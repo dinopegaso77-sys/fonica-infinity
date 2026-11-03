@@ -191,6 +191,14 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .recdone{position:absolute;inset:0;z-index:3;background:rgba(0,0,0,.92);display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;padding:16px}
 .recdone video{max-width:100%;max-height:70vh;border-radius:12px;background:#000}
 .recdone .rpmsg{color:#fff;text-align:center}
+.shoplist{display:flex;flex-direction:column;gap:8px}
+.shop{display:grid;grid-template-columns:56px 1fr;gap:4px 12px;align-items:center;background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.shop img{width:56px;height:56px;border-radius:8px;object-fit:cover;grid-row:span 2;background:var(--surface)}
+.shop .meta{min-width:0}.shop .meta b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.shop .meta small{color:var(--dim)}
+.shop .buy{grid-column:2;display:flex;gap:6px;flex-wrap:wrap}
+.shop .buy a,.shop .buy button{font-size:13px;padding:6px 10px;min-height:34px;text-decoration:none;color:var(--fg)}
+.shop .buy a.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.shop .price{font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent)}
 .toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:600;z-index:90;font-size:14px;max-width:calc(100% - 32px);text-align:center}
 
 /* sincronizzazione */
@@ -258,6 +266,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <div class="topbtns">
       <button class="chip pri" id="bPalco"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Palco</button>
       <button class="chip pri" id="bRec"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>Registra video</button>
+      <button class="chip" id="bShop">Cerca brani</button>
       <button class="chip" id="bAdd">Aggiungi brano</button>
       <button class="chip" id="bLib">Libreria</button>
       <button class="chip" id="bHelp">Guida</button>
@@ -308,7 +317,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       </div>
     </section>
     <section class="panel bp">
-      <div class="phead"><h2>Basso</h2>
+      <div class="phead"><h2 id="tabTitle">Basso</h2>
+        <div class="seg" role="group" aria-label="Strumento della tablatura" id="instSeg"><button data-i="bass" class="on">Basso</button><button data-i="guitar">Chitarra</button></div>
         <div class="seg" role="group" aria-label="Tipo di tablatura"><button id="tvAuto" class="on">Automatica</button><button id="tvWritten">Scritta</button></div>
       </div>
       <div class="tabwrap" id="tabAutoWrap"><canvas id="tabCv"></canvas><div class="tabmsg" id="tabMsg" hidden></div></div>
@@ -316,8 +326,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       <div class="pfoot" id="tabFootAuto">
         <span class="now">Nota: <b id="noteNow">–</b></span><span class="grow"></span>
         <label class="lbl" for="tabZoom">Zoom</label><select class="sel" id="tabZoom"><option value="0.6">lontano</option><option value="1" selected>normale</option><option value="1.5">vicino</option><option value="2.2">molto vicino</option></select>
-        <label class="lbl"><input type="checkbox" id="five"> 5 corde</label>
-        <select class="sel" id="sens" aria-label="Sensibilità"><option value="0.7">meno note</option><option value="1" selected>sensibilità normale</option><option value="1.5">più note</option></select>
+        <label class="lbl" id="fiveL"><input type="checkbox" id="five"> 5 corde</label>
+        <select class="sel" id="sens" aria-label="Quante note"><option value="0.5">pochissime note</option><option value="0.7" selected>meno note</option><option value="1">note normali</option><option value="1.5">più note</option></select>
         <button class="mini" id="bRedo">Rifai</button>
       </div>
       <div class="pfoot" id="tabFootWritten" hidden>
@@ -347,6 +357,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <button class="pbtn" id="pSm" aria-label="Testo più piccolo">A−</button><button class="pbtn" id="pLg" aria-label="Testo più grande">A+</button>
     <button class="pbtn" id="pRec">Registra video</button>
     <button class="pbtn on" id="pTab">Tablatura</button>
+    <button class="pbtn" id="pInst" aria-label="Cambia strumento della tablatura">Basso</button>
     <button class="pbtn" id="pX">Esci</button>
   </div>
   <div class="kpanel" id="kpPal"></div>
@@ -499,6 +510,18 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <p>Per altri problemi: endpoint → scheda <b>Logs</b>. La riga «Scheda video: …» e le righe rosse spiegano cosa è successo.</p>
   <div class="row"><span class="grow"></span><button class="chip pri" data-close>Ho capito, torno al collegamento</button></div>
 </div></div>
+<div class="ov" id="ovShop" hidden><div class="sheet">
+  <div class="row"><h3 class="grow">Cerca brani</h3><button class="mini" data-close>Chiudi</button></div>
+  <p>Cerca un artista o una canzone, ascolta l'anteprima e compra l'MP3 sulla piattaforma che preferisci. Dopo l'acquisto scarica il file e aggiungilo da <b>Libreria</b> con «Scegli file» o «Scarica da link».</p>
+  <div class="row">
+    <div class="seg" id="shopMode" role="group" aria-label="Cerca per"><button data-m="artist" class="on">Artista</button><button data-m="song">Canzone</button></div>
+    <input class="inp grow" id="shopQ" placeholder="Per esempio: Mina" spellcheck="false" aria-label="Cosa cercare">
+    <button class="chip pri" id="shopGo">Cerca</button>
+  </div>
+  <div class="status" id="shopStatus"></div>
+  <div class="shoplist" id="shopList"></div>
+  <p class="status">Elenco e anteprime da iTunes. I prezzi sono quelli di iTunes; sulle altre piattaforme possono cambiare.</p>
+</div></div>
 <div class="ov" id="ovEdit" hidden><div class="sheet">
   <div class="row"><h3 class="grow" id="edTitle">Testo</h3><button class="mini" data-close>Chiudi</button></div>
   <p id="edHelp"></p>
@@ -548,6 +571,10 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       <label class="recsl"><span>Musica</span><input type="range" id="recMus" min="0" max="1.5" step="0.05" value="0.8"></label>
       <label class="recsl"><span>Tua voce</span><input type="range" id="recVoc" min="0" max="2.5" step="0.05" value="1.3"></label>
       <label class="recsl"><span>Sincronia voce <i id="recLatV"></i></span><input type="range" id="recLat" min="0" max="500" step="10" value="120"></label>
+    </div>
+    <div class="recrow">
+      <div class="pseg" id="recBeauty"><span>Trucco</span><div class="seg"><button data-v="0">No</button><button data-v="0.3">Leggero</button><button data-v="0.55">Più bello</button></div></div>
+      <div class="pseg" id="recBgS"><span>Sfondo</span><div class="seg"><button data-v="0">Vero</button><button data-v="clothes">Colore dei vestiti</button><button data-v="blur">Sfocato</button></div></div>
     </div>
     <div class="recrow">
       <span class="rechint" id="recHint">Con le cuffie il risultato è migliore.</span>
@@ -690,8 +717,9 @@ async function loadSong(s,bufs){
   kBuild();updOff();lySrc();
   // tablatura
   blocks=[];parseTab();renderTab();
-  bassBase=s.bassBase||null;bassSens=s.bassSens||1;$('#sens').value=String(bassSens);bassNotes=bassBase?bassTab(bassBase):null;bassKey=bassBase?bassKeyGuess(bassBase):null;updTr();
-  if(!bassBase)bassAnalyze();else tabMsg('');
+  for(const k of ['bass','guitar']){TB[k].tok++;TB[k].busy=false}
+  TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;
+  tabRemap();updTr();setInst(inst);
   guide=null;analyzeGuide();
   updPalSegs();prefSet('last',s.id);
   await rebuildMix();
@@ -742,7 +770,7 @@ $$('#pChit button').forEach(b=>b.onclick=()=>{if(!stems.guitar)return;gains.guit
 $('#rate').onchange=e=>{rate=+e.target.value;A.defaultPlaybackRate=rate;A.playbackRate=rate};
 function updTr(){const a=Math.abs(tr);let s;if(!tr)s='originale';else{const whole=Math.floor(a/2),half=a%2;s=(tr>0?'+':'−')+(whole?whole+(half?' e ½':''):'½')+(a<=2?' tono':' toni')}
   if(tr&&bassKey!=null)s+=' ('+NOTE_IT[bassKey]+'→'+NOTE_IT[((bassKey+tr)%12+12)%12]+')';$('#trVal').textContent=s}
-function setTr(n){n=Math.max(-12,Math.min(12,n));if(n===tr)return;tr=n;if(bassBase)bassNotes=bassTab(bassBase);updTr();rebuildMix()}
+function setTr(n){n=Math.max(-12,Math.min(12,n));if(n===tr)return;tr=n;tabRemap();updTr();rebuildMix()}
 $('#trDown').onclick=()=>setTr(tr-1);$('#trUp').onclick=()=>setTr(tr+1);$('#trZero').onclick=()=>setTr(0);
 function updAB(){$('#bA').textContent=loopA==null?'A':'A '+fmt(loopA);$('#bB').textContent=loopB==null?'B':'B '+fmt(loopB);$('#bA').classList.toggle('hot',loopA!=null);$('#bB').classList.toggle('hot',loopB!=null);$('#bLoop').disabled=loopA==null}
 $('#bA').onclick=()=>{loopA=now();if(loopB!=null&&loopB<=loopA)loopB=null;updAB()};
@@ -843,15 +871,25 @@ function drawPitch(t){const cv=$('#pitch');if(!cv.offsetParent)return;const r=cv
 
 /* ================= tablatura automatica del basso ================= */
 const BASS_STR4=[['G',43],['D',38],['A',33],['E',28]],BASS_STR5=[['G',43],['D',38],['A',33],['E',28],['B',23]];
-let five=prefGet('five')==='1',tabZoom=+(prefGet('tabZoom')||1),bassBase=null,bassNotes=null,bassKey=null,bassSens=1,bassBusy=false,bassTok=0;
+const GTR_STR=[['e',64],['B',59],['G',55],['D',50],['A',45],['E',40]];
+let five=prefGet('five')==='1',tabZoom=+(prefGet('tabZoom')||1),bassKey=null,inst=prefGet('inst')==='guitar'?'guitar':'bass';
+const TB={bass:{base:null,notes:null,sens:.7,tok:0,busy:false},guitar:{base:null,notes:null,sens:.7,tok:0,busy:false}};
+const TCFG={bass:{name:'basso',stem:'bass',SRb:8000,hp:26,lp:320,sr2:4000,W:.128,hop:.032,fmin:28,fmax:300,lo:23,hi:67,fold:58,minF:3,maxFret:22,start:3,save:['bassBase','bassSens']},
+  guitar:{name:'chitarra',stem:'guitar',SRb:16000,hp:70,lp:1400,sr2:8000,W:.064,hop:.016,fmin:75,fmax:1300,lo:40,hi:88,fold:null,minF:5,maxFret:20,start:5,save:['gtrBase','gtrSens']}};
 $('#five').checked=five;$('#tabZoom').value=String(tabZoom);
-const bassStrings=()=>five?BASS_STR5:BASS_STR4;
+const bassStrings=()=>inst==='guitar'?GTR_STR:(five?BASS_STR5:BASS_STR4);
+function tabRemap(){for(const k of ['bass','guitar'])TB[k].notes=TB[k].base?bassTab(TB[k].base,k):null;const kb=TB.bass.base||TB.guitar.base;bassKey=kb?bassKeyGuess(kb):null}
+function setInst(k){inst=k;prefSet('inst',k);{const pb=$('#pInst');if(pb)pb.textContent=k==='guitar'?'Chitarra':'Basso'}$$('#instSeg button').forEach(b=>b.classList.toggle('on',b.dataset.i===k));$('#tabTitle').textContent=k==='guitar'?'Chitarra':'Basso';$('#fiveL').hidden=k==='guitar';$('#sens').value=String(TB[k].sens);
+  const c=TCFG[k];if(TB[k].busy)return;if(TB[k].base){tabMsg(TB[k].base.length?'':'Non ho trovato note di '+c.name+' in questo brano');return}
+  if(k==='guitar'&&!stems.guitar){tabMsg('Serve la traccia della chitarra: separa il brano a 6 tracce (Libreria → Separa un brano).');return}
+  bassAnalyze(k)}
+$$('#instSeg button').forEach(b=>b.onclick=()=>setInst(b.dataset.i));
 function fftIt(re,im,inv){const n=re.length;for(let i=1,j=0;i<n;i++){let bit=n>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;if(i<j){let t=re[i];re[i]=re[j];re[j]=t;t=im[i];im[i]=im[j];im[j]=t}}
   for(let len=2;len<=n;len<<=1){const ang=(inv?2:-2)*Math.PI/len,wr=Math.cos(ang),wi=Math.sin(ang);for(let i=0;i<n;i+=len){let cr=1,ci=0;for(let k=0;k<len/2;k++){const a=i+k,b=a+len/2;const t1=re[b]*cr-im[b]*ci,t2=re[b]*ci+im[b]*cr;re[b]=re[a]-t1;im[b]=im[a]-t2;re[a]+=t1;im[a]+=t2;const nr=cr*wr-ci*wi;ci=cr*wi+ci*wr;cr=nr}}}
   if(inv)for(let i=0;i<n;i++){re[i]/=n;im[i]/=n}}
 function medianOf(arr,tmp){const n=arr.length;for(let i=0;i<n;i++)tmp[i]=arr[i];const t=tmp.subarray(0,n);t.sort();return t[n>>1]}
 /* separa la parte armonica (il basso) da quella percussiva (la grancassa) con filtri mediani */
-async function hpss(x,SR2,onp){const N=512,H=128,nb=N/2+1,maxB=Math.min(nb-1,Math.ceil(320/(SR2/N)));const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);
+async function hpss(x,SR2,onp,fmax){const N=512,H=128,nb=N/2+1,maxB=Math.min(nb-1,Math.ceil((fmax||320)/(SR2/N)));const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);
   const F=Math.max(1,Math.floor((x.length-N)/H)+1);const RE=new Float32Array(F*(maxB+1)),IM=new Float32Array(F*(maxB+1)),MG=new Float32Array(F*(maxB+1));const re=new Float32Array(N),im=new Float32Array(N);
   for(let f=0;f<F;f++){const o=f*H;for(let i=0;i<N;i++){re[i]=(x[o+i]||0)*win[i];im[i]=0}fftIt(re,im,false);for(let k=0;k<=maxB;k++){const q=f*(maxB+1)+k;RE[q]=re[k];IM[q]=im[k];MG[q]=Math.hypot(re[k],im[k])}if(f%400===0){onp(.25*f/F);await sleep0()}}
   const LT=17,LF=9,hT=LT>>1,hF=LF>>1;const HM=new Float32Array(F*(maxB+1)),PM=new Float32Array(F*(maxB+1));const buf=new Float32Array(LT),tmp=new Float32Array(LT);
@@ -863,37 +901,38 @@ async function hpss(x,SR2,onp){const N=512,H=128,nb=N/2+1,maxB=Math.min(nb-1,Mat
   for(let i=0;i<out.length;i++)if(wsum[i]>1e-3)out[i]/=wsum[i];
   return{xh:out,perc,harm,hop:H,N,spec:HM,maxB,binHz:SR2/N}}
 function tabMsg(m){const el=$('#tabMsg');el.hidden=!m;el.textContent=m||''}
-async function bassAnalyze(){const tok=++bassTok;const src=stems.bass||stems.mix||stems.other;if(!src){tabMsg('Serve la traccia del basso o il brano completo');return}
-  bassBusy=true;const prog=v=>{if(tok===bassTok)tabMsg('Scrivo la tablatura del basso… '+Math.round(v*100)+'%')};prog(0);
-  try{let SRb=8000,off;try{off=new OfflineAudioContext(1,Math.ceil(src.duration*SRb),SRb)}catch(e){SRb=22050;off=new OfflineAudioContext(1,Math.ceil(src.duration*SRb),SRb)}
-    const s=off.createBufferSource();s.buffer=src;const hp=off.createBiquadFilter();hp.type='highpass';hp.frequency.value=26;
-    const l1=off.createBiquadFilter();l1.type='lowpass';l1.frequency.value=320;l1.Q.value=.6;const l2=off.createBiquadFilter();l2.type='lowpass';l2.frequency.value=320;l2.Q.value=.6;
+async function bassAnalyze(k){k=k||inst;const c=TCFG[k],T=TB[k];const tok=++T.tok;const src=k==='guitar'?stems.guitar:(stems.bass||stems.mix||stems.other);if(!src){tabMsg(k==='guitar'?'Serve la traccia della chitarra: separa il brano a 6 tracce.':'Serve la traccia del basso o il brano completo');return}
+  const live=()=>tok===T.tok;
+  T.busy=true;const prog=v=>{if(live()&&inst===k)tabMsg('Scrivo la tablatura '+(k==='guitar'?'della chitarra':'del basso')+'… '+Math.round(v*100)+'%')};prog(0);
+  try{let SRb=c.SRb,off;try{off=new OfflineAudioContext(1,Math.ceil(src.duration*SRb),SRb)}catch(e){SRb=22050;off=new OfflineAudioContext(1,Math.ceil(src.duration*SRb),SRb)}
+    const s=off.createBufferSource();s.buffer=src;const hp=off.createBiquadFilter();hp.type='highpass';hp.frequency.value=c.hp;
+    const l1=off.createBiquadFilter();l1.type='lowpass';l1.frequency.value=c.lp;l1.Q.value=.6;const l2=off.createBiquadFilter();l2.type='lowpass';l2.frequency.value=c.lp;l2.Q.value=.6;
     s.connect(hp);hp.connect(l1);l1.connect(l2);l2.connect(off.destination);s.start();const rb=await off.startRendering();const raw=rb.getChannelData(0);
-    const fac=Math.max(1,Math.round(SRb/4000));const SR2=SRb/fac;const NN=Math.floor(raw.length/fac);const x0=new Float32Array(NN);for(let i=0;i<NN;i++){let a=0;for(let k=0;k<fac;k++)a+=raw[i*fac+k];x0[i]=a/fac}
-    const hs=await hpss(x0,SR2,prog);if(tok!==bassTok)return;const x=hs.xh;const N=x.length;
-    const W=Math.round(SR2*.128),HOPb=Math.round(SR2*.032),tmin=Math.floor(SR2/300),tmax=Math.ceil(SR2/28);
+    const fac=Math.max(1,Math.round(SRb/c.sr2));const SR2=SRb/fac;const NN=Math.floor(raw.length/fac);const x0=new Float32Array(NN);for(let i=0;i<NN;i++){let a=0;for(let k=0;k<fac;k++)a+=raw[i*fac+k];x0[i]=a/fac}
+    const hs=await hpss(x0,SR2,prog,c.fmax);if(!live())return;const x=hs.xh;const N=x.length;
+    const W=Math.round(SR2*c.W),HOPb=Math.round(SR2*c.hop),tmin=Math.floor(SR2/c.fmax),tmax=Math.ceil(SR2/c.fmin);
     const F=Math.max(0,Math.floor((N-W-tmax)/HOPb));const f0=new Float32Array(F),rms=new Float32Array(F),conf=new Float32Array(F);const d=new Float32Array(tmax+2);
     for(let f=0;f<F;f++){const s0=f*HOPb;let e=0;for(let j=0;j<W;j++)e+=x[s0+j]*x[s0+j];rms[f]=Math.sqrt(e/W);
       d[0]=1;let run=0;for(let t=1;t<=tmax;t++){let sum=0;for(let j=0;j<W;j++){const df=x[s0+j]-x[s0+j+t];sum+=df*df}run+=sum;d[t]=run>0?sum*t/run:1}
       let best=-1,gmin=9,gb=-1;for(let t=tmin;t<tmax;t++){if(d[t]<.12&&d[t]<=d[t-1]&&d[t]<=d[t+1]){best=t;break}if(d[t]<gmin){gmin=d[t];gb=t}}
       const tau=best>0?best:(gmin<.22?gb:-1);conf[f]=tau>0?1-d[tau]:0;
       if(tau>tmin&&tau<tmax){const a=d[tau-1],b=d[tau],c2=d[tau+1];const den=a-2*b+c2;const sh=den?(a-c2)/(2*den):0;f0[f]=SR2/(tau+Math.max(-1,Math.min(1,sh)))}else f0[f]=0;
-      if(f%200===0){prog(.6+.35*f/F);await sleep0();if(tok!==bassTok)return}}
-    const sorted=Array.from(rms).sort((a,b)=>a-b);const p95=sorted[Math.floor(sorted.length*.95)]||1e-6;const thr=p95*(.12/bassSens);
-    const lo=23,hi=67;const mid=new Int16Array(F);for(let f=0;f<F;f++){if(!f0[f]||rms[f]<thr||conf[f]<.75){mid[f]=-1;continue}let m=Math.round(69+12*Math.log2(f0[f]/440));while(m>58&&m-12>=lo)m-=12;mid[f]=m>=lo&&m<=hi?m:-1}
+      if(f%200===0){prog(.6+.35*f/F);await sleep0();if(!live())return}}
+    const sorted=Array.from(rms).sort((a,b)=>a-b);const p95=sorted[Math.floor(sorted.length*.95)]||1e-6;const sens=T.sens,thr=p95*(.12/sens),cmin=sens<.6?.86:sens<.9?.8:.75,minF=Math.round(c.minF*(sens<.6?2:sens<.9?1.5:1));
+    const lo=c.lo,hi=c.hi;const mid=new Int16Array(F);for(let f=0;f<F;f++){if(!f0[f]||rms[f]<thr||conf[f]<cmin){mid[f]=-1;continue}let m=Math.round(69+12*Math.log2(f0[f]/440));if(c.fold)while(m>c.fold&&m-12>=lo)m-=12;mid[f]=m>=lo&&m<=hi?m:-1}
     const med=new Int16Array(F);for(let f=0;f<F;f++){if(mid[f]<0){med[f]=-1;continue}const w=[];for(let k=-2;k<=2;k++){const v=mid[f+k];if(v>=0)w.push(v)}w.sort((a,b)=>a-b);med[f]=w.length>=3?w[Math.floor(w.length/2)]:-1}
-    const hopS=HOPb/SR2,off0=W/SR2/2;const raw2=[];let cur=null,gap=0;const close=()=>{if(cur&&cur.n>=3)raw2.push(cur);cur=null};
+    const hopS=HOPb/SR2,off0=W/SR2/2;const raw2=[];let cur=null,gap=0;const close=()=>{if(cur&&cur.n>=minF)raw2.push(cur);cur=null};
     for(let f=0;f<F;f++){const m=med[f];if(m<0){gap++;if(gap>=2)close();continue}const onset=f>=2&&rms[f]>1.7*rms[f-2]&&rms[f-2]<p95*.6;
-      if(!cur||m!==cur.m||(onset&&cur.n>=3)){close();cur={m,s:f,e:f,n:1}}else{cur.e=f;cur.n++}gap=0}close();
+      if(!cur||m!==cur.m||(onset&&cur.n>=minF)){close();cur={m,s:f,e:f,n:1}}else{cur.e=f;cur.n++}gap=0}close();
     const hf=t=>Math.min(hs.perc.length-1,Math.max(0,Math.round(t/(hs.hop/SR2))));
     const notes=[];for(const c of raw2){const t0=c.s*hopS+off0,t1=(c.e+1)*hopS+off0,len=t1-t0;let pk=0;for(let k=hf(t0-.03);k<=hf(t0+.06);k++)pk=Math.max(pk,hs.perc[k]/(hs.harm[k]+1e-12));
-      if(len<.16&&pk>1.2&&!stems.bass)continue;
+      if(len<.16&&pk>1.2&&k==='bass'&&!stems.bass)continue;
       let m=c.m;const fq=440*Math.pow(2,(m-69)/12);const bi=q=>Math.round(q/hs.binHz);let a1=0,a2=0,cnt=0;for(let k=hf(t0);k<=hf(t1);k++){const row=k*(hs.maxB+1);const b1=bi(fq),b2=bi(fq/2);if(b2>=1&&b1<=hs.maxB){a1+=hs.spec[row+b1];a2+=hs.spec[row+b2];cnt++}}
-      if(cnt&&m-12>=lo&&a2>.7*a1&&fq/2>=27)m-=12;notes.push([+t0.toFixed(3),+t1.toFixed(3),m])}
-    bassBase=notes;bassNotes=bassTab(notes);bassKey=bassKeyGuess(notes);updTr();tabMsg(notes.length?'':'Non ho trovato note di basso in questo brano');saveCur({bassBase:notes,bassSens})}
-  catch(e){console.error(e);tabMsg('Non riesco ad analizzare il basso di questo brano')}finally{if(tok===bassTok)bassBusy=false}}
-function bassTab(base){const strs=bassStrings();let prev=3;const out=[];for(const[a,b,m0]of base){const m=m0+tr;let bestC=1e9,bs=0,bf=0;strs.forEach(([nm,open],si)=>{const fr=m-open;if(fr<0||fr>22)return;const cost=Math.abs(fr-prev)+(fr>12?3:0)+fr*.25+(fr===0?-.3:0)+(nm==='G'?7:0);if(cost<bestC){bestC=cost;bs=si;bf=fr}});
-  if(bestC>=1e9){const low=strs[strs.length-1][1];let mm=m;while(mm<low)mm+=12;while(mm>low+22)mm-=12;strs.forEach(([nm,open],si)=>{const fr=mm-open;if(fr<0||fr>22)return;const cost=Math.abs(fr-prev)+fr*.25+(nm==='G'?7:0);if(cost<bestC){bestC=cost;bs=si;bf=fr}});if(bestC<1e9)out.push([a,b,mm,bs,bf,1])}
+      if(cnt&&m-12>=lo&&a2>.7*a1&&fq/2>=c.fmin)m-=12;notes.push([+t0.toFixed(3),+t1.toFixed(3),m])}
+    T.base=notes;tabRemap();updTr();if(inst===k)tabMsg(notes.length?'':'Non ho trovato note di '+c.name+' in questo brano');saveCur({[c.save[0]]:notes,[c.save[1]]:sens})}
+  catch(e){console.error(e);if(inst===k)tabMsg('Non riesco ad analizzare '+(k==='guitar'?'la chitarra':'il basso')+' di questo brano')}finally{if(live())T.busy=false}}
+function bassTab(base,k){k=k||inst;const c=TCFG[k],MF=c.maxFret;const strs=k==='guitar'?GTR_STR:(five?BASS_STR5:BASS_STR4);const topPen=k==='bass'?7:0;let prev=c.start;const out=[];for(const[a,b,m0]of base){const m=m0+tr;let bestC=1e9,bs=0,bf=0;strs.forEach(([nm,open],si)=>{const fr=m-open;if(fr<0||fr>MF)return;const cost=Math.abs(fr-prev)+(fr>12?3:0)+fr*.25+(fr===0?-.3:0)+(si===0?topPen:0);if(cost<bestC){bestC=cost;bs=si;bf=fr}});
+  if(bestC>=1e9){const low=strs[strs.length-1][1];let mm=m;while(mm<low)mm+=12;while(mm>low+MF+24)mm-=12;strs.forEach(([nm,open],si)=>{const fr=mm-open;if(fr<0||fr>MF)return;const cost=Math.abs(fr-prev)+fr*.25+(si===0?topPen:0);if(cost<bestC){bestC=cost;bs=si;bf=fr}});if(bestC<1e9)out.push([a,b,mm,bs,bf,1])}
   else out.push([a,b,m,bs,bf]);if(bf>0)prev=bf}return out}
 function bassKeyGuess(base){const w=new Array(12).fill(0);for(const[a,b,m]of base)w[m%12]+=b-a;let best=0;for(let i=1;i<12;i++)if(w[i]>w[best])best=i;return base.length?best:null}
 let C={};function readColors(){C={paper:css('--paper'),fg:css('--fg'),dim:css('--dim'),steel:css('--steel'),acc:css('--accent'),accInk:css('--accent-ink'),line:css('--line'),mute:css('--mute'),surf:css('--surface')}}
@@ -904,15 +943,15 @@ function tabDraw(cv,o,cur){const dpr=window.devicePixelRatio||1,w=cv.clientWidth
   g.strokeStyle=C.steel;g.lineWidth=1.3;strs.forEach(([nm],i)=>{const y=top+i*gap;g.beginPath();g.moveTo(26,y);g.lineTo(w,y);g.stroke()});
   if(loopA!=null&&loopB!=null){g.fillStyle=C.acc;g.globalAlpha=.12;const xa=cx+(loopA-cur)*pxs,xb=cx+(loopB-cur)*pxs;g.fillRect(xa,top-14,xb-xa,h-top+6);g.globalAlpha=1}
   let active=null;
-  for(const nt of bassNotes||[]){const[a0,b0,m,si,fr]=nt;if(si>=n||b0<t0-.2||a0>t1)continue;const x=cx+(a0-cur)*pxs,xe=cx+(b0-cur)*pxs,y=top+si*gap;const on=a0<=cur&&cur<b0;if(on)active=nt;
+  for(const nt of TB[inst].notes||[]){const[a0,b0,m,si,fr]=nt;if(si>=n||b0<t0-.2||a0>t1)continue;const x=cx+(a0-cur)*pxs,xe=cx+(b0-cur)*pxs,y=top+si*gap;const on=a0<=cur&&cur<b0;if(on)active=nt;
     g.fillStyle=on?C.acc:C.steel;g.globalAlpha=on?.45:.18;g.fillRect(x,y-4,Math.max(4,xe-x),8);g.globalAlpha=1;
     g.beginPath();g.arc(x+r,y,r,0,Math.PI*2);g.fillStyle=on?C.acc:(a0<cur?C.dim:C.fg);g.fill();g.fillStyle=on?C.accInk:C.paper;g.font=`700 ${o.big?17:13}px Figtree,system-ui`;g.textAlign='center';g.fillText(String(fr),x+r,y+(o.big?6:4.5));g.textAlign='left'}
   g.fillStyle=C.mute;g.fillRect(cx-1,top-16,2,h-top+10);
   strs.forEach(([nm],i)=>{const y=top+i*gap;g.fillStyle=C.paper;g.fillRect(0,y-11,24,22);g.fillStyle=C.fg;g.font=`700 ${o.big?15:14}px Figtree,system-ui`;g.fillText(nm,6,y+5)});return active}
-$('#five').onchange=e=>{five=e.target.checked;prefSet('five',five?'1':'0');if(bassBase)bassNotes=bassTab(bassBase)};
+$('#five').onchange=e=>{five=e.target.checked;prefSet('five',five?'1':'0');tabRemap()};
 $('#tabZoom').onchange=e=>{tabZoom=+e.target.value;prefSet('tabZoom',tabZoom)};
-$('#sens').onchange=e=>{bassSens=+e.target.value;bassAnalyze()};
-$('#bRedo').onclick=()=>bassAnalyze();
+$('#sens').onchange=e=>{TB[inst].sens=+e.target.value;bassAnalyze(inst)};
+$('#bRedo').onclick=()=>bassAnalyze(inst);
 let tabView=prefGet('tabView')||'auto';
 function setTabView(v){tabView=v;prefSet('tabView',v);$('#tvAuto').classList.toggle('on',v==='auto');$('#tvWritten').classList.toggle('on',v!=='auto');$('#tabAutoWrap').hidden=v!=='auto';$('#tabFootAuto').hidden=v!=='auto';$('#tabs').hidden=v==='auto';$('#tabFootWritten').hidden=v==='auto'}
 $('#tvAuto').onclick=()=>setTabView('auto');$('#tvWritten').onclick=()=>setTabView('written');setTabView(tabView);
@@ -949,6 +988,7 @@ const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
 async function palOpen(v){palOn=v;$('#palco').hidden=!v;document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;
   try{if(v){const el=$('#palco');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el);try{await screen.orientation.lock('landscape')}catch(e){}}else if(fsEl())await(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
 $('#bPalco').onclick=()=>palOpen(true);$('#pX').onclick=()=>palOpen(false);
+$('#pInst').onclick=()=>{setInst(inst==='guitar'?'bass':'guitar');$$('.kpanel').forEach(P=>delete P.dataset.ci)};
 $('#pTab').onclick=()=>{palTabOn=!palTabOn;prefSet('palTab',palTabOn?'1':'0');$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;$$('.kpanel').forEach(P=>delete P.dataset.ci)};
 document.addEventListener('fullscreenchange',()=>{if(palOn&&!fsEl())palOpen(false)});
 
@@ -1407,9 +1447,53 @@ function recLyrics(g,W,H,t){const L=K.lines;if(!L.length)return;const tt=t-K.off
   const yC=H*(H>W?0.64:0.7);
   if(i>=0&&tt<=L[i].e+1.2){const h=drawLine(L[i],yC,base,1,true);if(L[i+1])drawLine(L[i+1],yC+h/2+base*1.1,Math.round(base*.78),.75,false)}
   else{const n=L[i+1];if(n){drawLine(n,yC,Math.round(base*.9),.85,false);const left=n.t-tt;if(left>0&&left<=3.2){g.font=`700 ${base}px sans-serif`;g.textAlign='center';g.fillStyle=hi;g.fillText('● '.repeat(Math.max(1,Math.ceil(left-.2))).trim(),W/2,yC-base*1.6)}}}}
+/* ===== effetti video: trucco (pelle liscia e luminosa) e sfondo in tinta unita ===== */
+const FX={beauty:+(prefGet('recBeauty')||'0.3'),bg:prefGet('recBg')||'0',seg:null,segLoading:false,segFail:false,mask:null,mw:0,mh:0,inv:null,lastSeg:0,col:[70,90,120],colT:0,cam:null,sm:null,mc:null,tmp:null,pk:null};
+function fxCanvas(k,w,h){let c=FX[k];if(!c){c=FX[k]=document.createElement('canvas')}if(c.width!==w||c.height!==h){c.width=w;c.height=h}return c}
+async function fxLoadSeg(){if(FX.seg||FX.segLoading||FX.segFail)return;FX.segLoading=true;$('#recHint').textContent='Preparo lo sfondo (solo la prima volta serve qualche secondo)…';
+  try{const V='0.10.14',m=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@'+V+'/vision_bundle.mjs');
+    const fs=await m.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@'+V+'/wasm');
+    const opt=d=>({baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite',delegate:d},runningMode:'VIDEO',outputCategoryMask:false,outputConfidenceMasks:true});
+    try{FX.seg=await m.ImageSegmenter.createFromOptions(fs,opt('GPU'))}catch(e){FX.seg=await m.ImageSegmenter.createFromOptions(fs,opt('CPU'))}
+    $('#recHint').textContent='Sfondo pronto.'}
+  catch(e){console.error(e);FX.segFail=true;FX.bg='0';fxSegUI();$('#recHint').textContent='Non riesco a cambiare lo sfondo su questo dispositivo (serve internet la prima volta).'}
+  finally{FX.segLoading=false}}
+function fxSegment(v){const t=performance.now();if(!FX.seg||t-FX.lastSeg<55)return;FX.lastSeg=t;
+  try{FX.seg.segmentForVideo(v,t,res=>{const mk=res.confidenceMasks&&res.confidenceMasks[0];if(!mk)return;const w=mk.width,hh=mk.height,a=mk.getAsFloat32Array();
+    if(FX.inv===null){let c=0,e=0,nc=0,ne=0;for(let y=0;y<hh;y++)for(let x=0;x<w;x++){const q=a[y*w+x],dx=Math.abs(x/w-.5),dy=y/hh;if(dx<.15&&dy>.35&&dy<.8){c+=q;nc++}else if(dx>.45&&dy<.3){e+=q;ne++}}FX.inv=(c/nc)<(e/ne)}
+    if(!FX.mask||FX.mw!==w||FX.mh!==hh){FX.mask=new ImageData(w,hh);FX.mw=w;FX.mh=hh}const d=FX.mask.data;
+    for(let i=0;i<w*hh;i++){let q=a[i];if(FX.inv)q=1-q;q=Math.min(1,Math.max(0,(q-.25)*2));d[i*4]=d[i*4+1]=d[i*4+2]=255;d[i*4+3]=q*255}
+    try{res.close&&res.close()}catch(e){}})}catch(e){console.error(e)}}
+/* colore dei vestiti: media dei pixel della persona nella parte bassa del corpo */
+function fxClothes(v){const t=performance.now();if(!FX.mask||t-FX.colT<1200)return;FX.colT=t;
+  const w=FX.mw,hh=FX.mh,pk=fxCanvas('pk',w,hh),g=pk.getContext('2d',{willReadFrequently:true});g.drawImage(v,0,0,w,hh);const px=g.getImageData(0,0,w,hh).data,m=FX.mask.data;
+  let top=-1,bot=-1;for(let y=0;y<hh;y++){let n=0;for(let x=0;x<w;x+=2)if(m[(y*w+x)*4+3]>200)n++;if(n>w*.04){if(top<0)top=y;bot=y}}if(top<0)return;
+  const y0=Math.round(top+(bot-top)*.5);let r=0,gg=0,b=0,n=0;for(let y=y0;y<=bot;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4;if(m[i+3]>220){r+=px[i];gg+=px[i+1];b+=px[i+2];n++}}
+  if(n<30)return;const tgt=fxBgColor(r/n,gg/n,b/n);FX.col=FX.col.map((c,i)=>c+(tgt[i]-c)*.5)}
+function rgb2hsl(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;let h=0,s=0;if(mx!==mn){const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);h=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;h/=6}return[h,s,l]}
+function hsl2rgb(h,s,l){const f=n=>{const k=(n+h*12)%12,a=s*Math.min(l,1-l);return 255*(l-a*Math.max(-1,Math.min(k-3,9-k,1)))};return[f(0),f(8),f(4)]}
+/* stessa tinta dei vestiti ma più morbida; chiara se i vestiti sono scuri e viceversa, così la persona risalta */
+function fxBgColor(r,g,b){let[h,s,l]=rgb2hsl(r,g,b);if(s<.12){return l<.45?hsl2rgb(.58,.18,.78):hsl2rgb(.6,.25,.24)}s=Math.min(.55,Math.max(.32,s*.8));l=l<.45?.74:.3;return hsl2rgb(h,s,l)}
+/* disegna la fotocamera con gli effetti nel riquadro (x,y,dw,dh) */
+function fxDrawCam(g,v,W,H,x,y,dw,dh,mirror){const cam=fxCanvas('cam',W,H),cg=cam.getContext('2d');cg.save();cg.clearRect(0,0,W,H);if(mirror){cg.translate(W,0);cg.scale(-1,1)}cg.drawImage(v,x,y,dw,dh);cg.restore();
+  if(FX.beauty>0){const sw=Math.max(8,Math.round(W/7)),sh=Math.max(8,Math.round(H/7)),sm=fxCanvas('sm',sw,sh),sg=sm.getContext('2d');sg.imageSmoothingQuality='high';sg.drawImage(cam,0,0,sw,sh);
+    cg.save();cg.globalAlpha=FX.beauty;cg.imageSmoothingQuality='high';cg.drawImage(sm,0,0,W,H);cg.globalAlpha=FX.beauty*.35;cg.globalCompositeOperation='screen';cg.drawImage(sm,0,0,W,H);
+    cg.globalCompositeOperation='soft-light';cg.globalAlpha=FX.beauty*.5;cg.fillStyle='#ffd9c4';cg.fillRect(0,0,W,H);cg.restore()}
+  const useBg=FX.bg!=='0'&&FX.seg&&FX.mask;
+  if(FX.bg!=='0'){fxLoadSeg();fxSegment(v);if(FX.bg==='clothes')fxClothes(v)}
+  if(!useBg){g.drawImage(cam,0,0);return}
+  const mc=fxCanvas('mc',FX.mw,FX.mh);mc.getContext('2d').putImageData(FX.mask,0,0);
+  const tmp=fxCanvas('tmp',W,H),tg=tmp.getContext('2d');tg.save();tg.globalCompositeOperation='copy';tg.drawImage(cam,0,0);tg.globalCompositeOperation='destination-in';tg.imageSmoothingQuality='high';if(mirror){tg.translate(W,0);tg.scale(-1,1)}tg.drawImage(mc,x,y,dw,dh);tg.restore();
+  if(FX.bg==='blur'){const bw=Math.max(8,Math.round(W/18)),bh=Math.max(8,Math.round(H/18)),bc=fxCanvas('bc',bw,bh);bc.getContext('2d').drawImage(cam,0,0,bw,bh);g.save();g.imageSmoothingQuality='high';g.drawImage(bc,0,0,W,H);g.restore()}
+  else{const[r,gg,b]=FX.col.map(Math.round),gr=g.createRadialGradient(W/2,H*.42,Math.min(W,H)*.1,W/2,H/2,Math.max(W,H)*.75);gr.addColorStop(0,`rgb(${Math.min(255,r+28)},${Math.min(255,gg+28)},${Math.min(255,b+28)})`);gr.addColorStop(1,`rgb(${Math.max(0,r-22)},${Math.max(0,gg-22)},${Math.max(0,b-22)})`);g.fillStyle=gr;g.fillRect(0,0,W,H)}
+  g.drawImage(tmp,0,0)}
+function fxSegUI(){$$('#recBeauty button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-FX.beauty)<.01));$$('#recBgS button').forEach(b=>b.classList.toggle('on',b.dataset.v===FX.bg))}
+$$('#recBeauty button').forEach(b=>b.onclick=()=>{FX.beauty=+b.dataset.v;prefSet('recBeauty',b.dataset.v);fxSegUI()});
+$$('#recBgS button').forEach(b=>b.onclick=()=>{FX.bg=b.dataset.v;prefSet('recBg',FX.bg);if(FX.bg!=='0'){FX.segFail=false;FX.colT=0;fxLoadSeg()}fxSegUI()});
+fxSegUI();
 function recDraw(){const cv=$('#recCv');const [W,H]=recSize();if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}const g=cv.getContext('2d');const v=$('#recCam');
   g.fillStyle='#000';g.fillRect(0,0,W,H);
-  if(v.videoWidth){const s=Math.max(W/v.videoWidth,H/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;g.save();if(R.facing==='user'){g.translate(W,0);g.scale(-1,1)}g.drawImage(v,(W-dw)/2,(H-dh)/2,dw,dh);g.restore()}
+  if(v.videoWidth){const s=Math.max(W/v.videoWidth,H/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;fxDrawCam(g,v,W,H,(W-dw)/2,(H-dh)/2,dw,dh,R.facing==='user')}
   const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);
   const t=now();const ly=$('#recLy');
   if($('#recTxt').checked){ly.hidden=true;recLyrics(g,W,H,t)}
@@ -1541,6 +1625,34 @@ async function linkGet(){const raw=$('#linkIn').value.trim(),st=$('#linkStatus')
 let linkFile=null;
 $('#linkGo').onclick=linkGet;$('#linkIn').onkeydown=e=>{if(e.key==='Enter')linkGet()};
 $('#linkUse').onclick=()=>{if(linkFile)importFiles([linkFile])};
+
+/* ================= cerca brani e compra l'MP3 ================= */
+function jsonp(url){return new Promise((ok,ko)=>{const cb='f8cb'+Date.now()+Math.floor(Math.random()*1e5);const s=document.createElement('script');
+  const clean=()=>{delete window[cb];s.remove();clearTimeout(to)};const to=setTimeout(()=>{clean();ko(new Error('timeout'))},12000);
+  window[cb]=d=>{clean();ok(d)};s.onerror=()=>{clean();ko(new Error('net'))};s.src=url+(url.includes('?')?'&':'?')+'callback='+cb;document.head.appendChild(s)})}
+let shopMode='artist',shopAudio=null;
+$$('#shopMode button').forEach(b=>b.onclick=()=>{shopMode=b.dataset.m;$$('#shopMode button').forEach(x=>x.classList.toggle('on',x===b));$('#shopQ').placeholder=shopMode==='artist'?'Per esempio: Mina':'Per esempio: Albachiara';$('#shopQ').focus()});
+const eur=(p,c)=>p==null||p<0?'':new Intl.NumberFormat('it-IT',{style:'currency',currency:c||'EUR'}).format(p);
+function shopLinks(x){const q=encodeURIComponent(x.artistName+' '+x.trackName);
+  return [['iTunes',x.trackViewUrl,true],['Amazon','https://www.amazon.it/s?k='+q+'&i=digital-music'],['Bandcamp','https://bandcamp.com/search?q='+q+'&item_type=t'],['Qobuz','https://www.qobuz.com/it-it/search?q='+q],['YouTube','https://www.youtube.com/results?search_query='+q]]}
+async function shopSearch(){const q=$('#shopQ').value.trim();const st=$('#shopStatus'),el=$('#shopList');if(!q){st.textContent='Scrivi il nome di un artista o di una canzone.';return}
+  st.textContent='Cerco…';el.innerHTML='';
+  const url='https://itunes.apple.com/search?term='+encodeURIComponent(q)+'&media=music&entity=song&country=IT&lang=it_it&limit=60'+(shopMode==='artist'?'&attribute=artistTerm':'&attribute=songTerm');
+  let d;try{const r=await fetch(url);d=await r.json()}catch(e){try{d=await jsonp(url)}catch(e2){st.textContent=window.self!==window.top?'Dentro l\'app Claude la ricerca è bloccata: apri Fonica Infinity dal suo indirizzo web.':'Non riesco a cercare adesso. Controlla internet e riprova.';return}}
+  let res=(d&&d.results||[]).filter(x=>x.kind==='song');
+  if(shopMode==='artist'){const n=normT(q);const best=res.filter(x=>normT(x.artistName)===n);if(best.length>=5)res=best}
+  const seen=new Set();res=res.filter(x=>{const k=normT(x.artistName)+'|'+normT(x.trackName);if(seen.has(k))return false;seen.add(k);return true});
+  if(!res.length){st.textContent='Nessun brano trovato. Prova a scrivere il nome in un altro modo.';return}
+  st.textContent=res.length+' brani trovati'+(shopMode==='artist'?' per «'+q+'»':'')+'.';
+  el.innerHTML=res.map((x,i)=>{const y=(x.releaseDate||'').slice(0,4);const art=(x.artworkUrl100||'').replace('100x100','160x160');
+    return `<div class="shop">${art?`<img src="${esc(art)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`:'<img alt="" style="visibility:hidden">'}<div class="meta"><b>${esc(x.trackName)}</b><small>${esc(x.artistName)} · ${esc(x.collectionName||'')}${y?' · '+y:''}${x.trackTimeMillis?' · '+fmt(x.trackTimeMillis/1000):''}</small> <span class="price">${eur(x.trackPrice,x.currency)}</span></div>
+      <div class="buy">${x.previewUrl?`<button class="mini" data-pv="${i}">▶ Anteprima</button>`:''}${shopLinks(x).filter(l=>l[1]).map(([n,u,p])=>`<a class="mini ${p?'pri':''}" href="${esc(u)}" target="_blank" rel="noopener">${n==='YouTube'?'Ascolta su YouTube':(p?'Compra su ':'')+n}</a>`).join('')}</div></div>`}).join('');
+  el.querySelectorAll('[data-pv]').forEach(b=>b.onclick=()=>{const x=res[+b.dataset.pv];if(!shopAudio){shopAudio=new Audio()}
+    if(shopAudio.dataset.i===b.dataset.pv&&!shopAudio.paused){shopAudio.pause();b.textContent='▶ Anteprima';return}
+    el.querySelectorAll('[data-pv]').forEach(z=>z.textContent='▶ Anteprima');pause();shopAudio.src=x.previewUrl;shopAudio.dataset.i=b.dataset.pv;shopAudio.play().catch(()=>{});b.textContent='❚❚ Pausa';shopAudio.onended=()=>b.textContent='▶ Anteprima'})}
+$('#shopGo').onclick=shopSearch;$('#shopQ').onkeydown=e=>{if(e.key==='Enter')shopSearch()};
+$('#bShop').onclick=()=>{openOv('#ovShop');setTimeout(()=>$('#shopQ').focus(),50)};
+$('#ovShop').addEventListener('click',e=>{if(e.target.closest('[data-close]')||e.target.id==='ovShop'){if(shopAudio)shopAudio.pause()}});
 
 /* ================= testo da LRCLIB (prima di tutto) ================= */
 const LRC_H={'Lrclib-Client':'Fonica Infinity v1 (karaoke personale)'};
