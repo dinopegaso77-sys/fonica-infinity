@@ -950,7 +950,7 @@ function sepFail(e){const m=String(e&&e.message||e);sepEnd();$('#spBar').classLi
     LONG:'La traccia è troppo lunga per una sola richiesta (massimo circa 7 minuti).',
     BIG:'Il file è troppo grande per RunPod (massimo circa 14 MB). Usa un MP3 a 192 o 256 kbps.'}[m]
     ||(/^MVERR:/.test(m)?'Il servizio gratuito ha dato un errore: '+m.slice(6,200):/import|module|Failed to fetch dynamically/i.test(m)?'Non riesco ad avviare il motore di calcolo. Apri FonicaInfinity.html con Chrome o Edge sul PC, con internet attivo.'
-    :/memory|alloc|OOM|Array buffer/i.test(m)?'Memoria insufficiente per questo brano. Chiudi altre schede o prova un brano più corto.':'Qualcosa è andato storto: '+m.slice(0,200));
+    :/memory|alloc|OOM|Array buffer/i.test(m)?'Memoria insufficiente per questo brano. Chiudi altre schede o prova un brano più corto.':'Qualcosa è andato storto: '+(m.length>260?'… '+m.slice(-260):m));
   spShow(msg,null);$('#spBar').classList.remove('ind');$('#spPct').textContent=''}
 /* controllo LRCLIB prima di separare: se c'è il testo sincronizzato con la stessa durata non serve trascriverlo */
 async function sepLrcCheck(meta,dur){const q=songQuery({title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||''});if(!q.t)return null;
@@ -1132,7 +1132,7 @@ async function sepRunpod(){if(!rp.key||!rp.ep){openOv('#ovLib');toast('Inserisci
     for(const k of ks){const ab2=b64ToAb(out.stems[k]);stemsRec[k]={name:k+'.m4a',data:ab2};bufs[k]=await decode(ab2);i++;spShow('Ricevo le tracce…',i/ks.length,'down')}
     if(!ks.length)throw new Error('RunPod non ha restituito le tracce');
     spShow('Salvo le tracce…',1,'save');
-    await sepFinish(meta,stemsRec,bufs,out.seconds?'scheda video: '+fmt(out.seconds):'',out.lyrics)}
+    await sepFinish(meta,stemsRec,bufs,(out.note?'la scheda video non andava: fatto sul processore, ':'')+(out.seconds?'lavoro su RunPod: '+fmt(out.seconds):''),out.lyrics)}
   catch(e){if(!sepAbort)sepFail(e)}}
 
 /* ================= testo dalla voce (Whisper su RunPod) ================= */
