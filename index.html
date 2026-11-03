@@ -1757,7 +1757,7 @@ async function loadDemo(){if(!demoBufs){demoBufs={};for(const k of ['vocals','ba
 /* ================= avvio ================= */
 window.addEventListener('resize',()=>$$('.kpanel').forEach(P=>delete P.dataset.ci));
 /* donazioni: link PayPal di chi distribuisce l'app (vuoto = pulsante nascosto) */
-const DONATE_URL='https://www.paypal.com/donate/?business=pegaso77%40live.it&currency_code=EUR&item_name=Sostieni+Fonica+Infinity';
+const DONATE_URL='https://www.paypal.com/donate/?business=dinoaddis77%40libero.it&currency_code=EUR&item_name=Sostieni+Fonica+Infinity';
 if(DONATE_URL){['#bDonate','#bDonate2'].forEach(s=>{const a=$(s);a.href=DONATE_URL});$('#bDonate').hidden=false;$('#donateBox').hidden=false}
 readColors();loadDir();rpLoad();mvLoad();
 (async()=>{const last=prefGet('last');let opened=false;
