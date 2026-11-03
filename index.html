@@ -186,6 +186,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .recly::before{content:'Solo per te: non va nel video';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8e2;opacity:.8}
 .recov.recording .recrow:first-child,.recov.recording .rechint{display:none}
 .recov.recording .recbar{background:none}
+.recfix{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;max-width:640px}
+.recfix .rechint{color:#fff}
 .recdone{position:absolute;inset:0;z-index:3;background:rgba(0,0,0,.92);display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;padding:16px}
 .recdone video{max-width:100%;max-height:70vh;border-radius:12px;background:#000}
 .recdone .rpmsg{color:#fff;text-align:center}
@@ -413,6 +415,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       </details>
     </div>
     <div class="row"><input type="file" id="sepIn" accept="audio/*,.mp3,.wav,.m4a,.flac,.ogg" class="inp grow"></div>
+    <div class="row"><input class="inp grow" id="linkIn" placeholder="Oppure incolla il link diretto a un file audio (.mp3)" spellcheck="false" inputmode="url" aria-label="Link a un file audio"><button class="chip" id="linkGo">Scarica da link</button></div>
+    <div class="row"><span class="status grow" id="linkStatus"></span><button class="mini" id="linkUse" hidden>Aggiungi così com'è</button></div>
     <div class="row"><button class="chip pri" id="bSep" disabled>Separa tracce</button><span class="status grow" id="sepFile"></span></div>
     <div class="sepmsg" id="sepMsg" role="alert" hidden></div>
   </div>
@@ -555,6 +559,12 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   </div>
   <div class="recdone" id="recDone" hidden>
     <video id="recPlay" controls playsinline></video>
+    <div class="recfix">
+      <label class="rechint"><input type="checkbox" id="recSync" checked> Sincronizza la voce automaticamente</label>
+      <div class="pseg" id="recTune"><span>Autotune</span><div class="seg"><button data-v="0">No</button><button data-v="0.4">Leggero</button><button data-v="0.7">Medio</button><button data-v="1">Forte</button></div></div>
+      <button class="chip pri" id="recFix">Crea il video migliorato</button>
+      <button class="chip" id="recOrig" hidden>Torna all'originale</button>
+    </div>
     <div class="row" style="justify-content:center">
       <button class="chip pri" id="recSave">Salva sul telefono</button>
       <button class="chip" id="recShare" hidden>Condividi</button>
@@ -989,12 +999,13 @@ function readID3(ab){const b=new Uint8Array(ab);const out={};if(b.length<10||b[0
     p+=10+fs}return out}
 function guessStem(name,taken){const base=name.replace(/\.[^.]+$/,'');for(const s of STEMS){if(s.re&&s.re.test(base)&&!taken.has(s.k))return s.k}return taken.has('mix')?'other':'mix'}
 const cleanName=n=>n.replace(/\.[^.]+$/,'').replace(/_+/g,' ').replace(/\b(vocals?|bass|drums|other|guitar|piano)\b/ig,'').trim();
-$('#fileIn').onchange=async e=>{const fs=[...e.target.files];if(!fs.length)return;pending=[];const taken=new Set();let meta={};
+$('#fileIn').onchange=e=>importFiles([...e.target.files]);
+async function importFiles(fs){if(!fs.length)return;pending=[];const taken=new Set();let meta={};
   for(const f of fs){const ab=await f.arrayBuffer();const k=guessStem(f.name,taken);taken.add(k);pending.push({name:f.name,k,ab});const m=readID3(ab);meta={title:meta.title||m.title,artist:meta.artist||m.artist,lyrics:meta.lyrics||m.lyrics}}
   $('#fileRows').innerHTML=pending.map((p,i)=>`<div class="fi"><span>${esc(p.name)}</span><select class="sel" data-i="${i}" aria-label="Traccia per ${esc(p.name)}">${STEMS.map(s=>`<option value="${s.k}" ${s.k===p.k?'selected':''}>${s.label}</option>`).join('')}</select></div>`).join('');
   $$('#fileRows select').forEach(s=>s.onchange=()=>pending[+s.dataset.i].k=s.value);
   $('#impTitle').value=meta.title||cleanName(fs[0].name)||'';$('#impArtist').value=meta.artist||'';pending.meta=meta;
-  $('#impStatus').textContent=fs.length===1?'Un solo file: lo uso come brano completo.':`${fs.length} file pronti. Controlla che ogni traccia sia al posto giusto.`;$('#importBox').hidden=false};
+  $('#impStatus').textContent=fs.length===1?'Un solo file: lo uso come brano completo.':`${fs.length} file pronti. Controlla che ogni traccia sia al posto giusto.`;$('#importBox').hidden=false;$('#importBox').scrollIntoView({behavior:'smooth',block:'center'})}
 $('#bSave').onclick=async()=>{if(!pending.length)return;const ks=pending.map(p=>p.k);if(new Set(ks).size!==ks.length){$('#impStatus').textContent='Due file sono assegnati alla stessa traccia: cambiane uno.';return}
   $('#impStatus').textContent='Leggo l\'audio…';const bufs={};
   for(const p of pending){try{bufs[p.k]=await decode(p.ab)}catch(e){$('#impStatus').textContent='Non riesco a leggere '+p.name+'. Prova a esportarlo di nuovo in MP3 o WAV.';return}}
@@ -1426,22 +1437,110 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   const vt=$('#recCv').captureStream(30).getVideoTracks()[0];const ms=new MediaStream([vt,...R.dest.stream.getAudioTracks()]);
   R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:4e6,audioBitsPerSecond:160e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
   R.rec.ondataavailable=e=>{if(e.data&&e.data.size)R.chunks.push(e.data)};R.rec.onstop=recFinish;
-  R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');play()}
-function recStop(){if(!R.on)return;R.on=false;$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
+  R.vchunks=[];R.vrec=null;try{const at=R.stream.getAudioTracks();if(at.length){R.vrec=new MediaRecorder(new MediaStream(at));R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
+  R.startSong=now();if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');play()}
+function recStop(){if(!R.on)return;R.on=false;$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
 A.addEventListener('ended',()=>{if(R.on)recStop()});
 function recName(){const ext=(R.mime||'').includes('mp4')?'mp4':'webm';const d=new Date();const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'.'+String(d.getMinutes()).padStart(2,'0');return safeName((song.artist?song.artist+' - ':'')+(song.title||'Brano'))+' - Fonica '+ds+'.'+ext}
-function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
+async function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});R.orig=R.blob;R.voiceBlob=null;if(R.vrec){await R.vstop;R.voiceBlob=new Blob(R.vchunks,{type:R.vrec.mimeType||'audio/webm'})}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
   $('#recDone').hidden=false;$('#recMsg').textContent='Video pronto ('+(R.blob.size/1048576).toFixed(1)+' MB). Guardalo, poi salvalo o condividilo.';
   const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored)}
 $('#recSave').onclick=()=>{if(!R.blob)return;if(window.self!==window.top){$('#recMsg').textContent='Dentro l\'app Claude non si possono salvare file: apri Fonica Infinity dal suo indirizzo web.';return}
   const a=document.createElement('a');a.href=URL.createObjectURL(R.blob);a.download=recName();document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);$('#recMsg').textContent='Salvato nella cartella Download del telefono.'};
 $('#recShare').onclick=async()=>{try{await navigator.share({files:[new File([R.blob],recName(),{type:R.blob.type})],title:(song&&song.title)||'Fonica Infinity'})}catch(e){if(e&&e.name!=='AbortError')$('#recMsg').textContent='Condivisione non riuscita: prova «Salva sul telefono».'}};
 $('#recFolder').onclick=async()=>{try{if(!await dirReady(true))return;const d=await (await songDirHandle(song)).getDirectoryHandle('Video',{create:true});const fh=await d.getFileHandle(recName(),{create:true});const w=await fh.createWritable();await w.write(R.blob);await w.close();$('#recMsg').textContent='Salvato in «'+[dirHandle.name,...songDirs(song),'Video'].join(' / ')+'».'}catch(e){$('#recMsg').textContent='Non riesco a salvare nella cartella: '+(e.message||e)}};
+/* ---------- dopo la registrazione: voce a tempo e autotune ---------- */
+function recSetUrl(blob){const u=URL.createObjectURL(blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u}
+function monoOf(b){const n=b.length,o=new Float32Array(n);const c=b.numberOfChannels;for(let ch=0;ch<c;ch++){const d=b.getChannelData(ch);for(let i=0;i<n;i++)o[i]+=d[i]/c}return o}
+function envOf(x,sr,hop){const H=Math.round(sr*hop),F=Math.floor(x.length/H),e=new Float32Array(F);for(let f=0;f<F;f++){let s=0;for(let i=f*H;i<f*H+H;i++)s+=x[i]*x[i];e[f]=Math.log(1e-6+Math.sqrt(s/H))}
+  const o=new Float32Array(F);for(let f=1;f<F;f++)o[f]=Math.max(0,e[f]-e[f-1]);return o}
+/* ritardo della tua voce rispetto alla voce originale del brano */
+async function recFindLag(voice,sr){const est=Math.min(.5,(ctx().outputLatency||.04)+(ctx().baseLatency||.01)+.05);
+  if(!stems.vocals)return{lag:est,how:'stimato'};
+  const ref=stems.vocals;const s0=Math.floor(R.startSong*ref.sampleRate),n=Math.min(ref.length-s0,Math.floor(voice.length/sr*ref.sampleRate));if(n<ref.sampleRate*5)return{lag:est,how:'stimato'};
+  const rm=new Float32Array(n);const c0=ref.getChannelData(0),c1=ref.numberOfChannels>1?ref.getChannelData(1):c0;for(let i=0;i<n;i++)rm[i]=(c0[s0+i]+c1[s0+i])*.5;
+  await sleep0();const hop=.005,a=envOf(rm,ref.sampleRate,hop),b=envOf(voice,sr,hop);const F=Math.min(a.length,b.length);
+  let best=-1,bl=0;const sc=[];for(let l=-20;l<=160;l++){let s=0;for(let i=Math.max(0,-l);i<F&&i+l<F;i++)s+=a[i]*b[i+l];sc.push(s);if(s>best){best=s;bl=l}}
+  const mean=sc.reduce((p,q)=>p+q,0)/sc.length;if(!(best>mean*1.25))return{lag:est,how:'stimato'};
+  return{lag:Math.max(0,bl*hop),how:'misurato'}}
+/* autotune: avvicina ogni nota alla melodia originale (o al semitono più vicino) */
+async function recAutotune(x,sr,lag,str,onp){
+  let pk=0;for(let i=0;i<x.length;i+=3)pk=Math.max(pk,Math.abs(x[i]));const gn=pk>0?.9/pk:1;
+  const f=Math.max(1,Math.round(sr/8000)),sr2=sr/f,n2=Math.floor(x.length/f),d=new Float32Array(n2);for(let i=0;i<n2;i++){let s=0;for(let k=0;k<f;k++)s+=x[i*f+k];d[i]=s/f*gn}
+  const hop=.02,H2=Math.round(sr2*hop),N=512,F=Math.max(0,Math.floor((n2-N)/H2));const midi=new Float32Array(F);
+  for(let i=0;i<F;i++){midi[i]=detect(d,sr2,i*H2,N);if(i%150===0){onp(.5*i/F);await sleep0()}}
+  const cents=new Float32Array(F);
+  for(let i=0;i<F;i++){const m=midi[i];if(!m)continue;let t=Math.round(m);
+    if(guide){const g=guide[Math.round((R.startSong+i*hop-lag)/HOP)];if(g>0){const gm=Math.round(g)+tr;t=gm+12*Math.round((m-gm)/12)}}
+    const c=(t-m)*100;cents[i]=Math.abs(c)<12?0:c*str}
+  const sm=new Float32Array(F);for(let i=0;i<F;i++){const w=[];for(let k=-2;k<=2;k++){const v=cents[i+k];if(v!==undefined)w.push(v)}w.sort((p,q)=>p-q);sm[i]=w[w.length>>1]}
+  for(let i=1;i<F;i++)if(midi[i]&&midi[i-1])sm[i]=sm[i-1]*.5+sm[i]*.5;
+  const G=2048,Hg=G/4,win=new Float32Array(G);for(let i=0;i<G;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/G);
+  const out=new Float32Array(x.length),ws=new Float32Array(x.length);let cnt=0;
+  for(let p=0;p+G<x.length;p+=Hg){const fi=Math.min(F-1,Math.floor((p+G/2)/sr/hop));const r=Math.pow(2,(fi>=0?sm[fi]:0)/1200);const c=p+G/2;
+    for(let k=0;k<G;k++){const pos=c+(k-G/2)*r;const i0=Math.floor(pos);if(i0<0||i0+1>=x.length)continue;const fr=pos-i0;const v=x[i0]+(x[i0+1]-x[i0])*fr;out[p+k]+=v*win[k];ws[p+k]+=win[k]}
+    if(++cnt%400===0){onp(.5+.5*p/x.length);await sleep0()}}
+  for(let i=0;i<x.length;i++)out[i]=ws[i]>1e-3?out[i]/ws[i]:x[i];return out}
+let fixBusy=false;
+async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=true;const btn=$('#recFix');btn.disabled=true;const say=t=>$('#recMsg').textContent=t;
+  const doSync=$('#recSync').checked,tune=+($$('#recTune button.on')[0]||{dataset:{v:0}}).dataset.v;
+  try{say('Analizzo la tua voce…');const vb=await decode(await R.voiceBlob.arrayBuffer());let voice=monoOf(vb);const vsr=vb.sampleRate;
+    let lag=0,how='';if(doSync){const r=await recFindLag(voice,vsr);lag=r.lag;how=r.how}
+    if(tune>0){voice=await recAutotune(voice,vsr,lag,tune,p=>say('Autotune sulla tua voce… '+Math.round(p*100)+'%'))}
+    say('Mescolo voce e base…');const src=await sourcesFor(tr);const dur=Math.max(1,voice.length/vsr-lag);
+    const oc=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);const mg=oc.createGain();mg.gain.value=$('#recBase').checked?+$('#recMus').value:0;mg.connect(oc.destination);
+    for(const k of order){const g=effGain(k);if(!g)continue;const s=oc.createBufferSource();s.buffer=src[k];const gg=oc.createGain();gg.gain.value=g;s.connect(gg);gg.connect(mg);s.start(0,Math.min(R.startSong,src[k].duration-.01))}
+    const vbuf=oc.createBuffer(1,voice.length,vsr);vbuf.copyToChannel(voice,0);const vs=oc.createBufferSource();vs.buffer=vbuf;const vg=oc.createGain();vg.gain.value=+$('#recVoc').value;vs.connect(vg);vg.connect(oc.destination);vs.start(0,lag);
+    const mixed=await oc.startRendering();
+    /* rifaccio il video: stesse immagini, audio corretto (dura quanto il brano registrato) */
+    const v=document.createElement('video');v.muted=true;v.playsInline=true;v.src=URL.createObjectURL(R.orig);await new Promise((ok,ko)=>{v.onloadeddata=ok;v.onerror=()=>ko(new Error('video'));v.load()});
+    const cv=document.createElement('canvas');const [W,H]=[$('#recCv').width,$('#recCv').height];cv.width=W;cv.height=H;const g2=cv.getContext('2d');
+    const c=ctx();await c.resume();const dest=c.createMediaStreamDestination();const as=c.createBufferSource();as.buffer=mixed;as.connect(dest);
+    const ms=new MediaStream([cv.captureStream(30).getVideoTracks()[0],...dest.stream.getAudioTracks()]);
+    const rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:4e6,audioBitsPerSecond:160e3}:undefined);const ch=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)ch.push(e.data)};
+    const done=new Promise(ok=>rec.onstop=ok);let raf=0;const t0=performance.now();
+    const draw=()=>{g2.drawImage(v,0,0,W,H);const el=(performance.now()-t0)/1000;say('Preparo il video migliorato… '+Math.min(99,Math.round(el/dur*100))+'% (tieni lo schermo acceso)');raf=requestAnimationFrame(draw)};
+    await v.play();rec.start(1000);as.start();draw();
+    await new Promise(ok=>{as.onended=ok});v.pause();cancelAnimationFrame(raf);rec.stop();await done;URL.revokeObjectURL(v.src);
+    R.blob=new Blob(ch,{type:(R.mime||'video/webm').split(';')[0]});recSetUrl(R.blob);$('#recOrig').hidden=false;
+    say('Fatto. '+(doSync?'Voce rimessa a tempo ('+how+': '+Math.round(lag*1000)+' ms). ':'')+(tune>0?'Autotune applicato. ':'')+'Ora puoi salvarlo o condividerlo.')}
+  catch(e){console.error(e);say('Non sono riuscito a migliorare il video: '+(e.message||e))}
+  finally{fixBusy=false;btn.disabled=false}}
+$$('#recTune button').forEach(b=>b.onclick=()=>{$$('#recTune button').forEach(x=>x.classList.toggle('on',x===b));prefSet('recTune',b.dataset.v)});
+{const v=prefGet('recTune')||'0';$$('#recTune button').forEach(x=>x.classList.toggle('on',x.dataset.v===v))}
+$('#recFix').onclick=recImprove;
+$('#recOrig').onclick=()=>{R.blob=R.orig;recSetUrl(R.blob);$('#recOrig').hidden=true;$('#recMsg').textContent='Rimesso il video originale.'};
+
 $('#recAgain').onclick=()=>{$('#recDone').hidden=true;$('#recPlay').pause()};
 $('#recGo').onclick=()=>R.on?recStop():recStart();
 $('#recX').onclick=recClose;
 $('#recFlip').onclick=async()=>{if(R.on)return;R.facing=R.facing==='user'?'environment':'user';try{await recCamera()}catch(e){toast('Non riesco a cambiare fotocamera')}};
 $('#bRec').onclick=recOpen;$('#pRec').onclick=()=>{palOpen(false);setTimeout(recOpen,200)};
+
+/* ---------- scarica un file audio da un link diretto ---------- */
+function linkFix(u){u=u.trim();
+  if(/dropbox\.com\//i.test(u))return u.replace(/([?&])dl=0/,'$1dl=1').replace(/^(https:\/\/)(www\.)?dropbox\.com/i,'$1dl.dropboxusercontent.com');
+  const gd=u.match(/drive\.google\.com\/file\/d\/([^/]+)/i);if(gd)return 'https://drive.google.com/uc?export=download&id='+gd[1];
+  return u}
+async function linkGet(){const raw=$('#linkIn').value.trim(),st=$('#linkStatus');$('#linkUse').hidden=true;
+  if(!raw){st.textContent='Incolla prima il link del file audio.';return}
+  if(/youtube\.com|youtu\.be|music\.youtube|spotify\.com|deezer\.com|music\.apple\.com|soundcloud\.com/i.test(raw)){st.textContent='Questo è il link di un servizio di streaming: da lì l\'audio non si può scaricare, perché quei servizi non lo permettono. Usa un tuo file MP3 o un link diretto a un file audio.';return}
+  let u;try{u=new URL(linkFix(raw))}catch(e){st.textContent='Il link non sembra valido: deve iniziare con https://';return}
+  st.textContent='Scarico il file…';
+  try{const r=await fetch(u.href);if(!r.ok)throw new Error('HTTP '+r.status);
+    const tot=+r.headers.get('Content-Length')||0;if(tot>60e6){st.textContent='Il file è troppo grande (più di 60 MB).';return}
+    const rd=r.body.getReader();const parts=[];let got=0;for(;;){const {done,value}=await rd.read();if(done)break;parts.push(value);got+=value.length;st.textContent='Scarico il file… '+(got/1048576).toFixed(1)+' MB'+(tot?' di '+(tot/1048576).toFixed(1):'')}
+    const blob=new Blob(parts,{type:r.headers.get('Content-Type')||'audio/mpeg'});
+    if(/text\/html/i.test(blob.type)){st.textContent='Il link apre una pagina web, non un file audio. Serve il link diretto al file (che finisce per esempio con .mp3).';return}
+    let name=decodeURIComponent((u.pathname.split('/').pop()||'brano').replace(/\+/g,' '));if(!/\.(mp3|m4a|aac|wav|flac|ogg|opus)$/i.test(name))name+=(/wav/i.test(blob.type)?'.wav':/mp4|m4a|aac/i.test(blob.type)?'.m4a':'.mp3');
+    const file=new File([blob],name,{type:blob.type});
+    try{await decode(await file.arrayBuffer())}catch(e){st.textContent='Ho scaricato il file, ma non è un audio che riesco a leggere.';return}
+    linkFile=file;sepFileObj=file;$('#sepFile').textContent=name;$('#bSep').disabled=sepBusy;
+    st.textContent='Scaricato: '+name+' ('+(file.size/1048576).toFixed(1)+' MB). Ora premi «Separa tracce» qui sopra, oppure aggiungilo così com\'è.';$('#linkUse').hidden=false}
+  catch(e){st.textContent=window.self!==window.top?'Dentro l\'app Claude lo scaricamento è bloccato: apri Fonica Infinity dal suo indirizzo web.':'Questo sito non permette di scaricare il file da un\'altra pagina. Scaricalo sul telefono e poi sceglilo con «Scegli file».'}}
+let linkFile=null;
+$('#linkGo').onclick=linkGet;$('#linkIn').onkeydown=e=>{if(e.key==='Enter')linkGet()};
+$('#linkUse').onclick=()=>{if(linkFile)importFiles([linkFile])};
 
 /* ================= testo da LRCLIB (prima di tutto) ================= */
 const LRC_H={'Lrclib-Client':'Fonica Infinity v1 (karaoke personale)'};
