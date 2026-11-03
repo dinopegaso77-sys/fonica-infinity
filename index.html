@@ -165,6 +165,30 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .adv summary{cursor:pointer;color:var(--steel);font-weight:600;padding:6px 0}.adv[open]{display:flex;flex-direction:column;gap:8px}
 .sepmsg{background:var(--surface);border:2px solid var(--mute);border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.55;color:var(--fg)}
 .sepmsg b{color:var(--mute)}
+.recov{position:fixed;inset:0;z-index:70;background:#000;color:#fff;display:flex;flex-direction:column}
+#recCv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+#recCam{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.rectop{position:relative;z-index:2;display:flex;gap:8px;align-items:center;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top,0px));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));background:linear-gradient(rgba(0,0,0,.6),transparent)}
+.rectop b{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--f-display);font-size:18px}
+.recrec{color:#ff5b5b;font-weight:700;font-variant-numeric:tabular-nums}
+.recov .pbtn{color:#fff;border-color:rgba(255,255,255,.5)}
+.recbar{position:relative;z-index:2;margin-top:auto;display:flex;flex-direction:column;gap:10px;padding:12px 14px;padding-bottom:max(12px,env(safe-area-inset-bottom,0px));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));background:linear-gradient(transparent,rgba(0,0,0,.75) 30%)}
+.recrow{display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap}
+.recsl{display:flex;flex-direction:column;gap:2px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#cfd8e2;flex:1 1 120px;min-width:0}
+.recsl input{accent-color:var(--stage-hi);width:100%}
+.rechint{font-size:14px;color:#cfd8e2;display:flex;gap:6px;align-items:center}
+.recov .pseg span{color:#cfd8e2}.recov .pseg .seg{border-color:rgba(255,255,255,.5)}.recov .pseg .seg button{color:#fff}.recov .pseg .seg button.on{background:var(--stage-hi);color:var(--stage2)}
+#recGo{margin-left:auto;background:#e0453b;color:#fff}
+#recGo.stop{background:#fff;color:#c0392b}
+.recly{position:absolute;left:0;right:0;top:50%;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 18px;text-align:center;pointer-events:none}
+.recly b{font-family:var(--f-display);font-size:clamp(22px,6vw,38px);color:var(--stage-hi);text-shadow:0 2px 10px #000;text-wrap:balance}
+.recly span{font-family:var(--f-display);font-size:clamp(17px,4.4vw,28px);color:#fff;opacity:.8;text-shadow:0 2px 8px #000}
+.recly::before{content:'Solo per te: non va nel video';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#cfd8e2;opacity:.8}
+.recov.recording .recrow:first-child,.recov.recording .rechint{display:none}
+.recov.recording .recbar{background:none}
+.recdone{position:absolute;inset:0;z-index:3;background:rgba(0,0,0,.92);display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;padding:16px}
+.recdone video{max-width:100%;max-height:70vh;border-radius:12px;background:#000}
+.recdone .rpmsg{color:#fff;text-align:center}
 .toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:600;z-index:90;font-size:14px;max-width:calc(100% - 32px);text-align:center}
 
 /* sincronizzazione */
@@ -231,6 +255,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     </div>
     <div class="topbtns">
       <button class="chip pri" id="bPalco"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Palco</button>
+      <button class="chip pri" id="bRec"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>Registra video</button>
       <button class="chip" id="bAdd">Aggiungi brano</button>
       <button class="chip" id="bLib">Libreria</button>
       <button class="chip" id="bHelp">Guida</button>
@@ -318,6 +343,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <div class="pal-top">
     <div class="pal-name" id="palName"></div>
     <button class="pbtn" id="pSm" aria-label="Testo più piccolo">A−</button><button class="pbtn" id="pLg" aria-label="Testo più grande">A+</button>
+    <button class="pbtn" id="pRec">Registra video</button>
     <button class="pbtn on" id="pTab">Tablatura</button>
     <button class="pbtn" id="pX">Esci</button>
   </div>
@@ -506,6 +532,37 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <div class="bar" id="spBar"><i id="spFill"></i></div>
   <div class="st" id="spStat"></div>
   <div class="row"><span class="status grow" id="spFile"></span><button class="mini" id="spStop">Annulla</button></div>
+</div>
+<div id="recOv" class="recov" hidden>
+  <canvas id="recCv"></canvas>
+  <video id="recCam" playsinline muted autoplay></video>
+  <div class="recly" id="recLy" hidden><b id="recLy1"></b><span id="recLy2"></span></div>
+  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="pbtn" id="recFlip" aria-label="Cambia fotocamera">Fotocamera</button><button class="pbtn" id="recX">Chiudi</button></div>
+  <div class="recbar" id="recBar">
+    <div class="recrow">
+      <div class="pseg" id="recVox"><span>Voce originale</span><div class="seg"><button data-v="0">No</button><button data-v="0.25">Guida</button><button data-v="1">Sì</button></div></div>
+      <label class="recsl"><span>Musica</span><input type="range" id="recMus" min="0" max="1.5" step="0.05" value="0.8"></label>
+      <label class="recsl"><span>Tua voce</span><input type="range" id="recVoc" min="0" max="2.5" step="0.05" value="1.3"></label>
+      <label class="recsl"><span>Sincronia voce <i id="recLatV"></i></span><input type="range" id="recLat" min="0" max="500" step="10" value="120"></label>
+    </div>
+    <div class="recrow">
+      <span class="rechint" id="recHint">Con le cuffie il risultato è migliore.</span>
+      <label class="rechint"><input type="checkbox" id="recTxt" checked> Testo nel video</label>
+      <label class="rechint"><input type="checkbox" id="recBase" checked> Base nel video</label>
+      <label class="rechint"><input type="checkbox" id="recFromStart" checked> dall'inizio</label>
+      <button class="big" id="recGo">● Registra</button>
+    </div>
+  </div>
+  <div class="recdone" id="recDone" hidden>
+    <video id="recPlay" controls playsinline></video>
+    <div class="row" style="justify-content:center">
+      <button class="chip pri" id="recSave">Salva sul telefono</button>
+      <button class="chip" id="recShare" hidden>Condividi</button>
+      <button class="chip" id="recFolder" hidden>Salva nella cartella</button>
+      <button class="chip" id="recAgain">Rifai</button>
+    </div>
+    <div class="rpmsg" id="recMsg"></div>
+  </div>
 </div>
 <div class="toast" id="toast" hidden></div>
 
@@ -1308,6 +1365,83 @@ $('#addGo').onclick=async()=>{const todo=addFound.filter(x=>x.sel);if(!todo.leng
   btn.disabled=false;renderAdd();$('#addStatus').textContent=done===todo.length?`Fatto: ${done} brani aggiunti alla Libreria.`.replace('1 brani aggiunti','1 brano aggiunto'):`Aggiunti ${done} brani su ${todo.length}: alcuni file non si sono potuti leggere.`;
   if(done===1&&firstId){closeOv(btn);openStored(firstId)}else if(done)toast('Brani aggiunti: li trovi in Libreria, divisi per artista')};
 $('#bAdd').onclick=openAdd;$('#bAdd2').onclick=()=>{closeOv($('#bAdd2'));openAdd()};
+
+/* ================= registra video mentre canti (stile StarMaker) ================= */
+const R={stream:null,facing:'user',rec:null,chunks:[],raf:0,on:false,count:0,t0:0,blob:null,mime:'',musG:null,vocG:null,musD:null,dest:null,micSrc:null,elSrc:null};
+const recLogo=new Image();recLogo.src=document.querySelector('.brand img').src;
+function recSize(){const port=innerHeight>=innerWidth;return port?[720,1280]:[1280,720]}
+async function recCamera(){if(R.stream)R.stream.getTracks().forEach(t=>t.stop());
+  R.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:R.facing,width:{ideal:1280},height:{ideal:720}},audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}});
+  const v=$('#recCam');v.srcObject=R.stream;try{await v.play()}catch(e){}
+  const c=ctx();if(R.micSrc)try{R.micSrc.disconnect()}catch(e){}R.micSrc=c.createMediaStreamSource(R.stream);R.micSrc.connect(R.vocG)}
+function recGraph(){const c=ctx();
+  if(!R.dest){R.dest=c.createMediaStreamDestination();R.musG=c.createGain();R.vocG=c.createGain();R.musD=c.createDelay(1);R.musG.connect(R.musD);R.musD.connect(R.dest);R.vocG.connect(R.dest)}
+  if(!R.elSrc){R.elSrc=c.createMediaElementSource(A);R.elSrc.connect(c.destination);R.elSrc.connect(R.musG)}  // la musica va sempre anche agli altoparlanti
+  recLevels()}
+function recLevels(){if(!R.musG)return;R.musG.gain.value=$('#recBase').checked?+$('#recMus').value:0;R.vocG.gain.value=+$('#recVoc').value;const ms=+$('#recLat').value;R.musD.delayTime.value=ms/1000;$('#recLatV').textContent=ms+' ms'}
+['#recMus','#recVoc','#recLat'].forEach(s=>$(s).oninput=()=>{recLevels();prefSet('rec'+s.slice(4),$(s).value)});
+['#recTxt','#recBase'].forEach(s=>{const v=prefGet(s.slice(1));if(v!=null)$(s).checked=v==='1';$(s).onchange=()=>{prefSet(s.slice(1),$(s).checked?'1':'0');recLevels();
+  if(s==='#recBase')$('#recHint').textContent=$('#recBase').checked?'La base è nel video.':'Senza base: nel video c\'è solo la tua voce. Usa le cuffie, così il microfono non riprende la musica.'}});
+function recVoxUI(){const v=stems.vocals?(gains.vocals.mute?0:gains.vocals.vol):(voiceOff?0:1);$$('#recVox button').forEach(b=>{const bv=+b.dataset.v;b.classList.toggle('on',Math.abs(bv-v)<.01||(bv===1&&v>.9)||(bv===.25&&v>.05&&v<.9));b.hidden=!stems.vocals&&bv===.25})}
+$$('#recVox button').forEach(b=>b.onclick=()=>{const v=+b.dataset.v;if(stems.vocals){gains.vocals.vol=v;gains.vocals.mute=false}else voiceOff=v===0;syncChanUI();rebuildMix();recVoxUI()});
+/* testo karaoke disegnato sul video */
+function recWrap(g,words,maxW){const rows=[];let cur=[],w=0;const sp=g.measureText(' ').width;for(const x of words){const ww=g.measureText(x.s).width;if(cur.length&&w+sp+ww>maxW){rows.push(cur);cur=[];w=0}cur.push({...x,ww});w+=(cur.length>1?sp:0)+ww}if(cur.length)rows.push(cur);return rows}
+function recLyrics(g,W,H,t){const L=K.lines;if(!L.length)return;const tt=t-K.off;let i=-1;for(let j=0;j<L.length;j++){if(L[j].t<=tt)i=j;else break}
+  const base=Math.round(Math.min(W,H)*0.062),hi=css('--stage-hi')||'#e8c8a6';g.textAlign='left';g.textBaseline='middle';
+  const drawLine=(l,y,size,alpha,prog)=>{g.font=`700 ${size}px "Josefin Sans","Avenir Next",sans-serif`;const words=lyrWords(l);const rows=recWrap(g,words,W*0.88);const sp=g.measureText(' ').width;const lh=size*1.22;let yy=y-(rows.length-1)*lh/2;
+    for(const r of rows){const rw=r.reduce((a,x)=>a+x.ww,0)+sp*(r.length-1);let x=(W-rw)/2;
+      for(const w of r){g.globalAlpha=alpha;g.shadowColor='rgba(0,0,0,.85)';g.shadowBlur=size*.25;g.fillStyle='#ffffff';g.fillText(w.s,x,yy);g.shadowBlur=0;
+        if(prog){const p=Math.max(0,Math.min(1,(tt-w.t)/Math.max(.08,w.e-w.t)));if(p>0){g.save();g.beginPath();g.rect(x,yy-size,w.ww*p,size*2);g.clip();g.fillStyle=hi;g.fillText(w.s,x,yy);g.restore()}}
+        x+=w.ww+sp}yy+=lh}g.globalAlpha=1;return rows.length*lh};
+  const yC=H*(H>W?0.64:0.7);
+  if(i>=0&&tt<=L[i].e+1.2){const h=drawLine(L[i],yC,base,1,true);if(L[i+1])drawLine(L[i+1],yC+h/2+base*1.1,Math.round(base*.78),.75,false)}
+  else{const n=L[i+1];if(n){drawLine(n,yC,Math.round(base*.9),.85,false);const left=n.t-tt;if(left>0&&left<=3.2){g.font=`700 ${base}px sans-serif`;g.textAlign='center';g.fillStyle=hi;g.fillText('● '.repeat(Math.max(1,Math.ceil(left-.2))).trim(),W/2,yC-base*1.6)}}}}
+function recDraw(){const cv=$('#recCv');const [W,H]=recSize();if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}const g=cv.getContext('2d');const v=$('#recCam');
+  g.fillStyle='#000';g.fillRect(0,0,W,H);
+  if(v.videoWidth){const s=Math.max(W/v.videoWidth,H/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;g.save();if(R.facing==='user'){g.translate(W,0);g.scale(-1,1)}g.drawImage(v,(W-dw)/2,(H-dh)/2,dw,dh);g.restore()}
+  const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);
+  const t=now();const ly=$('#recLy');
+  if($('#recTxt').checked){ly.hidden=true;recLyrics(g,W,H,t)}
+  else{ly.hidden=!K.lines.length;if(K.lines.length){const tt=t-K.off;let i=-1;for(let j=0;j<K.lines.length;j++){if(K.lines[j].t<=tt)i=j;else break}
+    const cur=i>=0&&tt<=K.lines[i].e+1.2?K.lines[i].s:'',nx=(K.lines[i+1]||{}).s||'';if($('#recLy1').textContent!==cur)$('#recLy1').textContent=cur;if($('#recLy2').textContent!==nx)$('#recLy2').textContent=nx}}
+  const u=Math.min(W,H);g.globalAlpha=.9;if(recLogo.complete&&recLogo.naturalWidth){const lw=u*.16,lh=lw*recLogo.naturalHeight/recLogo.naturalWidth;g.fillStyle='rgba(255,255,255,.9)';g.fillRect(u*.04-6,H-u*.04-lh-6,lw+12,lh+12);g.drawImage(recLogo,u*.04,H-u*.04-lh,lw,lh)}
+  g.font=`600 ${Math.round(u*.032)}px Figtree,sans-serif`;g.textAlign='right';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=6;g.fillText((song&&song.title)||'',W-u*.04,H-u*.04);g.shadowBlur=0;g.globalAlpha=1;
+  if(R.count>0){g.font=`800 ${Math.round(u*.32)}px "Josefin Sans",sans-serif`;g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=20;g.fillText(String(R.count),W/2,H*.42);g.shadowBlur=0}
+  if(R.on)$('#recTime').textContent=fmt((Date.now()-R.t0)/1000);
+  R.raf=requestAnimationFrame(recDraw)}
+async function recOpen(){if(!song){toast('Apri prima un brano');return}
+  if(!navigator.mediaDevices||!window.MediaRecorder){toast(window.self!==window.top?'Dentro l\'app Claude la fotocamera è bloccata: apri Fonica Infinity dal suo indirizzo web':'Questo browser non permette di registrare video');return}
+  pause();if(stems.vocals&&gains.vocals.vol>.3&&!gains.vocals.mute)preset('karaoke');
+  ['Mus','Voc','Lat'].forEach(k=>{const v=prefGet('rec'+k);if(v!=null)$('#recM'.slice(0,4)+k).value=v});
+  $('#recOv').hidden=false;$('#recDone').hidden=true;$('#recBar').hidden=false;$('#recTitle').textContent=(song.title||'Registra video')+(song.artist?' · '+song.artist:'');document.body.style.overflow='hidden';
+  try{const c=ctx();await c.resume();recGraph();await recCamera();$('#recHint').textContent=K.lines.length?'Con le cuffie il risultato è migliore. Premi Registra: parte un conto alla rovescia.':'Questo brano non ha il testo: puoi registrare lo stesso, oppure cercalo prima su LRCLIB.'}
+  catch(e){$('#recHint').textContent=e&&e.name==='NotAllowedError'?'Serve il permesso per fotocamera e microfono: consentilo dal lucchetto vicino all\'indirizzo.':window.self!==window.top?'Dentro l\'app Claude la fotocamera è bloccata: apri Fonica Infinity dal suo indirizzo web.':'Non riesco ad aprire la fotocamera: '+(e.message||e)}
+  recVoxUI();recLevels();cancelAnimationFrame(R.raf);R.raf=requestAnimationFrame(recDraw);
+  try{const el=$('#recOv');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el)}catch(e){}}
+function recClose(){if(R.on)recStop();cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
+function recMime(){for(const m of ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'])if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))return m;return ''}
+async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');return}
+  if($('#recFromStart').checked)seek(0);loopA=loopB=null;updAB();
+  $('#recGo').disabled=true;for(R.count=3;R.count>0;R.count--)await new Promise(r=>setTimeout(r,1000));
+  const vt=$('#recCv').captureStream(30).getVideoTracks()[0];const ms=new MediaStream([vt,...R.dest.stream.getAudioTracks()]);
+  R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:4e6,audioBitsPerSecond:160e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
+  R.rec.ondataavailable=e=>{if(e.data&&e.data.size)R.chunks.push(e.data)};R.rec.onstop=recFinish;
+  R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');play()}
+function recStop(){if(!R.on)return;R.on=false;$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
+A.addEventListener('ended',()=>{if(R.on)recStop()});
+function recName(){const ext=(R.mime||'').includes('mp4')?'mp4':'webm';const d=new Date();const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'.'+String(d.getMinutes()).padStart(2,'0');return safeName((song.artist?song.artist+' - ':'')+(song.title||'Brano'))+' - Fonica '+ds+'.'+ext}
+function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
+  $('#recDone').hidden=false;$('#recMsg').textContent='Video pronto ('+(R.blob.size/1048576).toFixed(1)+' MB). Guardalo, poi salvalo o condividilo.';
+  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored)}
+$('#recSave').onclick=()=>{if(!R.blob)return;if(window.self!==window.top){$('#recMsg').textContent='Dentro l\'app Claude non si possono salvare file: apri Fonica Infinity dal suo indirizzo web.';return}
+  const a=document.createElement('a');a.href=URL.createObjectURL(R.blob);a.download=recName();document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);$('#recMsg').textContent='Salvato nella cartella Download del telefono.'};
+$('#recShare').onclick=async()=>{try{await navigator.share({files:[new File([R.blob],recName(),{type:R.blob.type})],title:(song&&song.title)||'Fonica Infinity'})}catch(e){if(e&&e.name!=='AbortError')$('#recMsg').textContent='Condivisione non riuscita: prova «Salva sul telefono».'}};
+$('#recFolder').onclick=async()=>{try{if(!await dirReady(true))return;const d=await (await songDirHandle(song)).getDirectoryHandle('Video',{create:true});const fh=await d.getFileHandle(recName(),{create:true});const w=await fh.createWritable();await w.write(R.blob);await w.close();$('#recMsg').textContent='Salvato in «'+[dirHandle.name,...songDirs(song),'Video'].join(' / ')+'».'}catch(e){$('#recMsg').textContent='Non riesco a salvare nella cartella: '+(e.message||e)}};
+$('#recAgain').onclick=()=>{$('#recDone').hidden=true;$('#recPlay').pause()};
+$('#recGo').onclick=()=>R.on?recStop():recStart();
+$('#recX').onclick=recClose;
+$('#recFlip').onclick=async()=>{if(R.on)return;R.facing=R.facing==='user'?'environment':'user';try{await recCamera()}catch(e){toast('Non riesco a cambiare fotocamera')}};
+$('#bRec').onclick=recOpen;$('#pRec').onclick=()=>{palOpen(false);setTimeout(recOpen,200)};
 
 /* ================= testo da LRCLIB (prima di tutto) ================= */
 const LRC_H={'Lrclib-Client':'Fonica Infinity v1 (karaoke personale)'};
