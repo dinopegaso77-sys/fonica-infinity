@@ -154,9 +154,19 @@ def handler(job):
                 except Exception as e:  # la separazione resta valida anche se la trascrizione fallisce
                     lyrics = {"error": str(e)[-300:], "segments": []}
 
+        # tracce praticamente mute (per esempio il piano in un brano senza piano): non si inviano
+        def silent(path):
+            try:
+                import soundfile as sf
+                import numpy as np
+                d, _ = sf.read(path, dtype="float32")
+                return float(np.sqrt(np.mean(d * d))) < 0.003
+            except Exception:
+                return False
+        wavs = [w for w in wavs if os.path.basename(w).startswith(("vocals", "bass", "drums", "other")) or not silent(w)]
         runpod.serverless.progress_update(job, "Comprimo le tracce")
         first = int(inp.get("bitrate") or 128)
-        for br in (first, 96, 64):
+        for br in (first, 112, 96, 80, 64):
             res, total = {}, 0
             for w in wavs:
                 k = os.path.splitext(os.path.basename(w))[0]
