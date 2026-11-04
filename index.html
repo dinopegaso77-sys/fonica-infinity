@@ -207,8 +207,13 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .recov.recording .recbar{background:none}
 .recfix{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;max-width:640px}
 .recfix .rechint{color:#fff}
-.recdone{position:absolute;inset:0;z-index:3;background:rgba(0,0,0,.92);display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;padding:16px}
-.recdone video{max-width:100%;max-height:70vh;border-radius:12px;background:#000}
+.recdone{position:absolute;inset:0;z-index:3;background:#0a0f16;overflow-y:auto;padding:16px;padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}.recdone[hidden]{display:none}
+.recdone-in{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.stsec{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:10px}
+.stsec h5{margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--stage-hi)}
+.stpre{flex-wrap:wrap;border-color:rgba(255,255,255,.4)!important}.stpre button{color:#fff}.stpre button.on{background:var(--stage-hi);color:var(--stage2)}
+.recdone .pseg .seg{flex-wrap:wrap}
+.recdone video{max-width:100%;max-height:46vh;border-radius:12px;background:#000;align-self:center}
 .recdone .rpmsg{color:#fff;text-align:center}
 .shoplist{display:flex;flex-direction:column;gap:8px}
 .shop{display:grid;grid-template-columns:56px 1fr;gap:4px 12px;align-items:center;background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
@@ -711,7 +716,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <li><b>Ritardo audio</b> (in «Opzioni testo»): l'app misura da sola quanto tarda il suono ad arrivare (le cuffie Bluetooth anche 0,2–0,3 secondi) e allinea testo e tablatura. Togli «automatico» per regolarlo a mano.</li>
     <li><b>Basso e chitarra:</b> in «Opzioni strumento» scegli lo strumento e <b>Note</b> o <b>Accordi</b>. Con Note vedi la tablatura nota per nota (zoom, 5 corde, quante note, «Rifai»); con Accordi vedi gli accordi che scorrono, con il disegno della posizione per la chitarra e la nota da suonare per il basso. In «Scritta» puoi incollare una tablatura tua.</li>
     <li><b>Palco</b> apre lo schermo intero con il testo evidenziato parola per parola e, sotto o accanto, tablatura o accordi. In alto cambi strumento e Note/Accordi; in basso alzi o togli voce, chitarra e basso. Esci con «Esci» o con Esc.</li>
-    <li><b>Registra video:</b> canti (e suoni) con la fotocamera e il testo che scorre. Scegli se mettere testo e base nel video, il <b>trucco</b> e lo <b>sfondo</b> (vero, colore dei vestiti o sfocato). La «Sincronia voce» è automatica. Dopo la registrazione puoi sincronizzare la voce e correggerla con l'autotune, poi salvare o condividere. Senza fotocamera registra la tua esibizione con il testo a schermo.</li>
+    <li><b>Registra video:</b> canti (e suoni) con la fotocamera e il testo che scorre. Scegli se mettere testo e base nel video, il <b>trucco</b> e lo <b>sfondo</b> (vero, colore dei vestiti, sfocato o <b>Studio</b>). La «Sincronia voce» è automatica. Senza fotocamera registra la tua esibizione con il testo a schermo.</li>
+    <li><b>Studio (dopo la registrazione):</b> premi <b>«✨ Scegli tu per me»</b> per una prima regolazione automatica, poi aggiusta a piacere: volume di voce e base, sincronia, autotune, pulizia, stile della voce (Naturale, Studio, Pop, Ballata, Rock, Radio, Eco anni '80) con riverbero, eco, presenza, compressione e raddoppio. «Ascolta l'anteprima» fa sentire gli effetti dal vivo. Con <b>«Voce da studio con RunPod»</b> la voce viene ripulita da rumore, rimbombo e base entrata nel microfono. Nel riquadro Video scegli sfondo e trucco: il video viene rifinito alla fine con più cura. Poi <b>«Crea il video finale»</b> e salvalo o condividilo.</li>
     <li>Tastiera: <code>Spazio</code> avvia o mette in pausa (durante la sincronizzazione segna la riga).</li>
   </ol>
   <p>Brani, testi e impostazioni restano su questo dispositivo, nel browser. Per usare microfono, fotocamera e cartella, consenti i permessi quando il browser li chiede.</p>
@@ -745,7 +751,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     </div>
     <div class="recrow">
       <div class="pseg" id="recBeauty"><span>Trucco</span><div class="seg"><button data-v="0">No</button><button data-v="0.3">Leggero</button><button data-v="0.55">Più bello</button></div></div>
-      <div class="pseg" id="recBgS"><span>Sfondo</span><div class="seg"><button data-v="0">Vero</button><button data-v="clothes">Colore dei vestiti</button><button data-v="blur">Sfocato</button></div></div>
+      <div class="pseg" id="recBgS"><span>Sfondo</span><div class="seg"><button data-v="0">Vero</button><button data-v="clothes">Colore dei vestiti</button><button data-v="blur">Sfocato</button><button data-v="studio">Studio</button></div></div>
     </div>
     <div class="recrow">
       <span class="rechint" id="recHint">Con le cuffie il risultato è migliore.</span>
@@ -755,22 +761,35 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       <button class="big" id="recGo">● Registra</button>
     </div>
   </div>
-  <div class="recdone" id="recDone" hidden>
+  <div class="recdone" id="recDone" hidden><div class="recdone-in">
     <video id="recPlay" controls playsinline></video>
-    <div class="recfix">
-      <label class="rechint"><input type="checkbox" id="recSync" checked> Sincronizza la voce automaticamente</label>
-      <div class="pseg" id="recTune"><span>Autotune</span><div class="seg"><button data-v="0">No</button><button data-v="0.4">Leggero</button><button data-v="0.7">Medio</button><button data-v="1">Forte</button></div></div>
-      <button class="chip pri" id="recFix">Crea il video migliorato</button>
-      <button class="chip" id="recOrig" hidden>Torna all'originale</button>
+    <div class="row" style="justify-content:center"><button class="chip pri" id="stAuto">✨ Scegli tu per me</button><button class="chip" id="stPrev">▶ Ascolta l'anteprima</button></div>
+    <div class="stsec"><h5>Voce e base</h5>
+      <div class="recrow"><label class="recsl"><span>Volume voce <i id="stVocV"></i></span><input type="range" id="stVoc" min="0" max="3" step="0.05" value="1"></label><label class="recsl"><span>Volume base <i id="stMusV"></i></span><input type="range" id="stMus" min="0" max="1.5" step="0.05" value="0.8"></label></div>
+      <div class="recrow"><label class="rechint"><input type="checkbox" id="recSync" checked> Sincronizza la voce automaticamente</label>
+        <div class="pseg" id="recTune"><span>Autotune</span><div class="seg"><button data-v="0">No</button><button data-v="0.4">Leggero</button><button data-v="0.7">Medio</button><button data-v="1">Forte</button></div></div></div>
+      <div class="recrow"><label class="rechint"><input type="checkbox" id="stClean" checked> Pulizia (rumori bassi e «s» troppo forti)</label>
+        <label class="rechint"><input type="checkbox" id="stAi"> Voce da studio con RunPod (toglie rumore, rimbombo e la base che entra nel microfono)</label></div>
     </div>
+    <div class="stsec"><h5>Effetti sulla voce</h5>
+      <div class="seg stpre" id="stPreset"><button data-p="nat">Naturale</button><button data-p="studio">Studio</button><button data-p="pop">Pop</button><button data-p="ballata">Ballata</button><button data-p="rock">Rock</button><button data-p="radio">Radio</button><button data-p="eco80">Eco anni '80</button></div>
+      <div class="recrow"><label class="recsl"><span>Riverbero <i id="stRevV"></i></span><input type="range" id="stRev" min="0" max="1" step="0.01" value="0.25"></label><label class="recsl"><span>Eco <i id="stEchoV"></i></span><input type="range" id="stEcho" min="0" max="1" step="0.01" value="0.1"></label><label class="recsl"><span>Presenza <i id="stPresV"></i></span><input type="range" id="stPres" min="0" max="1" step="0.01" value="0.5"></label></div>
+      <div class="recrow"><label class="recsl"><span>Compressione <i id="stCompV"></i></span><input type="range" id="stComp" min="0" max="1" step="0.01" value="0.5"></label><label class="recsl"><span>Raddoppio (coro) <i id="stDblV"></i></span><input type="range" id="stDbl" min="0" max="1" step="0.01" value="0.15"></label></div>
+    </div>
+    <div class="stsec"><h5>Video</h5>
+      <div class="pseg" id="stBg"><span>Sfondo</span><div class="seg"><button data-v="rec">Come registrato</button><button data-v="real">Vero</button><button data-v="clothes">Colore vestiti</button><button data-v="blur">Sfocato</button><button data-v="studio">Studio</button></div></div>
+      <div class="pseg" id="stBeauty"><span>Trucco</span><div class="seg"><button data-v="0">No</button><button data-v="0.35">Leggero</button><button data-v="0.6">Più bello</button></div></div>
+      <span class="rechint" id="stVidNote">Con uno sfondo diverso da «Come registrato» il video viene rifinito alla fine: bordi più puliti, trucco solo sulla pelle e colori più vivi.</span>
+    </div>
+    <div class="row" style="justify-content:center"><button class="chip pri" id="recFix">Crea il video finale</button><button class="chip" id="recOrig" hidden>Torna all'originale</button></div>
+    <div class="rpmsg" id="recMsg"></div>
     <div class="row" style="justify-content:center">
       <button class="chip pri" id="recSave">Salva sul telefono</button>
       <button class="chip" id="recShare" hidden>Condividi</button>
       <button class="chip" id="recFolder" hidden>Salva nella cartella</button>
       <button class="chip" id="recAgain">Rifai</button>
     </div>
-    <div class="rpmsg" id="recMsg"></div>
-  </div>
+  </div></div>
 </div>
 <div class="toast" id="toast" hidden></div>
 
@@ -1728,13 +1747,13 @@ function mono16k(b){const sr=16000;const oc=new OfflineAudioContext(1,Math.ceil(
   return oc.startRendering().then(r=>{const d=r.getChannelData(0),n=d.length,buf=new ArrayBuffer(44+n*2),v=new DataView(buf);const w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
     w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
     const q=new Int16Array(buf,44,n);for(let i=0;i<n;i++){const x=d[i];q[i]=(x>1?1:x<-1?-1:x)*32767}return buf})}
-async function rpCall(input){let r;try{r=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/run`,{method:'POST',headers:rpH(),body:JSON.stringify({input})})}catch(e){throw new Error('NET')}
+async function rpCall(input,say){const show=say||spShow;let r;try{r=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/run`,{method:'POST',headers:rpH(),body:JSON.stringify({input})})}catch(e){throw new Error('NET')}
   if(r.status===401||r.status===403)throw new Error('AUTH');if(r.status===404)throw new Error('NOEP');if(!r.ok)throw new Error('RunPod ha risposto '+r.status);
   const job=await r.json();rpJob=job.id;const tQ=Date.now();let tRun=0,fails=0;
   while(!sepAbort){await new Promise(z=>setTimeout(z,2000));if(sepAbort)return null;
     let s;try{const q=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/status/${rpJob}`,{headers:rpH()});s=await q.json();fails=0}catch(e){if(++fails>5)throw new Error('NET');continue}
-    if(s.status==='IN_QUEUE'){sepInfo.extra='in coda da '+fmt((Date.now()-tQ)/1000);spShow('In coda: accendo la scheda video (dopo un periodo di pausa può volerci qualche minuto)…',null,'queue')}
-    else if(s.status==='IN_PROGRESS'){if(!tRun)tRun=Date.now();sepInfo.extra='sulla scheda video da '+fmt((Date.now()-tRun)/1000);const msg=typeof s.output==='string'?s.output:(s.output&&s.output.message)||'Lavoro sulla scheda video';spShow(msg+'…',null,'split')}
+    if(s.status==='IN_QUEUE'){sepInfo.extra='in coda da '+fmt((Date.now()-tQ)/1000);show('In coda: accendo la scheda video (dopo un periodo di pausa può volerci qualche minuto)…',null,'queue')}
+    else if(s.status==='IN_PROGRESS'){if(!tRun)tRun=Date.now();sepInfo.extra='sulla scheda video da '+fmt((Date.now()-tRun)/1000);const msg=typeof s.output==='string'?s.output:(s.output&&s.output.message)||'Lavoro sulla scheda video';show(msg+'…',null,'split')}
     else if(s.status==='COMPLETED'){rpJob=null;sepInfo.extra='';return s.output}
     else if(['FAILED','CANCELLED','TIMED_OUT'].includes(s.status)){rpJob=null;throw new Error(s.error||('RunPod: '+s.status))}}
   return null}
@@ -1884,7 +1903,8 @@ function fxDrawCam(g,v,W,H,x,y,dw,dh,mirror){const cam=fxCanvas('cam',W,H),cg=ca
   if(!useBg){g.drawImage(cam,0,0);return}
   const mc=fxCanvas('mc',FX.mw,FX.mh);mc.getContext('2d').putImageData(FX.mask,0,0);
   const tmp=fxCanvas('tmp',W,H),tg=tmp.getContext('2d');tg.save();tg.globalCompositeOperation='copy';tg.drawImage(cam,0,0);tg.globalCompositeOperation='destination-in';tg.imageSmoothingQuality='high';if(mirror){tg.translate(W,0);tg.scale(-1,1)}tg.drawImage(mc,x,y,dw,dh);tg.restore();
-  if(FX.bg==='blur'){const bw=Math.max(8,Math.round(W/18)),bh=Math.max(8,Math.round(H/18)),bc=fxCanvas('bc',bw,bh);bc.getContext('2d').drawImage(cam,0,0,bw,bh);g.save();g.imageSmoothingQuality='high';g.drawImage(bc,0,0,W,H);g.restore()}
+  if(FX.bg==='studio')g.drawImage(studioBg(W,H),0,0);
+  else if(FX.bg==='blur'){const bw=Math.max(8,Math.round(W/18)),bh=Math.max(8,Math.round(H/18)),bc=fxCanvas('bc',bw,bh);bc.getContext('2d').drawImage(cam,0,0,bw,bh);g.save();g.imageSmoothingQuality='high';g.drawImage(bc,0,0,W,H);g.restore()}
   else{const[r,gg,b]=FX.col.map(Math.round),gr=g.createRadialGradient(W/2,H*.42,Math.min(W,H)*.1,W/2,H/2,Math.max(W,H)*.75);gr.addColorStop(0,`rgb(${Math.min(255,r+28)},${Math.min(255,gg+28)},${Math.min(255,b+28)})`);gr.addColorStop(1,`rgb(${Math.max(0,r-22)},${Math.max(0,gg-22)},${Math.max(0,b-22)})`);g.fillStyle=gr;g.fillRect(0,0,W,H)}
   g.drawImage(tmp,0,0)}
 function fxSegUI(){$$('#recBeauty button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-FX.beauty)<.01));$$('#recBgS button').forEach(b=>b.classList.toggle('on',b.dataset.v===FX.bg))}
@@ -1923,11 +1943,13 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:4e6,audioBitsPerSecond:160e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
   R.rec.ondataavailable=e=>{if(e.data&&e.data.size)R.chunks.push(e.data)};R.rec.onstop=recFinish;
   R.vchunks=[];R.vrec=null;try{const at=R.vdest?R.vdest.stream.getAudioTracks():R.stream.getAudioTracks();if(at.length){R.vrec=new MediaRecorder(new MediaStream(at));R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
-  R.startSong=now();if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');play()}
-function recStop(){if(!R.on)return;R.on=false;$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
+  R.vDec=R.mBuf=R.vAi=R.lagC=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
+  try{const vt2=R.stream.getVideoTracks();if(vt2.length){R.rawch=[];R.rawrec=new MediaRecorder(new MediaStream(vt2),{videoBitsPerSecond:6e6});R.rawrec.ondataavailable=e=>{if(e.data&&e.data.size)R.rawch.push(e.data)};R.rawstop=new Promise(ok=>R.rawrec.onstop=ok)}}catch(e){R.rawrec=null}
+  R.startSong=now();if(R.rawrec)R.rawrec.start(1000);if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');play()}
+function recStop(){if(!R.on)return;R.on=false;$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}try{if(R.rawrec)R.rawrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
 A.addEventListener('ended',()=>{if(R.on)recStop()});
 function recName(){const ext=(R.mime||'').includes('mp4')?'mp4':'webm';const d=new Date();const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'.'+String(d.getMinutes()).padStart(2,'0');return safeName((song.artist?song.artist+' - ':'')+(song.title||'Brano'))+' - Fonica '+ds+'.'+ext}
-async function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});R.orig=R.blob;R.voiceBlob=null;if(R.vrec){await R.vstop;R.voiceBlob=new Blob(R.vchunks,{type:R.vrec.mimeType||'audio/webm'})}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
+async function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});R.orig=R.blob;R.voiceBlob=null;if(R.rawrec){await R.rawstop;R.raw=new Blob(R.rawch,{type:R.rawrec.mimeType||'video/webm'})}stOnFinish();if(R.vrec){await R.vstop;R.voiceBlob=new Blob(R.vchunks,{type:R.vrec.mimeType||'audio/webm'})}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
   $('#recDone').hidden=false;$('#recMsg').textContent='Video pronto ('+(R.blob.size/1048576).toFixed(1)+' MB). Guardalo, poi salvalo o condividilo.';
   const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored)}
 $('#recSave').onclick=()=>{if(!R.blob)return;if(window.self!==window.top){$('#recMsg').textContent='Qui non si possono salvare file: apri Fonica Infinity dal suo indirizzo web.';return}
@@ -1967,30 +1989,148 @@ async function recAutotune(x,sr,lag,str,onp){
     if(++cnt%400===0){onp(.5+.5*p/x.length);await sleep0()}}
   for(let i=0;i<x.length;i++)out[i]=ws[i]>1e-3?out[i]/ws[i]:x[i];return out}
 let fixBusy=false;
-async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=true;const btn=$('#recFix');btn.disabled=true;const say=t=>$('#recMsg').textContent=t;
-  const doSync=$('#recSync').checked,tune=+($$('#recTune button.on')[0]||{dataset:{v:0}}).dataset.v;
-  try{say('Analizzo la tua voce…');const vb=await decode(await R.voiceBlob.arrayBuffer());let voice=monoOf(vb);const vsr=vb.sampleRate;
-    let lag=0,how='';if(doSync){const r=await recFindLag(voice,vsr);lag=r.lag;how=r.how}
+/* ===== STUDIO: effetti sulla voce, anteprima, «Scegli tu per me», video finale ===== */
+const ST_PRE={nat:{rev:.1,echo:0,pres:.25,comp:.3,dbl:0},studio:{rev:.18,echo:.06,pres:.45,comp:.55,dbl:.1},pop:{rev:.3,echo:.16,pres:.6,comp:.65,dbl:.25},
+  ballata:{rev:.5,echo:.14,pres:.35,comp:.45,dbl:.1,len:3.2},rock:{rev:.2,echo:.1,pres:.7,comp:.75,dbl:.35,sat:.35},radio:{rev:.04,echo:0,pres:.55,comp:.85,dbl:0,radio:1,sat:.25,len:.8},eco80:{rev:.42,echo:.5,pres:.4,comp:.5,dbl:.2,len:2.6}};
+const ST=Object.assign({voc:1,mus:.8,preset:'pop',rev:.3,echo:.16,pres:.6,comp:.65,dbl:.25,clean:true,ai:false,bg:'rec',beauty:.35},(()=>{try{return JSON.parse(prefGet('studio')||'{}')}catch(e){return{}}})());
+const stSave=()=>prefSet('studio',JSON.stringify(ST));
+const ST_SL={stVoc:'voc',stMus:'mus',stRev:'rev',stEcho:'echo',stPres:'pres',stComp:'comp',stDbl:'dbl'};
+function stUI(){for(const[id,k]of Object.entries(ST_SL)){$('#'+id).value=ST[k];$('#'+id+'V').textContent=k==='voc'||k==='mus'?Math.round(ST[k]*100)+'%':Math.round(ST[k]*100)}
+  $$('#stPreset button').forEach(b=>b.classList.toggle('on',b.dataset.p===ST.preset));$$('#stBg button').forEach(b=>b.classList.toggle('on',b.dataset.v===ST.bg));
+  $$('#stBeauty button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-ST.beauty)<.01));$('#stClean').checked=ST.clean;$('#stAi').checked=ST.ai;$('#stBeauty').hidden=ST.bg==='rec';$('#stVidNote').hidden=ST.bg==='rec'}
+const IRC={};function stIR(c,len){const sr=c.sampleRate,k=sr+'/'+len;if(IRC[k])return IRC[k];const n=Math.floor(sr*len),b=c.createBuffer(2,n,sr);
+  for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch);let lp=0;for(let i=0;i<n;i++){const t=i/n,a=Math.pow(1-t,2.2)*Math.exp(-3*t);const w=Math.random()*2-1;const cf=.25+.7*t;lp=lp+(w-lp)*(1-cf);d[i]=lp*a*(i<sr*.004?i/(sr*.004):1)}}return IRC[k]=b}
+function stCurve(k){const n=1024,c=new Float32Array(n);for(let i=0;i<n;i++){const x=i/(n-1)*2-1;c[i]=Math.tanh(x*(1+k*6))/Math.tanh(1+k*6)}return c}
+/* catena: voce → pulizia → presenza → compressione → (raddoppio, eco, riverbero) + base → master */
+function stChain(c,p){const P=Object.assign({},ST_PRE[p.preset]||{},p),N=(t,o={})=>{const n=c['create'+t]();for(const[k,v]of Object.entries(o)){if(n[k]instanceof AudioParam)n[k].value=v;else n[k]=v}return n};
+  const vin=N('Gain'),min=N('Gain',{gain:p.mus}),bus=N('Gain'),master=N('DynamicsCompressor',{threshold:-8,ratio:2.5,attack:.01,release:.25,knee:8});bus.connect(master);master.connect(c.destination);min.connect(bus);
+  let x=vin;const link=n=>{x.connect(n);x=n;return n};
+  link(N('BiquadFilter',{type:'highpass',frequency:p.clean?90:40,Q:.7}));
+  if(p.clean)link(N('BiquadFilter',{type:'peaking',frequency:7000,Q:2,gain:-3.5}));
+  if(P.radio){link(N('BiquadFilter',{type:'highpass',frequency:380,Q:.8}));link(N('BiquadFilter',{type:'lowpass',frequency:3300,Q:.8}))}
+  link(N('BiquadFilter',{type:'lowshelf',frequency:200,gain:-1.5+p.pres*-1}));link(N('BiquadFilter',{type:'peaking',frequency:3200,Q:.9,gain:p.pres*7}));link(N('BiquadFilter',{type:'highshelf',frequency:10000,gain:p.pres*3.5}));
+  if(P.sat){const ws=N('WaveShaper');ws.curve=stCurve(P.sat);ws.oversample='2x';link(ws)}
+  link(N('DynamicsCompressor',{threshold:-10-p.comp*22,ratio:2+p.comp*6,attack:.004,release:.14,knee:6}));
+  const vout=link(N('Gain',{gain:p.voc*(1+p.comp*.9)}));vout.connect(bus);
+  if(p.dbl>0){const lfo=N('Oscillator',{type:'sine',frequency:.7}),dep=N('Gain',{gain:.0018});lfo.connect(dep);[[.013,-.65],[.021,.65]].forEach(([dt,pn])=>{const d=N('Delay',{delayTime:dt}),pa=N('StereoPanner',{pan:pn}),gg=N('Gain',{gain:p.dbl*.45});dep.connect(d.delayTime);vout.connect(d);d.connect(pa);pa.connect(gg);gg.connect(bus)});lfo.start()}
+  if(p.echo>0){const bt=BPM?60/BPM*.75:.33,d=N('Delay',{delayTime:Math.min(.9,Math.max(.2,bt))}),fb=N('Gain',{gain:.22+p.echo*.38}),lp=N('BiquadFilter',{type:'lowpass',frequency:3200}),sd=N('Gain',{gain:p.echo*.55});vout.connect(sd);sd.connect(d);d.connect(lp);lp.connect(fb);fb.connect(d);lp.connect(bus)}
+  if(p.rev>0){const cv=N('Convolver');cv.buffer=stIR(c,P.len||1.8);const pd=N('Delay',{delayTime:.02}),sd=N('Gain',{gain:p.rev*.9});vout.connect(sd);sd.connect(pd);pd.connect(cv);cv.connect(bus)}
+  return{vin,min}}
+/* voce registrata (eventualmente pulita da RunPod), ritardo e base pronti per anteprima e video */
+async function stVoice(say){if(!R.voiceBlob)throw new Error('manca la traccia della voce');
+  if(ST.ai&&!R.vAi){if(!rp.key||!rp.ep)throw new Error('per la voce da studio collega prima RunPod in Impostazioni');if(sepBusy)throw new Error('aspetta che finisca la separazione in corso');
+    say('Mando la voce a RunPod per pulirla…');let ab=await R.voiceBlob.arrayBuffer(),name='voce.webm';if(ab.byteLength>RP_MAX){const u=await shrinkForRp(ab,'voce.mp3');ab=u.ab;name=u.name}
+    sepAbort=false;const out=await rpCall({mode:'enhance',audio_b64:await abToB64(ab),filename:name},t=>say('Voce da studio: '+t));
+    if(!out||out.error||!out.voice)throw new Error(out&&out.error?out.error:'RunPod non ha restituito la voce (aggiorna handler.py su fonica-runpod e fai New Release)');
+    const vb=await decode(b64ToAb(out.voice));R.vAi={x:monoOf(vb),sr:vb.sampleRate};R.lagC=null}
+  if(!R.vDec){const vb=await decode(await R.voiceBlob.arrayBuffer());R.vDec={x:monoOf(vb),sr:vb.sampleRate}}
+  const V=ST.ai&&R.vAi?R.vAi:R.vDec;
+  if(R.lagC==null){R.lagC=$('#recSync').checked?(await recFindLag(V.x,V.sr)):{lag:0,how:''}}
+  return{V,lag:$('#recSync').checked?R.lagC.lag:0,how:R.lagC.how}}
+async function stMusic(dur){if(R.mBuf&&Math.abs(R.mBuf.duration-dur)<.05)return R.mBuf;const src=await sourcesFor(tr);const oc=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);
+  for(const k of order){const g=effGain(k);if(!g)continue;const s=oc.createBufferSource();s.buffer=src[k];const gg=oc.createGain();gg.gain.value=g;s.connect(gg);gg.connect(oc.destination);s.start(0,Math.min(R.startSong,src[k].duration-.01))}
+  return R.mBuf=await oc.startRendering()}
+const rmsOf=(x,from=0,to=x.length)=>{let s=0,n=0;for(let i=from;i<to;i+=4){s+=x[i]*x[i];n++}return Math.sqrt(s/Math.max(1,n))};
+function activeRms(x,sr){const H=Math.round(sr*.05);const fr=[];for(let i=0;i+H<x.length;i+=H)fr.push(rmsOf(x,i,i+H));const mx=Math.max(...fr,1e-6);const act=fr.filter(v=>v>mx*.08);return act.length?Math.sqrt(act.reduce((a,b)=>a+b*b,0)/act.length):mx}
+/* ✨ Scegli tu per me: equilibrio voce/base, stile in base al brano, chiarezza della voce */
+async function stAuto(){const say=t=>$('#recMsg').textContent=t;const b=$('#stAuto');b.disabled=true;
+  try{say('Ascolto la tua voce e la base…');const{V,lag}=await stVoice(say);const dur=Math.max(1,V.x.length/V.sr-lag);const M=await stMusic(dur);
+    const vr=activeRms(V.x,V.sr),mm=monoOf(M),mr=activeRms(mm,M.sampleRate);
+    let pr=BPM?(BPM<85?'ballata':BPM>135?'rock':'pop'):'pop';Object.assign(ST,{preset:pr},ST_PRE[pr]);
+    ST.mus=.8;ST.voc=Math.min(3,Math.max(.3,+(1.5*mr*ST.mus/Math.max(vr,1e-5)).toFixed(2)));
+    /* voce scura → più presenza */let hf=0,tot=0;for(let i=1;i<V.x.length;i+=3){const d=V.x[i]-V.x[i-1];hf+=d*d;tot+=V.x[i]*V.x[i]}const br=hf/(tot+1e-9);if(br<.02)ST.pres=Math.min(1,ST.pres+.15);
+    ST.clean=true;$('#recSync').checked=true;$$('#recTune button').forEach(x=>x.classList.toggle('on',x.dataset.v==='0.4'));
+    if(ST.bg==='rec')ST.bg=R.raw?(R.bgRec&&R.bgRec!=='0'?R.bgRec:'real'):'rec';ST.beauty=R.beautyRec>0?Math.max(.35,R.beautyRec):.35;stSave();stUI();
+    say(`Ho scelto lo stile «${$('#stPreset [data-p="'+pr+'"]').textContent}», la voce un po' sopra la base, autotune leggero e video rifinito. Ascolta l'anteprima e, se vuoi, aggiusta i cursori.`)}
+  catch(e){console.error(e);say('Non riesco a scegliere da solo: '+(e.message||e))}finally{b.disabled=false}}
+/* anteprima dal vivo con gli effetti (l'autotune si sente nel video finale) */
+const PV={on:false,srcs:[],t0:0,pos:0};
+function stPrevStop(){PV.srcs.forEach(s=>{try{s.stop()}catch(e){}});PV.srcs=[];if(PV.on)PV.pos+=ctx().currentTime-PV.t0;PV.on=false;$('#stPrev').textContent='▶ Ascolta l\'anteprima'}
+async function stPrevStart(from){const say=t=>$('#recMsg').textContent=t;try{$('#recPlay').pause();say('Preparo l\'anteprima…');const{V,lag}=await stVoice(say);const dur=Math.max(1,V.x.length/V.sr-lag);const M=await stMusic(dur);
+    const c=ctx();await c.resume();const ch=stChain(c,ST);const vb=c.createBuffer(1,V.x.length,V.sr);vb.copyToChannel(V.x,0);const vs=c.createBufferSource();vs.buffer=vb;vs.connect(ch.vin);const ms=c.createBufferSource();ms.buffer=M;ms.connect(ch.min);
+    const pos=Math.min(Math.max(0,from||0),dur-.5),at=c.currentTime+.05;vs.start(at,lag+pos);ms.start(at,pos);PV.srcs=[vs,ms];PV.t0=at;PV.pos=pos;PV.on=true;ms.onended=()=>{if(PV.on&&PV.srcs[1]===ms){PV.on=false;PV.pos=0;$('#stPrev').textContent='▶ Ascolta l\'anteprima'}};
+    $('#stPrev').textContent='■ Ferma l\'anteprima';say('Anteprima: '+(ST.ai&&R.vAi?'voce da studio, ':'')+'effetti dal vivo. L\'autotune si applica nel video finale.')}
+  catch(e){console.error(e);say('Anteprima non disponibile: '+(e.message||e))}}
+function stChanged(){stSave();stUI();if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}}
+function stOnFinish(){stPrevStop();PV.pos=0;if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=!R.raw;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
+for(const[id,k]of Object.entries(ST_SL))$('#'+id).oninput=e=>{ST[k]=+e.target.value;if(['rev','echo','pres','comp','dbl'].includes(k))ST.preset='';stChanged()};
+$$('#stPreset button').forEach(b=>b.onclick=()=>{ST.preset=b.dataset.p;Object.assign(ST,{sat:0,radio:0},ST_PRE[b.dataset.p]);stChanged()});
+$$('#stBg button').forEach(b=>b.onclick=()=>{ST.bg=b.dataset.v;stSave();stUI()});$$('#stBeauty button').forEach(b=>b.onclick=()=>{ST.beauty=+b.dataset.v;stSave();stUI()});
+$('#stClean').onchange=e=>{ST.clean=e.target.checked;stChanged()};$('#stAi').onchange=e=>{ST.ai=e.target.checked;stSave();if(PV.on){stPrevStop()}};
+$('#recSync').onchange=()=>{R.lagC=null;if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}};
+$('#stAuto').onclick=stAuto;$('#stPrev').onclick=()=>PV.on?stPrevStop():stPrevStart(PV.pos);stUI();
+/* sfondo «Studio»: parete con pannelli fonoassorbenti e luce calda */
+function studioBg(W,H){const c=fxCanvas('studio',W,H);if(c._k===W+'x'+H)return c;c._k=W+'x'+H;const g=c.getContext('2d');
+  let gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#1d2533');gr.addColorStop(.78,'#151b27');gr.addColorStop(1,'#0b0f17');g.fillStyle=gr;g.fillRect(0,0,W,H);
+  const u=Math.round(Math.min(W,H)/7.5),cols=Math.ceil(W/u)+1,rows=Math.ceil(H*.78/u);
+  for(let r=0;r<rows;r++)for(let q=0;q<cols;q++){const x=q*u,y=r*u,flip=(r+q)%2;const a=g.createLinearGradient(x,y,flip?x+u:x,flip?y:y+u);a.addColorStop(0,'rgba(255,255,255,.07)');a.addColorStop(.5,'rgba(0,0,0,.05)');a.addColorStop(1,'rgba(0,0,0,.28)');
+    g.fillStyle=a;g.fillRect(x+2,y+2,u-4,u-4);g.strokeStyle='rgba(0,0,0,.35)';g.lineWidth=2;g.strokeRect(x+2,y+2,u-4,u-4);
+    g.strokeStyle='rgba(255,255,255,.04)';g.lineWidth=1;for(let k=1;k<4;k++){g.beginPath();if(flip){g.moveTo(x+k*u/4,y+3);g.lineTo(x+k*u/4,y+u-3)}else{g.moveTo(x+3,y+k*u/4);g.lineTo(x+u-3,y+k*u/4)}g.stroke()}}
+  const sp=g.createRadialGradient(W/2,H*.36,0,W/2,H*.36,Math.max(W,H)*.62);sp.addColorStop(0,'rgba(255,196,128,.38)');sp.addColorStop(.45,'rgba(255,170,100,.12)');sp.addColorStop(1,'rgba(0,0,0,.35)');g.fillStyle=sp;g.fillRect(0,0,W,H);
+  const fl=g.createLinearGradient(0,H*.78,0,H);fl.addColorStop(0,'rgba(232,200,166,.28)');fl.addColorStop(.04,'rgba(30,24,20,.9)');fl.addColorStop(1,'#07090d');g.fillStyle=fl;g.fillRect(0,H*.78,W,H*.22);
+  return c}
+/* ===== video finale: rielabora la ripresa originale con più cura ===== */
+async function fxNewSeg(){const V='0.10.14',m=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@'+V+'/vision_bundle.mjs');const fs=await m.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@'+V+'/wasm');
+  const opt=d=>({baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite',delegate:d},runningMode:'VIDEO',outputCategoryMask:false,outputConfidenceMasks:true});
+  try{return await m.ImageSegmenter.createFromOptions(fs,opt('GPU'))}catch(e){return await m.ImageSegmenter.createFromOptions(fs,opt('CPU'))}}
+const HAS_FILTER=(()=>{try{const g=document.createElement('canvas').getContext('2d');g.filter='blur(1px)';return g.filter==='blur(1px)'}catch(e){return false}})();
+function finalOverlay(g,W,H,t,txt){const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);if(txt)recLyrics(g,W,H,t);
+  const u=Math.min(W,H);g.globalAlpha=.9;if(recLogo.complete&&recLogo.naturalWidth){const lw=u*.16,lh=lw*recLogo.naturalHeight/recLogo.naturalWidth;g.fillStyle='rgba(255,255,255,.9)';g.fillRect(u*.04-6,H-u*.04-lh-6,lw+12,lh+12);g.drawImage(recLogo,u*.04,H-u*.04-lh,lw,lh)}
+  g.font=`600 ${Math.round(u*.032)}px Figtree,sans-serif`;g.textAlign='right';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=6;g.fillText((song&&song.title)||'',W-u*.04,H-u*.04);g.shadowBlur=0;g.globalAlpha=1;}
+function makeFinalPainter(W,H,seg){const F={ema:null,mw:0,mh:0,inv:null,col:[70,90,120],colT:-9,mask:null};
+  return function paint(g,v,t){const mirror=R.facingRec==='user';const cam=fxCanvas('fcam',W,H),cg=cam.getContext('2d');cg.save();cg.clearRect(0,0,W,H);
+    if(HAS_FILTER)cg.filter='contrast(1.06) saturate(1.1) brightness(1.02)';const s=Math.max(W/v.videoWidth,H/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s,x=(W-dw)/2,y=(H-dh)/2;
+    if(mirror){cg.translate(W,0);cg.scale(-1,1)}cg.drawImage(v,x,y,dw,dh);cg.restore();
+    const need=ST.bg!=='real'||ST.beauty>0;let mF=null;
+    if(need&&seg){try{seg.segmentForVideo(v,performance.now(),res=>{const mk=res.confidenceMasks&&res.confidenceMasks[0];if(!mk)return;const w=mk.width,hh=mk.height,a=mk.getAsFloat32Array();
+        if(F.inv===null){let c=0,e=0,nc=0,ne=0;for(let yy=0;yy<hh;yy++)for(let xx=0;xx<w;xx++){const q=a[yy*w+xx],dx=Math.abs(xx/w-.5),dy=yy/hh;if(dx<.15&&dy>.35&&dy<.8){c+=q;nc++}else if(dx>.45&&dy<.3){e+=q;ne++}}F.inv=(c/nc)<(e/ne)}
+        if(!F.ema||F.mw!==w||F.mh!==hh){F.ema=new Float32Array(w*hh);F.mw=w;F.mh=hh;F.mask=new ImageData(w,hh);F.first=true}
+        for(let i=0;i<w*hh;i++){let q=a[i];if(F.inv)q=1-q;F.ema[i]=F.first?q:F.ema[i]*.45+q*.55}F.first=false;const d=F.mask.data;
+        for(let i=0;i<w*hh;i++){let q=(F.ema[i]-.35)/.3;q=q<0?0:q>1?1:q*q*(3-2*q);d[i*4]=d[i*4+1]=d[i*4+2]=255;d[i*4+3]=q*255}try{res.close&&res.close()}catch(x){}})}catch(e){console.error(e)}
+      if(F.mask){const mc=fxCanvas('fmc',F.mw,F.mh);mc.getContext('2d').putImageData(F.mask,0,0);mF=fxCanvas('fmF',W,H);const mg=mF.getContext('2d');mg.save();mg.clearRect(0,0,W,H);if(HAS_FILTER)mg.filter='blur('+Math.max(1,Math.round(W/400))+'px)';mg.imageSmoothingQuality='high';if(mirror){mg.translate(W,0);mg.scale(-1,1)}mg.drawImage(mc,x,y,dw,dh);mg.restore()}}
+    /* trucco solo sulla pelle: maschera persona × colore pelle */
+    if(ST.beauty>0&&mF){const sw=Math.max(16,Math.round(W/6)),sh=Math.max(16,Math.round(H/6));const sm=fxCanvas('fsm',sw,sh),sg=sm.getContext('2d',{willReadFrequently:true});sg.imageSmoothingQuality='high';sg.drawImage(cam,0,0,sw,sh);
+      const ms=fxCanvas('fms',sw,sh),msg=ms.getContext('2d',{willReadFrequently:true});msg.clearRect(0,0,sw,sh);msg.drawImage(mF,0,0,sw,sh);const px=sg.getImageData(0,0,sw,sh).data,pm=msg.getImageData(0,0,sw,sh).data;
+      const sk=fxCanvas('fsk',sw,sh),skg=sk.getContext('2d');const id=skg.createImageData(sw,sh),o=id.data;
+      for(let i=0;i<sw*sh;i++){const r=px[i*4],gg=px[i*4+1],b=px[i*4+2];const cb=128-.168736*r-.331264*gg+.5*b,cr=128+.5*r-.418688*gg-.081312*b;const dcb=(cb-110)/22,dcr=(cr-152)/20;const sk2=Math.max(0,1-(dcb*dcb+dcr*dcr));o[i*4]=o[i*4+1]=o[i*4+2]=255;o[i*4+3]=Math.min(255,sk2*1.6*pm[i*4+3])}
+      skg.putImageData(id,0,0);const t2=fxCanvas('ft2',W,H),tg=t2.getContext('2d');tg.save();tg.globalCompositeOperation='copy';tg.imageSmoothingQuality='high';tg.drawImage(sm,0,0,W,H);tg.globalCompositeOperation='destination-in';tg.drawImage(sk,0,0,W,H);tg.restore();
+      cg.save();cg.globalAlpha=Math.min(.9,ST.beauty*1.3);cg.drawImage(t2,0,0);cg.globalCompositeOperation='soft-light';cg.globalAlpha=ST.beauty*.45;const wm=fxCanvas('ft3',W,H),wg=wm.getContext('2d');wg.save();wg.globalCompositeOperation='copy';wg.fillStyle='#ffd2b8';wg.fillRect(0,0,W,H);wg.globalCompositeOperation='destination-in';wg.drawImage(sk,0,0,W,H);wg.restore();cg.drawImage(wm,0,0);cg.restore()}
+    if(ST.bg==='real'||!mF){g.drawImage(cam,0,0);return}
+    if(ST.bg==='studio')g.drawImage(studioBg(W,H),0,0);
+    else if(ST.bg==='blur'){const bw=Math.max(8,Math.round(W/20)),bh=Math.max(8,Math.round(H/20)),bc=fxCanvas('fbc',bw,bh);bc.getContext('2d').drawImage(cam,0,0,bw,bh);g.save();g.imageSmoothingQuality='high';if(HAS_FILTER)g.filter='blur(6px)';g.drawImage(bc,0,0,W,H);g.restore()}
+    else{if(t-F.colT>1.2){F.colT=t;const sw=64,sh=Math.round(64*H/W),a1=fxCanvas('fca',sw,sh),a1g=a1.getContext('2d',{willReadFrequently:true}),a2=fxCanvas('fcb',sw,sh),a2g=a2.getContext('2d',{willReadFrequently:true});a1g.drawImage(cam,0,0,sw,sh);a2g.clearRect(0,0,sw,sh);a2g.drawImage(mF,0,0,sw,sh);
+        const P=a1g.getImageData(0,0,sw,sh).data,Mk=a2g.getImageData(0,0,sw,sh).data;let top=-1,bot=-1;for(let yy=0;yy<sh;yy++){let n=0;for(let xx=0;xx<sw;xx++)if(Mk[(yy*sw+xx)*4+3]>200)n++;if(n>sw*.05){if(top<0)top=yy;bot=yy}}
+        if(top>=0){let r=0,gg=0,b=0,n=0;for(let yy=Math.round(top+(bot-top)*.5);yy<=bot;yy++)for(let xx=0;xx<sw;xx++){const i=(yy*sw+xx)*4;if(Mk[i+3]>220){r+=P[i];gg+=P[i+1];b+=P[i+2];n++}}if(n>20){const tg2=fxBgColor(r/n,gg/n,b/n);F.col=F.col.map((c2,i)=>F.colT<0?tg2[i]:c2+(tg2[i]-c2)*.5)}}}
+      const[r,gg,b]=F.col.map(Math.round),gr=g.createRadialGradient(W/2,H*.42,Math.min(W,H)*.1,W/2,H/2,Math.max(W,H)*.75);gr.addColorStop(0,`rgb(${Math.min(255,r+28)},${Math.min(255,gg+28)},${Math.min(255,b+28)})`);gr.addColorStop(1,`rgb(${Math.max(0,r-22)},${Math.max(0,gg-22)},${Math.max(0,b-22)})`);g.fillStyle=gr;g.fillRect(0,0,W,H)}
+    const pf=fxCanvas('fpf',W,H),pg=pf.getContext('2d');pg.save();pg.globalCompositeOperation='copy';pg.drawImage(cam,0,0);pg.globalCompositeOperation='destination-in';pg.drawImage(mF,0,0);pg.restore();g.drawImage(pf,0,0)}}
+async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=true;stPrevStop();const btn=$('#recFix');btn.disabled=true;$('#stAuto').disabled=true;const say=t=>$('#recMsg').textContent=t;
+  const tune=+($$('#recTune button.on')[0]||{dataset:{v:0}}).dataset.v;
+  try{const{V,lag,how}=await stVoice(say);let voice=V.x;const vsr=V.sr;
     if(tune>0){voice=await recAutotune(voice,vsr,lag,tune,p=>say('Autotune sulla tua voce… '+Math.round(p*100)+'%'))}
-    say('Mescolo voce e base…');const src=await sourcesFor(tr);const dur=Math.max(1,voice.length/vsr-lag);
-    const oc=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);const mg=oc.createGain();mg.gain.value=$('#recBase').checked?+$('#recMus').value:0;mg.connect(oc.destination);
-    for(const k of order){const g=effGain(k);if(!g)continue;const s=oc.createBufferSource();s.buffer=src[k];const gg=oc.createGain();gg.gain.value=g;s.connect(gg);gg.connect(mg);s.start(0,Math.min(R.startSong,src[k].duration-.01))}
-    const vbuf=oc.createBuffer(1,voice.length,vsr);vbuf.copyToChannel(voice,0);const vs=oc.createBufferSource();vs.buffer=vbuf;const vg=oc.createGain();vg.gain.value=+$('#recVoc').value;vs.connect(vg);vg.connect(oc.destination);vs.start(0,lag);
+    say('Mescolo voce, base ed effetti…');const dur=Math.max(1,voice.length/vsr-lag);const M=await stMusic(dur);
+    const oc=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);const ch=stChain(oc,ST);const ms=oc.createBufferSource();ms.buffer=M;ms.connect(ch.min);ms.start(0);
+    const vbuf=oc.createBuffer(1,voice.length,vsr);vbuf.copyToChannel(voice,0);const vs=oc.createBufferSource();vs.buffer=vbuf;vs.connect(ch.vin);vs.start(0,lag);
     const mixed=await oc.startRendering();
-    /* rifaccio il video: stesse immagini, audio corretto (dura quanto il brano registrato) */
-    const v=document.createElement('video');v.muted=true;v.playsInline=true;v.src=URL.createObjectURL(R.orig);await new Promise((ok,ko)=>{v.onloadeddata=ok;v.onerror=()=>ko(new Error('video'));v.load()});
-    const cv=document.createElement('canvas');const [W,H]=[$('#recCv').width,$('#recCv').height];cv.width=W;cv.height=H;const g2=cv.getContext('2d');
+    /* volume finale uniforme (circa -14 LUFS) senza distorcere */
+    {const L=mixed.getChannelData(0),Rr=mixed.getChannelData(1);let pk=0,s2=0;for(let i=0;i<L.length;i++){const a=Math.abs(L[i]),b=Math.abs(Rr[i]);if(a>pk)pk=a;if(b>pk)pk=b;s2+=L[i]*L[i]+Rr[i]*Rr[i]}const rms=Math.sqrt(s2/(2*L.length))||1e-6;
+      const gn=Math.min(.178/rms,4);for(const d of [L,Rr])for(let i=0;i<d.length;i++){const y=d[i]*gn;d[i]=Math.abs(y)<.85?y:Math.sign(y)*(.85+.13*Math.tanh((Math.abs(y)-.85)/.13))}}
+    const fin=ST.bg!=='rec'&&R.raw;let seg=null;if(fin&&(ST.bg!=='real'||ST.beauty>0)){say('Preparo la rifinitura del video…');try{seg=await fxNewSeg()}catch(e){console.error(e);say('Rifinitura dello sfondo non disponibile su questo dispositivo: uso il video registrato.')}}
+    const useRaw=fin&&(seg||ST.bg==='real');
+    const v=document.createElement('video');v.muted=true;v.playsInline=true;v.src=URL.createObjectURL(useRaw?R.raw:R.orig);await new Promise((ok,ko)=>{v.onloadeddata=ok;v.onerror=()=>ko(new Error('video'));v.load()});
+    if(useRaw){try{v.currentTime=Math.min(lag,Math.max(0,(v.duration||99)-.1));await new Promise(ok=>{v.onseeked=ok;setTimeout(ok,1500)})}catch(e){}}
+    const cv=document.createElement('canvas');const [W,H]=[$('#recCv').width,$('#recCv').height];cv.width=W;cv.height=H;const g2=cv.getContext('2d');const paint=useRaw?makeFinalPainter(W,H,seg):null;
     const c=ctx();await c.resume();const dest=c.createMediaStreamDestination();const as=c.createBufferSource();as.buffer=mixed;as.connect(dest);
-    const ms=new MediaStream([cv.captureStream(30).getVideoTracks()[0],...dest.stream.getAudioTracks()]);
-    const rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:4e6,audioBitsPerSecond:160e3}:undefined);const ch=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)ch.push(e.data)};
-    const done=new Promise(ok=>rec.onstop=ok);let raf=0;const t0=performance.now();
-    const draw=()=>{g2.drawImage(v,0,0,W,H);const el=(performance.now()-t0)/1000;say('Preparo il video migliorato… '+Math.min(99,Math.round(el/dur*100))+'% (tieni lo schermo acceso)');raf=requestAnimationFrame(draw)};
+    const mstr=new MediaStream([cv.captureStream(30).getVideoTracks()[0],...dest.stream.getAudioTracks()]);
+    const rec=new MediaRecorder(mstr,R.mime?{mimeType:R.mime,videoBitsPerSecond:5e6,audioBitsPerSecond:192e3}:undefined);const chs=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)chs.push(e.data)};
+    const done=new Promise(ok=>rec.onstop=ok);let raf=0,stop=false;const t0=performance.now();
+    const draw=()=>{if(stop)return;const el=(performance.now()-t0)/1000;if(paint){g2.fillStyle='#000';g2.fillRect(0,0,W,H);if(v.videoWidth)paint(g2,v,el);finalOverlay(g2,W,H,R.startSong+el,R.txtRec)}else g2.drawImage(v,0,0,W,H);
+      say((paint?'Rifinisco il video… ':'Preparo il video… ')+Math.min(99,Math.round(el/dur*100))+'% (tieni lo schermo acceso)');raf=v.requestVideoFrameCallback&&!v.paused?(v.requestVideoFrameCallback(draw),0):requestAnimationFrame(draw)};
     await v.play();rec.start(1000);as.start();draw();
-    await new Promise(ok=>{as.onended=ok});v.pause();cancelAnimationFrame(raf);rec.stop();await done;URL.revokeObjectURL(v.src);
-    R.blob=new Blob(ch,{type:(R.mime||'video/webm').split(';')[0]});recSetUrl(R.blob);$('#recOrig').hidden=false;
-    say('Fatto. '+(doSync?'Voce rimessa a tempo ('+how+': '+Math.round(lag*1000)+' ms). ':'')+(tune>0?'Autotune applicato. ':'')+'Ora puoi salvarlo o condividerlo.')}
-  catch(e){console.error(e);say('Non sono riuscito a migliorare il video: '+(e.message||e))}
-  finally{fixBusy=false;btn.disabled=false}}
+    await new Promise(ok=>{as.onended=ok});stop=true;v.pause();cancelAnimationFrame(raf);rec.stop();await done;URL.revokeObjectURL(v.src);try{seg&&seg.close&&seg.close()}catch(e){}
+    R.blob=new Blob(chs,{type:(R.mime||'video/webm').split(';')[0]});recSetUrl(R.blob);$('#recOrig').hidden=false;
+    say('Fatto. '+($('#recSync').checked?'Voce a tempo ('+how+': '+Math.round(lag*1000)+' ms). ':'')+(tune>0?'Autotune applicato. ':'')+(ST.ai?'Voce da studio. ':'')+(paint?'Video rifinito. ':'')+'Ora puoi salvarlo o condividerlo.')}
+  catch(e){console.error(e);say('Non sono riuscito a creare il video finale: '+(e.message||e))}
+  finally{fixBusy=false;btn.disabled=false;$('#stAuto').disabled=false}}
 $$('#recTune button').forEach(b=>b.onclick=()=>{$$('#recTune button').forEach(x=>x.classList.toggle('on',x===b));prefSet('recTune',b.dataset.v)});
 {const v=prefGet('recTune')||'0';$$('#recTune button').forEach(x=>x.classList.toggle('on',x.dataset.v===v))}
 $('#recFix').onclick=recImprove;
