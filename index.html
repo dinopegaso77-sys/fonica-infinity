@@ -375,6 +375,10 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
         <div class="grp"><label class="lbl" for="rate">Velocità</label>
           <select class="sel" id="rate" aria-label="Velocità in battiti al minuto"></select><button class="mini" id="bpmHalf" title="Il tempo trovato è il doppio di quello vero" hidden>bpm ÷2</button><button class="mini" id="bpmDbl" title="Il tempo trovato è la metà di quello vero" hidden>bpm ×2</button></div>
         <span class="sep-v"></span>
+        <div class="grp"><span class="lbl">Click</span><button class="mini" id="clickBtn" aria-pressed="false">Click batteria: no</button>
+          <select class="sel" id="clickMeter" aria-label="Accento"><option value="4">accento ogni 4</option><option value="3">accento ogni 3</option><option value="0">senza accento</option></select>
+          <input type="range" id="clickVol" min="0" max="1.5" step="0.05" value="0.8" aria-label="Volume del click" style="width:110px"></div>
+        <span class="sep-v"></span>
         <div class="grp"><span class="lbl">Tonalità</span>
           <button class="mini" id="trDown" aria-label="Abbassa di mezzo tono">− ½</button>
           <span class="trval" id="trVal">originale</span>
@@ -458,6 +462,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <button class="pbtn on" id="pTab">Tablatura</button>
     <button class="pbtn" id="pInst" aria-label="Cambia strumento della tablatura">Basso</button>
     <button class="pbtn" id="pMode" aria-label="Note o accordi">Note</button>
+    <button class="pbtn" id="pClick" aria-pressed="false">Click</button>
     <button class="pbtn" id="pX">Esci</button>
   </div>
   <div class="kpanel" id="kpPal"></div>
@@ -700,6 +705,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <li><b>Cerca brani:</b> cerca un artista o una canzone, ascolta l'anteprima e compralo (consigliato Amazon Music). Poi aggiungilo con «Aggiungi brano».</li>
     <li><b>Schermo pulito:</b> le impostazioni di player, testo, strumento e mixer sono nascoste; aprile con i pulsanti <b>«▾»</b> (Velocità e tono, Mixer, Opzioni testo, Opzioni strumento).</li>
     <li><b>Velocità</b> in bpm (battiti al minuto): l'app calcola il tempo del brano; se il numero sembra doppio o dimezzato correggilo con «bpm ÷2» o «bpm ×2». <b>Tonalità</b> sposta il brano di mezzo tono alla volta, con accordi e tablatura. <b>A</b> e <b>B</b> segnano un passaggio da ripetere, <b>Togli</b> annulla.</li>
+    <li><b>Click batteria</b> (in «Velocità e tono», e nel Palco con «Click»): un metronomo che segue i battiti veri del brano, anche se il tempo cambia un po'. Scegli l'accento ogni 4 o ogni 3 e il volume; con il mixer puoi togliere la batteria e suonarla tu. Se il click va al doppio o alla metà, correggi con «bpm ÷2» o «bpm ×2».</li>
     <li><b>Mixer:</b> alza, abbassa o togli ogni traccia, oppure usa i preset (Karaoke senza voce, Suono io il basso, Studio chitarra…).</li>
     <li><b>Testo:</b> l'app cerca da sola il testo sincronizzato su LRCLIB (titolo, artista e durata). Se non c'è, «Trascrivi dalla voce» lo ricava con RunPod e mette ogni parola a tempo. In «Opzioni testo» puoi cercarlo a mano, modificarlo, sincronizzarlo, spostarlo prima o dopo e ingrandirlo.</li>
     <li><b>Ritardo audio</b> (in «Opzioni testo»): l'app misura da sola quanto tarda il suono ad arrivare (le cuffie Bluetooth anche 0,2–0,3 secondi) e allinea testo e tablatura. Togli «automatico» per regolarlo a mano.</li>
@@ -960,7 +966,7 @@ async function bpmDetect(){const tok=++bpmTok;const src=stems.drums||stems.mix||
   const x=(await off.startRendering()).getChannelData(0);if(tok!==bpmTok)return null;
   const N=1024,H=128,F=Math.floor((x.length-N)/H);if(F<200)return null;const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);
   const re=new Float32Array(N),im=new Float32Array(N),prev=new Float32Array(N/2),env=new Float32Array(F);const kMax=Math.floor(5000*N/SR);
-  for(let f=0;f<F;f++){const o=f*H;for(let i=0;i<N;i++){re[i]=x[o+i]*win[i];im[i]=0}fftIt(re,im,false);let fl=0;for(let k=1;k<kMax;k++){const m=Math.log1p(100*Math.hypot(re[k],im[k]));const d=m-prev[k];if(d>0)fl+=d;prev[k]=m}env[f]=fl;if(f%800===0){await sleep0();if(tok!==bpmTok)return null}}
+  for(let f=0;f<F;f++){const o=f*H;for(let i=0;i<N;i++){re[i]=x[o+i]*win[i];im[i]=0}fftIt(re,im,false);let fl=0;for(let k=1;k<kMax;k++){const m=Math.log1p(1000*Math.hypot(re[k],im[k])/N);const d=m-prev[k];if(d>0)fl+=d;prev[k]=m}env[f]=fl;if(f%800===0){await sleep0();if(tok!==bpmTok)return null}}
   /* togli la media mobile e tieni solo i colpi */
   const W=Math.round(.5*SR/H),o2=new Float32Array(F);let acc=0;for(let f=0;f<F;f++){acc+=env[f];if(f>=W)acc-=env[f-W];const mu=acc/Math.min(f+1,W);o2[f]=Math.max(0,env[f]-mu)}
   const fps=SR/H,lmin=Math.floor(fps*60/200),lmax=Math.ceil(fps*60/55);const LM=4*lmax+2,ac=new Float32Array(LM+2);
@@ -971,9 +977,50 @@ async function bpmDetect(){const tok=++bpmTok;const src=stems.drums||stems.mix||
   {const l2=Math.round(bl/1.5);if(60*fps/l2<=185&&pk(l2)>.75*pk(bl))bl=l2}
   /* errori di «ottava»: se il tempo è veloce e anche il doppio della distanza è forte, il brano va a metà */
   if(60*fps/bl>160&&2*bl<=lmax+1&&pk(2*bl)>.55*ac[bl])bl*=2;else if(60*fps/bl<70&&pk(Math.round(bl/2))>.7*ac[bl])bl=Math.round(bl/2);const a=ac[bl-1],b=ac[bl],c=ac[bl+1],den=a-2*b+c,sh=den?.5*(a-c)/den:0;return Math.round(60*fps/(bl+Math.max(-.5,Math.min(.5,sh))))}
-function bpmFix(f){if(!BPM||!song)return;BPM=Math.round(BPM*f);rateUI();if(song.stored)saveCur({bpm:BPM});else song.bpm=BPM}
-async function bpmEnsure(s){BPM=s&&s.bpm||null;rateUI();if(BPM||!s)return;try{const v=await bpmDetect();if(v&&song===s){BPM=v;rateUI();if(s.stored)saveCur({bpm:v});else s.bpm=v}}catch(e){console.error(e)}}
+function bpmFix(f){if(!BPM||!song)return;BPM=Math.round(BPM*f);rateUI();if(song.stored)saveCur({bpm:BPM});else song.bpm=BPM;CLK2.beats=null;CLK2.tok++;if(CLK2.on)clickEnsure()}
+async function bpmEnsure(s){BPM=s&&s.bpm||null;rateUI();clickLoad(s);if(BPM||!s)return;try{const v=await bpmDetect();if(v&&song===s){BPM=v;rateUI();if(s.stored)saveCur({bpm:v});else s.bpm=v;if(CLK2.on)clickEnsure()}}catch(e){console.error(e)}}
 $('#bpmHalf').onclick=()=>bpmFix(.5);$('#bpmDbl').onclick=()=>bpmFix(2);
+/* ===== CLICK per la batteria: segue i battiti veri del brano (anche se il tempo cambia un po') ===== */
+const CLK2={on:false,vol:+(prefGet('clickVol')||.8),meter:+(prefGet('clickMeter')||4),beats:null,down:0,busy:false,tok:0,i:0,last:-1,g:null};
+function clickUI(){const t=CLK2.on?'Click batteria: sì':'Click batteria: no';$('#clickBtn').textContent=t;$('#clickBtn').classList.toggle('hot',CLK2.on);$('#clickBtn').setAttribute('aria-pressed',CLK2.on);
+  $('#pClick').classList.toggle('on',CLK2.on);$('#pClick').setAttribute('aria-pressed',CLK2.on);$('#clickVol').value=CLK2.vol;$('#clickMeter').value=String(CLK2.meter)}
+async function beatTrack(){const tok=++CLK2.tok;const src=stems.drums||stems.mix||stems.other||stems.bass;if(!src||!BPM)return null;
+  const SR=11025,N=1024,H=256,off=new OfflineAudioContext(1,Math.ceil(src.duration*SR),SR);const s=off.createBufferSource();s.buffer=src;s.connect(off.destination);s.start();
+  const x=(await off.startRendering()).getChannelData(0);if(tok!==CLK2.tok)return null;
+  const F=Math.floor((x.length-N)/H);if(F<50)return null;const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);
+  const re=new Float32Array(N),im=new Float32Array(N),pv=new Float32Array(N/2),o=new Float32Array(F),lo=new Float32Array(F);const kMax=Math.floor(5000*N/SR),kLo=Math.floor(160*N/SR);
+  for(let f=0;f<F;f++){const q=f*H;for(let i=0;i<N;i++){re[i]=x[q+i]*win[i];im[i]=0}fftIt(re,im,false);let fl=0,fb=0;for(let k=1;k<kMax;k++){const m=Math.log1p(1000*Math.hypot(re[k],im[k])/N);const d=m-pv[k];if(d>0){fl+=d;if(k<=kLo)fb+=d}pv[k]=m}o[f]=fl;lo[f]=fb;
+    if(f%800===0){await sleep0();if(tok!==CLK2.tok)return null}}
+  let mu=0;for(const v of o)mu+=v;mu/=F;let sd=0;for(const v of o)sd+=(v-mu)**2;sd=Math.sqrt(sd/F)||1;for(let f=0;f<F;f++)o[f]=Math.max(0,(o[f]-mu)/sd);
+  /* programmazione dinamica (metodo di Ellis): un battito ogni periodo, adattandosi ai colpi veri */
+  const fps=SR/H,P=fps*60/BPM,a=60,sc=new Float32Array(F),bk=new Int32Array(F).fill(-1);
+  for(let t=0;t<F;t++){let best=0,bi=-1;const t0=Math.max(0,Math.floor(t-2*P)),t1=Math.floor(t-P/2);for(let u=t0;u<=t1;u++){const l=Math.log((t-u)/P),v=sc[u]-a*l*l;if(bi<0||v>best){best=v;bi=u}}sc[t]=o[t]+(bi>=0?Math.max(0,best):0);bk[t]=bi>=0&&best>0?bi:-1;
+    if(t%3000===0){await sleep0();if(tok!==CLK2.tok)return null}}
+  let e=F-1,bv=-1e9;for(let t=Math.max(0,Math.floor(F-P));t<F;t++)if(sc[t]>bv){bv=sc[t];e=t}
+  const fr=[];for(let t=e;t>=0;t=bk[t])fr.push(t);fr.reverse();
+  /* riempie l'inizio prima del primo colpo, così il click parte dall'inizio del brano */
+  while(fr.length&&fr[0]-P>0)fr.unshift(Math.round(fr[0]-P));
+  const off0=N/2/SR+.012,beats=fr.map(f=>+(f/fps+off0).toFixed(3));
+  /* il primo tempo della battuta: dove i colpi bassi (cassa) sono più forti */
+  const m=CLK2.meter||4;let down=0,dv=-1;for(let k=0;k<m;k++){let s2=0;for(let i=k;i<fr.length;i+=m)s2+=lo[fr[i]]||0;if(s2>dv){dv=s2;down=k}}
+  return{beats,down}}
+async function clickEnsure(){if(CLK2.beats||CLK2.busy)return;if(!BPM){toast('Sto ancora calcolando il tempo del brano: riprova tra qualche secondo');return}
+  CLK2.busy=true;toast('Trovo i battiti del brano…');try{const r=await beatTrack();if(r&&song){CLK2.beats=r.beats;CLK2.down=r.down;CLK2.i=0;CLK2.last=-1;if(song.stored)saveCur({beats:r.beats,beatDown:r.down,beatBpm:BPM});else Object.assign(song,{beats:r.beats,beatDown:r.down,beatBpm:BPM})}}
+  catch(e){console.error(e);toast('Non riesco a trovare i battiti di questo brano')}finally{CLK2.busy=false}}
+function clickSet(v){CLK2.on=v;clickUI();if(v){const c=ctx();c.resume();clickEnsure()}}
+function clickTone(when,acc){const c=ctx();if(!CLK2.g){CLK2.g=c.createGain();CLK2.g.connect(c.destination)}CLK2.g.gain.value=CLK2.vol;
+  const o=c.createOscillator(),g=c.createGain();o.type='square';o.frequency.value=acc?2000:1300;g.gain.setValueAtTime(0,when);g.gain.linearRampToValueAtTime(acc?.5:.32,when+.002);g.gain.exponentialRampToValueAtTime(.001,when+.05);
+  const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=acc?2000:1300;f.Q.value=1.2;o.connect(f);f.connect(g);g.connect(CLK2.g);o.start(when);o.stop(when+.06)}
+/* chiamato a ogni fotogramma: prepara i click dei prossimi 0,2 secondi */
+function clickTick(){if(!CLK2.on||!CLK2.beats||!playing())return;const B=CLK2.beats,t=smoothNow(),r=A.playbackRate||1;
+  if(CLK2.last<0||Math.abs(t-CLK2.last)>.5||t<CLK2.last-.05){let lo=0,hi=B.length;while(lo<hi){const m=(lo+hi)>>1;if(B[m]<t)lo=m+1;else hi=m}CLK2.i=lo}
+  CLK2.last=t;const c=ctx();const m=CLK2.meter;
+  while(CLK2.i<B.length&&B[CLK2.i]<t+.2*r){const b=B[CLK2.i];if(b>=t-.01)clickTone(c.currentTime+Math.max(0,(b-t)/r),m>0&&((CLK2.i-CLK2.down)%m+m)%m===0);CLK2.i++}}
+function clickLoad(s){CLK2.tok++;CLK2.busy=false;CLK2.i=0;CLK2.last=-1;CLK2.beats=s&&s.beats&&s.beatBpm===s.bpm?s.beats:null;CLK2.down=s&&s.beatDown||0;if(CLK2.on&&s)setTimeout(()=>{if(song===s)clickEnsure()},1500)}
+$('#clickBtn').onclick=()=>clickSet(!CLK2.on);$('#pClick').onclick=()=>clickSet(!CLK2.on);
+$('#clickVol').oninput=e=>{CLK2.vol=+e.target.value;prefSet('clickVol',CLK2.vol);if(CLK2.g)CLK2.g.gain.value=CLK2.vol};
+$('#clickMeter').onchange=e=>{CLK2.meter=+e.target.value;prefSet('clickMeter',CLK2.meter);if(CLK2.beats&&song){const s=song;CLK2.beats=null;clickEnsure()}};
+clickUI();
 rateUI();
 function updTr(){const a=Math.abs(tr);let s;if(!tr)s='originale';else{const whole=Math.floor(a/2),half=a%2;s=(tr>0?'+':'−')+(whole?whole+(half?' e ½':''):'½')+(a<=2?' tono':' toni')}
   if(tr&&bassKey!=null)s+=' ('+NOTE_IT[bassKey]+'→'+NOTE_IT[((bassKey+tr)%12+12)%12]+')';$('#trVal').textContent=s}
@@ -1306,7 +1353,7 @@ document.addEventListener('fullscreenchange',()=>{if(palOn&&!fsEl())palOpen(fals
 
 /* ================= ciclo di disegno ================= */
 let lastColorT=0;
-function frame(){const t=now(),tv=viewT();if(performance.now()-LAT.t>2000){LAT.t=performance.now();latMeasure()}
+function frame(){const t=now(),tv=viewT();clickTick();if(performance.now()-LAT.t>2000){LAT.t=performance.now();latMeasure()}
   if(playing()&&loopA!=null&&loopB!=null&&t>=loopB)seek(loopA);
   const tt=fmt(t)+' / '+fmt(DUR);$('#tTime').textContent=tt;$('#tTime2').textContent=tt;
   if(!seeking)$('#seek').value=DUR?Math.round(t/DUR*1000):0;
