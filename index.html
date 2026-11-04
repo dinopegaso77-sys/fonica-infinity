@@ -46,7 +46,8 @@ button:disabled{opacity:.45;cursor:default}
 .optrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.optrow[hidden]{display:none}
 .mixer .optarea{border:0;padding:0;background:none}
 .si.addrow{border:2px dashed var(--accent)}
-a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center}
+.refnote{display:block;font-size:13px;color:var(--steel);margin-top:4px;font-style:italic}
+a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center;justify-content:center}.sheet a.chip.pri,a.chip.pri{color:var(--accent-ink)}.sheet a.chip:not(.pri){color:var(--fg)}
 .vu{flex:1 1 140px;height:12px;border-radius:6px;background:var(--raise);border:1px solid var(--line);overflow:hidden;min-width:100px}.vu i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ok),#d9a441 75%,var(--mute));transition:width .08s}
 .rowchk{display:flex;align-items:center;gap:8px;font-size:15px}.rowchk input{width:20px;height:20px}
 .box.sepfirst{border:2px solid var(--accent)}
@@ -157,7 +158,7 @@ textarea.inp{font-family:var(--f-mono);font-size:13px;min-height:240px;resize:ve
 code{font-family:var(--f-mono);font-size:13px;background:var(--bg);border-radius:6px;padding:2px 6px}
 .steps{margin:0;padding-left:20px;color:var(--dim);line-height:1.7}
 .rpwiz{display:flex;flex-direction:column;gap:12px}
-a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center}
+a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center;justify-content:center}.sheet a.chip.pri,a.chip.pri{color:var(--accent-ink)}.sheet a.chip:not(.pri){color:var(--fg)}
 .chip.donate svg{fill:currentColor;stroke:none}
 .chip.donate:not(.pri){border-color:var(--accent)}
 .rpguide{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:12px 14px}
@@ -532,7 +533,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       <div class="rpguide"><div><b>Prima volta con RunPod?</b><span>Una guida passo passo, schermata per schermata, con i valori da scegliere. Circa 30 minuti, una volta sola.</span></div><button class="chip pri" id="rpGuideOpen">Apri la guida</button></div>
       <div class="rpok" id="rpOk" hidden><b>RunPod è collegato.</b> <span id="rpOkTxt"></span> <button class="mini" id="rpChange">Cambia chiave o ID</button></div>
       <ol class="wiz" id="rpSteps">
-        <li><div><b>Crea il tuo account RunPod e ricarica il credito</b><span>Va bene l'accesso con Google. Con 10 dollari si lavorano qualche centinaio di brani.</span></div><a class="mini" href="https://console.runpod.io/user/billing" target="_blank" rel="noopener">Apri RunPod</a></li>
+        <li><div><b>Crea il tuo account RunPod e ricarica il credito</b><span>Tocca il pulsante e registrati con <b>«Accedi con Google»</b>, nello stesso browser e subito dopo. Poi ricarica <b>almeno 10 $</b>: bastano per qualche centinaio di brani e fanno scattare il bonus. Hai già un account? Usa «Ricarica RunPod» in alto.</span><span class="refnote">È un link di invito: tu ricevi 5 $ di bonus e Fonica Infinity riceve crediti che la aiutano a crescere.</span></div><a class="chip pri" href="https://runpod.io?ref=71bp02hn" target="_blank" rel="noopener">Crea l'account RunPod (bonus&nbsp;5&nbsp;$)</a></li>
         <li><div><b>Crea la chiave</b><span>Settings → API Keys → <b>Create API Key</b>, nome a piacere (per esempio «Fonica PC»), permessi «Read/Write». Copiala subito: è un codice lungo che inizia con <code>rpa_</code>. Le chiavi già nell'elenco non si possono più rivedere: se non hai salvato il codice, creane una nuova. Puoi anche usare la stessa chiave su telefono e PC.</span></div><a class="mini" href="https://console.runpod.io/user/settings" target="_blank" rel="noopener">Apri Settings</a></li>
         <li><div><b>Crea il servizio (endpoint)</b><span>Serverless → Get started, con il programma <code id="rpImgShow"></code> e i valori della guida.</span></div><div class="row"><button class="mini" id="rpCopyImg">Copia il nome</button><a class="mini" href="https://console.runpod.io/serverless" target="_blank" rel="noopener">Apri Serverless</a></div></li>
         <li><div><b>Incolla chiave e ID qui, poi premi «Salva»</b><span>La <b>chiave</b> è il codice <code>rpa_…</code> del passaggio sopra (non il suo nome). L'<b>ID</b> lo trovi in Serverless: apri il tuo endpoint, è la sigla di lettere e numeri scritta sotto il nome.</span>
@@ -598,7 +599,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <div class="row"><h3 class="grow">Collegare RunPod: guida passo passo</h3><button class="mini" data-close>Chiudi</button></div>
   <p>Con RunPod la separazione richiede 1–3 minuti, su una scheda video potente del <b>tuo</b> account. Si fa una volta sola; poi si paga solo quando separi un brano (circa 1–3 centesimi). Quando l'app è ferma il costo è zero.</p>
   <h4>1. Account e credito</h4>
-  <ol class="steps"><li>Apri <a href="https://www.runpod.io" target="_blank" rel="noopener">runpod.io</a> e premi <b>Sign up</b> (va bene Google).</li><li>In alto tocca il pulsante verde <b>+</b> accanto al credito e ricarica <b>10 dollari</b>.</li><li>Non serve collegare GitHub o Discord.</li></ol>
+  <div class="rpguide"><div><b>Non hai ancora RunPod?</b><span>Crealo con l'invito di Fonica Infinity: ricevi <b>5 $ di bonus</b> dopo la prima ricarica da 10 $.</span><span class="refnote">È un link di invito: tu ricevi 5 $ di bonus e Fonica Infinity riceve crediti che la aiutano a crescere.</span></div><a class="chip pri" href="https://runpod.io?ref=71bp02hn" target="_blank" rel="noopener">Crea l'account RunPod (bonus&nbsp;5&nbsp;$)</a></div>
+  <ol class="steps"><li>Tocca <b>«Crea l'account RunPod»</b> qui sopra e, nella pagina che si apre, premi <b>Sign up</b> e scegli <b>«Accedi con Google»</b>. Fallo subito e nello stesso browser: solo così il bonus viene riconosciuto.</li><li>In alto tocca il pulsante verde <b>+</b> accanto al credito e ricarica <b>almeno 10 $</b>.</li><li>Non serve collegare GitHub o Discord.</li><li>Hai già un account? Salta questo passaggio: il bonus vale solo per i nuovi iscritti.</li></ol>
   <h4>2. La chiave</h4>
   <ol class="steps"><li>Menu <b>☰</b> → <b>Account</b> → <b>Settings</b> → <b>API Keys</b> → <b>Create API Key</b>.</li><li>Nome <code>Fonica</code>, permessi <b>Read/Write</b>, poi <b>Create</b>.</li><li><b>Copia subito la chiave</b> e salvala in una nota: RunPod la mostra una volta sola. Non mandarla a nessuno.</li></ol>
   <h4>3. Il servizio (endpoint)</h4>
@@ -668,7 +670,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     </ul>
     <p>Pubblicare online un video in cui canti su una base protetta può richiedere licenze: molte piattaforme (YouTube, Facebook, TikTok…) le gestiscono con regole proprie, che vanno controllate prima.</p>
     <p><b>Responsabilità.</b> L'autore di Fonica Infinity non controlla i file caricati e non è responsabile dell'uso che l'utente fa dell'app o dei contenuti che crea: ogni utente ne risponde personalmente. L'autore si dissocia da qualsiasi utilizzo che violi i diritti d'autore o la legge. L'app è fornita gratuitamente «così com'è», senza garanzie.</p>
-    <p><b>Servizi esterni.</b> I brani inviati a MVSEP o al proprio account RunPod per la separazione, e le ricerche su LRCLIB e iTunes, seguono le condizioni di quei servizi. I file restano sul tuo dispositivo, salvo quelli che scegli di inviare per la separazione.</p>
+    <p><b>Servizi esterni.</b> I brani inviati a MVSEP o al proprio account RunPod per la separazione, e le ricerche su LRCLIB e iTunes, seguono le condizioni di quei servizi. Il pulsante per creare l'account RunPod è un <b>link di invito</b>: chi si iscrive riceve 5 $ di bonus dopo la prima ricarica e l'autore di Fonica Infinity riceve crediti RunPod. I file restano sul tuo dispositivo, salvo quelli che scegli di inviare per la separazione.</p>
   </div>
   <div class="row"><button class="chip pri" id="legalOk">Ho capito e accetto</button></div>
 </div></div>
@@ -1311,7 +1313,7 @@ function legalOpen(){$('#legalX').hidden=prefGet('legal1')!=='1';$('#legalOk').h
 $('#legalOk').onclick=()=>{prefSet('legal1','1');$('#ovLegal').hidden=true;setTimeout(firstSetup,250)};
 /* primo accesso: dopo le note legali porta a collegare RunPod */
 function firstSetup(){if(rp.key&&rp.ep)return;setSepMode('rp');openSet();const m=$('#setMsg');
-  m.innerHTML='<b>Benvenuto in Fonica Infinity!</b> Per separare i brani in voce, basso, batteria e chitarra collega il <b>tuo account RunPod</b>: lo fai una volta sola, in circa 30 minuti, seguendo la guida passo passo. Puoi farlo anche più tardi da <b>Impostazioni</b>.<div class="row" style="margin-top:10px"><button class="chip pri" id="fsGuide">Apri la guida di RunPod</button><button class="mini" id="fsLater">Più tardi</button></div>';m.hidden=false;
+  m.innerHTML='<b>Benvenuto in Fonica Infinity!</b> Per separare i brani in voce, basso, batteria e chitarra collega il <b>tuo account RunPod</b>: lo fai una volta sola, in circa 30 minuti, seguendo la guida passo passo. Puoi farlo anche più tardi da <b>Impostazioni</b>.<div class="row" style="margin-top:10px"><button class="chip pri" id="fsGuide">Apri la guida di RunPod</button><a class="chip" href="https://runpod.io?ref=71bp02hn" target="_blank" rel="noopener">Non hai RunPod? Crealo qui (bonus&nbsp;5&nbsp;$)</a><button class="mini" id="fsLater">Più tardi</button></div><span class="refnote">Il link per creare l&#39;account è un invito: tu ricevi 5 $ di bonus e Fonica Infinity riceve crediti che la aiutano a crescere.</span>';m.hidden=false;
   $('#fsGuide').onclick=()=>$('#rpGuideOpen').click();$('#fsLater').onclick=()=>closeOv($('#fsLater'));m.scrollIntoView({block:'start'})}
 [$('#bLegal'),...$$('.legalLink')].forEach(a=>a.onclick=e=>{e.preventDefault();legalOpen()});
 if(prefGet('legal1')!=='1')setTimeout(legalOpen,300);
