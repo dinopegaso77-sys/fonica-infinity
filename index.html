@@ -29,24 +29,26 @@ button,select,input{font:inherit;color:inherit}
 button{cursor:pointer;touch-action:manipulation}
 button:disabled{opacity:.45;cursor:default}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.app{height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:10px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.app{height:100%;width:100%;max-width:1600px;margin:0 auto;display:grid;grid-template-rows:auto 1fr auto;gap:10px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
-.top{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+.top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 18px;align-items:center}
 .brand{display:flex;align-items:center;gap:14px;min-width:0}
-.brand img{height:92px;width:auto;border-radius:12px;display:block;flex:none;background:#fff;padding:6px 10px}
+.brand img{height:clamp(56px,7vw,88px);width:auto;border-radius:12px;display:block;flex:none;background:#fff;padding:6px 10px}
 .song{min-width:0}
 .song b{display:block;font-family:var(--f-display);font-weight:600;font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .song span{color:var(--dim);font-size:13px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tagline{margin:0 0 6px;font-family:var(--f-display);font-weight:600;font-size:18px;line-height:1.3;color:var(--fg)}
+.tagline{margin:0 0 6px;font-family:var(--f-display);font-weight:600;font-size:clamp(15px,1.5vw,19px);line-height:1.3;color:var(--fg);text-wrap:balance}
 .nowsong{border-left:3px solid var(--accent);padding-left:10px;min-width:0}
 #bLoadSong{margin-top:2px}
-.optbtn{margin-left:auto}.optbtn.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.phead .optbtn{margin-left:auto}.topts{display:flex;gap:6px;margin-left:auto}.optbtn.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .optarea{display:flex;flex-direction:column;gap:6px;padding:8px 10px;border-bottom:1px solid var(--line);background:var(--surface)}.optarea[hidden]{display:none}
 .trow.optarea{flex-direction:row;border:0;padding:4px 0;background:none}
 .optrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.optrow[hidden]{display:none}
 .mixer .optarea{border:0;padding:0;background:none}
 .si.addrow{border:2px dashed var(--accent)}
-.topbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.box.sepfirst{border:2px solid var(--accent)}
+.topbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center;max-width:760px}
+.mixer[hidden]{display:none}
 .chip{background:var(--raise);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-weight:600;min-height:44px}
 .chip:hover:not(:disabled){border-color:var(--steel)}
 .chip.on,.chip.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
@@ -251,21 +253,66 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .pal-tab canvas{display:block;width:100%;height:min(28vh,210px)}
 .pal-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;padding-bottom:max(10px,env(safe-area-inset-bottom,0px));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));background:var(--stage2);border-top:1px solid var(--stage1)}
 .pal-bar .time{color:var(--stage-dim)}
+/* Palco: griglia, così testo, tablatura e comandi non si sovrappongono mai */
+#palco{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto}
+#palco[hidden]{display:none}
+#palco>*{min-width:0}
+#palco .kpanel{min-height:0}#palco .kpanel::after{height:10%}#palco .kpanel::before{height:12%}
+.pal-top{overflow-x:auto;scrollbar-width:none}.pal-top::-webkit-scrollbar{display:none}.pal-top .pbtn{flex:none}
+.pal-tab canvas{height:clamp(120px,24vh,210px)}
+@media (max-width:599px){
+  .pal-name{font-size:15px;min-width:90px}
+  .pal-bar{gap:8px;justify-content:center;padding-top:8px}
+  .pal-bar .grow{display:none}
+  .pal-bar .pseg span{font-size:10px}
+  .pal-tab canvas{height:clamp(120px,22vh,180px)}
+}
+/* telefono in orizzontale: testo a sinistra, tablatura a destra */
+@media (orientation:landscape) and (max-height:560px){
+  #palco{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto}
+  .pal-top,.pal-bar{grid-column:1/-1}
+  #palco .kpanel{grid-row:2;grid-column:1}
+  #palco:has(#palTabWrap[hidden]) .kpanel{grid-column:1/-1}
+  .pal-tab{grid-row:2;grid-column:2;display:flex;flex-direction:column;min-height:0}
+  .pal-tab canvas{flex:1;height:auto;min-height:0}
+  #palco .kl{font-size:calc(clamp(18px,3.2vw,30px) * var(--kscale));padding:6px 0}
+  .pal-top{padding-block:6px}
+  .pal-bar{flex-wrap:nowrap;overflow-x:auto;padding-block:6px}
+  .pal-bar .pbtn.round{width:42px;height:42px}
+}
 .pseg{display:inline-flex;align-items:center;gap:6px}
 .pseg span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--stage-dim)}
 .pseg .seg{border-color:var(--stage-dim)}
 .pseg .seg button{color:var(--stage-fg)}
 .pseg .seg button.on{background:var(--stage-hi);color:var(--stage2)}
 
+/* tablet orizzontale e PC piccoli: intestazione su due righe, tutto centrato */
+@media (max-width:1279px){
+  .top{grid-template-columns:1fr}
+  .brand{justify-content:center;text-align:left;max-width:900px;margin:0 auto}
+  .topbtns{justify-content:center;max-width:none}
+}
+/* tablet verticale e telefoni: i riquadri uno sotto l'altro */
 @media (max-width:899px){
   body{overflow:auto}
   .app{height:auto;min-height:100%}
   .stage{grid-template-columns:1fr}
-  .panel.kp{height:66vh}
-  .panel.bp{height:50vh}
-  .top{grid-template-columns:1fr}
-  .brand img{height:72px}
-  .topbtns{justify-content:flex-start}
+  .panel.kp{height:50vh;min-height:340px}
+  .panel.bp{height:38vh;min-height:260px}
+}
+/* telefoni */
+@media (max-width:599px){
+  .app{gap:8px}
+  .brand{gap:10px}
+  .topbtns{gap:6px}
+  .topbtns .chip{padding:8px 13px;font-size:15px;min-height:42px}
+  .donimg img{height:42px}
+  .trow{gap:8px;justify-content:center}
+  .seek{order:5;flex:1 1 100%;min-width:0}
+  .topts{order:6;margin:0 auto}
+  .time{min-width:0}
+  .panel.kp{height:56vh;min-height:320px}
+  .panel.bp{height:42vh;min-height:250px}
 }
 @media (prefers-reduced-motion:reduce){.klines{transition:none}.kl{transition:none}.bar.ind i{animation-duration:4s}}
 </style>
@@ -295,7 +342,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
         <button class="tbtn" id="bFwd" aria-label="Avanti 5 secondi"><svg viewBox="0 0 24 24"><path d="m13 6 8 6-8 6zM3 6l8 6-8 6z"/></svg></button>
         <div class="time" id="tTime">0:00 / 0:00</div>
         <input type="range" class="seek" id="seek" min="0" max="1000" value="0" aria-label="Posizione nel brano">
-        <button class="mini optbtn" data-opt="optPlay" aria-expanded="false">Velocità e tono ▾</button>
+        <span class="topts"><button class="mini optbtn" data-opt="optPlay" aria-expanded="false">Velocità e tono ▾</button><button class="mini optbtn" data-opt="optMix" aria-expanded="false">Mixer ▾</button></span>
       </div>
       <div class="trow optarea" id="optPlay" hidden>
         <div class="grp"><label class="lbl" for="rate">Velocità</label>
@@ -331,6 +378,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
         <span class="status" id="lySrc" style="flex-basis:100%"></span><span class="lbl">Testo</span><button class="mini" id="offM">prima</button><span class="trval" id="offVal" style="min-width:60px">0,0 s</span><button class="mini" id="offP">dopo</button>
         <span class="sep-v"></span>
         <button class="mini" id="kSm" aria-label="Testo più piccolo">A−</button><button class="mini" id="kLg" aria-label="Testo più grande">A+</button>
+        </div><div class="optrow">
+        <span class="lbl">Ritardo audio</span><label class="lbl"><input type="checkbox" id="latAuto" checked> automatico</label><input type="range" id="latMan" min="0" max="500" step="10" value="150" aria-label="Ritardo audio in millisecondi" hidden><span class="trval" id="latVal" style="min-width:70px">–</span>
       </div>
       </div>
       <div class="kpanel" id="kpMain"></div>
@@ -359,8 +408,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     </section>
   </main>
 
-  <footer class="mixer">
-    <div class="row"><button class="mini optbtn" data-opt="optMix" aria-expanded="false">Mixer: volumi delle tracce ▾</button></div>
+  <footer class="mixer" hidden>
     <div class="optarea" id="optMix" hidden>
     <div class="row"><span class="lbl">Mix</span>
       <button class="mini" data-p="all">Tutto</button>
@@ -405,11 +453,9 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 <div class="ov" id="ovLib" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Libreria</h3><button class="mini" data-close>Chiudi</button></div>
   <div class="sepmsg" id="originWarn" hidden></div>
-  <div class="songlist" id="songlist"></div>
-
-  <div class="box">
-    <h4>Separa un brano nuovo</h4>
-    <p>Scegli un MP3: lo separo in voce, basso, batteria, chitarra e altro con il servizio scelto in <a href="#" class="setLink">Impostazioni</a>.</p>
+  <div class="box sepfirst">
+    <h4>Separa un brano nuovo con RunPod</h4>
+    <p>Scegli un MP3 e premi «Separa tracce»: RunPod lo divide in voce, basso, batteria, chitarra e altro. Il collegamento a RunPod si fa una volta sola in <a href="#" class="setLink">Impostazioni</a>.</p>
     <div class="row"><input type="file" id="sepIn" accept="audio/*,.mp3,.wav,.m4a,.flac,.ogg" class="inp grow"></div>
     <p class="legalnote">Carica solo brani acquistati regolarmente o di cui hai i diritti, per uso personale. <a href="#" class="legalLink">Note legali</a></p>
     <div class="row"><input class="inp grow" id="linkIn" placeholder="Oppure incolla il link diretto a un file audio (.mp3)" spellcheck="false" inputmode="url" aria-label="Link a un file audio"><button class="chip" id="linkGo">Scarica da link</button></div>
@@ -417,6 +463,9 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <div class="row"><button class="chip pri" id="bSep" disabled>Separa tracce</button><span class="status grow" id="sepFile"></span></div>
     <div class="sepmsg" id="sepMsg" role="alert" hidden></div>
   </div>
+
+  <h4 style="margin:6px 0 0">I tuoi brani</h4>
+  <div class="songlist" id="songlist"></div>
 
   <div class="box">
     <h4>Aggiungi tracce già separate o un MP3</h4>
@@ -596,6 +645,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <ol class="steps">
     <li><b>Aggiungere un brano:</b> premi «Aggiungi brano» (o «Carica brano») e scegli l'MP3: la separazione parte subito. In <b>Impostazioni</b> scegli dove separare: con «Automatico» l'app prova prima il servizio gratuito MVSEP e, se non funziona, RunPod. Puoi anche scegliere «Solo RunPod» o «Sul PC» (scheda video in cloud, molto più veloce con una scheda video integrata; i passaggi per crearlo sono nel file LEGGIMI). <b>Sul PC:</b> apri FonicaInfinity.html con Chrome o Edge, vai in Libreria, scegli la cartella delle tracce, poi <b>Separa tracce</b>. Il riquadro in basso a destra mostra fase, percentuale, tempo trascorso e tempo che manca.</li>
     <li>Le impostazioni di player, testo, strumento e mixer sono nascoste per tenere lo schermo pulito: aprile con i pulsanti <b>«Opzioni ▾»</b>.</li>
+    <li><b>Ritardo audio</b> (in «Opzioni testo»): l'app misura da sola quanto tarda il suono ad arrivare (le cuffie Bluetooth ritardano anche 0,2–0,3 secondi) e sposta testo e tablatura di conseguenza. Se vuoi, togli «automatico» e regolalo a mano. Nella registrazione video la «Sincronia voce» si calcola allo stesso modo.</li>
     <li><b>Velocità</b> rallenta o accelera senza cambiare il tono. <b>Tonalità</b> sposta il brano di mezzo tono alla volta: musica e tablatura cambiano insieme.</li>
     <li><b>A</b> e <b>B</b> segnano un passaggio da ripetere; <b>Togli</b> annulla.</li>
     <li><b>Testo:</b> prima di tutto l'app cerca su LRCLIB titolo, artista e durata del brano: se trova il testo già sincronizzato con la stessa durata lo usa subito, e la trascrizione non serve. «Cerca su LRCLIB» mostra i risultati da scegliere; puoi anche incollare un link come https://lrclib.net/tracks/2022028. Se incolli un testo senza tempi, «Allinea da solo» lo mette a tempo usando la traccia della voce; «Sincronizza a mano» ti fa toccare l'inizio di ogni riga. «prima» e «dopo» spostano tutto il testo di 0,2 secondi.</li>
@@ -631,7 +681,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       <div class="pseg" id="recVox"><span>Voce originale</span><div class="seg"><button data-v="0">No</button><button data-v="0.25">Guida</button><button data-v="1">Sì</button></div></div>
       <label class="recsl"><span>Musica</span><input type="range" id="recMus" min="0" max="1.5" step="0.05" value="0.8"></label>
       <label class="recsl"><span>Tua voce</span><input type="range" id="recVoc" min="0" max="2.5" step="0.05" value="1.3"></label>
-      <label class="recsl"><span>Sincronia voce <i id="recLatV"></i></span><input type="range" id="recLat" min="0" max="500" step="10" value="120"></label>
+      <label class="recsl"><span>Sincronia voce <i id="recLatV"></i> <input type="checkbox" id="recLatAuto" checked style="vertical-align:-2px"> auto</span><input type="range" id="recLat" min="0" max="500" step="10" value="120"></label>
     </div>
     <div class="recrow">
       <div class="pseg" id="recBeauty"><span>Trucco</span><div class="seg"><button data-v="0">No</button><button data-v="0.3">Leggero</button><button data-v="0.55">Più bello</button></div></div>
@@ -710,6 +760,15 @@ let rate=1, tr=0, trCache={tr:0,bufs:null}, voiceOff=false;
 let mixUrl=null, mixBusy=false, mixPend=false, wantTime=0;
 let loopA=null, loopB=null;
 const playing=()=>!A.paused&&!A.ended;
+/* orologio fluido: alcuni browser aggiornano il tempo dell'audio solo a scatti */
+const CLK={a:-1,p:0,t:0};
+function smoothNow(){const a=now();if(!playing()){CLK.a=-1;return a}const p=performance.now();if(CLK.a<0){CLK.a=a;CLK.p=p;CLK.t=a;return a}
+  const est=CLK.t+(p-CLK.p)/1000*(A.playbackRate||1);CLK.p=p;if(a!==CLK.a){CLK.a=a;const d=a-est;CLK.t=Math.abs(d)>.25?a:est+d*.25}else CLK.t=est;return CLK.t}
+/* ritardo tra quando il suono parte e quando arriva alle orecchie (cuffie Bluetooth: anche 0,2-0,3 s) */
+const LAT={auto:prefGet('latAuto')!=='0',man:+(prefGet('latMan')||150),val:.03,meas:.03,t:0};
+function latMeasure(){let v=0;try{const c=ctx();if(c.state==='running')v=(c.outputLatency||0)+(c.baseLatency||0)}catch(e){}if(!v)v=.03;LAT.meas=Math.min(.6,v);LAT.val=LAT.auto?LAT.meas:LAT.man/1000;latUI()}
+function latUI(){const el=$('#latVal');if(!el)return;el.textContent=Math.round(LAT.val*1000)+' ms';$('#latAuto').checked=LAT.auto;$('#latMan').hidden=LAT.auto;$('#latMan').value=LAT.man}
+const viewT=()=>Math.max(0,smoothNow()-(playing()?LAT.val:0));
 const now=()=>A.currentTime||wantTime||0;
 function setBusy(msg){const b=$('#aBusy');if(msg){b.textContent=msg;b.hidden=false}else b.hidden=true}
 
@@ -1128,16 +1187,16 @@ document.addEventListener('fullscreenchange',()=>{if(palOn&&!fsEl())palOpen(fals
 
 /* ================= ciclo di disegno ================= */
 let lastColorT=0;
-function frame(){const t=now();
+function frame(){const t=now(),tv=viewT();if(performance.now()-LAT.t>2000){LAT.t=performance.now();latMeasure()}
   if(playing()&&loopA!=null&&loopB!=null&&t>=loopB)seek(loopA);
   const tt=fmt(t)+' / '+fmt(DUR);$('#tTime').textContent=tt;$('#tTime2').textContent=tt;
   if(!seeking)$('#seek').value=DUR?Math.round(t/DUR*1000):0;
-  karaUpdate(t);updTab(t);sampleMic(t);drawPitch(t);
+  karaUpdate(tv);updTab(tv);sampleMic(tv);drawPitch(tv);
   if(performance.now()-lastColorT>1000){readColors();lastColorT=performance.now()}
   let active=null;
   const TD=tabMode==='chords'?chordDraw:tabDraw;
-  if(!palOn&&tabView==='auto'&&!$('#tabAutoWrap').hidden)active=TD($('#tabCv'),{pxs:120*tabZoom,cx:.28,r:11},t);
-  if(palOn&&palTabOn)active=TD($('#palTab'),{pxs:150*tabZoom,cx:.14,r:15,big:1},t);
+  if(!palOn&&tabView==='auto'&&!$('#tabAutoWrap').hidden)active=TD($('#tabCv'),{pxs:120*tabZoom,cx:.28,r:11},tv);
+  if(palOn&&palTabOn)active=TD($('#palTab'),{pxs:150*tabZoom,cx:.14,r:15,big:1},tv);
   let txt='–';if(active){if(tabMode==='chords'){const r=((active[2]+tr)%12+12)%12;txt=chName(active[2]>=0?r:0,active[3])+' ('+chNameEn(r,active[3])+')'}else txt=`${nomeMidi(active[2])} · corda ${bassStrings()[active[3]][0]}, tasto ${active[4]}`}
   if($('#noteNow').textContent!==txt){$('#noteNow').textContent=txt;$('#noteNow2').textContent=txt}
   requestAnimationFrame(frame)}
@@ -1156,11 +1215,13 @@ function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});rende
 $('#bSet').onclick=()=>{$('#setMsg').hidden=true;openSet()};
 document.addEventListener('click',e=>{const a=e.target.closest('.setLink');if(a){e.preventDefault();$('#setMsg').hidden=true;openSet()}});
 /* pulsanti «Opzioni»: aprono e chiudono le impostazioni nascoste */
-$$('.optbtn').forEach(b=>{const el=$('#'+b.dataset.opt),lbl=b.textContent.replace(/ ▾$/,'');const set=v=>{el.hidden=!v;b.setAttribute('aria-expanded',v);b.textContent=lbl+(v?' ▴':' ▾');b.classList.toggle('on',v);prefSet('opt_'+b.dataset.opt,v?'1':'0')};
+$$('.optbtn').forEach(b=>{const el=$('#'+b.dataset.opt),lbl=b.textContent.replace(/ ▾$/,''),host=el.closest('footer.mixer');const set=v=>{el.hidden=!v;if(host)host.hidden=!v;b.setAttribute('aria-expanded',v);b.textContent=lbl+(v?' ▴':' ▾');b.classList.toggle('on',v);prefSet('opt_'+b.dataset.opt,v?'1':'0')};
   set(prefGet('opt_'+b.dataset.opt)==='1');b.onclick=()=>set(el.hidden)});
 /* «Aggiungi brano» e «Carica brano»: si sceglie l'MP3 e parte subito la separazione */
 let addDirect=false;function addSong(){if(sepBusy){toast('Sto già separando un brano: aspetta che finisca');return}addDirect=true;const i=$('#sepIn');i.value='';i.click()}
 $('#bLoadSong').onclick=addSong;
+$('#latAuto').onchange=e=>{LAT.auto=e.target.checked;prefSet('latAuto',LAT.auto?'1':'0');latMeasure()};
+$('#latMan').oninput=e=>{LAT.man=+e.target.value;prefSet('latMan',LAT.man);latMeasure()};latUI();
 if(location.protocol==='content:'||(isMobileOpen()&&location.protocol==='file:')){const w=$('#originWarn');w.hidden=false;w.innerHTML='<b>Hai aperto l\'app come file</b> (per esempio da WhatsApp). Così il telefono può bloccare il salvataggio dei brani e i collegamenti ai servizi. Per il telefono e il tablet aprila dal suo indirizzo web: <a href="https://dinopegaso77-sys.github.io/fonica-infinity/" target="_blank" rel="noopener">dinopegaso77-sys.github.io/fonica-infinity</a>'}
 function isMobileOpen(){return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)}
 document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea,select'))return;
@@ -1592,8 +1653,10 @@ function recGraph(){const c=ctx();
   if(!R.dest){R.dest=c.createMediaStreamDestination();R.musG=c.createGain();R.vocG=c.createGain();R.musD=c.createDelay(1);R.musG.connect(R.musD);R.musD.connect(R.dest);R.vocG.connect(R.dest)}
   if(!R.elSrc){R.elSrc=c.createMediaElementSource(A);R.elSrc.connect(c.destination);R.elSrc.connect(R.musG)}  // la musica va sempre anche agli altoparlanti
   recLevels()}
-function recLevels(){if(!R.musG)return;R.musG.gain.value=$('#recBase').checked?+$('#recMus').value:0;R.vocG.gain.value=+$('#recVoc').value;const ms=+$('#recLat').value;R.musD.delayTime.value=ms/1000;$('#recLatV').textContent=ms+' ms'}
+function recAutoLat(){let inL=.02;try{const tr=R.stream&&R.stream.getAudioTracks()[0];const s=tr&&tr.getSettings();if(s&&s.latency)inL=s.latency}catch(e){}latMeasure();return Math.round(Math.min(.5,LAT.meas+inL)*100)*10}
+function recLevels(){if(!R.musG)return;R.musG.gain.value=$('#recBase').checked?+$('#recMus').value:0;R.vocG.gain.value=+$('#recVoc').value;const auto=$('#recLatAuto').checked;if(auto)$('#recLat').value=recAutoLat();$('#recLat').disabled=auto;const ms=+$('#recLat').value;R.musD.delayTime.value=ms/1000;$('#recLatV').textContent=ms+' ms'+(auto?' (automatica)':'')}
 ['#recMus','#recVoc','#recLat'].forEach(s=>$(s).oninput=()=>{recLevels();prefSet('rec'+s.slice(4),$(s).value)});
+$('#recLatAuto').checked=prefGet('recLatAuto')!=='0';$('#recLatAuto').onchange=e=>{prefSet('recLatAuto',e.target.checked?'1':'0');recLevels()};
 ['#recTxt','#recBase'].forEach(s=>{const v=prefGet(s.slice(1));if(v!=null)$(s).checked=v==='1';$(s).onchange=()=>{prefSet(s.slice(1),$(s).checked?'1':'0');recLevels();
   if(s==='#recBase')$('#recHint').textContent=$('#recBase').checked?'La base è nel video.':'Senza base: nel video c\'è solo la tua voce. Usa le cuffie, così il microfono non riprende la musica.'}});
 function recVoxUI(){const v=stems.vocals?(gains.vocals.mute?0:gains.vocals.vol):(voiceOff?0:1);$$('#recVox button').forEach(b=>{const bv=+b.dataset.v;b.classList.toggle('on',Math.abs(bv-v)<.01||(bv===1&&v>.9)||(bv===.25&&v>.05&&v<.9));b.hidden=!stems.vocals&&bv===.25})}
@@ -1658,7 +1721,8 @@ function recDraw(){const cv=$('#recCv');const [W,H]=recSize();if(cv.width!==W||c
   g.fillStyle='#000';g.fillRect(0,0,W,H);
   if(v.videoWidth){const s=Math.max(W/v.videoWidth,H/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;fxDrawCam(g,v,W,H,(W-dw)/2,(H-dh)/2,dw,dh,R.facing==='user')}
   const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);
-  const t=now();const ly=$('#recLy');
+  if(R.musG&&$('#recLatAuto').checked&&!R.on&&(R._lt=(R._lt||0)+1)%90===0)recLevels();
+  const t=Math.max(0,smoothNow()-(R.musD&&playing()?R.musD.delayTime.value:0));const ly=$('#recLy');
   if($('#recTxt').checked){ly.hidden=true;recLyrics(g,W,H,t)}
   else{ly.hidden=!K.lines.length;if(K.lines.length){const tt=t-K.off;let i=-1;for(let j=0;j<K.lines.length;j++){if(K.lines[j].t<=tt)i=j;else break}
     const cur=i>=0&&tt<=K.lines[i].e+1.2?K.lines[i].s:'',nx=(K.lines[i+1]||{}).s||'';if($('#recLy1').textContent!==cur)$('#recLy1').textContent=cur;if($('#recLy2').textContent!==nx)$('#recLy2').textContent=nx}}
