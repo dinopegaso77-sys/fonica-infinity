@@ -46,6 +46,8 @@ button:disabled{opacity:.45;cursor:default}
 .optrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.optrow[hidden]{display:none}
 .mixer .optarea{border:0;padding:0;background:none}
 .si.addrow{border:2px dashed var(--accent)}
+.vu{flex:1 1 140px;height:12px;border-radius:6px;background:var(--raise);border:1px solid var(--line);overflow:hidden;min-width:100px}.vu i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ok),#d9a441 75%,var(--mute));transition:width .08s}
+.rowchk{display:flex;align-items:center;gap:8px;font-size:15px}.rowchk input{width:20px;height:20px}
 .box.sepfirst{border:2px solid var(--accent)}
 .topbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center;max-width:760px}
 .mixer[hidden]{display:none}
@@ -363,9 +365,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       </div>
       <div class="trow optarea" id="optPlay" hidden>
         <div class="grp"><label class="lbl" for="rate">Velocità</label>
-          <select class="sel" id="rate">
-            <option value="0.5">50%</option><option value="0.6">60%</option><option value="0.7">70%</option><option value="0.75">75%</option><option value="0.8">80%</option><option value="0.85">85%</option><option value="0.9">90%</option><option value="1" selected>100%</option><option value="1.1">110%</option><option value="1.25">125%</option>
-          </select></div>
+          <select class="sel" id="rate" aria-label="Velocità in battiti al minuto"></select><button class="mini" id="bpmHalf" title="Il tempo trovato è il doppio di quello vero" hidden>bpm ÷2</button><button class="mini" id="bpmDbl" title="Il tempo trovato è la metà di quello vero" hidden>bpm ×2</button></div>
         <span class="sep-v"></span>
         <div class="grp"><span class="lbl">Tonalità</span>
           <button class="mini" id="trDown" aria-label="Abbassa di mezzo tono">− ½</button>
@@ -543,6 +543,22 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       </details>
     </div>
   </div>
+  <div class="box" id="audBox">
+    <h4>Audio: scheda audio, microfono e cuffie</h4>
+    <p>Scegli da dove entra la tua voce o il tuo strumento (anche una scheda audio esterna) e dove senti la musica. Valgono per il microfono e per «Registra».</p>
+    <div class="row"><label class="field"><span>Ingresso (microfono o scheda audio)</span><select class="sel" id="audIn"><option value="">Predefinito del sistema</option></select></label>
+      <label class="field"><span>Canale di ingresso</span><select class="sel" id="audCh"><option value="auto">Tutti (automatico)</option><option value="L">Solo ingresso 1 (sinistro)</option><option value="R">Solo ingresso 2 (destro)</option><option value="stereo">Stereo: 1 a sinistra, 2 a destra</option></select></label></div>
+    <div class="row" id="audOutRow"><label class="field"><span>Uscita (cuffie o altoparlanti)</span><select class="sel" id="audOut"><option value="">Predefinita del sistema</option></select></label></div>
+    <div class="row" style="gap:6px 16px">
+      <label class="rowchk"><input type="checkbox" id="audEcho"> Riduci l'eco (con gli altoparlanti)</label>
+      <label class="rowchk"><input type="checkbox" id="audNoise"> Riduci il rumore</label>
+      <label class="rowchk"><input type="checkbox" id="audAgc"> Volume automatico</label>
+    </div>
+    <div class="row" style="gap:6px 16px"><label class="rowchk"><input type="checkbox" id="audMon"> Ascoltami in cuffia mentre suono e canto</label>
+      <label class="field" style="min-width:160px"><span>Volume dell'ascolto</span><input type="range" id="audMonV" min="0" max="1.5" step="0.05" value="0.8"></label></div>
+    <div class="row"><button class="mini" id="audTest">Prova l'ingresso</button><div class="vu" aria-hidden="true"><i id="audVu"></i></div><span class="status grow" id="audMsg"></span></div>
+    <p class="legalnote">Per una scheda audio o uno strumento collegato togli «Riduci l'eco», «Riduci il rumore» e «Volume automatico»: il suono resta naturale. Per ascoltarti usa le cuffie, altrimenti fischia.</p>
+  </div>
   <div class="box">
     <h4>Cartella delle tracce</h4>
     <p>Le tracce separate vengono salvate anche sul PC, divise per artista: <code>Artista / Titolo</code>, con voce, basso, batteria, altro e il testo (.lrc). Con «Aggiungi brano» li ritrovi tutti.</p>
@@ -662,6 +678,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <ol class="steps">
     <li><b>Aggiungere un brano:</b> premi «Aggiungi brano» (o «Carica brano») e scegli l'MP3: la separazione parte subito. In <b>Impostazioni</b> scegli dove separare: con «Automatico» l'app prova prima il servizio gratuito MVSEP e, se non funziona, RunPod. Puoi anche scegliere «Solo RunPod» o «Sul PC» (scheda video in cloud, molto più veloce con una scheda video integrata; i passaggi per crearlo sono nel file LEGGIMI). <b>Sul PC:</b> apri FonicaInfinity.html con Chrome o Edge, vai in Libreria, scegli la cartella delle tracce, poi <b>Separa tracce</b>. Il riquadro in basso a destra mostra fase, percentuale, tempo trascorso e tempo che manca.</li>
     <li>Le impostazioni di player, testo, strumento e mixer sono nascoste per tenere lo schermo pulito: aprile con i pulsanti <b>«Opzioni ▾»</b>.</li>
+    <li><b>Scheda audio</b> (in Impostazioni → Audio): scegli l'ingresso (microfono o scheda audio esterna), il canale (1, 2, tutti o stereo) e l'uscita per le cuffie. Con «Prova l'ingresso» vedi la barra del volume; con «Ascoltami in cuffia» senti voce e strumento mentre registri. Se il PC non ha la fotocamera, «Registra» salva lo stesso la tua esibizione con il testo a schermo.</li>
     <li><b>Ritardo audio</b> (in «Opzioni testo»): l'app misura da sola quanto tarda il suono ad arrivare (le cuffie Bluetooth ritardano anche 0,2–0,3 secondi) e sposta testo e tablatura di conseguenza. Se vuoi, togli «automatico» e regolalo a mano. Nella registrazione video la «Sincronia voce» si calcola allo stesso modo.</li>
     <li><b>Velocità</b> rallenta o accelera senza cambiare il tono. <b>Tonalità</b> sposta il brano di mezzo tono alla volta: musica e tablatura cambiano insieme.</li>
     <li><b>A</b> e <b>B</b> segnano un passaggio da ripetere; <b>Togli</b> annulla.</li>
@@ -855,7 +872,7 @@ async function loadSong(s,bufs){
   // tablatura
   blocks=[];parseTab();renderTab();
   for(const k of ['bass','guitar']){TB[k].tok++;TB[k].busy=false}
-  CH.tok++;CH.busy=false;CH.base=s.chordsBase||null;TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;
+  CH.tok++;CH.busy=false;CH.base=s.chordsBase||null;setTimeout(()=>bpmEnsure(s),600);TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;
   tabRemap();updTr();setInst(inst);
   guide=null;analyzeGuide();
   updPalSegs();prefSet('last',s.id);
@@ -905,6 +922,31 @@ $$('#pChit button').forEach(b=>b.onclick=()=>{if(!stems.guitar)return;gains.guit
 
 /* ================= velocità, tonalità, ripetizione ================= */
 $('#rate').onchange=e=>{rate=+e.target.value;A.defaultPlaybackRate=rate;A.playbackRate=rate};
+/* velocità in battiti al minuto (bpm): il tempo del brano si calcola da solo, una volta, e si salva */
+const RATES=[.5,.6,.7,.75,.8,.85,.9,.95,1,1.05,1.1,1.25];let BPM=null,bpmTok=0;
+function rateUI(){$('#bpmHalf').hidden=$('#bpmDbl').hidden=!BPM;const sel=$('#rate');sel.innerHTML=RATES.map(r=>`<option value="${r}">${BPM?Math.round(BPM*r)+' bpm'+(r===1?' (originale)':''):(r===1?'normale':Math.round(r*100)+'%')}</option>`).join('');
+  const best=RATES.reduce((a,b)=>Math.abs(b-rate)<Math.abs(a-rate)?b:a,1);sel.value=String(best)}
+async function bpmDetect(){const tok=++bpmTok;const src=stems.drums||stems.mix||stems.other||stems.bass;if(!src)return null;
+  const SR=11025,start=Math.min(src.duration*.2,30),len=Math.min(90,src.duration-start);if(len<8)return null;
+  const off=new OfflineAudioContext(1,Math.ceil(len*SR),SR);const s=off.createBufferSource();s.buffer=src;s.connect(off.destination);s.start(0,start,len);
+  const x=(await off.startRendering()).getChannelData(0);if(tok!==bpmTok)return null;
+  const N=1024,H=128,F=Math.floor((x.length-N)/H);if(F<200)return null;const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);
+  const re=new Float32Array(N),im=new Float32Array(N),prev=new Float32Array(N/2),env=new Float32Array(F);const kMax=Math.floor(5000*N/SR);
+  for(let f=0;f<F;f++){const o=f*H;for(let i=0;i<N;i++){re[i]=x[o+i]*win[i];im[i]=0}fftIt(re,im,false);let fl=0;for(let k=1;k<kMax;k++){const m=Math.log1p(100*Math.hypot(re[k],im[k]));const d=m-prev[k];if(d>0)fl+=d;prev[k]=m}env[f]=fl;if(f%800===0){await sleep0();if(tok!==bpmTok)return null}}
+  /* togli la media mobile e tieni solo i colpi */
+  const W=Math.round(.5*SR/H),o2=new Float32Array(F);let acc=0;for(let f=0;f<F;f++){acc+=env[f];if(f>=W)acc-=env[f-W];const mu=acc/Math.min(f+1,W);o2[f]=Math.max(0,env[f]-mu)}
+  const fps=SR/H,lmin=Math.floor(fps*60/200),lmax=Math.ceil(fps*60/55);const LM=4*lmax+2,ac=new Float32Array(LM+2);
+  for(let l=Math.max(1,lmin-1);l<=LM;l++){let s2=0;for(let f=0;f+l<F;f++)s2+=o2[f]*o2[f+l];ac[l]=s2/(F-l)}
+  const pk=l=>Math.max(ac[l-1]||0,ac[l]||0,ac[l+1]||0);let best=0,bl=0;for(let l=lmin;l<=lmax;l++){const bpm=60*fps/l;const w=Math.exp(-.5*Math.pow(Math.log2(bpm/110)/.7,2));let cm=0;for(let k=1;k<=4;k++)cm+=pk(k*l);const sc=cm*w;if(sc>best){best=sc;bl=l}}
+  if(!bl)return null;
+  /* scambio con un ritmo «in tre» (1,5 battiti): se anche 2/3 della distanza è forte, quello è il battito vero */
+  {const l2=Math.round(bl/1.5);if(60*fps/l2<=185&&pk(l2)>.75*pk(bl))bl=l2}
+  /* errori di «ottava»: se il tempo è veloce e anche il doppio della distanza è forte, il brano va a metà */
+  if(60*fps/bl>160&&2*bl<=lmax+1&&pk(2*bl)>.55*ac[bl])bl*=2;else if(60*fps/bl<70&&pk(Math.round(bl/2))>.7*ac[bl])bl=Math.round(bl/2);const a=ac[bl-1],b=ac[bl],c=ac[bl+1],den=a-2*b+c,sh=den?.5*(a-c)/den:0;return Math.round(60*fps/(bl+Math.max(-.5,Math.min(.5,sh))))}
+function bpmFix(f){if(!BPM||!song)return;BPM=Math.round(BPM*f);rateUI();if(song.stored)saveCur({bpm:BPM});else song.bpm=BPM}
+async function bpmEnsure(s){BPM=s&&s.bpm||null;rateUI();if(BPM||!s)return;try{const v=await bpmDetect();if(v&&song===s){BPM=v;rateUI();if(s.stored)saveCur({bpm:v});else s.bpm=v}}catch(e){console.error(e)}}
+$('#bpmHalf').onclick=()=>bpmFix(.5);$('#bpmDbl').onclick=()=>bpmFix(2);
+rateUI();
 function updTr(){const a=Math.abs(tr);let s;if(!tr)s='originale';else{const whole=Math.floor(a/2),half=a%2;s=(tr>0?'+':'−')+(whole?whole+(half?' e ½':''):'½')+(a<=2?' tono':' toni')}
   if(tr&&bassKey!=null)s+=' ('+NOTE_IT[bassKey]+'→'+NOTE_IT[((bassKey+tr)%12+12)%12]+')';$('#trVal').textContent=s}
 function setTr(n){n=Math.max(-12,Math.min(12,n));if(n===tr)return;tr=n;tabRemap();updTr();rebuildMix()}
@@ -987,11 +1029,43 @@ async function analyzeGuide(){const tk=++anaToken;const v=stems.vocals;if(!v){gu
     for(let i=0;i<n;i++){g[i]=detect(d,sr,i*hop,N);if(i%200===0){await sleep0();if(tk!==anaToken)return}}
     for(let i=1;i<n-1;i++)if(g[i]&&!g[i-1]&&!g[i+1])g[i]=0;
     const vals=[...g].filter(x=>x>0).sort((a,b)=>a-b);if(vals.length>10){gMin=Math.floor(vals[Math.floor(vals.length*.03)])-3;gMax=Math.ceil(vals[Math.floor(vals.length*.97)])+3}guide=g}catch(e){guide=null}}
+/* ===== impostazioni audio: ingresso, canali, uscita, ascolto in cuffia ===== */
+const AUD=Object.assign({inId:'',ch:'auto',outId:'',echo:true,noise:false,agc:false,mon:false,monV:.8},(()=>{try{return JSON.parse(prefGet('audio')||'{}')}catch(e){return{}}})());
+const audSave=()=>prefSet('audio',JSON.stringify(AUD));
+function audCons(){const a={echoCancellation:AUD.echo,noiseSuppression:AUD.noise,autoGainControl:AUD.agc};if(AUD.inId)a.deviceId={exact:AUD.inId};if(AUD.ch!=='auto')a.channelCount={ideal:2};return a}
+/* sceglie il canale della scheda audio: 1, 2, tutti o stereo */
+function audNode(c,src){const m=AUD.ch;if(m==='auto'||m==='stereo')return src;const sp=c.createChannelSplitter(2),mg=c.createChannelMerger(2),i=m==='L'?0:1;src.connect(sp);sp.connect(mg,i,0);sp.connect(mg,i,1);return mg}
+async function audSink(){if(!AUD.outId&&!audSink.used)return;audSink.used=true;try{if(A.setSinkId)await A.setSinkId(AUD.outId||'')}catch(e){console.error(e)}try{const c=ctx();if(c.setSinkId)await c.setSinkId(AUD.outId||'')}catch(e){console.error(e)}}
+async function audList(){if(!navigator.mediaDevices||!navigator.mediaDevices.enumerateDevices)return;const ds=await navigator.mediaDevices.enumerateDevices();
+  const fill=(sel,kind,cur,def)=>{const L=ds.filter(d=>d.kind===kind);sel.innerHTML=`<option value="">${def}</option>`+L.map((d,i)=>`<option value="${esc(d.deviceId)}">${esc(d.label||(kind==='audioinput'?'Ingresso ':'Uscita ')+(i+1))}</option>`).join('');sel.value=L.some(d=>d.deviceId===cur)?cur:''};
+  fill($('#audIn'),'audioinput',AUD.inId,'Predefinito del sistema');fill($('#audOut'),'audiooutput',AUD.outId,'Predefinita del sistema');
+  $('#audOutRow').hidden=!(A.setSinkId&&ds.some(d=>d.kind==='audiooutput'));
+  if(ds.some(d=>d.kind==='audioinput'&&!d.label))$('#audMsg').textContent='Premi «Prova l\'ingresso» per vedere i nomi dei dispositivi.'}
+function audUI(){$('#audCh').value=AUD.ch;$('#audEcho').checked=AUD.echo;$('#audNoise').checked=AUD.noise;$('#audAgc').checked=AUD.agc;$('#audMon').checked=AUD.mon;$('#audMonV').value=AUD.monV}
+let audTestS=null,audRaf=0;
+function audTestStop(){cancelAnimationFrame(audRaf);if(audTestS){audTestS.s.getTracks().forEach(t=>t.stop());try{audTestS.mg.disconnect()}catch(e){}audTestS=null}$('#audVu').style.width='0';$('#audTest').textContent='Prova l\'ingresso'}
+async function audTest(){if(audTestS){audTestStop();return}
+  try{const c=ctx();await c.resume();const s=await navigator.mediaDevices.getUserMedia({audio:audCons()});const src=c.createMediaStreamSource(s),n=audNode(c,src),an=c.createAnalyser();an.fftSize=1024;n.connect(an);
+    const mg=c.createGain();mg.gain.value=AUD.mon?AUD.monV:0;n.connect(mg);mg.connect(c.destination);audTestS={s,mg};await audList();
+    const tr=s.getAudioTracks()[0],st=tr.getSettings?tr.getSettings():{};$('#audMsg').textContent='In ascolto: '+(tr.label||'ingresso')+(st.channelCount?' · '+st.channelCount+(st.channelCount>1?' canali':' canale'):'')+(st.sampleRate?' · '+Math.round(st.sampleRate/100)/10+' kHz':'')+'. Suona o canta: la barra si muove.';
+    $('#audTest').textContent='Ferma la prova';const b=new Float32Array(1024);let pk=0;
+    const loop=()=>{an.getFloatTimeDomainData(b);let m=0;for(const v of b)m=Math.max(m,Math.abs(v));pk=Math.max(m,pk*.92);$('#audVu').style.width=Math.min(100,Math.round(Math.sqrt(pk)*100))+'%';audRaf=requestAnimationFrame(loop)};loop();
+    setTimeout(()=>{if(audTestS&&audTestS.s===s)audTestStop()},30000)}
+  catch(e){$('#audMsg').textContent=e&&e.name==='NotAllowedError'?'Serve il permesso per il microfono: consentilo dal lucchetto vicino all\'indirizzo.':'Non riesco ad aprire questo ingresso: '+(e.message||e)}}
+function audChanged(){audSave();if(audTestS){audTestStop();audTest()}if(mic){toggleMic().then(()=>toggleMic())}if(R&&R.stream&&!$('#recOv').hidden&&!R.on)recCamera().catch(()=>{})}
+$('#audTest').onclick=audTest;
+$('#audIn').onchange=e=>{AUD.inId=e.target.value;audChanged()};$('#audCh').onchange=e=>{AUD.ch=e.target.value;audChanged()};
+$('#audOut').onchange=async e=>{AUD.outId=e.target.value;audSave();await audSink();toast('Uscita audio cambiata')};
+[['#audEcho','echo'],['#audNoise','noise'],['#audAgc','agc']].forEach(([s,k])=>$(s).onchange=e=>{AUD[k]=e.target.checked;audChanged()});
+$('#audMon').onchange=e=>{AUD.mon=e.target.checked;audSave();audMonApply()};$('#audMonV').oninput=e=>{AUD.monV=+e.target.value;audSave();audMonApply()};
+function audMonApply(){const v=AUD.mon?AUD.monV:0;if(audTestS)audTestS.mg.gain.value=v;if(R&&R.monG)R.monG.gain.value=v}
+if(navigator.mediaDevices&&navigator.mediaDevices.addEventListener)navigator.mediaDevices.addEventListener('devicechange',()=>{if(!$('#ovSet').hidden)audList()});
+audUI();
 const micHist=[];let mic=null,micFrame=0;
 async function toggleMic(){const b=$('#bMic');
   if(mic){mic.stream.getTracks().forEach(t=>t.stop());mic=null;if(b)b.classList.remove('hot');$('#micLbl').textContent='';return}
-  try{const c=ctx();await c.resume();const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:false,autoGainControl:false}});
-    const src=c.createMediaStreamSource(stream);const an=c.createAnalyser();an.fftSize=2048;src.connect(an);
+  try{const c=ctx();await c.resume();const stream=await navigator.mediaDevices.getUserMedia({audio:audCons()});
+    const src=audNode(c,c.createMediaStreamSource(stream));const an=c.createAnalyser();an.fftSize=2048;src.connect(an);
     mic={stream,an,buf:new Float32Array(2048),ds:new Float32Array(512)};if(b)b.classList.add('hot');$('#micLbl').textContent='· i punti sono la tua voce';toast('Microfono attivo: canta sulla linea')}
   catch(e){toast('Microfono non disponibile qui: apri FonicaInfinity.html nel browser')}}
 function sampleMic(t){if(!mic||!playing())return;if((micFrame++)%3)return;mic.an.getFloatTimeDomainData(mic.buf);const k=4;for(let i=0;i<512;i++)mic.ds[i]=mic.buf[i*k];
@@ -1228,7 +1302,9 @@ $('#legalOk').onclick=()=>{prefSet('legal1','1');$('#ovLegal').hidden=true};
 if(prefGet('legal1')!=='1')setTimeout(legalOpen,300);
 $('#bHelp').onclick=()=>openOv('#ovHelp');
 $('#bLib').onclick=()=>{renderLib();openOv('#ovLib')};
-function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});renderDir();openOv('#ovSet')}
+function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});renderDir();audList();openOv('#ovSet')}
+$('#ovSet').addEventListener('click',e=>{if(e.target.closest('[data-close]')||e.target.id==='ovSet')audTestStop()});
+if(AUD.outId)document.addEventListener('pointerdown',()=>audSink(),{once:true});
 $('#bSet').onclick=()=>{$('#setMsg').hidden=true;openSet()};
 document.addEventListener('click',e=>{const a=e.target.closest('.setLink');if(a){e.preventDefault();$('#setMsg').hidden=true;openSet()}});
 /* pulsanti «Opzioni»: aprono e chiudono le impostazioni nascoste */
@@ -1663,11 +1739,13 @@ const R={stream:null,facing:'user',rec:null,chunks:[],raf:0,on:false,count:0,t0:
 const recLogo=new Image();recLogo.src=document.querySelector('.brand img').src;
 function recSize(){const port=innerHeight>=innerWidth;return port?[720,1280]:[1280,720]}
 async function recCamera(){if(R.stream)R.stream.getTracks().forEach(t=>t.stop());
-  R.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:R.facing,width:{ideal:1280},height:{ideal:720}},audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}});
+  R.noCam=false;try{R.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:R.facing,width:{ideal:1280},height:{ideal:720}},audio:audCons()})}
+  catch(e){if(e&&e.name==='NotAllowedError')throw e;R.stream=await navigator.mediaDevices.getUserMedia({audio:audCons()});R.noCam=true;toast('Nessuna fotocamera: registro la tua voce e lo strumento, con il testo a schermo')}
   const v=$('#recCam');v.srcObject=R.stream;try{await v.play()}catch(e){}
-  const c=ctx();if(R.micSrc)try{R.micSrc.disconnect()}catch(e){}R.micSrc=c.createMediaStreamSource(R.stream);R.micSrc.connect(R.vocG)}
+  const c=ctx();if(R.micSrc)try{R.micSrc.disconnect()}catch(e){}if(R.inN&&R.inN!==R.micSrc)try{R.inN.disconnect()}catch(e){}
+  R.micSrc=c.createMediaStreamSource(R.stream);R.inN=audNode(c,R.micSrc);R.inN.connect(R.vocG);R.inN.connect(R.vdest);R.inN.connect(R.monG);audMonApply()}
 function recGraph(){const c=ctx();
-  if(!R.dest){R.dest=c.createMediaStreamDestination();R.musG=c.createGain();R.vocG=c.createGain();R.musD=c.createDelay(1);R.musG.connect(R.musD);R.musD.connect(R.dest);R.vocG.connect(R.dest)}
+  if(!R.dest){R.vdest=c.createMediaStreamDestination();R.monG=c.createGain();R.monG.gain.value=0;R.monG.connect(c.destination);R.dest=c.createMediaStreamDestination();R.musG=c.createGain();R.vocG=c.createGain();R.musD=c.createDelay(1);R.musG.connect(R.musD);R.musD.connect(R.dest);R.vocG.connect(R.dest)}
   if(!R.elSrc){R.elSrc=c.createMediaElementSource(A);R.elSrc.connect(c.destination);R.elSrc.connect(R.musG)}  // la musica va sempre anche agli altoparlanti
   recLevels()}
 function recAutoLat(){let inL=.02;try{const tr=R.stream&&R.stream.getAudioTracks()[0];const s=tr&&tr.getSettings();if(s&&s.latency)inL=s.latency}catch(e){}latMeasure();return Math.round(Math.min(.5,LAT.meas+inL)*100)*10}
@@ -1757,7 +1835,7 @@ async function recOpen(){if(!song){toast('Apri prima un brano');return}
   catch(e){$('#recHint').textContent=e&&e.name==='NotAllowedError'?'Serve il permesso per fotocamera e microfono: consentilo dal lucchetto vicino all\'indirizzo.':window.self!==window.top?'Dentro l\'app Claude la fotocamera è bloccata: apri Fonica Infinity dal suo indirizzo web.':'Non riesco ad aprire la fotocamera: '+(e.message||e)}
   recVoxUI();recLevels();cancelAnimationFrame(R.raf);R.raf=requestAnimationFrame(recDraw);
   try{const el=$('#recOv');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el)}catch(e){}}
-function recClose(){if(R.on)recStop();cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
+function recClose(){if(R.monG)R.monG.gain.value=0;if(R.on)recStop();cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
 function recMime(){for(const m of ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'])if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))return m;return ''}
 async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');return}
   if($('#recFromStart').checked)seek(0);loopA=loopB=null;updAB();
@@ -1765,7 +1843,7 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   const vt=$('#recCv').captureStream(30).getVideoTracks()[0];const ms=new MediaStream([vt,...R.dest.stream.getAudioTracks()]);
   R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:4e6,audioBitsPerSecond:160e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
   R.rec.ondataavailable=e=>{if(e.data&&e.data.size)R.chunks.push(e.data)};R.rec.onstop=recFinish;
-  R.vchunks=[];R.vrec=null;try{const at=R.stream.getAudioTracks();if(at.length){R.vrec=new MediaRecorder(new MediaStream(at));R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
+  R.vchunks=[];R.vrec=null;try{const at=R.vdest?R.vdest.stream.getAudioTracks():R.stream.getAudioTracks();if(at.length){R.vrec=new MediaRecorder(new MediaStream(at));R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
   R.startSong=now();if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');play()}
 function recStop(){if(!R.on)return;R.on=false;$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
 A.addEventListener('ended',()=>{if(R.on)recStop()});
