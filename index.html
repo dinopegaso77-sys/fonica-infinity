@@ -210,6 +210,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .recdone{position:absolute;inset:0;z-index:3;background:#0a0f16;overflow-y:auto;padding:16px;padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}.recdone[hidden]{display:none}
 .recdone-in{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .stsec{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:10px}
+.lagrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.lagrow .lbl{flex-basis:100%;color:#cfd8e2}.lagrow input{flex:1 1 160px;accent-color:var(--stage-hi);min-width:120px}.lagrow b{min-width:72px;text-align:right;font-variant-numeric:tabular-nums}.recdone .mini{color:#fff;border-color:rgba(255,255,255,.4)}
 .stsec h5{margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--stage-hi)}
 .stpre{flex-wrap:wrap;border-color:rgba(255,255,255,.4)!important}.stpre button{color:#fff}.stpre button.on{background:var(--stage-hi);color:var(--stage2)}
 .recdone .pseg .seg{flex-wrap:wrap}
@@ -717,7 +718,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <li><b>Basso e chitarra:</b> in «Opzioni strumento» scegli lo strumento e <b>Note</b> o <b>Accordi</b>. Con Note vedi la tablatura nota per nota (zoom, 5 corde, quante note, «Rifai»); con Accordi vedi gli accordi che scorrono, con il disegno della posizione per la chitarra e la nota da suonare per il basso. In «Scritta» puoi incollare una tablatura tua.</li>
     <li><b>Palco</b> apre lo schermo intero con il testo evidenziato parola per parola e, sotto o accanto, tablatura o accordi. In alto cambi strumento e Note/Accordi; in basso alzi o togli voce, chitarra e basso. Esci con «Esci» o con Esc.</li>
     <li><b>Registra video:</b> canti (e suoni) con la fotocamera e il testo che scorre. Scegli se mettere testo e base nel video, il <b>trucco</b> e lo <b>sfondo</b> (vero, colore dei vestiti, sfocato, <b>Studio</b> o <b>Bianco</b> con il logo in alto). La «Sincronia voce» è automatica. La voce guida (Voce originale «Guida») la senti in cuffia ma non finisce nella registrazione. Senza fotocamera registra la tua esibizione con il testo a schermo.</li>
-    <li><b>Studio (dopo la registrazione):</b> premi <b>«✨ Scegli tu per me»</b> per una prima regolazione automatica, poi aggiusta a piacere: volume di voce e base, sincronia, autotune, pulizia, stile della voce (Naturale, Studio, Pop, Ballata, Rock, Radio, Eco anni '80) con riverbero, eco, presenza, compressione e raddoppio. «Ascolta l'anteprima» fa sentire gli effetti dal vivo. Con <b>«Voce da studio con RunPod»</b> la voce viene ripulita da rumore, rimbombo e base entrata nel microfono. Nel riquadro Video scegli sfondo e trucco: il video viene rifinito alla fine con più cura. Poi <b>«Crea il video finale»</b> e salvalo o condividilo.</li>
+    <li><b>Studio (dopo la registrazione):</b> premi <b>«✨ Scegli tu per me»</b> per una prima regolazione automatica, poi aggiusta a piacere: volume di voce e base, sincronia, autotune, pulizia, stile della voce (Naturale, Studio, Pop, Ballata, Rock, Radio, Eco anni '80) con riverbero, eco, presenza, compressione e raddoppio. «Ascolta l'anteprima» fa sentire gli effetti dal vivo. Con <b>«Voce da studio con RunPod»</b> la voce viene ripulita da rumore, rimbombo e base entrata nel microfono. Nel riquadro Video scegli sfondo e trucco: il video viene rifinito alla fine con più cura. La <b>Sincronia voce</b> si misura da sola al millisecondo (dalla base che entra nel microfono o confrontando la tua voce con l'originale); se non ti convince spostala con il cursore o con −10, −1, +1, +10 ms mentre ascolti l'anteprima. Poi <b>«Crea il video finale»</b> e salvalo o condividilo.</li>
     <li>Tastiera: <code>Spazio</code> avvia o mette in pausa (durante la sincronizzazione segna la riga).</li>
   </ol>
   <p>Brani, testi e impostazioni restano su questo dispositivo, nel browser. Per usare microfono, fotocamera e cartella, consenti i permessi quando il browser li chiede.</p>
@@ -766,7 +767,10 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <div class="row" style="justify-content:center"><button class="chip pri" id="stAuto">✨ Scegli tu per me</button><button class="chip" id="stPrev">▶ Ascolta l'anteprima</button></div>
     <div class="stsec"><h5>Voce e base</h5>
       <div class="recrow"><label class="recsl"><span>Volume voce <i id="stVocV"></i></span><input type="range" id="stVoc" min="0" max="3" step="0.05" value="1"></label><label class="recsl"><span>Volume base <i id="stMusV"></i></span><input type="range" id="stMus" min="0" max="1.5" step="0.05" value="0.8"></label></div>
-      <div class="recrow"><label class="rechint"><input type="checkbox" id="recSync" checked> Sincronizza la voce automaticamente</label>
+      <div class="recrow"><label class="rechint"><input type="checkbox" id="recSync" checked> Sincronizza la voce automaticamente</label><span class="rechint" id="stLagInfo"></span></div>
+      <div class="lagrow"><span class="lbl">Sincronia voce</span><button class="mini" data-lag="-10">−10</button><button class="mini" data-lag="-1">−1</button><input type="range" id="stLag" min="-300" max="1500" step="1" value="0" aria-label="Sincronia della voce in millisecondi"><button class="mini" data-lag="1">+1</button><button class="mini" data-lag="10">+10</button><b id="stLagV">0 ms</b></div>
+      <span class="rechint">Se la voce arriva dopo la base, aumenta i millisecondi; se arriva prima, diminuiscili. Con «Ascolta l'anteprima» senti subito il risultato.</span>
+      <div class="recrow">
         <div class="pseg" id="recTune"><span>Autotune</span><div class="seg"><button data-v="0">No</button><button data-v="0.4">Leggero</button><button data-v="0.7">Medio</button><button data-v="1">Forte</button></div></div></div>
       <div class="recrow"><label class="rechint"><input type="checkbox" id="stClean" checked> Pulizia (rumori bassi e «s» troppo forti)</label>
         <label class="rechint"><input type="checkbox" id="stAi"> Voce da studio con RunPod (toglie rumore, rimbombo e la base che entra nel microfono)</label></div>
@@ -1953,7 +1957,7 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:4e6,audioBitsPerSecond:160e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
   R.rec.ondataavailable=e=>{if(e.data&&e.data.size)R.chunks.push(e.data)};R.rec.onstop=recFinish;
   R.vchunks=[];R.vrec=null;try{const at=R.vdest?R.vdest.stream.getAudioTracks():R.stream.getAudioTracks();if(at.length){R.vrec=new MediaRecorder(new MediaStream(at));R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
-  R.vDec=R.mBuf=R.vAi=R.lagC=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
+  R.vDec=R.mBuf=R.vAi=R.lagC=null;R.lagMan=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
   try{const vt2=R.stream.getVideoTracks();if(vt2.length){R.rawch=[];R.rawrec=new MediaRecorder(new MediaStream(vt2),{videoBitsPerSecond:6e6});R.rawrec.ondataavailable=e=>{if(e.data&&e.data.size)R.rawch.push(e.data)};R.rawstop=new Promise(ok=>R.rawrec.onstop=ok)}}catch(e){R.rawrec=null}
   R.startSong=now();if(R.rawrec)R.rawrec.start(1000);if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');A.addEventListener('playing',recGuideStart,{once:true});play()}
 function recStop(){if(!R.on)return;R.on=false;recGuideOff();$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}try{if(R.rawrec)R.rawrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
@@ -1971,15 +1975,24 @@ function recSetUrl(blob){const u=URL.createObjectURL(blob);const pv=$('#recPlay'
 function monoOf(b){const n=b.length,o=new Float32Array(n);const c=b.numberOfChannels;for(let ch=0;ch<c;ch++){const d=b.getChannelData(ch);for(let i=0;i<n;i++)o[i]+=d[i]/c}return o}
 function envOf(x,sr,hop){const H=Math.round(sr*hop),F=Math.floor(x.length/H),e=new Float32Array(F);for(let f=0;f<F;f++){let s=0;for(let i=f*H;i<f*H+H;i++)s+=x[i]*x[i];e[f]=Math.log(1e-6+Math.sqrt(s/H))}
   const o=new Float32Array(F);for(let f=1;f<F;f++)o[f]=Math.max(0,e[f]-e[f-1]);return o}
-/* ritardo della tua voce rispetto alla voce originale del brano */
+/* ritardo della tua voce rispetto alla base: al millisecondo */
+async function rs8k(x,sr){const T=8000,b=new AudioBuffer({length:x.length,sampleRate:sr,numberOfChannels:1});b.copyToChannel(x,0);const oc=new OfflineAudioContext(1,Math.ceil(x.length/sr*T),T);const s=oc.createBufferSource();s.buffer=b;s.connect(oc.destination);s.start();return (await oc.startRendering()).getChannelData(0)}
+/* correlazione: c[l]=Σ a[t]·b[t+l], con la FFT */
+function xcorrPeak(a,b,maxL){let N=1;while(N<a.length+b.length)N<<=1;const ar=new Float32Array(N),ai=new Float32Array(N),br=new Float32Array(N),bi=new Float32Array(N);ar.set(a);br.set(b);fftIt(ar,ai,false);fftIt(br,bi,false);
+  for(let k=0;k<N;k++){const r=ar[k]*br[k]+ai[k]*bi[k],i=ar[k]*bi[k]-ai[k]*br[k];ar[k]=r;ai[k]=i}fftIt(ar,ai,true);
+  const lo=-Math.round(maxL*.2);let best=-1e30,bl=0,s2=0,n=0;for(let l=lo;l<=maxL;l++){const v=ar[(l+N)%N];s2+=v*v;n++;if(v>best){best=v;bl=l}}const rms=Math.sqrt(s2/n)||1e-9;
+  const y0=ar[(bl-1+N)%N],y1=best,y2=ar[(bl+1+N)%N],den=y0-2*y1+y2,sh=den?.5*(y0-y2)/den:0;return{l:bl+Math.max(-.5,Math.min(.5,sh)),q:best/rms}}
 async function recFindLag(voice,sr){const est=Math.min(.5,(ctx().outputLatency||.04)+(ctx().baseLatency||.01)+.05);
-  if(!stems.vocals)return{lag:est,how:'stimato'};
-  const ref=stems.vocals;const s0=Math.floor(R.startSong*ref.sampleRate),n=Math.min(ref.length-s0,Math.floor(voice.length/sr*ref.sampleRate));if(n<ref.sampleRate*5)return{lag:est,how:'stimato'};
-  const rm=new Float32Array(n);const c0=ref.getChannelData(0),c1=ref.numberOfChannels>1?ref.getChannelData(1):c0;for(let i=0;i<n;i++)rm[i]=(c0[s0+i]+c1[s0+i])*.5;
-  await sleep0();const hop=.005,a=envOf(rm,ref.sampleRate,hop),b=envOf(voice,sr,hop);const F=Math.min(a.length,b.length);
-  let best=-1,bl=0;const sc=[];for(let l=-20;l<=160;l++){let s=0;for(let i=Math.max(0,-l);i<F&&i+l<F;i++)s+=a[i]*b[i+l];sc.push(s);if(s>best){best=s;bl=l}}
-  const mean=sc.reduce((p,q)=>p+q,0)/sc.length;if(!(best>mean*1.25))return{lag:est,how:'stimato'};
-  return{lag:Math.max(0,bl*hop),how:'misurato'}}
+  try{/* 1) la base che entra nel microfono (altoparlanti): misura esatta */
+    const dur=voice.length/sr,M=await stMusic(Math.max(1,dur));const mm=monoOf(M);const st=Math.min(2,dur*.1),len=Math.min(30,dur-st);
+    if(len>4){const v8=await rs8k(voice.subarray(Math.floor(st*sr),Math.floor((st+len)*sr)),sr),m8=await rs8k(mm.subarray(Math.floor(st*M.sampleRate),Math.floor((st+len)*M.sampleRate)),M.sampleRate);
+      /* filtro passa-alto semplice: tolgo i bassi che confondono */for(const x of [v8,m8]){let p=0;for(let i=0;i<x.length;i++){const y=x[i]-p*.97;p=x[i];x[i]=y}}
+      const r=xcorrPeak(m8,v8,Math.round(1.5*8000));if(r.q>7&&r.l>=-800)return{lag:r.l/8000,how:'misurato dalla base nel microfono'}}}catch(e){console.error(e)}
+  /* 2) la tua voce confrontata con quella originale (con le cuffie) */
+  if(stems.vocals){const ref=stems.vocals;const s0=Math.floor(R.startSong*ref.sampleRate),n=Math.min(ref.length-s0,Math.floor(voice.length/sr*ref.sampleRate));
+    if(n>ref.sampleRate*5){const rm=new Float32Array(n);const c0=ref.getChannelData(0),c1=ref.numberOfChannels>1?ref.getChannelData(1):c0;for(let i=0;i<n;i++)rm[i]=(c0[s0+i]+c1[s0+i])*.5;
+      await sleep0();const hop=.005,a=envOf(rm,ref.sampleRate,hop),b=envOf(voice,sr,hop);const r=xcorrPeak(a,b,300);if(r.q>3.5)return{lag:r.l*hop,how:'misurato confrontando la tua voce con quella originale'}}}
+  return{lag:est,how:'stimato dal dispositivo'}}
 /* autotune: avvicina ogni nota alla melodia originale (o al semitono più vicino) */
 async function recAutotune(x,sr,lag,str,onp){
   let pk=0;for(let i=0;i<x.length;i+=3)pk=Math.max(pk,Math.abs(x[i]));const gn=pk>0?.9/pk:1;
@@ -2035,8 +2048,13 @@ async function stVoice(say){if(!R.voiceBlob)throw new Error('manca la traccia de
     const vb=await decode(b64ToAb(out.voice));R.vAi={x:monoOf(vb),sr:vb.sampleRate};R.lagC=null}
   if(!R.vDec){const vb=await decode(await R.voiceBlob.arrayBuffer());R.vDec={x:monoOf(vb),sr:vb.sampleRate}}
   const V=ST.ai&&R.vAi?R.vAi:R.vDec;
-  if(R.lagC==null){R.lagC=$('#recSync').checked?(await recFindLag(V.x,V.sr)):{lag:0,how:''}}
-  return{V,lag:$('#recSync').checked?R.lagC.lag:0,how:R.lagC.how}}
+  if(R.lagC==null&&(R.lagMan==null||$('#recSync').checked)){say('Misuro il ritardo della voce…');R.lagC=await recFindLag(V.x,V.sr)}
+  const lag=R.lagMan!=null?R.lagMan/1000:(R.lagC?R.lagC.lag:0);lagUI(lag);return{V,lag,how:R.lagMan!=null?'regolato a mano':(R.lagC?R.lagC.how:'')}}
+function lagUI(lag){const ms=Math.round(lag*1000);$('#stLag').value=ms;$('#stLagV').textContent=ms+' ms';$('#stLagInfo').textContent=R.lagMan!=null?'(regolato a mano)':R.lagC?'('+R.lagC.how+': '+Math.round(R.lagC.lag*1000)+' ms)':''}
+async function stLagEnsure(){try{if(!R.voiceBlob||R.lagC)return;if(!R.vDec){const vb=await decode(await R.voiceBlob.arrayBuffer());R.vDec={x:monoOf(vb),sr:vb.sampleRate}}if(R.lagMan==null&&$('#recSync').checked){R.lagC=await recFindLag(R.vDec.x,R.vDec.sr);lagUI(R.lagC.lag)}}catch(e){console.error(e)}}
+let lagT=0;function lagSet(ms){ms=Math.max(-300,Math.min(1500,Math.round(ms)));R.lagMan=ms;$('#recSync').checked=false;lagUI(ms/1000);clearTimeout(lagT);lagT=setTimeout(()=>{if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}},220)}
+/* avvia la voce spostata di «lag» (anche negativo) */
+function vStart(src,when,off){if(off>=0)src.start(when,off);else src.start(when-off,0)}
 async function stMusic(dur){if(R.mBuf&&Math.abs(R.mBuf.duration-dur)<.05)return R.mBuf;const src=await sourcesFor(tr);const oc=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);
   for(const k of order){if(k==='vocals'&&R.guideRec)continue;const g=effGain(k);if(!g)continue;const s=oc.createBufferSource();s.buffer=src[k];const gg=oc.createGain();gg.gain.value=g;s.connect(gg);gg.connect(oc.destination);s.start(0,Math.min(R.startSong,src[k].duration-.01))}
   return R.mBuf=await oc.startRendering()}
@@ -2058,16 +2076,17 @@ const PV={on:false,srcs:[],t0:0,pos:0};
 function stPrevStop(){PV.srcs.forEach(s=>{try{s.stop()}catch(e){}});PV.srcs=[];if(PV.on)PV.pos+=ctx().currentTime-PV.t0;PV.on=false;$('#stPrev').textContent='▶ Ascolta l\'anteprima'}
 async function stPrevStart(from){const say=t=>$('#recMsg').textContent=t;try{$('#recPlay').pause();say('Preparo l\'anteprima…');const{V,lag}=await stVoice(say);const dur=Math.max(1,V.x.length/V.sr-lag);const M=await stMusic(dur);
     const c=ctx();await c.resume();const ch=stChain(c,ST);const vb=c.createBuffer(1,V.x.length,V.sr);vb.copyToChannel(V.x,0);const vs=c.createBufferSource();vs.buffer=vb;vs.connect(ch.vin);const ms=c.createBufferSource();ms.buffer=M;ms.connect(ch.min);
-    const pos=Math.min(Math.max(0,from||0),dur-.5),at=c.currentTime+.05;vs.start(at,lag+pos);ms.start(at,pos);PV.srcs=[vs,ms];PV.t0=at;PV.pos=pos;PV.on=true;ms.onended=()=>{if(PV.on&&PV.srcs[1]===ms){PV.on=false;PV.pos=0;$('#stPrev').textContent='▶ Ascolta l\'anteprima'}};
+    const pos=Math.min(Math.max(0,from||0),dur-.5),at=c.currentTime+.05;vStart(vs,at,lag+pos);ms.start(at,pos);PV.srcs=[vs,ms];PV.t0=at;PV.pos=pos;PV.on=true;ms.onended=()=>{if(PV.on&&PV.srcs[1]===ms){PV.on=false;PV.pos=0;$('#stPrev').textContent='▶ Ascolta l\'anteprima'}};
     $('#stPrev').textContent='■ Ferma l\'anteprima';say('Anteprima: '+(ST.ai&&R.vAi?'voce da studio, ':'')+'effetti dal vivo. L\'autotune si applica nel video finale.')}
   catch(e){console.error(e);say('Anteprima non disponibile: '+(e.message||e))}}
 function stChanged(){stSave();stUI();if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}}
-function stOnFinish(){stPrevStop();PV.pos=0;if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=!R.raw;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
+function stOnFinish(){stPrevStop();PV.pos=0;$('#recSync').checked=true;lagUI(0);$('#stLagInfo').textContent='(misuro…)';setTimeout(stLagEnsure,400);if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=!R.raw;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
 for(const[id,k]of Object.entries(ST_SL))$('#'+id).oninput=e=>{ST[k]=+e.target.value;if(['rev','echo','pres','comp','dbl'].includes(k))ST.preset='';stChanged()};
 $$('#stPreset button').forEach(b=>b.onclick=()=>{ST.preset=b.dataset.p;Object.assign(ST,{sat:0,radio:0},ST_PRE[b.dataset.p]);stChanged()});
 $$('#stBg button').forEach(b=>b.onclick=()=>{ST.bg=b.dataset.v;stSave();stUI()});$$('#stBeauty button').forEach(b=>b.onclick=()=>{ST.beauty=+b.dataset.v;stSave();stUI()});
 $('#stClean').onchange=e=>{ST.clean=e.target.checked;stChanged()};$('#stAi').onchange=e=>{ST.ai=e.target.checked;stSave();if(PV.on){stPrevStop()}};
-$('#recSync').onchange=()=>{R.lagC=null;if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}};
+$('#recSync').onchange=e=>{if(e.target.checked){R.lagMan=null;R.lagC=null;stLagEnsure()}else{R.lagMan=Math.round(+$('#stLag').value);lagUI(R.lagMan/1000)}if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}};
+$('#stLag').oninput=e=>lagSet(+e.target.value);$$('[data-lag]').forEach(b=>b.onclick=()=>lagSet(+$('#stLag').value+ +b.dataset.lag));
 $('#stAuto').onclick=stAuto;$('#stPrev').onclick=()=>PV.on?stPrevStop():stPrevStart(PV.pos);stUI();
 /* sfondo «Bianco»: neutro, con il logo in alto a sinistra */
 function whiteBg(W,H){const c=fxCanvas('white',W,H);const ok=recLogo.complete&&recLogo.naturalWidth;if(c._k===W+'x'+H+ok)return c;c._k=W+'x'+H+ok;const g=c.getContext('2d');
@@ -2121,10 +2140,10 @@ function makeFinalPainter(W,H,seg){const F={ema:null,mw:0,mh:0,inv:null,col:[70,
 async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=true;stPrevStop();const btn=$('#recFix');btn.disabled=true;$('#stAuto').disabled=true;const say=t=>$('#recMsg').textContent=t;
   const tune=+($$('#recTune button.on')[0]||{dataset:{v:0}}).dataset.v;
   try{const{V,lag,how}=await stVoice(say);let voice=V.x;const vsr=V.sr;
-    if(tune>0){voice=await recAutotune(voice,vsr,lag,tune,p=>say('Autotune sulla tua voce… '+Math.round(p*100)+'%'))}
+    if(tune>0){voice=await recAutotune(voice,vsr,Math.max(0,lag),tune,p=>say('Autotune sulla tua voce… '+Math.round(p*100)+'%'))}
     say('Mescolo voce, base ed effetti…');const dur=Math.max(1,voice.length/vsr-lag);const M=await stMusic(dur);
     const oc=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);const ch=stChain(oc,ST);const ms=oc.createBufferSource();ms.buffer=M;ms.connect(ch.min);ms.start(0);
-    const vbuf=oc.createBuffer(1,voice.length,vsr);vbuf.copyToChannel(voice,0);const vs=oc.createBufferSource();vs.buffer=vbuf;vs.connect(ch.vin);vs.start(0,lag);
+    const vbuf=oc.createBuffer(1,voice.length,vsr);vbuf.copyToChannel(voice,0);const vs=oc.createBufferSource();vs.buffer=vbuf;vs.connect(ch.vin);vStart(vs,0,lag);
     const mixed=await oc.startRendering();
     /* volume finale uniforme (circa -14 LUFS) senza distorcere */
     {const L=mixed.getChannelData(0),Rr=mixed.getChannelData(1);let pk=0,s2=0;for(let i=0;i<L.length;i++){const a=Math.abs(L[i]),b=Math.abs(Rr[i]);if(a>pk)pk=a;if(b>pk)pk=b;s2+=L[i]*L[i]+Rr[i]*Rr[i]}const rms=Math.sqrt(s2/(2*L.length))||1e-6;
@@ -2132,7 +2151,7 @@ async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=tru
     const fin=ST.bg!=='rec'&&R.raw;let seg=null;if(fin&&(ST.bg!=='real'||ST.beauty>0)){say('Preparo la rifinitura del video…');try{seg=await fxNewSeg()}catch(e){console.error(e);say('Rifinitura dello sfondo non disponibile su questo dispositivo: uso il video registrato.')}}
     const useRaw=fin&&(seg||ST.bg==='real');
     const v=document.createElement('video');v.muted=true;v.playsInline=true;v.src=URL.createObjectURL(useRaw?R.raw:R.orig);await new Promise((ok,ko)=>{v.onloadeddata=ok;v.onerror=()=>ko(new Error('video'));v.load()});
-    if(useRaw){try{v.currentTime=Math.min(lag,Math.max(0,(v.duration||99)-.1));await new Promise(ok=>{v.onseeked=ok;setTimeout(ok,1500)})}catch(e){}}
+    if(useRaw){try{v.currentTime=Math.min(Math.max(0,lag),Math.max(0,(v.duration||99)-.1));await new Promise(ok=>{v.onseeked=ok;setTimeout(ok,1500)})}catch(e){}}
     const cv=document.createElement('canvas');const [W,H]=[$('#recCv').width,$('#recCv').height];cv.width=W;cv.height=H;const g2=cv.getContext('2d');const paint=useRaw?makeFinalPainter(W,H,seg):null;
     const c=ctx();await c.resume();const dest=c.createMediaStreamDestination();const as=c.createBufferSource();as.buffer=mixed;as.connect(dest);
     const mstr=new MediaStream([cv.captureStream(30).getVideoTracks()[0],...dest.stream.getAudioTracks()]);
@@ -2143,7 +2162,7 @@ async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=tru
     await v.play();rec.start(1000);as.start();draw();
     await new Promise(ok=>{as.onended=ok});stop=true;v.pause();cancelAnimationFrame(raf);rec.stop();await done;URL.revokeObjectURL(v.src);try{seg&&seg.close&&seg.close()}catch(e){}
     R.blob=new Blob(chs,{type:(R.mime||'video/webm').split(';')[0]});recSetUrl(R.blob);$('#recOrig').hidden=false;
-    say('Fatto. '+($('#recSync').checked?'Voce a tempo ('+how+': '+Math.round(lag*1000)+' ms). ':'')+(tune>0?'Autotune applicato. ':'')+(ST.ai?'Voce da studio. ':'')+(paint?'Video rifinito. ':'')+'Ora puoi salvarlo o condividerlo.')}
+    say('Fatto. '+('Voce spostata di '+Math.round(lag*1000)+' ms ('+how+'). ')+(tune>0?'Autotune applicato. ':'')+(ST.ai?'Voce da studio. ':'')+(paint?'Video rifinito. ':'')+'Ora puoi salvarlo o condividerlo.')}
   catch(e){console.error(e);say('Non sono riuscito a creare il video finale: '+(e.message||e))}
   finally{fixBusy=false;btn.disabled=false;$('#stAuto').disabled=false}}
 $$('#recTune button').forEach(b=>b.onclick=()=>{$$('#recTune button').forEach(x=>x.classList.toggle('on',x===b));prefSet('recTune',b.dataset.v)});
