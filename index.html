@@ -165,6 +165,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .adv summary{cursor:pointer;color:var(--steel);font-weight:600;padding:6px 0}.adv[open]{display:flex;flex-direction:column;gap:8px}
 .sepmsg{background:var(--surface);border:2px solid var(--mute);border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.55;color:var(--fg)}
 .sepmsg b{color:var(--mute)}
+.legal{font-size:16px;line-height:1.55;max-height:58vh;overflow:auto;padding-right:4px}.legal p{margin:0 0 10px}.legal ul{margin:0 0 10px;padding-left:22px}.legal li{margin-bottom:6px}
+.legalnote{font-size:14px;color:var(--steel);margin:4px 0}.legalnote a{color:inherit;font-weight:600}
 .recov{position:fixed;inset:0;z-index:70;background:#000;color:#fff;display:flex;flex-direction:column}
 #recCv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
 #recCam{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
@@ -319,15 +321,16 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <section class="panel bp">
       <div class="phead"><h2 id="tabTitle">Basso</h2>
         <div class="seg" role="group" aria-label="Strumento della tablatura" id="instSeg"><button data-i="bass" class="on">Basso</button><button data-i="guitar">Chitarra</button></div>
+        <div class="seg" role="group" aria-label="Note o accordi" id="modeSeg"><button data-m="notes" class="on">Note</button><button data-m="chords">Accordi</button></div>
         <div class="seg" role="group" aria-label="Tipo di tablatura"><button id="tvAuto" class="on">Automatica</button><button id="tvWritten">Scritta</button></div>
       </div>
       <div class="tabwrap" id="tabAutoWrap"><canvas id="tabCv"></canvas><div class="tabmsg" id="tabMsg" hidden></div></div>
       <div class="tabs" id="tabs" hidden></div>
       <div class="pfoot" id="tabFootAuto">
-        <span class="now">Nota: <b id="noteNow">–</b></span><span class="grow"></span>
+        <span class="now"><span class="nowLbl">Nota</span>: <b id="noteNow">–</b></span><span class="grow"></span>
         <label class="lbl" for="tabZoom">Zoom</label><select class="sel" id="tabZoom"><option value="0.6">lontano</option><option value="1" selected>normale</option><option value="1.5">vicino</option><option value="2.2">molto vicino</option></select>
-        <label class="lbl" id="fiveL"><input type="checkbox" id="five"> 5 corde</label>
-        <select class="sel" id="sens" aria-label="Quante note"><option value="0.5">pochissime note</option><option value="0.7" selected>meno note</option><option value="1">note normali</option><option value="1.5">più note</option></select>
+        <label class="lbl" id="fiveL" data-notes><input type="checkbox" id="five"> 5 corde</label>
+        <select class="sel" id="sens" aria-label="Quante note" data-notes><option value="0.5">pochissime note</option><option value="0.7" selected>meno note</option><option value="1">note normali</option><option value="1.5">più note</option></select>
         <button class="mini" id="bRedo">Rifai</button>
       </div>
       <div class="pfoot" id="tabFootWritten" hidden>
@@ -358,10 +361,11 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <button class="pbtn" id="pRec">Registra video</button>
     <button class="pbtn on" id="pTab">Tablatura</button>
     <button class="pbtn" id="pInst" aria-label="Cambia strumento della tablatura">Basso</button>
+    <button class="pbtn" id="pMode" aria-label="Note o accordi">Note</button>
     <button class="pbtn" id="pX">Esci</button>
   </div>
   <div class="kpanel" id="kpPal"></div>
-  <div class="pal-tab" id="palTabWrap"><div class="now">Nota: <b id="noteNow2">–</b></div><canvas id="palTab"></canvas></div>
+  <div class="pal-tab" id="palTabWrap"><div class="now"><span class="nowLbl">Nota</span>: <b id="noteNow2">–</b></div><canvas id="palTab"></canvas></div>
   <div class="pal-bar">
     <button class="pbtn round" id="pBack" aria-label="Indietro 5 secondi"><svg viewBox="0 0 24 24"><path d="M11 6 3 12l8 6zM21 6l-8 6 8 6z"/></svg></button>
     <button class="pbtn round main" id="pPlay" aria-label="Riproduci"><svg viewBox="0 0 24 24" class="playIco"><path d="M7 4v16l13-8z"/></svg></button>
@@ -426,6 +430,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       </details>
     </div>
     <div class="row"><input type="file" id="sepIn" accept="audio/*,.mp3,.wav,.m4a,.flac,.ogg" class="inp grow"></div>
+    <p class="legalnote">Carica solo brani acquistati regolarmente o di cui hai i diritti, per uso personale. <a href="#" class="legalLink">Note legali</a></p>
     <div class="row"><input class="inp grow" id="linkIn" placeholder="Oppure incolla il link diretto a un file audio (.mp3)" spellcheck="false" inputmode="url" aria-label="Link a un file audio"><button class="chip" id="linkGo">Scarica da link</button></div>
     <div class="row"><span class="status grow" id="linkStatus"></span><button class="mini" id="linkUse" hidden>Aggiungi così com'è</button></div>
     <div class="row"><button class="chip pri" id="bSep" disabled>Separa tracce</button><span class="status grow" id="sepFile"></span></div>
@@ -520,7 +525,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   </div>
   <div class="status" id="shopStatus"></div>
   <div class="shoplist" id="shopList"></div>
-  <p class="status">Elenco e anteprime da iTunes. I prezzi sono quelli di iTunes; sulle altre piattaforme possono cambiare.</p>
+  <p class="status">Consigliato: <b>Amazon Music</b> (MP3 senza protezioni, pronti per l'app). Elenco, anteprime e prezzi indicativi vengono da iTunes: su Amazon il prezzo può essere diverso.</p>
 </div></div>
 <div class="ov" id="ovEdit" hidden><div class="sheet">
   <div class="row"><h3 class="grow" id="edTitle">Testo</h3><button class="mini" data-close>Chiudi</button></div>
@@ -530,16 +535,33 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <div class="row"><button class="mini" id="edClearTs">Togli i tempi</button><span class="grow"></span><button class="chip pri" id="edSave">Applica</button></div>
 </div></div>
 
+<div class="ov" id="ovLegal" hidden><div class="sheet">
+  <div class="row"><h3 class="grow">Prima di iniziare: musica e diritti d'autore</h3><button class="mini" data-close id="legalX" hidden>Chiudi</button></div>
+  <div class="legal">
+    <p><b>Fonica Infinity è uno strumento per studiare musica e cantare per conto proprio.</b> L'app non contiene, non vende e non distribuisce brani musicali: lavora soltanto sui file audio che sceglie l'utente.</p>
+    <p>Usando l'app dichiari che:</p>
+    <ul>
+      <li>userai solo brani <b>acquistati regolarmente</b>, registrati da te, senza diritti d'autore o per i quali hai il permesso del titolare;</li>
+      <li>userai le tracce separate, i testi, le tablature e i video creati con l'app <b>solo per uso personale e di studio</b>, senza venderli né pubblicarli se non hai le autorizzazioni necessarie;</li>
+      <li>rispetterai la legge sul diritto d'autore (in Italia la Legge 22 aprile 1941, n. 633) e le condizioni dei servizi da cui ottieni la musica.</li>
+    </ul>
+    <p>Pubblicare online un video in cui canti su una base protetta può richiedere licenze: molte piattaforme (YouTube, Facebook, TikTok…) le gestiscono con regole proprie, che vanno controllate prima.</p>
+    <p><b>Responsabilità.</b> L'autore di Fonica Infinity non controlla i file caricati e non è responsabile dell'uso che l'utente fa dell'app o dei contenuti che crea: ogni utente ne risponde personalmente. L'autore si dissocia da qualsiasi utilizzo che violi i diritti d'autore o la legge. L'app è fornita gratuitamente «così com'è», senza garanzie.</p>
+    <p><b>Servizi esterni.</b> I brani inviati a MVSEP o al proprio account RunPod per la separazione, e le ricerche su LRCLIB e iTunes, seguono le condizioni di quei servizi. I file restano sul tuo dispositivo, salvo quelli che scegli di inviare per la separazione.</p>
+  </div>
+  <div class="row"><button class="chip pri" id="legalOk">Ho capito e accetto</button></div>
+</div></div>
 <div class="ov" id="ovHelp" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Come si usa</h3><button class="mini" data-close>Chiudi</button></div>
   <div class="rpguide" id="donateBox" hidden><div><b>Ti piace Fonica Infinity?</b><span>L'app è gratuita. Se vuoi sostenerla, puoi fare una piccola donazione con PayPal.</span></div><a class="chip pri donate" id="bDonate2" href="#" target="_blank" rel="noopener">Dona con PayPal</a></div>
+  <p class="legalnote">Usa solo brani acquistati regolarmente o di cui hai i diritti. <a href="#" id="bLegal">Note legali e diritti d'autore</a></p>
   <ol class="steps">
     <li><b>Separare un brano:</b> in Libreria, con «Automatico» l'app prova prima il servizio gratuito MVSEP e, se non funziona, RunPod. Puoi anche scegliere «Solo RunPod» o «Sul PC» (scheda video in cloud, molto più veloce con una scheda video integrata; i passaggi per crearlo sono nel file LEGGIMI). <b>Sul PC:</b> apri FonicaInfinity.html con Chrome o Edge, vai in Libreria, scegli la cartella delle tracce, poi <b>Separa tracce</b>. Il riquadro in basso a destra mostra fase, percentuale, tempo trascorso e tempo che manca.</li>
     <li><b>Velocità</b> rallenta o accelera senza cambiare il tono. <b>Tonalità</b> sposta il brano di mezzo tono alla volta: musica e tablatura cambiano insieme.</li>
     <li><b>A</b> e <b>B</b> segnano un passaggio da ripetere; <b>Togli</b> annulla.</li>
     <li><b>Testo:</b> prima di tutto l'app cerca su LRCLIB titolo, artista e durata del brano: se trova il testo già sincronizzato con la stessa durata lo usa subito, e la trascrizione non serve. «Cerca su LRCLIB» mostra i risultati da scegliere; puoi anche incollare un link come https://lrclib.net/tracks/2022028. Se incolli un testo senza tempi, «Allinea da solo» lo mette a tempo usando la traccia della voce; «Sincronizza a mano» ti fa toccare l'inizio di ogni riga. «prima» e «dopo» spostano tutto il testo di 0,2 secondi.</li>
     <li><b>Testo dalla voce:</b> con RunPod, «Trascrivi dalla voce» ascolta la traccia della voce con Whisper e mette ogni parola a tempo. Se il testo c'è già (online o incollato), tiene le tue parole e usa la voce solo per i tempi; altrimenti scrive il testo riconosciuto, che puoi correggere con «Modifica» senza perdere i tempi. Il file .lrc finisce anche nella cartella del brano.</li>
-    <li><b>Basso:</b> la tablatura automatica si ricava dalla traccia del basso. Puoi cambiare zoom, passare a 5 corde, scegliere quante note rilevare e rifarla. In «Scritta» puoi incollare una tablatura tua.</li>
+    <li><b>Basso e chitarra:</b> scegli lo strumento in alto nel pannello. Con «Note» vedi la tablatura nota per nota (zoom, 5 corde per il basso, quante note rilevare, «Rifai»); con «Accordi» vedi gli accordi del brano che scorrono, con il disegno della posizione per la chitarra e la nota da suonare per il basso. In «Scritta» puoi incollare una tablatura tua.</li>
     <li><b>Palco</b> apre lo schermo intero con solo il testo evidenziato parola per parola e, sotto, la tablatura. Esci con «Esci» o con il tasto Esc.</li>
     <li>Tastiera: <code>Spazio</code> avvia o mette in pausa (durante la sincronizzazione segna la riga).</li>
   </ol>
@@ -718,7 +740,7 @@ async function loadSong(s,bufs){
   // tablatura
   blocks=[];parseTab();renderTab();
   for(const k of ['bass','guitar']){TB[k].tok++;TB[k].busy=false}
-  TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;
+  CH.tok++;CH.busy=false;CH.base=s.chordsBase||null;TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;
   tabRemap();updTr();setInst(inst);
   guide=null;analyzeGuide();
   updPalSegs();prefSet('last',s.id);
@@ -880,6 +902,7 @@ $('#five').checked=five;$('#tabZoom').value=String(tabZoom);
 const bassStrings=()=>inst==='guitar'?GTR_STR:(five?BASS_STR5:BASS_STR4);
 function tabRemap(){for(const k of ['bass','guitar'])TB[k].notes=TB[k].base?bassTab(TB[k].base,k):null;const kb=TB.bass.base||TB.guitar.base;bassKey=kb?bassKeyGuess(kb):null}
 function setInst(k){inst=k;prefSet('inst',k);{const pb=$('#pInst');if(pb)pb.textContent=k==='guitar'?'Chitarra':'Basso'}$$('#instSeg button').forEach(b=>b.classList.toggle('on',b.dataset.i===k));$('#tabTitle').textContent=k==='guitar'?'Chitarra':'Basso';$('#fiveL').hidden=k==='guitar';$('#sens').value=String(TB[k].sens);
+  if(tabMode==='chords'){chordEnsure();return}
   const c=TCFG[k];if(TB[k].busy)return;if(TB[k].base){tabMsg(TB[k].base.length?'':'Non ho trovato note di '+c.name+' in questo brano');return}
   if(k==='guitar'&&!stems.guitar){tabMsg('Serve la traccia della chitarra: separa il brano a 6 tracce (Libreria → Separa un brano).');return}
   bassAnalyze(k)}
@@ -936,6 +959,78 @@ function bassTab(base,k){k=k||inst;const c=TCFG[k],MF=c.maxFret;const strs=k==='
   else out.push([a,b,m,bs,bf]);if(bf>0)prev=bf}return out}
 function bassKeyGuess(base){const w=new Array(12).fill(0);for(const[a,b,m]of base)w[m%12]+=b-a;let best=0;for(let i=1;i<12;i++)if(w[i]>w[best])best=i;return base.length?best:null}
 let C={};function readColors(){C={paper:css('--paper'),fg:css('--fg'),dim:css('--dim'),steel:css('--steel'),acc:css('--accent'),accInk:css('--accent-ink'),line:css('--line'),mute:css('--mute'),surf:css('--surface')}}
+
+/* ===== ACCORDI: riconoscimento dal brano (senza voce e batteria) e diagrammi ===== */
+const NOTE_EN=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const CH={base:null,tok:0,busy:false};let tabMode=prefGet('tabMode')==='chords'?'chords':'notes';
+const chName=(r,q)=>NOTE_IT[r]+(q?'m':''),chNameEn=(r,q)=>NOTE_EN[r]+(q?'m':'');
+function chordEnsure(){if(CH.busy)return;if(CH.base){tabMsg(CH.base.some(c=>c[2]>=0)?'':'Non ho trovato accordi in questo brano');return}chordAnalyze()}
+function setTabMode(m){tabMode=m;prefSet('tabMode',m);$$('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));$$('[data-notes]').forEach(e=>e.hidden=m==='chords'||(e.id==='fiveL'&&inst==='guitar'));
+  $$('.nowLbl').forEach(e=>e.textContent=m==='chords'?'Accordo':'Nota');$('#pMode').textContent=m==='chords'?'Accordi':'Note';$('#noteNow').textContent='–';$('#noteNow2').textContent='–';$$('.kpanel').forEach(P=>delete P.dataset.ci);
+  if(!song)return;if(m==='chords')chordEnsure();else setInst(inst)}
+$$('#modeSeg button').forEach(b=>b.onclick=()=>setTabMode(b.dataset.m));
+$('#pMode').onclick=()=>setTabMode(tabMode==='chords'?'notes':'chords');
+async function chordAnalyze(){const tok=++CH.tok;const live=()=>tok===CH.tok;
+  const parts=['guitar','piano','other','bass'].filter(k=>stems[k]);const srcs=parts.length?parts.map(k=>stems[k]):(stems.mix?[stems.mix]:[]);
+  if(!srcs.length){tabMsg('Serve il brano per trovare gli accordi');return}
+  CH.busy=true;const prog=v=>{if(live()&&tabMode==='chords')tabMsg('Cerco gli accordi… '+Math.round(v*100)+'%')};prog(0);
+  try{const SR=11025,dur=Math.max(...srcs.map(b=>b.duration));const off=new OfflineAudioContext(1,Math.ceil(dur*SR),SR);const hp=off.createBiquadFilter();hp.type='highpass';hp.frequency.value=45;hp.connect(off.destination);
+    for(const b of srcs){const s=off.createBufferSource();s.buffer=b;s.connect(hp);s.start()}
+    const x=(await off.startRendering()).getChannelData(0);if(!live())return;prog(.1);
+    const N=4096,H=2048,F=Math.max(1,Math.floor((x.length-N)/H)+1),hop=H/SR,win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);
+    const kLo=Math.ceil(55*N/SR),kHi=Math.floor(2000*N/SR),kB=Math.floor(220*N/SR),pcOf=new Int8Array(kHi+1);const mOf=new Int16Array(kHi+1);for(let k=kLo;k<=kHi;k++){const m=Math.round(69+12*Math.log2(k*SR/N/440));pcOf[k]=((m%12)+12)%12;mOf[k]=m}const nE=new Float32Array(128);
+    const chr=new Float32Array(F*12),bas=new Float32Array(F*12),en=new Float32Array(F);const re=new Float32Array(N),im=new Float32Array(N);
+    for(let f=0;f<F;f++){const o=f*H;for(let i=0;i<N;i++){re[i]=x[o+i]*win[i];im[i]=0}fftIt(re,im,false);let e=0;
+      nE.fill(0);for(let k=kLo;k<=kHi;k++)nE[mOf[k]]+=re[k]*re[k]+im[k]*im[k];for(let m=30;m<100;m++){if(!nE[m])continue;const a=Math.sqrt(nE[m]);chr[f*12+m%12]+=a;if(m<=57)bas[f*12+m%12]+=a;e+=a}en[f]=e;
+      if(f%150===0){prog(.1+.7*f/F);await sleep0();if(!live())return}}
+    /* media mobile su ~0,6 s per togliere le note di passaggio */
+    const sm=new Float32Array(F*12),sb=new Float32Array(F*12);for(let f=0;f<F;f++)for(let q=-2;q<=2;q++){const g=f+q;if(g<0||g>=F)continue;for(let p=0;p<12;p++){sm[f*12+p]+=chr[g*12+p];sb[f*12+p]+=bas[g*12+p]}}
+    const se=Array.from(en).sort((a,b)=>a-b),thr=(se[Math.floor(F*.9)]||1)*.15;
+    const T=[];for(let r=0;r<12;r++)for(const q of [0,1]){const v=new Float32Array(12);v[r]=1;v[(r+(q?3:4))%12]=1;v[(r+7)%12]=1;T.push([r,q,v])}
+    const S=T.length+1,P=.45;let dp=new Float32Array(S),nd=new Float32Array(S);const bp=new Uint8Array(F*S);
+    for(let f=0;f<F;f++){const em=new Float32Array(S);if(en[f]<thr){em[S-1]=1}else{let n=0,bm=0;for(let p=0;p<12;p++){n+=sm[f*12+p]**2;bm=Math.max(bm,sb[f*12+p])}n=Math.sqrt(n)||1;
+        T.forEach(([r,q,v],i)=>{let d=0;for(let p=0;p<12;p++)d+=v[p]*sm[f*12+p];em[i]=d/(n*Math.sqrt(3))+.12*(bm?sb[f*12+r]/bm:0)});em[S-1]=.25}
+      let bi=0;for(let s=1;s<S;s++)if(dp[s]>dp[bi])bi=s;
+      for(let s=0;s<S;s++){const stay=dp[s],sw=dp[bi]-P;if(stay>=sw){nd[s]=stay+em[s];bp[f*S+s]=s}else{nd[s]=sw+em[s];bp[f*S+s]=bi}}[dp,nd]=[nd,dp]}
+    const path=new Uint8Array(F);let s=0;for(let i=1;i<S;i++)if(dp[i]>dp[s])s=i;for(let f=F-1;f>=0;f--){path[f]=s;s=bp[f*S+s]}
+    let segs=[];const off0=N/SR/2;for(let f=0;f<F;f++){const st=path[f],t0=f*hop+off0,t1=t0+hop;const L=segs[segs.length-1];if(L&&L.s===st)L.b=t1;else segs.push({s:st,a:t0,b:t1})}
+    /* accordi troppo brevi: uniti al precedente */
+    const out=[];for(const g of segs){const L=out[out.length-1];if(L&&(g.b-g.a<.6||L.s===g.s)){L.b=g.b}else out.push({...g})}
+    const base=out.map(g=>g.s===S-1?[+g.a.toFixed(2),+g.b.toFixed(2),-1,0]:[+g.a.toFixed(2),+g.b.toFixed(2),T[g.s][0],T[g.s][1]]);
+    CH.base=base;if(tabMode==='chords')tabMsg(base.some(c=>c[2]>=0)?'':'Non ho trovato accordi in questo brano');saveCur({chordsBase:base})}
+  catch(e){console.error(e);if(tabMode==='chords')tabMsg('Non riesco a trovare gli accordi di questo brano')}finally{if(live())CH.busy=false}}
+/* diteggiature per chitarra (dal Mi basso al Mi cantino, -1 = corda da non suonare) */
+const G_OPEN={'0,0':[-1,3,2,0,1,0],'2,0':[-1,-1,0,2,3,2],'4,0':[0,2,2,1,0,0],'7,0':[3,2,0,0,0,3],'9,0':[-1,0,2,2,2,0],'2,1':[-1,-1,0,2,3,1],'4,1':[0,2,2,0,0,0],'9,1':[-1,0,2,2,1,0]};
+function gShape(r,q){const o=G_OPEN[r+','+q];if(o)return{fr:o,barre:0};const fe=(r-4+12)%12||12,fa=(r-9+12)%12||12;
+  if(fe<=fa)return{fr:q?[fe,fe+2,fe+2,fe,fe,fe]:[fe,fe+2,fe+2,fe+1,fe,fe],barre:fe,from:0};return{fr:q?[-1,fa,fa+2,fa+2,fa+1,fa]:[-1,fa,fa+2,fa+2,fa+2,fa],barre:fa,from:1}}
+function bassRoot(r){const o=[['E',4],['A',9],['D',2]].map(([s,op])=>({s,f:(r-op+12)%12})).sort((x,y)=>x.f-y.f);return{s:o[0].s,f:o[0].f,alt:o[1].s,af:o[1].f}}
+function drawChordBox(g,x,y,w,h,r,q,big){const sh=gShape(r,q),fr=sh.fr,used=fr.filter(v=>v>0),mn=used.length?Math.min(...used):1,start=mn>3?mn:1,nf=4;
+  const top=y+(big?18:14),sw=w/5,fh=(h-(top-y)-4)/nf;g.strokeStyle=C.fg;g.lineWidth=1;
+  for(let i=0;i<6;i++){g.beginPath();g.moveTo(x+i*sw,top);g.lineTo(x+i*sw,top+nf*fh);g.stroke()}
+  for(let j=0;j<=nf;j++){g.lineWidth=j===0&&start===1?4:1;g.beginPath();g.moveTo(x,top+j*fh);g.lineTo(x+w,top+j*fh);g.stroke()}g.lineWidth=1;
+  if(start>1){g.fillStyle=C.fg;g.font=`600 ${big?13:11}px Figtree,system-ui`;g.textAlign='right';g.fillText(start+'ª',x-4,top+fh*.65)}
+  const rad=Math.min(sw,fh)*.3;g.textAlign='center';g.font=`700 ${big?13:11}px Figtree,system-ui`;
+  if(sh.barre){const j=sh.barre-start;const x0=x+sh.from*sw;g.fillStyle=C.acc;g.beginPath();g.roundRect(x0-rad,top+(j+.5)*fh-rad,(5-sh.from)*sw+2*rad,2*rad,rad);g.fill()}
+  fr.forEach((v,i)=>{const cx=x+i*sw;if(v<0){g.fillStyle=C.dim;g.fillText('×',cx,top-4)}else if(v===0){g.strokeStyle=C.fg;g.beginPath();g.arc(cx,top-8,rad*.6,0,Math.PI*2);g.stroke()}
+    else if(v!==sh.barre){g.fillStyle=C.acc;g.beginPath();g.arc(cx,top+(v-start+.5)*fh,rad,0,Math.PI*2);g.fill()}});g.textAlign='left'}
+function chordDraw(cv,o,cur){const dpr=window.devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return null;if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
+  const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle=C.paper;g.fillRect(0,0,w,h);
+  const L=CH.base||[];const lane=Math.min(o.big?64:52,h*.32),pxs=o.pxs*.7,cx=Math.round(w*o.cx),t0=cur-cx/pxs,t1=t0+w/pxs;let ai=-1;
+  if(loopA!=null&&loopB!=null){g.fillStyle=C.acc;g.globalAlpha=.12;g.fillRect(cx+(loopA-cur)*pxs,0,(loopB-loopA)*pxs,lane+8);g.globalAlpha=1}
+  L.forEach((c,i)=>{const[a,b,r0,q]=c;if(a<=cur&&cur<b)ai=i;if(r0<0||b<t0||a>t1)return;const r=((r0+tr)%12+12)%12,x=cx+(a-cur)*pxs,xe=cx+(b-cur)*pxs,on=a<=cur&&cur<b;
+    g.fillStyle=on?C.acc:C.surf;g.strokeStyle=C.line;g.beginPath();g.roundRect(x+1,6,Math.max(6,xe-x-2),lane,8);g.fill();g.stroke();
+    if(xe-x>28){g.fillStyle=on?C.accInk:(b<cur?C.dim:C.fg);g.font=`700 ${o.big?20:16}px Figtree,system-ui`;g.save();g.beginPath();g.rect(x,6,xe-x,lane);g.clip();g.fillText(chName(r,q),Math.max(x+8,Math.min(8,xe-80)),6+lane/2+6);g.restore()}});
+  g.fillStyle=C.mute;g.fillRect(cx-1,2,2,lane+8);
+  /* sotto: accordo attuale e il prossimo */
+  let ni=-1;for(let i=Math.max(0,ai+1);i<L.length;i++)if(L[i][2]>=0&&L[i][0]>=cur){ni=i;break}
+  const area=h-lane-16,y0=lane+14;const show=(c,x,bw,big)=>{if(!c||c[2]<0){g.fillStyle=C.dim;g.font='600 15px Figtree,system-ui';g.fillText(big?'(pausa)':'',x,y0+20);return}
+    const r=((c[2]+tr)%12+12)%12,q=c[3];g.fillStyle=big?C.fg:C.dim;g.font=`800 ${big?(o.big?30:24):(o.big?20:16)}px Figtree,system-ui`;g.fillText(chName(r,q),x,y0+(big?26:20));
+    g.font=`500 ${o.big?14:12}px Figtree,system-ui`;g.fillStyle=C.dim;g.fillText(chNameEn(r,q),x,y0+(big?44:36));
+    if(inst==='guitar'){const dh=Math.min(area-10,big?150:110),dw=Math.min(bw-100,dh*.62);if(dw>40&&dh>50)drawChordBox(g,x+86,y0,dw,dh,r,q,big)}
+    else{const p=bassRoot(r);g.font=`600 ${o.big?17:14}px Figtree,system-ui`;g.fillStyle=big?C.fg:C.dim;g.fillText(`Corda ${p.s}, tasto ${p.f}`,x,y0+(big?70:58));if(big){g.font=`500 ${o.big?14:12}px Figtree,system-ui`;g.fillStyle=C.dim;g.fillText(`(oppure corda ${p.alt}, tasto ${p.af})`,x,y0+90)}}};
+  const half=w*.58;g.fillStyle=C.dim;g.font='600 11px Figtree,system-ui';g.fillText('ORA',12,y0-2);g.fillText('POI',half+8,y0-2);
+  show(ai>=0?L[ai]:null,12,half-20,true);show(ni>=0?L[ni]:null,half+8,w-half-16,false);
+  return ai>=0&&L[ai][2]>=0?L[ai]:null}
 function tabDraw(cv,o,cur){const dpr=window.devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return null;if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
   const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle=C.paper;g.fillRect(0,0,w,h);
   const strs=bassStrings(),n=strs.length,top=o.big?18:28,gap=(h-top-(o.big?16:22))/(n-1),pxs=o.pxs,cx=Math.round(w*o.cx),t0=cur-cx/pxs,t1=t0+w/pxs,r=o.r;
@@ -951,10 +1046,10 @@ function tabDraw(cv,o,cur){const dpr=window.devicePixelRatio||1,w=cv.clientWidth
 $('#five').onchange=e=>{five=e.target.checked;prefSet('five',five?'1':'0');tabRemap()};
 $('#tabZoom').onchange=e=>{tabZoom=+e.target.value;prefSet('tabZoom',tabZoom)};
 $('#sens').onchange=e=>{TB[inst].sens=+e.target.value;bassAnalyze(inst)};
-$('#bRedo').onclick=()=>bassAnalyze(inst);
+$('#bRedo').onclick=()=>tabMode==='chords'?chordAnalyze():bassAnalyze(inst);
 let tabView=prefGet('tabView')||'auto';
 function setTabView(v){tabView=v;prefSet('tabView',v);$('#tvAuto').classList.toggle('on',v==='auto');$('#tvWritten').classList.toggle('on',v!=='auto');$('#tabAutoWrap').hidden=v!=='auto';$('#tabFootAuto').hidden=v!=='auto';$('#tabs').hidden=v==='auto';$('#tabFootWritten').hidden=v==='auto'}
-$('#tvAuto').onclick=()=>setTabView('auto');$('#tvWritten').onclick=()=>setTabView('written');setTabView(tabView);
+$('#tvAuto').onclick=()=>setTabView('auto');$('#tvWritten').onclick=()=>setTabView('written');setTabView(tabView);setTabMode(tabMode);
 /* tablatura scritta a mano */
 let blocks=[];
 function parseTab(){blocks=[];const txt=((song&&song.tab)||'').replace(/\r/g,'');if(!txt.trim())return;let cur=null;const push=()=>{if(cur&&cur.lines.length)blocks.push(cur);cur=null};
@@ -1001,16 +1096,21 @@ function frame(){const t=now();
   karaUpdate(t);updTab(t);sampleMic(t);drawPitch(t);
   if(performance.now()-lastColorT>1000){readColors();lastColorT=performance.now()}
   let active=null;
-  if(!palOn&&tabView==='auto'&&!$('#tabAutoWrap').hidden)active=tabDraw($('#tabCv'),{pxs:120*tabZoom,cx:.28,r:11},t);
-  if(palOn&&palTabOn)active=tabDraw($('#palTab'),{pxs:150*tabZoom,cx:.14,r:15,big:1},t);
-  const txt=active?`${nomeMidi(active[2])} · corda ${bassStrings()[active[3]][0]}, tasto ${active[4]}`:'–';
+  const TD=tabMode==='chords'?chordDraw:tabDraw;
+  if(!palOn&&tabView==='auto'&&!$('#tabAutoWrap').hidden)active=TD($('#tabCv'),{pxs:120*tabZoom,cx:.28,r:11},t);
+  if(palOn&&palTabOn)active=TD($('#palTab'),{pxs:150*tabZoom,cx:.14,r:15,big:1},t);
+  let txt='–';if(active){if(tabMode==='chords'){const r=((active[2]+tr)%12+12)%12;txt=chName(active[2]>=0?r:0,active[3])+' ('+chNameEn(r,active[3])+')'}else txt=`${nomeMidi(active[2])} · corda ${bassStrings()[active[3]][0]}, tasto ${active[4]}`}
   if($('#noteNow').textContent!==txt){$('#noteNow').textContent=txt;$('#noteNow2').textContent=txt}
   requestAnimationFrame(frame)}
 
 /* ================= overlay ================= */
 const openOv=id=>{$(id).hidden=false},closeOv=el=>{el.closest('.ov').hidden=true};
 $$('[data-close]').forEach(b=>b.onclick=()=>closeOv(b));
-$$('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.hidden=true}));
+$$('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o&&!(o.id==='ovLegal'&&prefGet('legal1')!=='1'))o.hidden=true}));
+function legalOpen(){$('#legalX').hidden=prefGet('legal1')!=='1';$('#legalOk').hidden=prefGet('legal1')==='1';openOv('#ovLegal')}
+$('#legalOk').onclick=()=>{prefSet('legal1','1');$('#ovLegal').hidden=true};
+[$('#bLegal'),...$$('.legalLink')].forEach(a=>a.onclick=e=>{e.preventDefault();legalOpen()});
+if(prefGet('legal1')!=='1')setTimeout(legalOpen,300);
 $('#bHelp').onclick=()=>openOv('#ovHelp');
 $('#bLib').onclick=()=>{renderLib();renderDir();openOv('#ovLib')};
 if(location.protocol==='content:'||(isMobileOpen()&&location.protocol==='file:')){const w=$('#originWarn');w.hidden=false;w.innerHTML='<b>Hai aperto l\'app come file</b> (per esempio da WhatsApp). Così il telefono può bloccare il salvataggio dei brani e i collegamenti ai servizi. Per il telefono e il tablet aprila dal suo indirizzo web: <a href="https://dinopegaso77-sys.github.io/fonica-infinity/" target="_blank" rel="noopener">dinopegaso77-sys.github.io/fonica-infinity</a>'}
@@ -1634,7 +1734,7 @@ let shopMode='artist',shopAudio=null;
 $$('#shopMode button').forEach(b=>b.onclick=()=>{shopMode=b.dataset.m;$$('#shopMode button').forEach(x=>x.classList.toggle('on',x===b));$('#shopQ').placeholder=shopMode==='artist'?'Per esempio: Mina':'Per esempio: Albachiara';$('#shopQ').focus()});
 const eur=(p,c)=>p==null||p<0?'':new Intl.NumberFormat('it-IT',{style:'currency',currency:c||'EUR'}).format(p);
 function shopLinks(x){const q=encodeURIComponent(x.artistName+' '+x.trackName);
-  return [['iTunes',x.trackViewUrl,true],['Amazon','https://www.amazon.it/s?k='+q+'&i=digital-music'],['Bandcamp','https://bandcamp.com/search?q='+q+'&item_type=t'],['Qobuz','https://www.qobuz.com/it-it/search?q='+q],['YouTube','https://www.youtube.com/results?search_query='+q]]}
+  return [['Amazon Music','https://www.amazon.it/s?k='+q+'&i=digital-music',true],['iTunes',x.trackViewUrl],['Bandcamp','https://bandcamp.com/search?q='+q+'&item_type=t'],['Qobuz','https://www.qobuz.com/it-it/search?q='+q],['YouTube','https://www.youtube.com/results?search_query='+q]]}
 async function shopSearch(){const q=$('#shopQ').value.trim();const st=$('#shopStatus'),el=$('#shopList');if(!q){st.textContent='Scrivi il nome di un artista o di una canzone.';return}
   st.textContent='Cerco…';el.innerHTML='';
   const url='https://itunes.apple.com/search?term='+encodeURIComponent(q)+'&media=music&entity=song&country=IT&lang=it_it&limit=60'+(shopMode==='artist'?'&attribute=artistTerm':'&attribute=songTerm');
@@ -1757,7 +1857,7 @@ async function loadDemo(){if(!demoBufs){demoBufs={};for(const k of ['vocals','ba
 /* ================= avvio ================= */
 window.addEventListener('resize',()=>$$('.kpanel').forEach(P=>delete P.dataset.ci));
 /* donazioni: link PayPal di chi distribuisce l'app (vuoto = pulsante nascosto) */
-const DONATE_URL='https://www.paypal.com/donate/?business=dinoaddis77%40libero.it&currency_code=EUR&item_name=Sostieni+Fonica+Infinity';
+const DONATE_URL='https://www.paypal.me/fonicainfinity';
 if(DONATE_URL){['#bDonate','#bDonate2'].forEach(s=>{const a=$(s);a.href=DONATE_URL});$('#bDonate').hidden=false;$('#donateBox').hidden=false}
 readColors();loadDir();rpLoad();mvLoad();
 (async()=>{const last=prefGet('last');let opened=false;
