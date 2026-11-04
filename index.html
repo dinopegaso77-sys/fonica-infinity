@@ -1213,8 +1213,8 @@ function sepFail(e){const m=String(e&&e.message||e);sepEnd();$('#spBar').classLi
     NET:'Non riesco a contattare RunPod. Controlla internet; dentro l\'app Claude il collegamento è bloccato, apri FonicaInfinity.html nel browser del PC.',
     AUTH:'RunPod rifiuta la chiave API: controlla di averla copiata tutta in Libreria → RunPod.',
     NOEP:'RunPod non trova l\'endpoint: controlla l\'ID in Libreria → RunPod.',
-    LONG:'La traccia è troppo lunga per una sola richiesta (massimo circa 7 minuti).',
-    BIG:'Il file è troppo grande per RunPod (massimo circa 14 MB). Usa un MP3 a 192 o 256 kbps.'}[m]
+    LONG:'La traccia è troppo lunga per una sola richiesta.',
+    BIG:'Il brano è troppo lungo per RunPod (massimo circa 9 minuti).',MP3:'Non riesco a comprimere il brano: controlla la connessione a internet e riprova.'}[m]
     ||(/^MVERR:/.test(m)?'Il servizio gratuito ha dato un errore: '+m.slice(6,200):/import|module|Failed to fetch dynamically/i.test(m)?'Non riesco ad avviare il motore di calcolo. Apri FonicaInfinity.html con Chrome o Edge sul PC, con internet attivo.'
     :/memory|alloc|OOM|Array buffer/i.test(m)?'Memoria insufficiente per questo brano. Chiudi altre schede o prova un brano più corto.':'Qualcosa è andato storto: '+(m.length>260?'… '+m.slice(-260):m));
   spShow(msg,null);$('#spBar').classList.remove('ind');$('#spPct').textContent=''}
@@ -1382,18 +1382,32 @@ if($('#rpConnect'))$('#rpConnect').onclick=async()=>{const key=$('#rpKey').value
     if(blocked&&window.self!==window.top)rpSay('Dentro l\'app Claude il collegamento è bloccato: apri FonicaInfinity.html con Chrome o Edge sul PC.','err');
     else{rpSay(blocked?'Non sono riuscito a preparare RunPod da qui. Nessun problema: segui il collegamento a mano qui sotto.':'RunPod ha risposto con un errore ('+esc(String(e.message||e))+'). Puoi fare il collegamento a mano qui sotto.','err');$('#rpManual').hidden=false;$('#rpImgShow').textContent=rpImage()}}
   finally{btn.disabled=false}};
+/* RunPod accetta al massimo circa 10 MB per richiesta: i file più grandi vengono ricompressi in MP3 qui nel browser */
+const RP_MAX=7.0e6;
+const MP3_WORKER="importScripts('https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js');onmessage=e=>{const{L,R,sr,kbps}=e.data;const enc=new lamejs.Mp3Encoder(R?2:1,sr,kbps);const n=L.length,B=1152,out=[];const l=new Int16Array(B),r=new Int16Array(B);"+
+ "const cv=(a,o,d,len)=>{for(let i=0;i<len;i++){const x=a[o+i];d[i]=x<0?Math.max(-1,x)*32768:Math.min(1,x)*32767}};"+
+ "for(let o=0,k=0;o<n;o+=B,k++){const len=Math.min(B,n-o);cv(L,o,l,len);if(R)cv(R,o,r,len);const m=R?enc.encodeBuffer(l.subarray(0,len),r.subarray(0,len)):enc.encodeBuffer(l.subarray(0,len));if(m.length)out.push(new Uint8Array(m));if(k%300===0)postMessage({p:o/n})}"+
+ "const f=enc.flush();if(f.length)out.push(new Uint8Array(f));postMessage({done:new Blob(out,{type:'audio/mpeg'})})}";
+function toMp3(buf,kbps,onp,mono){return new Promise((ok,ko)=>{let w;try{w=new Worker(URL.createObjectURL(new Blob([MP3_WORKER],{type:'text/javascript'})))}catch(e){ko(e);return}
+  const L=new Float32Array(buf.getChannelData(0)),R=!mono&&buf.numberOfChannels>1?new Float32Array(buf.getChannelData(1)):null;
+  w.onmessage=e=>{if(e.data.done){w.terminate();ok(e.data.done)}else if(onp)onp(e.data.p)};w.onerror=e=>{w.terminate();ko(new Error('MP3'))};
+  w.postMessage({L,R,sr:buf.sampleRate,kbps},R?[L.buffer,R.buffer]:[L.buffer])})}
+async function shrinkForRp(ab,name,onp){if(ab.byteLength<=RP_MAX)return{ab,name};
+  const buf=await decode(ab);const kb=[192,160,128,112,96].find(k=>buf.duration*k*125<RP_MAX*.95);if(!kb)throw new Error('BIG');
+  const blob=await toMp3(buf,kb,onp);return{ab:await blob.arrayBuffer(),name:name.replace(/\.[^.]*$/,'')+'.mp3'}}
 function abToB64(ab){return new Promise((ok,ko)=>{const fr=new FileReader();fr.onload=()=>ok(String(fr.result).split(',')[1]||'');fr.onerror=()=>ko(fr.error);fr.readAsDataURL(new Blob([ab]))})}
 function b64ToAb(s){const bin=atob(s);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u.buffer}
 async function sepRunpod(){if(!rp.key||!rp.ep){openOv('#ovLib');toast('Inserisci chiave API e ID endpoint di RunPod');return}
   sepStart([['lrc','Testo online'],['send','Invio'],['queue','In coda'],['split','Separazione'],['down','Ricezione'],['save','Salvataggio']]);sepInfo.ep='runpod';
-  try{if(sepFileObj.size>14.5e6)throw new Error('BIG');
+  try{
     spShow('Invio il brano a RunPod…',null,'send');
     const ab=await sepFileObj.arrayBuffer();const meta=readID3(ab);let dur=0;try{dur=(await decode(ab)).duration}catch(e){}
     const found=await sepLrcCheck(meta,dur);if(sepAbort)return;
     const needAsr=rp.asr!==false&&!(found&&(found.kind==='synced'||found.kind==='instr'));
     spShow(needAsr?'Invio il brano a RunPod (separo e trascrivo il testo)…':'Invio il brano a RunPod (il testo c\'è già, separo solo le tracce)…',null,'send');
-    const b64=await abToB64(ab);if(sepAbort)return;
-    const out=await rpCall({audio_b64:b64,filename:sepFileObj.name,model:rp.model,bitrate:128,transcribe:needAsr,language:rp.lang||'',prompt:(meta.lyrics||'').slice(0,700)});
+    let up={ab,name:sepFileObj.name};if(ab.byteLength>RP_MAX){spShow('Il file è grande: lo comprimo per RunPod…',0,'send');up=await shrinkForRp(ab,sepFileObj.name,p=>spShow('Comprimo il brano per RunPod… '+Math.round(p*100)+'%',p,'send'));if(sepAbort)return;spShow('Invio il brano a RunPod…',null,'send')}
+    const b64=await abToB64(up.ab);if(sepAbort)return;
+    const out=await rpCall({audio_b64:b64,filename:up.name,model:rp.model,bitrate:128,transcribe:needAsr,language:rp.lang||'',prompt:(meta.lyrics||'').slice(0,700)});
     if(sepAbort||!out)return;
     if(!out||out.error)throw new Error((out&&out.error)||'RunPod non ha restituito le tracce');
     sepInfo.extra='';spShow('Ricevo le tracce…',null,'down');
@@ -1458,9 +1472,9 @@ async function asrRun(force){if(!song)return;
   const src=stems.vocals||stems.mix||stems.other;if(!src){toast('Questo brano non ha audio da trascrivere');return}
   if(!stems.vocals)toast('Senza la voce separata la trascrizione è meno precisa');
   pause();sepStart([['send','Invio'],['queue','In coda'],['split','Trascrizione'],['save','Testo']],'Trascrivo il testo',song.title||'');sepInfo.ep='runpod';
-  try{spShow('Preparo la traccia della voce…',null,'send');const wav=await mono16k(src);if(wav.byteLength>14.5e6)throw new Error('LONG');
+  try{spShow('Preparo la traccia della voce…',null,'send');let wav=await mono16k(src),wname='vocals.wav';if(wav.byteLength>RP_MAX){const sr=16000,b=await decode(wav);const kb=[64,48,32].find(k=>b.duration*k*125<RP_MAX*.95);if(!kb)throw new Error('LONG');spShow('Comprimo la voce…',0,'send');wav=await (await toMp3(b,kb,p=>spShow('Comprimo la voce… '+Math.round(p*100)+'%',p,'send'),true)).arrayBuffer();wname='vocals.mp3'}
     const b64=await abToB64(wav);if(sepAbort)return;spShow('Invio la voce a RunPod…',null,'send');
-    const out=await rpCall({mode:'transcribe',audio_b64:b64,filename:'vocals.wav',language:rp.lang||'',prompt:K.lines.map(l=>l.s).join(' ').slice(0,700)});
+    const out=await rpCall({mode:'transcribe',audio_b64:b64,filename:wname,language:rp.lang||'',prompt:K.lines.map(l=>l.s).join(' ').slice(0,700)});
     if(sepAbort||!out)return;if(out.error)throw new Error(out.error);
     const asr=out.lyrics;if(!asr||!asr.segments||!asr.segments.length)throw new Error('Whisper non ha riconosciuto parole in questa traccia');
     spShow('Metto a tempo il testo…',1,'save');song.asr=asr;await saveCur({asr});
