@@ -166,6 +166,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .sepmsg{background:var(--surface);border:2px solid var(--mute);border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.55;color:var(--fg)}
 .sepmsg b{color:var(--mute)}
 .legal{font-size:16px;line-height:1.55;max-height:58vh;overflow:auto;padding-right:4px}.legal p{margin:0 0 10px}.legal ul{margin:0 0 10px;padding-left:22px}.legal li{margin-bottom:6px}
+#ovDonate a.chip{text-decoration:none;font-size:18px;min-width:64px;justify-content:center}#ovDonate a.chip.pri{color:var(--accent-ink)}#ovDonate a.chip:not(.pri){color:var(--fg)}
 .legalnote{font-size:14px;color:var(--steel);margin:4px 0}.legalnote a{color:inherit;font-weight:600}
 .recov{position:fixed;inset:0;z-index:70;background:#000;color:#fff;display:flex;flex-direction:column}
 #recCv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
@@ -550,6 +551,12 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <p><b>Servizi esterni.</b> I brani inviati a MVSEP o al proprio account RunPod per la separazione, e le ricerche su LRCLIB e iTunes, seguono le condizioni di quei servizi. I file restano sul tuo dispositivo, salvo quelli che scegli di inviare per la separazione.</p>
   </div>
   <div class="row"><button class="chip pri" id="legalOk">Ho capito e accetto</button></div>
+</div></div>
+<div class="ov" id="ovDonate" hidden><div class="sheet">
+  <div class="row"><h3 class="grow">Dona per far crescere Fonica Infinity</h3><button class="mini" data-close>Chiudi</button></div>
+  <p>Fonica Infinity è gratuita. Scegli quanto donare: si apre PayPal con l'importo già pronto, tu controlli e confermi con <b>Invia</b>.</p>
+  <div class="row donamt"><a class="chip pri" data-eur="2" target="_blank" rel="noopener">2 €</a><a class="chip pri" data-eur="5" target="_blank" rel="noopener">5 €</a><a class="chip pri" data-eur="10" target="_blank" rel="noopener">10 €</a><a class="chip pri" data-eur="20" target="_blank" rel="noopener">20 €</a></div>
+  <div class="row"><input class="inp" id="donOther" type="number" min="1" step="1" inputmode="numeric" placeholder="Altro importo" aria-label="Altro importo in euro" style="max-width:160px"><a class="chip" id="donOtherGo" target="_blank" rel="noopener">Dona questo importo</a></div>
 </div></div>
 <div class="ov" id="ovHelp" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Come si usa</h3><button class="mini" data-close>Chiudi</button></div>
@@ -1858,7 +1865,10 @@ async function loadDemo(){if(!demoBufs){demoBufs={};for(const k of ['vocals','ba
 window.addEventListener('resize',()=>$$('.kpanel').forEach(P=>delete P.dataset.ci));
 /* donazioni: link PayPal di chi distribuisce l'app (vuoto = pulsante nascosto) */
 const DONATE_URL='https://www.paypal.me/fonicainfinity';
-if(DONATE_URL){['#bDonate','#bDonate2'].forEach(s=>{const a=$(s);a.href=DONATE_URL});$('#bDonate').hidden=false;$('#donateBox').hidden=false}
+const donUrl=e=>DONATE_URL.replace(/\/$/,'')+'/'+e+'EUR';
+$$('#ovDonate [data-eur]').forEach(a=>a.href=donUrl(a.dataset.eur));
+const donOth=()=>{const v=Math.round(+$('#donOther').value||0);$('#donOtherGo').href=v>=1?donUrl(v):DONATE_URL};$('#donOther').oninput=donOth;donOth();
+if(DONATE_URL){['#bDonate','#bDonate2'].forEach(s=>{const a=$(s);a.href=DONATE_URL;a.removeAttribute('target');a.onclick=e=>{e.preventDefault();$$('.ov').forEach(o=>{if(o.id!=='ovDonate')o.hidden=true});openOv('#ovDonate')}});$('#bDonate').hidden=false;$('#donateBox').hidden=false}
 readColors();loadDir();rpLoad();mvLoad();
 (async()=>{const last=prefGet('last');let opened=false;
   if(last&&last!=='demo'){const s=await dbGet(last);if(s){await openStored(last);opened=!!song}}
