@@ -919,12 +919,14 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <div class="stsec"><h5>Video</h5>
       <div class="pseg" id="stBg"><span>Sfondo</span><div class="seg"><button data-v="rec">Come registrato</button><button data-v="real">Vero</button><button data-v="clothes">Colore vestiti</button><button data-v="blur">Sfocato</button><button data-v="studio">Studio</button><button data-v="white">Bianco</button></div></div>
       <div class="pseg" id="stBeauty"><span>Trucco</span><div class="seg"><button data-v="0">No</button><button data-v="0.35">Leggero</button><button data-v="0.6">Più bello</button></div></div>
+      <div class="lagrow"><span class="lbl">Sincronia labbra (video e audio)</span><button class="mini" data-av="-40">−40</button><button class="mini" data-av="-10">−10</button><input type="range" id="stAv" min="-800" max="800" step="10" value="0" aria-label="Sincronia tra labbra e audio in millisecondi"><button class="mini" data-av="10">+10</button><button class="mini" data-av="40">+40</button><b id="stAvV">0 ms</b></div>
+      <span class="rechint">Se nel video finale le labbra si muovono <b>prima</b> della voce, aumenta; se si muovono <b>dopo</b>, diminuisci. Poi ricrea il video.</span>
       <span class="rechint" id="stVidNote">Con uno sfondo diverso da «Come registrato» il video viene rifinito alla fine: bordi più puliti, trucco solo sulla pelle e colori più vivi.</span>
     </div>
     <div class="row" style="justify-content:center"><button class="chip pri" id="recFix">Crea il video finale</button><button class="chip" id="recOrig" hidden>Torna all'originale</button></div>
     <div class="rpmsg" id="recMsg"></div>
     <div class="stsec" id="fbBox" hidden><h5>Com'è venuto? Me lo segno e la prossima volta faccio meglio</h5>
-      <div class="row" style="gap:6px"><button class="mini fb" data-fb="ok">👍 Bene</button><button class="mini fb" data-fb="metal">Gracchia / metallico</button><button class="mini fb" data-fb="bg">Sfondo instabile</button><button class="mini fb" data-fb="late">Voce in ritardo</button><button class="mini fb" data-fb="early">Voce in anticipo</button><button class="mini fb" data-fb="low">Voce troppo bassa</button><button class="mini fb" data-fb="high">Voce troppo alta</button></div>
+      <div class="row" style="gap:6px"><button class="mini fb" data-fb="ok">👍 Bene</button><button class="mini fb" data-fb="metal">Gracchia / metallico</button><button class="mini fb" data-fb="bg">Sfondo instabile</button><button class="mini fb" data-fb="late">Voce in ritardo</button><button class="mini fb" data-fb="early">Voce in anticipo</button><button class="mini fb" data-fb="lipsfirst">Labbra prima della voce</button><button class="mini fb" data-fb="lipsafter">Labbra dopo la voce</button><button class="mini fb" data-fb="low">Voce troppo bassa</button><button class="mini fb" data-fb="high">Voce troppo alta</button></div>
       <span class="rechint" id="lrnInfo"></span></div>
     <div class="row" style="justify-content:center">
       <button class="chip pri" id="recSave">Salva sul telefono</button>
@@ -2008,7 +2010,7 @@ function recLyrics(g,W,H,t){const L=K.lines;if(!L.length)return;const tt=t-K.off
       for(const w of r){g.globalAlpha=alpha;g.shadowColor='rgba(0,0,0,.85)';g.shadowBlur=size*.25;g.fillStyle='#ffffff';g.fillText(w.s,x,yy);g.shadowBlur=0;
         if(prog){const p=Math.max(0,Math.min(1,(tt-w.t)/Math.max(.08,w.e-w.t)));if(p>0){g.save();g.beginPath();g.rect(x,yy-size,w.ww*p,size*2);g.clip();g.fillStyle=hi;g.fillText(w.s,x,yy);g.restore()}}
         x+=w.ww+sp}yy+=lh}g.globalAlpha=1;return rows.length*lh};
-  const yC=H*(H>W?0.64:0.7);{const bh=base*3.6;const gr=g.createLinearGradient(0,yC-bh*.75,0,yC+bh*1.05);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(.22,'rgba(8,14,22,.55)');gr.addColorStop(.78,'rgba(8,14,22,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,yC-bh*.75,W,bh*1.8)}
+  const yC=H*(H>W?0.79:0.8);{const bh=base*3.6;const gr=g.createLinearGradient(0,yC-bh*.75,0,yC+bh*1.05);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(.22,'rgba(8,14,22,.55)');gr.addColorStop(.78,'rgba(8,14,22,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,yC-bh*.75,W,bh*1.8)}
   if(i>=0&&tt<=L[i].e+1.2){const h=drawLine(L[i],yC,base,1,true);if(L[i+1])drawLine(L[i+1],yC+h/2+base*1.1,Math.round(base*.78),.75,false)}
   else{const n=L[i+1];if(n){drawLine(n,yC,Math.round(base*.9),.85,false);const left=n.t-tt;if(left>0&&left<=3.2){g.font=`700 ${base}px sans-serif`;g.textAlign='center';g.fillStyle=hi;g.fillText('● '.repeat(Math.max(1,Math.ceil(left-.2))).trim(),W/2,yC-base*1.6)}}}}
 /* ===== effetti video: trucco (pelle liscia e luminosa) e sfondo in tinta unita ===== */
@@ -2164,15 +2166,18 @@ const LRN={log:(()=>{try{return JSON.parse(prefGet('reclog')||'[]')}catch(e){ret
   count(k){return this.mine().slice(-8).filter(r=>r.fb&&r.fb.includes(k)).length},
   smooth(){return Math.min(.8,.5+this.count('bg')*.1)},
   vocMul(){return Math.pow(1.15,this.count('low'))/Math.pow(1.15,this.count('high'))},
-  metal(){return this.count('metal')>0}};
+  metal(){return this.count('metal')>0},
+  /* sincronia labbra: ultimo valore usato su questo dispositivo, corretto dai giudizi */
+  av(){const m=this.mine().filter(r=>r.av!=null).slice(-8);if(!m.length)return 0;const last=m[m.length-1];let v=last.av;if(last.fb&&last.fb.includes('lipsfirst'))v+=80;if(last.fb&&last.fb.includes('lipsafter'))v-=80;return Math.max(-800,Math.min(800,v))}};
 function lrnRecord(){const tune=+($$('#recTune button.on')[0]||{dataset:{v:0}}).dataset.v;const r={t:Date.now(),dev:LRN.dev,song:song&&song.title,lagAuto:R.lagC?Math.round(R.lagC.lag*1000):null,lagHow:R.lagC&&R.lagC.how,lagFinal:Math.round(+$('#stLag').value),
-  manual:R.lagMan!=null,preset:ST.preset,voc:ST.voc,tune,dbl:ST.dbl,bg:ST.bg,ai:ST.ai,echo:$('#recEcho').checked,fb:[]};LRN.log.push(r);LRN.save();R.lrn=r;$('#fbBox').hidden=false;$$('.fb').forEach(b=>b.classList.remove('on'));lrnInfo()}
+  manual:R.lagMan!=null,av:+$('#stAv').value,preset:ST.preset,voc:ST.voc,tune,dbl:ST.dbl,bg:ST.bg,ai:ST.ai,echo:$('#recEcho').checked,fb:[]};LRN.log.push(r);LRN.save();R.lrn=r;$('#fbBox').hidden=false;$$('.fb').forEach(b=>b.classList.remove('on'));lrnInfo()}
 function lrnInfo(){const n=LRN.mine().length,b=LRN.lagBias(),parts=[];if(n)parts.push(n+' registrazion'+(n>1?'i':'e')+' su questo dispositivo');if(b)parts.push('sincronia corretta di '+(b>0?'+':'')+b+' ms rispetto alla misura');
-  if(LRN.count('bg'))parts.push('sfondo più stabile');if(LRN.metal())parts.push('effetti più delicati (niente autotune e coro)');const vm=LRN.vocMul();if(Math.abs(vm-1)>.01)parts.push('voce '+(vm>1?'più alta':'più bassa'));
+  {const a=LRN.av();if(a)parts.push('sincronia labbra '+(a>0?'+':'')+a+' ms')}if(LRN.count('bg'))parts.push('sfondo più stabile');if(LRN.metal())parts.push('effetti più delicati (niente autotune e coro)');const vm=LRN.vocMul();if(Math.abs(vm-1)>.01)parts.push('voce '+(vm>1?'più alta':'più bassa'));
   $('#lrnInfo').textContent=parts.length?'Ho imparato: '+parts.join(' · ')+'.':''}
 $$('.fb').forEach(b=>b.onclick=()=>{if(!R.lrn)return;const k=b.dataset.fb;const f=R.lrn.fb;const i=f.indexOf(k);if(i>=0)f.splice(i,1);else{if(k==='ok')f.length=0;else{const j=f.indexOf('ok');if(j>=0)f.splice(j,1)}f.push(k)}
   $$('.fb').forEach(x=>x.classList.toggle('on',f.includes(x.dataset.fb)));LRN.save();lrnInfo();
   if(k==='metal'&&f.includes('metal'))$('#recMsg').textContent='Segnato. Prova: Autotune «No», «Raddoppio» a zero, e la prossima volta registra con le cuffie e senza «Filtro anti-eco». Poi «Crea il video finale».';
+  if((k==='lipsfirst'||k==='lipsafter')&&f.includes(k)){const v=Math.max(-800,Math.min(800,+$('#stAv').value+(k==='lipsfirst'?80:-80)));avSet(v);$('#recMsg').textContent='Ho spostato la «Sincronia labbra» a '+v+' ms: premi «Crea il video finale» per riprovare. Me lo ricordo per le prossime registrazioni.'}
   if(k==='bg'&&f.includes('bg'))$('#recMsg').textContent='Segnato: dalla prossima volta la sagoma viene più stabile. Per questo video scegli «Bianco» (o un altro sfondo) nel riquadro Video e ricrea il video finale.';
   if((k==='late'||k==='early')&&f.includes(k))$('#recMsg').textContent='Segnato. Per questo video sposta la «Sincronia voce» di '+(k==='late'?'+':'-')+'20–40 ms e ricrea il video; dalla prossima volta correggo da solo.'});
 /* ===== STUDIO: effetti sulla voce, anteprima, «Scegli tu per me», video finale ===== */
@@ -2259,7 +2264,9 @@ async function stPrevStart(from){const say=t=>$('#recMsg').textContent=t;try{$('
     $('#stPrev').textContent='■ Ferma l\'anteprima';requestAnimationFrame(stWaveDraw);say('Anteprima: '+(ST.ai&&R.vAi?'voce da studio, ':'')+'effetti dal vivo. L\'autotune si applica nel video finale.')}
   catch(e){console.error(e);say('Anteprima non disponibile: '+(e.message||e))}}
 function stChanged(){stSave();stUI();if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}}
-function stOnFinish(){stPrevStop();PV.pos=0;$('#fbBox').hidden=true;R.lrn=null;$('#recSync').checked=true;lagUI(0);$('#stLagInfo').textContent='(misuro…)';setTimeout(stLagEnsure,400);if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=!R.raw;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
+function avSet(v){v=Math.max(-800,Math.min(800,Math.round(v)));$('#stAv').value=v;$('#stAvV').textContent=(v>0?'+':'')+v+' ms'}
+$('#stAv').oninput=e=>avSet(+e.target.value);$$('[data-av]').forEach(b=>b.onclick=()=>avSet(+$('#stAv').value+ +b.dataset.av));
+function stOnFinish(){avSet(LRN.av());stPrevStop();PV.pos=0;$('#fbBox').hidden=true;R.lrn=null;$('#recSync').checked=true;lagUI(0);$('#stLagInfo').textContent='(misuro…)';setTimeout(stLagEnsure,400);if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=!R.raw;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
 for(const[id,k]of Object.entries(ST_SL))$('#'+id).oninput=e=>{ST[k]=+e.target.value;if(['rev','echo','pres','comp','dbl'].includes(k))ST.preset='';stChanged()};
 $$('#stPreset button').forEach(b=>b.onclick=()=>{ST.preset=b.dataset.p;Object.assign(ST,{sat:0,radio:0},ST_PRE[b.dataset.p]);stChanged()});
 $$('#stBg button').forEach(b=>b.onclick=()=>{ST.bg=b.dataset.v;stSave();stUI()});$$('#stBeauty button').forEach(b=>b.onclick=()=>{ST.beauty=+b.dataset.v;stSave();stUI()});
@@ -2336,9 +2343,10 @@ async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=tru
     const mstr=new MediaStream([cv.captureStream(30).getVideoTracks()[0],...dest.stream.getAudioTracks()]);
     const rec=new MediaRecorder(mstr,R.mime?{mimeType:R.mime,videoBitsPerSecond:5e6,audioBitsPerSecond:256e3}:undefined);const chs=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)chs.push(e.data)};
     const done=new Promise(ok=>rec.onstop=ok);let raf=0,stop=false;const t0=performance.now();
-    const draw=()=>{if(stop)return;const el=(performance.now()-t0)/1000;if(paint){g2.fillStyle='#000';g2.fillRect(0,0,W,H);if(v.videoWidth)paint(g2,v,el);finalOverlay(g2,W,H,R.startSong+el,R.txtRec)}else g2.drawImage(v,0,0,W,H);
+    const draw=()=>{if(stop)return;const el=Math.max(0,(performance.now()-t0)/1000-Math.max(0,-(+$('#stAv').value/1000)));if(paint){g2.fillStyle='#000';g2.fillRect(0,0,W,H);if(v.videoWidth)paint(g2,v,el);finalOverlay(g2,W,H,R.startSong+el,R.txtRec)}else g2.drawImage(v,0,0,W,H);
       say((paint?'Rifinisco il video… ':'Preparo il video… ')+Math.min(99,Math.round(el/dur*100))+'% (tieni lo schermo acceso)');raf=v.requestVideoFrameCallback&&!v.paused?(v.requestVideoFrameCallback(draw),0):requestAnimationFrame(draw)};
-    await v.play();rec.start(1000);as.start();draw();
+    const av=+$('#stAv').value/1000;rec.start(1000);
+    if(av>=0){as.start();draw();if(av>0)await new Promise(r=>setTimeout(r,av*1000));await v.play()}else{await v.play();draw();await new Promise(r=>setTimeout(r,-av*1000));as.start()}
     await new Promise(ok=>{as.onended=ok});stop=true;v.pause();cancelAnimationFrame(raf);rec.stop();await done;URL.revokeObjectURL(v.src);try{seg&&seg.close&&seg.close()}catch(e){}
     R.blob=new Blob(chs,{type:(R.mime||'video/webm').split(';')[0]});recSetUrl(R.blob);$('#recOrig').hidden=false;try{lrnRecord()}catch(e){console.error(e)}
     say('Fatto. '+('Voce spostata di '+Math.round(lag*1000)+' ms ('+how+'). ')+(tune>0?'Autotune applicato. ':'')+(ST.ai?'Voce da studio. ':'')+(paint?'Video rifinito. ':'')+'Ora puoi salvarlo o condividerlo.')}
