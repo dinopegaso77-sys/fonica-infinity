@@ -865,6 +865,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <li><b>Basso e chitarra:</b> in «Opzioni strumento» scegli lo strumento e <b>Note</b> o <b>Accordi</b>. Con Note vedi la tablatura nota per nota (zoom, 5 corde, quante note, «Rifai»); con Accordi vedi gli accordi che scorrono, con il disegno della posizione per la chitarra e la nota da suonare per il basso. In «Scritta» puoi incollare una tablatura tua.</li>
     <li><b>Palco</b> apre lo schermo intero con il testo evidenziato parola per parola e, sotto o accanto, tablatura o accordi. In alto cambi strumento e Note/Accordi; in basso alzi o togli voce, chitarra e basso. Esci con «Esci» o con Esc.</li>
     <li><b>Registra video:</b> canti (e suoni) con la fotocamera e il testo che scorre. Scegli se mettere testo e base nel video, il <b>trucco</b> e lo <b>sfondo</b> (vero, colore dei vestiti, sfocato, <b>Studio</b> o <b>Bianco</b> con il logo in alto). La «Sincronia voce» è automatica. La voce guida (Voce originale «Guida») la senti in cuffia ma non finisce nella registrazione. Senza fotocamera registra la tua esibizione con il testo a schermo.</li>
+    <li><b>Qualità della registrazione</b>: «Leggera» (540p, 24 fotogrammi, circa 12 MB al minuto) per PC e telefoni poco potenti, «Normale» (720p, circa 22 MB al minuto, con rifinitura finale dello sfondo) e «Alta». L'app sceglie da sola e, se il dispositivo fatica, passa a Leggera.</li>
     <li><b>Studio (dopo la registrazione):</b> premi <b>«✨ Scegli tu per me»</b> per una prima regolazione automatica, poi aggiusta a piacere: volume di voce e base, sincronia, autotune, pulizia, stile della voce (Naturale, Studio, Pop, Ballata, Rock, Radio, Eco anni '80) con riverbero, eco, presenza, compressione e raddoppio. «Ascolta l'anteprima» fa sentire gli effetti dal vivo. Con <b>«Voce da studio con RunPod»</b> la voce viene ripulita da rumore, rimbombo e base entrata nel microfono. Nel riquadro Video scegli sfondo e trucco: il video viene rifinito alla fine con più cura. La <b>Sincronia voce</b> si misura da sola al millisecondo (dalla base che entra nel microfono o confrontando la tua voce con l'originale); se non ti convince spostala con il cursore o con −10, −1, +1, +10 ms mentre ascolti l'anteprima. Poi <b>«Crea il video finale»</b> e salvalo o condividilo.</li>
     <li><b>Sala prove</b> (solo su PC, con Chrome o Edge): registrate la band con la scheda audio. «Suona e riconosco» trova l'ingresso di ogni musicista, l'accordatore aiuta chitarra e basso, «Taratura ritardo» misura il ritardo della scheda. Per chitarra e basso, in «🎛 Suono», scegli amplificatore NAM e cassa da <b>TONE3000</b> (serve la chiave pubblica in Impostazioni) o da file .nam/.wav, con overdrive, compressore, equalizzatore, chorus, delay e riverbero. La base suona senza gli strumenti che suonate voi, con click e conteggio. Ogni ingresso finisce su una traccia separata; con la <b>sovraincisione</b> aggiungi altri strumenti dopo. In «Mix e sincronia» trascini le tracce sul grafico per farle combaciare (o usi «Allinea sul colpo» e «Allinea alla base»), applichi gli amplificatori con il re-amp ed esporti il mix (WAV e MP3) e le tracce separate.</li>
     <li>Tastiera: <code>Spazio</code> avvia o mette in pausa (durante la sincronizzazione segna la riga).</li>
@@ -897,6 +898,9 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       <label class="recsl"><span>Musica</span><input type="range" id="recMus" min="0" max="1.5" step="0.05" value="0.8"></label>
       <label class="recsl"><span>Tua voce</span><input type="range" id="recVoc" min="0" max="2.5" step="0.05" value="1.3"></label>
       <label class="recsl"><span>Sincronia voce <i id="recLatV"></i> <input type="checkbox" id="recLatAuto" checked style="vertical-align:-2px"> auto</span><input type="range" id="recLat" min="0" max="500" step="10" value="120"></label>
+    </div>
+    <div class="recrow">
+      <div class="pseg" id="recQ"><span>Qualità</span><div class="seg"><button data-q="leggera">Leggera</button><button data-q="normale">Normale</button><button data-q="alta">Alta</button></div></div><span class="rechint" id="recQInfo"></span>
     </div>
     <div class="recrow">
       <div class="pseg" id="recBeauty"><span>Trucco</span><div class="seg"><button data-v="0">No</button><button data-v="0.3">Leggero</button><button data-v="0.55">Più bello</button></div></div>
@@ -1996,9 +2000,15 @@ $('#bAdd').onclick=addSong;
 /* ================= registra video mentre canti (stile StarMaker) ================= */
 const R={stream:null,facing:'user',rec:null,chunks:[],raf:0,on:false,count:0,t0:0,blob:null,mime:'',musG:null,vocG:null,musD:null,dest:null,micSrc:null,elSrc:null};
 const recLogo=new Image();recLogo.src=document.querySelector('.brand img').src;
-function recSize(){const port=innerHeight>=innerWidth;return port?[720,1280]:[1280,720]}
+/* qualità della registrazione: Leggera per PC e telefoni poco potenti */
+const QP={leggera:{s:540,fps:24,vbr:1.5e6,seg:120,raw:false,mb:12},normale:{s:720,fps:30,vbr:2.8e6,seg:70,raw:true,mb:22},alta:{s:720,fps:30,vbr:5e6,seg:55,raw:true,mb:38}};
+const weakDev=()=>isMobile||(navigator.hardwareConcurrency||4)<=4||(navigator.deviceMemory||8)<=4;
+let QK=prefGet('recQ')||(weakDev()?'leggera':'normale');if(!QP[QK])QK='leggera';const Q=()=>QP[QK];
+/* sempre in verticale (formato da telefono, 9:16), anche dal PC: dalla webcam si prende la parte centrale */
+function recSize(){const s=Q().s,l=Math.round(s*16/9/2)*2;return[s,l]}
+function recQUI(){$$('#recQ button').forEach(b=>b.classList.toggle('on',b.dataset.q===QK));$('#recQInfo').textContent='circa '+Q().mb+' MB al minuto'+(Q().raw?'':' · senza rifinitura finale dello sfondo')}
 async function recCamera(){if(R.stream)R.stream.getTracks().forEach(t=>t.stop());
-  R.noCam=false;const rcA=Object.assign(audCons(),{echoCancellation:$('#recEcho').checked,noiseSuppression:false,autoGainControl:false});try{R.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:R.facing,width:{ideal:1280},height:{ideal:720}},audio:rcA})}
+  R.noCam=false;const rcA=Object.assign(audCons(),{echoCancellation:$('#recEcho').checked,noiseSuppression:false,autoGainControl:false});try{R.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:R.facing,width:{ideal:Q().s*16/9},height:{ideal:Q().s},frameRate:{ideal:Q().fps,max:30}},audio:rcA})}
   catch(e){if(e&&e.name==='NotAllowedError')throw e;R.stream=await navigator.mediaDevices.getUserMedia({audio:rcA});R.noCam=true;toast('Nessuna fotocamera: registro la tua voce e lo strumento, con il testo a schermo')}
   const v=$('#recCam');v.srcObject=R.stream;try{await v.play()}catch(e){}
   const c=ctx();if(R.micSrc)try{R.micSrc.disconnect()}catch(e){}if(R.inN&&R.inN!==R.micSrc)try{R.inN.disconnect()}catch(e){}
@@ -2038,7 +2048,7 @@ async function fxLoadSeg(){if(FX.seg||FX.segLoading||FX.segFail)return;FX.segLoa
     $('#recHint').textContent='Sfondo pronto.'}
   catch(e){console.error(e);FX.segFail=true;FX.bg='0';fxSegUI();$('#recHint').textContent='Non riesco a cambiare lo sfondo su questo dispositivo (serve internet la prima volta).'}
   finally{FX.segLoading=false}}
-function fxSegment(v){const t=performance.now();if(!FX.seg||t-FX.lastSeg<55)return;FX.lastSeg=t;
+function fxSegment(v){const t=performance.now();if(!FX.seg||t-FX.lastSeg<Q().seg)return;FX.lastSeg=t;
   try{FX.seg.segmentForVideo(v,t,res=>{const mk=res.confidenceMasks&&res.confidenceMasks[0];if(!mk)return;const w=mk.width,hh=mk.height,a=mk.getAsFloat32Array();
     if(FX.inv===null){let c=0,e=0,nc=0,ne=0;for(let y=0;y<hh;y++)for(let x=0;x<w;x++){const q=a[y*w+x],dx=Math.abs(x/w-.5),dy=y/hh;if(dx<.15&&dy>.35&&dy<.8){c+=q;nc++}else if(dx>.45&&dy<.3){e+=q;ne++}}FX.inv=(c/nc)<(e/ne)}
     if(!FX.mask||FX.mw!==w||FX.mh!==hh){FX.mask=new ImageData(w,hh);FX.mw=w;FX.mh=hh}const d=FX.mask.data;
@@ -2071,11 +2081,13 @@ function fxDrawCam(g,v,W,H,x,y,dw,dh,mirror){const cam=fxCanvas('cam',W,H),cg=ca
   else{const[r,gg,b]=FX.col.map(Math.round),gr=g.createRadialGradient(W/2,H*.42,Math.min(W,H)*.1,W/2,H/2,Math.max(W,H)*.75);gr.addColorStop(0,`rgb(${Math.min(255,r+28)},${Math.min(255,gg+28)},${Math.min(255,b+28)})`);gr.addColorStop(1,`rgb(${Math.max(0,r-22)},${Math.max(0,gg-22)},${Math.max(0,b-22)})`);g.fillStyle=gr;g.fillRect(0,0,W,H)}
   g.drawImage(tmp,0,0)}
 function fxSegUI(){$$('#recBeauty button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-FX.beauty)<.01));$$('#recBgS button').forEach(b=>b.classList.toggle('on',b.dataset.v===FX.bg))}
+$$('#recQ button').forEach(b=>b.onclick=()=>{if(R.on)return;QK=b.dataset.q;prefSet('recQ',QK);recQUI();if(R.stream)recCamera().catch(()=>{})});
 $$('#recBeauty button').forEach(b=>b.onclick=()=>{FX.beauty=+b.dataset.v;prefSet('recBeauty',b.dataset.v);fxSegUI()});
 $$('#recBgS button').forEach(b=>b.onclick=()=>{FX.bg=b.dataset.v;prefSet('recBg',FX.bg);if(FX.bg!=='0'){FX.segFail=false;FX.colT=0;fxLoadSeg()}fxSegUI()});
-fxSegUI();
+fxSegUI();recQUI();
 let OVL_NOLOGO=false;
-function recDraw(){OVL_NOLOGO=FX.bg==='white'&&!!FX.mask;const cv=$('#recCv');const [W,H]=recSize();if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}const g=cv.getContext('2d');const v=$('#recCam');
+let rdT=0,rdAvg=16,rdSlow=0;
+function recDraw(){const _t0=performance.now();OVL_NOLOGO=FX.bg==='white'&&!!FX.mask;const cv=$('#recCv');const [W,H]=recSize();if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}const g=cv.getContext('2d');const v=$('#recCam');
   g.fillStyle='#000';g.fillRect(0,0,W,H);
   if(v.videoWidth){const s=Math.max(W/v.videoWidth,H/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;fxDrawCam(g,v,W,H,(W-dw)/2,(H-dh)/2,dw,dh,R.facing==='user')}
   const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);
@@ -2088,6 +2100,7 @@ function recDraw(){OVL_NOLOGO=FX.bg==='white'&&!!FX.mask;const cv=$('#recCv');co
   g.font=`600 ${Math.round(u*.032)}px Figtree,sans-serif`;g.textAlign='right';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=6;g.fillText((song&&song.title)||'',W-u*.04,H-u*.04);g.shadowBlur=0;g.globalAlpha=1;
   if(R.count>0){g.font=`800 ${Math.round(u*.32)}px "Josefin Sans",sans-serif`;g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=20;g.fillText(String(R.count),W/2,H*.42);g.shadowBlur=0}
   if(R.on)$('#recTime').textContent=fmt((Date.now()-R.t0)/1000);
+  {const dt=performance.now()-_t0;rdAvg=rdAvg*.92+dt*.08;if(!R.on&&QK!=='leggera'&&rdAvg>28){if(++rdSlow>90){rdSlow=0;QK='leggera';prefSet('recQ',QK);recQUI();toast('Il dispositivo fatica: passo alla qualità Leggera');recCamera().catch(()=>{})}}else rdSlow=Math.max(0,rdSlow-1)}
   R.raf=requestAnimationFrame(recDraw)}
 async function recOpen(){if(!song){toast('Apri prima un brano');return}
   if(!navigator.mediaDevices||!window.MediaRecorder){toast(window.self!==window.top?'Qui la fotocamera è bloccata: apri Fonica Infinity dal suo indirizzo web':'Questo browser non permette di registrare video');return}
@@ -2099,7 +2112,7 @@ async function recOpen(){if(!song){toast('Apri prima un brano');return}
   recVoxUI();recLevels();cancelAnimationFrame(R.raf);R.raf=requestAnimationFrame(recDraw);
   try{const el=$('#recOv');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el)}catch(e){}}
 function recClose(){if(R.monG)R.monG.gain.value=0;if(R.on)recStop();cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
-function recMime(){for(const m of ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'])if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))return m;return ''}
+function recMime(){for(const m of ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=h264,opus','video/mp4','video/webm;codecs=vp8,opus','video/webm','video/webm;codecs=vp9,opus'])if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))return m;return ''}
 /* voce guida separata: in cuffia sì, nella registrazione no */
 async function recGuideOn(){R.guideBuf=null;R.guideRec=false;if(!stems.vocals)return;const g=gains.vocals;if(g.mute||g.vol<=0||g.vol>=.9)return;
   R.guideVol=g.vol;R.guideRec=true;g.vol=0;await rebuildMix();for(let i=0;i<200&&(mixBusy||mixPend);i++)await new Promise(r=>setTimeout(r,50));
@@ -2111,12 +2124,12 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   $('#recGo').disabled=true;await recGuideOn();
   if($('#recFromStart').checked)seek(0);loopA=loopB=null;updAB();
   $('#recGo').disabled=true;for(R.count=3;R.count>0;R.count--)await new Promise(r=>setTimeout(r,1000));
-  const vt=$('#recCv').captureStream(30).getVideoTracks()[0];const ms=new MediaStream([vt,...R.dest.stream.getAudioTracks()]);
-  R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:4e6,audioBitsPerSecond:256e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
+  const vt=$('#recCv').captureStream(Q().fps).getVideoTracks()[0];const ms=new MediaStream([vt,...R.dest.stream.getAudioTracks()]);
+  R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:Q().vbr,audioBitsPerSecond:192e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
   R.rec.ondataavailable=e=>{if(e.data&&e.data.size)R.chunks.push(e.data)};R.rec.onstop=recFinish;
   R.vchunks=[];R.vrec=null;try{const at=R.vdest?R.vdest.stream.getAudioTracks():R.stream.getAudioTracks();if(at.length){const vm=['audio/webm;codecs=opus','audio/mp4','audio/webm'].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m));R.vrec=new MediaRecorder(new MediaStream(at),vm?{mimeType:vm,audioBitsPerSecond:256000}:{audioBitsPerSecond:256000});R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
   R.vDec=R.mBuf=R.vAi=R.lagC=null;R.lagMan=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
-  try{const vt2=R.stream.getVideoTracks();if(vt2.length){R.rawch=[];R.rawrec=new MediaRecorder(new MediaStream(vt2),{videoBitsPerSecond:6e6});R.rawrec.ondataavailable=e=>{if(e.data&&e.data.size)R.rawch.push(e.data)};R.rawstop=new Promise(ok=>R.rawrec.onstop=ok)}}catch(e){R.rawrec=null}
+  try{const vt2=Q().raw?R.stream.getVideoTracks():[];if(vt2.length){R.rawch=[];R.rawrec=new MediaRecorder(new MediaStream(vt2),{videoBitsPerSecond:Q().vbr*1.4});R.rawrec.ondataavailable=e=>{if(e.data&&e.data.size)R.rawch.push(e.data)};R.rawstop=new Promise(ok=>R.rawrec.onstop=ok)}}catch(e){R.rawrec=null}
   R.startSong=now();if(R.rawrec)R.rawrec.start(1000);if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');A.addEventListener('playing',recGuideStart,{once:true});play()}
 function recStop(){if(!R.on)return;R.on=false;recGuideOff();$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}try{if(R.rawrec)R.rawrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
 A.addEventListener('ended',()=>{if(R.on)recStop()});
@@ -2354,8 +2367,8 @@ async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=tru
     if(useRaw){try{v.currentTime=Math.min(Math.max(0,lag),Math.max(0,(v.duration||99)-.1));await new Promise(ok=>{v.onseeked=ok;setTimeout(ok,1500)})}catch(e){}}
     const cv=document.createElement('canvas');const [W,H]=[$('#recCv').width,$('#recCv').height];cv.width=W;cv.height=H;const g2=cv.getContext('2d');const paint=useRaw?makeFinalPainter(W,H,seg):null;
     const c=ctx();await c.resume();const dest=c.createMediaStreamDestination();const as=c.createBufferSource();as.buffer=mixed;as.connect(dest);
-    const mstr=new MediaStream([cv.captureStream(30).getVideoTracks()[0],...dest.stream.getAudioTracks()]);
-    const rec=new MediaRecorder(mstr,R.mime?{mimeType:R.mime,videoBitsPerSecond:5e6,audioBitsPerSecond:256e3}:undefined);const chs=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)chs.push(e.data)};
+    const mstr=new MediaStream([cv.captureStream(Q().fps).getVideoTracks()[0],...dest.stream.getAudioTracks()]);
+    const rec=new MediaRecorder(mstr,R.mime?{mimeType:R.mime,videoBitsPerSecond:Q().vbr*1.2,audioBitsPerSecond:192e3}:undefined);const chs=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)chs.push(e.data)};
     const done=new Promise(ok=>rec.onstop=ok);let raf=0,stop=false;const t0=performance.now();
     const draw=()=>{if(stop)return;const el=Math.max(0,(performance.now()-t0)/1000-Math.max(0,-(+$('#stAv').value/1000)));if(paint){g2.fillStyle='#000';g2.fillRect(0,0,W,H);if(v.videoWidth)paint(g2,v,el);finalOverlay(g2,W,H,R.startSong+el,R.txtRec)}else g2.drawImage(v,0,0,W,H);
       say((paint?'Rifinisco il video… ':'Preparo il video… ')+Math.min(99,Math.round(el/dur*100))+'% (tieni lo schermo acceso)');raf=v.requestVideoFrameCallback&&!v.paused?(v.requestVideoFrameCallback(draw),0):requestAnimationFrame(draw)};
