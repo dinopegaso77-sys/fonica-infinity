@@ -158,7 +158,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .chx{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap}
 
 /* overlays */
-.ov{position:fixed;inset:0;background:var(--scrim);display:grid;place-items:center;z-index:40;padding:16px}
+.ov{position:fixed;inset:0;background:var(--scrim);display:grid;place-items:center;z-index:100;padding:16px}
 .sheet{background:var(--surface);border:1px solid var(--line);border-radius:18px;width:min(780px,100%);max-height:calc(100% - 20px);overflow:auto;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
 .sheet h3{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0}
 .sheet h4{font-family:var(--f-display);font-weight:600;font-size:17px;margin:0}
@@ -191,7 +191,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .chip.donate:not(.pri){border-color:var(--accent)}
 .rpguide{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:12px 14px}
 .rpguide>div{flex:1 1 220px;display:flex;flex-direction:column;gap:2px}.rpguide b{font-size:17px}.rpguide span{color:var(--dim);line-height:1.5}
-#ovRpGuide{z-index:45}.guide h4{margin-top:6px}.guide .steps{font-size:16px}
+#ovRpGuide{z-index:105}.guide h4{margin-top:6px}.guide .steps{font-size:16px}
 .gt{border-collapse:collapse;width:100%;font-size:15px}.gt th,.gt td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}.gt th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
 .tablewrap{overflow-x:auto}
 .sheet a:not(.mini){color:var(--accent);font-weight:600}
@@ -254,7 +254,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .shop .buy a,.shop .buy button{font-size:13px;padding:6px 10px;min-height:34px;text-decoration:none;color:var(--fg)}
 .shop .buy a.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .shop .price{font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent)}
-.toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:600;z-index:90;font-size:14px;max-width:calc(100% - 32px);text-align:center}
+.toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:600;z-index:130;font-size:14px;max-width:calc(100% - 32px);text-align:center}
 
 /* sincronizzazione */
 .syncbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:80;background:var(--surface);border:2px solid var(--accent);border-radius:18px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 10px 40px var(--scrim);width:min(640px,calc(100% - 32px))}
@@ -263,7 +263,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .big{min-height:64px;min-width:130px;border-radius:14px;background:var(--accent);color:var(--accent-ink);border:0;font-weight:700;font-size:18px;letter-spacing:.06em}
 
 /* avanzamento separazione */
-.sepcard{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;width:min(380px,calc(100% - 32px));background:var(--surface);border:2px solid var(--accent);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 12px 40px var(--scrim)}
+.sepcard{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:95;width:min(380px,calc(100% - 32px));background:var(--surface);border:2px solid var(--accent);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 12px 40px var(--scrim)}
 .sepcard h4{margin:0;font-family:var(--f-display);font-size:17px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
 .sepcard h4 span{font-family:var(--f-mono);font-size:22px;color:var(--accent)}
 .sepcard .ph{font-size:14px;font-weight:600}
@@ -958,7 +958,7 @@ const fmt=t=>{t=Math.max(0,t||0);return Math.floor(t/60)+':'+String(Math.floor(t
 const ts=t=>{t=Math.max(0,t);const m=Math.floor(t/60),s=t%60;return '['+String(m).padStart(2,'0')+':'+s.toFixed(2).padStart(5,'0')+']'};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const sleep0=()=>new Promise(r=>setTimeout(r,0));
-let toastT;function toast(m){const el=$('#toast');el.textContent=m;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,3200)}
+let toastT;function toast(m){const el=$('#toast');{const host=document.fullscreenElement||document.webkitFullscreenElement||document.body;if(el.parentNode!==host)host.appendChild(el)}el.textContent=m;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,3200)}
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
 /* ================= archivio (IndexedDB in questo browser) ================= */
@@ -1525,7 +1525,9 @@ function frame(){const t=now(),tv=viewT();clickTick();if(performance.now()-LAT.t
   requestAnimationFrame(frame)}
 
 /* ================= overlay ================= */
-const openOv=id=>{$(id).hidden=false},closeOv=el=>{el.closest('.ov').hidden=true};
+/* le finestre si aprono sempre in primo piano, anche sopra Palco e Video a schermo intero */
+const ovHost=()=>document.fullscreenElement||document.webkitFullscreenElement||document.body;
+const openOv=id=>{const o=$(id),host=ovHost();if(o.parentNode!==host||o!==host.lastElementChild)host.appendChild(o);o.hidden=false},closeOv=el=>{el.closest('.ov').hidden=true};
 $$('[data-close]').forEach(b=>b.onclick=()=>closeOv(b));
 $$('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o&&!(o.id==='ovLegal'&&prefGet('legal1')!=='1'))o.hidden=true}));
 function legalOpen(){$('#legalX').hidden=prefGet('legal1')!=='1';$('#legalOk').hidden=prefGet('legal1')==='1';openOv('#ovLegal')}
@@ -2767,7 +2769,7 @@ function salaClose(){if(SA.on)sRecStop();wvStop();$('#salaOv').hidden=true;docum
 function salaInfo(mobile){$('#salaInfoT').textContent=mobile?'Sala prove: solo su PC':'Benvenuto nella Sala prove';
   $('#salaInfoB').innerHTML=mobile?'<p>La <b>Sala prove</b> serve per registrare la band con la scheda audio: più ingressi (voce, chitarra, basso), amplificatori <b>NAM</b> e suoni di <b>TONE3000</b>, tracce separate e mix finale.</p><p>Per ora funziona <b>solo sul computer</b> (Windows o Mac, con Chrome o Edge). Sul telefono e sul tablet trovi «Ascolto e studio» e «Video».</p>'
     :'<ol class="steps"><li><b>Usate le cuffie</b>: con le casse il suono rientra nei microfoni.</li><li><b>«Suona e riconosco»</b>: ogni musicista suona qualche nota e l\'app trova il suo ingresso.</li><li><b>«Taratura ritardo»</b> una volta per scheda audio: avvicina un microfono alle casse, parte un bip e l\'app misura il ritardo al millisecondo.</li><li><b>🎛 Suono</b>: amplificatore NAM e cassa per chitarra e basso (da TONE3000 o da file). Se senti ritardo o gracchi, togli «dal vivo»: l\'amplificatore si applica dopo, con il re-amp.</li><li>All\'inizio della ripresa <b>battete una volta le mani</b>: con «Allinea sul colpo» le tracce combaciano.</li><li>In <b>«Mix e sincronia»</b> trascini le tracce sul grafico, regoli volumi e esporti mix e tracce.</li></ol><p class="snote">Il browser legge al massimo 2 canali per dispositivo audio: per più strumenti collega un altro dispositivo o usa la sovraincisione.</p>';
-  document.body.appendChild($('#ovSalaInfo'));openOv('#ovSalaInfo');$('#salaInfoOk').onclick=()=>{closeOv($('#salaInfoOk'));if(!mobile)prefSet('salaIntro','1');else prefSet('salaInfo1','1')}}
+  openOv('#ovSalaInfo');$('#salaInfoOk').onclick=()=>{closeOv($('#salaInfoOk'));if(!mobile)prefSet('salaIntro','1');else prefSet('salaInfo1','1')}}
 $('#salaX').onclick=salaClose;$('#salaHelp').onclick=()=>salaInfo(false);$$('.sala-tabs button').forEach(b=>b.onclick=()=>sView(b.dataset.sv));
 $('#sAdd').onclick=async()=>{const t=newTrack(SA.tracks.some(x=>x.role==='voce')?(SA.tracks.some(x=>x.role==='chitarra')?(SA.tracks.some(x=>x.role==='basso')?'altro':'basso'):'chitarra'):'voce');const free=SA.chans.find(ch=>!SA.tracks.some(x=>x.dev===ch.key));t.dev=(free||SA.chans[0]||{}).key||'';SA.tracks.push(t);await sBuild(t);sTapBuild();sRender();sSave()};
 $('#sDetect').onclick=sDetect;$('#sCal').onclick=sCalibrate;$('#sRecGo').onclick=sRecStart;
