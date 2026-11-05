@@ -45,6 +45,7 @@ button:disabled{opacity:.45;cursor:default}
 .optrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.optrow[hidden]{display:none}
 .mixer .optarea{border:0;padding:0;background:none}
 .si.addrow{border:2px dashed var(--accent)}
+input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secret]:focus{-webkit-text-security:none}
 .maintabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
 .maintabs button{border:1px solid var(--line);background:var(--raise);border-radius:12px;padding:10px 18px;font-weight:700;font-size:15px;min-height:46px}
 .maintabs button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
@@ -675,7 +676,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
         <li><div><b>Crea un account gratuito su MVSEP</b><span>Serve solo un indirizzo email.</span></div><a class="mini" href="https://mvsep.com/register" target="_blank" rel="noopener">Apri MVSEP</a></li>
         <li><div><b>Copia la tua chiave</b><span>Nella pagina «API» del tuo profilo MVSEP trovi la chiave (api token): copiala.</span></div><a class="mini" href="https://mvsep.com/user-api" target="_blank" rel="noopener">Apri la chiave</a></li>
         <li><div><b>Incolla la chiave qui e premi «Collega»</b>
-          <div class="row" style="margin-top:8px"><input class="inp grow" id="mvKey" type="password" autocomplete="off" spellcheck="false" placeholder="Incolla qui la chiave MVSEP" aria-label="Chiave MVSEP"><button class="chip pri" id="mvConnect">Collega</button></div></div></li>
+          <div class="row" style="margin-top:8px"><input class="inp grow" id="mvKey" type="text" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-secret spellcheck="false" placeholder="Incolla qui la chiave MVSEP" aria-label="Chiave MVSEP"><button class="chip pri" id="mvConnect">Collega</button></div></div></li>
       </ol>
       <div class="rpmsg" id="mvStatus" role="status" aria-live="polite"></div>
       <h4 style="margin-top:6px">2ª scelta: RunPod (a pagamento, veloce)</h4>
@@ -689,7 +690,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
         <li><div><b>Crea la chiave</b><span>Settings → API Keys → <b>Create API Key</b>, nome a piacere (per esempio «Fonica PC»), permessi «Read/Write». Copiala subito: è un codice lungo che inizia con <code>rpa_</code>. Le chiavi già nell'elenco non si possono più rivedere: se non hai salvato il codice, creane una nuova. Puoi anche usare la stessa chiave su telefono e PC.</span></div><a class="mini" href="https://console.runpod.io/user/settings" target="_blank" rel="noopener">Apri Settings</a></li>
         <li><div><b>Crea il servizio (endpoint)</b><span>Serverless → Get started, con il programma <code id="rpImgShow"></code> e i valori della guida.</span></div><div class="row"><button class="mini" id="rpCopyImg">Copia il nome</button><a class="mini" href="https://console.runpod.io/serverless" target="_blank" rel="noopener">Apri Serverless</a></div></li>
         <li><div><b>Incolla chiave e ID qui, poi premi «Salva»</b><span>La <b>chiave</b> è il codice <code>rpa_…</code> del passaggio sopra (non il suo nome). L'<b>ID</b> lo trovi in Serverless: apri il tuo endpoint, è la sigla di lettere e numeri scritta sotto il nome.</span>
-          <div class="row" style="margin-top:8px"><input class="inp grow" id="rpKey" type="password" autocomplete="off" spellcheck="false" placeholder="Chiave RunPod" aria-label="Chiave RunPod"></div>
+          <div class="row" style="margin-top:8px"><input class="inp grow" id="rpKey" type="text" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-secret spellcheck="false" placeholder="Chiave RunPod" aria-label="Chiave RunPod"></div>
           <div class="row" style="margin-top:8px"><input class="inp grow" id="rpEpManual" autocomplete="off" spellcheck="false" placeholder="ID dell'endpoint" aria-label="ID dell'endpoint"><button class="chip pri" id="rpSaveManual">Salva</button></div></div></li>
       </ol>
       <div class="rpmsg" id="rpStatus" role="status" aria-live="polite"></div>
@@ -970,11 +971,11 @@ const STEMS=[
  {k:'mix',label:'Brano completo',re:null}];
 const SL=Object.fromEntries(STEMS.map(s=>[s.k,s.label]));
 /* presentazione all'avvio: si chiude da sola alla fine, toccando lo schermo o con «Salta» */
-{const sp=$('#splash'),v=$('#splashV'),snd=$('#splashSnd');let done=false,tm=0;const end=()=>{if(done)return;done=true;clearTimeout(tm);sp.classList.add('out');try{v.pause()}catch(e){}setTimeout(()=>{sp.remove()},700)};
+{const sp=$('#splash'),v=$('#splashV'),snd=$('#splashSnd');let done=false,tm=0;const fromT3=/[?&](code|error)=/.test(location.search);const end=()=>{if(done)return;done=true;clearTimeout(tm);sp.classList.add('out');try{v.pause()}catch(e){}setTimeout(()=>{sp.remove()},700)};
   const arm=s=>{clearTimeout(tm);tm=setTimeout(end,s*1000)};
-  v.addEventListener('ended',end);v.addEventListener('error',end);arm(9);
+  if(fromT3){sp.remove();try{v.pause()}catch(e){}}else{v.addEventListener('ended',end);v.addEventListener('error',end);arm(9);
   /* prima prova con la musica; se il browser la blocca, parte senza suono e compare «Attiva il suono» */
-  v.muted=false;v.volume=1;v.play().catch(()=>{v.muted=true;v.play().catch(end);snd.hidden=false});
+  v.muted=false;v.volume=1;v.play().catch(()=>{v.muted=true;v.play().catch(end);snd.hidden=false});}
   snd.addEventListener('click',e=>{e.stopPropagation();snd.hidden=true;v.muted=false;try{v.currentTime=0}catch(x){}v.play().catch(()=>{});arm(9)});
   sp.addEventListener('click',e=>{if(e.target===snd)return;end()});document.addEventListener('keydown',e=>{if(e.key==='Escape'||e.key===' ')end()},{once:true})}
 const NOTE_IT=["Do","Do#","Re","Re#","Mi","Fa","Fa#","Sol","Sol#","La","La#","Si"];
@@ -2707,7 +2708,7 @@ $('#rigAmpFile').onchange=async e=>{const f=e.target.files[0];if(!f||!RIG)return
 $('#rigIrFile').onchange=async e=>{const f=e.target.files[0];if(!f||!RIG)return;const bytes=await f.arrayBuffer();const key=await ampPut({kind:'ir',name:f.name.replace(/\.wav$/i,''),bytes});RIG.rig.ir={key,name:f.name.replace(/\.wav$/i,'')};rigInfo();await sBuild(RIG);sTapBuild();sSave();toast('Cassa caricata')};
 $('#rigAmpDel').onclick=async()=>{RIG.rig.amp=null;rigInfo();await sBuild(RIG);sTapBuild();sSave();sRender()};$('#rigIrDel').onclick=async()=>{RIG.rig.ir=null;rigInfo();await sBuild(RIG);sTapBuild();sSave()};
 /* ---------- TONE3000 (accesso OAuth con PKCE e scelta dal catalogo) ---------- */
-const T3={base:'https://www.tone3000.com/api/v1',get key(){return (prefGet('t3key')||'').trim()},redirect:location.origin+location.pathname};
+const T3={base:'https://www.tone3000.com/api/v1',get key(){return (prefGet('t3key')||'').trim()},redirect:location.origin+location.pathname.replace(/index\.html$/,'')};
 const b64u=a=>btoa(String.fromCharCode(...new Uint8Array(a))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 async function t3Start(kind){if(!T3.key){toast('Inserisci prima la chiave pubblica TONE3000 in Impostazioni');openSet();setTimeout(()=>$('#t3Key').scrollIntoView({block:'center'}),300);return}
   const ver=b64u(crypto.getRandomValues(new Uint8Array(32))),ch=b64u(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(ver))),state=b64u(crypto.getRandomValues(new Uint8Array(16)));
@@ -2720,7 +2721,10 @@ async function t3Auth(){let tk=null;try{tk=JSON.parse(prefGet('t3tok')||'null')}
 function t3Keep(r){prefSet('t3tok',JSON.stringify({access_token:r.access_token,refresh_token:r.refresh_token,exp:Date.now()+((r.expires_in||3600)*1000)}))}
 async function t3Get(path){const a=await t3Auth();const r=await fetch(path.startsWith('http')?path:T3.base+path,{headers:{Authorization:'Bearer '+a}});if(!r.ok)throw new Error('TONE3000 ha risposto '+r.status);return r}
 /* ritorno dal catalogo: ?code=…&state=…&tone_id=… */
-async function t3Return(){const u=new URL(location.href);const code=u.searchParams.get('code'),state=u.searchParams.get('state');if(!code||!state)return;let st=null;try{st=JSON.parse(sessionStorage.getItem('t3')||'null')}catch(e){}
+async function t3Return(){const u=new URL(location.href);const err=u.searchParams.get('error');
+  if(err){history.replaceState(null,'',T3.redirect);const d=u.searchParams.get('error_description')||'';const msg='TONE3000 ha risposto: '+err+(d?' – '+d:'');console.warn(msg,location.href);
+    setTimeout(()=>{toast(msg);if(SALA_OK&&song)salaOpen().then(()=>{$('#sMsg').textContent=msg+'. Controlla in Impostazioni la chiave pubblica e che su TONE3000 l\'indirizzo di ritorno sia esattamente '+T3.redirect})},1200);return}
+  const code=u.searchParams.get('code'),state=u.searchParams.get('state');if(!code||!state)return;let st=null;try{st=JSON.parse(sessionStorage.getItem('t3')||'null')}catch(e){}
   history.replaceState(null,'',T3.redirect);if(!st||st.state!==state){toast('Accesso a TONE3000 non valido: riprova');return}sessionStorage.removeItem('t3');
   try{toast('Scarico il suono da TONE3000…');const r=await t3Token({grant_type:'authorization_code',code,code_verifier:st.ver,redirect_uri:T3.redirect,client_id:T3.key});t3Keep(r);
     const toneId=u.searchParams.get('tone_id');if(!toneId){toast('Accesso fatto. Scegli il suono dal pulsante «Scegli su TONE3000».');return}
