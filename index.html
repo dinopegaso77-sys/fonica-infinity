@@ -117,6 +117,17 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .pdmove{display:flex;align-items:center;justify-content:space-between;gap:4px}.pdmove span{font-size:10.5px;font-weight:700;opacity:.8}.pdmove button{min-width:40px;min-height:32px;border-radius:8px;border:1px solid rgba(0,0,0,.35);background:rgba(255,255,255,.55);color:#111;font-weight:900;cursor:pointer}
 .ampcard{justify-content:space-between;background:repeating-linear-gradient(135deg,#1d242c 0 10px,#232c36 10px 20px)!important}.ampcard p{margin:0;font-size:12px;line-height:1.35;color:#d7dde3}
 .pdtempo{min-height:34px;border-radius:8px;border:1px solid rgba(0,0,0,.4);background:rgba(255,255,255,.6);color:#111;font-weight:800}
+.origb{white-space:nowrap}.origb.on{background:#e8c8a6!important;color:#0a1827!important;border-color:#e8c8a6!important}.mmtop .origb{min-height:32px;padding:2px 7px;font-size:12px}
+.sllist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:sl;max-height:46vh;overflow:auto}
+.sllist li{counter-increment:sl;display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--raise)}
+.sllist li::before{content:counter(sl);min-width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:var(--surface)}
+.sllist li.cur{border-color:#e8c8a6;box-shadow:0 0 0 2px #e8c8a6}.sllist li.cur::before{background:#e8c8a6;color:#0a1827}.sllist li.miss{opacity:.5}
+.sllist .slt{flex:1;min-width:0}.sllist .slt b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sllist .slt small{color:var(--dim)}
+.sllist .mini{min-width:40px;min-height:40px}.slempty{color:var(--dim);text-align:center;padding:14px}
+.slbar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(10px,env(safe-area-inset-bottom,0px));z-index:95;display:flex;align-items:center;gap:6px;max-width:calc(100vw - 20px);padding:6px;border-radius:999px;background:#0a1827;color:#fff;border:1px solid #e8c8a6;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.slbar[hidden]{display:none}.slbar .mini{min-height:42px;background:#16293d;color:#fff;border-color:#26405a}.slnow{flex:1 1 auto;min-width:0;max-width:52vw;min-height:42px;border:0;background:transparent;color:#fff;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;padding:0 6px}
+.slbar.count .slnow{color:#e8c8a6}
+.salaov:not([hidden])~.slbar,.salaov.perf~.slbar{bottom:auto;top:64px}
 .banks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
 .bankb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:48px;min-width:0;padding:3px 2px;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;line-height:1.1}
 .bankb b{font-size:15px;font-weight:900}.bankb span{font-size:10.5px;font-weight:700;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.85}
@@ -128,7 +139,8 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .salaov.perf .smini{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:8px}
 .smini>div{display:flex!important;flex-direction:column;align-items:stretch!important;gap:6px!important;white-space:normal!important;min-width:0}
 .mmtop{display:flex;align-items:center;gap:6px;min-width:0}.mmname{flex:0 1 auto;min-width:0;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mmtop .vu{flex:1 1 40px;min-width:30px}.mmtop .hp{min-height:32px;padding:2px 7px}
-@media (max-height:820px){.salaov.perf .salakp{height:26vh;min-height:140px}.salaov.perf .stab{height:18vh;min-height:110px}.sdock{padding:8px 10px}.sdock #sRecGo,.sdock #sListen{min-height:46px}}
+@media (max-height:900px){.salaov.perf .salakp{height:22vh;min-height:120px}.salaov.perf .stab{height:15vh;min-height:90px}}
+@media (max-height:820px){.salaov.perf .salakp{height:20vh;min-height:110px}.salaov.perf .stab{height:13vh;min-height:80px}.sdock{padding:8px 10px}.sdock #sRecGo,.sdock #sListen{min-height:46px}}
 @media (max-width:1100px){.stracks{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}
 @media (max-height:900px){.strack{gap:6px;padding:9px 10px}.strack .sthint{font-size:11.5px;margin:0}.strack .knob{width:34px;height:34px}.stpeds{gap:4px;margin-top:2px}.pdchip{min-height:30px;padding:1px 6px}.bankb{min-height:42px}}
 .stpeds{display:flex;flex-direction:column;gap:6px;margin-top:6px}.stprerow{display:flex;align-items:center;gap:8px}.stprerow>b{font-size:12.5px;color:var(--dim);white-space:nowrap}.stpre{flex:1;min-width:0;min-height:40px;font-size:14px}.prauto{white-space:nowrap;border-color:#e8c8a6!important}.stprerow{flex-wrap:wrap}.lvpeds .stpre{background:#16293d;color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px}
@@ -575,6 +587,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
     <div class="topbtns">
       <div class="acts">
       <button class="chip pri" id="bPalco"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Palco</button>
+      <button class="chip" id="bSet" title="Scaletta dei brani da suonare uno dopo l'altro">📋 Scaletta</button>
       <button class="chip pri" id="bRec"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>Registra video</button>
       </div>
       <div class="nav"><button class="chip" id="bMenu" aria-expanded="false" aria-haspopup="true">⚙ Menu ▾</button>
@@ -762,7 +775,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
     <div class="sala-tabs seg" role="tablist"><button data-sv="rec" class="on">Registra</button><button data-sv="mix">Mix e sincronia</button></div>
     <span class="slat" id="sLat" title="Ritardo tra quando suoni e quando ti senti in cuffia">Ritardo – ms</span>
     <button class="mini" id="salaFull">⛶ Schermo intero</button>
-    <button class="mini" id="sTuneTop">🎵 Accordatore</button><button class="mini" id="salaHelp">Come funziona</button>
+    <button class="mini" id="sSetTop">📋 Scaletta</button><button class="mini" id="sTuneTop">🎵 Accordatore</button><button class="mini" id="salaHelp">Come funziona</button>
     <button class="mini" id="salaX">Chiudi</button>
   </div>
   <div class="sala-body">
@@ -1089,7 +1102,8 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
     <li><b>Mixer:</b> alza, abbassa o togli ogni traccia, oppure usa i preset (Karaoke senza voce, Suono io il basso, Studio chitarra…).</li>
     <li><b>Testo:</b> l'app cerca da sola il testo sincronizzato su LRCLIB (titolo, artista e durata). Se non c'è, «Trascrivi dalla voce» lo ricava con RunPod e mette ogni parola a tempo. In «Opzioni testo» puoi cercarlo a mano, modificarlo, sincronizzarlo, spostarlo prima o dopo e ingrandirlo. Nei <b>duetti</b> le righe si colorano da sole: <b style="color:#3d8bff">blu</b> = cantante 1, <b style="color:#ff4d4d">rosso</b> = cantante 2, <b style="color:#d4a800">giallo</b> = insieme. Le voci vengono riconosciute da RunPod mentre separa il brano; per i brani già separati (o separati sul PC o con MVSEP) premi una volta <b>«🎭 Riconosci le voci (duetto)»</b>. Se una riga è sbagliata, <b>«🎭 Correggi a mano»</b> e toccala. I colori si vedono nel karaoke, sul palco e nel video.</li>
 <li><b>Duetto video:</b> in «Registra video» premi <b>«🎭 Duetto: carica il video di un amico»</b> e scegli un video fatto con Fonica Infinity, registrato dall'inizio del brano. Mentre registri senti lui (base e voce) al posto della base; nel video finale lui è <b>sopra</b> e tu <b>sotto</b>, con il testo nel mezzo. Se non siete a tempo, sposta «Sincronia con l'amico».</li>
-<li><b>Pedaliera:</b> ogni musicista della Sala prove (anche la voce) e il microfono del Palco hanno i pedali in formato compatto: Noise Gate, Compressor, Auto Wah, Octaver, Pitch Shifter, Overdrive, Distortion, Phaser, Flanger, Chorus, Vibrato, Tremolo, Delay e Reverb. Sulla striscia (e sul palco durante la registrazione) tocchi la sigla del pedale per accenderlo o spegnerlo; con «Manopole dei pedali» regoli ogni manopola e premi l'interruttore. Ogni musicista ha <b>5 banchi</b>: tocchi 1, 2, 3, 4 o 5 sulla striscia (o sul palco mentre registri) e cambia tutto il suono in un colpo. Il <b>banco 1 ✨</b> è sempre il preset più adatto al brano; gli altri li scegli in «🎛 Manopole e banchi», dove puoi anche mettere in un banco i pedali come sono adesso. Il Delay ha «♩ A tempo» per andare a tempo con il brano. Puoi decidere <b>l'ordine dei pedali</b>: trascina un pedale tenendolo per il nome (la fascia nera) sopra un altro, oppure usa le frecce ◀ ▶ sotto ogni pedale; il riquadro «Ampli + EQ» indica quali pedali entrano nell'amplificatore e quali escono. «↺ Ordine classico» rimette l'ordine di partenza. In alto nella pedaliera scegli un <b>preset</b> già pronto (⭐ Rock, Assolo, Anni '80, Funk, Basso funk, Voce ballata…): compaiono solo quelli dello stesso strumento; con <b>«✨ Adatto al brano»</b> l'app ascolta la traccia di quello strumento nel brano caricato (distorsione, attacchi, velocità) e sceglie da sola il preset più adatto, oppure premi «💾 Salva preset» per salvare i tuoi pedali con un nome e ricaricarli quando vuoi su qualsiasi strumento. La registrazione resta pulita: i pedali si sentono anche nel mix e nell'esportazione.</li>
+<li><b>Scaletta:</b> con <b>«📋 Scaletta»</b> metti in fila i brani della serata, li sposti con ▲ ▼ e salvi la scaletta con un nome (o in un file, da portare su un altro dispositivo). «▶ Suona dal primo» apre il primo brano; in basso compare la barra con ⏮ e <b>⏭ Prossimo</b>. Se spunti «passa da solo al prossimo», alla fine di ogni brano parte il successivo dopo 5 secondi (✕ per fermarlo). Funziona anche in Sala prove.</li>
+<li><b>Pedaliera:</b> ogni musicista della Sala prove (anche la voce) e il microfono del Palco hanno i pedali in formato compatto: Noise Gate, Compressor, Auto Wah, Octaver, Pitch Shifter, Overdrive, Distortion, Phaser, Flanger, Chorus, Vibrato, Tremolo, Delay e Reverb. Sulla striscia (e sul palco durante la registrazione) tocchi la sigla del pedale per accenderlo o spegnerlo; con «Manopole dei pedali» regoli ogni manopola e premi l'interruttore. Se un musicista deve allontanarsi, tocca <b>«🎵 Originale»</b> sulla sua striscia (o sul palco mentre suonate): torna subito lo strumento originale del brano, anche a metà canzone; ritoccalo per rispegnerlo. Anche quando togli un musicista lo strumento originale torna da solo. Ogni musicista ha <b>5 banchi</b>: tocchi 1, 2, 3, 4 o 5 sulla striscia (o sul palco mentre registri) e cambia tutto il suono in un colpo. Il <b>banco 1 ✨</b> è sempre il preset più adatto al brano; gli altri li scegli in «🎛 Manopole e banchi», dove puoi anche mettere in un banco i pedali come sono adesso. Il Delay ha «♩ A tempo» per andare a tempo con il brano. Puoi decidere <b>l'ordine dei pedali</b>: trascina un pedale tenendolo per il nome (la fascia nera) sopra un altro, oppure usa le frecce ◀ ▶ sotto ogni pedale; il riquadro «Ampli + EQ» indica quali pedali entrano nell'amplificatore e quali escono. «↺ Ordine classico» rimette l'ordine di partenza. In alto nella pedaliera scegli un <b>preset</b> già pronto (⭐ Rock, Assolo, Anni '80, Funk, Basso funk, Voce ballata…): compaiono solo quelli dello stesso strumento; con <b>«✨ Adatto al brano»</b> l'app ascolta la traccia di quello strumento nel brano caricato (distorsione, attacchi, velocità) e sceglie da sola il preset più adatto, oppure premi «💾 Salva preset» per salvare i tuoi pedali con un nome e ricaricarli quando vuoi su qualsiasi strumento. La registrazione resta pulita: i pedali si sentono anche nel mix e nell'esportazione.</li>
 <li><b>Sfondi e trucco:</b> ogni sfondo ha la sua anteprima (Palco con luci, Tramonto, Città di notte, Neon, Mattoni, Cielo…); con <b>«La tua foto»</b> scegli un'immagine tua (toccala di nuovo per cambiarla). Nel video finale il trucco riconosce il viso: liscia la pelle senza toccare occhi, sopracciglia e bocca; «Più bello» aggiunge un filo di colore a guance e labbra.</li>
     <li><b>Ritardo audio</b> (in «Opzioni testo»): l'app misura da sola quanto tarda il suono ad arrivare (le cuffie Bluetooth anche 0,2–0,3 secondi) e allinea testo e tablatura. Togli «automatico» per regolarlo a mano.</li>
     <li><b>Basso e chitarra:</b> in «Opzioni strumento» scegli lo strumento e <b>Note</b> o <b>Accordi</b>. Con Note vedi la tablatura nota per nota (zoom, 5 corde, quante note, «Rifai»); con Accordi vedi gli accordi che scorrono, con il disegno della posizione per la chitarra e la nota da suonare per il basso. In «Scritta» puoi incollare una tablatura tua.</li>
@@ -1205,6 +1219,17 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
   <div class="pklist" id="bpList"></div>
   <div class="pkacts" id="bpActs"><button class="chip" data-pa="__add">➕ Separa un nuovo brano</button><button class="chip" data-pa="__load">📁 Carica tracce separate</button><button class="chip" data-pa="__shop">🛒 Cerca e compra</button><button class="chip pri" data-pa="__lib">📚 Apri la libreria</button></div>
 </div></div>
+<div class="ov" id="ovSet2" hidden><div class="sheet">
+  <div class="row"><h3 class="grow">📋 Scaletta</h3><button class="mini" data-close>Chiudi</button></div>
+  <p class="snote">I brani da suonare uno dopo l'altro, nell'ordine che vuoi. Salvala con un nome e ricaricala per la prossima serata.</p>
+  <div class="row slrow"><label class="field" style="flex:1 1 220px"><span>Scalette salvate</span><select class="sel" id="slSaved"></select></label><button class="chip" id="slLoad">📂 Carica</button><button class="mini" id="slDel">🗑 Elimina</button></div>
+  <div class="row slrow"><label class="field" style="flex:1 1 220px"><span>Nome della scaletta</span><input class="inp" id="slName" placeholder="Es. Serata al pub" autocomplete="off"></label><button class="chip pri" id="slSave">💾 Salva scaletta</button><button class="mini" id="slNew">✚ Nuova vuota</button></div>
+  <ol class="sllist" id="slList"></ol>
+  <div class="row slrow"><label class="field" style="flex:1 1 260px"><span>Aggiungi un brano</span><select class="sel" id="slAdd"></select></label><button class="chip" id="slAddAll" title="Mette in scaletta tutta la libreria">Tutta la libreria</button></div>
+  <label class="rowchk"><input type="checkbox" id="slAuto"> Alla fine di un brano passa da solo al prossimo (con 5 secondi di pausa)</label>
+  <div class="row"><button class="chip pri" id="slGo">▶ Suona dal primo</button><button class="chip" id="slFile">⬇ Salva in un file</button><button class="chip" id="slOpen">⬆ Apri da file</button><input type="file" id="slFileIn" accept=".json,application/json" hidden></div>
+</div></div>
+<div class="slbar" id="slBar" hidden><button class="mini" id="slPrev" aria-label="Brano precedente">⏮</button><button class="slnow" id="slNow"></button><button class="mini" id="slNext" aria-label="Brano successivo">⏭ Prossimo</button><button class="mini" id="slStop" aria-label="Chiudi la scaletta">✕</button></div>
 <div class="ov" id="ovPed" hidden><div class="sheet"><div class="row"><h3 class="grow" id="pedTitle">🎛 Pedaliera</h3><button class="mini" data-close>Chiudi</button></div><p class="snote">Interruttore per accendere o spegnere, manopole da trascinare su o giù. Si sente subito, anche mentre canti.</p><div class="pdpre" id="pedPre"><label class="field"><span>Preset</span><select class="sel" data-prsel aria-label="Preset dei pedali"></select></label><button class="chip" data-prload>📂 Carica</button><button class="chip pri" data-prsave>💾 Salva preset</button><button class="mini" data-prdel hidden>🗑 Elimina</button><button class="mini" data-prord title="Rimette i pedali nell'ordine classico">↺ Ordine classico</button><button class="mini prauto" data-prbarauto>✨ Adatto al brano</button></div><div class="pboard" id="pedBoard"></div></div></div>
 <div class="toast" id="toast" hidden></div>
 
@@ -2028,6 +2053,48 @@ $$('#bpActs [data-pa]').forEach(b=>b.onclick=()=>{pkClose();songPickGo(b.dataset
 $('#songPickBtn').onclick=()=>pkOpen('main');$('#sSongPickBtn').onclick=()=>pkOpen('sala');
 function pkBtnUI(n){const t=song&&song.id&&song.id!=='demo'?('🎵 '+(song.title||'Senza titolo')+(song.artist?' · '+song.artist:'')):song&&song.id==='demo'?'🎤 Prova di palco':'🎵 Scegli un brano…';
   for(const id of ['#songPickBtn','#sSongPickBtn']){const b=$(id);if(b){b.textContent=t+'  ▾';b.title='Scegli un brano ('+n+' in libreria)'}}}
+
+/* ===================== SCALETTA ===================== */
+const SCL={name:'',items:[],i:-1,auto:prefGet('slAuto')==='1',timer:0};
+const slSaved=()=>{try{return JSON.parse(prefGet('setlists')||'[]')}catch(e){return[]}};const slPut=L=>prefSet('setlists',JSON.stringify(L));
+function slCur(){try{const o=JSON.parse(prefGet('slCur')||'null');if(o){SCL.name=o.name||'';SCL.items=o.items||[];SCL.i=o.i==null?-1:o.i}}catch(e){}}slCur();
+const slKeep=()=>prefSet('slCur',JSON.stringify({name:SCL.name,items:SCL.items,i:SCL.i}));
+let SCLLIB=[];
+async function slOpen(){SCLLIB=(await dbAll())||[];SCLLIB.sort((a,b)=>pkSort((a.artist||'')+' '+(a.title||''),(b.artist||'')+' '+(b.title||'')));$('#slAuto').checked=SCL.auto;$('#slName').value=SCL.name||'';slDraw();openOv('#ovSet2')}
+function slFind(it){return SCLLIB.find(x=>x.id===it.id)||SCLLIB.find(x=>(x.title||'').toLowerCase()===(it.title||'').toLowerCase()&&(x.artist||'').toLowerCase()===(it.artist||'').toLowerCase())}
+function slDraw(){const L=slSaved();$('#slSaved').innerHTML='<option value="">— scegli —</option>'+L.map((x,i)=>`<option value="${i}" ${x.name===SCL.name?'selected':''}>${esc(x.name)} (${x.items.length})</option>`).join('');
+  $('#slAdd').innerHTML='<option value="">— scegli un brano dalla libreria —</option>'+SCLLIB.map(x=>`<option value="${esc(x.id)}">${esc((x.artist?x.artist+' · ':'')+(x.title||'Senza titolo'))}</option>`).join('');
+  const ol=$('#slList');ol.innerHTML=SCL.items.length?SCL.items.map((it,i)=>{const ok=!!slFind(it);return`<li class="${i===SCL.i?'cur':''} ${ok?'':'miss'}" data-sli="${i}"><span class="slt"><b>${esc(it.title||'Senza titolo')}</b><small>${esc(it.artist||'')}${ok?'':' · non è nella libreria di questo dispositivo'}</small></span>
+    <button class="mini" data-slp="${i}" aria-label="Suona questo brano" ${ok?'':'disabled'}>▶</button><button class="mini" data-slm="-1" aria-label="Sposta su">▲</button><button class="mini" data-slm="1" aria-label="Sposta giù">▼</button><button class="mini" data-slx aria-label="Togli dalla scaletta">✕</button></li>`}).join(''):'<li class="slempty">La scaletta è vuota: aggiungi i brani qui sotto.</li>';
+  ol.querySelectorAll('[data-sli]').forEach(li=>{const i=+li.dataset.sli;li.querySelector('[data-slp]').onclick=()=>{closeOvAll();slPlay(i)};
+    li.querySelectorAll('[data-slm]').forEach(b=>b.onclick=()=>{const j=i+(+b.dataset.slm);if(j<0||j>=SCL.items.length)return;const[x]=SCL.items.splice(i,1);SCL.items.splice(j,0,x);if(SCL.i===i)SCL.i=j;else if(SCL.i===j)SCL.i=i;slKeep();slDraw()});
+    li.querySelector('[data-slx]').onclick=()=>{SCL.items.splice(i,1);if(SCL.i>=SCL.items.length)SCL.i=SCL.items.length-1;else if(i<SCL.i)SCL.i--;slKeep();slDraw();slBarUI()}})}
+function closeOvAll(){$$('.ov').forEach(o=>{if(o.id==='ovSet2')o.hidden=true})}
+$('#slAdd').onchange=e=>{const x=SCLLIB.find(y=>y.id===e.target.value);if(!x)return;SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});slKeep();slDraw();$('#slList').lastElementChild&&$('#slList').lastElementChild.scrollIntoView({block:'nearest'})};
+$('#slAddAll').onclick=()=>{for(const x of SCLLIB)if(!SCL.items.some(it=>it.id===x.id))SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});slKeep();slDraw()};
+$('#slAuto').onchange=e=>{SCL.auto=e.target.checked;prefSet('slAuto',SCL.auto?'1':'0')};
+$('#slSave').onclick=()=>{const name=$('#slName').value.trim();if(!name){toast('Scrivi un nome per la scaletta');$('#slName').focus();return}if(!SCL.items.length){toast('La scaletta è vuota');return}
+  const L=slSaved(),k=L.findIndex(x=>x.name.toLowerCase()===name.toLowerCase());if(k>=0&&!confirm('Esiste già la scaletta «'+L[k].name+'». La sostituisco?'))return;const rec={name,items:SCL.items.slice(),date:Date.now()};if(k>=0)L[k]=rec;else L.push(rec);L.sort((a,b)=>a.name.localeCompare(b.name,'it'));slPut(L);SCL.name=name;slKeep();slDraw();toast('Scaletta «'+name+'» salvata')};
+$('#slLoad').onclick=()=>{const L=slSaved(),x=L[+$('#slSaved').value];if(!x){toast('Scegli una scaletta salvata');return}SCL.name=x.name;SCL.items=x.items.slice();SCL.i=-1;$('#slName').value=x.name;slKeep();slDraw();slBarUI();toast('Scaletta «'+x.name+'» caricata: '+x.items.length+' brani')};
+$('#slSaved').onchange=()=>$('#slLoad').click();
+$('#slDel').onclick=()=>{const L=slSaved(),k=+$('#slSaved').value,x=L[k];if(!x)return;if(!confirm('Elimino la scaletta «'+x.name+'»?'))return;L.splice(k,1);slPut(L);slDraw();toast('Scaletta eliminata')};
+$('#slNew').onclick=()=>{if(SCL.items.length&&!confirm('Svuoto la scaletta che hai aperta? (quelle salvate restano)'))return;SCL.name='';SCL.items=[];SCL.i=-1;$('#slName').value='';slKeep();slDraw();slBarUI()};
+$('#slGo').onclick=()=>{if(!SCL.items.length){toast('La scaletta è vuota');return}closeOvAll();slPlay(0)};
+$('#slFile').onclick=()=>{if(!SCL.items.length){toast('La scaletta è vuota');return}const nm=(SCL.name||'scaletta').replace(/[^\w\- ]+/g,'').trim()||'scaletta';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({app:'fonica-infinity',kind:'scaletta',name:SCL.name,items:SCL.items},null,1)],{type:'application/json'}));a.download='Scaletta '+nm+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('Scaletta salvata nella cartella Download')};
+$('#slOpen').onclick=()=>{$('#slFileIn').value='';$('#slFileIn').click()};
+$('#slFileIn').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||d.kind!=='scaletta'||!Array.isArray(d.items))throw 0;SCL.name=d.name||f.name.replace(/\.json$/i,'');SCL.items=d.items.filter(x=>x&&(x.id||x.title)).map(x=>({id:x.id||'',title:x.title||'',artist:x.artist||''}));SCL.i=-1;$('#slName').value=SCL.name;slKeep();slDraw();slBarUI();
+    const miss=SCL.items.filter(x=>!slFind(x)).length;toast('Scaletta «'+SCL.name+'» aperta'+(miss?' · '+miss+' brani non sono in libreria':''))}catch(x){toast('Questo file non è una scaletta di Fonica Infinity')}};
+async function slPlay(i){if(!SCL.items.length)return;if(!SCLLIB.length)SCLLIB=(await dbAll())||[];let j=i;while(j<SCL.items.length&&!slFind(SCL.items[j]))j++;if(j>=SCL.items.length){toast('Fine della scaletta 🎉');SCL.i=SCL.items.length-1;slKeep();slBarUI();return}
+  if(j!==i)toast('Salto «'+SCL.items[i].title+'»: non è in libreria');clearInterval(SCL.timer);SCL.timer=0;SCL.i=j;slKeep();slBarUI();const x=slFind(SCL.items[j]);if(song&&song.id===x.id){toast('▶ '+(j+1)+'/'+SCL.items.length+' · '+(x.title||''));return}await songPickGo(x.id);slBarUI()}
+function slBarUI(){const b=$('#slBar');const on=SCL.items.length>0&&SCL.i>=0;b.hidden=!on;if(!on)return;const it=SCL.items[SCL.i];b.classList.remove('count');$('#slNow').textContent='📋 '+(SCL.i+1)+'/'+SCL.items.length+' · '+(it?it.title:'');$('#slNext').disabled=SCL.i>=SCL.items.length-1;$('#slPrev').disabled=SCL.i<=0;
+  const nx=SCL.items[SCL.i+1];$('#slNext').title=nx?'Prossimo: '+nx.title:'È l\'ultimo brano'}
+$('#slPrev').onclick=()=>slPlay(Math.max(0,SCL.i-1));$('#slNext').onclick=()=>{if(SCL.i<SCL.items.length-1)slPlay(SCL.i+1)};$('#slNow').onclick=()=>slOpen();
+$('#slStop').onclick=()=>{clearInterval(SCL.timer);SCL.timer=0;SCL.i=-1;slKeep();slBarUI()};
+/* alla fine del brano: prossimo da solo, con 5 secondi per fermarlo */
+function slEnded(){if(!SCL.auto||SCL.i<0||SCL.i>=SCL.items.length-1||SCL.timer)return;let n=5;const b=$('#slBar');b.classList.add('count');const nx=SCL.items[SCL.i+1];$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca ✕ per fermare)';
+  SCL.timer=setInterval(async()=>{n--;if(n>0){$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca ✕ per fermare)';return}clearInterval(SCL.timer);SCL.timer=0;await slPlay(SCL.i+1);setTimeout(()=>{try{if($('#salaOv').hidden)play()}catch(e){}},700)},1000)}
+A.addEventListener('ended',slEnded);
+$('#bSet').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
 async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
   toast('Apro il brano…');if(id==='demo')await loadDemo();else await openStored(id);
   if(inSala&&song){$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}}
@@ -3137,7 +3204,7 @@ const SALA_OK=!isMobile&&!(matchMedia('(pointer:coarse)').matches&&innerWidth<11
 const ROLES={voce:'Voce',chitarra:'Chitarra',basso:'Basso',altro:'Altro'};
 const ROLE_COL={voce:'#e8c8a6',chitarra:'#7fb4e0',basso:'#9ad08f',altro:'#d39ad6'};
 const SA={ctx:null,devs:[],chans:[],tracks:[],takes:[],cur:-1,rec:null,on:false,base:null,t0:0,timer:0,cal:{},mods:{},nam:null,namLoading:null,view:'rec'};
-const sSave=()=>prefSet('sala',JSON.stringify({tracks:SA.tracks.map(t=>({id:t.id,name:t.name,role:t.role,dev:t.dev,ch:t.ch,mon:t.mon,hear:t.hear!==false,arm:t.arm,rig:t.rig})),cal:SA.cal,
+const sSave=()=>prefSet('sala',JSON.stringify({tracks:SA.tracks.map(t=>({orig:!!t.orig,id:t.id,name:t.name,role:t.role,dev:t.dev,ch:t.ch,mon:t.mon,hear:t.hear!==false,arm:t.arm,rig:t.rig})),cal:SA.cal,
   base:{vol:+$('#sBaseVol').value,auto:$('#sAutoMute').checked,guide:$('#sGuide').checked,click:$('#sClick').checked,count:$('#sCount').checked}}));
 function sLoad(){let o={};try{o=JSON.parse(prefGet('sala')||'{}')}catch(e){}SA.cal=o.cal||{};SA.tracks=(o.tracks||[]).map(t=>Object.assign(newTrack(t.role),t,{rig:Object.assign(defRig(t.role),t.rig||{},t.rig&&t.rig.fx?{}:{fx:fxMigrate(t.rig||{},t.role)})}));SA.tracks.forEach(t=>fxOf(t.rig,t.role));
   if(o.base){$('#sBaseVol').value=o.base.vol;$('#sAutoMute').checked=o.base.auto!==false;$('#sGuide').checked=!!o.base.guide;$('#sClick').checked=!!o.base.click;$('#sCount').checked=o.base.count!==false}}
@@ -3321,15 +3388,21 @@ let tapReady=null;async function sTapBuild(){const c=sCtx();if(!tapReady)tapRead
   SA.tap=new AudioWorkletNode(c,'fonica-tap',{numberOfInputs:arm.length,numberOfOutputs:1,channelCount:1,channelCountMode:'explicit',processorOptions:{n:arm.length}});arm.forEach((t,i)=>t.node.inG.connect(SA.tap,0,i));
   const z=c.createGain();z.gain.value=0;SA.tap.connect(z);z.connect(c.destination)}
 /* ---------- base: tracce del brano senza gli strumenti suonati ---------- */
-async function sBaseBufs(){const src=await sourcesFor(tr);const roles=new Set(SA.tracks.filter(t=>t.arm).map(t=>t.role));const out=[];
-  for(const k of order){if(!src[k])continue;let g=effGain(k);if($('#sAutoMute').checked){if(k==='guitar'&&roles.has('chitarra'))g=0;if(k==='bass'&&roles.has('basso'))g=0;if(k==='vocals'&&roles.has('voce'))g=0}
-    const guide=k==='vocals'&&$('#sGuide').checked&&roles.has('voce');out.push({k,buf:src[k],g,guide})}return out}
+/* lo strumento originale del brano si spegne solo se c'è un musicista attivo di quello strumento che non ha chiesto «Originale» */
+const ROLE_STEM={chitarra:'guitar',basso:'bass',voce:'vocals'};
+function stemMuted(k){if(!$('#sAutoMute').checked)return false;return SA.tracks.some(t=>t.arm&&ROLE_STEM[t.role]===k&&!t.orig)}
+const origBtn=t=>ROLE_STEM[t.role]?`<button class="mini origb ${t.orig?'on':''}" data-orig="${t.id}" aria-pressed="${!!t.orig}" title="${t.orig?'Si sente lo strumento originale del brano: tocca per spegnerlo':'Lo strumento originale del brano è spento perché suona '+esc(t.name)+': tocca per riaccenderlo subito'}">🎵 Originale ${t.orig?'Sì':'No'}</button>`:'';
+function origSet(t,on){t.orig=!!on;sStemApply();SA.baseMono=null;sSave();$$(`[data-orig="${t.id}"]`).forEach(b=>{b.classList.toggle('on',t.orig);b.setAttribute('aria-pressed',t.orig);b.textContent='🎵 Originale '+(t.orig?'Sì':'No')});toast((t.orig?'Si sente di nuovo ':'Spento ')+'lo strumento originale ('+(ROLES[t.role]||t.role)+')')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-orig]');if(!b)return;e.preventDefault();const t=SA.tracks.find(x=>x.id===b.dataset.orig);if(t)origSet(t,!t.orig)});
+async function sBaseBufs(){const src=await sourcesFor(tr);const out=[];
+  for(const k of order){if(!src[k])continue;let g=effGain(k);if(stemMuted(k))g=0;
+    const guide=k==='vocals'&&$('#sGuide').checked&&stemMuted('vocals');out.push({k,buf:src[k],g,guide})}return out}
 function sClickAt(c,when,acc){const o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();o.type='square';o.frequency.value=acc?2000:1300;f.type='bandpass';f.frequency.value=o.frequency.value;g.gain.setValueAtTime(0,when);g.gain.linearRampToValueAtTime(acc?.4:.26,when+.002);g.gain.exponentialRampToValueAtTime(.001,when+.05);o.connect(f);f.connect(g);g.connect(SA.out);o.start(when);o.stop(when+.06)}
 /* ---------- base con i volumi del mixer (si aggiornano anche mentre suona) ---------- */
 const STEM_N={vocals:'Voce',drums:'Batteria',bass:'Basso',guitar:'Chitarra',piano:'Piano',other:'Altro'};
-function stemVol(k,b){const roles=new Set(SA.tracks.filter(t=>t.arm).map(t=>t.role));let g=effGain(k);if($('#sAutoMute').checked){if(k==='guitar'&&roles.has('chitarra'))g=0;if(k==='bass'&&roles.has('basso'))g=0;if(k==='vocals'&&roles.has('voce'))g=$('#sGuide').checked?(gains.vocals?gains.vocals.vol*.35:.25):0}return g*+$('#sBaseVol').value}
+function stemVol(k,b){let g=effGain(k);if(stemMuted(k))g=k==='vocals'&&$('#sGuide').checked?(gains.vocals?gains.vocals.vol*.35:.25):0;return g*+$('#sBaseVol').value}
 async function sBaseStart(c,at,from){const src=await sourcesFor(tr);SA.stemG={};const srcs=[];for(const k of order){if(!src[k])continue;const s=c.createBufferSource();s.buffer=src[k];const g=c.createGain();g.gain.value=stemVol(k);s.connect(g);g.connect(SA.out);s.start(at,Math.min(from,src[k].duration-.01));SA.stemG[k]=g;srcs.push(s)}return srcs}
-function sStemApply(){for(const[k,g]of Object.entries(SA.stemG||{}))g.gain.value=stemVol(k)}
+function sStemApply(){const c=SA.ctx;for(const[k,g]of Object.entries(SA.stemG||{})){const v=stemVol(k);try{g.gain.setTargetAtTime(v,c.currentTime,.03)}catch(e){g.gain.value=v}}}
 function sStemsUI(){$('#sStems').innerHTML=order.filter(k=>stems[k]).map(k=>{const g=gains[k];return `<div class="stem ${g.mute?'off':''}" data-st="${k}"><b>${STEM_N[k]||k}</b><input type="range" min="0" max="1.5" step="0.05" value="${g.vol}" aria-label="Volume ${STEM_N[k]||k}"><button class="mini" data-mute>${g.mute?'Accendi':'Spegni'}</button></div>`}).join('');
   $$('#sStems [data-st]').forEach(el=>{const k=el.dataset.st;el.querySelector('input').oninput=e=>{gains[k].vol=+e.target.value;sStemApply();try{syncChanUI()}catch(x){}};el.querySelector('[data-mute]').onclick=()=>{gains[k].mute=!gains[k].mute;sStemsUI();sStemApply();try{syncChanUI()}catch(x){}}})}
 /* orologio della Sala: ascolto, conteggio e registrazione */
@@ -3465,7 +3538,7 @@ function knobify(L){const inp=L.querySelector('input'),k=L.querySelector('.knob'
   k.onwheel=e=>{e.preventDefault();set(+inp.value-Math.sign(e.deltaY)*(mx-mn)/40)};
   k.onkeydown=e=>{const d=(mx-mn)/40;if(e.key==='ArrowUp'||e.key==='ArrowRight'){e.preventDefault();set(+inp.value+d)}else if(e.key==='ArrowDown'||e.key==='ArrowLeft'){e.preventDefault();set(+inp.value-d)}};
   k.ondblclick=()=>{if(inp.dataset.def!=null&&inp.dataset.def!=='undefined')set(+inp.dataset.def)};L.onclick=e=>e.preventDefault();show()}
-function sRender(){
+function sRender(){try{sStemApply();SA.baseMono=null}catch(e){}
   const ROLE_IC={voce:'🎤',chitarra:'🎸',basso:'🎸',batteria:'🥁',tastiere:'🎹',altro:'🎶'};
   $('#sTracks').innerHTML=SA.tracks.length?SA.tracks.map(t=>`<div class="strack ${t.arm?'':'unarmed'}" data-tr="${t.id}" style="--tc:${ROLE_COL[t.role]}">
     <div class="sthead"><input class="inp stname" data-f="name" value="${esc(t.name)}" aria-label="Nome">
@@ -3477,11 +3550,11 @@ function sRender(){
     <div class="stmeter"><div class="stvurow"><div class="vu"><i></i><em>–∞ dB</em></div>${hpBtn(t)}</div><div class="sthint">Suona qualche nota per vedere il livello</div></div>
     <div class="stmon"><button class="mini ${t.hear!==false?'hot':''}" data-hear="${t.id}" title="Acceso: ti senti in cuffia dal PC, con gli effetti. Spento: ti senti con la manopola «Direct Monitor» della scheda audio, senza ritardo (la registrazione avviene comunque).">${hearTxt(t)}</button>
       <label class="field"><span>Volume cuffia</span><input type="range" data-f="mon" min="0" max="1.5" step="0.05" value="${t.mon}"></label>
-      <button class="mini" data-rig="${t.id}" title="Tutte le opzioni del suono">🎛 Altro</button></div>
+      <button class="mini" data-rig="${t.id}" title="Tutte le opzioni del suono">🎛 Altro</button>${origBtn(t)}</div>
     ${t.role!=='voce'?`<div class="stsnd"><label class="field"><span>🎸 Tono NAM</span><select class="sel" data-snd="amp"></select></label><label class="field"><span>🔈 Cassa IR</span><select class="sel" data-snd="ir"></select></label></div>`:''}
     <div class="knobs">${FXS[t.role].map(([k,l,mn,mx,st])=>`<label class="kn"><input type="range" data-fx="${k}" min="${mn}" max="${mx}" step="${st}" value="${t.rig[k]}" data-def="${defRig(t.role)[k]}"><span class="knob" tabindex="0" role="slider" aria-label="${l}" title="${l}: trascina su o giù · doppio clic per tornare all'inizio"><b></b></span><span>${({Ingresso:'Gain',Compressore:'Comp',Riverbero:'Riverb',Overdrive:'Drive',Volume:'Vol'})[l]||l}</span><em></em></label>`).join('')}</div>
     <div class="stpeds"><b>🎛 Banchi dei pedali</b><div class="banks">${bankBtns(t)}</div>${pedChips(fxOf(t.rig,t.role),`data-pdt="${t.id}"`)}<button class="mini" data-board="${t.id}">🎛 Manopole e banchi</button></div></div>`).join(''):'<p class="snote">Nessun musicista: premi «+ Aggiungi musicista» o «Suona e riconosco».</p>';
-  $('#sMini').innerHTML=SA.tracks.filter(t=>t.arm).map(t=>`<div data-mm="${t.id}"><div class="mmtop"><span class="mmname">${ROLE_IC[t.role]||''} ${esc(t.name)}</span><span class="vu"><i></i></span>${hpBtn(t)}<button class="mini" data-board="${t.id}" aria-label="Manopole dei pedali di ${esc(t.name)}">🎛</button></div><div class="banks mm">${bankBtns(t,'sm')}</div></div>`).join('');
+  $('#sMini').innerHTML=SA.tracks.filter(t=>t.arm).map(t=>`<div data-mm="${t.id}"><div class="mmtop"><span class="mmname">${ROLE_IC[t.role]||''} ${esc(t.name)}</span><span class="vu"><i></i></span>${hpBtn(t)}${origBtn(t)}<button class="mini" data-board="${t.id}" aria-label="Manopole dei pedali di ${esc(t.name)}">🎛</button></div><div class="banks mm">${bankBtns(t,'sm')}</div></div>`).join('');
   $$('#sTracks .kn').forEach(knobify);
   for(const t of SA.tracks){const el=document.querySelector(`[data-tr="${t.id}"]`);const sel=el.querySelector('[data-f="dev"]');if(t.dev&&chanOf(t))sel.value=t.dev;
     el.querySelector('[data-hear]').onclick=()=>sHearSet(t,t.hear===false);
@@ -3489,7 +3562,7 @@ function sRender(){
       else if(f==='role'&&e.type==='change'){t.role=inp.value;t.rig=Object.assign(defRig(t.role),{amp:t.rig.amp,ir:t.rig.ir});await sBuild(t);sRender()}else if(f==='dev'&&e.type==='change'){t.dev=inp.value;await sBuild(t);sTapBuild()}
       else if(f==='devid'&&e.type==='change'){const ch=SA.chans.find(c=>c.dev.id===inp.value&&!SA.tracks.some(x=>x!==t&&x.dev===c.key))||SA.chans.find(c=>c.dev.id===inp.value);if(ch){t.dev=ch.key;await sBuild(t);sTapBuild();sSave();sRender()}return}
       if(f==='arm'&&e.type==='change')sTapBuild();sSave()})}
-  $$('#sTracks [data-del]').forEach(b=>b.onclick=()=>{const t=SA.tracks.find(x=>x.id===b.dataset.del);if(t&&t.node)try{t.node.mon.disconnect()}catch(e){}SA.tracks=SA.tracks.filter(x=>x!==t);sRender();sTapBuild();sSave()});
+  $$('#sTracks [data-del]').forEach(b=>b.onclick=()=>{const t=SA.tracks.find(x=>x.id===b.dataset.del);if(t&&t.node)try{t.node.mon.disconnect()}catch(e){}SA.tracks=SA.tracks.filter(x=>x!==t);sRender();sTapBuild();sSave();sStemApply();SA.baseMono=null;if(t&&ROLE_STEM[t.role])toast('Tolto '+t.name+': torna lo strumento originale del brano')});
   $$('#sTracks [data-rig]').forEach(b=>b.onclick=()=>rigOpen(SA.tracks.find(x=>x.id===b.dataset.rig)));
   $$('#sTracks [data-tune]').forEach(b=>b.onclick=()=>tuneOpen(SA.tracks.find(x=>x.id===b.dataset.tune)));
   for(const t of SA.tracks){const el=document.querySelector(`[data-tr="${t.id}"]`);if(!el)continue;
