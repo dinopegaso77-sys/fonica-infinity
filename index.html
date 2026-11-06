@@ -329,6 +329,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .recdone .pseg .seg{flex-wrap:wrap}
 .recdone video{max-width:100%;max-height:46vh;border-radius:12px;background:#000;align-self:center}
 .recdone .rpmsg{color:#fff;text-align:center}
+.recdone span.rechint{display:block;line-height:1.45}
 .shoplist{display:flex;flex-direction:column;gap:8px}
 .shop{display:grid;grid-template-columns:56px 1fr;gap:4px 12px;align-items:center;background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .shop img{width:56px;height:56px;border-radius:8px;object-fit:cover;grid-row:span 2;background:var(--surface)}
@@ -362,6 +363,15 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 
 /* palco a schermo intero */
 #palco{position:fixed;inset:0;z-index:60;background:var(--stage2);display:flex;flex-direction:column;color:var(--stage-fg)}
+.palmic{position:absolute;top:64px;right:14px;z-index:5;width:min(440px,calc(100vw - 28px));max-height:calc(100% - 150px);overflow:auto;background:#0d1826;border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.55);color:#fff;display:flex;flex-direction:column;gap:10px}.palmic[hidden]{display:none}
+.lvtop{display:flex;align-items:center;justify-content:space-between;gap:8px}.lvtop b{font-size:17px}
+#lvGo{min-height:56px;border-radius:12px;border:0;background:#2fae62;color:#fff;font-weight:800;font-size:18px;cursor:pointer}#lvGo.on{background:#d32f2f}
+.lvrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px}
+.lvhead{display:flex;gap:8px;align-items:center;grid-column:1/-1}.lvhead b{font-size:16px}.lvhead select{margin-left:auto;background:#16293d;color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;min-height:38px;padding:2px 8px;font-size:15px}
+.lvvu{position:relative;height:18px;border-radius:9px;border:1px solid rgba(255,255,255,.2);background:linear-gradient(90deg,#2fae62 0 70%,#f0a030 70% 88%,#ff4d3d 88%);overflow:hidden}.lvvu i{position:absolute;right:0;top:0;bottom:0;width:100%;background:#06101a;transition:width .06s linear}
+.lvvol{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:14px;color:#cfd8e2}.lvvol input{flex:1;accent-color:#e8c8a6}.lvvol em{font-style:normal;min-width:42px;text-align:right;color:#fff}
+.lvhint{font-size:13.5px;color:#cfd8e2;line-height:1.45}.lvhint b{color:#fff}
+#pMic.live{background:#1f7a46;border-color:#2fae62;color:#fff}
 .pal-top{display:flex;align-items:center;gap:8px;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top,0px));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
 .pal-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--f-display);font-size:18px;font-weight:600}
 .pbtn{background:transparent;border:1px solid var(--stage-dim);color:var(--stage-fg);border-radius:10px;padding:8px 12px;min-height:42px;font-weight:600}
@@ -605,12 +615,20 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <div class="pal-top">
     <div class="pal-name" id="palName"></div>
     <button class="pbtn" id="pSm" aria-label="Testo più piccolo">A−</button><button class="pbtn" id="pLg" aria-label="Testo più grande">A+</button>
+    <button class="pbtn" id="pMic" aria-expanded="false">🎤 Microfono</button>
     <button class="pbtn" id="pRec">Registra video</button>
     <button class="pbtn on" id="pTab">Tablatura</button>
     <button class="pbtn" id="pInst" aria-label="Cambia strumento della tablatura">Basso</button>
     <button class="pbtn" id="pMode" aria-label="Note o accordi">Note</button>
     <button class="pbtn" id="pClick" aria-pressed="false">Click</button>
     <button class="pbtn" id="pX">Esci</button>
+  </div>
+  <div class="palmic" id="palMic" hidden role="dialog" aria-label="Microfono e strumenti">
+    <div class="lvtop"><b>🎤 <span id="lvTitle">Microfono e strumenti</span></b><button class="pbtn" id="lvX" aria-label="Chiudi">✕</button></div>
+    <button id="lvGo">🎤 Accendi</button>
+    <div id="lvRows"></div>
+    <div class="pseg" id="lvRev"><span>Eco sulla voce</span><div class="seg"><button data-v="0">No</button><button data-v="0.2">Poco</button><button data-v="0.45">Tanto</button></div></div>
+    <div class="lvhint" id="lvInfo"></div>
   </div>
   <div class="kpanel" id="kpPal"></div>
   <div class="pal-tab" id="palTabWrap"><div class="now"><span class="nowLbl">Nota</span>: <b id="noteNow2">–</b></div><canvas id="palTab"></canvas></div>
@@ -989,9 +1007,9 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <li><b>Testo:</b> l'app cerca da sola il testo sincronizzato su LRCLIB (titolo, artista e durata). Se non c'è, «Trascrivi dalla voce» lo ricava con RunPod e mette ogni parola a tempo. In «Opzioni testo» puoi cercarlo a mano, modificarlo, sincronizzarlo, spostarlo prima o dopo e ingrandirlo.</li>
     <li><b>Ritardo audio</b> (in «Opzioni testo»): l'app misura da sola quanto tarda il suono ad arrivare (le cuffie Bluetooth anche 0,2–0,3 secondi) e allinea testo e tablatura. Togli «automatico» per regolarlo a mano.</li>
     <li><b>Basso e chitarra:</b> in «Opzioni strumento» scegli lo strumento e <b>Note</b> o <b>Accordi</b>. Con Note vedi la tablatura nota per nota (zoom, 5 corde, quante note, «Rifai»); con Accordi vedi gli accordi che scorrono, con il disegno della posizione per la chitarra e la nota da suonare per il basso. In «Scritta» puoi incollare una tablatura tua.</li>
-    <li><b>Palco</b> apre lo schermo intero con il testo evidenziato parola per parola e, sotto o accanto, tablatura o accordi. In alto cambi strumento e Note/Accordi; in basso alzi o togli voce, chitarra e basso. Esci con «Esci» o con Esc.</li>
+    <li><b>Palco</b> apre lo schermo intero con il testo evidenziato parola per parola e, sotto o accanto, tablatura o accordi. In alto cambi strumento e Note/Accordi; in basso alzi o togli voce, chitarra e basso. Con <b>«🎤 Microfono»</b> accendi il microfono (sul PC anche gli strumenti della scheda audio, es. In 1 voce e In 2 basso) e scegli per ognuno se sentirlo in cuffia (🎧 Sì / No), il volume e l'eco sulla voce. Sul telefono c'è solo il microfono: usa cuffie con il filo. Uscendo dal Palco il microfono si spegne. Esci con «Esci» o con Esc.</li>
     <li><b>Registra video:</b> canti (e suoni) con la fotocamera e il testo che scorre. Scegli se mettere testo e base nel video, il <b>trucco</b> e lo <b>sfondo</b> (vero, colore dei vestiti, sfocato, <b>Studio</b> o <b>Bianco</b> con il logo in alto). La «Sincronia voce» è automatica. La voce guida (Voce originale «Guida») la senti in cuffia ma non finisce nella registrazione. Senza fotocamera registra la tua esibizione con il testo a schermo.</li>
-    <li><b>Qualità della registrazione</b>: «Leggera» (540p, 24 fotogrammi, circa 12 MB al minuto) per PC e telefoni poco potenti, «Normale» (720p, circa 22 MB al minuto, con rifinitura finale dello sfondo) e «Alta». L'app sceglie da sola e, se il dispositivo fatica, passa a Leggera.</li>
+    <li><b>Qualità della registrazione</b>: «Leggera» (540p, 24 fotogrammi, circa 16 MB al minuto) per PC e telefoni poco potenti, «Normale» (720p, circa 22 MB al minuto) e «Alta». Con tutte e tre, finita la registrazione, puoi ancora cambiare sfondo e trucco nello Studio. L'app sceglie da sola e, se il dispositivo fatica, passa a Leggera.</li>
     <li><b>Studio (dopo la registrazione):</b> premi <b>«✨ Scegli tu per me»</b> per una prima regolazione automatica, poi aggiusta a piacere: volume di voce e base, sincronia, autotune, pulizia, stile della voce (Naturale, Studio, Pop, Ballata, Rock, Radio, Eco anni '80) con riverbero, eco, presenza, compressione e raddoppio. Il riquadro «Ascolta con gli effetti» è un vero player: ▶ Ascolta / ⏸ Pausa, ■ Ferma, la barra per andare in un punto e il 🔊 volume generale. Con <b>«Voce da studio con RunPod»</b> la voce viene ripulita da rumore, rimbombo e base entrata nel microfono. Nel riquadro Video scegli sfondo e trucco: il video viene rifinito alla fine con più cura. La <b>Sincronia voce</b> si misura da sola al millisecondo (dalla base che entra nel microfono o confrontando la tua voce con l'originale); se non ti convince spostala con il cursore o con −10, −1, +1, +10 ms mentre ascolti l'anteprima. Poi <b>«Crea il video finale»</b> e salvalo o condividilo.</li>
     <li><b>Sala prove</b> (solo su PC, con Chrome o Edge): registrate la band con la scheda audio. «Suona e riconosco» trova l'ingresso di ogni musicista, l'accordatore aiuta chitarra e basso, «Taratura ritardo» misura il ritardo della scheda. Per chitarra e basso, in «🎛 Suono», scegli amplificatore NAM e cassa da <b>TONE3000</b> (serve la chiave pubblica in Impostazioni) o da file .nam/.wav, con overdrive, compressore, equalizzatore, chorus, delay e riverbero. La base suona senza gli strumenti che suonate voi, con click e conteggio. Ogni ingresso finisce su una traccia separata; con la <b>sovraincisione</b> aggiungi altri strumenti dopo. In «Mix e sincronia» trascini le tracce sul grafico per farle combaciare (o usi «Allinea sul colpo» e «Allinea alla base»), applichi gli amplificatori con il re-amp ed esporti il mix (WAV e MP3) e le tracce separate.</li>
     <li>Tastiera: <code>Spazio</code> avvia o mette in pausa (durante la sincronizzazione segna la riga).</li>
@@ -1698,9 +1716,56 @@ $('#bSyncLy').onclick=()=>startSync('ly');$('#bSyncTab').onclick=()=>startSync('
 /* ================= palco a schermo intero ================= */
 let palOn=false,palTabOn=prefGet('palTab')!=='0';
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
-async function palOpen(v){palOn=v;$('#palco').hidden=!v;document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;
+async function palOpen(v){palOn=v;$('#palco').hidden=!v;if(!v){if(LV.on)lvStop();$('#palMic').hidden=true}document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;
   try{if(v){const el=$('#palco');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el);try{await screen.orientation.lock('landscape')}catch(e){}}else if(fsEl())await(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
 $('#bPalco').onclick=()=>palOpen(true);$('#pX').onclick=()=>palOpen(false);
+/* ===== PALCO: microfono e strumenti dal vivo in cuffia (PC: scheda audio; telefono e tablet: solo microfono) ===== */
+const LV={on:false,rows:[],streams:[],nodes:[],rev:+(prefGet('lvRev')||0.2),cfg:(()=>{try{return JSON.parse(prefGet('lvCfg')||'{}')}catch(e){return{}}})()};
+const LV_ROLE={voce:'🎤 Voce',chitarra:'🎸 Chitarra',basso:'🎸 Basso',tastiere:'🎹 Tastiere',altro:'🎶 Strumento'};
+function lvSave(){for(const r of LV.rows)LV.cfg[r.key]={role:r.role,hear:r.hear,vol:r.vol};try{prefSet('lvCfg',JSON.stringify(LV.cfg));prefSet('lvRev',String(LV.rev))}catch(e){}}
+function lvApply(r){const c=ctx(),t=c.currentTime;r.mon.gain.setTargetAtTime(r.hear?r.vol:0,t,.02);r.send.gain.setTargetAtTime(r.hear&&r.role==='voce'?r.vol:0,t,.02)}
+function lvStop(){for(const n of LV.nodes)try{n.disconnect()}catch(e){}for(const s of LV.streams)try{s.getTracks().forEach(t=>t.stop())}catch(e){}LV.nodes=[];LV.streams=[];LV.rows=[];LV.on=false;lvRender()}
+async function lvOpenDev(id){return navigator.mediaDevices.getUserMedia({audio:Object.assign({channelCount:{ideal:2},echoCancellation:false,noiseSuppression:false,autoGainControl:false,latency:0},id?{deviceId:{exact:id}}:{})})}
+async function lvStart(){const c=ctx();try{await c.resume()}catch(e){}lvStop();if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast('Questo browser non può usare il microfono');return}
+  $('#lvGo').disabled=true;$('#lvGo').textContent='Accendo…';const ins=[];
+  try{if(isMobile){const st=await audOpen({echoCancellation:false,noiseSuppression:false,autoGainControl:false});LV.streams.push(st);ins.push({st,ch:0,name:'Microfono',key:'mob'})}
+    else{const t0=await navigator.mediaDevices.getUserMedia({audio:true});t0.getTracks().forEach(t=>t.stop());
+      const ds=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='audioinput'&&d.deviceId!=='default'&&d.deviceId!=='communications');
+      const ifs=ds.filter(d=>isIface(d.label)),range=l=>/\bIN\s*\d+\s*[-–]\s*\d+/i.test(l),single=ifs.filter(d=>/\bIN\s*\d+/i.test(d.label)&&!range(d.label));
+      const use=single.length?single:ifs;
+      if(!use.length){const st=await lvOpenDev(AE.id||'');LV.streams.push(st);ins.push({st,ch:0,name:'Microfono',key:'def'})}
+      for(const d of use){try{const st=await lvOpenDev(d.deviceId);LV.streams.push(st);const tr=st.getAudioTracks()[0],se=tr.getSettings?tr.getSettings():{};const n=Math.max(1,Math.min(2,se.channelCount||1));
+          if(single.length){const m=d.label.match(/\bIN\s*(\d+)/i);ins.push({st,ch:0,name:'In '+(m?m[1]:ins.length+1),key:d.label+'#0',lat:se.latency})}
+          else for(let i=0;i<n;i++)ins.push({st,ch:i,name:'In '+(ins.length+1),key:d.label+'#'+i,lat:se.latency})}
+        catch(e){console.warn('ingresso non apribile',d.label,e)}}
+      if(!ins.length)throw new Error('nessun ingresso si è aperto: forse la scheda è usata da un altro programma')}}
+  catch(e){console.error(e);$('#lvGo').disabled=false;lvRender();toast(e&&e.name==='NotAllowedError'?'Serve il permesso per il microfono: consentilo dal lucchetto vicino all\'indirizzo':'Microfono non acceso: '+(e.message||e));return}
+  const bus=c.createGain();bus.connect(c.destination);const rv=c.createConvolver();rv.buffer=stIR(c,1.6);const rg=c.createGain();rg.gain.value=LV.rev;rv.connect(rg);rg.connect(bus);LV.rg=rg;LV.nodes.push(bus,rv,rg);
+  const srcs=new Map();ins.forEach((x,i)=>{let sp=srcs.get(x.st);if(!sp){const src=c.createMediaStreamSource(x.st);sp=c.createChannelSplitter(2);src.connect(sp);srcs.set(x.st,sp);LV.nodes.push(src,sp)}
+    const g=c.createGain(),an=c.createAnalyser(),hp=c.createBiquadFilter(),mon=c.createGain(),send=c.createGain();an.fftSize=1024;sp.connect(g,x.ch);g.connect(an);hp.type='highpass';g.connect(hp);hp.connect(mon);mon.connect(bus);hp.connect(send);send.connect(rv);LV.nodes.push(g,an,hp,mon,send);
+    const cf=LV.cfg[x.key]||{};const r={key:x.key,name:x.name,lat:x.lat||0,an,hp,mon,send,role:cf.role||(i===0?'voce':'altro'),hear:cf.hear!=null?cf.hear:!isMobile,vol:cf.vol!=null?cf.vol:1};
+    hp.frequency.value=r.role==='basso'?25:r.role==='voce'?85:50;lvApply(r);LV.rows.push(r)});
+  LV.on=true;$('#lvGo').disabled=false;lvRender();lvMeter();if(isMobile&&!LV.rows[0].hear)toast('Microfono acceso. Metti le cuffie e tocca 🎧 per sentirti')}
+function lvRender(){const box=$('#lvRows');if(!box)return;const g=$('#lvGo');g.classList.toggle('on',LV.on);if(!g.disabled)g.textContent=LV.on?'■ Spegni il microfono':'🎤 Accendi '+(isMobile?'il microfono':'microfono e strumenti');
+  $('#lvTitle').textContent=isMobile?'Microfono':'Microfono e strumenti';$('#pMic').classList.toggle('live',LV.on);$('#pMic').textContent=LV.on?'🎤 Microfono acceso':'🎤 Microfono';$('#lvRev').hidden=!LV.rows.some(r=>r.role==='voce');
+  $$('#lvRev button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-LV.rev)<.01));
+  box.innerHTML=LV.rows.map((r,i)=>`<div class="lvrow" data-lv="${i}"><div class="lvhead"><b>${esc(r.name)}</b>${isMobile?'':`<select data-lvrole aria-label="Cosa c'è su ${esc(r.name)}">${Object.entries(LV_ROLE).map(([k,v])=>`<option value="${k}" ${k===r.role?'selected':''}>${v}</option>`).join('')}</select>`}</div>
+    <div class="lvvu"><i></i></div><button class="hp ${r.hear?'on':''}" data-lvhp aria-pressed="${r.hear}" title="${r.hear?'Ti senti in cuffia: tocca per spegnere':'In cuffia spento: tocca per sentirti'}"><span>🎧</span><b>${r.hear?'Sì':'No'}</b></button>
+    <label class="lvvol">In cuffia<input type="range" data-lvvol min="0" max="2" step="0.05" value="${r.vol}"><em>${Math.round(r.vol*100)}%</em></label></div>`).join('');
+  $$('#lvRows [data-lv]').forEach(el=>{const r=LV.rows[+el.dataset.lv];el.querySelector('[data-lvhp]').onclick=()=>{r.hear=!r.hear;lvApply(r);lvSave();lvRender()};
+    const vs=el.querySelector('[data-lvvol]');vs.oninput=()=>{r.vol=+vs.value;if(r.vol>0&&!r.hear){r.hear=true;lvRender()}else el.querySelector('em').textContent=Math.round(r.vol*100)+'%';lvApply(r);lvSave()};
+    const rs=el.querySelector('[data-lvrole]');if(rs)rs.onchange=()=>{r.role=rs.value;r.hp.frequency.value=r.role==='basso'?25:r.role==='voce'?85:50;lvApply(r);lvSave();lvRender()}});
+  lvInfo()}
+function lvInfo(){const el=$('#lvInfo');if(!el)return;const c=actx;let t='';
+  if(LV.on&&c){const ms=Math.round(((c.outputLatency||0)+(c.baseLatency||0)+Math.max(0,...LV.rows.map(r=>r.lat||0)))*1000);if(ms)t+='Ritardo in cuffia circa <b>'+ms+' ms</b>'+(ms>35?' (alto: chiudi altri programmi o spegni la 🎧 e usa il Direct Monitor della scheda).':'.')+' '}
+  t+=isMobile?'Sul telefono c\'è solo il microfono. Usa <b>cuffie con il filo</b>: con quelle Bluetooth ti senti in ritardo. Senza cuffie lascia la 🎧 su «No», altrimenti fischia.':'Su PC si accendono il microfono e gli strumenti della scheda audio (es. Behringer: In 1 voce, In 2 basso). Se ti senti due volte, spegni il Direct Monitor della scheda oppure metti la 🎧 su «No».';
+  el.innerHTML=t}
+function lvMeter(){if(!LV.on)return;const b=new Float32Array(1024);LV.rows.forEach((r,i)=>{r.an.getFloatTimeDomainData(b);let m=0;for(const v of b){const a=v<0?-v:v;if(a>m)m=a}r.pk=Math.max(m,(r.pk||0)*.9);const db=r.pk>1e-5?20*Math.log10(r.pk):-99,lv=Math.max(0,Math.min(100,(db+60)/60*100));const i2=document.querySelector(`#lvRows [data-lv="${i}"] .lvvu i`);if(i2)i2.style.width=(100-lv)+'%'});
+  if((LV._f=(LV._f||0)+1)%60===0)lvInfo();requestAnimationFrame(lvMeter)}
+$('#pMic').onclick=()=>{const p=$('#palMic');p.hidden=!p.hidden;$('#pMic').setAttribute('aria-expanded',!p.hidden);if(!p.hidden)lvRender()};$('#lvX').onclick=()=>{$('#palMic').hidden=true;$('#pMic').setAttribute('aria-expanded','false')};
+$('#lvGo').onclick=()=>LV.on?lvStop():lvStart();
+$$('#lvRev button').forEach(b=>b.onclick=()=>{LV.rev=+b.dataset.v;if(LV.rg)LV.rg.gain.setTargetAtTime(LV.rev,ctx().currentTime,.03);lvSave();lvRender()});
+
 $('#pInst').onclick=()=>{setInst(inst==='guitar'?'bass':'guitar');$$('.kpanel').forEach(P=>delete P.dataset.ci)};
 $('#pTab').onclick=()=>{palTabOn=!palTabOn;prefSet('palTab',palTabOn?'1':'0');$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;$$('.kpanel').forEach(P=>delete P.dataset.ci)};
 document.addEventListener('fullscreenchange',()=>{if(palOn&&!fsEl())palOpen(false)});
@@ -2182,7 +2247,7 @@ $('#bAdd').onclick=addSong;
 const R={stream:null,facing:'user',rec:null,chunks:[],raf:0,on:false,count:0,t0:0,blob:null,mime:'',musG:null,vocG:null,musD:null,dest:null,micSrc:null,elSrc:null};
 const recLogo=new Image();recLogo.src=document.querySelector('.brand img').src;
 /* qualità della registrazione: Leggera per PC e telefoni poco potenti */
-const QP={leggera:{s:540,fps:24,vbr:1.5e6,seg:120,raw:false,mb:12},normale:{s:720,fps:30,vbr:2.8e6,seg:70,raw:true,mb:22},alta:{s:720,fps:30,vbr:5e6,seg:55,raw:true,mb:38}};
+const QP={leggera:{s:540,fps:24,vbr:1.5e6,seg:120,raw:true,mb:16},normale:{s:720,fps:30,vbr:2.8e6,seg:70,raw:true,mb:22},alta:{s:720,fps:30,vbr:5e6,seg:55,raw:true,mb:38}};
 const weakDev=()=>isMobile||(navigator.hardwareConcurrency||4)<=4||(navigator.deviceMemory||8)<=4;
 let QK=prefGet('recQ')||(weakDev()?'leggera':'normale');if(!QP[QK])QK='leggera';const Q=()=>QP[QK];
 /* sempre in verticale (formato da telefono, 9:16), anche dal PC: dalla webcam si prende la parte centrale */
@@ -2293,7 +2358,7 @@ async function recOpen(){if(!song){toast('Apri prima un brano');return}
   catch(e){$('#recHint').textContent=e&&e.name==='NotAllowedError'?'Serve il permesso per fotocamera e microfono: consentilo dal lucchetto vicino all\'indirizzo.':window.self!==window.top?'Qui la fotocamera è bloccata: apri Fonica Infinity dal suo indirizzo web.':'Non riesco ad aprire la fotocamera: '+(e.message||e)}
   recVoxUI();recLevels();cancelAnimationFrame(R.raf);R.raf=requestAnimationFrame(recDraw);
   try{const el=$('#recOv');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el)}catch(e){}}
-function recClose(){if(R.monG)R.monG.gain.value=0;if(R.on)recStop();cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
+function recClose(){if(R.monG)R.monG.gain.value=0;if(R.on)recStop();try{stPrevStop()}catch(e){}try{$('#recPlay').pause()}catch(e){}try{recGuideOff()}catch(e){}cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
 function recMime(){for(const m of ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=h264,opus','video/mp4','video/webm;codecs=vp8,opus','video/webm','video/webm;codecs=vp9,opus'])if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))return m;return ''}
 /* voce guida separata: in cuffia sì, nella registrazione no */
 async function recGuideOn(){R.guideBuf=null;R.guideRec=false;if(!stems.vocals)return;const g=gains.vocals;if(g.mute||g.vol<=0||g.vol>=.9)return;
@@ -2397,7 +2462,7 @@ const stSave=()=>prefSet('studio',JSON.stringify(ST));
 const ST_SL={stVoc:'voc',stMus:'mus',stRev:'rev',stEcho:'echo',stPres:'pres',stComp:'comp',stDbl:'dbl'};
 function stUI(){for(const[id,k]of Object.entries(ST_SL)){$('#'+id).value=ST[k];$('#'+id+'V').textContent=k==='voc'||k==='mus'?Math.round(ST[k]*100)+'%':Math.round(ST[k]*100)}
   $$('#stPreset button').forEach(b=>b.classList.toggle('on',b.dataset.p===ST.preset));$$('#stBg button').forEach(b=>b.classList.toggle('on',b.dataset.v===ST.bg));
-  $$('#stBeauty button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-ST.beauty)<.01));$('#stClean').checked=ST.clean;$('#stAi').checked=ST.ai;$('#stBeauty').hidden=ST.bg==='rec';$('#stVidNote').hidden=ST.bg==='rec'}
+  $$('#stBeauty button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-ST.beauty)<.01));$('#stClean').checked=ST.clean;$('#stAi').checked=ST.ai;const raw=!!(typeof R!=='undefined'&&R&&R.raw);$('#stBeauty').hidden=!raw;$$('#stBg button').forEach(b=>b.disabled=!raw&&b.dataset.v!=='rec');$('#stVidNote').hidden=raw&&ST.bg==='rec';$('#stVidNote').textContent=raw?'Con uno sfondo diverso da «Come registrato» o con il trucco il video viene rifinito alla fine: bordi più puliti, trucco solo sulla pelle e colori più vivi. Poi premi «Crea il video finale».':'Questo video è stato registrato senza la copia della fotocamera (il dispositivo non ce l\'ha fatta): sfondo e trucco si scelgono prima di registrare.'}
 const IRC={};function stIR(c,len){const sr=c.sampleRate,k=sr+'/'+len;if(IRC[k])return IRC[k];const n=Math.floor(sr*len),b=c.createBuffer(2,n,sr);
   for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch);let lp=0;for(let i=0;i<n;i++){const t=i/n,a=Math.pow(1-t,2.2)*Math.exp(-3*t);const w=Math.random()*2-1;const cf=.25+.7*t;lp=lp+(w-lp)*(1-cf);d[i]=lp*a*(i<sr*.004?i/(sr*.004):1)}}return IRC[k]=b}
 function stCurve(k){const n=1024,c=new Float32Array(n);for(let i=0;i<n;i++){const x=i/(n-1)*2-1;c[i]=Math.tanh(x*(1+k*6))/Math.tanh(1+k*6)}return c}
@@ -2478,10 +2543,10 @@ async function stPrevStart(from){const say=t=>$('#recMsg').textContent=t;try{$('
 function stChanged(){stSave();stUI();if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}}
 function avSet(v){v=Math.max(-800,Math.min(800,Math.round(v)));$('#stAv').value=v;$('#stAvV').textContent=(v>0?'+':'')+v+' ms'}
 $('#stAv').oninput=e=>avSet(+e.target.value);$$('[data-av]').forEach(b=>b.onclick=()=>avSet(+$('#stAv').value+ +b.dataset.av));
-function stOnFinish(){avSet(LRN.av());stPrevStop();PV.pos=0;PV.dur=0;stPlTick();$('#fbBox').hidden=true;R.lrn=null;$('#recSync').checked=true;lagUI(0);$('#stLagInfo').textContent='(misuro…)';setTimeout(stLagEnsure,400);if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=!R.raw;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
+function stOnFinish(){avSet(LRN.av());stPrevStop();PV.pos=0;PV.dur=0;stPlTick();$('#fbBox').hidden=true;R.lrn=null;$('#recSync').checked=true;lagUI(0);$('#stLagInfo').textContent='(misuro…)';setTimeout(stLagEnsure,400);if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=false;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
 for(const[id,k]of Object.entries(ST_SL))$('#'+id).oninput=e=>{ST[k]=+e.target.value;if(['rev','echo','pres','comp','dbl'].includes(k))ST.preset='';stChanged()};
 $$('#stPreset button').forEach(b=>b.onclick=()=>{ST.preset=b.dataset.p;Object.assign(ST,{sat:0,radio:0},ST_PRE[b.dataset.p]);stChanged()});
-$$('#stBg button').forEach(b=>b.onclick=()=>{ST.bg=b.dataset.v;stSave();stUI()});$$('#stBeauty button').forEach(b=>b.onclick=()=>{ST.beauty=+b.dataset.v;stSave();stUI()});
+$$('#stBg button').forEach(b=>b.onclick=()=>{ST.bg=b.dataset.v;stSave();stUI()});$$('#stBeauty button').forEach(b=>b.onclick=()=>{ST.beauty=+b.dataset.v;if(ST.beauty>0&&ST.bg==='rec')ST.bg='real';stSave();stUI()});
 $('#stClean').onchange=e=>{ST.clean=e.target.checked;stChanged()};$('#stAi').onchange=e=>{ST.ai=e.target.checked;stSave();if(PV.on){stPrevStop()}};
 $('#recSync').onchange=e=>{if(e.target.checked){R.lagMan=null;R.lagC=null;stLagEnsure()}else{R.lagMan=Math.round(+$('#stLag').value);lagUI(R.lagMan/1000)}if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}};
 $('#stLag').oninput=e=>lagSet(+e.target.value);$$('[data-lag]').forEach(b=>b.onclick=()=>lagSet(+$('#stLag').value+ +b.dataset.lag));
