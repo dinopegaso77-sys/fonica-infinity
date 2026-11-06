@@ -338,6 +338,23 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .shop .buy a,.shop .buy button{font-size:13px;padding:6px 10px;min-height:34px;text-decoration:none;color:var(--fg)}
 .shop .buy a.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .shop .price{font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent)}
+.pkbtn{display:block;text-align:left;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--raise);color:var(--fg);border:1px solid var(--line)}
+.pkov{position:fixed;inset:0;z-index:105;background:rgba(5,12,20,.6);display:flex;align-items:center;justify-content:center;padding:max(10px,env(safe-area-inset-top,0px)) 10px max(10px,env(safe-area-inset-bottom,0px))}.pkov[hidden]{display:none}
+.pkov.dark{--surface:#0f1f30;--raise:#16293d;--line:#26405a;--fg:#eef0f2;--dim:#a3adb8;--accent:#e8c8a6;--accent-ink:#0a1827;color-scheme:dark}
+.pkbox{width:min(560px,100%);height:min(760px,100%);max-height:100%;display:flex;flex-direction:column;gap:10px;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 20px 50px rgba(0,0,0,.45);overflow:hidden}
+.pktop{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none}.pktop b{font-size:19px}
+.pksearch{flex:none;width:100%;min-height:48px;font-size:17px;padding:8px 14px;border-radius:12px}
+.pklist{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:8px;padding-right:2px}
+.pkart{border:2px solid var(--line);border-radius:14px;background:var(--raise);flex:none}.pkart.open{border-color:var(--accent)}
+.pkhead{display:flex;align-items:center;gap:10px;width:100%;min-height:56px;padding:8px 10px 8px 14px;background:transparent;border:0;color:var(--fg);text-align:left;cursor:pointer;font-size:18px;font-weight:800}
+.pkhead span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pkhead small{font-size:13px;font-weight:600;color:var(--dim)}
+.pkhead i{font-style:normal;flex:none;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-size:26px;font-weight:800;background:var(--accent);color:var(--accent-ink);line-height:1}
+.pksongs{display:flex;flex-direction:column;gap:6px;padding:0 10px 10px}.pksongs[hidden]{display:none}
+.pksong{display:block;width:100%;text-align:left;min-height:50px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:16.5px;font-weight:600;cursor:pointer;line-height:1.3}
+.pksong.cur{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}.pksong.cur::after{content:'  ▶ in uso';font-size:12px;font-weight:800}
+.pkdemo{flex:none}.pkempty{color:var(--dim);text-align:center;padding:20px 8px;font-size:16px}
+.pkacts{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid var(--line);padding-top:10px}.pkacts .chip{min-height:48px;font-size:15px;padding:6px 10px;border-radius:12px;width:100%}.pkacts[hidden]{display:none}
+mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 .toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:600;z-index:130;font-size:14px;max-width:calc(100% - 32px);text-align:center}
 
 /* sincronizzazione */
@@ -498,7 +515,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       <div class="song"><p class="tagline">Fonica Infinity è la tua saletta prove: divertiti a cantare e suonare i tuoi brani preferiti.</p>
         <div class="nowsong" id="nowSong" hidden><b id="sTitle">—</b><span id="sArtist"></span></div>
         <button class="chip pri" id="bLoadSong" hidden>Carica brano</button>
-        <select class="sel songpick" id="songPick" aria-label="Scegli un brano dalla libreria"><option value="">📚 Scegli un brano…</option></select></div>
+        <button class="sel songpick pkbtn" id="songPickBtn" data-pk="main" aria-haspopup="dialog">🎵 Scegli un brano…</button><select class="sel songpick" id="songPick" hidden aria-hidden="true" tabindex="-1"><option value="">📚 Scegli un brano…</option></select></div>
     </div>
     <div class="topbtns">
       <div class="acts">
@@ -681,7 +698,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 <div id="salaOv" class="salaov" hidden>
   <div class="sala-top">
     <b class="sala-title" id="salaTitle">Sala prove</b>
-    <select class="sel songpick" id="sSongPick" aria-label="Scegli un brano dalla libreria"></select>
+    <button class="sel songpick pkbtn" id="sSongPickBtn" data-pk="sala" aria-haspopup="dialog">🎵 Scegli un brano…</button><select class="sel songpick" id="sSongPick" hidden aria-hidden="true" tabindex="-1"></select>
     <div class="sala-tabs seg" role="tablist"><button data-sv="rec" class="on">Registra</button><button data-sv="mix">Mix e sincronia</button></div>
     <span class="slat" id="sLat" title="Ritardo tra quando suoni e quando ti senti in cuffia">Ritardo – ms</span>
     <button class="mini" id="salaFull">⛶ Schermo intero</button>
@@ -1109,6 +1126,12 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     </div>
   </div></div>
 </div>
+<div class="pkov" id="bpOv" hidden><div class="pkbox" role="dialog" aria-modal="true" aria-labelledby="pkTitle">
+  <div class="pktop"><b id="bpTitle">🎵 Scegli un brano</b><button class="mini" id="bpX" aria-label="Chiudi">✕</button></div>
+  <input class="inp pksearch" id="bpQ" type="search" placeholder="🔎 Cerca artista o brano" aria-label="Cerca artista o brano" autocomplete="off">
+  <div class="pklist" id="bpList"></div>
+  <div class="pkacts" id="bpActs"><button class="chip" data-pa="__add">➕ Separa un nuovo brano</button><button class="chip" data-pa="__load">📁 Carica tracce separate</button><button class="chip" data-pa="__shop">🛒 Cerca e compra</button><button class="chip pri" data-pa="__lib">📚 Apri la libreria</button></div>
+</div></div>
 <div class="toast" id="toast" hidden></div>
 
 <script>
@@ -1828,7 +1851,35 @@ async function songPickFill(){const all=((await dbAll())||[]).sort((a,b)=>(a.art
   const by=new Map();for(const x of all){const a=x.artist||'Artista sconosciuto';if(!by.has(a))by.set(a,[]);by.get(a).push(x)}
   const cur=song&&song.id;const opts=`<option value="demo">Prova di palco (brano di prova)</option>`+[...by].map(([a,L])=>`<optgroup label="${esc(a)}">${L.map(x=>`<option value="${esc(x.id)}">${esc(x.title||'Senza titolo')}</option>`).join('')}</optgroup>`).join('');
   const acts=`<optgroup label="Aggiungi"><option value="__add">➕ Separa un nuovo brano</option><option value="__load">📁 Carica tracce già separate</option><option value="__shop">🔎 Cerca e compra un brano</option><option value="__lib">📚 Apri la libreria</option></optgroup>`;
-  for(const id of ['#songPick','#sSongPick']){const sel=$(id);if(!sel)continue;sel.innerHTML=(id==='#songPick'?`<option value="" disabled>🎵 Scegli un brano (${all.length} in libreria)</option>`:'')+opts+(id==='#songPick'?acts:'');sel.value=cur&&[...sel.options].some(o=>o.value===cur)?cur:(id==='#songPick'?'':'demo')}}
+  for(const id of ['#songPick','#sSongPick']){const sel=$(id);if(!sel)continue;sel.innerHTML=(id==='#songPick'?`<option value="" disabled>🎵 Scegli un brano (${all.length} in libreria)</option>`:'')+opts+(id==='#songPick'?acts:'');sel.value=cur&&[...sel.options].some(o=>o.value===cur)?cur:(id==='#songPick'?'':'demo')}pkBtnUI(all.length)}
+
+/* ---------- scelta del brano: artisti in riquadri, + / − per aprire i brani, tutto in ordine alfabetico ---------- */
+const PK={all:[],open:new Set((()=>{try{return JSON.parse(sessionStorage.getItem('pkOpen')||'[]')}catch(e){return[]}})()),from:'main'};
+const pkSort=(a,b)=>a.localeCompare(b,'it',{sensitivity:'base',numeric:true});
+function pkGroups(){const by=new Map();for(const x of PK.all){const a=(x.artist||'').trim()||'Artista sconosciuto';if(!by.has(a))by.set(a,[]);by.get(a).push(x)}
+  const L=[...by].map(([a,s2])=>[a,s2.sort((x,y)=>pkSort(x.title||'',y.title||''))]);L.sort((x,y)=>(x[0]==='Artista sconosciuto')-(y[0]==='Artista sconosciuto')||pkSort(x[0],y[0]));return L}
+const pkNorm=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function pkMark(t,q){t=String(t||'');if(!q)return esc(t);const i=pkNorm(t).indexOf(q);return i<0?esc(t):esc(t.slice(0,i))+'<mark class="pkm">'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length))}
+function pkRender(){const q=pkNorm($('#bpQ').value.trim()),cur=song&&song.id,box=$('#bpList');let html='',n=0;
+  if(!q||pkNorm('prova di palco brano di prova').includes(q))html+=`<button class="pksong pkdemo ${cur==='demo'?'cur':''}" data-ps="demo">🎤 ${pkMark('Prova di palco (brano di prova)',q)}</button>`;
+  for(const[a,L]of pkGroups()){const am=!q||pkNorm(a).includes(q),S=am?L:L.filter(x=>pkNorm(x.title).includes(q));if(!S.length)continue;n++;
+    const open=q?true:PK.open.has(a)||S.some(x=>x.id===cur);
+    html+=`<div class="pkart ${open?'open':''}" data-pa2="${esc(a)}"><button class="pkhead" aria-expanded="${open}"><span>${pkMark(a,am?q:'')}</span><small>${S.length} ${S.length===1?'brano':'brani'}</small><i aria-hidden="true">${open?'−':'+'}</i></button>
+      <div class="pksongs" ${open?'':'hidden'}>${S.map(x=>`<button class="pksong ${x.id===cur?'cur':''}" data-ps="${esc(x.id)}">${pkMark(x.title||'Senza titolo',q)}</button>`).join('')}</div></div>`}
+  if(!n&&q)html+=`<div class="pkempty">Nessun brano trovato per «${esc($('#bpQ').value.trim())}».</div>`;else if(!PK.all.length)html+=`<div class="pkempty">La libreria è vuota: aggiungi il tuo primo brano qui sotto.</div>`;
+  box.innerHTML=html;$('#bpTitle').textContent='🎵 Scegli un brano ('+PK.all.length+' in libreria)';
+  box.querySelectorAll('.pkhead').forEach(h=>h.onclick=()=>{const el=h.parentNode,a=el.dataset.pa2,op=!el.classList.contains('open');el.classList.toggle('open',op);h.setAttribute('aria-expanded',op);h.querySelector('i').textContent=op?'−':'+';el.querySelector('.pksongs').hidden=!op;
+    if(!q){if(op)PK.open.add(a);else PK.open.delete(a);try{sessionStorage.setItem('pkOpen',JSON.stringify([...PK.open]))}catch(e){}}});
+  box.querySelectorAll('[data-ps]').forEach(b=>b.onclick=()=>{pkClose();songPickGo(b.dataset.ps)});
+  const c=box.querySelector('.pksong.cur');if(c&&!q&&!pkRender.done){pkRender.done=true;c.scrollIntoView({block:'center'})}}
+async function pkOpen(from){PK.from=from;PK.all=(await dbAll())||[];$('#bpOv').classList.toggle('dark',from==='sala');$('#bpActs').hidden=from==='sala';$('#bpQ').value='';pkRender.done=false;$('#bpOv').hidden=false;pkRender();if(!isMobile)setTimeout(()=>$('#bpQ').focus(),50)}
+function pkClose(){$('#bpOv').hidden=true}
+$('#bpQ').oninput=pkRender;$('#bpX').onclick=pkClose;$('#bpOv').onclick=e=>{if(e.target===$('#bpOv'))pkClose()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#bpOv').hidden){e.preventDefault();e.stopPropagation();pkClose()}},true);
+$$('#bpActs [data-pa]').forEach(b=>b.onclick=()=>{pkClose();songPickGo(b.dataset.pa)});
+$('#songPickBtn').onclick=()=>pkOpen('main');$('#sSongPickBtn').onclick=()=>pkOpen('sala');
+function pkBtnUI(n){const t=song&&song.id&&song.id!=='demo'?('🎵 '+(song.title||'Senza titolo')+(song.artist?' · '+song.artist:'')):song&&song.id==='demo'?'🎤 Prova di palco':'🎵 Scegli un brano…';
+  for(const id of ['#songPickBtn','#sSongPickBtn']){const b=$(id);if(b){b.textContent=t+'  ▾';b.title='Scegli un brano ('+n+' in libreria)'}}}
 async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
   toast('Apro il brano…');if(id==='demo')await loadDemo();else await openStored(id);
   if(inSala&&song){$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}}
