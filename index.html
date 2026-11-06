@@ -102,6 +102,10 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .stmeter .vu,.smini .vu{position:relative;height:16px;border-radius:8px;min-width:0;flex:none;border:1px solid var(--line);background:linear-gradient(90deg,#2fae62 0 70%,#f0a030 70% 88%,#ff4d3d 88%)}
 .stmeter .vu i,.smini .vu i{position:absolute;right:0;top:0;bottom:0;width:100%;left:auto;background:#06101a;transition:width .06s linear;display:block}
 .stmeter .vu em{position:absolute;right:6px;top:0;font-size:10px;line-height:15px;font-family:var(--f-mono);font-style:normal;color:#d7dee6;z-index:1}
+.stvurow{display:flex;align-items:center;gap:8px}.stvurow .vu{flex:1 1 auto}
+.hp{flex:none;display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:2px 10px;border-radius:10px;border:2px solid #4a5a6b;background:#1a2635;color:#9aa8b6;font-weight:800;font-size:14px;cursor:pointer;position:relative}
+.hp span{font-size:18px;line-height:1;filter:grayscale(1);opacity:.6}.hp.on{background:#1f7a46;border-color:#2fae62;color:#fff}.hp.on span{filter:none;opacity:1}
+.hp:not(.on)::after{content:'';position:absolute;left:8px;top:50%;width:22px;height:2px;background:#ff6b5b;transform:rotate(-40deg)}
 .sthint{font-size:12.5px;color:var(--steel);min-height:17px;margin-top:4px}.sthint.ok{color:var(--ok)}.sthint.bad{color:#ff7a6b;font-weight:700}.sthint.warn{color:#f0a030}
 .stmon{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.stmon .field{flex:1 1 110px;min-width:90px}
 .stsnd{display:grid;grid-template-columns:1fr 1fr;gap:6px}.stsnd .sel{width:100%;min-width:0}.stsnd .field span{font-size:10px}
@@ -277,6 +281,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .recsl{display:flex;flex-direction:column;gap:2px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#cfd8e2;flex:1 1 120px;min-width:0}
 .recsl input{accent-color:var(--stage-hi);width:100%}
 .rechint{font-size:14px;color:#cfd8e2;display:flex;gap:6px;align-items:center}
+.rectr .seg{align-items:center}.rectr .seg b{min-width:96px;white-space:nowrap;text-align:center;color:#e8c8a6;font-size:14px;padding:0 6px}.rectr .seg button{min-width:44px;font-size:16px;font-weight:800}
 .recov .pseg span{color:#cfd8e2}.recov .pseg .seg{border-color:rgba(255,255,255,.5)}.recov .pseg .seg button{color:#fff}.recov .pseg .seg button.on{background:var(--stage-hi);color:var(--stage2)}
 #recGo{margin-left:auto;background:#e0453b;color:#fff}
 #recGo.stop{background:#fff;color:#c0392b}
@@ -303,6 +308,17 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .recfix{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;max-width:640px}
 .recfix .rechint{color:#fff}
 .recdone{position:absolute;inset:0;z-index:3;background:#0a0f16;overflow-y:auto;padding:16px;padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}.recdone[hidden]{display:none}
+.stplayer{background:#13202e;border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.stpl-top{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#fff}.stpl-top b{font-size:15px}.stpl-top span{font-variant-numeric:tabular-nums;color:#e8c8a6;font-weight:700;font-size:16px}
+.stpl-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.stpl-row input{flex:1 1 160px;min-width:120px;accent-color:#e8c8a6;height:26px}
+.stpl-play{min-height:52px;min-width:140px;border-radius:12px;border:0;background:#e8c8a6;color:#0a1827;font-weight:800;font-size:17px}.stpl-play.on{background:#fff;color:#0a1827}
+.stpl-btn{min-height:52px;border-radius:12px;border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;font-weight:700;font-size:15px;padding:0 14px}
+.stpl-vl{color:#cfd8e2;font-weight:700}.stpl-row b{min-width:48px;text-align:right;color:#fff;font-variant-numeric:tabular-nums}
+.recdone .chip{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.45)}.recdone .chip.pri{background:#e8c8a6;color:#0a1827;border-color:#e8c8a6}
+.recdone .chip:disabled{opacity:.5}
+#recGo,.sdock #sRecGo{background:#d32f2f!important;color:#fff!important;font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,.35);opacity:1}
+#recGo:disabled{background:#7a1f1f!important;color:#ffd6d0!important;opacity:1}
+#recGo.stop,.sdock #sRecGo.stop{background:#fff!important;color:#b71c1c!important;text-shadow:none}
 .recdone-in{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px;align-items:stretch}
 .stsec{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:10px}
 .stwave{height:150px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.15)}#stWave{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
@@ -976,7 +992,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
     <li><b>Palco</b> apre lo schermo intero con il testo evidenziato parola per parola e, sotto o accanto, tablatura o accordi. In alto cambi strumento e Note/Accordi; in basso alzi o togli voce, chitarra e basso. Esci con «Esci» o con Esc.</li>
     <li><b>Registra video:</b> canti (e suoni) con la fotocamera e il testo che scorre. Scegli se mettere testo e base nel video, il <b>trucco</b> e lo <b>sfondo</b> (vero, colore dei vestiti, sfocato, <b>Studio</b> o <b>Bianco</b> con il logo in alto). La «Sincronia voce» è automatica. La voce guida (Voce originale «Guida») la senti in cuffia ma non finisce nella registrazione. Senza fotocamera registra la tua esibizione con il testo a schermo.</li>
     <li><b>Qualità della registrazione</b>: «Leggera» (540p, 24 fotogrammi, circa 12 MB al minuto) per PC e telefoni poco potenti, «Normale» (720p, circa 22 MB al minuto, con rifinitura finale dello sfondo) e «Alta». L'app sceglie da sola e, se il dispositivo fatica, passa a Leggera.</li>
-    <li><b>Studio (dopo la registrazione):</b> premi <b>«✨ Scegli tu per me»</b> per una prima regolazione automatica, poi aggiusta a piacere: volume di voce e base, sincronia, autotune, pulizia, stile della voce (Naturale, Studio, Pop, Ballata, Rock, Radio, Eco anni '80) con riverbero, eco, presenza, compressione e raddoppio. «Ascolta l'anteprima» fa sentire gli effetti dal vivo. Con <b>«Voce da studio con RunPod»</b> la voce viene ripulita da rumore, rimbombo e base entrata nel microfono. Nel riquadro Video scegli sfondo e trucco: il video viene rifinito alla fine con più cura. La <b>Sincronia voce</b> si misura da sola al millisecondo (dalla base che entra nel microfono o confrontando la tua voce con l'originale); se non ti convince spostala con il cursore o con −10, −1, +1, +10 ms mentre ascolti l'anteprima. Poi <b>«Crea il video finale»</b> e salvalo o condividilo.</li>
+    <li><b>Studio (dopo la registrazione):</b> premi <b>«✨ Scegli tu per me»</b> per una prima regolazione automatica, poi aggiusta a piacere: volume di voce e base, sincronia, autotune, pulizia, stile della voce (Naturale, Studio, Pop, Ballata, Rock, Radio, Eco anni '80) con riverbero, eco, presenza, compressione e raddoppio. Il riquadro «Ascolta con gli effetti» è un vero player: ▶ Ascolta / ⏸ Pausa, ■ Ferma, la barra per andare in un punto e il 🔊 volume generale. Con <b>«Voce da studio con RunPod»</b> la voce viene ripulita da rumore, rimbombo e base entrata nel microfono. Nel riquadro Video scegli sfondo e trucco: il video viene rifinito alla fine con più cura. La <b>Sincronia voce</b> si misura da sola al millisecondo (dalla base che entra nel microfono o confrontando la tua voce con l'originale); se non ti convince spostala con il cursore o con −10, −1, +1, +10 ms mentre ascolti l'anteprima. Poi <b>«Crea il video finale»</b> e salvalo o condividilo.</li>
     <li><b>Sala prove</b> (solo su PC, con Chrome o Edge): registrate la band con la scheda audio. «Suona e riconosco» trova l'ingresso di ogni musicista, l'accordatore aiuta chitarra e basso, «Taratura ritardo» misura il ritardo della scheda. Per chitarra e basso, in «🎛 Suono», scegli amplificatore NAM e cassa da <b>TONE3000</b> (serve la chiave pubblica in Impostazioni) o da file .nam/.wav, con overdrive, compressore, equalizzatore, chorus, delay e riverbero. La base suona senza gli strumenti che suonate voi, con click e conteggio. Ogni ingresso finisce su una traccia separata; con la <b>sovraincisione</b> aggiungi altri strumenti dopo. In «Mix e sincronia» trascini le tracce sul grafico per farle combaciare (o usi «Allinea sul colpo» e «Allinea alla base»), applichi gli amplificatori con il re-amp ed esporti il mix (WAV e MP3) e le tracce separate.</li>
     <li>Tastiera: <code>Spazio</code> avvia o mette in pausa (durante la sincronizzazione segna la riga).</li>
   </ol>
@@ -1011,6 +1027,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
       <label class="recsl"><span>Sincronia voce <i id="recLatV"></i></span><input type="range" id="recLat" min="0" max="500" step="10" value="120"></label>
       <label class="rechint"><input type="checkbox" id="recLatAuto" checked> Sincronia automatica</label>
     </div>
+    <div class="recrow"><div class="pseg rectr"><span>Tonalità</span><div class="seg"><button id="recTrDown" aria-label="Mezzo tono più basso">−½</button><b id="recTrVal">originale</b><button id="recTrUp" aria-label="Mezzo tono più alto">+½</button><button id="recTrZero">Originale</button></div></div></div>
     <div class="recrow">
       <label class="rechint"><input type="checkbox" id="recBase" checked> Base nel video</label>
       <label class="rechint"><input type="checkbox" id="recFromStart" checked> Dall'inizio del brano</label>
@@ -1033,13 +1050,17 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   </div>
   <div class="recdone" id="recDone" hidden><div class="recdone-in">
     <video id="recPlay" controls playsinline></video>
-    <div class="row" style="justify-content:center"><button class="chip pri" id="stAuto">✨ Scegli tu per me</button><button class="chip" id="stPrev">▶ Ascolta l'anteprima</button></div>
+    <div class="row" style="justify-content:center"><button class="chip pri" id="stAuto">✨ Scegli tu per me</button></div>
+    <div class="stplayer" aria-label="Ascolta con gli effetti"><div class="stpl-top"><b>Ascolta con gli effetti</b><span id="stPlT">0:00 / 0:00</span></div>
+      <div class="stpl-row"><button class="stpl-play" id="stPrev" aria-label="Ascolta">▶ Ascolta</button><button class="stpl-btn" id="stStop" aria-label="Ferma e torna all'inizio">■ Ferma</button>
+        <input type="range" id="stPos" min="0" max="100" step="0.1" value="0" aria-label="Posizione nel brano"></div>
+      <div class="stpl-row"><span class="stpl-vl">🔊 Volume</span><input type="range" id="stMaster" min="0" max="1.5" step="0.05" value="1" aria-label="Volume generale"><b id="stMasterV">100%</b></div></div>
     <div class="stsec"><h5>Voce e base</h5>
       <div class="recrow"><label class="recsl"><span>Volume voce <i id="stVocV"></i></span><input type="range" id="stVoc" min="0" max="3" step="0.05" value="1"></label><label class="recsl"><span>Volume base <i id="stMusV"></i></span><input type="range" id="stMus" min="0" max="1.5" step="0.05" value="0.8"></label></div>
       <div class="recrow"><label class="rechint"><input type="checkbox" id="recSync" checked> Sincronizza la voce automaticamente</label><span class="rechint" id="stLagInfo"></span></div>
       <div class="lagrow"><span class="lbl">Sincronia voce</span><button class="mini" data-lag="-10">−10</button><button class="mini" data-lag="-1">−1</button><input type="range" id="stLag" min="-300" max="1500" step="1" value="0" aria-label="Sincronia della voce in millisecondi"><button class="mini" data-lag="1">+1</button><button class="mini" data-lag="10">+10</button><b id="stLagV">0 ms</b></div>
       <div class="stwave"><canvas id="stWave"></canvas></div>
-      <span class="rechint">Se la voce arriva dopo la base, aumenta i millisecondi; se arriva prima, diminuiscili. Con «Ascolta l'anteprima» senti subito il risultato.</span>
+      <span class="rechint">Se la voce arriva dopo la base, aumenta i millisecondi; se arriva prima, diminuiscili. Con «▶ Ascolta» senti subito il risultato.</span>
       <div class="recrow">
         <div class="pseg" id="recTune"><span>Autotune</span><div class="seg"><button data-v="0">No</button><button data-v="0.4">Leggero</button><button data-v="0.7">Medio</button><button data-v="1">Forte</button></div></div></div>
       <div class="recrow"><label class="rechint"><input type="checkbox" id="stClean" checked> Pulizia (rumori bassi e «s» troppo forti)</label>
@@ -1321,7 +1342,7 @@ $('#clickMeter').onchange=e=>{CLK2.meter=+e.target.value;prefSet('clickMeter',CL
 clickUI();
 rateUI();
 function updTr(){const a=Math.abs(tr);let s;if(!tr)s='originale';else{const whole=Math.floor(a/2),half=a%2;s=(tr>0?'+':'−')+(whole?whole+(half?' e ½':''):'½')+(a<=2?' tono':' toni')}
-  if(tr&&bassKey!=null)s+=' ('+NOTE_IT[bassKey]+'→'+NOTE_IT[((bassKey+tr)%12+12)%12]+')';$('#trVal').textContent=s;const sv=document.getElementById('sTrVal');if(sv)sv.textContent=s}
+  if(tr&&bassKey!=null)s+=' ('+NOTE_IT[bassKey]+'→'+NOTE_IT[((bassKey+tr)%12+12)%12]+')';$('#trVal').textContent=s;const sv=document.getElementById('sTrVal');if(sv)sv.textContent=s;const rv=document.getElementById('recTrVal');if(rv)rv.textContent=s}
 function setTr(n){n=Math.max(-12,Math.min(12,n));if(n===tr)return;tr=n;tabRemap();updTr();rebuildMix()}
 $('#trDown').onclick=()=>setTr(tr-1);$('#trUp').onclick=()=>setTr(tr+1);$('#trZero').onclick=()=>setTr(0);
 function updAB(){$('#bA').textContent=loopA==null?'A':'A '+fmt(loopA);$('#bB').textContent=loopB==null?'B':'B '+fmt(loopB);$('#bA').classList.toggle('hot',loopA!=null);$('#bB').classList.toggle('hot',loopB!=null);$('#bLoop').disabled=loopA==null}
@@ -2289,7 +2310,7 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:Q().vbr,audioBitsPerSecond:192e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
   R.rec.ondataavailable=e=>{if(e.data&&e.data.size)R.chunks.push(e.data)};R.rec.onstop=recFinish;
   R.vchunks=[];R.vrec=null;try{const at=R.vdest?R.vdest.stream.getAudioTracks():R.stream.getAudioTracks();if(at.length){const vm=['audio/webm;codecs=opus','audio/mp4','audio/webm'].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m));R.vrec=new MediaRecorder(new MediaStream(at),vm?{mimeType:vm,audioBitsPerSecond:256000}:{audioBitsPerSecond:256000});R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
-  R.vDec=R.mBuf=R.vAi=R.lagC=null;R.lagMan=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
+  R.vDec=R.mBuf=R.vAi=R.lagC=null;R.trRec=tr;R.lagMan=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
   try{const vt2=Q().raw?R.stream.getVideoTracks():[];if(vt2.length){R.rawch=[];R.rawrec=new MediaRecorder(new MediaStream(vt2),{videoBitsPerSecond:Q().vbr*1.4});R.rawrec.ondataavailable=e=>{if(e.data&&e.data.size)R.rawch.push(e.data)};R.rawstop=new Promise(ok=>R.rawrec.onstop=ok)}}catch(e){R.rawrec=null}
   R.startSong=now();if(R.rawrec)R.rawrec.start(1000);if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');A.addEventListener('playing',recGuideStart,{once:true});play()}
 function recStop(){if(!R.on)return;R.on=false;recGuideOff();$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}try{if(R.rawrec)R.rawrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
@@ -2381,8 +2402,8 @@ const IRC={};function stIR(c,len){const sr=c.sampleRate,k=sr+'/'+len;if(IRC[k])r
   for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch);let lp=0;for(let i=0;i<n;i++){const t=i/n,a=Math.pow(1-t,2.2)*Math.exp(-3*t);const w=Math.random()*2-1;const cf=.25+.7*t;lp=lp+(w-lp)*(1-cf);d[i]=lp*a*(i<sr*.004?i/(sr*.004):1)}}return IRC[k]=b}
 function stCurve(k){const n=1024,c=new Float32Array(n);for(let i=0;i<n;i++){const x=i/(n-1)*2-1;c[i]=Math.tanh(x*(1+k*6))/Math.tanh(1+k*6)}return c}
 /* catena: voce → pulizia → presenza → compressione → (raddoppio, eco, riverbero) + base → master */
-function stChain(c,p){const P=Object.assign({},ST_PRE[p.preset]||{},p),N=(t,o={})=>{const n=c['create'+t]();for(const[k,v]of Object.entries(o)){if(n[k]instanceof AudioParam)n[k].value=v;else n[k]=v}return n};
-  const vin=N('Gain'),min=N('Gain',{gain:p.mus}),bus=N('Gain'),master=N('DynamicsCompressor',{threshold:-8,ratio:2.5,attack:.01,release:.25,knee:8});bus.connect(master);master.connect(c.destination);min.connect(bus);
+function stChain(c,p,dest){const P=Object.assign({},ST_PRE[p.preset]||{},p),N=(t,o={})=>{const n=c['create'+t]();for(const[k,v]of Object.entries(o)){if(n[k]instanceof AudioParam)n[k].value=v;else n[k]=v}return n};
+  const vin=N('Gain'),min=N('Gain',{gain:p.mus}),bus=N('Gain'),master=N('DynamicsCompressor',{threshold:-8,ratio:2.5,attack:.01,release:.25,knee:8});bus.connect(master);master.connect(dest||c.destination);min.connect(bus);
   let x=vin;const link=n=>{x.connect(n);x=n;return n};
   link(N('BiquadFilter',{type:'highpass',frequency:p.clean?90:40,Q:.7}));
   if(p.clean)link(N('BiquadFilter',{type:'peaking',frequency:7000,Q:2,gain:-3.5}));
@@ -2423,11 +2444,11 @@ function stWaveDraw(){const cv=$('#stWave');if(!cv||cv.offsetParent===null)retur
   cv.onwheel=e=>{e.preventDefault();const r=cv.getBoundingClientRect(),x=e.clientX-r.left,t=SW.t0+x/(cv.clientWidth/SW.span);SW.span=Math.max(.02,Math.min(300,SW.span*(e.deltaY>0?1.25:.8)));SW.t0=Math.max(-1,t-x/(cv.clientWidth/SW.span));stWaveDraw()};
   let pin=null;cv.addEventListener('touchmove',e=>{if(e.touches.length!==2)return;e.preventDefault();const dd=Math.abs(e.touches[0].clientX-e.touches[1].clientX);if(pin){SW.span=Math.max(.02,Math.min(300,SW.span*pin/dd));stWaveDraw()}pin=dd},{passive:false});cv.addEventListener('touchend',()=>pin=null)}
 function lagUI(lag){requestAnimationFrame(stWaveDraw);const ms=Math.round(lag*1000);$('#stLag').value=ms;$('#stLagV').textContent=ms+' ms';const b=LRN.lagBias();$('#stLagInfo').textContent=R.lagMan!=null?'(regolato a mano)':R.lagC?'('+R.lagC.how+': '+Math.round(R.lagC.lag*1000)+' ms'+(b?', corretto con l\'esperienza '+(b>0?'+':'')+b+' ms':'')+')':''}
-async function stLagEnsure(){try{if(!R.voiceBlob||R.lagC){stWaveDraw();return}if(!R.vDec){const vb=await decode(await R.voiceBlob.arrayBuffer());R.vDec={x:monoOf(vb),sr:vb.sampleRate}}if(R.lagMan==null&&$('#recSync').checked){R.lagC=await recFindLag(R.vDec.x,R.vDec.sr);lagUI(R.lagC.lag+LRN.lagBias()/1000)}else{await stMusic(Math.max(1,R.vDec.x.length/R.vDec.sr));stWaveDraw()}}catch(e){console.error(e)}}
+async function stLagEnsure(){try{if(!R.voiceBlob||R.lagC){stWaveDraw();return}if(!R.vDec){const vb=await decode(await R.voiceBlob.arrayBuffer());R.vDec={x:monoOf(vb),sr:vb.sampleRate}}PV.dur=R.vDec.x.length/R.vDec.sr;stPlTick();if(R.lagMan==null&&$('#recSync').checked){R.lagC=await recFindLag(R.vDec.x,R.vDec.sr);lagUI(R.lagC.lag+LRN.lagBias()/1000)}else{await stMusic(Math.max(1,R.vDec.x.length/R.vDec.sr));stWaveDraw()}}catch(e){console.error(e)}}
 let lagT=0;function lagSet(ms){ms=Math.max(-300,Math.min(1500,Math.round(ms)));R.lagMan=ms;$('#recSync').checked=false;lagUI(ms/1000);clearTimeout(lagT);lagT=setTimeout(()=>{if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}},220)}
 /* avvia la voce spostata di «lag» (anche negativo) */
 function vStart(src,when,off){if(off>=0)src.start(when,off);else src.start(when-off,0)}
-async function stMusic(dur){if(R.mBuf&&Math.abs(R.mBuf.duration-dur)<.05)return R.mBuf;const src=await sourcesFor(tr);const oc=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);
+async function stMusic(dur){if(R.mBuf&&Math.abs(R.mBuf.duration-dur)<.05)return R.mBuf;const src=await sourcesFor(R.trRec!=null?R.trRec:tr);const oc=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);
   for(const k of order){if(k==='vocals'&&R.guideRec)continue;const g=effGain(k);if(!g)continue;const s=oc.createBufferSource();s.buffer=src[k];const gg=oc.createGain();gg.gain.value=g;s.connect(gg);gg.connect(oc.destination);s.start(0,Math.min(R.startSong,src[k].duration-.01))}
   return R.mBuf=await oc.startRendering()}
 const rmsOf=(x,from=0,to=x.length)=>{let s=0,n=0;for(let i=from;i<to;i+=4){s+=x[i]*x[i];n++}return Math.sqrt(s/Math.max(1,n))};
@@ -2441,27 +2462,34 @@ async function stAuto(){const say=t=>$('#recMsg').textContent=t;const b=$('#stAu
     /* voce scura → più presenza */let hf=0,tot=0;for(let i=1;i<V.x.length;i+=3){const d=V.x[i]-V.x[i-1];hf+=d*d;tot+=V.x[i]*V.x[i]}const br=hf/(tot+1e-9);if(br<.02)ST.pres=Math.min(1,ST.pres+.15);
     ST.clean=true;$$('#recTune button').forEach(x=>x.classList.toggle('on',x.dataset.v==='0'));
     if(ST.bg==='rec')ST.bg=R.raw?(R.bgRec&&R.bgRec!=='0'?R.bgRec:'real'):'rec';ST.beauty=R.beautyRec>0?Math.max(.35,R.beautyRec):.35;stSave();stUI();
-    say(`Ho scelto lo stile «${$('#stPreset [data-p="'+pr+'"]').textContent}», la voce un po' sopra la base e il video rifinito. L'autotune è spento (se serve scegli «Leggero»). Ascolta l'anteprima e, se vuoi, aggiusta i cursori.`+(LRN.mine().length?' Ho tenuto conto delle registrazioni precedenti.':''))}
+    say(`Ho scelto lo stile «${$('#stPreset [data-p="'+pr+'"]').textContent}», la voce un po' sopra la base e il video rifinito. L'autotune è spento (se serve scegli «Leggero»). Premi «▶ Ascolta» e, se vuoi, aggiusta i cursori.`+(LRN.mine().length?' Ho tenuto conto delle registrazioni precedenti.':''))}
   catch(e){console.error(e);say('Non riesco a scegliere da solo: '+(e.message||e))}finally{b.disabled=false}}
 /* anteprima dal vivo con gli effetti (l'autotune si sente nel video finale) */
-const PV={on:false,srcs:[],t0:0,pos:0};
-function stPrevStop(){PV.srcs.forEach(s=>{try{s.stop()}catch(e){}});PV.srcs=[];if(PV.on)PV.pos+=ctx().currentTime-PV.t0;PV.on=false;$('#stPrev').textContent='▶ Ascolta l\'anteprima'}
+const PV={on:false,srcs:[],t0:0,pos:0,dur:0,vol:+(prefGet('stVol')||1),mg:null};
+function stPlBtn(){const b=$('#stPrev');b.textContent=PV.on?'⏸ Pausa':'▶ Ascolta';b.classList.toggle('on',PV.on)}
+function stPlTick(){const pos=PV.on?PV.pos+ctx().currentTime-PV.t0:PV.pos,d=PV.dur||0;if(!PV.drag&&d){$('#stPos').max=d.toFixed(1);$('#stPos').value=Math.min(d,pos).toFixed(1)}$('#stPlT').textContent=fmt(Math.max(0,PV.drag?+$('#stPos').value:pos))+' / '+fmt(d)}
+setInterval(()=>{if(!$('#recDone').hidden)stPlTick()},200);
+function stPrevStop(){PV.srcs.forEach(s=>{try{s.stop()}catch(e){}});PV.srcs=[];if(PV.on)PV.pos+=ctx().currentTime-PV.t0;PV.on=false;stPlBtn();stPlTick()}
 async function stPrevStart(from){const say=t=>$('#recMsg').textContent=t;try{$('#recPlay').pause();say('Preparo l\'anteprima…');const{V,lag}=await stVoice(say);const dur=Math.max(1,V.x.length/V.sr-lag);const M=await stMusic(dur);
-    const c=ctx();await c.resume();const ch=stChain(c,ST);const vb=c.createBuffer(1,V.x.length,V.sr);vb.copyToChannel(V.x,0);const vs=c.createBufferSource();vs.buffer=vb;vs.connect(ch.vin);const ms=c.createBufferSource();ms.buffer=M;ms.connect(ch.min);
-    const pos=Math.min(Math.max(0,from||0),dur-.5),at=c.currentTime+.05;vStart(vs,at,lag+pos);ms.start(at,pos);PV.srcs=[vs,ms];PV.t0=at;PV.pos=pos;PV.on=true;ms.onended=()=>{if(PV.on&&PV.srcs[1]===ms){PV.on=false;PV.pos=0;$('#stPrev').textContent='▶ Ascolta l\'anteprima'}};
-    $('#stPrev').textContent='■ Ferma l\'anteprima';requestAnimationFrame(stWaveDraw);say('Anteprima: '+(ST.ai&&R.vAi?'voce da studio, ':'')+'effetti dal vivo. L\'autotune si applica nel video finale.')}
+    const c=ctx();await c.resume();PV.dur=dur;if(PV.mg)try{PV.mg.disconnect()}catch(e){}PV.mg=c.createGain();PV.mg.gain.value=PV.vol;PV.mg.connect(c.destination);const ch=stChain(c,ST,PV.mg);const vb=c.createBuffer(1,V.x.length,V.sr);vb.copyToChannel(V.x,0);const vs=c.createBufferSource();vs.buffer=vb;vs.connect(ch.vin);const ms=c.createBufferSource();ms.buffer=M;ms.connect(ch.min);
+    const pos=Math.min(Math.max(0,from||0),dur-.5),at=c.currentTime+.05;vStart(vs,at,lag+pos);ms.start(at,pos);PV.srcs=[vs,ms];PV.t0=at;PV.pos=pos;PV.on=true;ms.onended=()=>{if(PV.on&&PV.srcs[1]===ms){PV.on=false;PV.pos=0;stPlBtn();stPlTick()}};
+    stPlBtn();requestAnimationFrame(stWaveDraw);say('Anteprima: '+(ST.ai&&R.vAi?'voce da studio, ':'')+'effetti dal vivo. L\'autotune si applica nel video finale.')}
   catch(e){console.error(e);say('Anteprima non disponibile: '+(e.message||e))}}
 function stChanged(){stSave();stUI();if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}}
 function avSet(v){v=Math.max(-800,Math.min(800,Math.round(v)));$('#stAv').value=v;$('#stAvV').textContent=(v>0?'+':'')+v+' ms'}
 $('#stAv').oninput=e=>avSet(+e.target.value);$$('[data-av]').forEach(b=>b.onclick=()=>avSet(+$('#stAv').value+ +b.dataset.av));
-function stOnFinish(){avSet(LRN.av());stPrevStop();PV.pos=0;$('#fbBox').hidden=true;R.lrn=null;$('#recSync').checked=true;lagUI(0);$('#stLagInfo').textContent='(misuro…)';setTimeout(stLagEnsure,400);if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=!R.raw;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
+function stOnFinish(){avSet(LRN.av());stPrevStop();PV.pos=0;PV.dur=0;stPlTick();$('#fbBox').hidden=true;R.lrn=null;$('#recSync').checked=true;lagUI(0);$('#stLagInfo').textContent='(misuro…)';setTimeout(stLagEnsure,400);if(!R.raw&&ST.bg!=='rec')ST.bg='rec';stUI();$('#stBg').hidden=!R.raw;$('#stBg [data-v="rec"]').textContent=R.raw?'Come registrato':'Come registrato (unica scelta)'}
 for(const[id,k]of Object.entries(ST_SL))$('#'+id).oninput=e=>{ST[k]=+e.target.value;if(['rev','echo','pres','comp','dbl'].includes(k))ST.preset='';stChanged()};
 $$('#stPreset button').forEach(b=>b.onclick=()=>{ST.preset=b.dataset.p;Object.assign(ST,{sat:0,radio:0},ST_PRE[b.dataset.p]);stChanged()});
 $$('#stBg button').forEach(b=>b.onclick=()=>{ST.bg=b.dataset.v;stSave();stUI()});$$('#stBeauty button').forEach(b=>b.onclick=()=>{ST.beauty=+b.dataset.v;stSave();stUI()});
 $('#stClean').onchange=e=>{ST.clean=e.target.checked;stChanged()};$('#stAi').onchange=e=>{ST.ai=e.target.checked;stSave();if(PV.on){stPrevStop()}};
 $('#recSync').onchange=e=>{if(e.target.checked){R.lagMan=null;R.lagC=null;stLagEnsure()}else{R.lagMan=Math.round(+$('#stLag').value);lagUI(R.lagMan/1000)}if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}};
 $('#stLag').oninput=e=>lagSet(+e.target.value);$$('[data-lag]').forEach(b=>b.onclick=()=>lagSet(+$('#stLag').value+ +b.dataset.lag));
-$('#stAuto').onclick=stAuto;$('#stPrev').onclick=()=>PV.on?stPrevStop():stPrevStart(PV.pos);stUI();
+$('#stAuto').onclick=stAuto;$('#stPrev').onclick=()=>PV.on?stPrevStop():stPrevStart(PV.pos);
+$('#stStop').onclick=()=>{stPrevStop();PV.pos=0;stPlTick();stWaveDraw()};
+$('#stPos').oninput=()=>{PV.drag=true;stPlTick()};$('#stPos').onchange=()=>{PV.drag=false;const v=+$('#stPos').value;if(PV.on){stPrevStop();stPrevStart(v)}else{PV.pos=v;stPlTick();stWaveDraw()}};
+function stVolUI(){$('#stMaster').value=PV.vol;$('#stMasterV').textContent=Math.round(PV.vol*100)+'%';try{$('#recPlay').volume=Math.min(1,PV.vol)}catch(e){}}
+$('#stMaster').oninput=e=>{PV.vol=+e.target.value;if(PV.mg)PV.mg.gain.setTargetAtTime(PV.vol,ctx().currentTime,.02);stVolUI();prefSet('stVol',PV.vol)};stVolUI();stUI();
 /* sfondo «Bianco»: neutro, con il logo in alto a sinistra */
 function whiteBg(W,H){const c=fxCanvas('white',W,H);const ok=recLogo.complete&&recLogo.naturalWidth;if(c._k===W+'x'+H+ok)return c;c._k=W+'x'+H+ok;const g=c.getContext('2d');
   const gr=g.createRadialGradient(W/2,H*.42,Math.min(W,H)*.15,W/2,H/2,Math.max(W,H)*.75);gr.addColorStop(0,'#ffffff');gr.addColorStop(1,'#ececea');g.fillStyle=gr;g.fillRect(0,0,W,H);
@@ -2547,6 +2575,7 @@ $('#recOrig').onclick=()=>{R.blob=R.orig;recSetUrl(R.blob);$('#recOrig').hidden=
 
 $('#recAgain').onclick=()=>{$('#recDone').hidden=true;$('#recPlay').pause()};
 $('#recGo').onclick=()=>R.on?recStop():recStart();
+{const rt=n=>{if(R.on){toast('Cambia la tonalità prima di registrare');return}setTr(n);R.guideBuf=null;if(tr)toast('Base in tonalità '+$('#recTrVal').textContent+': il video userà questa')};$('#recTrDown').onclick=()=>rt(tr-1);$('#recTrUp').onclick=()=>rt(tr+1);$('#recTrZero').onclick=()=>rt(0)}
 $('#recX').onclick=recClose;
 $('#recFlip').onclick=async()=>{if(R.on)return;R.facing=R.facing==='user'?'environment':'user';try{await recCamera()}catch(e){toast('Non riesco a cambiare fotocamera')}};
 $('#bRec').onclick=recOpen;$('#pRec').onclick=()=>{palOpen(false);setTimeout(recOpen,200)};
@@ -2742,7 +2771,8 @@ async function sOpenDevices(){const c=sCtx();await c.resume();
       for(let i=0;i<n;i++){const g=c.createGain();sp.connect(g,i);const an=c.createAnalyser();an.fftSize=2048;g.connect(an);SA.chans.push({dev,i,node:g,an,key:dev.label+'#'+i,name:(n>1?dev.label+' – In '+(i+1):dev.label)})}}
     catch(e){console.warn('dispositivo non apribile',d.label,e)}}
   $('#sDevInfo').textContent=SA.chans.length?`Ho trovato ${SA.chans.length} ingress${SA.chans.length>1?'i':'o'} su ${SA.devs.length} dispositiv${SA.devs.length>1?'i':'o'}. I browser leggono al massimo 2 canali per dispositivo: se vi servono più ingressi collegate un altro dispositivo o usate la sovraincisione.`:'Nessun ingresso trovato: collega la scheda audio e riapri la Sala prove.';
-  for(const t of SA.tracks)if(!SA.chans.some(ch=>ch.key===t.dev))t.dev=(SA.chans[0]||{}).key||'';sBuildAll();sRender()}
+  for(const t of SA.tracks)if(!SA.chans.some(ch=>ch.key===t.dev))t.dev=(SA.chans[0]||{}).key||'';sBuildAll();sRender();
+  try{await audResolve(false);if(AE.outId&&c.setSinkId)await c.setSinkId(AE.outId)}catch(e){}if(SA.chans.length)$('#sDevInfo').textContent+=' Le cuffie suonano da: '+(AE.outLabel?devShort(AE.outLabel):'uscita del sistema di Windows')+'. Se non ti senti, collega le cuffie lì e accendi la 🎧 accanto al livello.'}
 const chanOf=t=>SA.chans.find(c=>c.key===t.dev);
 /* ---------- NAM (motore in WebAssembly) ---------- */
 async function sNam(){if(SA.nam)return SA.nam;if(!SA.namLoading)SA.namLoading=(async()=>{let last=null;
@@ -2920,6 +2950,11 @@ function sDevOpts(t){const cur=chanOf(t);const devs=SA.devs.filter(d=>SA.chans.s
   const dv=devs.map(d=>`<option value="${esc(d.id)}" ${cur&&cur.dev===d?'selected':''}>${esc(devShort(d.label))}${isIface(d.label)?' 🎛':''}</option>`).join('')||'<option value="">nessun ingresso</option>';
   const dd=cur?cur.dev:devs[0];const cv=SA.chans.filter(c=>c.dev===dd).map(c=>`<option value="${esc(c.key)}" ${cur===c?'selected':''}>In ${c.i+1}</option>`).join('');return{dv,cv}}
 const hearTxt=t=>t.hear!==false?'🎧 Mi sento dal PC':'🎛 Monitor della scheda';
+/* cuffia accanto al livello: accende o spegne l'ascolto di quell'entrata in cuffia */
+const hpBtn=t=>`<button class="hp ${t.hear!==false?'on':''}" data-hp="${t.id}" aria-pressed="${t.hear!==false}" title="${t.hear!==false?'Ti senti in cuffia: tocca per spegnere':'In cuffia spento: tocca per sentirti'}"><span>🎧</span><b>${t.hear!==false?'Sì':'No'}</b></button>`;
+function sHearUI(t){const on=t.hear!==false;document.querySelectorAll(`[data-hp="${t.id}"]`).forEach(b=>{b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.title=on?'Ti senti in cuffia: tocca per spegnere':'In cuffia spento: tocca per sentirti';b.querySelector('b').textContent=on?'Sì':'No'});const hb=document.querySelector(`[data-hear="${t.id}"]`);if(hb){hb.classList.toggle('hot',on);hb.textContent=hearTxt(t)}}
+function sHearSet(t,on){t.hear=on;try{sCtx().resume()}catch(e){}if(t.node)t.node.mon.gain.value=on?(t.mon||.9):0;if(on&&!t.mon)t.mon=.9;sHearUI(t);sSave();if(on&&!chanOf(t))toast('Questa entrata non ha una scheda audio collegata')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-hp]');if(!b)return;e.preventDefault();e.stopPropagation();const t=SA.tracks.find(x=>x.id===b.dataset.hp);if(t)sHearSet(t,t.hear===false)},true);
 /* manopola: trascina su/giù, rotellina, frecce; doppio clic = valore iniziale */
 function knobify(L){const inp=L.querySelector('input'),k=L.querySelector('.knob'),em=L.querySelector('em');if(!inp||!k)return;
   const mn=+inp.min,mx=+inp.max,st=+inp.step||.01;
@@ -2940,17 +2975,17 @@ function sRender(){
       <label class="recarm ${t.arm?'on':''}" title="Registra questo musicista"><input type="checkbox" data-f="arm" ${t.arm?'checked':''}><i></i>REC</label>
       <button class="mini" data-del="${t.id}" aria-label="Togli ${esc(t.name)}">✕</button></div>
     <div class="stio"><select class="sel" data-f="devid" aria-label="Scheda audio">${sDevOpts(t).dv}</select><select class="sel" data-f="dev" aria-label="Canale">${sDevOpts(t).cv||'<option value="">–</option>'}</select></div>
-    <div class="stmeter"><div class="vu"><i></i><em>–∞ dB</em></div><div class="sthint">Suona qualche nota per vedere il livello</div></div>
+    <div class="stmeter"><div class="stvurow"><div class="vu"><i></i><em>–∞ dB</em></div>${hpBtn(t)}</div><div class="sthint">Suona qualche nota per vedere il livello</div></div>
     <div class="stmon"><button class="mini ${t.hear!==false?'hot':''}" data-hear="${t.id}" title="Acceso: ti senti in cuffia dal PC, con gli effetti. Spento: ti senti con la manopola «Direct Monitor» della scheda audio, senza ritardo (la registrazione avviene comunque).">${hearTxt(t)}</button>
       <label class="field"><span>Volume cuffia</span><input type="range" data-f="mon" min="0" max="1.5" step="0.05" value="${t.mon}"></label>
       <button class="mini" data-rig="${t.id}" title="Tutte le opzioni del suono">🎛 Altro</button></div>
     ${t.role!=='voce'?`<div class="stsnd"><label class="field"><span>🎸 Tono NAM</span><select class="sel" data-snd="amp"></select></label><label class="field"><span>🔈 Cassa IR</span><select class="sel" data-snd="ir"></select></label></div>`:''}
     <div class="knobs">${FXS[t.role].map(([k,l,mn,mx,st])=>`<label class="kn"><input type="range" data-fx="${k}" min="${mn}" max="${mx}" step="${st}" value="${t.rig[k]}" data-def="${defRig(t.role)[k]}"><span class="knob" tabindex="0" role="slider" aria-label="${l}" title="${l}: trascina su o giù · doppio clic per tornare all'inizio"><b></b></span><span>${({Ingresso:'Gain',Compressore:'Comp',Riverbero:'Riverb',Overdrive:'Drive',Volume:'Vol'})[l]||l}</span><em></em></label>`).join('')}</div></div>`).join(''):'<p class="snote">Nessun musicista: premi «+ Aggiungi musicista» o «Suona e riconosco».</p>';
-  $('#sMini').innerHTML=SA.tracks.filter(t=>t.arm).map(t=>`<div data-mm="${t.id}">${ROLE_IC[t.role]||''} ${esc(t.name)}<span class="vu"><i></i></span></div>`).join('');
+  $('#sMini').innerHTML=SA.tracks.filter(t=>t.arm).map(t=>`<div data-mm="${t.id}">${ROLE_IC[t.role]||''} ${esc(t.name)}<span class="vu"><i></i></span>${hpBtn(t)}</div>`).join('');
   $$('#sTracks .kn').forEach(knobify);
   for(const t of SA.tracks){const el=document.querySelector(`[data-tr="${t.id}"]`);const sel=el.querySelector('[data-f="dev"]');if(t.dev&&chanOf(t))sel.value=t.dev;
-    el.querySelector('[data-hear]').onclick=e=>{t.hear=t.hear===false;const b=e.currentTarget;b.classList.toggle('hot',t.hear);b.textContent=hearTxt(t);if(t.node)t.node.mon.gain.value=t.hear?t.mon:0;sSave()};
-    el.querySelectorAll('[data-f]').forEach(inp=>inp.onchange=inp.oninput=async e=>{const f=inp.dataset.f;if(f==='arm'){t.arm=inp.checked;el.classList.toggle('unarmed',!t.arm);const ra=inp.closest('.recarm');if(ra)ra.classList.toggle('on',t.arm)}else if(f==='mon'){t.mon=+inp.value;if(t.mon>0&&t.hear===false){t.hear=true;const hb=el.querySelector('[data-hear]');if(hb){hb.classList.add('hot');hb.textContent=hearTxt(t)}}if(t.node)t.node.mon.gain.value=t.hear===false?0:t.mon}else if(f==='name')t.name=inp.value;
+    el.querySelector('[data-hear]').onclick=()=>sHearSet(t,t.hear===false);
+    el.querySelectorAll('[data-f]').forEach(inp=>inp.onchange=inp.oninput=async e=>{const f=inp.dataset.f;if(f==='arm'){t.arm=inp.checked;el.classList.toggle('unarmed',!t.arm);const ra=inp.closest('.recarm');if(ra)ra.classList.toggle('on',t.arm)}else if(f==='mon'){t.mon=+inp.value;if(t.mon>0&&t.hear===false){t.hear=true;sHearUI(t)}if(t.node)t.node.mon.gain.value=t.hear===false?0:t.mon}else if(f==='name')t.name=inp.value;
       else if(f==='role'&&e.type==='change'){t.role=inp.value;t.rig=Object.assign(defRig(t.role),{amp:t.rig.amp,ir:t.rig.ir});await sBuild(t);sRender()}else if(f==='dev'&&e.type==='change'){t.dev=inp.value;await sBuild(t);sTapBuild()}
       else if(f==='devid'&&e.type==='change'){const ch=SA.chans.find(c=>c.dev.id===inp.value&&!SA.tracks.some(x=>x!==t&&x.dev===c.key))||SA.chans.find(c=>c.dev.id===inp.value);if(ch){t.dev=ch.key;await sBuild(t);sTapBuild();sSave();sRender()}return}
       if(f==='arm'&&e.type==='change')sTapBuild();sSave()})}
