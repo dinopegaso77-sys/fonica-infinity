@@ -67,6 +67,8 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .stakes{display:flex;gap:6px;flex-wrap:wrap;flex-basis:100%}
 .wavewrap{height:min(52vh,460px);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
 #sWave{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.sbrano{gap:8px}.slyr{height:110px;border-radius:10px;overflow:hidden;background:#0d1520}.stab{height:190px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}#sLyr,#sTab{width:100%;height:100%;display:block}
+.smixer{display:flex;flex-wrap:wrap;gap:8px 14px}.smixer .stem{display:flex;align-items:center;gap:6px;background:var(--raise);border-radius:10px;padding:4px 10px}.smixer .stem b{min-width:62px;font-size:13px}.smixer .stem input[type=range]{width:110px}.smixer .stem.off{opacity:.45}
 .smix{display:flex;flex-direction:column;gap:6px}
 .smrow{display:grid;grid-template-columns:150px minmax(160px,1fr) 150px 150px auto auto auto;gap:8px;align-items:center;padding:6px 10px;border-radius:10px;background:var(--raise);border-left:5px solid var(--tc)}
 .rigslot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0}.rigslot b{min-width:120px}.rigslot span{flex:1;min-width:120px;color:var(--steel)}
@@ -579,6 +581,17 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <div class="sala-body">
     <!-- ===== REGISTRA ===== -->
     <section id="salaRec">
+      <div class="sbox sbrano">
+        <div class="slyr"><canvas id="sLyr"></canvas></div>
+        <div class="row" style="gap:8px">
+          <div class="seg" id="sInst"><button data-i="bass">Basso</button><button data-i="guitar">Chitarra</button></div>
+          <div class="seg" id="sMode"><button data-m="notes">Note</button><button data-m="chords">Accordi</button></div>
+          <span class="snote" id="sNote"></span><span class="grow"></span>
+          <button class="chip pri" id="sListen">▶ Ascolta e prova</button>
+          <input type="range" id="sPos" min="0" max="1000" value="0" aria-label="Posizione nel brano" style="flex:1 1 220px"><span class="stime" id="sPosT">0:00</span>
+        </div>
+        <div class="stab"><canvas id="sTab"></canvas></div>
+      </div>
       <div class="sbox">
         <div class="row"><h4 class="grow">Musicisti e ingressi</h4>
           <button class="chip" id="sDetect">🎤 Suona e riconosco</button>
@@ -597,6 +610,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
           <label class="rowchk"><input type="checkbox" id="sCount" checked> Conteggio 1-2-3-4</label>
           <label class="rowchk"><input type="checkbox" id="sFromStart" checked> Dall'inizio del brano</label>
         </div>
+        <div class="smixer" id="sStems"></div>
       </div>
       <div class="sbox stransport">
         <button class="big" id="sRecGo">● Registra</button>
@@ -632,7 +646,7 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
   <div class="box" id="rigAmpBox">
     <h4>Amplificatore e cassa (NAM)</h4>
     <div class="rigslot"><b>Amplificatore</b><span id="rigAmpName">nessuno</span>
-      <button class="chip pri" id="rigT3">Scegli su TONE3000</button><label class="chip"><input type="file" id="rigAmpFile" accept=".nam,application/json" hidden>Carica file .nam</label><button class="mini" id="rigAmpDel">Togli</button></div>
+      <button class="chip" id="rigT3">Scegli su TONE3000</button><label class="chip"><input type="file" id="rigAmpFile" hidden>Carica file .nam</label><button class="mini" id="rigAmpDel">Togli</button></div>
     <div class="rigslot"><b>Cassa (IR)</b><span id="rigIrName">nessuna</span>
       <button class="chip" id="rigT3ir">Scegli su TONE3000</button><label class="chip"><input type="file" id="rigIrFile" accept=".wav,audio/wav" hidden>Carica file .wav</label><button class="mini" id="rigIrDel">Togli</button></div>
     <div class="t3credit" id="rigCredit"></div>
@@ -2585,7 +2599,13 @@ async function sOpenDevices(){const c=sCtx();await c.resume();
   for(const t of SA.tracks)if(!SA.chans.some(ch=>ch.key===t.dev))t.dev=(SA.chans[0]||{}).key||'';sBuildAll();sRender()}
 const chanOf=t=>SA.chans.find(c=>c.key===t.dev);
 /* ---------- NAM (motore in WebAssembly) ---------- */
-async function sNam(){if(SA.nam)return SA.nam;if(!SA.namLoading)SA.namLoading=(async()=>{const m=await import('https://cdn.jsdelivr.net/npm/@hpcc-js/wasm-nam-core/+esm');const C=m.NeuralAmpModelerCore||(m.default&&m.default.NeuralAmpModelerCore)||m.default;return SA.nam=await C.load()})().catch(e=>{SA.namLoading=null;throw e});return SA.namLoading}
+async function sNam(){if(SA.nam)return SA.nam;if(!SA.namLoading)SA.namLoading=(async()=>{let last=null;
+    for(const u of ['https://cdn.jsdelivr.net/npm/@hpcc-js/wasm-nam-core/+esm','https://cdn.jsdelivr.net/npm/@hpcc-js/wasm-nam-core/dist/index.js','https://esm.sh/@hpcc-js/wasm-nam-core']){
+      try{const m=await import(u);const C=m.NeuralAmpModelerCore||(m.default&&m.default.NeuralAmpModelerCore)||m.default;if(!C||!C.load)throw new Error('motore NAM non trovato in '+u);return SA.nam=await C.load()}catch(e){console.warn('NAM',u,e);last=e}}
+    throw new Error('non riesco a scaricare il motore NAM ('+((last&&last.message)||last)+')')})().catch(e=>{SA.namLoading=null;throw e});return SA.namLoading}
+/* un file .nam è un testo JSON con "architecture" e "weights"; alcuni siti lo danno dentro uno .zip */
+function namCheck(bytes){const u=new Uint8Array(bytes);if(u[0]===0x50&&u[1]===0x4b)throw new Error('è un archivio .zip: aprilo e carica il file .nam che c\'è dentro');let j;try{j=JSON.parse(new TextDecoder().decode(u))}catch(e){throw new Error('non è un file .nam valido')}
+  if(!j.architecture||!j.weights)throw new Error('il file non contiene un modello NAM (manca architecture/weights)');return j}
 async function ampGet(key){if(!key)return null;if(SA.mods[key])return SA.mods[key];const r=await setGet('mod:'+key);if(r)SA.mods[key]=r;return r}
 async function ampPut(rec){const key=rec.key||('m'+Date.now().toString(36));rec.key=key;SA.mods[key]=rec;await setPut('mod:'+key,rec);return key}
 /* ---------- catena dal vivo di un musicista ---------- */
@@ -2597,9 +2617,9 @@ async function sBuild(t){const c=sCtx();if(t.node){try{t.node.disconnect()}catch
   if(R2.comp>0)link(N('DynamicsCompressor',{threshold:-12-R2.comp*20,ratio:2+R2.comp*6,attack:.005,release:.12,knee:6}));
   if((t.role==='chitarra'||t.role==='altro')&&R2.drive>0){const ws=N('WaveShaper');ws.curve=curveDrive(R2.drive);ws.oversample='4x';link(ws)}
   let sp=null;
-  if(R2.amp&&R2.live&&(t.role==='chitarra'||t.role==='basso'||t.role==='altro')){try{const nam=await sNam(),rec=await ampGet(R2.amp.key);if(rec){const model=nam.loadModel(new Uint8Array(rec.bytes),{prewarm:false});const B=512;model.reset(c.sampleRate,B);try{model.prewarm()}catch(e){}
+  if(R2.amp&&R2.live&&(t.role==='chitarra'||t.role==='basso'||t.role==='altro')){try{const nam=await sNam(),rec=await ampGet(R2.amp.key);if(rec){const model=nam.loadModel(new TextDecoder().decode(new Uint8Array(rec.bytes)));const B=512;model.reset(c.sampleRate,B);try{model.prewarm()}catch(e){}
         sp=c.createScriptProcessor(B,1,1);sp.onaudioprocess=ev=>{const i=ev.inputBuffer.getChannelData(0),o=ev.outputBuffer.getChannelData(0);try{const y=model.process(i,B);o.set(y.subarray?y.subarray(0,B):y)}catch(e){o.set(i)}};sp._model=model;link(sp)}}
-    catch(e){console.error(e);$('#sMsg').textContent='Amplificatore NAM non disponibile dal vivo ('+(e.message||e)+'): si applica con il re-amp.'}}
+    catch(e){console.error(e);$('#sMsg').textContent='Amplificatore NAM di '+t.name+' non attivo dal vivo: '+(e.message||e)+'.';toast('NAM: '+(e.message||e))}}
   if(R2.ir){const rec=await ampGet(R2.ir.key);if(rec){try{const b=await c.decodeAudioData(rec.bytes.slice(0));const cv=N('Convolver');cv.normalize=true;cv.buffer=b;link(cv)}catch(e){console.error(e)}}}
   else if(R2.amp&&t.role!=='voce'&&!R2.amp.full){link(N('BiquadFilter',{type:'lowpass',frequency:t.role==='basso'?4500:6000,Q:.7}))}
   link(N('BiquadFilter',{type:'lowshelf',frequency:t.role==='basso'?90:150,gain:R2.bass}));link(N('BiquadFilter',{type:'peaking',frequency:t.role==='basso'?700:900,Q:.8,gain:R2.mid}));link(N('BiquadFilter',{type:'highshelf',frequency:t.role==='basso'?2500:3500,gain:R2.treble}));
@@ -2625,12 +2645,43 @@ async function sBaseBufs(){const src=await sourcesFor(tr);const roles=new Set(SA
   for(const k of order){if(!src[k])continue;let g=effGain(k);if($('#sAutoMute').checked){if(k==='guitar'&&roles.has('chitarra'))g=0;if(k==='bass'&&roles.has('basso'))g=0;if(k==='vocals'&&roles.has('voce'))g=0}
     const guide=k==='vocals'&&$('#sGuide').checked&&roles.has('voce');out.push({k,buf:src[k],g,guide})}return out}
 function sClickAt(c,when,acc){const o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();o.type='square';o.frequency.value=acc?2000:1300;f.type='bandpass';f.frequency.value=o.frequency.value;g.gain.setValueAtTime(0,when);g.gain.linearRampToValueAtTime(acc?.4:.26,when+.002);g.gain.exponentialRampToValueAtTime(.001,when+.05);o.connect(f);f.connect(g);g.connect(SA.out);o.start(when);o.stop(when+.06)}
+/* ---------- base con i volumi del mixer (si aggiornano anche mentre suona) ---------- */
+const STEM_N={vocals:'Voce',drums:'Batteria',bass:'Basso',guitar:'Chitarra',piano:'Piano',other:'Altro'};
+function stemVol(k,b){const roles=new Set(SA.tracks.filter(t=>t.arm).map(t=>t.role));let g=effGain(k);if($('#sAutoMute').checked){if(k==='guitar'&&roles.has('chitarra'))g=0;if(k==='bass'&&roles.has('basso'))g=0;if(k==='vocals'&&roles.has('voce'))g=$('#sGuide').checked?(gains.vocals?gains.vocals.vol*.35:.25):0}return g*+$('#sBaseVol').value}
+async function sBaseStart(c,at,from){const src=await sourcesFor(tr);SA.stemG={};const srcs=[];for(const k of order){if(!src[k])continue;const s=c.createBufferSource();s.buffer=src[k];const g=c.createGain();g.gain.value=stemVol(k);s.connect(g);g.connect(SA.out);s.start(at,Math.min(from,src[k].duration-.01));SA.stemG[k]=g;srcs.push(s)}return srcs}
+function sStemApply(){for(const[k,g]of Object.entries(SA.stemG||{}))g.gain.value=stemVol(k)}
+function sStemsUI(){$('#sStems').innerHTML=order.filter(k=>stems[k]).map(k=>{const g=gains[k];return `<div class="stem ${g.mute?'off':''}" data-st="${k}"><b>${STEM_N[k]||k}</b><input type="range" min="0" max="1.5" step="0.05" value="${g.vol}" aria-label="Volume ${STEM_N[k]||k}"><button class="mini" data-mute>${g.mute?'Accendi':'Spegni'}</button></div>`}).join('');
+  $$('#sStems [data-st]').forEach(el=>{const k=el.dataset.st;el.querySelector('input').oninput=e=>{gains[k].vol=+e.target.value;sStemApply();try{syncChanUI()}catch(x){}};el.querySelector('[data-mute]').onclick=()=>{gains[k].mute=!gains[k].mute;sStemsUI();sStemApply();try{syncChanUI()}catch(x){}}})}
+/* orologio della Sala: ascolto, conteggio e registrazione */
+const SP={on:false,at:0,from:0,srcs:[]};
+function sNow(){const c=SA.ctx;if(!c)return SP.from;if(SA.on)return Math.max(0,SA.recFrom+(c.currentTime-SA.t0)-(c.outputLatency||0));if(SP.on)return Math.max(0,SP.from+(c.currentTime-SP.at)-(c.outputLatency||0));return SP.from}
+const sDur=()=>Math.max(1,...Object.values(stems).filter(Boolean).map(b=>b.duration||0));
+async function sListen(){if(SA.on)return;if(SP.on){sListenStop();return}const c=sCtx();await c.resume();const at=c.currentTime+.08;SP.srcs=await sBaseStart(c,at,SP.from);
+  if($('#sClick').checked&&CLK2.beats){const m=CLK2.meter;CLK2.beats.forEach((b,i)=>{if(b>=SP.from&&b<SP.from+900)sClickAt(c,at+(b-SP.from),m>0&&((i-CLK2.down)%m+m)%m===0)})}
+  SP.at=at;SP.on=true;$('#sListen').textContent='■ Ferma';SP.srcs[0]&&(SP.srcs[0].onended=()=>{if(SP.on)sListenStop()})}
+function sListenStop(){if(!SP.on)return;SP.from=sNow();SP.srcs.forEach(s=>{try{s.stop()}catch(e){}});SP.srcs=[];SP.on=false;$('#sListen').textContent='▶ Ascolta e prova'}
+$('#sListen').onclick=sListen;$('#sPos').oninput=e=>{const was=SP.on;if(was)sListenStop();SP.from=+e.target.value/1000*sDur();if(was)sListen()};
+$$('#sInst button').forEach(b=>b.onclick=()=>{setInst(b.dataset.i);sTabUI()});$$('#sMode button').forEach(b=>b.onclick=()=>{setTabMode(b.dataset.m);sTabUI()});
+function sTabUI(){$$('#sInst button').forEach(b=>b.classList.toggle('on',b.dataset.i===inst));$$('#sMode button').forEach(b=>b.classList.toggle('on',b.dataset.m===tabMode))}
+/* testo del brano: riga attuale grande, la prossima piccola */
+function sLyrDraw(t){const cv=$('#sLyr');const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w)return;if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
+  const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle='#0d1520';g.fillRect(0,0,w,h);const L=K.lines;g.textAlign='center';g.textBaseline='middle';
+  if(!L.length){g.fillStyle='#8fa3b8';g.font='15px Figtree,system-ui';g.fillText('Nessun testo per questo brano',w/2,h/2);return}
+  const tt=t-K.off;let i=-1;for(let j=0;j<L.length;j++){if(L[j].t<=tt)i=j;else break}const cur=i>=0?L[i]:null,nx=L[i+1];
+  const fit=(s,max,px)=>{let f=px;g.font=`700 ${f}px "Josefin Sans",sans-serif`;while(f>14&&g.measureText(s).width>max){f-=2;g.font=`700 ${f}px "Josefin Sans",sans-serif`}return f};
+  if(cur){const s=cur.s;fit(s,w*.94,34);const ws=lyrWords(cur);let pr=0;if(ws.length&&ws[0].t!=null){const done=ws.filter(x=>x.t<=tt).length;pr=done/ws.length}g.fillStyle='#fff';g.fillText(s,w/2,h*.38);
+    if(pr>0){g.save();const tw=g.measureText(s).width,x0=w/2-tw/2;g.beginPath();g.rect(x0,0,tw*pr,h*.62);g.clip();g.fillStyle=css('--stage-hi')||'#e8c8a6';g.fillText(s,w/2,h*.38);g.restore()}}
+  if(nx){fit(nx.s,w*.94,20);g.fillStyle='rgba(255,255,255,.55)';g.font=g.font.replace('700','600');g.fillText(nx.s,w/2,h*.8)}}
+let sFr=0;function sFrame(){if($('#salaOv').hidden)return;const t=sNow();if(SA.view==='rec'){sLyrDraw(t);const TD=tabMode==='chords'?chordDraw:tabDraw;const a=TD($('#sTab'),{pxs:120*tabZoom,cx:.25,r:11},t);
+    $('#sNote').textContent=a?(tabMode==='chords'?'Accordo: '+chName(((a[2]+tr)%12+12)%12,a[3]):'Nota: '+nomeMidi(a[2])+' · corda '+bassStrings()[a[3]][0]+', tasto '+a[4]):'';
+    const d=sDur();if(document.activeElement!==$('#sPos'))$('#sPos').value=Math.round(t/d*1000);$('#sPosT').textContent=fmt(t)}
+  sFr=requestAnimationFrame(sFrame)}
 /* ---------- registrazione ---------- */
 async function sRecStart(){if(SA.on){sRecStop();return}if(!song){toast('Apri prima un brano');return}if(!SA.chans.length){toast('Nessun ingresso: collega la scheda audio');return}
   const c=sCtx();await c.resume();const over=$('#sOver').checked&&SA.takes[SA.cur];await sTapBuild();if(!SA.tap){toast('Spunta «Registra» su almeno un musicista');return}
-  const from=$('#sFromStart').checked?0:Math.max(0,now()),bpm=BPM||100,cnt=$('#sCount').checked?4:0,beat=60/bpm,startAt=c.currentTime+.25+cnt*beat;
+  if(SP.on)sListenStop();const from=$('#sFromStart').checked?0:SP.from,bpm=BPM||100,cnt=$('#sCount').checked?4:0,beat=60/bpm,startAt=c.currentTime+.25+cnt*beat;
   pause();SA.srcs=[];for(let i=0;i<cnt;i++)sClickAt(c,c.currentTime+.25+i*beat,i===0);
-  const base=await sBaseBufs();for(const b of base){const gv=b.guide?(gains.vocals?gains.vocals.vol*.35:.25):b.g;if(!gv)continue;const s=c.createBufferSource();s.buffer=b.buf;const g=c.createGain();g.gain.value=gv*+$('#sBaseVol').value;s.connect(g);g.connect(SA.out);s.start(startAt,Math.min(from,b.buf.duration-.01));SA.srcs.push(s)}
+  const base=await sBaseBufs();SA.srcs.push(...await sBaseStart(c,startAt,from));SA.recFrom=from;
   if($('#sClick').checked&&CLK2.beats){const m=CLK2.meter;CLK2.beats.forEach((b,i)=>{if(b>=from)sClickAt(c,startAt+(b-from),m>0&&((i-CLK2.down)%m+m)%m===0)})}
   else if($('#sClick').checked){for(let t2=0;t2<600;t2+=beat)sClickAt(c,startAt+t2,Math.round(t2/beat)%4===0)}
   if(over){for(const tk of over.tracks){if(tk.mute)continue;const s=c.createBufferSource();s.buffer=tk.proc||tk.buf;const g=c.createGain();g.gain.value=tk.vol;s.connect(g);g.connect(SA.out);const off=from+tk.off/1000;if(off>=0)s.start(startAt,off);else s.start(startAt-off,0);SA.srcs.push(s)}}
@@ -2703,9 +2754,9 @@ function rigInfo(){const r=RIG.rig;$('#rigAmpName').textContent=r.amp?r.amp.name
   const cr=[r.amp,r.ir].filter(x=>x&&x.creator);$('#rigCredit').innerHTML=cr.map(x=>`<span class="t3c">${x.avatar?`<img src="${esc(x.avatar)}" alt="">`:''}<b>${esc(x.name)}</b> di <a href="${esc(x.url||'https://www.tone3000.com')}" target="_blank" rel="noopener">${esc(x.creator)}</a> · TONE3000</span>`).join('')}
 let rigT=0;for(const[id,k]of Object.entries(RIG_SL))$('#'+id).oninput=e=>{if(!RIG)return;RIG.rig[k]=+e.target.value;clearTimeout(rigT);rigT=setTimeout(()=>{if(RIG.__mix){RIG.proc=null;return}sBuild(RIG).then(sTapBuild);sSave()},250)};
 $('#rigLive').onchange=e=>{RIG.rig.live=e.target.checked;sBuild(RIG).then(sTapBuild);sSave()};
-$('#rigAmpFile').onchange=async e=>{const f=e.target.files[0];if(!f||!RIG)return;const bytes=await f.arrayBuffer();try{JSON.parse(new TextDecoder().decode(bytes))}catch(x){toast('Questo non sembra un file .nam valido');return}
+$('#rigAmpFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!RIG)return;const bytes=await f.arrayBuffer();try{namCheck(bytes)}catch(x){toast('File non valido: '+x.message);return}
   const key=await ampPut({kind:'nam',name:f.name.replace(/\.nam$/i,''),bytes});RIG.rig.amp={key,name:f.name.replace(/\.nam$/i,'')};rigInfo();await sBuild(RIG);sTapBuild();sSave();sRender();toast('Amplificatore caricato')};
-$('#rigIrFile').onchange=async e=>{const f=e.target.files[0];if(!f||!RIG)return;const bytes=await f.arrayBuffer();const key=await ampPut({kind:'ir',name:f.name.replace(/\.wav$/i,''),bytes});RIG.rig.ir={key,name:f.name.replace(/\.wav$/i,'')};rigInfo();await sBuild(RIG);sTapBuild();sSave();toast('Cassa caricata')};
+$('#rigIrFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!RIG)return;const bytes=await f.arrayBuffer();const key=await ampPut({kind:'ir',name:f.name.replace(/\.wav$/i,''),bytes});RIG.rig.ir={key,name:f.name.replace(/\.wav$/i,'')};rigInfo();await sBuild(RIG);sTapBuild();sSave();toast('Cassa caricata')};
 $('#rigAmpDel').onclick=async()=>{RIG.rig.amp=null;rigInfo();await sBuild(RIG);sTapBuild();sSave();sRender()};$('#rigIrDel').onclick=async()=>{RIG.rig.ir=null;rigInfo();await sBuild(RIG);sTapBuild();sSave()};
 /* ---------- TONE3000 (accesso OAuth con PKCE e scelta dal catalogo) ---------- */
 const T3={base:'https://www.tone3000.com/api/v1',get key(){return (prefGet('t3key')||'').trim()},redirect:location.origin+location.pathname.replace(/index\.html$/,'')};
@@ -2714,7 +2765,7 @@ async function t3Start(kind){if(!T3.key){toast('Inserisci prima la chiave pubbli
   const ver=b64u(crypto.getRandomValues(new Uint8Array(32))),ch=b64u(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(ver))),state=b64u(crypto.getRandomValues(new Uint8Array(16)));
   sessionStorage.setItem('t3',JSON.stringify({ver,state,kind,track:RIG&&RIG.id,song:song&&song.id}));
   const q=new URLSearchParams({client_id:T3.key,redirect_uri:T3.redirect,response_type:'code',state,code_challenge:ch,code_challenge_method:'S256',prompt:'select_tone',format:kind==='ir'?'ir':'nam',preview:'true',locale:'it'});
-  if(RIG&&kind!=='ir')q.set('gears',RIG.role==='basso'?'amp,full-rig,pedal':'amp,full-rig,pedal');location.href=T3.base+'/oauth/authorize?'+q}
+  location.href=T3.base+'/oauth/authorize?'+q}
 async function t3Token(body){for(const asJson of [false,true]){try{const r=await fetch(T3.base+'/oauth/token',{method:'POST',headers:{'Content-Type':asJson?'application/json':'application/x-www-form-urlencoded'},body:asJson?JSON.stringify(body):new URLSearchParams(body)});if(r.ok)return await r.json()}catch(e){if(asJson)throw e}}throw new Error('TONE3000 non ha accettato l\'accesso')}
 async function t3Auth(){let tk=null;try{tk=JSON.parse(prefGet('t3tok')||'null')}catch(e){}if(tk&&tk.exp>Date.now()+30000)return tk.access_token;
   if(tk&&tk.refresh_token){const r=await t3Token({grant_type:'refresh_token',refresh_token:tk.refresh_token,client_id:T3.key});t3Keep(r);return r.access_token}throw new Error('Accedi di nuovo a TONE3000')}
@@ -2730,7 +2781,7 @@ async function t3Return(){const u=new URL(location.href);const err=u.searchParam
     const toneId=u.searchParams.get('tone_id');if(!toneId){toast('Accesso fatto. Scegli il suono dal pulsante «Scegli su TONE3000».');return}
     const tone=await (await t3Get('/tones/'+encodeURIComponent(toneId))).json();let ms=await (await t3Get('/models?tone_id='+encodeURIComponent(toneId))).json();ms=ms.data||ms.models||ms;
     if(!Array.isArray(ms)||!ms.length)throw new Error('nessun file in questo suono');const pref=['feather','lite','standard','nano'];ms.sort((a,b)=>{const ia=pref.indexOf(String(a.size||'').toLowerCase()),ib=pref.indexOf(String(b.size||'').toLowerCase());return (ia<0?9:ia)-(ib<0?9:ib)});
-    const m=ms[0];const bytes=await (await t3Get(m.model_url)).arrayBuffer();const user=tone.user||tone.creator||{};
+    const m=ms[0];const url=m.model_url||m.url||m.download_url||m.file_url;if(!url)throw new Error('il suono non ha un file da scaricare');const bytes=await (await t3Get(url)).arrayBuffer();if(st.kind!=='ir')namCheck(bytes);const user=tone.user||tone.creator||{};
     const meta={kind:st.kind==='ir'?'ir':'nam',name:tone.title||tone.name||m.name||'TONE3000',creator:user.username||user.name||'',avatar:user.avatar_url||user.avatar||'',url:tone.url||('https://www.tone3000.com/tones/'+toneId),toneId,size:m.size||'',full:/full/i.test(String(tone.gear||tone.gears||'')),bytes};
     const key=await ampPut(meta);sLoad();const t=SA.tracks.find(x=>x.id===st.track);if(t){t.rig[st.kind==='ir'?'ir':'amp']={key,name:meta.name,creator:meta.creator,avatar:meta.avatar,url:meta.url,full:meta.full};sSave()}
     toast('Suono «'+meta.name+'» pronto'+(t?' per '+t.name:''));if(SALA_OK){await salaOpen();if(t)rigOpen(SA.tracks.find(x=>x.id===st.track))}}
@@ -2740,7 +2791,7 @@ $('#rigT3').onclick=()=>t3Start('nam');$('#rigT3ir').onclick=()=>t3Start('ir');
 async function reampTrack(t,say){const r=t.rig;const sr=t.buf.sampleRate;let x=t.buf.getChannelData(0).slice();
   for(let i=0;i<x.length;i++)x[i]*=r.gain;
   if((t.role==='chitarra'||t.role==='altro')&&r.drive>0){const cv=curveDrive(r.drive),n=cv.length;for(let i=0;i<x.length;i++){const v=Math.max(-1,Math.min(1,x[i]));x[i]=cv[Math.round((v+1)/2*(n-1))]}}
-  if(r.amp&&t.role!=='voce'){const rec=await ampGet(r.amp.key);if(rec){const nam=await sNam();const model=nam.loadModel(new Uint8Array(rec.bytes),{prewarm:false});const B=4096;model.reset(sr,B);try{model.prewarm()}catch(e){}
+  if(r.amp&&t.role!=='voce'){const rec=await ampGet(r.amp.key);if(rec){const nam=await sNam();const model=nam.loadModel(new TextDecoder().decode(new Uint8Array(rec.bytes)));const B=4096;model.reset(sr,B);try{model.prewarm()}catch(e){}
       const blk=new Float32Array(B);for(let p=0;p<x.length;p+=B){const len=Math.min(B,x.length-p);blk.fill(0);blk.set(x.subarray(p,p+len));const y=model.process(blk,B);x.set((y.subarray?y.subarray(0,len):Array.from(y).slice(0,len)),p);if((p/B)%40===0){say&&say(Math.round(p/x.length*100));await sleep0()}}
       try{model.delete()}catch(e){}}}
   const oc=new OfflineAudioContext(1,x.length,sr);const b=oc.createBuffer(1,x.length,sr);b.copyToChannel(x,0);const s=oc.createBufferSource();s.buffer=b;let nd=s;const lk=n=>{nd.connect(n);nd=n};const N=(k,o={})=>{const n=oc['create'+k]();for(const[a,v]of Object.entries(o)){if(n[a]instanceof AudioParam)n[a].value=v;else n[a]=v}return n};
@@ -2830,8 +2881,8 @@ async function salaOpen(){if(!SALA_OK){salaInfo(true);return}if(!song){toast('Ap
   $('#salaOv').hidden=false;document.body.style.overflow='hidden';$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');
   if(!SA.loaded){sLoad();SA.loaded=true;wvBind()}SA.baseMono=null;sRender();sTakesUI();$('#sOverL').hidden=!SA.takes.length;
   try{await sOpenDevices()}catch(e){$('#sDevInfo').textContent=e.message||String(e)}
-  cancelAnimationFrame(sRaf);sRaf=requestAnimationFrame(sMeters);if(prefGet('salaIntro')!=='1')salaInfo(false)}
-function salaClose(){if(SA.on)sRecStop();wvStop();$('#salaOv').hidden=true;document.body.style.overflow='';cancelAnimationFrame(sRaf);for(const d of SA.devs)try{d.stream.getTracks().forEach(t=>t.stop())}catch(e){}SA.devs=[];SA.chans=[];for(const t of SA.tracks)if(t.node){try{t.node.mon.disconnect()}catch(e){}t.node=null}}
+  cancelAnimationFrame(sRaf);sRaf=requestAnimationFrame(sMeters);SP.from=0;sStemsUI();sTabUI();cancelAnimationFrame(sFr);sFr=requestAnimationFrame(sFrame);if(prefGet('salaIntro')!=='1')salaInfo(false)}
+function salaClose(){if(SA.on)sRecStop();sListenStop();cancelAnimationFrame(sFr);wvStop();$('#salaOv').hidden=true;document.body.style.overflow='';cancelAnimationFrame(sRaf);for(const d of SA.devs)try{d.stream.getTracks().forEach(t=>t.stop())}catch(e){}SA.devs=[];SA.chans=[];for(const t of SA.tracks)if(t.node){try{t.node.mon.disconnect()}catch(e){}t.node=null}}
 function salaInfo(mobile){$('#salaInfoT').textContent=mobile?'Sala prove: solo su PC':'Benvenuto nella Sala prove';
   $('#salaInfoB').innerHTML=mobile?'<p>La <b>Sala prove</b> serve per registrare la band con la scheda audio: più ingressi (voce, chitarra, basso), amplificatori <b>NAM</b> e suoni di <b>TONE3000</b>, tracce separate e mix finale.</p><p>Per ora funziona <b>solo sul computer</b> (Windows o Mac, con Chrome o Edge). Sul telefono e sul tablet trovi «Ascolto e studio» e «Video».</p>'
     :'<ol class="steps"><li><b>Usate le cuffie</b>: con le casse il suono rientra nei microfoni.</li><li><b>«Suona e riconosco»</b>: ogni musicista suona qualche nota e l\'app trova il suo ingresso.</li><li><b>«Taratura ritardo»</b> una volta per scheda audio: avvicina un microfono alle casse, parte un bip e l\'app misura il ritardo al millisecondo.</li><li><b>🎛 Suono</b>: amplificatore NAM e cassa per chitarra e basso (da TONE3000 o da file). Se senti ritardo o gracchi, togli «dal vivo»: l\'amplificatore si applica dopo, con il re-amp.</li><li>All\'inizio della ripresa <b>battete una volta le mani</b>: con «Allinea sul colpo» le tracce combaciano.</li><li>In <b>«Mix e sincronia»</b> trascini le tracce sul grafico, regoli volumi e esporti mix e tracce.</li></ol><p class="snote">Il browser legge al massimo 2 canali per dispositivo audio: per più strumenti collega un altro dispositivo o usa la sovraincisione.</p>';
@@ -2839,7 +2890,7 @@ function salaInfo(mobile){$('#salaInfoT').textContent=mobile?'Sala prove: solo s
 $('#salaX').onclick=salaClose;$('#salaHelp').onclick=()=>salaInfo(false);$$('.sala-tabs button').forEach(b=>b.onclick=()=>sView(b.dataset.sv));
 $('#sAdd').onclick=async()=>{const t=newTrack(SA.tracks.some(x=>x.role==='voce')?(SA.tracks.some(x=>x.role==='chitarra')?(SA.tracks.some(x=>x.role==='basso')?'altro':'basso'):'chitarra'):'voce');const free=SA.chans.find(ch=>!SA.tracks.some(x=>x.dev===ch.key));t.dev=(free||SA.chans[0]||{}).key||'';SA.tracks.push(t);await sBuild(t);sTapBuild();sRender();sSave()};
 $('#sDetect').onclick=sDetect;$('#sCal').onclick=sCalibrate;$('#sRecGo').onclick=sRecStart;
-['#sBaseVol','#sAutoMute','#sGuide','#sClick','#sCount'].forEach(s=>$(s).onchange=()=>{SA.baseMono=null;sSave()});
+['#sBaseVol','#sAutoMute','#sGuide','#sClick','#sCount'].forEach(s=>{$(s).onchange=()=>{SA.baseMono=null;sStemApply();sSave()};if(s==='#sBaseVol')$(s).oninput=()=>sStemApply()});
 $('#sPlay').onclick=()=>WV.play?wvStop():wvPlay();$$('[data-nud]').forEach(b=>b.onclick=()=>{const tk=SA.takes[SA.cur];const t=tk&&tk.tracks[WV.sel];if(!t){toast('Tocca prima una traccia sul grafico');return}t.off+= +b.dataset.nud;t.offHow='regolato a mano';wvSelInfo();wvDraw();if(WV.play){wvStop();wvPlay()}});
 $('#sZoomIn').onclick=()=>{WV.span=Math.max(.02,WV.span*.5);WV.t0=Math.max(-2,WV.pos-WV.span/2);wvDraw()};$('#sZoomOut').onclick=()=>{WV.span=Math.min(600,WV.span*2);WV.t0=Math.max(-2,WV.pos-WV.span/2);wvDraw()};
 $('#sAlignClap').onclick=alignClap;$('#sAlignBase').onclick=alignBase;
