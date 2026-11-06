@@ -181,6 +181,10 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .kl.p1{--hi:var(--d1);--kfg:#d6e5ff}.kl.p2{--hi:var(--d2);--kfg:#ffdede}.kl.p3{--hi:var(--d3);--kfg:#fff3c8}
 .kl.p1::before,.kl.p2::before,.kl.p3::before{display:inline-block;vertical-align:.15em;margin-right:.45em;padding:.08em .5em;border-radius:1em;font-size:.5em;font-weight:800;font-family:var(--f-body,sans-serif);color:#fff;letter-spacing:0}
 .kl.p1::before{content:'1';background:var(--d1)}.kl.p2::before{content:'2';background:var(--d2)}.kl.p3::before{content:'1+2';background:var(--d3);color:#222}
+.kl.oth{opacity:.38}.kl.oth::after{content:'  · canta l\'altro';font-size:.45em;font-weight:700;opacity:.9;vertical-align:.2em}.kl.mine.cur{text-shadow:0 0 18px rgba(255,255,255,.35)}
+.partsel .seg button{min-height:44px}
+#optLy .partsel .seg button:not(.on){color:var(--fg)}
+.recov .chip:not(.pri){background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.4)}
 .kpanel.duoedit .kl{opacity:.9;outline:1px dashed rgba(255,255,255,.25);outline-offset:-2px;border-radius:8px}
 .duoleg{flex-basis:100%;font-size:13.5px;color:var(--fg)}.duoleg i{font-style:normal;font-weight:800;padding:1px 8px;border-radius:10px;color:#fff}.duoleg .d1{background:var(--d1)}.duoleg .d2{background:var(--d2)}.duoleg .d3{background:var(--d3);color:#222}
 #bDuo[aria-pressed="true"]{background:var(--d3);color:#222;border-color:var(--d3)}
@@ -594,6 +598,8 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
         <button class="mini" id="bSyncLy">Sincronizza a mano</button>
         <button class="mini" id="bVoices">🎭 Riconosci le voci (duetto)</button>
         <button class="mini" id="bDuo" aria-pressed="false">🎭 Correggi a mano</button>
+        
+        <div class="pseg partsel" data-partsel hidden><span>Tu canti</span><div class="seg"><button data-part="1">🔵 Voce 1</button><button data-part="2">🔴 Voce 2</button><button data-part="0">Tutto</button></div></div>
         <span class="duoleg" id="duoLeg" hidden>Tocca ogni riga del testo per cambiare: <i class="d1">1</i> blu → <i class="d2">2</i> rosso → <i class="d3">1+2</i> giallo → nessuno</span>
         </div>
       <div class="optrow">
@@ -1083,6 +1089,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
       <label class="recsl"><span>Sincronia voce <i id="recLatV"></i></span><input type="range" id="recLat" min="0" max="500" step="10" value="120"></label>
       <label class="rechint"><input type="checkbox" id="recLatAuto" checked> Sincronia automatica</label>
     </div>
+    <div class="recrow"><div class="pseg partsel" data-partsel hidden><span>Tu canti</span><div class="seg"><button data-part="1">🔵 Voce 1</button><button data-part="2">🔴 Voce 2</button><button data-part="0">Tutto</button></div></div></div>
     <div class="recrow duorow"><button class="chip" id="duoLoad">🎭 Duetto: carica il video di un amico</button><span class="rechint" id="duoInfo"></span><button class="chip" id="duoOff" hidden>✕ Togli il duetto</button><input type="file" id="duoFile" accept="video/*" hidden></div>
     <div class="recrow" id="duoSyncRow" hidden><span class="rechint">Sincronia con l'amico</span><input type="range" id="duoSync" min="-1500" max="1500" step="10" value="0" aria-label="Sincronia con il video dell'amico in millisecondi"><b id="duoSyncV">0 ms</b></div>
     <div class="recrow"><div class="pseg rectr"><span>Tonalità</span><div class="seg"><button id="recTrDown" aria-label="Mezzo tono più basso">−½</button><b id="recTrVal">originale</b><button id="recTrUp" aria-label="Mezzo tono più alto">+½</button><button id="recTrZero">Originale</button></div></div></div>
@@ -1474,11 +1481,17 @@ async function voicesRun(){if(!song||song.id==='demo'){toast('Apri prima un tuo 
     else{singLines(out.singers);const c=[0,0,0,0];K.lines.forEach(l=>c[l.p||0]++);msg=`Duetto riconosciuto: ${c[1]} righe voce 1 (blu), ${c[2]} voce 2 (rosso), ${c[3]} insieme (giallo). Se una riga è sbagliata, correggila con «🎭 Correggi a mano».`}
     K._sAuto=song.id+'/'+K.lines.length;kBuild();saveLyr();sepEnd();spShow(msg+(out.seconds?' Scheda video: '+fmt(out.seconds)+'.':''),1);$$('#spSteps span').forEach(el=>el.className='ok')}
   catch(e){if(!sepAbort)sepFail(e)}}
-function kBuild(){singAuto();const L=K.lines;
+/* parte scelta nel duetto: le righe dell'altro restano visibili ma più tenui */
+K.mine=+(prefGet('duoPart')||0);
+function partUI(){const has=K.lines.some(l=>l.p===1||l.p===2);$$('[data-partsel]').forEach(el=>{el.hidden=!has;el.querySelectorAll('[data-part]').forEach(b=>b.classList.toggle('on',+b.dataset.part===K.mine))});
+  $$('.kpanel [data-kl]').forEach(el=>{const l=K.lines[+el.dataset.kl];el.classList.toggle('oth',!!(has&&K.mine&&l&&(l.p===1||l.p===2)&&l.p!==K.mine));el.classList.toggle('mine',!!(has&&K.mine&&l&&(l.p===K.mine||l.p===3)))})}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-partsel] [data-part]');if(!b)return;K.mine=+b.dataset.part;prefSet('duoPart',String(K.mine));partUI();
+  toast(K.mine===1?'Canti tu le righe blu (e le gialle insieme)':K.mine===2?'Canti tu le righe rosse (e le gialle insieme)':'Canti tutto il testo')});
+function kBuild(){singAuto();setTimeout(partUI,0);const L=K.lines;
   const html=L.length?`<div class="kcount" aria-hidden="true"></div><div class="klines">${L.map((l,i)=>`<div class="kl ${l.st&&i?'st':''} ${l.p?'p'+l.p:''}" data-kl="${i}">${lyrWords(l).map(w=>`<span class="kw">${esc(w.s)}</span>`).join(' ')}</div>`).join('')}</div>`
     :`<div class="kempty"><div>Nessun testo per questo brano.<br>Tocca <b>Cerca su LRCLIB</b>, <b>Modifica</b> per incollarlo, oppure <b>Trascrivi dalla voce</b>.</div></div>`;
   $$('.kpanel').forEach(P=>{P.innerHTML=html;delete P.dataset.ci});
-  $$('.kpanel [data-kl]').forEach(el=>el.onclick=()=>{if(K.duoEdit){const l=K.lines[+el.dataset.kl];if(!l)return;l.p=((l.p||0)+1)%4;$$(`.kpanel [data-kl="${el.dataset.kl}"]`).forEach(x=>{x.classList.remove('p1','p2','p3');if(l.p)x.classList.add('p'+l.p)});saveLyr();return}if(K.sync)return;const l=K.lines[+el.dataset.kl];if(l){seek(Math.max(0,l.t+K.off-.6));if(!playing())play()}})}
+  $$('.kpanel [data-kl]').forEach(el=>el.onclick=()=>{if(K.duoEdit){const l=K.lines[+el.dataset.kl];if(!l)return;l.p=((l.p||0)+1)%4;$$(`.kpanel [data-kl="${el.dataset.kl}"]`).forEach(x=>{x.classList.remove('p1','p2','p3');if(l.p)x.classList.add('p'+l.p)});saveLyr();partUI();return}if(K.sync)return;const l=K.lines[+el.dataset.kl];if(l){seek(Math.max(0,l.t+K.off-.6));if(!playing())play()}})}
 $('#bVoices').onclick=voicesRun;
 $('#bDuo').onclick=()=>{K.duoEdit=!K.duoEdit;$('#bDuo').setAttribute('aria-pressed',K.duoEdit);$('#bDuo').textContent=K.duoEdit?'✓ Fatto':'🎭 Correggi a mano';$('#duoLeg').hidden=!K.duoEdit;$$('.kpanel').forEach(P=>P.classList.toggle('duoedit',K.duoEdit));if(K.duoEdit){if(playing())pause();toast('Tocca le righe da correggere: 1 blu, 2 rosso, insieme giallo')}};
 function karaUpdate(cur,only){const L=K.lines;if(!L.length)return;const tt=cur-K.off;let idx=-1;for(let i=0;i<L.length;i++){if(L[i].t<=tt)idx=i;else break}
@@ -2375,7 +2388,7 @@ function recWrap(g,words,maxW){const rows=[];let cur=[],w=0;const sp=g.measureTe
 function recLyrics(g,W,H,t){const L=K.lines;if(!L.length)return;const tt=t-K.off;let i=-1;for(let j=0;j<L.length;j++){if(L[j].t<=tt)i=j;else break}
   const base=Math.round(Math.min(W,H)*0.062),hi=css('--stage-hi')||'#e8c8a6';g.textAlign='left';g.textBaseline='middle';
   const pc=l=>l&&l.p===1?'#3d8bff':l&&l.p===2?'#ff4d4d':l&&l.p===3?'#ffd23f':null;
-  const drawLine=(l,y,size,alpha,prog)=>{const hiL=pc(l)||hi;g.font=`700 ${size}px "Josefin Sans","Avenir Next",sans-serif`;const words=lyrWords(l);const rows=recWrap(g,words,W*0.88);const sp=g.measureText(' ').width;const lh=size*1.22;let yy=y-(rows.length-1)*lh/2;
+  const drawLine=(l,y,size,alpha,prog)=>{const hiL=pc(l)||hi;if(K.mine&&l&&(l.p===1||l.p===2)&&l.p!==K.mine)alpha*=.45;g.font=`700 ${size}px "Josefin Sans","Avenir Next",sans-serif`;const words=lyrWords(l);const rows=recWrap(g,words,W*0.88);const sp=g.measureText(' ').width;const lh=size*1.22;let yy=y-(rows.length-1)*lh/2;
     for(const r of rows){const rw=r.reduce((a,x)=>a+x.ww,0)+sp*(r.length-1);let x=(W-rw)/2;
       for(const w of r){g.globalAlpha=alpha;g.shadowColor='rgba(0,0,0,.85)';g.shadowBlur=size*.25;g.fillStyle=!prog&&pc(l)?pc(l):'#ffffff';g.fillText(w.s,x,yy);g.shadowBlur=0;
         if(prog){const p=Math.max(0,Math.min(1,(tt-w.t)/Math.max(.08,w.e-w.t)));if(p>0){g.save();g.beginPath();g.rect(x,yy-size,w.ww*p,size*2);g.clip();g.fillStyle=hiL;g.fillText(w.s,x,yy);g.restore()}}
