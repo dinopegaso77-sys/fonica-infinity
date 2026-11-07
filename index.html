@@ -120,6 +120,7 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .origb{white-space:nowrap}.origb.half{background:rgba(232,200,166,.35)!important;color:#fff!important;border-color:#e8c8a6!important}.origb.on{background:#e8c8a6!important;color:#0a1827!important;border-color:#e8c8a6!important}.mmtop .origb{min-height:32px;padding:2px 7px;font-size:12px}
 .sheet>*{flex-shrink:0}
 .slsheet{height:min(860px,calc(100% - 20px));overflow:hidden;gap:10px}
+#ovTrAsk .slsheet{height:auto;max-height:calc(100% - 20px);overflow:auto;max-width:640px}
 .slhead{display:flex;align-items:center;gap:10px}.slhead h3{flex:1;margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .slmore{border:1px solid var(--line);border-radius:12px;padding:0 10px}.slmore summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700}.slmore[open]{padding-bottom:10px}
 .slgrid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;align-items:end}.slbtns{display:flex;gap:6px;flex-wrap:wrap}.slfull{grid-column:1/-1}
@@ -1126,7 +1127,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
     <li><b>Libreria:</b> qui trovi i tuoi brani divisi per artista. «Carica i brani già separati» li riprende dalla cartella di salvataggio, con il loro testo.</li>
     <li><b>Cerca brani:</b> cerca un artista o una canzone, ascolta l'anteprima e compralo (consigliato Amazon Music). Poi aggiungilo con «Aggiungi brano».</li>
     <li><b>Schermo pulito:</b> le impostazioni di player, testo, strumento e mixer sono nascoste; aprile con i pulsanti <b>«▾»</b> (Velocità e tono, Mixer, Opzioni testo, Opzioni strumento).</li>
-    <li><b>Velocità</b> in bpm (battiti al minuto): l'app calcola il tempo del brano; se il numero sembra doppio o dimezzato correggilo con «bpm ÷2» o «bpm ×2». <b>Tonalità</b> sposta il brano di mezzo tono alla volta, fino a 3 toni in su o in giù, con accordi e tablatura. Le tonalità le prepara RunPod e restano salvate con il brano: per i brani nuovi si preparano da sole dopo la separazione; per quelli vecchi, la prima volta che scegli una tonalità l'app mette in pausa, ti mostra cosa sta facendo e la prepara. <b>A</b> e <b>B</b> segnano un passaggio da ripetere, <b>Togli</b> annulla.</li>
+    <li><b>Velocità</b> in bpm (battiti al minuto): l'app calcola il tempo del brano; se il numero sembra doppio o dimezzato correggilo con «bpm ÷2» o «bpm ×2». <b>Tonalità</b> sposta il brano di mezzo tono alla volta, fino a 3 toni in su o in giù, con accordi e tablatura. Le tonalità le prepara RunPod e restano salvate con il brano: prima di separare un brano nuovo l'app ti chiede quali ti servono (più basse e più alte, e di quanto), così occupano solo lo spazio necessario. Se poi scegli una tonalità che non c'è, l'app mette in pausa, ti mostra cosa sta facendo e prepara solo quella. <b>A</b> e <b>B</b> segnano un passaggio da ripetere, <b>Togli</b> annulla.</li>
     <li><b>Click batteria</b> (in «Velocità e tono», e nel Palco con «Click»): un metronomo che segue i battiti veri del brano, anche se il tempo cambia un po'. Scegli l'accento ogni 4 o ogni 3 e il volume; con il mixer puoi togliere la batteria e suonarla tu. Se il click va al doppio o alla metà, correggi con «bpm ÷2» o «bpm ×2».</li>
     <li><b>Mixer:</b> alza, abbassa o togli ogni traccia, oppure usa i preset (Karaoke senza voce, Suono io il basso, Studio chitarra…).</li>
     <li><b>Testo:</b> l'app cerca da sola il testo sincronizzato su LRCLIB (titolo, artista e durata). Se non c'è, «Trascrivi dalla voce» lo ricava con RunPod e mette ogni parola a tempo. In «Opzioni testo» puoi cercarlo a mano, modificarlo, sincronizzarlo, spostarlo prima o dopo e ingrandirlo. Nei <b>duetti</b> le righe si colorano da sole: <b style="color:#3d8bff">blu</b> = cantante 1, <b style="color:#ff4d4d">rosso</b> = cantante 2, <b style="color:#d4a800">giallo</b> = insieme. Le voci vengono riconosciute da RunPod mentre separa il brano; per i brani già separati (o separati sul PC o con MVSEP) premi una volta <b>«🎭 Riconosci le voci (duetto)»</b>. Se una riga è sbagliata, <b>«🎭 Correggi a mano»</b> e toccala. I colori si vedono nel karaoke, sul palco e nel video.</li>
@@ -1276,6 +1277,13 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
   <p class="snote" id="drSpace"></p>
 </div></div>
 <div class="ov" id="ovPed" hidden><div class="sheet"><div class="row"><h3 class="grow" id="pedTitle">🎛 Pedaliera</h3><button class="mini" data-close>Chiudi</button></div><p class="snote">Interruttore per accendere o spegnere, manopole da trascinare su o giù. Si sente subito, anche mentre canti.</p><div class="pdpre" id="pedPre"><label class="field"><span>Preset</span><select class="sel" data-prsel aria-label="Preset dei pedali"></select></label><button class="chip" data-prload>📂 Carica</button><button class="chip pri" data-prsave>💾 Salva preset</button><button class="mini" data-prdel hidden>🗑 Elimina</button><button class="mini" data-prord title="Rimette i pedali nell'ordine classico">↺ Ordine classico</button><button class="mini prauto" data-prbarauto>✨ Adatto al brano</button></div><div class="pboard" id="pedBoard"></div></div></div>
+<div class="ov" id="ovTrAsk" hidden><div class="sheet slsheet">
+  <div class="slhead"><h3>🎚 Tonalità</h3><button class="mini" data-close>Chiudi</button></div>
+  <p class="snote">Ti serviranno tonalità diverse per questo brano? RunPod le prepara insieme alla separazione e le salva con il brano. Scegli solo quelle che ti servono: ognuna occupa spazio. Se poi te ne serve un'altra, la prepara quando la scegli.</p>
+  <div class="row"><label class="field grow"><span>Più basse, fino a</span><select class="sel" id="taDown"><option value="0">No</option><option value="1">½ tono</option><option value="2">1 tono</option><option value="3">1 tono e ½</option><option value="4">2 toni</option><option value="5">2 toni e ½</option><option value="6">3 toni</option></select></label><label class="field grow"><span>Più alte, fino a</span><select class="sel" id="taUp"><option value="0">No</option><option value="1">½ tono</option><option value="2">1 tono</option><option value="3">1 tono e ½</option><option value="4">2 toni</option><option value="5">2 toni e ½</option><option value="6">3 toni</option></select></label></div>
+  <p class="snote" id="taSpace"></p>
+  <div class="row"><button class="chip" id="taNone">Solo originale</button><button class="chip pri grow" id="taGo">Separa il brano</button></div>
+</div></div>
 <div class="toast" id="toast" hidden></div>
 
 <script>
@@ -1411,9 +1419,9 @@ async function trvRun(id,semis,loud){const O=order.slice(),S=stems;const have=aw
   trvPump();if(loud)spShow(`Preparo la tonalità su RunPod: 0 di ${tot} parti pronte…`,0,'send');
   await Promise.all([...ps,...waits.map(w=>w.then(tick))])}
 /* tutte le tonalità del brano, in sottofondo (nessun riquadro, il brano resta usabile) */
-async function trvBackground(id){if(!rp.key||!rp.ep||!order.length)return;const have=await trvIdx(id);const miss=TR_ALL.filter(s=>!trvDone(have,s,order));if(!miss.length)return;
-  toast('Preparo su RunPod le tonalità da −3 a +3 toni, in sottofondo: le salvo con il brano');
-  try{await trvRun(id,miss,false);if(song&&song.id===id)toast('✅ Tonalità da −3 a +3 toni pronte per «'+(song.title||'brano')+'»')}catch(e){console.warn('tonalità in sottofondo',e)}}
+async function trvBackground(id,list){if(!rp.key||!rp.ep||!order.length||!list||!list.length)return;const have=await trvIdx(id);const miss=list.filter(s=>!trvDone(have,s,order));if(!miss.length)return;
+  toast('Preparo su RunPod le tonalità scelte, in sottofondo: le salvo con il brano');
+  try{await trvRun(id,miss,false);if(song&&song.id===id)toast('✅ Tonalità pronte per «'+(song.title||'brano')+'»: '+miss.slice().sort((a,b)=>a-b).map(trTxt).join(', '))}catch(e){console.warn('tonalità in sottofondo',e)}}
 /* manca la tonalità scelta: fermo tutto, spiego cosa succede e la preparo subito */
 async function trvNeed(t){
   if(!rp.key||!rp.ep)throw trvErr('Per cambiare tonalità serve RunPod collegato (Impostazioni → RunPod): prepara le tracce e le salva con il brano.');
@@ -1424,7 +1432,7 @@ async function trvNeed(t){
   try{await trvRun(song.id,[t],true)}catch(e){const stop=sepAbort;sepEnd();if(!stop)sepFail(e);else $('#sepCard').hidden=true;throw trvErr(stop?'Cambio di tonalità annullato':'')}
   if(sepAbort){sepEnd();$('#sepCard').hidden=true;throw trvErr('Cambio di tonalità annullato')}
   sepEnd();spShow('Tonalità '+trTxt(t)+' pronta e salvata con il brano. Premi Play per ascoltare.',1);$$('#spSteps span').forEach(el=>el.className='ok');
-  setTimeout(()=>{if(!sepBusy)$('#sepCard').hidden=true},6000);trvBackground(song.id)}
+  setTimeout(()=>{if(!sepBusy)$('#sepCard').hidden=true},6000)}
 async function sourcesFor(t){if(!t)return stems;if(trCache.tr===t&&trCache.bufs)return trCache.bufs;
   while(trJob){const j=trJob;try{await j.p}catch(e){}if(trCache.tr===t&&trCache.bufs)return trCache.bufs;if(t!==tr&&R.trRec!==t)return stems}
   const job={t};job.p=(async()=>{trCache={tr:0,bufs:null};const id=song&&song.id;if(!id)return stems;
@@ -2340,10 +2348,20 @@ async function sepFinish(meta,stemsRec,bufs,note,asr,sing){
   await loadSong({...rec,stems:undefined,stored:!!ok},bufs);
   if(!saved){const b=document.createElement('button');b.className='mini';b.textContent=window.showDirectoryPicker?'Salva tracce in una cartella':'Scarica le tracce';b.onclick=async()=>{if(await exportSong(rec,true))b.remove()};$('#spFile').textContent='';$('#spFile').appendChild(b)}
   if(!rec.lyrics&&rec.title&&!meta.lrcTried)findLyrics(true);
-  if(ok&&rp.key&&rp.ep)setTimeout(()=>{if(song&&song.id===rec.id&&!sepBusy)trvBackground(rec.id)},4000)}
+  const tl=trList(SEPTR);if(ok&&rp.key&&rp.ep&&tl.length)setTimeout(()=>{if(song&&song.id===rec.id&&!sepBusy)trvBackground(rec.id,tl)},4000)}
 const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
 function sepNotice(html,target){let el=$('#sepMsg');if(target){el=$('#setMsg');openSet()}else if($('#ovLib').hidden){renderLib();openOv('#ovLib')}el.innerHTML=html;el.hidden=false;el.scrollIntoView({behavior:'smooth',block:'center'});if(target)setTimeout(()=>{const t=$(target);if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.focus&&t.focus()}},2600)}
+/* prima di separare: quali tonalità preparare (solo quelle scelte, per risparmiare spazio) */
+let SEPTR=(()=>{try{const o=JSON.parse(prefGet('sepTr')||'{}');return{down:+o.down||0,up:+o.up||0}}catch(e){return{down:0,up:0}}})();
+const trList=o=>{const L=[];for(let i=1;i<=Math.max(o.down,o.up);i++){if(i<=o.down)L.push(-i);if(i<=o.up)L.push(i)}return L};
+function taUI(){const n=+$('#taDown').value+ +$('#taUp').value;$('#taSpace').textContent=n?`${n} tonalità in più: circa ${n*13} MB di spazio per un brano di 4-5 minuti.`:'Nessuna tonalità in più: il brano resta nella sua tonalità originale.'}
+$('#taDown').onchange=taUI;$('#taUp').onchange=taUI;
+function trAsk(){return new Promise(ok=>{$('#taDown').value=SEPTR.down;$('#taUp').value=SEPTR.up;taUI();openOv('#ovTrAsk');
+  const done=v=>{$('#ovTrAsk').hidden=true;$('#taGo').onclick=$('#taNone').onclick=null;if(v){SEPTR=v;prefSet('sepTr',JSON.stringify(v))}ok(v)};
+  $('#taGo').onclick=()=>done({down:+$('#taDown').value,up:+$('#taUp').value});$('#taNone').onclick=()=>done({down:0,up:0});
+  $('#ovTrAsk [data-close]').onclick=()=>done(null)})}
 $('#bSep').onclick=async()=>{if(!sepFileObj||sepBusy)return;$('#sepMsg').hidden=true;
+  if(sepMode!=='pc'&&rp.key&&rp.ep){if(!await trAsk())return}
   const rpOk=!!(rp.key&&rp.ep),mvOk=!!mv.key;
   if(sepMode==='auto'&&!mvOk&&!rpOk){sepNotice('<b>Non posso ancora separare:</b> manca il collegamento a un servizio. Collega <b>RunPod</b> oppure il <b>servizio gratuito MVSEP</b> (qui sotto): bastano pochi passaggi. Ti porto lì.','#mvKey');return}
   if(sepMode==='rp'&&!rpOk){sepNotice('<b>RunPod non è ancora collegato.</b> Completa i passaggi qui sotto, oppure scegli «Automatico» e collega il servizio gratuito.','#rpKey');return}
