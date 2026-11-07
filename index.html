@@ -929,6 +929,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
     <div class="row"><button class="chip pri" id="bkSave">💾 Salva le chiavi in un file</button><button class="chip" id="bkLoad">📂 Ricarica dal file</button><input type="file" id="bkFile" accept=".json,application/json" hidden></div>
     <p class="snote" id="bkInfo"></p>
     <p class="snote">⚠️ Il file contiene le tue chiavi personali: tienilo solo sul tuo PC o telefono e non mandarlo a nessuno.</p>
+    <p class="snote" id="spaceInfo"></p><div class="row"><button class="mini" id="spaceTest">🧪 Prova il salvataggio</button><button class="mini" id="spaceDrafts">🗑 Elimina tutte le bozze video</button></div>
   </div>
   <div class="box">
     <h4>Separazione delle tracce</h4>
@@ -1310,7 +1311,10 @@ const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim
 /* ================= archivio (IndexedDB in questo browser) ================= */
 let dbP=null;
 function db(){if(dbP)return dbP;dbP=new Promise(res=>{try{const r=indexedDB.open('fonica8',3);r.onupgradeneeded=()=>{const d=r.result;for(const s of ['songs','models','settings'])if(!d.objectStoreNames.contains(s))d.createObjectStore(s,s==='songs'?{keyPath:'id'}:undefined)};r.onsuccess=()=>res(r.result);r.onerror=()=>res(null)}catch(e){res(null)}});return dbP}
-async function idb(store,mode,fn){const d=await db();if(!d)return null;return new Promise(r=>{try{const t=d.transaction(store,mode);const q=fn(t.objectStore(store));t.oncomplete=()=>r(q&&('result' in q)?(q.result===undefined?null:q.result):true);t.onerror=()=>r(null);t.onabort=()=>r(null)}catch(e){r(null)}})}
+let IDBERR='';async function idb(store,mode,fn){const d=await db();if(!d){IDBERR='NODB';return null}return new Promise(r=>{try{const t=d.transaction(store,mode);const q=fn(t.objectStore(store));t.oncomplete=()=>r(q&&('result' in q)?(q.result===undefined?null:q.result):true);const bad=()=>{const e=t.error||(q&&q.error);IDBERR=e&&e.name||'ERR';console.error('IndexedDB',store,e);r(null)};t.onerror=bad;t.onabort=bad}catch(e){IDBERR=e&&e.name||'ERR';console.error(e);r(null)}})}
+async function spaceMsg(){let t='';try{const e=await navigator.storage.estimate();t=' (usati '+(e.usage/1048576).toFixed(0)+' MB'+(e.quota?' su '+(e.quota/1048576).toFixed(0)+' MB permessi':'')+')'}catch(e){}return t}
+async function saveFailMsg(){const n=IDBERR;const sp=await spaceMsg();if(n==='QuotaExceededError')return'lo spazio del browser è pieno'+sp+'. Elimina qualche bozza video (📂 Bozze) o brani che non usi, oppure libera spazio sul disco del PC.';
+  if(n==='NODB')return'il browser non permette di salvare (forse è una finestra in incognito o i dati del sito sono bloccati).';return'il browser ha rifiutato il salvataggio ('+(n||'errore sconosciuto')+')'+sp+'.'}
 const dbAll=async()=>(await idb('songs','readonly',s=>s.getAll()))||[];
 const dbGet=id=>idb('songs','readonly',s=>s.get(id));
 const dbPut=v=>idb('songs','readwrite',s=>s.put(v));
@@ -2061,7 +2065,7 @@ function firstSetup(){if(rp.key&&rp.ep)return;setSepMode('rp');openSet();const m
 if(prefGet('legal1')!=='1')setTimeout(legalOpen,300);
 $('#bHelp').onclick=()=>openOv('#ovHelp');
 $('#bLib').onclick=()=>{renderLib();openOv('#ovLib')};
-function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});renderDir();audList();openOv('#ovSet')}
+function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});renderDir();audList();openOv('#ovSet');try{spaceInfo()}catch(e){}}
 $('#ovSet').addEventListener('click',e=>{if(e.target.closest('[data-close]')||e.target.id==='ovSet')audTestStop()});
 document.addEventListener('pointerdown',()=>audSink(),{once:true});
 $('#bSet').onclick=()=>{$('#setMsg').hidden=true;openSet()};
@@ -2394,6 +2398,10 @@ $('#bkFile').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)
   toast('Chiavi e impostazioni ricaricate: riapro l\'app…');setTimeout(()=>location.reload(),900)};
 function bkInfo(){const el=$('#bkInfo');if(!el)return;const d=prefGet('bkDate');el.textContent=d?'Ultima copia salvata: '+new Date(d).toLocaleString('it-IT',{dateStyle:'medium',timeStyle:'short'})+'.':'Non hai ancora salvato una copia.'}
 bkInfo();
+async function spaceInfo(){const el=$('#spaceInfo');if(!el)return;let t='';try{const e=await navigator.storage.estimate();const per=navigator.storage.persisted?await navigator.storage.persisted():false;t='💽 Spazio usato dall\'app: '+(e.usage/1048576).toFixed(0)+' MB'+(e.quota?' su '+(e.quota/1073741824).toFixed(1)+' GB permessi dal browser':'')+'. '+(per?'Dati protetti: il browser non li cancella da solo.':'Il browser può cancellare questi dati quando serve spazio.')}catch(x){t='Il browser non dice quanto spazio è usato.'}
+  const L=await drIndex();if(L.length)t+=' Bozze video: '+L.length+' ('+L.reduce((a,x)=>a+(x.mb||0),0).toFixed(0)+' MB).';el.textContent=t;$('#spaceDrafts').hidden=!L.length}
+$('#spaceTest').onclick=async()=>{IDBERR='';const big=new Uint8Array(2*1048576);const ok=await setPut('__prova',big);if(ok){await idb('settings','readwrite',s=>s.delete('__prova'));toast('✅ Il salvataggio funziona')}else toast('❌ Il browser non salva: '+await saveFailMsg());spaceInfo()};
+$('#spaceDrafts').onclick=async()=>{const L=await drIndex();if(!L.length||!confirm('Elimino tutte le '+L.length+' bozze video? Non si potranno più modificare.'))return;for(const x of L)await idb('settings','readwrite',s=>s.delete('draft:'+x.id));await drPutIdx([]);drCount();spaceInfo();toast('Bozze eliminate: spazio liberato')};
 /* chiede al browser di non cancellare da solo i dati dell'app */
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persisted().then(p=>{if(!p)navigator.storage.persist().catch(()=>{})})}catch(e){}
 /* se all'avvio mancano tutte le chiavi, ricorda che si possono ricaricare dal file */
@@ -2569,6 +2577,9 @@ async function describe(found){const lib=await dbAll();const have=new Set(lib.ma
     const audio=g.files.filter(f=>AUDIO_RX.test(f.name)),lrc=g.files.find(f=>/\.lrc$/i.test(f.name));
     const taken=new Set();const map=audio.map(f=>{const k=guessStem(f.name,taken);taken.add(k);return[k,f]});
     if(!title&&audio.length===1)title=cleanName(audio[0].name);
+    /* nessun nome di traccia riconosciuto (voce, basso, batteria…): sono brani interi, uno per file */
+    if(audio.length>1&&map.every(([k])=>k==='mix'||k==='other')){for(const f of audio){const nm=cleanName(f.name),m=nm.split(/\s[-–]\s/);const a=m.length>1?m[0].trim():(p.length>=2?p[p.length-2]:''),ti=m.length>1?m.slice(1).join(' - ').trim():nm;
+        const lr=g.files.find(x=>/\.lrc$/i.test(x.name)&&cleanName(x.name)===nm);out.push({artist:a,title:ti,stems:[['mix',f]],lrc:lr,single:true,inLib:have.has(normKey(a,ti)),sel:!have.has(normKey(a,ti))})}continue}
     out.push({artist,title:title||'Brano',stems:map,lrc,inLib:have.has(normKey(artist,title)),sel:!have.has(normKey(artist,title))})}
   out.sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||a.title.localeCompare(b.title,'it'));return out}
 function renderAdd(){const el=$('#addList');$('#addTools').hidden=!addFound.length;
@@ -2590,15 +2601,16 @@ $('#addOther').onclick=async()=>{if(window.showDirectoryPicker){try{const h=awai
 $('#addDirIn').onchange=async e=>{const list=[...e.target.files];if(!list.length)return;$('#addStatus').textContent='Cerco i brani…';addFound=await describe(scanList(list));$('#addStatus').textContent=addFound.length?`Ho trovato ${addFound.length} brani.`:'In questa cartella non ho trovato brani.';renderAdd()};
 $('#addMp3').onclick=()=>{closeOv($('#addMp3'));addSong()};
 const asFile=async f=>f.getFile?await f.getFile():f;
-$('#addGo').onclick=async()=>{const todo=addFound.filter(x=>x.sel);if(!todo.length)return;const btn=$('#addGo');btn.disabled=true;let done=0,firstId=null;
+$('#addGo').onclick=async()=>{const todo=addFound.filter(x=>x.sel);if(!todo.length)return;const btn=$('#addGo');btn.disabled=true;let done=0,firstId=null,why='';const bad=[];IDBERR='';try{if(navigator.storage&&navigator.storage.persist)await navigator.storage.persist()}catch(e){}
   for(const x of todo){$('#addStatus').textContent=`Aggiungo ${done+1} di ${todo.length}: ${x.title}…`;
     try{const stemsRec={};for(const [k,f] of x.stems){const file=await asFile(f);stemsRec[k]={name:file.name,data:await file.arrayBuffer()}}
       let lyrics='';if(x.lrc){lyrics=await (await asFile(x.lrc)).text();const ar=lyrics.match(/^\[ar:(.*)\]$/m),ti=lyrics.match(/^\[ti:(.*)\]$/m);if(!x.artist&&ar)x.artist=ar[1].trim();if(ti&&x.title==='Brano')x.title=ti[1].trim()}
       const id='s'+Date.now().toString(36)+done;const lib=await dbAll();const old=lib.find(s=>normKey(s.artist,s.title)===normKey(x.artist,x.title));
       const rec={id:old?old.id:id,title:x.title,artist:x.artist,created:old?old.created:Date.now(),lyrics,tab:old?old.tab||'':'',stems:stemsRec};
-      if(await dbPut(rec)){done++;firstId=firstId||rec.id;x.inLib=true;x.sel=false}}
-    catch(e){console.error(e)}}
-  btn.disabled=false;renderAdd();$('#addStatus').textContent=done===todo.length?`Fatto: ${done} brani aggiunti alla Libreria.`.replace('1 brani aggiunti','1 brano aggiunto'):`Aggiunti ${done} brani su ${todo.length}: alcuni file non si sono potuti leggere.`;
+      if(await dbPut(rec)){done++;firstId=firstId||rec.id;x.inLib=true;x.sel=false}
+      else{why=why||await saveFailMsg();if(IDBERR==='QuotaExceededError'||IDBERR==='NODB')break}}
+    catch(e){console.error(e);bad.push(x.title);if(!why&&e&&e.name==='NotReadableError')why='alcuni file non si possono leggere (forse sono aperti da un altro programma o la cartella è stata spostata).'}}
+  btn.disabled=false;renderAdd();$('#addStatus').textContent=done===todo.length?`Fatto: ${done} brani aggiunti alla Libreria.`.replace('1 brani aggiunti','1 brano aggiunto'):`Aggiunti ${done} brani su ${todo.length}: `+(why||'alcuni file non si sono potuti leggere.')+(bad.length?' Non letti: '+bad.slice(0,3).join(', ')+(bad.length>3?'…':''):'');
   if(done===1&&firstId){closeOv(btn);openStored(firstId)}else if(done)toast('Brani aggiunti: li trovi in Libreria, divisi per artista')};
 $('#bAdd').onclick=addSong;
 
