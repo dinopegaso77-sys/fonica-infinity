@@ -1316,7 +1316,8 @@ const dbGet=id=>idb('songs','readonly',s=>s.get(id));
 const dbPut=v=>idb('songs','readwrite',s=>s.put(v));
 const dbDel=id=>idb('songs','readwrite',s=>s.delete(id));
 const setGet=k=>idb('settings','readonly',s=>s.get(k));
-const setPut=(k,v)=>idb('settings','readwrite',s=>s.put(v,k));
+const KEYS_LS={runpod:'keyRp',mvsep:'keyMv'};
+const setPut=(k,v)=>{if(KEYS_LS[k])try{prefSet(KEYS_LS[k],JSON.stringify(v))}catch(e){}return idb('settings','readwrite',s=>s.put(v,k))};
 const prefGet=k=>{try{return localStorage.getItem('f8_'+k)}catch(e){return null}};
 const prefSet=(k,v)=>{try{localStorage.setItem('f8_'+k,v)}catch(e){}};
 
@@ -2314,7 +2315,15 @@ let mv={key:''},mvJob=null;
 const MV='https://mvsep.com';
 const mvSay=(html,kind)=>{const el=$('#mvStatus');el.className='rpmsg'+(kind?' '+kind:'');el.innerHTML=html};
 function mvView(){const ok=!!mv.key;$('#mvOk').hidden=!ok;$('#mvSteps').hidden=ok}
-async function mvLoad(){try{const v=await setGet('mvsep');if(v)mv={...mv,...v}}catch(e){}$('#mvKey').value=mv.key||'';mvView()}
+async function mvLoad(){try{const v=await setGet('mvsep');if(v)mv={...mv,...v}}catch(e){}try{const w=JSON.parse(prefGet('keyMv')||'null');if(w&&!mv.key&&w.key)mv={...w,...mv,key:w.key}}catch(e){}$('#mvKey').value=mv.key||'';mvView();keysSync()}
+/* le chiavi si salvano appena le incolli, senza dover premere altri pulsanti; e se una delle due memorie del browser le perde, si rimettono dall'altra */
+function keysSync(){try{if(rp.key||rp.ep)setPut('runpod',rp);if(mv.key)setPut('mvsep',mv)}catch(e){}}
+let keysT=0,keysRp=false;function keysFromFields(){const k=$('#rpKey').value.trim(),e=($('#rpEpManual').value.trim()||$('#rpEp').value.trim()).replace(/^.*\/v2\//,'').replace(/\/.*$/,''),m=$('#mvKey').value.trim();let ch=false;
+  if(k&&k!==rp.key){rp.key=k;ch=keysRp=true}if(e&&e!==rp.ep){rp.ep=e;ch=keysRp=true}if(m&&m!==mv.key){mv.key=m;ch=true}if(ch){clearTimeout(keysT);keysT=setTimeout(async()=>{setPut('runpod',rp);setPut('mvsep',mv);toast('Chiavi salvate');
+    /* RunPod: prova subito la chiave e l'endpoint, così si vede se sono giusti */
+    if(keysRp&&rp.key&&rp.ep){keysRp=false;rpSay('Provo la chiave e l\'endpoint di RunPod…');try{await rpHealth(true)}catch(x){rpSay('Non riesco a contattare RunPod: controlla internet e riprova.','err')}}},900)}}
+{const t=document.getElementById('t3Key');if(t)t.addEventListener('input',()=>{const v=t.value.trim();if(/^t3k_pub_\w+/.test(v)&&v!==prefGet('t3key')){prefSet('t3key',v);toast('Chiave TONE3000 salvata')}})}
+['rpKey','rpEpManual','rpEp','mvKey'].forEach(id=>{const el=document.getElementById(id);if(el){el.addEventListener('input',keysFromFields);el.addEventListener('change',keysFromFields)}});
 $('#mvChange').onclick=()=>{$('#mvOk').hidden=true;$('#mvSteps').hidden=false;$('#mvKey').focus()};
 $('#mvConnect').onclick=async()=>{const key=$('#mvKey').value.trim();if(!key){mvSay('Prima incolla la chiave copiata da MVSEP.','err');return}
   mvSay('Controllo la chiave…');
@@ -2369,12 +2378,12 @@ const rpSay=(html,kind)=>{const el=$('#rpStatus');el.className='rpmsg'+(kind?' '
 function rpView(){const ok=!!(rp.key&&rp.ep);$('#rpOk').hidden=!ok;$('#rpSteps').hidden=ok;if(ok)$('#rpOkTxt').textContent='Il servizio sul tuo account è pronto.';$('#rpImgShow').textContent=rpImage();$('#rpImgShow2').textContent=rpImage();$('#rpEpManual').value=rp.ep||'';$('#rpImg').value=rp.image||'';$('#rpImg').placeholder=RP_IMAGE}
 
 /* ---------- copia di sicurezza: chiavi e impostazioni in un file da ricaricare ---------- */
-async function bkMake(){const prefs={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('f8_'))prefs[k]=localStorage.getItem(k)}}catch(e){}
+async function bkMake(){try{keysFromFields();clearTimeout(keysT);await setPut('runpod',rp);await setPut('mvsep',mv)}catch(e){}const prefs={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('f8_'))prefs[k]=localStorage.getItem(k)}}catch(e){}
   let photo=null;try{const b=await setGet('bgPhoto');if(b&&b.size<6e6)photo=await new Promise(ok=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>ok(null);r.readAsDataURL(b)})}catch(e){}
   return{app:'fonica-infinity',v:1,date:new Date().toISOString(),runpod:rp,mvsep:mv,prefs,bgPhoto:photo}}
 $('#bkSave').onclick=async()=>{const d=await bkMake();const blob=new Blob([JSON.stringify(d,null,1)],{type:'application/json'});const a=document.createElement('a');const dd=new Date();
   a.download='fonica-chiavi-'+dd.getFullYear()+'-'+String(dd.getMonth()+1).padStart(2,'0')+'-'+String(dd.getDate()).padStart(2,'0')+'.json';a.href=URL.createObjectURL(blob);document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
-  prefSet('bkDate',dd.toISOString());bkInfo();toast('File salvato nella cartella Download: conservalo')};
+  prefSet('bkDate',dd.toISOString());bkInfo();const miss=[!rp.key&&'chiave RunPod',!rp.ep&&'ID endpoint',!mv.key&&'chiave MVSEP',!prefGet('t3key')&&'chiave TONE3000'].filter(Boolean);toast(miss.length?'File salvato. Mancano: '+miss.join(', ')+' (non li hai ancora inseriti)':'File salvato con tutte le chiavi: conservalo')};
 $('#bkLoad').onclick=()=>{$('#bkFile').value='';$('#bkFile').click()};
 $('#bkFile').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;let d;try{d=JSON.parse(await f.text())}catch(x){toast('Questo file non è una copia di Fonica Infinity');return}
   if(!d||d.app!=='fonica-infinity'){toast('Questo file non è una copia di Fonica Infinity');return}
@@ -2389,7 +2398,7 @@ bkInfo();
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persisted().then(p=>{if(!p)navigator.storage.persist().catch(()=>{})})}catch(e){}
 /* se all'avvio mancano tutte le chiavi, ricorda che si possono ricaricare dal file */
 setTimeout(()=>{try{if(!rp.key&&!mv.key&&!prefGet('t3key')&&prefGet('bkHint')!=='no'){const el=$('#bkInfo');if(el)el.innerHTML='⚠️ Non trovo nessuna chiave: se le avevi salvate in un file, premi <b>«📂 Ricarica dal file»</b>.';if(prefGet('bkDate')||localStorage.length<3)toast('Chiavi non trovate: puoi ricaricarle dal file in ⚙ Impostazioni')}}catch(e){}},2500);
-async function rpLoad(){try{const v=await setGet('runpod');if(v)rp={...rp,...v}}catch(e){}
+async function rpLoad(){try{const v=await setGet('runpod');if(v)rp={...rp,...v}}catch(e){}try{const w=JSON.parse(prefGet('keyRp')||'null');if(w){if(!rp.key&&w.key)rp.key=w.key;if(!rp.ep&&w.ep)rp.ep=w.ep;for(const k in w)if(rp[k]==null)rp[k]=w[k]}}catch(e){}
   if(!rp.m6){rp.model='htdemucs_6s';rp.m6=1;setPut('runpod',rp)}  // da ora la chitarra è separata di serie
   $('#rpKey').value=rp.key||'';$('#rpEp').value=rp.ep||'';$('#rpModel').value=rp.model||'htdemucs';$('#rpAsr').checked=rp.asr!==false;$('#rpLang').value=rp.lang||'';
   setSepMode(sepMode);rpView()}
