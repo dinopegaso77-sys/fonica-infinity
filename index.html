@@ -929,16 +929,16 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
     <div class="row"><button class="chip pri" id="bkSave">💾 Salva le chiavi in un file</button><button class="chip" id="bkLoad">📂 Ricarica dal file</button><input type="file" id="bkFile" accept=".json,application/json" hidden></div>
     <p class="snote" id="bkInfo"></p>
     <p class="snote">⚠️ Il file contiene le tue chiavi personali: tienilo solo sul tuo PC o telefono e non mandarlo a nessuno.</p>
-    <p class="snote" id="spaceInfo"></p><div class="row"><button class="mini" id="spaceTest">🧪 Prova il salvataggio</button><button class="mini" id="spaceDrafts">🗑 Elimina tutte le bozze video</button></div>
+    <p class="snote" id="spaceInfo"></p><div class="row"><button class="mini" id="spaceTest">🧪 Prova il salvataggio</button><button class="mini" id="spaceFix">🛠 Ripara l'archivio</button><button class="mini" id="spaceDrafts">🗑 Elimina tutte le bozze video</button></div>
   </div>
   <div class="box">
     <h4>Separazione delle tracce</h4>
     <p>Scegli dove vengono separati i brani che aggiungi.</p>
-    <div class="seg" id="sepModeSeg" role="group" aria-label="Dove separare"><button data-m="auto">Automatico (prima gratis)</button><button data-m="rp">Solo RunPod</button><button data-m="pc">Sul PC</button></div>
+    <div class="seg" id="sepModeSeg" role="group" aria-label="Dove separare"><button data-m="auto">Automatico</button><button data-m="rp">Solo RunPod</button><button data-m="pc">Sul PC</button></div>
     <p id="pcNote">Carichi un solo MP3 e Fonica Infinity crea voce, basso, batteria e altro usando la scheda video del PC. Funziona con Chrome o Edge sul PC. La prima volta scarica il modello (circa 170 MB). Con una scheda video integrata può essere lento: in quel caso usa RunPod.</p>
     <div id="mvBox" hidden class="rpwiz">
-      <h4>1ª scelta: servizio gratuito (MVSEP)</h4>
-      <p>MVSEP separa i brani gratis sui suoi server. Si aspetta in una coda: a volte pochi minuti, a volte di più. Se non funziona, Fonica Infinity passa da sola a RunPod.</p>
+      <h4>Servizio gratuito (MVSEP), di riserva</h4>
+      <p>Se RunPod è collegato, Fonica Infinity usa sempre RunPod: separa, trova il testo e riconosce le voci dei duetti in un solo passaggio. MVSEP gratuito si usa solo se RunPod manca o non risponde: si aspetta in una coda e testo e voci si fanno dopo.</p>
       <div class="rpok" id="mvOk" hidden><b>Servizio gratuito collegato.</b> <button class="mini" id="mvChange">Cambia chiave</button></div>
       <ol class="wiz" id="mvSteps">
         <li><div><b>Crea un account gratuito su MVSEP</b><span>Serve solo un indirizzo email.</span></div><a class="mini" href="https://mvsep.com/register" target="_blank" rel="noopener">Apri MVSEP</a></li>
@@ -1310,11 +1310,22 @@ const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim
 
 /* ================= archivio (IndexedDB in questo browser) ================= */
 let dbP=null;
-function db(){if(dbP)return dbP;dbP=new Promise(res=>{try{const r=indexedDB.open('fonica8',3);r.onupgradeneeded=()=>{const d=r.result;for(const s of ['songs','models','settings'])if(!d.objectStoreNames.contains(s))d.createObjectStore(s,s==='songs'?{keyPath:'id'}:undefined)};r.onsuccess=()=>res(r.result);r.onerror=()=>res(null)}catch(e){res(null)}});return dbP}
+let DBOPENERR='';
+function dbTry(){return new Promise(res=>{let t=setTimeout(()=>{DBOPENERR='Blocked';res(null)},8000);const end=v=>{clearTimeout(t);res(v)};try{const r=indexedDB.open('fonica8',3);r.onupgradeneeded=()=>{const d=r.result;for(const s of ['songs','models','settings'])if(!d.objectStoreNames.contains(s))d.createObjectStore(s,s==='songs'?{keyPath:'id'}:undefined)};
+  r.onsuccess=()=>{const d=r.result;d.onversionchange=()=>{try{d.close()}catch(e){}dbP=null};DBOPENERR='';end(d)};r.onerror=e=>{DBOPENERR=(r.error&&r.error.name)||'ERR';console.error('IndexedDB open',r.error);try{e.preventDefault()}catch(x){}end(null)};r.onblocked=()=>{DBOPENERR='Blocked'}}catch(e){DBOPENERR=e&&e.name||'ERR';end(null)}})}
+function db(){if(dbP)return dbP;dbP=(async()=>{let d=await dbTry();if(!d){await new Promise(z=>setTimeout(z,600));d=await dbTry()}if(!d)setTimeout(()=>{dbP=null},3000);return d})();return dbP}
+async function dbRepair(){if(!confirm('Riparo l\'archivio dell\'app nel browser?\n\nSe è danneggiato lo ricreo vuoto: i brani salvati nel browser andranno ricaricati dalla cartella delle tracce. Le chiavi restano (sono salvate anche a parte).'))return;
+  try{const d=await dbP;if(d)d.close()}catch(e){}dbP=null;
+  const ok=await new Promise(r=>{try{const q=indexedDB.deleteDatabase('fonica8');q.onsuccess=()=>r(true);q.onerror=()=>r(false);q.onblocked=()=>r('blocked')}catch(e){r(false)}});
+  if(ok==='blocked'){toast('Chiudi le altre schede di Fonica aperte e riprova');return}
+  IDBERR='';const t=await setPut('__prova',1);if(t){await idb('settings','readwrite',x=>x.delete('__prova'));for(const k of ['runpod','mvsep'])try{const v=prefGet(KEYS_LS[k]);if(v)await setPut(k,JSON.parse(v))}catch(e){}toast('✅ Archivio riparato: ora il salvataggio funziona. Ricarica i brani dalla cartella.');try{renderLib()}catch(e){}}
+  else toast('❌ Ancora non salva: '+await saveFailMsg());spaceInfo()}
 let IDBERR='';async function idb(store,mode,fn){const d=await db();if(!d){IDBERR='NODB';return null}return new Promise(r=>{try{const t=d.transaction(store,mode);const q=fn(t.objectStore(store));t.oncomplete=()=>r(q&&('result' in q)?(q.result===undefined?null:q.result):true);const bad=()=>{const e=t.error||(q&&q.error);IDBERR=e&&e.name||'ERR';console.error('IndexedDB',store,e);r(null)};t.onerror=bad;t.onabort=bad}catch(e){IDBERR=e&&e.name||'ERR';console.error(e);r(null)}})}
 async function spaceMsg(){let t='';try{const e=await navigator.storage.estimate();t=' (usati '+(e.usage/1048576).toFixed(0)+' MB'+(e.quota?' su '+(e.quota/1048576).toFixed(0)+' MB permessi':'')+')'}catch(e){}return t}
 async function saveFailMsg(){const n=IDBERR;const sp=await spaceMsg();if(n==='QuotaExceededError')return'lo spazio del browser è pieno'+sp+'. Elimina qualche bozza video (📂 Bozze) o brani che non usi, oppure libera spazio sul disco del PC.';
-  if(n==='NODB')return'il browser non permette di salvare (forse è una finestra in incognito o i dati del sito sono bloccati).';return'il browser ha rifiutato il salvataggio ('+(n||'errore sconosciuto')+')'+sp+'.'}
+  if(n==='NODB'){const o=DBOPENERR;if(o==='Blocked')return'l\'archivio è occupato da un\'altra scheda di Fonica: chiudi le altre schede dell\'app e riprova.';
+    if(o==='SecurityError'||o==='InvalidStateError')return'il browser non permette di salvare: forse è una finestra in incognito, oppure in Chrome i dati del sito sono bloccati (Impostazioni di Chrome › Privacy › Impostazioni sito › Dati sui siti: consenti).';
+    return'l\'archivio dell\'app nel browser sembra danneggiato ('+(o||'errore')+'). Vai in ⚙️ Impostazioni › «🛠 Ripara l\'archivio».'}return'il browser ha rifiutato il salvataggio ('+(n||'errore sconosciuto')+')'+sp+'.'}
 const dbAll=async()=>(await idb('songs','readonly',s=>s.getAll()))||[];
 const dbGet=id=>idb('songs','readonly',s=>s.get(id));
 const dbPut=v=>idb('songs','readwrite',s=>s.put(v));
@@ -2251,13 +2262,13 @@ function sepFail(e){const m=String(e&&e.message||e);sepEnd();$('#spBar').classLi
     AUTH:'RunPod rifiuta la chiave API: controlla di averla copiata tutta in Impostazioni → RunPod.',
     NOEP:'RunPod non trova l\'endpoint: controlla l\'ID in Impostazioni → RunPod.',
     LONG:'La traccia è troppo lunga per una sola richiesta.',
-    BIG:'Il brano è troppo lungo per RunPod (massimo circa 9 minuti).',MP3:'Non riesco a comprimere il brano: controlla la connessione a internet e riprova.'}[m]
+    BIG:'Il brano è troppo lungo per RunPod (massimo circa 9 minuti).',MP3:'Non riesco a comprimere il brano (serve internet per lo strumento di compressione): controlla la connessione e riprova.'}[m]
     ||(/^MVERR:/.test(m)?'Il servizio gratuito ha dato un errore: '+m.slice(6,200):/import|module|Failed to fetch dynamically/i.test(m)?'Non riesco ad avviare il motore di calcolo. Usa Chrome o Edge sul PC, con internet attivo.'
     :/memory|alloc|OOM|Array buffer/i.test(m)?'Memoria insufficiente per questo brano. Chiudi altre schede o prova un brano più corto.':'Qualcosa è andato storto: '+(m.length>260?'… '+m.slice(-260):m));
   spShow(msg,null);$('#spBar').classList.remove('ind');$('#spPct').textContent=''}
 /* controllo LRCLIB prima di separare: se c'è il testo sincronizzato con la stessa durata non serve trascriverlo */
 async function sepLrcCheck(meta,dur){const q=songQuery({title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||''});if(!q.t)return null;
-  try{spShow('Cerco il testo su LRCLIB…',null,'lrc');const {best}=await lrcFind(q,dur);if(!best||best.kind==='none')return null;
+  try{spShow('Cerco il testo su LRCLIB…',null,'lrc');const {best}=await lrcFind(q,dur);meta.lrcTried=true;if(!best||best.kind==='none')return null;
     const x=best.x;let txt=x.syncedLyrics||x.plainLyrics||'';if(best.kind==='shift')txt=txt.split('\n').map(l=>l.replace(/\[\d{1,2}:\d{1,2}(?:[.:]\d{1,3})?\]/g,'').trim()).join('\n');
     if(best.kind!=='instr'){meta.lyrics=txt;meta.lrc={id:x.id,kind:best.kind,track:x.trackName,artist:x.artistName,dur:x.duration}}
     if(!meta.title)meta.title=x.trackName;if(!meta.artist)meta.artist=x.artistName;
@@ -2271,14 +2282,14 @@ async function sepFinish(meta,stemsRec,bufs,note,asr,sing){
   spShow(`Fatto in ${took}${note?' ('+note+')':''}. ${saved?'Tracce salvate anche nella cartella «'+dirHandle.name+'».':'Il brano è in Libreria.'}`,1);$$('#spSteps span').forEach(el=>el.className='ok');
   await loadSong({...rec,stems:undefined,stored:!!ok},bufs);
   if(!saved){const b=document.createElement('button');b.className='mini';b.textContent=window.showDirectoryPicker?'Salva tracce in una cartella':'Scarica le tracce';b.onclick=async()=>{if(await exportSong(rec,true))b.remove()};$('#spFile').textContent='';$('#spFile').appendChild(b)}
-  if(!rec.lyrics&&rec.title)findLyrics(true)}
+  if(!rec.lyrics&&rec.title&&!meta.lrcTried)findLyrics(true)}
 const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
 function sepNotice(html,target){let el=$('#sepMsg');if(target){el=$('#setMsg');openSet()}else if($('#ovLib').hidden){renderLib();openOv('#ovLib')}el.innerHTML=html;el.hidden=false;el.scrollIntoView({behavior:'smooth',block:'center'});if(target)setTimeout(()=>{const t=$(target);if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.focus&&t.focus()}},2600)}
 $('#bSep').onclick=async()=>{if(!sepFileObj||sepBusy)return;$('#sepMsg').hidden=true;
   const rpOk=!!(rp.key&&rp.ep),mvOk=!!mv.key;
-  if(sepMode==='auto'&&!mvOk&&!rpOk){sepNotice('<b>Non posso ancora separare:</b> manca il collegamento a un servizio. Collega il <b>servizio gratuito MVSEP</b> (1ª scelta, qui sotto) oppure RunPod: bastano pochi passaggi. Ti porto lì.','#mvKey');return}
-  if(sepMode==='rp'&&!rpOk){sepNotice('<b>RunPod non è ancora collegato.</b> Completa i passaggi qui sotto, oppure scegli «Automatico (prima gratis)» e collega il servizio gratuito.','#rpKey');return}
-  if(sepMode==='pc'&&isMobile){sepNotice('<b>Sul telefono o sul tablet</b> la separazione sul dispositivo è troppo pesante e non parte. Scegli «Automatico (prima gratis)» e collega il servizio gratuito.');return}
+  if(sepMode==='auto'&&!mvOk&&!rpOk){sepNotice('<b>Non posso ancora separare:</b> manca il collegamento a un servizio. Collega <b>RunPod</b> oppure il <b>servizio gratuito MVSEP</b> (qui sotto): bastano pochi passaggi. Ti porto lì.','#mvKey');return}
+  if(sepMode==='rp'&&!rpOk){sepNotice('<b>RunPod non è ancora collegato.</b> Completa i passaggi qui sotto, oppure scegli «Automatico» e collega il servizio gratuito.','#rpKey');return}
+  if(sepMode==='pc'&&isMobile){sepNotice('<b>Sul telefono o sul tablet</b> la separazione sul dispositivo è troppo pesante e non parte. Scegli «Automatico» e collega il servizio gratuito.');return}
   if(window.showDirectoryPicker&&dirHandle)await dirReady(true);   // chiede il permesso della cartella ora, con il clic
   if(sepMode==='rp')return sepRunpod();
   if(sepMode==='auto')return sepAuto();
@@ -2343,8 +2354,9 @@ async function sepMvsep(){
   sepStart([['lrc','Testo online'],['send','Invio'],['queue','Coda gratuita'],['split','Separazione'],['down','Ricezione'],['save','Salvataggio']],'Separo le tracce (gratis)');sepInfo.ep='mvsep';
   const ab=await sepFileObj.arrayBuffer();const meta=readID3(ab);let dur=0;try{dur=(await decode(ab)).duration}catch(e){}
   await sepLrcCheck(meta,dur);if(sepAbort)return 'stop';
+  let up={ab,name:sepFileObj.name};if(ab.byteLength>RP_MAX){spShow('Il file è grande: lo comprimo per inviarlo più in fretta…',0,'send');try{up=await shrinkForRp(ab,sepFileObj.name,p=>spShow('Comprimo il brano… '+Math.round(p*100)+'%',p,'send'))}catch(e){up={ab,name:sepFileObj.name}}if(sepAbort)return 'stop'}
   spShow('Invio il brano al servizio gratuito…',null,'send');
-  const fd=new FormData();fd.append('api_token',mv.key);fd.append('audiofile',new Blob([ab]),sepFileObj.name);fd.append('sep_type','20');fd.append('add_opt1','2');fd.append('output_format','0');
+  const fd=new FormData();fd.append('api_token',mv.key);fd.append('audiofile',new Blob([up.ab]),up.name);fd.append('sep_type','20');fd.append('add_opt1','2');fd.append('output_format','0');
   let r;try{r=await fetch(`${MV}/api/separation/create`,{method:'POST',body:fd})}catch(e){throw new Error('MVNET')}
   if(r.status===401)throw new Error('MVAUTH');const j=await r.json().catch(()=>({}));
   if(!j.success||!j.data||!j.data.hash)throw new Error('MVERR:'+((j.data&&j.data.message)||('errore '+r.status)));
@@ -2365,14 +2377,12 @@ async function sepMvsep(){
   await sepFinish(meta,stemsRec,bufs,'gratis con MVSEP',null);
   if(!meta.lyrics&&rp.key&&rp.ep&&rp.asr!==false)setTimeout(()=>{if(!K.lines.length)asrRun(true)},1500);
   return 'ok'}
-/* scelta automatica: prima gratis, poi RunPod */
+/* scelta automatica: RunPod se è collegato (separa, testo e voci in un solo passaggio); MVSEP gratuito solo se RunPod manca o non risponde */
 async function sepAuto(){
-  if(mv.key){try{const r=await sepMvsep();if(r==='ok'||r==='stop')return}
-    catch(e){if(sepAbort)return;const m=String(e&&e.message||e);
-      if(rp.key&&rp.ep){sepEnd();toast('Il servizio gratuito non ha funzionato: passo a RunPod');return sepRunpod()}
-      return sepFail(e)}}
-  if(rp.key&&rp.ep)return sepRunpod();
-  openSet();toast('Collega il servizio gratuito o RunPod, oppure scegli «Sul PC»')}
+  if(rp.key&&rp.ep){const r=await sepRunpod(!!mv.key);if(r==='rpdown'&&mv.key){sepEnd();toast('RunPod non risponde: uso il servizio gratuito');return sepAuto2()}return}
+  if(mv.key)return sepAuto2();
+  openSet();toast('Collega RunPod o il servizio gratuito, oppure scegli «Sul PC»')}
+async function sepAuto2(){try{await sepMvsep()}catch(e){if(!sepAbort)sepFail(e)}}
 
 /* programma (immagine) pubblicato su GitHub da chi distribuisce l'app */
 const RP_IMAGE='ghcr.io/dinopegaso77-sys/fonica-runpod:latest';
@@ -2400,7 +2410,7 @@ function bkInfo(){const el=$('#bkInfo');if(!el)return;const d=prefGet('bkDate');
 bkInfo();
 async function spaceInfo(){const el=$('#spaceInfo');if(!el)return;let t='';try{const e=await navigator.storage.estimate();const per=navigator.storage.persisted?await navigator.storage.persisted():false;t='💽 Spazio usato dall\'app: '+(e.usage/1048576).toFixed(0)+' MB'+(e.quota?' su '+(e.quota/1073741824).toFixed(1)+' GB permessi dal browser':'')+'. '+(per?'Dati protetti: il browser non li cancella da solo.':'Il browser può cancellare questi dati quando serve spazio.')}catch(x){t='Il browser non dice quanto spazio è usato.'}
   const L=await drIndex();if(L.length)t+=' Bozze video: '+L.length+' ('+L.reduce((a,x)=>a+(x.mb||0),0).toFixed(0)+' MB).';el.textContent=t;$('#spaceDrafts').hidden=!L.length}
-$('#spaceTest').onclick=async()=>{IDBERR='';const big=new Uint8Array(2*1048576);const ok=await setPut('__prova',big);if(ok){await idb('settings','readwrite',s=>s.delete('__prova'));toast('✅ Il salvataggio funziona')}else toast('❌ Il browser non salva: '+await saveFailMsg());spaceInfo()};
+$('#spaceFix').onclick=dbRepair;$('#spaceTest').onclick=async()=>{IDBERR='';const big=new Uint8Array(2*1048576);const ok=await setPut('__prova',big);if(ok){await idb('settings','readwrite',s=>s.delete('__prova'));toast('✅ Il salvataggio funziona')}else toast('❌ Il browser non salva: '+await saveFailMsg());spaceInfo()};
 $('#spaceDrafts').onclick=async()=>{const L=await drIndex();if(!L.length||!confirm('Elimino tutte le '+L.length+' bozze video? Non si potranno più modificare.'))return;for(const x of L)await idb('settings','readwrite',s=>s.delete('draft:'+x.id));await drPutIdx([]);drCount();spaceInfo();toast('Bozze eliminate: spazio liberato')};
 /* chiede al browser di non cancellare da solo i dati dell'app */
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persisted().then(p=>{if(!p)navigator.storage.persist().catch(()=>{})})}catch(e){}
@@ -2461,26 +2471,31 @@ const MP3_WORKER="importScripts('https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.
  "const f=enc.flush();if(f.length)out.push(new Uint8Array(f));postMessage({done:new Blob(out,{type:'audio/mpeg'})})}";
 function toMp3(buf,kbps,onp,mono){return new Promise((ok,ko)=>{let w;try{w=new Worker(URL.createObjectURL(new Blob([MP3_WORKER],{type:'text/javascript'})))}catch(e){ko(e);return}
   const L=new Float32Array(buf.getChannelData(0)),R=!mono&&buf.numberOfChannels>1?new Float32Array(buf.getChannelData(1)):null;
-  w.onmessage=e=>{if(e.data.done){w.terminate();ok(e.data.done)}else if(onp)onp(e.data.p)};w.onerror=e=>{w.terminate();ko(new Error('MP3'))};
+  let wd;const arm=()=>{clearTimeout(wd);wd=setTimeout(()=>{w.terminate();ko(new Error('MP3'))},25000)};arm();
+  w.onmessage=e=>{if(e.data.done){clearTimeout(wd);w.terminate();ok(e.data.done)}else{arm();if(onp)onp(e.data.p)}};w.onerror=e=>{clearTimeout(wd);w.terminate();ko(new Error('MP3'))};
   w.postMessage({L,R,sr:buf.sampleRate,kbps},R?[L.buffer,R.buffer]:[L.buffer])})}
-async function shrinkForRp(ab,name,onp){if(ab.byteLength<=RP_MAX)return{ab,name};
-  const buf=await decode(ab);const kb=[192,160,128,112,96].find(k=>buf.duration*k*125<RP_MAX*.95);if(!kb)throw new Error('BIG');
+async function shrinkForRp(ab,name,onp,dec){if(ab.byteLength<=RP_MAX)return{ab,name};
+  const buf=dec||await decode(ab);const kb=[192,160,128,112,96].find(k=>buf.duration*k*125<RP_MAX*.95);if(!kb)throw new Error('BIG');
   const blob=await toMp3(buf,kb,onp);return{ab:await blob.arrayBuffer(),name:name.replace(/\.[^.]*$/,'')+'.mp3'}}
 function abToB64(ab){return new Promise((ok,ko)=>{const fr=new FileReader();fr.onload=()=>ok(String(fr.result).split(',')[1]||'');fr.onerror=()=>ko(fr.error);fr.readAsDataURL(new Blob([ab]))})}
 function b64ToAb(s){const bin=atob(s);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u.buffer}
-async function sepRunpod(){if(!rp.key||!rp.ep){openSet();toast('Inserisci chiave API e ID endpoint di RunPod');return}
+async function sepRunpod(canFallback){if(!rp.key||!rp.ep){openSet();toast('Inserisci chiave API e ID endpoint di RunPod');return}
   sepStart([['lrc','Testo online'],['send','Invio'],['queue','In coda'],['split','Separazione'],['down','Ricezione'],['save','Salvataggio']]);sepInfo.ep='runpod';
   try{
-    spShow('Invio il brano a RunPod…',null,'send');
-    const ab=await sepFileObj.arrayBuffer();const meta=readID3(ab);let dur=0;try{dur=(await decode(ab)).duration}catch(e){}
-    const found=await sepLrcCheck(meta,dur);if(sepAbort)return;
+    spShow('Leggo il brano…',null,'send');
+    const ab=await sepFileObj.arrayBuffer();const meta=readID3(ab);let dec=null;try{dec=await decode(ab)}catch(e){}const dur=dec?dec.duration:0;
+    /* un solo passaggio per tutto: il testo su LRCLIB si cerca mentre comprimo il brano */
+    const big=ab.byteLength>RP_MAX;
+    const pL=sepLrcCheck(meta,dur);
+    const pU=big?shrinkForRp(ab,sepFileObj.name,p=>spShow('Comprimo il brano per RunPod… '+Math.round(p*100)+'%',p,'send'),dec):Promise.resolve({ab,name:sepFileObj.name});
+    const [found,up]=await Promise.all([pL,pU]);dec=null;if(sepAbort)return;
     const needAsr=rp.asr!==false&&!(found&&(found.kind==='synced'||found.kind==='instr'));
-    spShow(needAsr?'Invio il brano a RunPod (separo e trascrivo il testo)…':'Invio il brano a RunPod (il testo c\'è già, separo solo le tracce)…',null,'send');
-    let up={ab,name:sepFileObj.name};if(ab.byteLength>RP_MAX){spShow('Il file è grande: lo comprimo per RunPod…',0,'send');up=await shrinkForRp(ab,sepFileObj.name,p=>spShow('Comprimo il brano per RunPod… '+Math.round(p*100)+'%',p,'send'));if(sepAbort)return;spShow('Invio il brano a RunPod…',null,'send')}
+    spShow(needAsr?'Invio il brano a RunPod (separo, trascrivo il testo e riconosco le voci)…':'Invio il brano a RunPod (il testo c\'è già: separo e riconosco le voci)…',null,'send');
     const b64=await abToB64(up.ab);if(sepAbort)return;
-    const out=await rpCall({audio_b64:b64,filename:up.name,model:rp.model,bitrate:128,voices:true,transcribe:needAsr,language:rp.lang||'',prompt:(meta.lyrics||'').slice(0,700)});
+    let out;try{out=await rpCall({audio_b64:b64,filename:up.name,model:rp.model,bitrate:128,voices:true,transcribe:needAsr,language:rp.lang||'',prompt:(meta.lyrics||'').slice(0,700)})}
+    catch(e){const m=String(e&&e.message||e);if(canFallback&&['NET','AUTH','NOEP'].includes(m))return 'rpdown';throw e}
     if(sepAbort||!out)return;
-    if(!out||out.error)throw new Error((out&&out.error)||'RunPod non ha restituito le tracce');
+    if(out.error)throw new Error(out.error);
     sepInfo.extra='';spShow('Ricevo le tracce…',null,'down');
     const stemsRec={},bufs={};const ks=Object.keys(out.stems||{});let i=0;
     for(const k of ks){const ab2=b64ToAb(out.stems[k]);stemsRec[k]={name:k+'.m4a',data:ab2};bufs[k]=await decode(ab2);i++;spShow('Ricevo le tracce…',i/ks.length,'down')}
