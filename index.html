@@ -1126,7 +1126,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
     <li><b>Libreria:</b> qui trovi i tuoi brani divisi per artista. «Carica i brani già separati» li riprende dalla cartella di salvataggio, con il loro testo.</li>
     <li><b>Cerca brani:</b> cerca un artista o una canzone, ascolta l'anteprima e compralo (consigliato Amazon Music). Poi aggiungilo con «Aggiungi brano».</li>
     <li><b>Schermo pulito:</b> le impostazioni di player, testo, strumento e mixer sono nascoste; aprile con i pulsanti <b>«▾»</b> (Velocità e tono, Mixer, Opzioni testo, Opzioni strumento).</li>
-    <li><b>Velocità</b> in bpm (battiti al minuto): l'app calcola il tempo del brano; se il numero sembra doppio o dimezzato correggilo con «bpm ÷2» o «bpm ×2». <b>Tonalità</b> sposta il brano di mezzo tono alla volta, con accordi e tablatura. <b>A</b> e <b>B</b> segnano un passaggio da ripetere, <b>Togli</b> annulla.</li>
+    <li><b>Velocità</b> in bpm (battiti al minuto): l'app calcola il tempo del brano; se il numero sembra doppio o dimezzato correggilo con «bpm ÷2» o «bpm ×2». <b>Tonalità</b> sposta il brano di mezzo tono alla volta, fino a 3 toni in su o in giù, con accordi e tablatura. Le tonalità le prepara RunPod e restano salvate con il brano: per i brani nuovi si preparano da sole dopo la separazione; per quelli vecchi, la prima volta che scegli una tonalità l'app mette in pausa, ti mostra cosa sta facendo e la prepara. <b>A</b> e <b>B</b> segnano un passaggio da ripetere, <b>Togli</b> annulla.</li>
     <li><b>Click batteria</b> (in «Velocità e tono», e nel Palco con «Click»): un metronomo che segue i battiti veri del brano, anche se il tempo cambia un po'. Scegli l'accento ogni 4 o ogni 3 e il volume; con il mixer puoi togliere la batteria e suonarla tu. Se il click va al doppio o alla metà, correggi con «bpm ÷2» o «bpm ×2».</li>
     <li><b>Mixer:</b> alza, abbassa o togli ogni traccia, oppure usa i preset (Karaoke senza voce, Suono io il basso, Studio chitarra…).</li>
     <li><b>Testo:</b> l'app cerca da sola il testo sincronizzato su LRCLIB (titolo, artista e durata). Se non c'è, «Trascrivi dalla voce» lo ricava con RunPod e mette ogni parola a tempo. In «Opzioni testo» puoi cercarlo a mano, modificarlo, sincronizzarlo, spostarlo prima o dopo e ingrandirlo. Nei <b>duetti</b> le righe si colorano da sole: <b style="color:#3d8bff">blu</b> = cantante 1, <b style="color:#ff4d4d">rosso</b> = cantante 2, <b style="color:#d4a800">giallo</b> = insieme. Le voci vengono riconosciute da RunPod mentre separa il brano; per i brani già separati (o separati sul PC o con MVSEP) premi una volta <b>«🎭 Riconosci le voci (duetto)»</b>. Se una riga è sbagliata, <b>«🎭 Correggi a mano»</b> e toccala. I colori si vedono nel karaoke, sul palco e nel video.</li>
@@ -1329,7 +1329,7 @@ async function saveFailMsg(){const n=IDBERR;const sp=await spaceMsg();if(n==='Qu
 const dbAll=async()=>(await idb('songs','readonly',s=>s.getAll()))||[];
 const dbGet=id=>idb('songs','readonly',s=>s.get(id));
 const dbPut=v=>idb('songs','readwrite',s=>s.put(v));
-const dbDel=id=>idb('songs','readwrite',s=>s.delete(id));
+const dbDel=async id=>{const r=await idb('songs','readwrite',s=>s.delete(id));trvDrop(id);return r};
 const setGet=k=>idb('settings','readonly',s=>s.get(k));
 const KEYS_LS={runpod:'keyRp',mvsep:'keyMv'};
 const setPut=(k,v)=>{if(KEYS_LS[k])try{prefSet(KEYS_LS[k],JSON.stringify(v))}catch(e){}return idb('settings','readwrite',s=>s.put(v,k))};
@@ -1368,16 +1368,73 @@ function wavFromI16(q,n,sr){const buf=new ArrayBuffer(44+n*4),v=new DataView(buf
   new Int16Array(buf,44,n*2).set(q.subarray(0,n*2));return buf}
 
 /* cambio di tonalità: phase vocoder in worker, una traccia per worker in parallelo */
-const PV_WORKER="self.onmessage=e=>{const{chs,sr,ratio}=e.data;const N=2048,Ha=512,Hs=Math.round(Ha*ratio);const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);\nfunction fft(re,im,inv){const n=re.length;for(let i=1,j=0;i<n;i++){let bit=n>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;if(i<j){let t=re[i];re[i]=re[j];re[j]=t;t=im[i];im[i]=im[j];im[j]=t}}for(let len=2;len<=n;len<<=1){const ang=(inv?2:-2)*Math.PI/len,wr=Math.cos(ang),wi=Math.sin(ang);for(let i=0;i<n;i+=len){let cr=1,ci=0;for(let k=0;k<len/2;k++){const a=i+k,b=a+len/2;const tr=re[b]*cr-im[b]*ci,ti=re[b]*ci+im[b]*cr;re[b]=re[a]-tr;im[b]=im[a]-ti;re[a]+=tr;im[a]+=ti;const nr=cr*wr-ci*wi;ci=cr*wi+ci*wr;cr=nr}}}if(inv)for(let i=0;i<n;i++){re[i]/=n;im[i]/=n}}\nconst out=[];const total=chs.length;chs.forEach((x,ci)=>{const L=x.length;const F=Math.floor((L-N)/Ha)+1;const sl=(F-1)*Hs+N;const y=new Float32Array(sl),ws=new Float32Array(sl);const re=new Float32Array(N),im=new Float32Array(N);const lastPh=new Float32Array(N/2+1),sumPh=new Float32Array(N/2+1);const mag=new Float32Array(N/2+1),ph=new Float32Array(N/2+1);\nfor(let f=0;f<F;f++){const o=f*Ha;for(let i=0;i<N;i++){re[i]=x[o+i]*win[i];im[i]=0}fft(re,im,false);\n for(let k=0;k<=N/2;k++){mag[k]=Math.hypot(re[k],im[k]);ph[k]=Math.atan2(im[k],re[k])}\n let pk=[];for(let k=2;k<N/2-2;k++)if(mag[k]>mag[k-1]&&mag[k]>=mag[k+1]&&mag[k]>mag[k-2]&&mag[k]>=mag[k+2])pk.push(k);\n const om=k=>2*Math.PI*k*Ha/N;\n for(const k of pk){let dp=ph[k]-lastPh[k]-om(k);dp-=2*Math.PI*Math.round(dp/(2*Math.PI));const tf=(om(k)+dp)/Ha;sumPh[k]=f?sumPh[k]+tf*Hs:ph[k]}\n if(!pk.length)for(let k=0;k<=N/2;k++)sumPh[k]=ph[k];\n let pi=0;for(let k=0;k<=N/2;k++){while(pi<pk.length-1&&Math.abs(pk[pi+1]-k)<Math.abs(pk[pi]-k))pi++;const p=pk.length?pk[pi]:k;const nph=p===k?sumPh[k]:sumPh[p]+(ph[k]-ph[p]);re[k]=mag[k]*Math.cos(nph);im[k]=mag[k]*Math.sin(nph);if(k>0&&k<N/2){re[N-k]=re[k];im[N-k]=-im[k]}}\n for(let k=0;k<=N/2;k++)lastPh[k]=ph[k];\n fft(re,im,true);const so=f*Hs;for(let i=0;i<N;i++){y[so+i]+=re[i]*win[i];ws[so+i]+=win[i]*win[i]}\n if(f%500===0)self.postMessage({p:(ci+f/F)/total})}\nfor(let i=0;i<sl;i++)if(ws[i]>1e-3)y[i]/=ws[i];\nconst z=new Float32Array(L);for(let i=0;i<L;i++){const t=i*ratio;const i0=Math.floor(t),fr=t-i0;const a=y[i0]||0,b=y[i0+1]||0;z[i]=a+(b-a)*fr}out.push(z)});\nself.postMessage({done:1,out},out.map(o=>o.buffer))}";
 function runWorker(src,msg,transfer,onp){return new Promise((ok,ko)=>{const u=URL.createObjectURL(new Blob([src],{type:'text/javascript'}));let w;try{w=new Worker(u)}catch(e){URL.revokeObjectURL(u);ko(e);return}
   const end=()=>{w.terminate();URL.revokeObjectURL(u)};w.onmessage=e=>{const d=e.data;if(d.err){end();ko(new Error(d.err))}else if(d.done){end();ok(d)}else if(onp)onp(d)};w.onerror=e=>{end();ko(new Error(e.message||'worker'))};w.postMessage(msg,transfer||[])})}
+/* ================= tonalità pronte (RunPod) =================
+   Il browser non calcola più la tonalità: RunPod prepara le tracce da −3 a +3 toni (−6/+6 semitoni) e l'app le salva con il brano.
+   Cambiare tonalità vuol dire solo leggere le tracce già pronte (come aprire un brano). */
+const TR_MAX=6,TR_ALL=[-1,1,-2,2,-3,3,-4,4,-5,5,-6,6];
+let trJob=null;
+const trTxt=n=>{const a=Math.abs(n);if(!n)return'originale';const w=Math.floor(a/2),h=a%2;return(n>0?'+':'−')+(w?w+(h?' e ½':''):'½')+(a<=2?' tono':' toni')};
+const trvErr=m=>{const e=new Error('TRV');e.trv=m;return e};
+const TRV={fl:new Map(),q:[],run:0,ix:Promise.resolve()};
+async function trvIdx(id){return(await idb('settings','readonly',x=>x.get('trvidx:'+id)))||{}}
+function trvMark(id,s,k){TRV.ix=TRV.ix.then(async()=>{const m=await trvIdx(id);m[s]=[...new Set([...(m[s]||[]),k])];await idb('settings','readwrite',x=>x.put(m,'trvidx:'+id))});return TRV.ix}
+async function trvDrop(id){try{const m=await trvIdx(id);for(const s of Object.keys(m))for(const k of m[s])await idb('settings','readwrite',x=>x.delete('trv:'+id+':'+s+':'+k));await idb('settings','readwrite',x=>x.delete('trvidx:'+id))}catch(e){}}
+const trvDone=(m,s,ks)=>ks.every(k=>(m[s]||[]).includes(k));
+/* le tracce da mandare: quelle salvate se leggere, altrimenti compresse in MP3 dalla traccia già aperta */
+async function trvFiles(id,ks,S){const rec=id!=='demo'?await dbGet(id):null;const out={};
+  for(const k of ks){const d=rec&&rec.stems&&rec.stems[k];
+    if(d&&d.data&&d.data.byteLength<=6e6)out[k]={name:k+(String(d.name||'').match(/\.[a-z0-9]+$/i)||['.m4a'])[0].toLowerCase(),data:d.data};
+    else if(S[k]){const kb=[128,96,64].find(x=>S[k].duration*x*125<5.5e6)||48;out[k]={name:k+'.mp3',data:await (await toMp3(S[k],kb)).arrayBuffer()}}}
+  return out}
+function trvPump(){while(TRV.run<3&&TRV.q.length){TRV.q.sort((a,b)=>b.prio-a.prio);const j=TRV.q.shift();TRV.run++;j.started=true;
+  trvExec(j).then(j.ok,j.ko).finally(()=>{TRV.run--;trvPump()})}}
+async function trvExec(j){const files=[];for(const [k,f] of Object.entries(j.files))files.push({name:f.name,b64:await abToB64(f.data)});
+  const say=(m,p,st)=>{if(j.prio&&st==='queue')spShow('In coda: accendo RunPod (dopo una pausa può volerci qualche minuto)…',null,'queue')};
+  const out=await rpCall({mode:'shift',files,semis:j.semis},say);if(!out)throw new Error('STOP');if(out.error)throw new Error(out.error);
+  if(!out.shift)throw new Error('il servizio RunPod va aggiornato: pubblica la nuova versione del worker (New Release con un tag nuovo)');
+  for(const [s,o] of Object.entries(out.shift))for(const [k,b] of Object.entries(o)){const ok=await idb('settings','readwrite',x=>x.put({name:k+'.m4a',data:b64ToAb(b)},'trv:'+j.id+':'+s+':'+k));if(!ok)throw new Error('non riesco a salvare: '+await saveFailMsg());await trvMark(j.id,+s,k)}}
+/* prepara su RunPod le tonalità mancanti (semis) del brano id; loud = mostra l'avanzamento nel riquadro */
+async function trvRun(id,semis,loud){const O=order.slice(),S=stems;const have=await trvIdx(id);const waits=[],todo=[];
+  for(const s of semis)for(const k of O){if((have[s]||[]).includes(k))continue;const f=TRV.fl.get(id+':'+s+':'+k);if(f){if(loud&&!f.started)f.prio=1;waits.push(f.p)}else todo.push([s,k])}
+  if(!todo.length&&!waits.length)return;
+  const files=todo.length?await trvFiles(id,[...new Set(todo.map(x=>x[1]))],S):{};
+  /* gruppi: stessa lista di semitoni, entrata sotto ~9 MB e risposta sotto ~17 MB */
+  const per={};for(const [s,k] of todo)if(files[k])(per[k]=per[k]||[]).push(s);
+  const jobs=[];for(const [k,ss] of Object.entries(per)){const sz=files[k].data.byteLength;const n=Math.max(1,Math.min(ss.length,Math.floor(17e6/(sz*1.37*1.1))));
+    for(let i=0;i<ss.length;i+=n){const ch=ss.slice(i,i+n);const sig=ch.join(',');let jb=jobs.find(x=>x.sig===sig&&(x.sz+sz)*1.37<9e6&&(x.sz+sz)*ch.length*1.37*1.1<17e6);
+      if(!jb){jb={id,sig,semis:ch,files:{},sz:0,prio:loud?1:0};jobs.push(jb)}jb.files[k]=files[k];jb.sz+=sz}}
+  let done=0;const tot=jobs.length+waits.length;const tick=()=>{done++;if(loud)spShow(`Preparo la tonalità su RunPod: ${done} di ${tot} parti pronte…`,done/tot,'split')};
+  const ps=jobs.map(jb=>{jb.p=new Promise((ok,ko)=>{jb.ok=ok;jb.ko=ko});for(const s of jb.semis)for(const k of Object.keys(jb.files))TRV.fl.set(id+':'+s+':'+k,jb);
+    jb.p.finally(()=>{for(const s of jb.semis)for(const k of Object.keys(jb.files))if(TRV.fl.get(id+':'+s+':'+k)===jb)TRV.fl.delete(id+':'+s+':'+k)}).catch(()=>{});TRV.q.push(jb);return jb.p.then(tick)});
+  trvPump();if(loud)spShow(`Preparo la tonalità su RunPod: 0 di ${tot} parti pronte…`,0,'send');
+  await Promise.all([...ps,...waits.map(w=>w.then(tick))])}
+/* tutte le tonalità del brano, in sottofondo (nessun riquadro, il brano resta usabile) */
+async function trvBackground(id){if(!rp.key||!rp.ep||!order.length)return;const have=await trvIdx(id);const miss=TR_ALL.filter(s=>!trvDone(have,s,order));if(!miss.length)return;
+  toast('Preparo su RunPod le tonalità da −3 a +3 toni, in sottofondo: le salvo con il brano');
+  try{await trvRun(id,miss,false);if(song&&song.id===id)toast('✅ Tonalità da −3 a +3 toni pronte per «'+(song.title||'brano')+'»')}catch(e){console.warn('tonalità in sottofondo',e)}}
+/* manca la tonalità scelta: fermo tutto, spiego cosa succede e la preparo subito */
+async function trvNeed(t){
+  if(!rp.key||!rp.ep)throw trvErr('Per cambiare tonalità serve RunPod collegato (Impostazioni → RunPod): prepara le tracce e le salva con il brano.');
+  if(sepBusy)throw trvErr('Aspetta che finisca il lavoro in corso, poi cambia tonalità.');
+  pause();try{if(typeof SP!=='undefined'&&SP.on)sListenStop()}catch(e){}
+  sepStart([['send','Invio'],['queue','In coda'],['split','Tonalità'],['save','Salvataggio']],'Preparo la tonalità '+trTxt(t),song.title||'');sepInfo.ep='runpod';
+  spShow('Questa tonalità non è ancora pronta: la preparo su RunPod e la salvo con il brano. Dalla prossima volta sarà immediata.',null,'send');
+  try{await trvRun(song.id,[t],true)}catch(e){const stop=sepAbort;sepEnd();if(!stop)sepFail(e);else $('#sepCard').hidden=true;throw trvErr(stop?'Cambio di tonalità annullato':'')}
+  if(sepAbort){sepEnd();$('#sepCard').hidden=true;throw trvErr('Cambio di tonalità annullato')}
+  sepEnd();spShow('Tonalità '+trTxt(t)+' pronta e salvata con il brano. Premi Play per ascoltare.',1);$$('#spSteps span').forEach(el=>el.className='ok');
+  setTimeout(()=>{if(!sepBusy)$('#sepCard').hidden=true},6000);trvBackground(song.id)}
 async function sourcesFor(t){if(!t)return stems;if(trCache.tr===t&&trCache.bufs)return trCache.bufs;
-  const ks=order;const prog={};const upd=()=>{const p=ks.reduce((a,k)=>a+(prog[k]||0),0)/ks.length;setBusy('Cambio tonalità… '+Math.round(p*100)+'%')};upd();
-  const ratio=Math.pow(2,t/12);
-  const res=await Promise.all(ks.map(k=>{const b=stems[k];const chs=[];for(let c=0;c<Math.min(2,b.numberOfChannels);c++)chs.push(new Float32Array(b.getChannelData(c)));
-    return runWorker(PV_WORKER,{chs,sr:b.sampleRate,ratio},chs.map(c=>c.buffer),d=>{if(d.p!=null){prog[k]=d.p;upd()}}).then(r=>[k,r.out,b.sampleRate])}));
-  const out={};for(const [k,chs,sr] of res){const b=new AudioBuffer({length:chs[0].length,numberOfChannels:chs.length,sampleRate:sr});chs.forEach((c,i)=>b.copyToChannel(c,i));out[k]=b}
-  trCache={tr:t,bufs:out};return out}
+  while(trJob){const j=trJob;try{await j.p}catch(e){}if(trCache.tr===t&&trCache.bufs)return trCache.bufs;if(t!==tr&&R.trRec!==t)return stems}
+  const job={t};job.p=(async()=>{trCache={tr:0,bufs:null};const id=song&&song.id;if(!id)return stems;
+    if(!trvDone(await trvIdx(id),t,order))await trvNeed(t);
+    setBusy('Carico la tonalità '+trTxt(t)+'…');const out={};
+    for(const k of order){const r=await idb('settings','readonly',x=>x.get('trv:'+id+':'+t+':'+k));out[k]=r&&r.data?await resampleTo(await decode(r.data),SR):stems[k]}
+    trCache={tr:t,bufs:out};return out})();
+  trJob=job;try{return await job.p}
+  catch(e){if(e&&e.trv!=null){if(e.trv)toast(e.trv);tr=0;tabRemap();updTr();return stems}throw e}
+  finally{if(trJob===job)trJob=null;setBusy('')}}
 
 /* voce tolta "rapida" quando c'è solo il brano completo: lati L−R + bassi del centro */
 function noVox(L,R){const n=L.length,oL=new Float32Array(n),oR=new Float32Array(n);const a=Math.exp(-2*Math.PI*140/SR);let y1=0,y2=0;
@@ -1543,7 +1600,7 @@ clickUI();
 rateUI();
 function updTr(){const a=Math.abs(tr);let s;if(!tr)s='originale';else{const whole=Math.floor(a/2),half=a%2;s=(tr>0?'+':'−')+(whole?whole+(half?' e ½':''):'½')+(a<=2?' tono':' toni')}
   if(tr&&bassKey!=null)s+=' ('+NOTE_IT[bassKey]+'→'+NOTE_IT[((bassKey+tr)%12+12)%12]+')';$('#trVal').textContent=s;const sv=document.getElementById('sTrVal');if(sv)sv.textContent=s;const rv=document.getElementById('recTrVal');if(rv)rv.textContent=s}
-function setTr(n){n=Math.max(-12,Math.min(12,n));if(n===tr)return;tr=n;tabRemap();updTr();rebuildMix()}
+function setTr(n){if(Math.abs(n)>TR_MAX)toast('La tonalità si sposta al massimo di 3 toni in su o in giù');n=Math.max(-TR_MAX,Math.min(TR_MAX,n));if(n===tr)return;tr=n;tabRemap();updTr();rebuildMix()}
 $('#trDown').onclick=()=>setTr(tr-1);$('#trUp').onclick=()=>setTr(tr+1);$('#trZero').onclick=()=>setTr(0);
 function updAB(){$('#bA').textContent=loopA==null?'A':'A '+fmt(loopA);$('#bB').textContent=loopB==null?'B':'B '+fmt(loopB);$('#bA').classList.toggle('hot',loopA!=null);$('#bB').classList.toggle('hot',loopB!=null);$('#bLoop').disabled=loopA==null}
 $('#bA').onclick=()=>{loopA=now();if(loopB!=null&&loopB<=loopA)loopB=null;updAB()};
@@ -2247,7 +2304,7 @@ function spStat(){const el=(Date.now()-sepT0)/1000;let s='Trascorso '+fmt(el);
 let rpJob=null;
 function sepEnd(){clearInterval(sepTimer);sepTimer=null;if(sepWorker){sepWorker.terminate();sepWorker=null}sepBusy=false;$('#bSep').disabled=!sepFileObj;$('#spStop').textContent='Chiudi'}
 let sepBusy=false;
-$('#spStop').onclick=()=>{if(sepBusy){sepAbort=true;if(mvJob&&mv.key){const f=new FormData();f.append('api_token',mv.key);f.append('hash',mvJob);fetch(MV+'/api/separation/cancel',{method:'POST',body:f}).catch(()=>{})}mvJob=null;if(rpJob&&rp.key){fetch(`https://api.runpod.ai/v2/${rp.ep}/cancel/${rpJob}`,{method:'POST',headers:{Authorization:'Bearer '+rp.key}}).catch(()=>{})}rpJob=null;sepEnd();spShow('Separazione annullata.',null);$('#spBar').classList.remove('ind');$('#spPct').textContent=''}else $('#sepCard').hidden=true};
+$('#spStop').onclick=()=>{if(sepBusy){sepAbort=true;if(mvJob&&mv.key){const f=new FormData();f.append('api_token',mv.key);f.append('hash',mvJob);fetch(MV+'/api/separation/cancel',{method:'POST',body:f}).catch(()=>{})}mvJob=null;if(rp.key){for(const j of new Set([...RP_JOBS,rpJob].filter(Boolean)))fetch(`https://api.runpod.ai/v2/${rp.ep}/cancel/${j}`,{method:'POST',headers:{Authorization:'Bearer '+rp.key}}).catch(()=>{})}rpJob=null;sepEnd();spShow('Separazione annullata.',null);$('#spBar').classList.remove('ind');$('#spPct').textContent=''}else $('#sepCard').hidden=true};
 const modelGet=()=>idb('models','readonly',s=>s.get(MODEL_KEY));
 const modelPut=b=>idb('models','readwrite',s=>s.put(b,MODEL_KEY));
 function sepStart(steps,title,label){$('#spTitle').textContent=title||'Separo le tracce';sepAbort=false;sepBusy=true;closeOv($('#bSep'));pause();spSetSteps(steps);$('#sepCard').hidden=false;$('#spStop').textContent='Annulla';$('#spFile').textContent=label!=null?label:(sepFileObj?sepFileObj.name:'');
@@ -2282,7 +2339,8 @@ async function sepFinish(meta,stemsRec,bufs,note,asr,sing){
   spShow(`Fatto in ${took}${note?' ('+note+')':''}. ${saved?'Tracce salvate anche nella cartella «'+dirHandle.name+'».':'Il brano è in Libreria.'}`,1);$$('#spSteps span').forEach(el=>el.className='ok');
   await loadSong({...rec,stems:undefined,stored:!!ok},bufs);
   if(!saved){const b=document.createElement('button');b.className='mini';b.textContent=window.showDirectoryPicker?'Salva tracce in una cartella':'Scarica le tracce';b.onclick=async()=>{if(await exportSong(rec,true))b.remove()};$('#spFile').textContent='';$('#spFile').appendChild(b)}
-  if(!rec.lyrics&&rec.title&&!meta.lrcTried)findLyrics(true)}
+  if(!rec.lyrics&&rec.title&&!meta.lrcTried)findLyrics(true);
+  if(ok&&rp.key&&rp.ep)setTimeout(()=>{if(song&&song.id===rec.id&&!sepBusy)trvBackground(rec.id)},4000)}
 const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
 function sepNotice(html,target){let el=$('#sepMsg');if(target){el=$('#setMsg');openSet()}else if($('#ovLib').hidden){renderLib();openOv('#ovLib')}el.innerHTML=html;el.hidden=false;el.scrollIntoView({behavior:'smooth',block:'center'});if(target)setTimeout(()=>{const t=$(target);if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.focus&&t.focus()}},2600)}
 $('#bSep').onclick=async()=>{if(!sepFileObj||sepBusy)return;$('#sepMsg').hidden=true;
@@ -2542,14 +2600,15 @@ function mono16k(b){const sr=16000;const oc=new OfflineAudioContext(1,Math.ceil(
     const q=new Int16Array(buf,44,n);for(let i=0;i<n;i++){const x=d[i];q[i]=(x>1?1:x<-1?-1:x)*32767}return buf})}
 async function rpCall(input,say){const show=say||spShow;let r;try{r=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/run`,{method:'POST',headers:rpH(),body:JSON.stringify({input})})}catch(e){throw new Error('NET')}
   if(r.status===401||r.status===403)throw new Error('AUTH');if(r.status===404)throw new Error('NOEP');if(!r.ok)throw new Error('RunPod ha risposto '+r.status);
-  const job=await r.json();rpJob=job.id;const tQ=Date.now();let tRun=0,fails=0;
-  while(!sepAbort){await new Promise(z=>setTimeout(z,2000));if(sepAbort)return null;
-    let s;try{const q=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/status/${rpJob}`,{headers:rpH()});s=await q.json();fails=0}catch(e){if(++fails>5)throw new Error('NET');continue}
+  const job=await r.json();const jid=job.id;rpJob=jid;RP_JOBS.add(jid);const tQ=Date.now();let tRun=0,fails=0;
+  try{while(!sepAbort){await new Promise(z=>setTimeout(z,2000));if(sepAbort)return null;
+    let s;try{const q=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/status/${jid}`,{headers:rpH()});s=await q.json();fails=0}catch(e){if(++fails>5)throw new Error('NET');continue}
     if(s.status==='IN_QUEUE'){sepInfo.extra='in coda da '+fmt((Date.now()-tQ)/1000);show('In coda: accendo la scheda video (dopo un periodo di pausa può volerci qualche minuto)…',null,'queue')}
     else if(s.status==='IN_PROGRESS'){if(!tRun)tRun=Date.now();sepInfo.extra='sulla scheda video da '+fmt((Date.now()-tRun)/1000);const msg=typeof s.output==='string'?s.output:(s.output&&s.output.message)||'Lavoro sulla scheda video';show(msg+'…',null,'split')}
-    else if(s.status==='COMPLETED'){rpJob=null;sepInfo.extra='';return s.output}
-    else if(['FAILED','CANCELLED','TIMED_OUT'].includes(s.status)){rpJob=null;throw new Error(s.error||('RunPod: '+s.status))}}
-  return null}
+    else if(s.status==='COMPLETED'){sepInfo.extra='';return s.output}
+    else if(['FAILED','CANCELLED','TIMED_OUT'].includes(s.status)){throw new Error(s.error||('RunPod: '+s.status))}}
+  return null}finally{RP_JOBS.delete(jid);if(rpJob===jid)rpJob=null}}
+const RP_JOBS=new Set();
 async function asrRun(force){if(!song)return;
   if(sepBusy){toast('Aspetta che finisca il lavoro in corso');return}
   if(force!==true&&song.id!=='demo'){if(song.lrclib&&song.lrclib.kind==='synced'){showAsrSkip('Il testo di questo brano viene da LRCLIB, già sincronizzato e con la stessa durata: non serve trascriverlo.');return}
