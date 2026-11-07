@@ -138,6 +138,9 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .slbar[hidden]{display:none}.slbar .mini{min-height:42px;background:#16293d;color:#fff;border-color:#26405a}.slnow{flex:1 1 auto;min-width:0;max-width:52vw;min-height:42px;border:0;background:transparent;color:#fff;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;padding:0 6px}
 .slbar.count .slnow{color:#e8c8a6}
 .salaov:not([hidden])~.slbar,.salaov.perf~.slbar{bottom:auto;top:64px}
+.drrow{justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
+.drlist li{gap:10px}.drlist .slbt{display:grid!important;grid-template-columns:2fr 1fr!important;gap:6px;min-width:180px}.drlist .slbt>*{min-height:44px;width:100%}.drlist li img{width:54px;height:96px;object-fit:cover;border-radius:8px;background:#000;flex:none}.drlist li::before{display:none}
+@media (max-width:599px){.drlist li{grid-template-columns:54px minmax(0,1fr)!important;grid-template-areas:'n t' 'b b'!important}.drlist li img{grid-area:n}}
 .banks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
 .bankb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:48px;min-width:0;padding:3px 2px;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;line-height:1.1}
 .bankb b{font-size:15px;font-weight:900}.bankb span{font-size:10.5px;font-weight:700;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.85}
@@ -1127,6 +1130,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 <li><b>Duetto video:</b> in «Registra video» premi <b>«🎭 Duetto: carica il video di un amico»</b> e scegli un video fatto con Fonica Infinity, registrato dall'inizio del brano. Mentre registri senti lui (base e voce) al posto della base; nel video finale lui è <b>sopra</b> e tu <b>sotto</b>, con il testo nel mezzo. Se non siete a tempo, sposta «Sincronia con l'amico».</li>
 <li><b>Scaletta:</b> con <b>«📋 Scaletta»</b> metti in fila i brani della serata, li sposti con ▲ ▼ e salvi la scaletta con un nome (o in un file, da portare su un altro dispositivo). «▶ Suona dal primo» apre il primo brano; in basso compare la barra con ⏮ e <b>⏭ Prossimo</b>. Se spunti «passa da solo al prossimo», alla fine di ogni brano parte il successivo dopo 5 secondi (✕ per fermarlo). Funziona anche in Sala prove.</li>
 <li><b>Pedaliera:</b> ogni musicista della Sala prove (anche la voce) e il microfono del Palco hanno i pedali in formato compatto: Noise Gate, Compressor, Auto Wah, Octaver, Pitch Shifter, Overdrive, Distortion, Phaser, Flanger, Chorus, Vibrato, Tremolo, Delay e Reverb. Sulla striscia (e sul palco durante la registrazione) tocchi la sigla del pedale per accenderlo o spegnerlo; con «Manopole dei pedali» regoli ogni manopola e premi l'interruttore. Se un musicista deve allontanarsi, tocca <b>«🎵 Originale»</b> sulla sua striscia (per la voce: No → Guida, cioè bassa → Sì) (o sul palco mentre suonate): torna subito lo strumento originale del brano, anche a metà canzone; ritoccalo per rispegnerlo. Anche quando togli un musicista lo strumento originale torna da solo. Ogni musicista ha <b>5 banchi</b>: tocchi 1, 2, 3, 4 o 5 sulla striscia (o sul palco mentre registri) e cambia tutto il suono in un colpo. Il <b>banco 1 ✨</b> è sempre il preset più adatto al brano; gli altri li scegli in «🎛 Manopole e banchi», dove puoi anche mettere in un banco i pedali come sono adesso. Il Delay ha «♩ A tempo» per andare a tempo con il brano. Puoi decidere <b>l'ordine dei pedali</b>: trascina un pedale tenendolo per il nome (la fascia nera) sopra un altro, oppure usa le frecce ◀ ▶ sotto ogni pedale; il riquadro «Ampli + EQ» indica quali pedali entrano nell'amplificatore e quali escono. «↺ Ordine classico» rimette l'ordine di partenza. In alto nella pedaliera scegli un <b>preset</b> già pronto (⭐ Rock, Assolo, Anni '80, Funk, Basso funk, Voce ballata…): compaiono solo quelli dello stesso strumento; con <b>«✨ Adatto al brano»</b> l'app ascolta la traccia di quello strumento nel brano caricato (distorsione, attacchi, velocità) e sceglie da sola il preset più adatto, oppure premi «💾 Salva preset» per salvare i tuoi pedali con un nome e ricaricarli quando vuoi su qualsiasi strumento. La registrazione resta pulita: i pedali si sentono anche nel mix e nell'esportazione.</li>
+<li><b>Bozze:</b> ogni registrazione viene salvata da sola in <b>«📂 Bozze»</b> (in alto in «Registra video»). Puoi chiudere l'app e riprenderla dopo: «✏️ Riprendi» riapre lo Studio con effetti, sfondo e sincronia come li avevi lasciati, e crei il video finale quando vuoi. Le bozze occupano spazio sul dispositivo: eliminale con 🗑 quando hai finito.</li>
 <li><b>Sfondi e trucco:</b> ogni sfondo ha la sua anteprima (Palco con luci, Tramonto, Città di notte, Neon, Mattoni, Cielo…); con <b>«La tua foto»</b> scegli un'immagine tua (toccala di nuovo per cambiarla). Nel video finale il trucco riconosce il viso: liscia la pelle senza toccare occhi, sopracciglia e bocca; «Più bello» aggiunge un filo di colore a guance e labbra.</li>
     <li><b>Ritardo audio</b> (in «Opzioni testo»): l'app misura da sola quanto tarda il suono ad arrivare (le cuffie Bluetooth anche 0,2–0,3 secondi) e allinea testo e tablatura. Togli «automatico» per regolarlo a mano.</li>
     <li><b>Basso e chitarra:</b> in «Opzioni strumento» scegli lo strumento e <b>Note</b> o <b>Accordi</b>. Con Note vedi la tablatura nota per nota (zoom, 5 corde, quante note, «Rifai»); con Accordi vedi gli accordi che scorrono, con il disegno della posizione per la chitarra e la nota da suonare per il basso. In «Scritta» puoi incollare una tablatura tua.</li>
@@ -1158,7 +1162,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
   <canvas id="recCv"></canvas>
   <video id="recCam" playsinline muted autoplay></video>
   <div class="recly" id="recLy" hidden><b id="recLy1"></b><span id="recLy2"></span></div>
-  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="pbtn" id="recFlip" aria-label="Cambia fotocamera">Fotocamera</button><button class="pbtn" id="recX">Chiudi</button></div>
+  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="pbtn" id="recDrafts" title="Registrazioni da completare">📂 Bozze <span id="recDraftsN"></span></button><button class="pbtn" id="recFlip" aria-label="Cambia fotocamera">Fotocamera</button><button class="pbtn" id="recX">Chiudi</button></div>
   <div class="recbar" id="recBar">
     <div class="recgh">🎵 Audio</div>
     <div class="recrow">
@@ -1234,6 +1238,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
       <button class="chip" id="recFolder" hidden>Salva nella cartella</button>
       <button class="chip" id="recAgain">Rifai</button>
     </div>
+    <div class="row drrow"><button class="chip" id="drSave">💾 Salva bozza</button><button class="mini" id="drDel" hidden>🗑 Elimina questa bozza</button><span class="rechint" id="drInfo"></span></div>
   </div></div>
 </div>
 <div class="pkov" id="bpOv" hidden><div class="pkbox" role="dialog" aria-modal="true" aria-labelledby="pkTitle">
@@ -1261,6 +1266,12 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
   </div>
 </div></div>
 <div class="slbar" id="slBar" hidden><button class="mini" id="slPrev" aria-label="Brano precedente">⏮</button><button class="slnow" id="slNow"></button><button class="mini" id="slNext" aria-label="Brano successivo">⏭ Prossimo</button><button class="mini" id="slStop" aria-label="Chiudi la scaletta">✕</button></div>
+<div class="ov" id="ovDrafts" hidden><div class="sheet slsheet">
+  <div class="slhead"><h3>📂 Bozze dei video</h3><button class="mini" data-close>Chiudi</button></div>
+  <p class="snote">Le registrazioni restano qui finché non le elimini: riaprile per cambiare effetti, sfondo e sincronia e creare il video finale quando vuoi.</p>
+  <ol class="sllist drlist" id="drList"></ol>
+  <p class="snote" id="drSpace"></p>
+</div></div>
 <div class="ov" id="ovPed" hidden><div class="sheet"><div class="row"><h3 class="grow" id="pedTitle">🎛 Pedaliera</h3><button class="mini" data-close>Chiudi</button></div><p class="snote">Interruttore per accendere o spegnere, manopole da trascinare su o giù. Si sente subito, anche mentre canti.</p><div class="pdpre" id="pedPre"><label class="field"><span>Preset</span><select class="sel" data-prsel aria-label="Preset dei pedali"></select></label><button class="chip" data-prload>📂 Carica</button><button class="chip pri" data-prsave>💾 Salva preset</button><button class="mini" data-prdel hidden>🗑 Elimina</button><button class="mini" data-prord title="Rimette i pedali nell'ordine classico">↺ Ordine classico</button><button class="mini prauto" data-prbarauto>✨ Adatto al brano</button></div><div class="pboard" id="pedBoard"></div></div></div>
 <div class="toast" id="toast" hidden></div>
 
@@ -2692,7 +2703,7 @@ async function recOpen(){if(!song){toast('Apri prima un brano');return}if(R.duo)
   catch(e){$('#recHint').textContent=e&&e.name==='NotAllowedError'?'Serve il permesso per fotocamera e microfono: consentilo dal lucchetto vicino all\'indirizzo.':window.self!==window.top?'Qui la fotocamera è bloccata: apri Fonica Infinity dal suo indirizzo web.':'Non riesco ad aprire la fotocamera: '+(e.message||e)}
   recVoxUI();recLevels();cancelAnimationFrame(R.raf);R.raf=requestAnimationFrame(recDraw);
   try{const el=$('#recOv');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el)}catch(e){}}
-function recClose(){if(R.monG)R.monG.gain.value=0;if(R.on)recStop();try{stPrevStop()}catch(e){}try{$('#recPlay').pause()}catch(e){}try{recGuideOff()}catch(e){}try{if(DUO.el)DUO.el.pause()}catch(e){}A.muted=false;cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
+function recClose(){if(DR_CUR&&R.orig&&!$('#recDone').hidden)drSave(true);if(R.monG)R.monG.gain.value=0;if(R.on)recStop();try{stPrevStop()}catch(e){}try{$('#recPlay').pause()}catch(e){}try{recGuideOff()}catch(e){}try{if(DUO.el)DUO.el.pause()}catch(e){}A.muted=false;cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
 function recMime(){for(const m of ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=h264,opus','video/mp4','video/webm;codecs=vp8,opus','video/webm','video/webm;codecs=vp9,opus'])if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))return m;return ''}
 /* voce guida separata: in cuffia sì, nella registrazione no */
 async function recGuideOn(){R.guideBuf=null;R.guideRec=false;if(!stems.vocals)return;const g=gains.vocals;if(g.mute||g.vol<=0||g.vol>=.9)return;
@@ -2717,7 +2728,8 @@ A.addEventListener('ended',()=>{if(R.on)recStop()});
 function recName(){const ext=(R.mime||'').includes('mp4')?'mp4':'webm';const d=new Date();const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'.'+String(d.getMinutes()).padStart(2,'0');return safeName((song.artist?song.artist+' - ':'')+(song.title||'Brano'))+' - Fonica '+ds+'.'+ext}
 async function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});R.orig=R.blob;R.voiceBlob=null;if(R.rawrec){await R.rawstop;R.raw=new Blob(R.rawch,{type:R.rawrec.mimeType||'video/webm'})}stOnFinish();if(R.vrec){await R.vstop;R.voiceBlob=new Blob(R.vchunks,{type:R.vrec.mimeType||'audio/webm'})}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
   $('#recDone').hidden=false;$('#recMsg').textContent='Video pronto ('+(R.blob.size/1048576).toFixed(1)+' MB). Guardalo, poi salvalo o condividilo.';
-  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored)}
+  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored);
+  DR_CUR=null;setTimeout(()=>drSave(true).then(()=>{if(DR_CUR)$('#recMsg').textContent+=' Salvato anche nelle 📂 Bozze.'}),600)}
 $('#recSave').onclick=()=>{if(!R.blob)return;if(window.self!==window.top){$('#recMsg').textContent='Qui non si possono salvare file: apri Fonica Infinity dal suo indirizzo web.';return}
   const a=document.createElement('a');a.href=URL.createObjectURL(R.blob);a.download=recName();document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);$('#recMsg').textContent='Salvato nella cartella Download del telefono.'};
 $('#recShare').onclick=async()=>{try{await navigator.share({files:[new File([R.blob],recName(),{type:R.blob.type})],title:(song&&song.title)||'Fonica Infinity'})}catch(e){if(e&&e.name!=='AbortError')$('#recMsg').textContent='Condivisione non riuscita: prova «Salva sul telefono».'}};
@@ -3059,7 +3071,41 @@ $$('#recTune button').forEach(b=>b.onclick=()=>{$$('#recTune button').forEach(x=
 $('#recFix').onclick=recImprove;
 $('#recOrig').onclick=()=>{R.blob=R.orig;recSetUrl(R.blob);$('#recOrig').hidden=true;$('#recMsg').textContent='Rimesso il video originale.'};
 
-$('#recAgain').onclick=()=>{$('#recDone').hidden=true;$('#recPlay').pause()};
+$('#recAgain').onclick=()=>{$('#recDone').hidden=true;$('#recPlay').pause();DR_CUR=null;drUI()};
+/* ===================== BOZZE DEI VIDEO: registrazioni da completare dopo ===================== */
+let DR_CUR=null;
+const drIndex=async()=>{try{return(await setGet('drafts'))||[]}catch(e){return[]}};
+const drPutIdx=L=>setPut('drafts',L);
+async function drCount(){const L=await drIndex();$('#recDraftsN').textContent=L.length?'('+L.length+')':''}
+async function drThumb(){try{const v=$('#recPlay');if(!v.videoWidth)return null;const c=document.createElement('canvas');c.width=108;c.height=192;const g=c.getContext('2d');const s=Math.max(108/v.videoWidth,192/v.videoHeight);g.drawImage(v,(108-v.videoWidth*s)/2,(192-v.videoHeight*s)/2,v.videoWidth*s,v.videoHeight*s);return c.toDataURL('image/jpeg',.7)}catch(e){return null}}
+async function drSave(quiet){if(!R.orig||!song){toast('Non c\'è una registrazione da salvare');return}const id=DR_CUR||('dr'+Date.now());
+  const data={id,songId:song.id,title:song.title||'',artist:song.artist||'',orig:R.orig,raw:R.raw||null,voice:R.voiceBlob||null,mime:R.mime||'',startSong:R.startSong||0,trRec:R.trRec||0,
+    duo:R.duoRec?{blob:R.duoRec.blob,off:R.duoRec.off}:null,facing:R.facingRec||'user',txt:!!R.txtRec,bgRec:R.bgRec,beautyRec:R.beautyRec,lagMan:R.lagMan,st:JSON.parse(JSON.stringify(ST)),qk:QK,mine:K.mine||0};
+  let ok=null;try{ok=await setPut('draft:'+id,data)}catch(e){console.error(e)}if(!ok){toast('Bozza non salvata: forse lo spazio è pieno. Elimina qualche bozza vecchia e riprova');return}
+  const L=await drIndex(),meta={id,title:data.title,artist:data.artist,songId:data.songId,date:Date.now(),mb:+((data.orig.size+(data.raw?data.raw.size:0)+(data.voice?data.voice.size:0))/1048576).toFixed(1),thumb:(L.find(x=>x.id===id)||{}).thumb||await drThumb()};
+  const k=L.findIndex(x=>x.id===id);if(k>=0)L[k]=meta;else L.unshift(meta);await drPutIdx(L);DR_CUR=id;drUI();drCount();if(!quiet)toast('💾 Bozza salvata: la ritrovi in «📂 Bozze»')}
+function drUI(){$('#drDel').hidden=!DR_CUR;$('#drInfo').textContent=DR_CUR?'Questa registrazione è salvata nelle bozze.':''}
+async function drList(){const L=await drIndex(),ol=$('#drList');
+  ol.innerHTML=L.length?L.map(x=>`<li data-dr="${esc(x.id)}">${x.thumb?`<img src="${x.thumb}" alt="">`:'<img alt="">'}<span class="slt"><b>${esc(x.title||'Senza titolo')}</b><small>${esc(x.artist||'')} · ${new Date(x.date).toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short'})} · ${x.mb} MB</small></span>
+    <span class="slbt"><button class="chip pri" data-dro>✏️ Riprendi</button><button class="mini" data-drx aria-label="Elimina la bozza">🗑</button></span></li>`).join(''):'<li class="slempty">Nessuna bozza. Dopo ogni registrazione viene salvata qui da sola.</li>';
+  ol.querySelectorAll('[data-dr]').forEach(li=>{const id=li.dataset.dr;li.querySelector('[data-dro]').onclick=()=>drOpen(id);
+    li.querySelector('[data-drx]').onclick=async()=>{if(!confirm('Elimino questa bozza? Il video non si potrà più modificare.'))return;await drDelete(id);drList()}});
+  try{const e=await navigator.storage.estimate();$('#drSpace').textContent='Spazio usato dall\'app: '+(e.usage/1048576).toFixed(0)+' MB'+(e.quota?' su circa '+(e.quota/1073741824).toFixed(1)+' GB disponibili':'')+'.'}catch(e){}}
+async function drDelete(id){try{await idb('settings','readwrite',s=>s.delete('draft:'+id))}catch(e){}const L=(await drIndex()).filter(x=>x.id!==id);await drPutIdx(L);if(DR_CUR===id){DR_CUR=null;drUI()}drCount();toast('Bozza eliminata')}
+async function drOpen(id){const d=await setGet('draft:'+id);if(!d){toast('Bozza non trovata');return}$('#ovDrafts').hidden=true;
+  if(!song||song.id!==d.songId){const all=(await dbAll())||[];if(!all.some(x=>x.id===d.songId)){toast('Il brano di questa bozza non è più in libreria: il video si riapre, ma il video finale userà solo la tua voce');}else{await songPickGo(d.songId)}}
+  if($('#recOv').hidden)await recOpen();
+  Object.assign(ST,d.st||{});stSave();QK=d.qk||QK;R.mime=d.mime;R.startSong=d.startSong;R.trRec=d.trRec;R.duoRec=d.duo?{blob:d.duo.blob,off:d.duo.off}:null;R.facingRec=d.facing;R.txtRec=d.txt;R.bgRec=d.bgRec;R.beautyRec=d.beautyRec;
+  R.vDec=R.mBuf=R.vAi=R.lagC=null;R.lrn=null;R.raw=d.raw;R.orig=d.orig;R.blob=d.orig;R.voiceBlob=d.voice;R.duoBuf=null;if(d.mine!=null){K.mine=d.mine;try{partUI()}catch(e){}}
+  stOnFinish();if(d.lagMan!=null){R.lagMan=d.lagMan;lagUI(d.lagMan)}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;
+  const u=URL.createObjectURL(R.blob),pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;$('#recDone').hidden=false;
+  $('#recMsg').textContent='Bozza riaperta ('+(R.blob.size/1048576).toFixed(1)+' MB): cambia quello che vuoi e premi «Crea il video finale».';
+  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));DR_CUR=id;drUI();stUI()}
+$('#recDrafts').onclick=()=>{if(R.on)return;drList();openOv('#ovDrafts')};
+$('#drSave').onclick=()=>drSave(false);
+$('#drDel').onclick=async()=>{if(!DR_CUR||!confirm('Elimino questa bozza?'))return;await drDelete(DR_CUR)};
+drCount();
+
 $('#recGo').onclick=()=>R.on?recStop():recStart();
 {const rt=n=>{if(R.on){toast('Cambia la tonalità prima di registrare');return}setTr(n);R.guideBuf=null;if(tr)toast('Base in tonalità '+$('#recTrVal').textContent+': il video userà questa')};$('#recTrDown').onclick=()=>rt(tr-1);$('#recTrUp').onclick=()=>rt(tr+1);$('#recTrZero').onclick=()=>rt(0)}
 $('#recX').onclick=recClose;
