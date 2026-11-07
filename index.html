@@ -610,7 +610,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
     <div class="topbtns">
       <div class="acts">
       <button class="chip pri" id="bPalco"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Palco</button>
-      <button class="chip" id="bSet" title="Scaletta dei brani da suonare uno dopo l'altro">📋 Scaletta</button>
+      <button class="chip" id="bScal" title="Scaletta dei brani da suonare uno dopo l'altro">📋 Scaletta</button>
       <button class="chip pri" id="bRec"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>Registra video</button>
       </div>
       <div class="nav"><button class="chip" id="bMenu" aria-expanded="false" aria-haspopup="true">⚙ Menu ▾</button>
@@ -2125,7 +2125,7 @@ $('#slStop').onclick=()=>{clearInterval(SCL.timer);SCL.timer=0;SCL.i=-1;slKeep()
 function slEnded(){if(!SCL.auto||SCL.i<0||SCL.i>=SCL.items.length-1||SCL.timer)return;let n=5;const b=$('#slBar');b.classList.add('count');const nx=SCL.items[SCL.i+1];$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca ✕ per fermare)';
   SCL.timer=setInterval(async()=>{n--;if(n>0){$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca ✕ per fermare)';return}clearInterval(SCL.timer);SCL.timer=0;await slPlay(SCL.i+1);setTimeout(()=>{try{if($('#salaOv').hidden)play()}catch(e){}},700)},1000)}
 A.addEventListener('ended',slEnded);
-$('#bSet').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
+$('#bScal').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
 async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
   toast('Apro il brano…');if(id==='demo')await loadDemo();else await openStored(id);
   if(inSala&&song){$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}}
