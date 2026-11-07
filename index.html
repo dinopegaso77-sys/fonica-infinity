@@ -3217,7 +3217,7 @@ const SALA_OK=!isMobile&&!(matchMedia('(pointer:coarse)').matches&&innerWidth<11
 const ROLES={voce:'Voce',chitarra:'Chitarra',basso:'Basso',altro:'Altro'};
 const ROLE_COL={voce:'#e8c8a6',chitarra:'#7fb4e0',basso:'#9ad08f',altro:'#d39ad6'};
 const SA={ctx:null,devs:[],chans:[],tracks:[],takes:[],cur:-1,rec:null,on:false,base:null,t0:0,timer:0,cal:{},mods:{},nam:null,namLoading:null,view:'rec'};
-const sSave=()=>prefSet('sala',JSON.stringify({tracks:SA.tracks.map(t=>({orig:t.orig===true?true:t.orig==='guide'?'guide':false,id:t.id,name:t.name,role:t.role,dev:t.dev,ch:t.ch,mon:t.mon,hear:t.hear!==false,arm:t.arm,rig:t.rig})),cal:SA.cal,
+const sSave=()=>prefSet('sala',JSON.stringify({tracks:SA.tracks.map(t=>({orig:t.orig===true?true:t.orig==='guide'?'guide':false,origSet:!!t.origSet,id:t.id,name:t.name,role:t.role,dev:t.dev,ch:t.ch,mon:t.mon,hear:t.hear!==false,arm:t.arm,rig:t.rig})),cal:SA.cal,
   base:{vol:+$('#sBaseVol').value,auto:$('#sAutoMute').checked,guide:$('#sGuide').checked,click:$('#sClick').checked,count:$('#sCount').checked}}));
 function sLoad(){let o={};try{o=JSON.parse(prefGet('sala')||'{}')}catch(e){}SA.cal=o.cal||{};SA.tracks=(o.tracks||[]).map(t=>Object.assign(newTrack(t.role),t,{rig:Object.assign(defRig(t.role),t.rig||{},t.rig&&t.rig.fx?{}:{fx:fxMigrate(t.rig||{},t.role)})}));SA.tracks.forEach(t=>fxOf(t.rig,t.role));
   if(o.base){$('#sBaseVol').value=o.base.vol;$('#sAutoMute').checked=o.base.auto!==false;$('#sGuide').checked=!!o.base.guide;$('#sClick').checked=!!o.base.click;$('#sCount').checked=o.base.count!==false}}
@@ -3403,13 +3403,13 @@ let tapReady=null;async function sTapBuild(){const c=sCtx();if(!tapReady)tapRead
 /* ---------- base: tracce del brano senza gli strumenti suonati ---------- */
 /* lo strumento originale del brano si spegne solo se c'è un musicista attivo di quello strumento che non ha chiesto «Originale» */
 const ROLE_STEM={chitarra:'guitar',basso:'bass',voce:'vocals'};
-function stemMuted(k){if(!$('#sAutoMute').checked)return false;return SA.tracks.some(t=>t.arm&&ROLE_STEM[t.role]===k&&t.orig!==true)}
+function stemMuted(k){const auto=$('#sAutoMute').checked;return SA.tracks.some(t=>ROLE_STEM[t.role]===k&&t.orig!==true&&(t.orig===false&&t.origSet||auto&&t.arm))}
 const origTxt=t=>'🎵 Originale '+(t.orig===true?'Sì':t.orig==='guide'?'Guida':'No');
 const origTip=t=>t.orig===true?'Si sente lo strumento originale del brano: tocca per spegnerlo':t.orig==='guide'?'Voce originale bassa, come guida: tocca per spegnerla':'Lo strumento originale è spento: tocca per riaccenderlo'+(t.role==='voce'?' (prima bassa come guida, poi piena)':'');
 const origBtn=t=>ROLE_STEM[t.role]?`<button class="mini origb ${t.orig===true?'on':t.orig==='guide'?'half':''}" data-orig="${t.id}" aria-pressed="${t.orig===true}" title="${origTip(t)}">${origTxt(t)}</button>`:'';
-function origSet(t,v){t.orig=v===true?true:v==='guide'?'guide':false;sStemApply();SA.baseMono=null;sSave();$$(`[data-orig="${t.id}"]`).forEach(b=>{b.classList.toggle('on',t.orig===true);b.classList.toggle('half',t.orig==='guide');b.setAttribute('aria-pressed',t.orig===true);b.textContent=origTxt(t);b.title=origTip(t)});
+function origSet(t,v){t.orig=v===true?true:v==='guide'?'guide':false;t.origSet=true;sStemApply();SA.baseMono=null;sSave();$$(`[data-orig="${t.id}"]`).forEach(b=>{b.classList.toggle('on',t.orig===true);b.classList.toggle('half',t.orig==='guide');b.setAttribute('aria-pressed',t.orig===true);b.textContent=origTxt(t);b.title=origTip(t)});
   const k=ROLE_STEM[t.role],nm=ROLES[t.role]||t.role;let msg=t.orig===true?'Si sente di nuovo lo strumento originale ('+nm+')':t.orig==='guide'?'Voce originale bassa, come guida':'Spento lo strumento originale ('+nm+')';
-  if(!$('#sAutoMute').checked&&t.orig!==true)msg+=' · attenzione: è tolta la spunta «Togli dalla base gli strumenti che suonate»';else if(k&&stems&&!stems[k])msg='Questo brano non ha la traccia «'+nm+'» separata: lo strumento originale resta nella base';
+  if(k&&stems&&!stems[k])msg='Questo brano non ha la traccia «'+nm+'» separata: lo strumento originale resta nella base';
   else if(t.orig===false&&k!=='vocals'&&stems&&stems.vocals)msg+='';toast(msg)}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-orig]');if(!b)return;e.preventDefault();const t=SA.tracks.find(x=>x.id===b.dataset.orig);if(!t)return;
   origSet(t,t.role==='voce'?(t.orig===false||t.orig==null?'guide':t.orig==='guide'?true:false):!(t.orig===true))});
