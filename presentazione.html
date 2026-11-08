@@ -94,6 +94,7 @@ h2{font-family:var(--f-lux);font-weight:700;font-size:clamp(28px,4.4vw,48px);lin
 .final{text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(217,180,74,.16),transparent 60%)}
 .final img{width:min(260px,60vw);margin:0 auto 22px;border-radius:14px;box-shadow:0 0 50px rgba(217,180,74,.18)}
 .final .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.skip{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:var(--dim);font-size:16px;cursor:pointer}.skip input{width:22px;height:22px;accent-color:#d9b44a}
 .note{font-size:14px;color:#8f8366;max-width:760px;margin:26px auto 0}
 footer{border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));color:#8f8366;font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -119,7 +120,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="logo" href="#top"><img src="logo-oro.jpg" alt=""><span class="g">FONICA INFINITY</span></a>
-    <a class="btn pri" href="./">Apri l'app</a>
+    <a class="btn pri" href="./?app">Apri l'app</a>
   </div>
 </header>
 
@@ -130,7 +131,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <h1 class="g">La tua sala prove</h1>
       <p class="lead">Prendi una canzone, togli la voce o uno strumento e mettiti al suo posto. Canta, suona, registra e duetta: tutto nel browser, sul PC, sul tablet e sullo smartphone.</p>
       <div class="cta">
-        <a class="btn pri" href="./">Prova subito, è gratis</a>
+        <a class="btn pri" href="./?app">Prova subito, è gratis</a>
         <a class="btn sec" href="#cosa">Scopri cosa fa</a>
       </div>
     </div>
@@ -245,16 +246,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <h2 class="g reveal">La tua musica merita un palco d'oro</h2>
       <p class="intro-txt reveal" style="margin:0 auto">Apri Fonica Infinity e prova con la tua canzone preferita.</p>
       <div class="cta reveal">
-        <a class="btn pri" href="./">Apri l'app</a>
+        <a class="btn pri" href="./?app">Apri l'app</a>
         <a class="btn sec" href="https://www.paypal.me/fonicainfinity" target="_blank" rel="noopener">Sostieni il progetto</a>
       </div>
+      <label class="skip reveal"><input type="checkbox" id="skipPres"> La prossima volta apri direttamente l'app, senza questa presentazione</label>
       <p class="note">Fonica Infinity è uno strumento per lo studio e l'uso personale della musica. Non contiene, non vende e non distribuisce brani: chi la usa si impegna a rispettare il diritto d'autore.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap"><span>© Fonica Infinity</span><a href="./">Apri l'app</a></div>
+  <div class="wrap"><span>© Fonica Infinity</span><a href="./?app">Apri l'app</a></div>
 </footer>
 
 <script>
@@ -262,6 +264,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   const v=document.getElementById('heroV');
   /* il simbolo d'oro si forma e resta fermo (il guerriero compare solo nell'intro dell'app) */
   v.addEventListener('error',()=>{v.remove()});
+  const sk=document.getElementById('skipPres');try{sk.checked=localStorage.getItem('f8_skipPres')==='1'}catch(e){}
+  sk.onchange=()=>{try{sk.checked?localStorage.setItem('f8_skipPres','1'):localStorage.removeItem('f8_skipPres')}catch(e){}};
   const nav=document.getElementById('nav');
   const onS=()=>nav.classList.toggle('on',scrollY>40);addEventListener('scroll',onS,{passive:true});onS();
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
