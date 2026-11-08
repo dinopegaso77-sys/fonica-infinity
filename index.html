@@ -1371,10 +1371,10 @@ const SL=Object.fromEntries(STEMS.map(s=>[s.k,s.label]));
   if(fromPres)try{history.replaceState(null,'',location.pathname+location.hash)}catch(e){}
   const end=()=>{if(done)return;done=true;clearTimeout(tm);try{v.pause()}catch(e){}if(toPres){location.replace('presentazione.html');return}sp.classList.add('out');setTimeout(()=>{sp.remove()},700)};
   const arm=s=>{clearTimeout(tm);tm=setTimeout(end,s*1000)};
-  if(fromT3||fromPres){sp.remove();try{v.pause()}catch(e){}}else{v.addEventListener('ended',end);v.addEventListener('error',end);arm(9);
+  if(fromT3||fromPres){sp.remove();try{v.pause()}catch(e){}}else{v.addEventListener('ended',end);v.addEventListener('error',end);arm(12);
   /* prima prova con la musica; se il browser la blocca, parte senza suono e compare «Attiva il suono» */
   v.muted=false;v.volume=1;v.play().catch(()=>{v.muted=true;v.play().catch(end);snd.hidden=false});}
-  snd.addEventListener('click',e=>{e.stopPropagation();snd.hidden=true;v.muted=false;try{v.currentTime=0}catch(x){}v.play().catch(()=>{});arm(9)});
+  snd.addEventListener('click',e=>{e.stopPropagation();snd.hidden=true;v.muted=false;try{v.currentTime=0}catch(x){}v.play().catch(()=>{});arm(12)});
   sp.addEventListener('click',e=>{if(e.target===snd)return;end()});document.addEventListener('keydown',e=>{if(e.key==='Escape'||e.key===' ')end()},{once:true})}
 const NOTE_IT=["Do","Do#","Re","Re#","Mi","Fa","Fa#","Sol","Sol#","La","La#","Si"];
 const nomeMidi=m=>NOTE_IT[((m%12)+12)%12]+(Math.floor(m/12)-1);
