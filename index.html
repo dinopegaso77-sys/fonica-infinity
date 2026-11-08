@@ -1830,7 +1830,10 @@ const audSave=()=>prefSet('audio',JSON.stringify(AUD));
 /* scheda audio esterna (Behringer, Focusrite, ...): riconosciuta dal nome */
 const IFACE=/umc|behringer|focusrite|scarlett|steinberg|presonus|motu|audient|m-audio|tascam|roland|yamaha|zoom|line ?6|irig|ik multimedia|universal audio|volt|ssl|native instruments|komplete|esi|arturia|minifuse|audiobox|interfaccia|interface|usb audio|codec/i;
 const NOTIF=/webcam|camera|cam\b|hdmi|display|nvidia|realtek|intel|amd|smart sound|microfono integrato|stereo mix|missaggio/i;
-const isIface=l=>!!l&&IFACE.test(l)&&!NOTIF.test(l);
+/* qualsiasi scheda: oltre ai nomi noti, riconosco i nomi tipici delle schede ("IN 1-2", "OUT 3-4", "Input 1", "Line", "Main", "USB") */
+const IFACE2=/\b(in|out|input|output|line|main|analog|playback)\s*\d+(\s*[-–\/+]\s*\d+)?\b|\busb\b|\b\d+\s*[-–\/+]\s*\d+\b/i;
+const NOTIF2=/bluetooth|hands-?free|headset|airpods|buds|wh-\d|virtual|cable output|voicemeeter|teams|zoom audio device|discord|nvidia broadcast/i;
+const isIface=l=>!!l&&(IFACE.test(l)||IFACE2.test(l))&&!NOTIF.test(l)&&!NOTIF2.test(l);
 const AE={id:'',label:'',ch:AUD.ch,iface:false,outId:''};/* dispositivo effettivo */
 async function audResolve(ask){if(!navigator.mediaDevices||!navigator.mediaDevices.enumerateDevices)return AE;
   let ds=await navigator.mediaDevices.enumerateDevices();
@@ -1846,8 +1849,11 @@ async function audResolve(ask){if(!navigator.mediaDevices||!navigator.mediaDevic
   AE.ch=AUD.ch!=='auto'?AUD.ch:(AE.iface?'L':'auto');
   let o=null;if(AUD.outId&&AUD.outId!=='sys')o=outs.find(x=>x.deviceId===AUD.outId)||(AUD.outLabel&&outs.find(x=>x.label===AUD.outLabel))||null;
   if(o&&o.deviceId!==AUD.outId){AUD.outId=o.deviceId;audSave()}
-  if(!o&&AUD.outId!=='sys'&&AE.iface)o=outs.find(x=>x.groupId&&x.groupId===AE.group&&x.deviceId!=='default'&&x.deviceId!=='communications')||outs.find(x=>isIface(x.label)&&x.deviceId!=='default'&&x.deviceId!=='communications')||null;
+  if(!o&&AUD.outId!=='sys'&&AE.iface){const ok=x=>x.deviceId!=='default'&&x.deviceId!=='communications';o=outMain(outs.filter(x=>ok(x)&&x.groupId&&x.groupId===AE.group))||outMain(outs.filter(x=>ok(x)&&isIface(x.label)))}
   AE.outId=o?o.deviceId:'';AE.outLabel=o?o.label:'';return AE}
+/* tra le uscite della scheda preferisco la coppia principale 1-2: è quella che arriva a MAIN OUT e cuffie con MONITOR su A */
+/* vale per qualsiasi scheda: prima la coppia principale (1-2, Main, Speakers, Line), poi le altre; le cuffie della scheda di solito ascoltano proprio questa coppia */
+function outMain(L){if(!L||!L.length)return null;const sc=x=>{const l=x.label||'';return /\b1\s*[-–\/+]\s*2\b/.test(l)?0:/\b(main|speaker|altoparlant|monitor|line ?out|out(put)?\s*1)\b/i.test(l)?1:/\b1\s*[-–\/+]\s*\d/.test(l)?2:/\b(phones|headphone|cuffi)/i.test(l)?3:/\b[3-9]\s*[-–\/+]\s*\d+\b/.test(l)?5:4};return L.slice().sort((a,b)=>sc(a)-sc(b))[0]}
 function audCons(){const a={echoCancellation:AE.iface?false:AUD.echo,noiseSuppression:AUD.noise,autoGainControl:AUD.agc};if(AE.id)a.deviceId={exact:AE.id};if(AE.ch!=='auto'||AE.iface)a.channelCount={ideal:2};if(AE.iface)a.latency=0;return a}
 /* apre l'ingresso scelto; se non c'è più usa quello del sistema invece di fallire */
 async function audOpen(extra,video){await audResolve(true);if(AE.missing){toast('«'+AE.missing+'» non è collegata: uso l\'ingresso del sistema');AE.missing=''}
@@ -1889,7 +1895,13 @@ $('#audOut').onchange=async e=>{AUD.outId=e.target.value;const o=e.target.select
 [['#audEcho','echo'],['#audNoise','noise'],['#audAgc','agc']].forEach(([s,k])=>$(s).onchange=e=>{AUD[k]=e.target.checked;audChanged()});
 $('#audMon').onchange=e=>{AUD.mon=e.target.checked;audSave();audMonApply()};$('#audMonV').oninput=e=>{AUD.monV=+e.target.value;audSave();audMonApply()};
 function audMonApply(){const v=AUD.mon?AUD.monV:0;if(audTestS)audTestS.mg.gain.value=v;if(R&&R.monG)R.monG.gain.value=v}
-if(navigator.mediaDevices&&navigator.mediaDevices.addEventListener)navigator.mediaDevices.addEventListener('devicechange',()=>{if(!$('#ovSet').hidden)audList();setTimeout(()=>audSink(),400)});
+/* scheda audio collegata o scollegata mentre l'app è aperta: ricollego tutto da solo */
+let IFNOW=null;
+async function ifaceName(){try{const ds=await navigator.mediaDevices.enumerateDevices();const d=ds.find(x=>(x.kind==='audioinput'||x.kind==='audiooutput')&&x.deviceId!=='default'&&x.deviceId!=='communications'&&isIface(x.label));return d?d.label.replace(/^(Predefinito|Default) - /,''):''}catch(e){return''}}
+if(navigator.mediaDevices&&navigator.mediaDevices.addEventListener){ifaceName().then(n=>{IFNOW=n});
+  navigator.mediaDevices.addEventListener('devicechange',()=>{setTimeout(async()=>{const n=await ifaceName();const was=IFNOW;IFNOW=n;audSink.cur=null;await audSink();if(!$('#ovSet').hidden)audList();
+    if(was!==null&&n!==was){toast(n?'🎛 Scheda audio collegata ('+n.replace(/\s*\(.*$/,'')+'): ingressi, uscita e cuffie collegati in automatico':'Scheda audio scollegata: torno all\'audio del PC');
+      try{if(LV.on){await lvStart()}}catch(e){}try{lvOutFill()}catch(e){}}},700)})}
 audUI();
 const micHist=[];let mic=null,micFrame=0;
 async function toggleMic(){const b=$('#bMic');
@@ -2133,7 +2145,7 @@ async function lvStart(){const c=ctx();try{await c.resume()}catch(e){}lvStop();i
     hp.frequency.value=r.role==='basso'?25:r.role==='voce'?85:50;lvApply(r);LV.rows.push(r)});
   try{audSink.cur=null;await audSink();
     /* se gli ingressi sono della scheda audio ma l'uscita è ancora quella del sistema, porta le cuffie sulla scheda */
-    if(!AE.outId&&(!AUD.outId||AUD.outId==='')&&ins.some(x=>isIface(x.key||''))){const o=(await navigator.mediaDevices.enumerateDevices()).find(d=>d.kind==='audiooutput'&&d.deviceId!=='default'&&d.deviceId!=='communications'&&isIface(d.label));
+    if(!AE.outId&&(!AUD.outId||AUD.outId==='')&&ins.some(x=>isIface(x.key||''))){const o=outMain((await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='audiooutput'&&d.deviceId!=='default'&&d.deviceId!=='communications'&&isIface(d.label)));
       if(o){AE.outId=o.deviceId;AE.outLabel=o.label;try{if(A.setSinkId)await A.setSinkId(o.deviceId)}catch(e){}try{if(c.setSinkId)await c.setSinkId(o.deviceId)}catch(e){}audSink.cur=o.deviceId;toast('🎧 Cuffie sulla scheda: '+o.label.replace(/^(Predefinito|Default) - /,''))}}}catch(e){console.error(e)}lvOutFill();
   LV.on=true;$('#lvGo').disabled=false;lvRender();lvMeter();if(isMobile&&!LV.rows[0].hear)toast('Microfono acceso. Metti le cuffie e tocca 🎧 per sentirti')}
 function lvRender(){const box=$('#lvRows');if(!box)return;const g=$('#lvGo');g.classList.toggle('on',LV.on);if(!g.disabled)g.textContent=LV.on?'■ Spegni il microfono':'🎤 Accendi '+(isMobile?'il microfono':'microfono e strumenti');
@@ -3698,16 +3710,19 @@ let tapReady=null;async function sTapBuild(){const c=sCtx();if(!tapReady)tapRead
 /* ---------- base: tracce del brano senza gli strumenti suonati ---------- */
 /* lo strumento originale del brano si spegne solo se c'è un musicista attivo di quello strumento che non ha chiesto «Originale» */
 const ROLE_STEM={chitarra:'guitar',basso:'bass',voce:'vocals'};
-function stemMuted(k){const auto=$('#sAutoMute').checked;return SA.tracks.some(t=>ROLE_STEM[t.role]===k&&t.orig!==true&&(t.orig===false&&t.origSet||auto&&t.arm))}
-const origTxt=t=>'🎵 Originale '+(t.orig===true?'Sì':t.orig==='guide'?'Guida':'No');
-const origTip=t=>t.orig===true?'Si sente lo strumento originale del brano: tocca per spegnerlo':t.orig==='guide'?'Voce originale bassa, come guida: tocca per spegnerla':'Lo strumento originale è spento: tocca per riaccenderlo'+(t.role==='voce'?' (prima bassa come guida, poi piena)':'');
-const origBtn=t=>ROLE_STEM[t.role]?`<button class="mini origb ${t.orig===true?'on':t.orig==='guide'?'half':''}" data-orig="${t.id}" aria-pressed="${t.orig===true}" title="${origTip(t)}">${origTxt(t)}</button>`:'';
-function origSet(t,v){t.orig=v===true?true:v==='guide'?'guide':false;t.origSet=true;sStemApply();SA.baseMono=null;sSave();$$(`[data-orig="${t.id}"]`).forEach(b=>{b.classList.toggle('on',t.orig===true);b.classList.toggle('half',t.orig==='guide');b.setAttribute('aria-pressed',t.orig===true);b.textContent=origTxt(t);b.title=origTip(t)});
+/* stato reale dello strumento originale per quel musicista: la scelta fatta col pulsante vale sempre; se non l'ha mai toccato decide «Togli dalla base gli strumenti che suonate» */
+function origEff(t){if(t.origSet)return t.orig===true?true:t.orig==='guide'&&t.role==='voce'?'guide':false;return $('#sAutoMute').checked&&t.arm?false:true}
+function stemMuted(k){return SA.tracks.some(t=>ROLE_STEM[t.role]===k&&origEff(t)===false)}
+const origTxt=t=>{const e=origEff(t);return'🎵 Originale '+(e===true?'Sì':e==='guide'?'Guida':'No')};
+const origTip=t=>(e=>e===true?'Si sente lo strumento originale del brano: tocca per spegnerlo':e==='guide'?'Voce originale bassa, come guida: tocca per spegnerla':'Lo strumento originale è spento: tocca per riaccenderlo'+(t.role==='voce'?' (prima bassa come guida, poi piena)':''))(origEff(t));
+const origBtn=t=>{if(!ROLE_STEM[t.role])return'';const e=origEff(t);return`<button class="mini origb ${e===true?'on':e==='guide'?'half':''}" data-orig="${t.id}" aria-pressed="${e===true}" title="${origTip(t)}">${origTxt(t)}</button>`};
+function origUI(){for(const t of SA.tracks){const e=origEff(t);$$(`[data-orig="${t.id}"]`).forEach(b=>{b.classList.toggle('on',e===true);b.classList.toggle('half',e==='guide');b.setAttribute('aria-pressed',e===true);b.textContent=origTxt(t);b.title=origTip(t)})}}
+function origSet(t,v){t.orig=v===true?true:v==='guide'?'guide':false;t.origSet=true;sStemApply();SA.baseMono=null;sSave();origUI();
   const k=ROLE_STEM[t.role],nm=ROLES[t.role]||t.role;let msg=t.orig===true?'Si sente di nuovo lo strumento originale ('+nm+')':t.orig==='guide'?'Voce originale bassa, come guida':'Spento lo strumento originale ('+nm+')';
   if(k&&stems&&!stems[k])msg='Questo brano non ha la traccia «'+nm+'» separata: lo strumento originale resta nella base';
   else if(t.orig===false&&k!=='vocals'&&stems&&stems.vocals)msg+='';toast(msg)}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-orig]');if(!b)return;e.preventDefault();const t=SA.tracks.find(x=>x.id===b.dataset.orig);if(!t)return;
-  origSet(t,t.role==='voce'?(t.orig===false||t.orig==null?'guide':t.orig==='guide'?true:false):!(t.orig===true))});
+  const oe=origEff(t);origSet(t,t.role==='voce'?(oe===false?'guide':oe==='guide'?true:false):oe!==true)});
 /* la vecchia spunta «voce come guida» ora corrisponde allo stato «Guida» del pulsante della voce */
 $('#sGuide').addEventListener('change',e=>{for(const t of SA.tracks)if(t.role==='voce'&&t.orig!==true)origSet(t,e.target.checked?'guide':false)});
 async function sBaseBufs(){const src=await sourcesFor(tr);const out=[];
@@ -3716,10 +3731,10 @@ async function sBaseBufs(){const src=await sourcesFor(tr);const out=[];
 function sClickAt(c,when,acc){const o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();o.type='square';o.frequency.value=acc?2000:1300;f.type='bandpass';f.frequency.value=o.frequency.value;g.gain.setValueAtTime(0,when);g.gain.linearRampToValueAtTime(acc?.4:.26,when+.002);g.gain.exponentialRampToValueAtTime(.001,when+.05);o.connect(f);f.connect(g);g.connect(SA.out);o.start(when);o.stop(when+.06)}
 /* ---------- base con i volumi del mixer (si aggiornano anche mentre suona) ---------- */
 const STEM_N={vocals:'Voce',drums:'Batteria',bass:'Basso',guitar:'Chitarra',piano:'Piano',other:'Altro'};
-function vocGuide(){return SA.tracks.some(t=>t.arm&&t.role==='voce'&&t.orig==='guide')}
-function stemVol(k,b){let g=effGain(k);if(k==='vocals'&&vocGuide()&&!SA.tracks.some(t=>t.arm&&t.role==='voce'&&!t.orig))g=g*.35;else if(stemMuted(k))g=0;return g*+$('#sBaseVol').value}
+function vocGuide(){return SA.tracks.some(t=>t.role==='voce'&&origEff(t)==='guide')}
+function stemVol(k,b){let g=effGain(k);if(k==='vocals'&&vocGuide()&&!SA.tracks.some(t=>t.role==='voce'&&origEff(t)===false))g=g*.35;else if(stemMuted(k))g=0;return g*+$('#sBaseVol').value}
 async function sBaseStart(c,at,from){const src=await sourcesFor(tr);SA.stemG={};const srcs=[];for(const k of order){if(!src[k])continue;const s=c.createBufferSource();s.buffer=src[k];const g=c.createGain();g.gain.value=stemVol(k);s.connect(g);g.connect(SA.out);s.start(at,Math.min(from,src[k].duration-.01));SA.stemG[k]=g;srcs.push(s)}return srcs}
-function sStemApply(){const c=SA.ctx;for(const[k,g]of Object.entries(SA.stemG||{})){const v=stemVol(k);try{g.gain.setTargetAtTime(v,c.currentTime,.03)}catch(e){g.gain.value=v}}}
+function sStemApply(){try{origUI()}catch(e){}const c=SA.ctx;for(const[k,g]of Object.entries(SA.stemG||{})){const v=stemVol(k);try{g.gain.setTargetAtTime(v,c.currentTime,.03)}catch(e){g.gain.value=v}}}
 function sStemsUI(){$('#sStems').innerHTML=order.filter(k=>stems[k]).map(k=>{const g=gains[k];return `<div class="stem ${g.mute?'off':''}" data-st="${k}"><b>${STEM_N[k]||k}</b><input type="range" min="0" max="1.5" step="0.05" value="${g.vol}" aria-label="Volume ${STEM_N[k]||k}"><button class="mini" data-mute>${g.mute?'Accendi':'Spegni'}</button></div>`}).join('');
   $$('#sStems [data-st]').forEach(el=>{const k=el.dataset.st;el.querySelector('input').oninput=e=>{gains[k].vol=+e.target.value;sStemApply();try{syncChanUI()}catch(x){}};el.querySelector('[data-mute]').onclick=()=>{gains[k].mute=!gains[k].mute;sStemsUI();sStemApply();try{syncChanUI()}catch(x){}}})}
 /* orologio della Sala: ascolto, conteggio e registrazione */
@@ -3875,7 +3890,7 @@ function sRender(){try{sStemApply();SA.baseMono=null}catch(e){}
   $$('#sTracks .kn').forEach(knobify);
   for(const t of SA.tracks){const el=document.querySelector(`[data-tr="${t.id}"]`);const sel=el.querySelector('[data-f="dev"]');if(t.dev&&chanOf(t))sel.value=t.dev;
     el.querySelector('[data-hear]').onclick=()=>sHearSet(t,t.hear===false);
-    el.querySelectorAll('[data-f]').forEach(inp=>inp.onchange=inp.oninput=async e=>{const f=inp.dataset.f;if(f==='arm'){t.arm=inp.checked;el.classList.toggle('unarmed',!t.arm);const ra=inp.closest('.recarm');if(ra)ra.classList.toggle('on',t.arm)}else if(f==='mon'){t.mon=+inp.value;if(t.mon>0&&t.hear===false){t.hear=true;sHearUI(t)}if(t.node)t.node.mon.gain.value=t.hear===false?0:t.mon}else if(f==='name')t.name=inp.value;
+    el.querySelectorAll('[data-f]').forEach(inp=>inp.onchange=inp.oninput=async e=>{const f=inp.dataset.f;if(f==='arm'){t.arm=inp.checked;el.classList.toggle('unarmed',!t.arm);const ra=inp.closest('.recarm');if(ra)ra.classList.toggle('on',t.arm);SA.baseMono=null;sStemApply()}else if(f==='mon'){t.mon=+inp.value;if(t.mon>0&&t.hear===false){t.hear=true;sHearUI(t)}if(t.node)t.node.mon.gain.value=t.hear===false?0:t.mon}else if(f==='name')t.name=inp.value;
       else if(f==='role'&&e.type==='change'){t.role=inp.value;t.rig=Object.assign(defRig(t.role),{amp:t.rig.amp,ir:t.rig.ir});await sBuild(t);sRender()}else if(f==='dev'&&e.type==='change'){t.dev=inp.value;await sBuild(t);sTapBuild()}
       else if(f==='devid'&&e.type==='change'){const ch=SA.chans.find(c=>c.dev.id===inp.value&&!SA.tracks.some(x=>x!==t&&x.dev===c.key))||SA.chans.find(c=>c.dev.id===inp.value);if(ch){t.dev=ch.key;await sBuild(t);sTapBuild();sSave();sRender()}return}
       if(f==='arm'&&e.type==='change')sTapBuild();sSave()})}
