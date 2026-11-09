@@ -1423,7 +1423,7 @@ const ctx=()=>actx||(actx=new (window.AudioContext||window.webkitAudioContext)()
 const A=new Audio();A.preload='auto';try{A.preservesPitch=true;A.mozPreservesPitch=true;A.webkitPreservesPitch=true}catch(e){}
 let song=null, stems={}, order=[], gains={}, SR=44100, DUR=0;
 let rate=1, tr=0, trCache={tr:0,bufs:null}, voiceOff=false;
-let mixUrl=null, mixBusy=false, mixPend=false, wantTime=0;
+let mixUrl=null, mixBusy=false, mixPend=false, wantTime=0, newSong=false;
 let loopA=null, loopB=null;
 const playing=()=>!A.paused&&!A.ended;
 /* orologio fluido: alcuni browser aggiornano il tempo dell'audio solo a scatti */
@@ -1497,7 +1497,7 @@ async function trvBackground(id,list){if(!rp.key||!rp.ep||!order.length||!list||
 async function trvNeed(t){
   if(!rp.key||!rp.ep)throw trvErr('Per cambiare tonalità serve RunPod collegato (Impostazioni → RunPod): prepara le tracce e le salva con il brano.');
   if(sepBusy)throw trvErr('Aspetta che finisca il lavoro in corso, poi cambia tonalità.');
-  pause();try{if(typeof SP!=='undefined'&&SP.on)sListenStop()}catch(e){}
+  pause();try{if(typeof SP!=='undefined'&&SP.on)sListenStop(true)}catch(e){}
   sepStart([['send','Invio'],['queue','In coda'],['split','Tonalità'],['save','Salvataggio']],'Preparo la tonalità '+trTxt(t),song.title||'');sepInfo.ep='runpod';
   spShow('Questa tonalità non è ancora pronta: la preparo su RunPod e la salvo con il brano. Dalla prossima volta sarà immediata.',null,'send');
   try{await trvRun(song.id,[t],true)}catch(e){const stop=sepAbort;sepEnd();if(!stop)sepFail(e);else $('#sepCard').hidden=true;throw trvErr(stop?'Cambio di tonalità annullato':'')}
@@ -1530,7 +1530,7 @@ async function rebuildMix(){if(!order.length)return;if(mixBusy){mixPend=true;ret
     const url=URL.createObjectURL(new Blob([wavFromLR(L,R,SR)],{type:'audio/wav'}));swapSrc(url)}
   catch(e){console.error(e);toast('Non sono riuscito a preparare l\'audio su questo dispositivo')}
   finally{mixBusy=false;setBusy('');if(mixPend){mixPend=false;rebuildMix()}}}
-function swapSrc(url){const t=A.src?A.currentTime:wantTime,was=playing();const old=mixUrl;mixUrl=url;wantTime=t;
+function swapSrc(url){const t=A.src&&!newSong?A.currentTime:wantTime,was=playing()&&!newSong;newSong=false;const old=mixUrl;mixUrl=url;wantTime=t;
   const on=()=>{A.removeEventListener('loadedmetadata',on);try{A.currentTime=Math.min(wantTime,(A.duration||DUR)-0.05)}catch(e){}A.playbackRate=rate;if(was)A.play().catch(()=>{});if(old)URL.revokeObjectURL(old)};
   A.addEventListener('loadedmetadata',on);A.src=url;A.defaultPlaybackRate=rate;A.load()}
 let mixT=null;const mixSoon=()=>{clearTimeout(mixT);mixT=setTimeout(rebuildMix,220)};
@@ -1539,7 +1539,7 @@ let wake=null;async function holdWake(on){try{if(on&&navigator.wakeLock&&!wake)w
 function play(){if(!A.src)return;A.playbackRate=rate;A.play().catch(()=>{})}
 function pause(){A.pause()}
 function seek(t){t=Math.max(0,Math.min(DUR||A.duration||0,t));wantTime=t;try{A.currentTime=t}catch(e){}}
-A.addEventListener('play',()=>{setPlayIco();holdWake(true)});A.addEventListener('pause',()=>{setPlayIco();holdWake(false)});A.addEventListener('ended',()=>{setPlayIco();holdWake(false)});
+A.addEventListener('play',()=>{setPlayIco();holdWake(true)});A.addEventListener('pause',()=>{setPlayIco();holdWake(false)});A.addEventListener('ended',()=>{setPlayIco();holdWake(false);/* finita la canzone torna all'inizio */setTimeout(()=>{if(A.paused){wantTime=0;try{A.currentTime=0}catch(e){}}},0)});
 function setPlayIco(){const p=playing();$$('.playIco').forEach(s=>s.innerHTML=p?'<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>':'<path d="M7 4v16l13-8z"/>');$('#bPlay').setAttribute('aria-label',p?'Pausa':'Riproduci');$('#pPlay').setAttribute('aria-label',p?'Pausa':'Riproduci')}
 
 /* ================= caricamento brano ================= */
@@ -1551,7 +1551,8 @@ async function loadSong(s,bufs){
   for(const k of order)bufs[k]=await resampleTo(bufs[k],SR);
   stems=bufs;DUR=Math.max(...order.map(k=>stems[k].duration));gains={};order.forEach(k=>gains[k]={vol:1,mute:false,solo:false});
   song=s;$('#sTitle').textContent=s.title||'Senza titolo';$('#sArtist').textContent=s.artist||'';{const demo=s.id==='demo';$('#nowSong').hidden=demo;$('#bLoadSong').hidden=!demo}$('#palName').textContent=(s.title||'')+(s.artist?' · '+s.artist:'');
-  wantTime=0;renderChans();$$('[data-p]').forEach(b=>b.classList.remove('hot'));
+  /* brano nuovo: si riparte sempre da zero, fermo */
+  try{A.pause()}catch(e){}wantTime=0;newSong=true;try{if(A.src)A.currentTime=0}catch(e){}renderChans();$$('[data-p]').forEach(b=>b.classList.remove('hot'));
   // testo
   K.off=s.lyrOff||0;K.lines=[];K.sync=null;vocalEnv();
   if(s.lyr&&s.lyr.length){K.lines=s.lyr.map(l=>({t:l.t,e:null,s:l.s,st:!!l.st,w:l.w||null,p:l.p||0,pm:l.pm||0,pq:l.pq||0}));lyrFix()}
@@ -2311,7 +2312,7 @@ $('#slOpen').onclick=()=>{$('#slFileIn').value='';$('#slFileIn').click()};
 $('#slFileIn').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||d.kind!=='scaletta'||!Array.isArray(d.items))throw 0;SCL.name=d.name||f.name.replace(/\.json$/i,'');SCL.items=d.items.filter(x=>x&&(x.id||x.title)).map(x=>({id:x.id||'',title:x.title||'',artist:x.artist||''}));SCL.i=-1;$('#slName').value=SCL.name;slKeep();slDraw();slBarUI();
     const miss=SCL.items.filter(x=>!slFind(x)).length;toast('Scaletta «'+SCL.name+'» aperta'+(miss?' · '+miss+' brani non sono in libreria':''))}catch(x){toast('Questo file non è una scaletta di Fonica Infinity')}};
 async function slPlay(i){if(!SCL.items.length)return;if(!SCLLIB.length)SCLLIB=(await dbAll())||[];let j=i;while(j<SCL.items.length&&!slFind(SCL.items[j]))j++;if(j>=SCL.items.length){toast('Fine della scaletta 🎉');SCL.i=SCL.items.length-1;slKeep();slBarUI();return}
-  if(j!==i)toast('Salto «'+SCL.items[i].title+'»: non è in libreria');clearInterval(SCL.timer);SCL.timer=0;SCL.i=j;slKeep();slBarUI();const x=slFind(SCL.items[j]);if(song&&song.id===x.id){toast('▶ '+(j+1)+'/'+SCL.items.length+' · '+(x.title||''));return}await songPickGo(x.id);slBarUI()}
+  if(j!==i)toast('Salto «'+SCL.items[i].title+'»: non è in libreria');clearInterval(SCL.timer);SCL.timer=0;SCL.i=j;slKeep();slBarUI();const x=slFind(SCL.items[j]);if(song&&song.id===x.id){pause();seek(0);try{if(SP.on)sListenStop()}catch(e){}SP.from=0;toast('▶ '+(j+1)+'/'+SCL.items.length+' · '+(x.title||''));return}await songPickGo(x.id);slBarUI()}
 function slBarUI(){const b=$('#slBar');const on=SCL.items.length>0&&SCL.i>=0;b.hidden=!on;if(!on)return;const it=SCL.items[SCL.i];b.classList.remove('count');$('#slNow').textContent='📋 '+(SCL.i+1)+'/'+SCL.items.length+' · '+(it?it.title:'');$('#slNext').disabled=SCL.i>=SCL.items.length-1;$('#slPrev').disabled=SCL.i<=0;
   const nx=SCL.items[SCL.i+1];$('#slNext').title=nx?'Prossimo: '+nx.title:'È l\'ultimo brano'}
 $('#slPrev').onclick=()=>slPlay(Math.max(0,SCL.i-1));$('#slNext').onclick=()=>{if(SCL.i<SCL.items.length-1)slPlay(SCL.i+1)};$('#slNow').onclick=()=>slOpen();
@@ -3744,8 +3745,8 @@ const sDur=()=>Math.max(1,...Object.values(stems).filter(Boolean).map(b=>b.durat
 async function sListen(){if(SA.on)return;if(SP.on){sListenStop();return}const c=sCtx();await c.resume();const at=c.currentTime+.08;SP.srcs=await sBaseStart(c,at,SP.from);
   if($('#sClick').checked&&CLK2.beats){const m=CLK2.meter;CLK2.beats.forEach((b,i)=>{if(b>=SP.from&&b<SP.from+900)sClickAt(c,at+(b-SP.from),m>0&&((i-CLK2.down)%m+m)%m===0)})}
   SP.at=at;SP.on=true;$('#sListen').textContent='■ Ferma';SP.srcs[0]&&(SP.srcs[0].onended=()=>{if(SP.on)sListenStop()})}
-function sListenStop(){if(!SP.on)return;SP.from=sNow();SP.srcs.forEach(s=>{try{s.stop()}catch(e){}});SP.srcs=[];SP.on=false;$('#sListen').textContent='▶ Ascolta e prova'}
-$('#sListen').onclick=sListen;$('#sPos').oninput=e=>{const was=SP.on;if(was)sListenStop();SP.from=+e.target.value/1000*sDur();if(was)sListen()};
+function sListenStop(keep){if(!SP.on)return;SP.from=keep?sNow():0;SP.srcs.forEach(s=>{try{s.stop()}catch(e){}});SP.srcs=[];SP.on=false;$('#sListen').textContent='▶ Ascolta e prova'}
+$('#sListen').onclick=sListen;$('#sPos').oninput=e=>{const was=SP.on;if(was)sListenStop(true);SP.from=+e.target.value/1000*sDur();if(was)sListen()};
 $$('#sInst button').forEach(b=>b.onclick=()=>{setInst(b.dataset.i);sTabUI()});$$('#sMode button').forEach(b=>b.onclick=()=>{setTabMode(b.dataset.m);sTabUI()});
 function sTabUI(){$$('#sInst button').forEach(b=>b.classList.toggle('on',b.dataset.i===inst));$$('#sMode button').forEach(b=>b.classList.toggle('on',b.dataset.m===tabMode))}
 /* testo del brano: riga attuale grande, la prossima piccola */
@@ -3764,7 +3765,7 @@ let sFr=0;function sFrame(){if($('#salaOv').hidden)return;const t=sNow();if(SA.v
 /* ---------- registrazione ---------- */
 async function sRecStart(){if(SA.on){sRecStop();return}if(!song){toast('Apri prima un brano');return}if(!SA.chans.length){toast('Nessun ingresso: collega la scheda audio');return}
   const c=sCtx();await c.resume();const over=$('#sOver').checked&&SA.takes[SA.cur];await sTapBuild();if(!SA.tap){toast('Spunta «Registra» su almeno un musicista');return}
-  if(SP.on)sListenStop();const from=$('#sFromStart').checked?0:SP.from,bpm=BPM||100,cnt=$('#sCount').checked?4:0,beat=60/bpm,startAt=c.currentTime+.25+cnt*beat;
+  if(SP.on)sListenStop(true);const from=$('#sFromStart').checked?0:SP.from,bpm=BPM||100,cnt=$('#sCount').checked?4:0,beat=60/bpm,startAt=c.currentTime+.25+cnt*beat;
   pause();SA.srcs=[];for(let i=0;i<cnt;i++)sClickAt(c,c.currentTime+.25+i*beat,i===0);
   const base=await sBaseBufs();SA.srcs.push(...await sBaseStart(c,startAt,from));SA.recFrom=from;
   if($('#sClick').checked&&CLK2.beats){const m=CLK2.meter;CLK2.beats.forEach((b,i)=>{if(b>=from)sClickAt(c,startAt+(b-from),m>0&&((i-CLK2.down)%m+m)%m===0)})}
@@ -4219,7 +4220,7 @@ $('#sTuneTop').onclick=()=>{const t=SA.tracks.find(x=>x.role==='chitarra'||x.rol
 function sPerfUI(){const on=!!(SA.on||SA.perfMan);$('#salaOv').classList.toggle('perf',on);$('#sPerf').classList.toggle('hot',on);$('#sPerf').textContent=on?'🎛 Vista preparazione':'🎤 Vista palco'}
 setInterval(()=>{if(!$('#salaOv').hidden){const on=!!(SA.on||SA.perfMan);if($('#salaOv').classList.contains('perf')!==on)sPerfUI()}},250);
 $('#sRecGo').onclick=sRecStart;$('#songPick').onchange=e=>songPickGo(e.target.value);$('#sSongPick').onchange=e=>songPickGo(e.target.value);
-const sTr=async n=>{if(SA.on){toast('Cambia la tonalità prima di registrare');return}const was=SP.on;if(was)sListenStop();setTr(n);SA.baseMono=null;$('#sMsg').textContent=tr?'Preparo la base nella nuova tonalità…':'';try{await sourcesFor(tr)}catch(e){}$('#sMsg').textContent=tr?'Base in tonalità '+$('#sTrVal').textContent+': anche la registrazione userà questa.':'';if(was)sListen()};
+const sTr=async n=>{if(SA.on){toast('Cambia la tonalità prima di registrare');return}const was=SP.on;if(was)sListenStop(true);setTr(n);SA.baseMono=null;$('#sMsg').textContent=tr?'Preparo la base nella nuova tonalità…':'';try{await sourcesFor(tr)}catch(e){}$('#sMsg').textContent=tr?'Base in tonalità '+$('#sTrVal').textContent+': anche la registrazione userà questa.':'';if(was)sListen()};
 $('#sTrDown').onclick=()=>sTr(tr-1);$('#sTrUp').onclick=()=>sTr(tr+1);$('#sTrZero').onclick=()=>sTr(0);$('#sRecX').onclick=sRecCancel;document.addEventListener('keydown',e=>{if(e.key==='Escape'&&SA.on&&!$('#salaOv').hidden){e.preventDefault();sRecCancel()}},true);
 ['#sBaseVol','#sAutoMute','#sGuide','#sClick','#sCount'].forEach(s=>{$(s).onchange=()=>{SA.baseMono=null;sStemApply();sSave()};if(s==='#sBaseVol')$(s).oninput=()=>sStemApply()});
 $('#sPlay').onclick=()=>WV.play?wvStop():wvPlay();$$('[data-nud]').forEach(b=>b.onclick=()=>{const tk=SA.takes[SA.cur];const t=tk&&tk.tracks[WV.sel];if(!t){toast('Tocca prima una traccia sul grafico');return}t.off+= +b.dataset.nud;t.offHow='regolato a mano';wvSelInfo();wvDraw();if(WV.play){wvStop();wvPlay()}});
