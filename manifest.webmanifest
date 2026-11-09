@@ -1,13 +1,13 @@
 {
- "name": "Fonica Infinity",
- "short_name": "Fonica",
- "description": "Karaoke e studio del basso: tracce separate, testo sincronizzato, tablatura.",
+ "name": "Pure Voltage",
+ "short_name": "Pure Voltage",
+ "description": "Sala prove e karaoke: tracce separate, testo sincronizzato, effetti e video.",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
  "orientation": "any",
- "background_color": "#0a1827",
- "theme_color": "#16324c",
+ "background_color": "#07080d",
+ "theme_color": "#07080d",
  "lang": "it",
  "icons": [
   {

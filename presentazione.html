@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Fonica Infinity</title>
-<meta name="description" content="Fonica Infinity: la tua sala prove. Separi qualsiasi brano in voce e strumenti, canti in karaoke, suoni dal vivo con la tua scheda audio e crei video e duetti.">
-<meta name="theme-color" content="#0b0b0e">
-<meta property="og:title" content="Fonica Infinity — la tua sala prove">
+<title>Pure Voltage</title>
+<meta name="description" content="Pure Voltage: la tua sala prove. Separi qualsiasi brano in voce e strumenti, canti in karaoke, suoni dal vivo con la tua scheda audio e crei video e duetti.">
+<meta name="theme-color" content="#07080d">
+<meta property="og:title" content="Pure Voltage — la tua sala prove">
 <meta property="og:description" content="Separa i brani, canta, suona dal vivo, crea duetti. Tutto nel browser.">
-<meta property="og:image" content="logo-fine.jpg">
+<meta property="og:image" content="pv-hero.jpg">
 <link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Josefin+Sans:wght@400;600;700&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Josefin+Sans:wght@400;600;700&family=Figtree:wght@400;500;600&display=swap">
 <style>
 :root{
-  --bg:#08080a;--bg2:#0f0e11;--card:#141317;--line:#3a3222;
-  --fg:#f3e4bb;--dim:#bfae84;--ink:#1a1305;
-  --gold:#d9b44a;
-  --goldgrad:linear-gradient(180deg,#fff4c8 0%,#f2d273 38%,#c99a2e 68%,#f3d986 100%);
-  --goldbtn:linear-gradient(180deg,#f8e08e 0%,#ddb64c 55%,#a8801f 100%);
-  --f-lux:"Cinzel","Trajan Pro",Georgia,serif;
+  --bg:#07080d;--bg2:#0d1020;--card:#12152a;--line:#2a3150;
+  --fg:#e8edff;--dim:#a3aed0;--ink:#ffffff;
+  --gold:#6fd8ff;
+  --goldgrad:linear-gradient(90deg,#5ee0ff 0%,#7f9bff 50%,#c06bff 100%);
+  --goldbtn:linear-gradient(90deg,#1d8fe0 0%,#5a5cf0 55%,#8a3df0 100%);
+  --f-lux:"Exo 2","Josefin Sans",system-ui,sans-serif;
   --f-display:"Josefin Sans","Avenir Next",system-ui,sans-serif;
   --f-body:"Figtree","Segoe UI",system-ui,sans-serif;
 }
@@ -30,11 +30,11 @@ img,video{max-width:100%;display:block}
 a{color:inherit}
 .wrap{width:min(1120px,100%);margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
 .g{background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:17px;text-decoration:none;border:1px solid #c9a23a;transition:transform .15s ease,box-shadow .2s ease}
-.btn.pri{background:var(--goldbtn);color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,245,200,.6),0 6px 26px rgba(217,180,74,.28)}
-.btn.pri:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,245,200,.6),0 10px 34px rgba(217,180,74,.4)}
-.btn.sec{background:rgba(0,0,0,.35);color:var(--fg);border-color:rgba(217,180,74,.55)}
-.btn:focus-visible{outline:2px solid #fff3c8;outline-offset:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:17px;text-decoration:none;border:1px solid #6f7dff;transition:transform .15s ease,box-shadow .2s ease}
+.btn.pri{background:var(--goldbtn);color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 26px rgba(110,130,255,.28)}
+.btn.pri:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 10px 34px rgba(110,130,255,.4)}
+.btn.sec{background:rgba(0,0,0,.35);color:var(--fg);border-color:rgba(110,130,255,.55)}
+.btn:focus-visible{outline:2px solid #bfe9ff;outline-offset:3px}
 
 /* barra in alto */
 .nav{position:fixed;inset:0 0 auto 0;z-index:20;transition:background .3s ease,border-color .3s ease;border-bottom:1px solid transparent}
@@ -45,13 +45,13 @@ a{color:inherit}
 .nav .btn{min-height:42px;padding:0 18px;font-size:15px}
 
 /* apertura */
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 38%,rgba(217,180,74,.10),transparent 60%),#000;padding:84px 0 48px!important}
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 38%,rgba(110,130,255,.14),transparent 60%),#05060b;padding:84px 0 48px!important}
 .hero .stage{position:relative;width:min(640px,96vw,90vh);aspect-ratio:16/9;margin:0 auto 10px}
 .hero .stage video,.hero .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 55%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 50%,#000 55%,transparent 72%)}
 .hero .wrap{text-align:center}
 .eyebrow{font-family:var(--f-display);letter-spacing:.32em;text-transform:uppercase;font-size:13px;color:var(--dim);margin:0 0 10px}
-.hero h1{font-family:var(--f-lux);font-weight:700;font-size:clamp(34px,6vw,68px);line-height:1.05;letter-spacing:.04em;margin:0 0 14px;text-shadow:0 0 40px rgba(217,180,74,.25)}
-.hero p.lead{font-size:clamp(18px,2.2vw,23px);max-width:680px;margin:0 auto 26px;color:#f7ecd0}
+.hero h1{font-family:var(--f-lux);font-weight:700;font-size:clamp(34px,6vw,68px);line-height:1.05;letter-spacing:.04em;margin:0 0 14px;text-shadow:0 0 40px rgba(110,130,255,.25)}
+.hero p.lead{font-size:clamp(18px,2.2vw,23px);max-width:680px;margin:0 auto 26px;color:#e3e9ff}
 .hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
 /* sezioni */
@@ -60,17 +60,17 @@ section{padding:clamp(64px,10vw,120px) 0}
 .kicker::before{content:"";width:36px;height:1px;background:var(--goldgrad)}
 h2{font-family:var(--f-lux);font-weight:700;font-size:clamp(28px,4.4vw,48px);line-height:1.12;margin:0 0 18px;letter-spacing:.02em}
 .intro-txt{max-width:720px;color:var(--dim);font-size:18px;margin:0}
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(217,180,74,.6),transparent);border:0;margin:0}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(110,130,255,.6),transparent);border:0;margin:0}
 
 .pillars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:40px}
-.pillar{position:relative;background:linear-gradient(180deg,#17151a,#100f12);border:1px solid var(--line);border-radius:22px;padding:28px 26px 26px;overflow:hidden}
+.pillar{position:relative;background:linear-gradient(180deg,#141831,#0c0f1d);border:1px solid var(--line);border-radius:22px;padding:28px 26px 26px;overflow:hidden}
 .pillar::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:var(--goldgrad);opacity:.8}
 .pillar .n{font-family:var(--f-lux);font-size:15px;color:var(--gold);letter-spacing:.2em}
 .pillar h3{font-family:var(--f-display);font-weight:700;font-size:24px;margin:6px 0 8px}
 .pillar p{margin:0 0 12px;color:var(--dim)}
 .pillar ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
 .pillar li{padding-left:24px;position:relative}
-.pillar li::before{content:"✦";position:absolute;left:0;top:0;color:var(--gold);font-size:14px}
+.pillar li::before{content:"⚡";position:absolute;left:0;top:0;color:var(--gold);font-size:14px}
 
 .who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:36px}
 .who div{border:1px solid var(--line);border-radius:18px;padding:20px;background:var(--bg2)}
@@ -91,12 +91,12 @@ h2{font-family:var(--f-lux);font-weight:700;font-size:clamp(28px,4.4vw,48px);lin
 .faq details[open] summary::after{content:"–"}
 .faq p{margin:0 0 18px;color:var(--dim)}
 
-.final{text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(217,180,74,.16),transparent 60%)}
-.final img{width:min(260px,60vw);margin:0 auto 22px;border-radius:14px;box-shadow:0 0 50px rgba(217,180,74,.18)}
+.final{text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(110,130,255,.16),transparent 60%)}
+.final img{width:min(260px,60vw);margin:0 auto 22px;border-radius:14px;box-shadow:0 0 50px rgba(110,130,255,.18)}
 .final .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-.skip{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:var(--dim);font-size:16px;cursor:pointer}.skip input{width:22px;height:22px;accent-color:#d9b44a}
-.note{font-size:14px;color:#8f8366;max-width:760px;margin:26px auto 0}
-footer{border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));color:#8f8366;font-size:14px}
+.skip{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:var(--dim);font-size:16px;cursor:pointer}.skip input{width:22px;height:22px;accent-color:#6f7dff}
+.note{font-size:14px;color:#7d88ad;max-width:760px;margin:26px auto 0}
+footer{border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));color:#7d88ad;font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
@@ -119,14 +119,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <header class="nav" id="nav">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Fonica Infinity"><img src="logo-oro.jpg" alt="Fonica Infinity"></a>
+    <a class="logo" href="#top" aria-label="Pure Voltage"><img src="pv-logo.jpg" alt="Pure Voltage"></a>
     <a class="btn pri" href="./?app">Apri l'app</a>
   </div>
 </header>
 
 <main id="top">
   <section class="hero" style="padding:0">
-    <div class="stage"><img src="logo-fine.jpg" alt="Logo Fonica Infinity"><video id="heroV" src="logo-anim.mp4" autoplay muted playsinline preload="auto"></video></div>
+    <div class="stage"><img src="pv-hero.jpg" alt="Logo Pure Voltage"><video id="heroV" src="pv-anim.mp4" autoplay muted loop playsinline preload="auto"></video></div>
     <div class="wrap">
       <h1 class="g">La tua sala prove</h1>
       <p class="lead">Prendi una canzone, togli la voce o uno strumento e mettiti al suo posto. Canta, suona, registra e duetta: tutto nel browser, sul PC, sul tablet e sullo smartphone.</p>
@@ -142,8 +142,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <section id="cosa">
     <div class="wrap">
       <p class="kicker reveal">Cosa fa</p>
-      <h2 class="g reveal">Quattro strumenti preziosi in uno</h2>
-      <p class="intro-txt reveal">Fonica Infinity è pensata per chi ama la musica, a qualsiasi età: pulsanti grandi, scritte chiare e nessun programma da installare.</p>
+      <h2 class="g reveal">Quattro strumenti in uno, a tutta energia</h2>
+      <p class="intro-txt reveal">Pure Voltage è pensata per chi ama la musica, a qualsiasi età: pulsanti grandi, scritte chiare e nessun programma da installare.</p>
       <div class="pillars">
         <article class="pillar reveal">
           <div class="n">I</div>
@@ -218,7 +218,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <h2 class="g reveal">Tre passi e sei sul palco</h2>
       <div class="steps">
         <div class="step reveal"><h3>Apri l'app</h3><p>Funziona nel browser: Chrome, Edge o Brave, sul PC come sul telefono. Puoi anche aggiungerla alla schermata Home.</p></div>
-        <div class="step reveal"><h3>Carica una canzone</h3><p>Scegli un MP3 o un intero album: Fonica Infinity lo separa in voce e strumenti e lo mette in Libreria.</p></div>
+        <div class="step reveal"><h3>Carica una canzone</h3><p>Scegli un MP3 o un intero album: Pure Voltage lo separa in voce e strumenti e lo mette in Libreria.</p></div>
         <div class="step reveal"><h3>Canta e suona</h3><p>Togli la parte che vuoi fare tu, scegli la tonalità e premi Play. Se vuoi, registra il video.</p></div>
       </div>
     </div>
@@ -233,39 +233,36 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="faq">
         <details class="reveal"><summary>Quanto costa?</summary><p>L'app è gratuita. Per separare i brani in modo veloce si collega un proprio account RunPod, un servizio a consumo: si paga solo il tempo di calcolo, pochi centesimi a brano. C'è anche un servizio gratuito, più lento.</p></details>
         <details class="reveal"><summary>Devo installare qualcosa?</summary><p>No. Si apre dal browser. Sul telefono e sul PC puoi aggiungerla alla schermata principale e usarla come un'app.</p></details>
-        <details class="reveal"><summary>Posso usare la mia scheda audio?</summary><p>Sì. Sul PC Fonica Infinity riconosce gli ingressi della scheda audio, per voce e strumenti, e puoi ascoltarti in cuffia mentre suona la base.</p></details>
+        <details class="reveal"><summary>Posso usare la mia scheda audio?</summary><p>Sì. Sul PC Pure Voltage riconosce gli ingressi della scheda audio, per voce e strumenti, e puoi ascoltarti in cuffia mentre suona la base.</p></details>
         <details class="reveal"><summary>Dove finiscono i miei brani?</summary><p>Restano sul tuo dispositivo, nel browser, e se vuoi anche in una cartella del tuo PC. Puoi salvare in un file le tue chiavi e impostazioni, per ritrovarle sempre.</p></details>
-        <details class="reveal"><summary>Posso usare qualsiasi canzone?</summary><p>Fonica Infinity non contiene e non vende musica: lavora sui file che scegli tu. Usala con brani acquistati regolarmente, tuoi o liberi da diritti, per studio e uso personale.</p></details>
+        <details class="reveal"><summary>Posso usare qualsiasi canzone?</summary><p>Pure Voltage non contiene e non vende musica: lavora sui file che scegli tu. Usala con brani acquistati regolarmente, tuoi o liberi da diritti, per studio e uso personale.</p></details>
       </div>
     </div>
   </section>
 
   <section class="final">
     <div class="wrap">
-      <img src="logo-oro.jpg" alt="Logo Fonica Infinity" class="reveal">
-      <h2 class="g reveal">La tua musica merita un palco d'oro</h2>
-      <p class="intro-txt reveal" style="margin:0 auto">Apri Fonica Infinity e prova con la tua canzone preferita.</p>
+      <img src="pv-logo.jpg" alt="Logo Pure Voltage" class="reveal">
+      <h2 class="g reveal">Accendi la tua musica</h2>
+      <p class="intro-txt reveal" style="margin:0 auto">Apri Pure Voltage e prova con la tua canzone preferita.</p>
       <div class="cta reveal">
         <a class="btn pri" href="./?app">Apri l'app</a>
         <a class="btn sec" href="https://www.paypal.me/fonicainfinity" target="_blank" rel="noopener">Sostieni il progetto</a>
       </div>
       <label class="skip reveal"><input type="checkbox" id="skipPres"> La prossima volta apri direttamente l'app, senza questa presentazione</label>
-      <p class="note">Fonica Infinity è uno strumento per lo studio e l'uso personale della musica. Non contiene, non vende e non distribuisce brani: chi la usa si impegna a rispettare il diritto d'autore.</p>
+      <p class="note">Pure Voltage è uno strumento per lo studio e l'uso personale della musica. Non contiene, non vende e non distribuisce brani: chi la usa si impegna a rispettare il diritto d'autore.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap"><span>© Fonica Infinity</span><a href="./?app">Apri l'app</a></div>
+  <div class="wrap"><span>© Pure Voltage</span><a href="./?app">Apri l'app</a></div>
 </footer>
 
 <script>
 (()=>{
   const v=document.getElementById('heroV');
-  /* il simbolo d'oro si forma e resta fermo (il guerriero compare solo nell'intro dell'app) */
   v.addEventListener('error',()=>{v.remove()});
-  /* alla fine il simbolo d'oro si completa con la scritta FONICA INFINITY */
-  v.addEventListener('ended',()=>{v.style.transition='opacity 1.2s ease';v.style.opacity='0'});
   const sk=document.getElementById('skipPres');try{sk.checked=localStorage.getItem('f8_skipPres')==='1'}catch(e){}
   sk.onchange=()=>{try{sk.checked?localStorage.setItem('f8_skipPres','1'):localStorage.removeItem('f8_skipPres')}catch(e){}};
   const nav=document.getElementById('nav');
