@@ -105,6 +105,7 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .smrow{display:grid;grid-template-columns:150px minmax(160px,1fr) 150px 150px auto auto auto;gap:8px;align-items:center;padding:6px 10px;border-radius:10px;background:var(--raise);border-left:5px solid var(--tc)}
 .rigslot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0}.rigslot b{min-width:120px}.rigslot span{flex:1;min-width:120px;color:var(--steel)}
 .rigslot label.chip{cursor:pointer}
+.r2cors{white-space:pre-wrap;word-break:break-all;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;font:12px/1.4 var(--f-mono);max-height:180px;overflow:auto}
 .rigfx{gap:10px 16px}.rigfx .field{min-width:150px;flex:1 1 150px}
 .t3credit{display:flex;flex-direction:column;gap:4px}.t3c{display:flex;align-items:center;gap:8px;font-size:14px}.t3c img{width:26px;height:26px;border-radius:50%}
 @media (max-width:1200px){.smrow{grid-template-columns:1fr 1fr 1fr}}
@@ -961,6 +962,13 @@ themeApply();</script>
     <p class="snote" id="spaceInfo"></p><div class="row"><button class="mini" id="spaceTest">🧪 Prova il salvataggio</button><button class="mini" id="spaceFix">🛠 Ripara l'archivio</button><button class="mini" id="spaceDrafts">🗑 Elimina tutte le bozze video</button></div>
   </div>
   <div class="box">
+    <h4>☁️ Dove salvo i brani</h4>
+    <p>I brani stanno sempre su questo dispositivo. Se colleghi il tuo spazio <b>Cloudflare R2</b> li salvo anche nel cloud, così li ritrovi sul telefono, sul tablet o su un altro PC.</p>
+    <div class="row" role="group" aria-label="Dove salvo i brani"><button class="chip" id="stLocal">📱 Solo su questo dispositivo</button><button class="chip" id="stR2">☁️ Anche nel cloud R2</button></div>
+    <p class="snote" id="r2Info"></p>
+    <div class="row" id="r2Acts" hidden><button class="chip" id="r2Edit">🔑 Collegamento R2</button><button class="chip" id="r2All">☁️ Salva tutta la Libreria nel cloud</button></div>
+  </div>
+  <div class="box">
     <h4>Separazione delle tracce</h4>
     <p>Scegli dove vengono separati i brani che aggiungi.</p>
     <div class="seg" id="sepModeSeg" role="group" aria-label="Dove separare"><button data-m="auto">Automatico</button><button data-m="rp">Solo RunPod</button><button data-m="pc">Sul PC</button></div>
@@ -1045,6 +1053,7 @@ themeApply();</script>
     <button class="chip pri" id="addFromDir">Dalla cartella delle tracce</button>
     <button class="chip" id="addOther">Scegli un'altra cartella</button>
     <input type="file" id="addDirIn" webkitdirectory multiple hidden>
+    <button class="chip" id="addR2" hidden>☁️ Dal cloud R2</button>
     <button class="chip" id="addMp3">Un nuovo MP3 da separare</button>
   </div>
   <div class="status" id="addStatus"></div>
@@ -1298,6 +1307,25 @@ themeApply();</script>
   </div>
 </div></div>
 <div class="slbar" id="slBar" hidden><button class="mini" id="slPrev" aria-label="Brano precedente">⏮</button><button class="slnow" id="slNow"></button><button class="mini" id="slNext" aria-label="Brano successivo">⏭ Prossimo</button><button class="mini" id="slStop" aria-label="Chiudi la scaletta">✕</button></div>
+<div class="ov" id="ovR2" hidden><div class="sheet">
+  <div class="row"><h3 class="grow">☁️ Collega Cloudflare R2</h3><button class="mini" data-close>Chiudi</button></div>
+  <p>Inserisci i dati del tuo spazio R2. Restano solo su questo dispositivo (e nel file «Salva le chiavi in un file»).</p>
+  <div class="row"><label class="field grow"><span>ID account</span><input class="inp" id="r2Acc" autocomplete="off" spellcheck="false" placeholder="32 caratteri, o l'indirizzo S3"></label><label class="field grow"><span>Nome del bucket</span><input class="inp" id="r2Bucket" autocomplete="off" spellcheck="false" placeholder="es. purevoltage"></label></div>
+  <div class="row"><label class="field grow"><span>Access Key ID</span><input class="inp" id="r2Key" autocomplete="off" spellcheck="false" data-secret></label><label class="field grow"><span>Secret Access Key</span><input class="inp" id="r2Secret" type="password" autocomplete="off" spellcheck="false" data-secret></label></div>
+  <div class="row"><button class="chip pri" id="r2Test">🧪 Salva e prova il collegamento</button><button class="chip" id="r2Off">Scollega</button></div>
+  <p class="status" id="r2Msg"></p>
+  <details class="slmore"><summary>📖 Come si crea lo spazio R2 (una volta sola, circa 10 minuti)</summary>
+    <ol class="steps">
+      <li>Vai su <b>dash.cloudflare.com</b>, entra (o crea un account gratuito) e apri <b>R2 Object Storage</b>. Chiede una carta, ma fino a 10 GB è gratis.</li>
+      <li>Premi <b>Create bucket</b>, dai un nome (es. <code>purevoltage</code>) e crealo.</li>
+      <li>Nel bucket apri <b>Settings › CORS Policy › Add CORS policy</b> e incolla questa regola (serve perché l'app possa leggere e scrivere):
+        <pre class="r2cors" id="r2Cors"></pre><button class="mini" id="r2CorsCopy">📋 Copia la regola</button></li>
+      <li>Torna su R2 e apri <b>Manage R2 API Tokens › Create API token</b>. Scegli <b>Object Read &amp; Write</b>, limita il token al tuo bucket e crealo.</li>
+      <li>Copia <b>Access Key ID</b> e <b>Secret Access Key</b> qui sopra. L'<b>ID account</b> lo trovi nella pagina principale di R2 (Account ID).</li>
+      <li>Premi «Salva e prova il collegamento»: se compare ✅ è tutto pronto.</li>
+    </ol>
+  </details>
+</div></div>
 <div class="ov" id="ovDrafts" hidden><div class="sheet slsheet">
   <div class="slhead"><h3>📂 Bozze dei video</h3><button class="mini" data-close>Chiudi</button></div>
   <p class="snote">Le registrazioni restano qui finché non le elimini: riaprile per cambiare effetti, sfondo e sincronia e creare il video finale quando vuoi.</p>
@@ -2420,12 +2448,13 @@ function showAsrSkip(msg){spSetSteps([]);$('#spTitle').textContent='Testo trovat
 async function sepFinish(meta,stemsRec,bufs,note,asr,sing){
   const id='s'+Date.now().toString(36);const rec={id,title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',created:Date.now(),lyrics:meta.lyrics||'',tab:'',stems:stemsRec};if(meta.lrc)rec.lrclib=meta.lrc;if(asr&&asr.segments&&asr.segments.length)rec.asr=asr;if(sing&&!sing.error&&sing.k!=null)rec.singers=sing;
   const ok=await dbPut(rec);let saved=false;if(window.showDirectoryPicker&&dirHandle)saved=await exportSong(rec,false);
-  if(BATCH.on){if(!ok){sepFail(new Error('non riesco a salvare: '+await saveFailMsg()));return}BATCH.res='ok';sepEnd();spShow(`«${rec.title}» pronto in Libreria`,1);return}
+  if(BATCH.on){if(!ok){sepFail(new Error('non riesco a salvare: '+await saveFailMsg()));return}if(r2On()){spShow('☁️ Salvo «'+rec.title+'» anche nel cloud…',null,'save');await r2Auto(rec)}BATCH.res='ok';sepEnd();spShow(`«${rec.title}» pronto in Libreria`,1);return}
   sepEnd();const took=fmt((Date.now()-sepT0)/1000);
   spShow(`Fatto in ${took}${note?' ('+note+')':''}. ${saved?'Tracce salvate anche nella cartella «'+dirHandle.name+'».':'Il brano è in Libreria.'}`,1);$$('#spSteps span').forEach(el=>el.className='ok');
   await loadSong({...rec,stems:undefined,stored:!!ok},bufs);
   if(!saved){const b=document.createElement('button');b.className='mini';b.textContent=window.showDirectoryPicker?'Salva tracce in una cartella':'Scarica le tracce';b.onclick=async()=>{if(await exportSong(rec,true))b.remove()};$('#spFile').textContent='';$('#spFile').appendChild(b)}
   if(!rec.lyrics&&rec.title&&!meta.lrcTried)findLyrics(true);
+  if(ok)r2Auto(rec);
   const tl=trList(SEPTR);if(ok&&rp.key&&rp.ep&&tl.length)setTimeout(()=>{if(song&&song.id===rec.id&&!sepBusy)trvBackground(rec.id,tl)},4000)}
 const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
 function sepNotice(html,target){let el=$('#sepMsg');if(target){el=$('#setMsg');openSet()}else if($('#ovLib').hidden){renderLib();openOv('#ovLib')}el.innerHTML=html;el.hidden=false;el.scrollIntoView({behavior:'smooth',block:'center'});if(target)setTimeout(()=>{const t=$(target);if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.focus&&t.focus()}},2600)}
@@ -2730,6 +2759,73 @@ async function asrRun(force){if(!song)return;
 const AUDIO_RX=/\.(mp3|m4a|aac|wav|flac|ogg|opus)$/i;
 const songDirs=s=>[safeName(s.artist||'Artista sconosciuto'),safeName(s.title||'Brano')];
 async function songDirHandle(s){let d=dirHandle;for(const n of songDirs(s))d=await d.getDirectoryHandle(n,{create:true});return d}
+/* ================= cloud Cloudflare R2 (S3): ogni utente collega il proprio spazio =================
+   Stessa struttura della cartella delle tracce: PureVoltage/Artista/Titolo/voce.m4a, basso.m4a…, Titolo.lrc */
+const R2P='PureVoltage/';
+let R2=(()=>{try{return JSON.parse(prefGet('keyR2')||'null')||{}}catch(e){return{}}})();
+const r2Ok=()=>!!(R2.acc&&R2.key&&R2.secret&&R2.bucket),r2On=()=>r2Ok()&&R2.mode==='r2';
+const r2Save=()=>prefSet('keyR2',JSON.stringify(R2));
+const S3E=new TextEncoder(),s3hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const s3sha=async d=>s3hex(await crypto.subtle.digest('SHA-256',typeof d==='string'?S3E.encode(d):d));
+const s3hmac=async(k,d)=>{const key=await crypto.subtle.importKey('raw',typeof k==='string'?S3E.encode(k):k,{name:'HMAC',hash:'SHA-256'},false,['sign']);return crypto.subtle.sign('HMAC',key,S3E.encode(d))};
+const s3uri=x=>encodeURIComponent(x).replace(/[!'()*]/g,c=>'%'+c.charCodeAt(0).toString(16).toUpperCase());
+/* firma AWS Signature V4 (verificata con gli esempi ufficiali AWS) */
+async function s3sign({method,host,path,query={},headers={},payloadHash='UNSIGNED-PAYLOAD',key,secret,region='auto',date=new Date()}){
+  const amz=date.toISOString().replace(/[-:]/g,'').replace(/\.\d+/,''),day=amz.slice(0,8);
+  const h={...headers,host,'x-amz-content-sha256':payloadHash,'x-amz-date':amz},hl={};for(const k in h)hl[k.toLowerCase()]=String(h[k]).trim();const names=Object.keys(hl).sort();
+  const canonUri=path.split('/').map(s3uri).join('/'),canonQ=Object.keys(query).sort().map(k=>s3uri(k)+'='+s3uri(query[k])).join('&');
+  const creq=[method,canonUri,canonQ,names.map(n=>n+':'+hl[n]+'\n').join(''),names.join(';'),payloadHash].join('\n');
+  const scope=`${day}/${region}/s3/aws4_request`,sts=['AWS4-HMAC-SHA256',amz,scope,await s3sha(creq)].join('\n');
+  let k=await s3hmac('AWS4'+secret,day);k=await s3hmac(k,region);k=await s3hmac(k,'s3');k=await s3hmac(k,'aws4_request');
+  const out={...h,Authorization:`AWS4-HMAC-SHA256 Credential=${key}/${scope}, SignedHeaders=${names.join(';')}, Signature=${s3hex(await s3hmac(k,sts))}`};delete out.host;return{headers:out,canonUri,canonQ}}
+async function r2Req(method,objKey,{query={},body=null,ctype=''}={}){if(!r2Ok())throw new Error('R2OFF');
+  const host=R2.acc.trim()+'.r2.cloudflarestorage.com',path='/'+R2.bucket.trim()+(objKey?'/'+objKey:'');
+  const {headers,canonUri,canonQ}=await s3sign({method,host,path,query,headers:ctype?{'content-type':ctype}:{},key:R2.key.trim(),secret:R2.secret.trim()});
+  let r;try{r=await fetch('https://'+host+canonUri+(canonQ?'?'+canonQ:''),{method,headers,body})}catch(e){throw new Error('R2NET')}
+  if(r.ok)return r;let txt='';try{txt=await r.text()}catch(e){}
+  if(r.status===403||/SignatureDoesNotMatch|InvalidAccessKeyId|AccessDenied/.test(txt))throw new Error('R2AUTH');if(/NoSuchBucket/.test(txt))throw new Error('R2BUCKET');
+  if(r.status===404)throw new Error('R2NOFILE');throw new Error('R2: '+r.status+' '+(txt.match(/<Message>(.*?)<\/Message>/)||['',''])[1])}
+const R2MSG={R2NET:'Non riesco a raggiungere il cloud: controlla internet, l\'ID account e la regola CORS del bucket (vedi la guida qui sotto).',R2AUTH:'Le chiavi non sono giuste o il token non può usare questo bucket.',R2BUCKET:'Non trovo il bucket: controlla il nome.',R2OFF:'Il cloud R2 non è collegato.'};
+const r2Err=e=>R2MSG[e&&e.message]||String(e&&e.message||e);
+async function r2List(prefix){const out=[];let tok='';do{const q={'list-type':'2',prefix,'max-keys':'1000'};if(tok)q['continuation-token']=tok;
+    const x=new DOMParser().parseFromString(await (await r2Req('GET','',{query:q})).text(),'application/xml');
+    for(const c of x.getElementsByTagName('Contents'))out.push({key:c.getElementsByTagName('Key')[0].textContent,size:+(c.getElementsByTagName('Size')[0]||{}).textContent||0});
+    tok=x.getElementsByTagName('IsTruncated')[0]&&x.getElementsByTagName('IsTruncated')[0].textContent==='true'?(x.getElementsByTagName('NextContinuationToken')[0]||{}).textContent||'':''}while(tok);return out}
+function songFiles(s){const folder=folderName(s);
+  const files=Object.entries(s.stems||{}).map(([k,v])=>{const ext=(v.name&&v.name.match(/\.[a-z0-9]+$/i)||['.wav'])[0];return [k+ext,new Blob([v.data])]});
+  const lrc=(s.lyr&&s.lyr.length)?s.lyr.map(l=>ts(l.t)+' '+l.s).join('\n'):(s.lyrics||'');if(lrc)files.push([folder+'.lrc',new Blob([(s.artist?'[ar:'+s.artist+']\n':'')+(s.title?'[ti:'+s.title+']\n':'')+lrc],{type:'text/plain'})]);return files}
+const r2Type=n=>/\.lrc$/i.test(n)?'text/plain; charset=utf-8':/\.m4a$/i.test(n)?'audio/mp4':/\.mp3$/i.test(n)?'audio/mpeg':/\.wav$/i.test(n)?'audio/wav':/\.flac$/i.test(n)?'audio/flac':'application/octet-stream';
+async function r2SaveSong(s,onp){const base=R2P+songDirs(s).join('/')+'/';const files=songFiles(s);let i=0;
+  for(const [n,b] of files){if(onp)onp(i,files.length,n);await r2Req('PUT',base+n,{body:b,ctype:r2Type(n)});i++}return files.length}
+/* lettura: stessa forma della scansione di una cartella, così «Aggiungi» funziona uguale */
+async function r2Scan(){const all=(await r2List(R2P)).filter(o=>AUDIO_RX.test(o.key)||/\.lrc$/i.test(o.key));const by=new Map();
+  for(const o of all){const parts=o.key.slice(R2P.length).split('/');const name=parts.pop();const k=parts.join('/');if(!by.has(k))by.set(k,{path:parts,files:[]});
+    by.get(k).files.push({name,size:o.size,getFile:async()=>new File([await (await r2Req('GET',o.key)).blob()],name)})}
+  return [...by.values()].filter(g=>g.files.some(f=>AUDIO_RX.test(f.name)))}
+function r2UI(){const on=r2On();$('#stLocal').classList.toggle('on',!on);$('#stR2').classList.toggle('on',on);$('#r2Acts').hidden=!on;$('#addR2').hidden=!r2Ok();
+  $('#r2Info').textContent=on?'☁️ Cloud collegato: bucket «'+R2.bucket+'». I brani nuovi si salvano anche lì, da soli.':r2Ok()?'Il cloud R2 è configurato ma spento: i brani restano solo su questo dispositivo.':'I brani restano solo su questo dispositivo.'}
+function r2Open(){$('#r2Acc').value=R2.acc||'';$('#r2Bucket').value=R2.bucket||'';$('#r2Key').value=R2.key||'';$('#r2Secret').value=R2.secret||'';$('#r2Msg').textContent='';
+  $('#r2Cors').textContent=JSON.stringify([{AllowedOrigins:[location.origin],AllowedMethods:['GET','PUT','HEAD','DELETE'],AllowedHeaders:['*'],ExposeHeaders:['ETag'],MaxAgeSeconds:3600}],null,2);openOv('#ovR2')}
+$('#stLocal').onclick=()=>{R2.mode='local';r2Save();r2UI()};
+$('#stR2').onclick=()=>{if(!r2Ok()){r2Open();return}R2.mode='r2';r2Save();r2UI()};
+$('#r2Edit').onclick=r2Open;
+$('#r2CorsCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('#r2Cors').textContent);toast('Regola copiata: incollala nella CORS Policy del bucket')}catch(e){toast('Seleziona il testo e copialo a mano')}};
+$('#r2Off').onclick=()=>{R2={mode:'local'};r2Save();r2UI();$('#r2Msg').textContent='Cloud scollegato: i dati sono stati tolti da questo dispositivo.'};
+$('#r2Test').onclick=async()=>{const v=id=>$(id).value.trim();const nv={acc:((v('#r2Acc').match(/[0-9a-f]{32}/i)||[])[0]||v('#r2Acc').replace(/^https?:\/\//,'').replace(/\..*$/,'')),bucket:v('#r2Bucket'),key:v('#r2Key'),secret:v('#r2Secret')};
+  if(!nv.acc||!nv.bucket||!nv.key||!nv.secret){$('#r2Msg').textContent='Compila tutti e quattro i campi.';return}
+  const old=R2;R2={...nv,mode:'r2'};$('#r2Msg').textContent='Provo il collegamento…';
+  try{await r2Req('PUT',R2P+'.prova',{body:'ok',ctype:'text/plain'});await r2Req('DELETE',R2P+'.prova');r2Save();r2UI();$('#r2Msg').textContent='✅ Collegato! Da ora i brani nuovi si salvano anche nel cloud.';toast('☁️ Cloud R2 collegato')}
+  catch(e){R2=old;$('#r2Msg').textContent='❌ '+r2Err(e)}};
+$('#r2All').onclick=async()=>{const b=$('#r2All');if(b.disabled)return;b.disabled=true;try{
+    const have=new Set((await r2List(R2P)).map(o=>o.key.slice(R2P.length).split('/').slice(0,-1).join('/')));
+    const ids=(await idb('songs','readonly',x=>x.getAllKeys()))||[];let done=0,skip=0,n=0;
+    for(const id of ids){n++;if(id==='demo')continue;const s=await dbGet(id);if(!s||!s.stems)continue;if(have.has(songDirs(s).join('/'))){skip++;continue}
+      $('#r2Info').textContent=`☁️ Salvo nel cloud ${n} di ${ids.length}: ${s.title||'brano'}…`;await r2SaveSong(s);done++}
+    r2UI();toast(`☁️ Libreria nel cloud: ${done} brani salvati`+(skip?`, ${skip} c'erano già`:''))}
+  catch(e){r2UI();toast('❌ '+r2Err(e))}finally{b.disabled=false}};
+/* brano appena separato: copia anche nel cloud, in sottofondo */
+async function r2Auto(s){if(!r2On()||!s||!s.stems)return;try{await r2SaveSong(s);toast('☁️ «'+(s.title||'brano')+'» salvato anche nel cloud')}catch(e){toast('☁️ Non sono riuscito a salvarlo nel cloud: '+r2Err(e))}}
+setTimeout(()=>{try{r2UI()}catch(e){}},0);
 const normKey=(a,t)=>normT(a)+'|'+normT(t);
 let addFound=[];
 /* legge una cartella (File System Access) cercando le cartelle dei brani */
@@ -2771,6 +2867,9 @@ $('#addFromDir').onclick=async()=>{if(!dirHandle){$('#addOther').click();return}
 $('#addOther').onclick=async()=>{if(window.showDirectoryPicker){try{const h=await window.showDirectoryPicker({id:'fonica-tracce',mode:'readwrite'});if(!dirHandle){dirHandle=h;await setPut('dir',h);renderDir()}addScan(h)}catch(e){if(e&&e.name!=='AbortError')$('#addStatus').textContent=window.self!==window.top?'Qui non si può scegliere una cartella: apri Pure Voltage dal suo indirizzo web.':'Non riesco ad aprire la scelta della cartella.'}}else $('#addDirIn').click()};
 $('#addDirIn').onchange=async e=>{const list=[...e.target.files];if(!list.length)return;$('#addStatus').textContent='Cerco i brani…';addFound=await describe(scanList(list));$('#addStatus').textContent=addFound.length?`Ho trovato ${addFound.length} brani.`:'In questa cartella non ho trovato brani.';renderAdd()};
 $('#addMp3').onclick=()=>{closeOv($('#addMp3'));addSong()};
+$('#addR2').onclick=async()=>{$('#addStatus').textContent='Cerco i brani nel cloud R2…';addFound=[];renderAdd();
+  try{addFound=await describe(await r2Scan());addFound.forEach(x=>x.fromCloud=true);$('#addStatus').textContent=addFound.length?(addFound.length===1?'Nel cloud c\'è 1 brano.':`Nel cloud ci sono ${addFound.length} brani.`)+' Quelli già in Libreria non sono selezionati.':'Nel cloud non ci sono ancora brani.';renderAdd()}
+  catch(e){$('#addStatus').textContent='❌ '+r2Err(e)}};
 const asFile=async f=>f.getFile?await f.getFile():f;
 $('#addGo').onclick=async()=>{const todo=addFound.filter(x=>x.sel);if(!todo.length)return;const btn=$('#addGo');btn.disabled=true;let done=0,firstId=null,why='';const bad=[];IDBERR='';try{if(navigator.storage&&navigator.storage.persist)await navigator.storage.persist()}catch(e){}
   for(const x of todo){$('#addStatus').textContent=`Aggiungo ${done+1} di ${todo.length}: ${x.title}…`;
@@ -2778,7 +2877,7 @@ $('#addGo').onclick=async()=>{const todo=addFound.filter(x=>x.sel);if(!todo.leng
       let lyrics='';if(x.lrc){lyrics=await (await asFile(x.lrc)).text();const ar=lyrics.match(/^\[ar:(.*)\]$/m),ti=lyrics.match(/^\[ti:(.*)\]$/m);if(!x.artist&&ar)x.artist=ar[1].trim();if(ti&&x.title==='Brano')x.title=ti[1].trim()}
       const id='s'+Date.now().toString(36)+done;const lib=await dbAll();const old=lib.find(s=>normKey(s.artist,s.title)===normKey(x.artist,x.title));
       const rec={id:old?old.id:id,title:x.title,artist:x.artist,created:old?old.created:Date.now(),lyrics,tab:old?old.tab||'':'',stems:stemsRec};
-      if(await dbPut(rec)){done++;firstId=firstId||rec.id;x.inLib=true;x.sel=false}
+      if(await dbPut(rec)){done++;firstId=firstId||rec.id;x.inLib=true;x.sel=false;if(r2On()&&!x.fromCloud){$('#addStatus').textContent=`☁️ Copio nel cloud: ${x.title}…`;try{await r2SaveSong(rec)}catch(e){toast('☁️ '+r2Err(e))}}}
       else{why=why||await saveFailMsg();if(IDBERR==='QuotaExceededError'||IDBERR==='NODB')break}}
     catch(e){console.error(e);bad.push(x.title);if(!why&&e&&e.name==='NotReadableError')why='alcuni file non si possono leggere (forse sono aperti da un altro programma o la cartella è stata spostata).'}}
   btn.disabled=false;renderAdd();$('#addStatus').textContent=done===todo.length?`Fatto: ${done} brani aggiunti alla Libreria.`.replace('1 brani aggiunti','1 brano aggiunto'):`Aggiunti ${done} brani su ${todo.length}: `+(why||'alcuni file non si sono potuti leggere.')+(bad.length?' Non letti: '+bad.slice(0,3).join(', ')+(bad.length>3?'…':''):'');
