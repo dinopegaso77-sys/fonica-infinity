@@ -1316,12 +1316,20 @@ themeApply();</script>
   <p class="status" id="r2Msg"></p>
   <details class="slmore"><summary>📖 Come si crea lo spazio R2 (una volta sola, circa 10 minuti)</summary>
     <ol class="steps">
-      <li>Vai su <b>dash.cloudflare.com</b>, entra (o crea un account gratuito) e apri <b>R2 Object Storage</b>. Chiede una carta, ma fino a 10 GB è gratis.</li>
-      <li>Premi <b>Create bucket</b>, dai un nome (es. <code>purevoltage</code>) e crealo.</li>
-      <li>Nel bucket apri <b>Settings › CORS Policy › Add CORS policy</b> e incolla questa regola (serve perché l'app possa leggere e scrivere):
+      <li>Vai su <b>dash.cloudflare.com</b> ed entra (o premi <b>Sign up</b> per creare un account gratuito).</li>
+      <li>Nel menu a sinistra apri <b>Storage &amp; databases</b> e poi <b>R2 Object Storage</b>. La prima volta chiede di attivarlo con una carta, ma fino a 10 GB è gratis.</li>
+      <li>Premi <b>Create bucket</b>. In <b>Bucket name</b> scrivi un nome (es. <code>purevoltage</code>), lascia il resto com'è e premi <b>Create bucket</b>. Scrivi lo stesso nome qui sopra in «Nome del bucket».</li>
+      <li>Si apre il tuo bucket: premi la scheda <b>Settings</b>, scendi fino a <b>CORS Policy</b> e premi <b>Add</b> (o <b>Add CORS policy</b>). Cancella quello che c'è scritto, incolla questa regola e premi <b>Save</b>:
         <pre class="r2cors" id="r2Cors"></pre><button class="mini" id="r2CorsCopy">📋 Copia la regola</button></li>
-      <li>Torna su R2 e apri <b>Manage R2 API Tokens › Create API token</b>. Scegli <b>Object Read &amp; Write</b>, limita il token al tuo bucket e crealo.</li>
-      <li>Copia <b>Access Key ID</b> e <b>Secret Access Key</b> qui sopra. L'<b>ID account</b> lo trovi nella pagina principale di R2 (Account ID).</li>
+      <li>Torna su <b>R2 Object Storage</b> (menu a sinistra). A destra, nel riquadro <b>Account Details</b>, copia il numero accanto ad <b>Account ID</b> e incollalo qui sopra in «ID account».</li>
+      <li>Nello stesso riquadro <b>Account Details</b>, accanto ad <b>API Tokens</b>, premi <b>Manage</b>.<br><small>⚠️ Se vedi una pagina con «Permission policies», «Start from scratch» e «Read all resources» sei nella pagina sbagliata: torna indietro e usa il pulsante <b>Manage</b> della pagina di R2.</small></li>
+      <li>Premi <b>Create Account API token</b>. Compila così:
+        <ul><li><b>Token name</b>: per esempio <code>purevoltage</code></li>
+        <li><b>Permissions</b>: scegli <b>Object Read &amp; Write</b></li>
+        <li><b>Specify bucket(s)</b>: scegli <b>Apply to specific buckets only</b> e seleziona il tuo bucket</li>
+        <li><b>TTL</b>: lascia <b>Forever</b></li></ul>
+        Poi in fondo premi <b>Create Account API Token</b>.</li>
+      <li>Nella pagina che si apre copia <b>Access Key ID</b> e <b>Secret Access Key</b> e incollali qui sopra. ⚠️ La Secret Access Key si vede una volta sola: copiala subito.</li>
       <li>Premi «Salva e prova il collegamento»: se compare ✅ è tutto pronto.</li>
     </ol>
   </details>
