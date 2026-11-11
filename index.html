@@ -483,6 +483,16 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 #palco{position:fixed;inset:0;z-index:60;background:var(--stage2);display:flex;flex-direction:column;color:var(--stage-fg)}
 .palmic{position:absolute;top:64px;right:14px;z-index:5;width:min(440px,calc(100vw - 28px));max-height:calc(100% - 150px);overflow:auto;background:#0d1826;border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.55);color:#fff;display:flex;flex-direction:column;gap:10px}.palmic[hidden]{display:none}
 .lvtop{display:flex;align-items:center;justify-content:space-between;gap:8px}.lvtop b{font-size:17px}
+.donban{position:fixed;left:50%;bottom:max(96px,calc(env(safe-area-inset-bottom,0px) + 96px));transform:translateX(-50%);z-index:110;width:min(600px,calc(100vw - 24px));display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;padding:12px 14px;border-radius:16px;background:var(--surface);color:var(--fg);border:1px solid var(--btnline);box-shadow:0 0 0 1px rgba(110,140,255,.25),0 10px 30px rgba(0,0,0,.5),0 0 24px rgba(120,90,255,.25);animation:donIn .4s ease}
+.donban .dbt{flex:1 1 260px;font-size:16px;line-height:1.35}.donban .chip{min-height:44px}
+#palco .donban{position:absolute}
+@keyframes donIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){.donban{animation:none}}
+.pmrow{display:grid;grid-template-columns:minmax(84px,auto) auto minmax(0,1fr) 3.2em;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.12)}
+.pmrow b{font-size:16px}.pmrow input[type=range]{width:100%;min-width:0}.pmrow .pmv{text-align:right;font-variant-numeric:tabular-nums;opacity:.85}
+.pmrow .pmon{min-width:74px;min-height:40px;border-radius:999px;font-weight:700}.pmrow .pmon.on{background:var(--btnbg);color:var(--btnink);border-color:var(--btnline)}
+.pmrow.off b,.pmrow.off .pmv{opacity:.45}
+#palco .pkov{position:absolute;z-index:20}
 #lvGo{min-height:56px;border-radius:12px;border:0;background:#2fae62;color:#fff;font-weight:800;font-size:18px;cursor:pointer}#lvGo.on{background:#d32f2f}
 .lvrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px}
 .lvhead{display:flex;gap:8px;align-items:center;grid-column:1/-1}.lvhead b{font-size:16px}.lvhead select{margin-left:auto;background:var(--h16293d);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;min-height:38px;padding:2px 8px;font-size:15px}
@@ -513,6 +523,24 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 #palco .kpanel{min-height:0}#palco .kpanel::after{height:10%}#palco .kpanel::before{height:12%}
 .pal-top{overflow-x:auto;scrollbar-width:none}.pal-top::-webkit-scrollbar{display:none}.pal-top .pbtn{flex:none}
 .pal-tab canvas{height:clamp(120px,24vh,210px)}
+/* testo a sinistra (metà schermo); a destra tablatura in alto e tracce in basso; se ne è aperta una sola, metà e metà */
+#palco{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) minmax(0,1fr) auto}
+#palco>.pal-top{grid-row:1;grid-column:1/-1}#palco>.pal-bar{grid-row:4;grid-column:1/-1}
+#palco>.kpanel{grid-row:2/4;grid-column:1/-1}
+#palco.side{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#palco.side>.kpanel{grid-column:1}
+#palco>.pal-tab{grid-row:2/4;grid-column:2;display:flex;flex-direction:column;min-height:0;border-left:1px solid var(--stage1)}
+#palco>.pal-tab canvas{flex:1;height:auto;min-height:0}
+#palco.both>.pal-tab{grid-row:2}
+#palco>.palmix{position:static;grid-row:2/4;grid-column:2;width:auto;max-height:none;min-height:0;border-radius:0;box-shadow:none;border:0;border-left:1px solid var(--stage1);background:var(--stage2);overflow:auto}
+#palco.both>.palmix{grid-row:3;border-top:1px solid var(--stage1)}
+@media (orientation:portrait) and (max-width:767px){
+  #palco,#palco.side{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto auto}
+  #palco>.kpanel,#palco.side>.kpanel{grid-row:2;grid-column:1}
+  #palco>.pal-tab,#palco.both>.pal-tab{grid-row:3;grid-column:1;border-left:0;border-top:1px solid var(--stage1)}
+  #palco>.pal-tab canvas{flex:none;height:clamp(120px,22vh,180px)}
+  #palco>.palmix,#palco.both>.palmix{grid-row:4;grid-column:1;max-height:36vh;border-left:0;border-top:1px solid var(--stage1)}
+  #palco>.pal-bar{grid-row:5}
+}
 @media (max-width:599px){
   .pal-name{font-size:15px;min-width:90px}
   .pal-bar{gap:8px;justify-content:center;padding-top:8px}
@@ -522,12 +550,6 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 }
 /* telefono in orizzontale: testo a sinistra, tablatura a destra */
 @media (orientation:landscape) and (max-height:560px){
-  #palco{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto}
-  .pal-top,.pal-bar{grid-column:1/-1}
-  #palco .kpanel{grid-row:2;grid-column:1}
-  #palco:has(#palTabWrap[hidden]) .kpanel{grid-column:1/-1}
-  .pal-tab{grid-row:2;grid-column:2;display:flex;flex-direction:column;min-height:0}
-  .pal-tab canvas{flex:1;height:auto;min-height:0}
   #palco .kl{font-size:calc(clamp(18px,3.2vw,30px) * var(--kscale));padding:6px 0}
   .pal-top{padding-block:6px}
   .pal-bar{flex-wrap:nowrap;overflow-x:auto;padding-block:6px}
@@ -761,6 +783,8 @@ themeApply();</script>
 <div id="palco" hidden>
   <div class="pal-top">
     <div class="pal-name" id="palName"></div>
+    <button class="pbtn" id="pSong">🎵 Brano</button>
+    <button class="pbtn" id="pMixB" aria-expanded="false">🎚 Tracce</button>
     <button class="pbtn" id="pSm" aria-label="Testo più piccolo">A−</button><button class="pbtn" id="pLg" aria-label="Testo più grande">A+</button>
     <button class="pbtn" id="pMic" aria-expanded="false">🎤 Microfono</button>
     <button class="pbtn" id="pRec">Registra video</button>
@@ -778,6 +802,11 @@ themeApply();</script>
     <div class="pseg" id="lvRev"><span>Eco sulla voce</span><div class="seg"><button data-v="0">No</button><button data-v="0.2">Poco</button><button data-v="0.45">Tanto</button></div></div>
     <div class="lvhint" id="lvInfo"></div>
   </div>
+  <div class="palmic palmix" id="palMix" hidden role="dialog" aria-label="Volume e accensione delle tracce">
+    <div class="lvtop"><b>🎚 Tracce del brano</b><button class="pbtn" id="pmX" aria-label="Chiudi">✕</button></div>
+    <div id="pmRows"></div>
+    <div class="row" style="gap:8px"><button class="pbtn" id="pmAll">🔊 Tutte accese</button></div>
+  </div>
   <div class="kpanel" id="kpPal"></div>
   <div class="pal-tab" id="palTabWrap"><div class="now"><span class="nowLbl">Nota</span>: <b id="noteNow2">–</b></div><canvas id="palTab"></canvas></div>
   <div class="pal-bar">
@@ -786,10 +815,7 @@ themeApply();</script>
     <button class="pbtn round" id="pFwd" aria-label="Avanti 5 secondi"><svg viewBox="0 0 24 24"><path d="m13 6 8 6-8 6zM3 6l8 6-8 6z"/></svg></button>
     <span class="time" id="tTime2">0:00</span>
     <span class="grow"></span>
-    <div class="pseg" id="pVoce"><span>Voce</span><div class="seg"><button data-v="1">Sì</button><button data-v="0.25">Bassa</button><button data-v="0">No</button></div></div>
-    <div class="pseg" id="pChit"><span>Chitarra</span><div class="seg"><button data-v="1">Sì</button><button data-v="0.25">Bassa</button><button data-v="0">No</button></div></div>
-    <div class="pseg" id="pBasso"><span>Basso</span><div class="seg"><button data-v="1">Sì</button><button data-v="0.25">Basso</button><button data-v="0">No</button></div></div>
-  </div>
+</div>
 </div>
 
 <!-- Libreria -->
@@ -1139,6 +1165,7 @@ themeApply();</script>
   </div>
   <div class="row"><button class="chip pri" id="legalOk">Ho capito e accetto</button></div>
 </div></div>
+<div class="donban" id="donBan" hidden role="note" aria-live="polite"><span class="dbt">💙 Ti piace <b>Pure Voltage</b>? Sostieni il progetto con una piccola donazione.</span><a class="chip pri" id="donBanGo" href="#" target="_blank" rel="noopener">Dona con PayPal</a><button class="mini" id="donBanX" aria-label="Chiudi">✕</button></div>
 <div class="ov" id="ovDonate" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Dona per far crescere Pure Voltage</h3><button class="mini" data-close>Chiudi</button></div>
   <p>Pure Voltage è gratuita. Scegli quanto donare: si apre PayPal con l'importo già pronto, tu controlli e confermi con <b>Invia</b>.</p>
@@ -1539,7 +1566,7 @@ let wake=null;async function holdWake(on){try{if(on&&navigator.wakeLock&&!wake)w
 function play(){if(!A.src)return;A.playbackRate=rate;A.play().catch(()=>{})}
 function pause(){A.pause()}
 function seek(t){t=Math.max(0,Math.min(DUR||A.duration||0,t));wantTime=t;try{A.currentTime=t}catch(e){}}
-A.addEventListener('play',()=>{setPlayIco();holdWake(true)});A.addEventListener('pause',()=>{setPlayIco();holdWake(false)});A.addEventListener('ended',()=>{setPlayIco();holdWake(false);/* finita la canzone torna all'inizio */setTimeout(()=>{if(A.paused){wantTime=0;try{A.currentTime=0}catch(e){}}},0)});
+A.addEventListener('play',()=>{setPlayIco();holdWake(true)});A.addEventListener('pause',()=>{setPlayIco();holdWake(false)});A.addEventListener('ended',()=>{setPlayIco();holdWake(false);try{donBanMaybe()}catch(e){}/* finita la canzone torna all'inizio */setTimeout(()=>{if(A.paused){wantTime=0;try{A.currentTime=0}catch(e){}}},0)});
 function setPlayIco(){const p=playing();$$('.playIco').forEach(s=>s.innerHTML=p?'<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>':'<path d="M7 4v16l13-8z"/>');$('#bPlay').setAttribute('aria-label',p?'Pausa':'Riproduci');$('#pPlay').setAttribute('aria-label',p?'Pausa':'Riproduci')}
 
 /* ================= caricamento brano ================= */
@@ -1590,7 +1617,7 @@ function renderChans(){
   const on=$('#vxOn'),off=$('#vxOff');if(on){on.onclick=()=>{voiceOff=false;syncChanUI();mixSoon()};off.onclick=()=>{voiceOff=true;syncChanUI();mixSoon()}}
   syncChanUI()}
 function syncChanUI(){order.forEach(k=>{const el=document.querySelector('.ch[data-k="'+k+'"]');if(!el)return;const g=gains[k];el.querySelector('.m').classList.toggle('on',g.mute);el.querySelector('.s').classList.toggle('on',g.solo);el.querySelector('input').value=g.vol;el.classList.toggle('silent',effGain(k)===0)});
-  const on=$('#vxOn');if(on){on.classList.toggle('on',!voiceOff);$('#vxOff').classList.toggle('on',voiceOff)}updPalSegs()}
+  const on=$('#vxOn');if(on){on.classList.toggle('on',!voiceOff);$('#vxOff').classList.toggle('on',voiceOff)}updPalSegs();if(!syncChanUI.skipPm&&$('#palMix')&&!$('#palMix').hidden)pmRender()}
 function preset(p){order.forEach(k=>{const g=gains[k];g.mute=false;g.solo=false;g.vol=1;
   if(p==='karaoke'&&k==='vocals')g.vol=0;if(p==='guide'&&k==='vocals')g.vol=.25;if(p==='nobass'&&k==='bass')g.vol=0;
   if(p==='bassonly'){g.vol=k==='bass'?1.1:k==='drums'?1:k==='vocals'?.3:.35}
@@ -2112,9 +2139,19 @@ $('#bSyncLy').onclick=()=>startSync('ly');$('#bSyncTab').onclick=()=>startSync('
 /* ================= palco a schermo intero ================= */
 let palOn=false,palTabOn=prefGet('palTab')!=='0';
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
-async function palOpen(v){palOn=v;$('#palco').hidden=!v;if(!v){if(LV.on)lvStop();$('#palMic').hidden=true}document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;
+async function palOpen(v){palOn=v;$('#palco').hidden=!v;try{pmShow(false)}catch(e){}if(!v){if(LV.on)lvStop();$('#palMic').hidden=true}document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;palLayout();
   try{if(v){const el=$('#palco');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el);try{await screen.orientation.lock('landscape')}catch(e){}}else if(fsEl())await(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
 $('#bPalco').onclick=()=>palOpen(true);$('#pX').onclick=()=>palOpen(false);
+/* palco a schermo intero: tracce (accese/spente e volume) e scelta del brano senza uscire */
+function pmRender(){const box=$('#pmRows');if(!box)return;box.innerHTML=order.map(k=>{const g=gains[k],on=!g.mute;
+    return `<div class="pmrow ${on?'':'off'}" data-k="${k}"><b>${SL[k]}</b><button class="pbtn pmon ${on?'on':''}" data-pm="${k}" aria-pressed="${on}">${on?'Accesa':'Spenta'}</button><input type="range" min="0" max="1.2" step="0.01" value="${g.vol}" data-pv="${k}" aria-label="Volume ${SL[k]}"><span class="pmv">${Math.round(g.vol*100)}%</span></div>`}).join('')||'<p class="lvhint">Nessuna traccia.</p>';
+  box.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{const g=gains[b.dataset.pm];g.mute=!g.mute;if(!g.mute)g.solo=false;syncChanUI();mixSoon()});
+  box.querySelectorAll('[data-pv]').forEach(r=>r.oninput=()=>{const k=r.dataset.pv;gains[k].vol=+r.value;if(gains[k].vol>0&&gains[k].mute)gains[k].mute=false;r.parentNode.querySelector('.pmv').textContent=Math.round(gains[k].vol*100)+'%';syncChanUI.skipPm=true;syncChanUI();syncChanUI.skipPm=false;mixSoon()})}
+function palLayout(){const p=$('#palco');if(!p)return;const t=!$('#palTabWrap').hidden,m=!$('#palMix').hidden;p.classList.toggle('side',t||m);p.classList.toggle('both',t&&m);$$('.kpanel').forEach(P=>delete P.dataset.ci);requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')))}
+function pmShow(v){$('#palMix').hidden=!v;palLayout();$('#pMixB').classList.toggle('on',v);$('#pMixB').setAttribute('aria-expanded',v);if(v){$('#palMic').hidden=true;$('#pMic').setAttribute('aria-expanded','false');pmRender()}}
+$('#pMixB').onclick=()=>pmShow($('#palMix').hidden);$('#pmX').onclick=()=>pmShow(false);
+$('#pmAll').onclick=()=>{order.forEach(k=>{gains[k].mute=false;gains[k].solo=false;if(!gains[k].vol)gains[k].vol=1});syncChanUI();mixSoon()};
+$('#pSong').onclick=()=>{const ov=$('#bpOv');if(ov.parentNode!==$('#palco'))$('#palco').appendChild(ov);pkOpen('palco')};
 /* ===== PALCO: microfono e strumenti dal vivo in cuffia (PC: scheda audio; telefono e tablet: solo microfono) ===== */
 const LV={on:false,rows:[],streams:[],nodes:[],rev:+(prefGet('lvRev')||0.2),cfg:(()=>{try{return JSON.parse(prefGet('lvCfg')||'{}')}catch(e){return{}}})()};
 const LV_ROLE={voce:'🎤 Voce',chitarra:'🎸 Chitarra',basso:'🎸 Basso',tastiere:'🎹 Tastiere',altro:'🎶 Strumento'};
@@ -2180,7 +2217,7 @@ $('#lvOut').onchange=async e=>{const v=e.target.value,o=e.target.selectedOptions
 $('#lvTest').onclick=async()=>{const c=ctx();try{await c.resume()}catch(e){}const t=c.currentTime,o=c.createOscillator(),g=c.createGain();o.frequency.value=660;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.25,t+.03);g.gain.setValueAtTime(.25,t+.35);g.gain.linearRampToValueAtTime(0,t+.45);
   o.frequency.setValueAtTime(880,t+.5);g.gain.setValueAtTime(0,t+.5);g.gain.linearRampToValueAtTime(.25,t+.53);g.gain.linearRampToValueAtTime(0,t+.9);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+1);
   toast('Senti due «bip»? Se non li senti in cuffia, scegli qui sopra la scheda audio (🎛)')};
-$('#pMic').onclick=()=>{const p=$('#palMic');p.hidden=!p.hidden;$('#pMic').setAttribute('aria-expanded',!p.hidden);if(!p.hidden){lvRender();lvOutFill()}};$('#lvX').onclick=()=>{$('#palMic').hidden=true;$('#pMic').setAttribute('aria-expanded','false')};
+$('#pMic').onclick=()=>{const p=$('#palMic');if(p.hidden)pmShow(false);p.hidden=!p.hidden;$('#pMic').setAttribute('aria-expanded',!p.hidden);if(!p.hidden){lvRender();lvOutFill()}};$('#lvX').onclick=()=>{$('#palMic').hidden=true;$('#pMic').setAttribute('aria-expanded','false')};
 $('#lvGo').onclick=()=>LV.on?lvStop():lvStart();
 async function lvRewire(r){const c=ctx();const nb=await fxBoard(c,r.fx);try{r.hp.disconnect()}catch(e){}try{r.fb.post.out.disconnect()}catch(e){}r.hp.connect(r.an.context?nb.pre.inp:nb.pre.inp);nb.pre.out.connect(nb.post.inp);nb.post.out.connect(r.mon);nb.post.out.connect(r.send);nb.set(r.fx);r.fb=nb}
 function lvPedSet(r,k){r.fb.set(r.fx);lvSave();$$(`[data-lvpd="${LV.rows.indexOf(r)}"][data-pd="${k}"]`).forEach(b=>{b.classList.toggle('on',!!r.fx[k].on);b.setAttribute('aria-pressed',!!r.fx[k].on)})}
@@ -2190,7 +2227,7 @@ let PEDB=null;
 $$('#lvRev button').forEach(b=>b.onclick=()=>{LV.rev=+b.dataset.v;if(LV.rg)LV.rg.gain.setTargetAtTime(LV.rev,ctx().currentTime,.03);lvSave();lvRender()});
 
 $('#pInst').onclick=()=>{setInst(inst==='guitar'?'bass':'guitar');$$('.kpanel').forEach(P=>delete P.dataset.ci)};
-$('#pTab').onclick=()=>{palTabOn=!palTabOn;prefSet('palTab',palTabOn?'1':'0');$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;$$('.kpanel').forEach(P=>delete P.dataset.ci)};
+$('#pTab').onclick=()=>{palTabOn=!palTabOn;prefSet('palTab',palTabOn?'1':'0');$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;palLayout()};
 document.addEventListener('fullscreenchange',()=>{if(palOn&&!fsEl())palOpen(false)});
 
 /* ================= ciclo di disegno ================= */
@@ -2272,8 +2309,8 @@ function pkRender(){const q=pkNorm($('#bpQ').value.trim()),cur=song&&song.id,box
     if(!q){if(op)PK.open.add(a);else PK.open.delete(a);try{sessionStorage.setItem('pkOpen',JSON.stringify([...PK.open]))}catch(e){}}});
   box.querySelectorAll('[data-ps]').forEach(b=>b.onclick=()=>{pkClose();songPickGo(b.dataset.ps)});
   const c=box.querySelector('.pksong.cur');if(c&&!q&&!pkRender.done){pkRender.done=true;c.scrollIntoView({block:'center'})}}
-async function pkOpen(from){PK.from=from;PK.all=(await dbAll())||[];$('#bpOv').classList.toggle('dark',from==='sala');$('#bpActs').hidden=from==='sala';$('#bpQ').value='';pkRender.done=false;$('#bpOv').hidden=false;pkRender();if(!isMobile)setTimeout(()=>$('#bpQ').focus(),50)}
-function pkClose(){$('#bpOv').hidden=true}
+async function pkOpen(from){PK.from=from;PK.all=(await dbAll())||[];$('#bpOv').classList.toggle('dark',from==='sala'||from==='palco');$('#bpActs').hidden=from==='sala'||from==='palco';$('#bpQ').value='';pkRender.done=false;$('#bpOv').hidden=false;pkRender();if(!isMobile)setTimeout(()=>$('#bpQ').focus(),50)}
+function pkClose(){const ov=$('#bpOv');ov.hidden=true;if(ov.parentNode!==document.body)document.body.appendChild(ov)}
 $('#bpQ').oninput=pkRender;$('#bpX').onclick=pkClose;$('#bpOv').onclick=e=>{if(e.target===$('#bpOv'))pkClose()};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#bpOv').hidden){e.preventDefault();e.stopPropagation();pkClose()}},true);
 $$('#bpActs [data-pa]').forEach(b=>b.onclick=()=>{pkClose();songPickGo(b.dataset.pa)});
@@ -2328,7 +2365,7 @@ A.addEventListener('ended',slEnded);
 $('#bScal').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
 async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
   toast('Apro il brano…');if(id==='demo')await loadDemo();else await openStored(id);
-  if(inSala&&song){$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}}
+  if(inSala&&song){$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}try{donBanMaybe()}catch(e){}}
 async function renderLib(){const all=(await dbAll()).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(a.title||'').localeCompare(b.title||'','it'));const el=$('#songlist');const fsOk=!!window.showDirectoryPicker;
   const row=(id,t,a,tags,stored)=>`<div class="si ${song&&song.id===id?'cur':''}"><div class="meta"><b>${esc(t||'Senza titolo')}</b><small>${esc(a||'')}</small></div>${tags}
     <button class="mini" data-open="${id}">Apri</button>${stored?`<button class="mini" data-exp="${id}">Salva tracce${fsOk?' in cartella':''}</button><button class="mini" data-del="${id}">${delArm===id?'Conferma elimina':'Elimina'}</button>`:''}</div>`;
@@ -3592,6 +3629,15 @@ const donUrl=e=>DONATE_URL.replace(/\/$/,'')+'/'+e+'EUR';
 $$('#ovDonate [data-eur]').forEach(a=>a.href=donUrl(a.dataset.eur));
 const donOth=()=>{const v=Math.round(+$('#donOther').value||0);$('#donOtherGo').href=v>=1?donUrl(v):DONATE_URL};$('#donOther').oninput=donOth;donOth();
 if(DONATE_URL){['#bDonate','#bDonate2'].forEach(s=>{const a=$(s);a.href=DONATE_URL;a.removeAttribute('target');a.onclick=e=>{e.preventDefault();$$('.ov').forEach(o=>{if(o.id!=='ovDonate')o.hidden=true});openOv('#ovDonate')}});$('#bDonate').hidden=false;$('#donateBox').hidden=false}
+/* ogni tanto, tra una canzone e l'altra, un piccolo invito a sostenere il progetto */
+const DONB={ready:false,t:0};setTimeout(()=>DONB.ready=true,8000);
+function donBanHide(){clearTimeout(DONB.t);const b=$('#donBan');b.hidden=true;if(b.parentNode!==document.body)document.body.appendChild(b)}
+function donBanMaybe(){if(!DONATE_URL||!DONB.ready)return;try{if(R&&R.on)return}catch(e){}
+  const n=(+prefGet('donCnt')||0)+1;prefSet('donCnt',String(n));const last=+prefGet('donLast')||0;
+  if(n%3!==0||Date.now()-last<20*60*1000)return;prefSet('donLast',String(Date.now()));
+  const b=$('#donBan');$('#donBanGo').href=DONATE_URL;const pal=$('#palco');if(pal&&!pal.hidden)pal.appendChild(b);else if(b.parentNode!==document.body)document.body.appendChild(b);
+  b.hidden=false;clearTimeout(DONB.t);DONB.t=setTimeout(donBanHide,12000)}
+$('#donBanX').onclick=donBanHide;$('#donBanGo').addEventListener('click',()=>setTimeout(donBanHide,300));
 /* =====================================================================
    SALA PROVE (solo PC): più ingressi, amplificatori NAM, TONE3000,
    registrazione multitraccia, grafico delle tracce, mix ed esportazione
