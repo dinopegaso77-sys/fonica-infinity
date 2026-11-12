@@ -637,6 +637,14 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
   .panel.kp{height:50vh;min-height:340px}
   .panel.bp{height:38vh;min-height:260px}
 }
+/* con le opzioni aperte il riquadro si allunga: testo e tablatura restano sempre visibili e toccabili */
+@media (max-width:899px){
+  .panel.kp:has(>.optarea:not([hidden])),.panel.bp:has(>.optarea:not([hidden])){height:auto!important}
+  .panel.kp:has(>.optarea:not([hidden]))>.kpanel{flex:none;height:max(300px,44vh)}
+  .panel.bp:has(>.optarea:not([hidden]))>.tabwrap,.panel.bp:has(>.optarea:not([hidden]))>.tabs{flex:none;height:max(240px,34vh)}
+}
+/* su schermi larghi le opzioni non schiacciano il testo: se sono tante scorrono */
+@media (min-width:900px){.panel.kp>.optarea,.panel.bp>.optarea{max-height:45%;overflow:auto}}
 /* telefoni */
 @media (max-width:599px){
   .app{gap:8px}
