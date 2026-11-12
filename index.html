@@ -169,6 +169,8 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .pbtn.round.slb{border-color:var(--stage-hi);color:var(--stage-hi)}.pbtn.round.slb:disabled{opacity:.3}
 .salaov:not([hidden])~.slbar,.salaov.perf~.slbar{bottom:auto;top:64px}
 .drrow{justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
+.rdgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.rdgrid .chip{width:100%;justify-content:center;min-height:48px;margin:0}.rdgrid .rdwide{grid-column:1/-1}.rdgrid [hidden]{display:none!important}
+.rdsub{grid-template-columns:repeat(auto-fit,minmax(118px,1fr))}.rdsub .chip{min-height:44px;font-size:15px}.rdsave #drInfo{text-align:center}
 .drlist li{gap:10px}.drlist .slbt{display:grid!important;grid-template-columns:2fr 1fr!important;gap:6px;min-width:180px}.drlist .slbt>*{min-height:44px;width:100%}.drlist li img{width:54px;height:96px;object-fit:cover;border-radius:8px;background:#000;flex:none}.drlist li::before{display:none}
 @media (max-width:599px){.drlist li{grid-template-columns:54px minmax(0,1fr)!important;grid-template-areas:'n t' 'b b'!important}.drlist li img{grid-area:n}}
 .banks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
@@ -580,7 +582,7 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
   .pbtn.pico{min-width:42px;padding:0 8px}
   .pal-bar{gap:8px;flex-direction:column;align-items:stretch;padding-top:8px}
   .ptrans{justify-content:center}
-  .ptools{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0}.ptool{min-width:0;font-size:11.5px}
+  .ptools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:0}.ptool{min-width:0;min-height:48px;padding:3px 2px;font-size:11.5px;flex-direction:row;gap:5px}.ptool i{font-size:18px}
   .pal-bar .pseg span{font-size:10px}
   .pal-tab canvas{height:clamp(120px,22vh,180px)}
 }
@@ -762,7 +764,7 @@ themeApply();</script>
         <button class="mini" id="bSyncLy">Sincronizza a mano</button>
         <button class="mini" id="bVoices">🎭 Riconosci le voci (duetto)</button>
         <button class="mini" id="bDuo" aria-pressed="false">🎭 Correggi a mano</button>
-        
+        <div class="pseg" data-duosel><span>Duetto</span><div class="seg"><button data-duo="0">No, una voce</button><button data-duo="1">Sì, due voci</button></div></div>
         <div class="pseg partsel" data-partsel hidden><span>Tu canti</span><div class="seg"><button data-part="1">🔵 Voce 1</button><button data-part="2">🔴 Voce 2</button><button data-part="0">Tutto</button></div></div>
         <span class="duoleg" id="duoLeg" hidden>Tocca una riga per cambiarla: <i class="d1">1</i> blu → <i class="d2">2</i> rosso → <i class="d3">1+2</i> giallo → nessuno. Le righe con «?» sono dubbie. Dopo ogni correzione l'app ricalcola da sola le altre righe.</span>
         </div>
@@ -819,7 +821,7 @@ themeApply();</script>
 <!-- Palco -->
 <div id="palco" hidden>
   <div class="pal-top">
-    <button class="pbtn pico" id="pX" aria-label="Esci dal palco" title="Esci dal palco">✕</button>
+    <button class="pbtn pico" id="pX" aria-label="Torna alla pagina principale" title="Pagina principale">🏠</button>
     <button class="pal-name" id="pSong" title="Cambia brano" aria-label="Cambia brano"><span class="pnm" id="palName"></span><span class="pdd" aria-hidden="true">▾</span></button>
     <button class="pbtn pico" id="pSm" aria-label="Testo più piccolo" title="Testo più piccolo">A−</button><button class="pbtn pico" id="pLg" aria-label="Testo più grande" title="Testo più grande">A+</button>
     <button class="pbtn pico" id="pCast" aria-label="Trasmetti sul TV" title="Trasmetti sul TV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></button>
@@ -849,6 +851,8 @@ themeApply();</script>
     <div class="ptools">
       <button class="ptool" id="pMixB" aria-expanded="false"><i aria-hidden="true">🎚</i><span>Tracce</span></button>
       <button class="ptool on" id="pTab"><i aria-hidden="true">🎸</i><span>Tablatura</span></button>
+      <button class="ptool" id="pSl"><i aria-hidden="true">📋</i><span>Scaletta</span></button>
+      <button class="ptool" id="pDuo" aria-pressed="false"><i aria-hidden="true">🎭</i><span>Duetto</span></button>
       <button class="ptool" id="pClick" aria-pressed="false"><i aria-hidden="true">⏱</i><span>Click</span></button>
       <button class="ptool" id="pMic" aria-expanded="false"><i aria-hidden="true">🎤</i><span>Microfono</span></button>
       <button class="ptool" id="pRec"><i aria-hidden="true">🎬</i><span>Video</span></button>
@@ -911,7 +915,7 @@ themeApply();</script>
     <span class="slat" id="sLat" title="Ritardo tra quando suoni e quando ti senti in cuffia">Ritardo – ms</span>
     <button class="mini" id="salaFull">⛶ Schermo intero</button>
     <button class="mini" id="sSetTop">📋 Scaletta</button><button class="mini" id="sTuneTop">🎵 Accordatore</button><button class="mini" id="salaHelp">Come funziona</button>
-    <button class="mini" id="salaX">Chiudi</button>
+    <button class="mini" id="salaX" aria-label="Torna alla pagina principale">🏠 Home</button>
   </div>
   <div class="sala-body">
     <!-- ===== REGISTRA ===== -->
@@ -1298,7 +1302,7 @@ themeApply();</script>
   <canvas id="recCv"></canvas>
   <video id="recCam" playsinline muted autoplay></video>
   <div class="recly" id="recLy" hidden><b id="recLy1"></b><span id="recLy2"></span></div>
-  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="pbtn" id="recDrafts" title="Registrazioni da completare">📂 Bozze <span id="recDraftsN"></span></button><button class="pbtn" id="recFlip" aria-label="Cambia fotocamera">Fotocamera</button><button class="pbtn" id="recX">Chiudi</button></div>
+  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="pbtn" id="recDrafts" title="Registrazioni da completare">📂 Bozze <span id="recDraftsN"></span></button><button class="pbtn" id="recFlip" aria-label="Cambia fotocamera">Fotocamera</button><button class="pbtn" id="recX" aria-label="Torna alla pagina principale">🏠 Home</button></div>
   <div class="recbar" id="recBar">
     <div class="recgh">🎵 Audio</div>
     <div class="recrow">
@@ -1308,7 +1312,7 @@ themeApply();</script>
       <label class="recsl"><span>Sincronia voce <i id="recLatV"></i></span><input type="range" id="recLat" min="0" max="500" step="10" value="120"></label>
       <label class="rechint"><input type="checkbox" id="recLatAuto" checked> Sincronia automatica</label>
     </div>
-    <div class="recrow"><div class="pseg partsel" data-partsel hidden><span>Tu canti</span><div class="seg"><button data-part="1">🔵 Voce 1</button><button data-part="2">🔴 Voce 2</button><button data-part="0">Tutto</button></div></div></div>
+    <div class="recrow"><div class="pseg" data-duosel><span>Duetto</span><div class="seg"><button data-duo="0">No, una voce</button><button data-duo="1">Sì, due voci</button></div></div><div class="pseg partsel" data-partsel hidden><span>Tu canti</span><div class="seg"><button data-part="1">🔵 Voce 1</button><button data-part="2">🔴 Voce 2</button><button data-part="0">Tutto</button></div></div></div>
     <div class="recrow duorow"><button class="chip" id="duoLoad">🎭 Duetto: carica il video di un amico</button><span class="rechint" id="duoInfo"></span><button class="chip" id="duoOff" hidden>✕ Togli il duetto</button><input type="file" id="duoFile" accept="video/*" hidden></div>
     <div class="recrow" id="duoSyncRow" hidden><span class="rechint">Sincronia con l'amico</span><input type="range" id="duoSync" min="-1500" max="1500" step="10" value="0" aria-label="Sincronia con il video dell'amico in millisecondi"><b id="duoSyncV">0 ms</b></div>
     <div class="recrow"><div class="pseg rectr"><span>Tonalità</span><div class="seg"><button id="recTrDown" aria-label="Mezzo tono più basso">−½</button><b id="recTrVal">originale</b><button id="recTrUp" aria-label="Mezzo tono più alto">+½</button><button id="recTrZero">Originale</button></div></div></div>
@@ -1384,13 +1388,20 @@ themeApply();</script>
     <div class="stsec" id="fbBox" hidden><h5>Com'è venuto? Me lo segno e la prossima volta faccio meglio</h5>
       <div class="row" style="gap:6px"><button class="mini fb" data-fb="ok">👍 Bene</button><button class="mini fb" data-fb="metal">Gracchia / metallico</button><button class="mini fb" data-fb="bg">Sfondo instabile</button><button class="mini fb" data-fb="late">Voce in ritardo</button><button class="mini fb" data-fb="early">Voce in anticipo</button><button class="mini fb" data-fb="lipsfirst">Labbra prima della voce</button><button class="mini fb" data-fb="lipsafter">Labbra dopo la voce</button><button class="mini fb" data-fb="low">Voce troppo bassa</button><button class="mini fb" data-fb="high">Voce troppo alta</button></div>
       <span class="rechint" id="lrnInfo"></span></div>
-    <div class="row" style="justify-content:center">
-      <button class="chip pri" id="recSave">Salva sul telefono</button>
-      <button class="chip" id="recShare" hidden>Condividi</button>
-      <button class="chip" id="recFolder" hidden>Salva nella cartella</button>
-      <button class="chip" id="recAgain">Rifai</button>
+    <div class="stsec rdsave"><h5>💾 Il tuo video</h5>
+      <div class="rdgrid">
+        <button class="chip pri rdwide" id="recSave">⬇ Salva sul telefono</button>
+        <button class="chip" id="recShare" hidden>📤 Condividi</button>
+        <button class="chip" id="recFolder" hidden>📁 Salva nella cartella</button>
+      </div>
+      <div class="rdgrid rdsub">
+        <button class="chip" id="drSave">📂 Salva bozza</button>
+        <button class="chip" id="drDel" hidden>🗑 Elimina bozza</button>
+        <button class="chip" id="recAgain">↺ Rifai</button>
+        <button class="chip" id="recHome">🏠 Home</button>
+      </div>
+      <span class="rechint" id="drInfo"></span>
     </div>
-    <div class="row drrow"><button class="chip" id="drSave">💾 Salva bozza</button><button class="mini" id="drDel" hidden>🗑 Elimina questa bozza</button><span class="rechint" id="drInfo"></span></div>
    </div>
   </div></div>
 </div>
@@ -1880,7 +1891,7 @@ function singClassify(sg){const L=K.lines;if(!sg||!L.length)return false;if(!sg.
       conf[i]=cf;if(nl!==lab[i]){lab[i]=nl;ch++}});
     if(!ch&&it>1)break}
   L.forEach((l,i)=>{if(l.pm){l.pq=0;return}l.p=lab[i]||0;l.pq=l.p&&conf[i]<.05?1:0});return true}
-function partClasses(){$$('.kpanel [data-kl]').forEach(x=>{const l=K.lines[+x.dataset.kl];if(!l)return;x.classList.remove('p1','p2','p3');if(l.p)x.classList.add('p'+l.p);x.classList.toggle('pq',!!l.pq)});partUI()}
+function partClasses(){$$('.kpanel [data-kl]').forEach(x=>{const l=K.lines[+x.dataset.kl];if(!l)return;x.classList.remove('p1','p2','p3');if(l.p&&(K.duo||K.duoEdit))x.classList.add('p'+l.p);x.classList.toggle('pq',!!l.pq&&(K.duo||K.duoEdit))});partUI()}
 let reclT=null;function singRecalc(){clearTimeout(reclT);reclT=setTimeout(()=>{if(!song||!song.singers||!song.singers.emb)return;const before=K.lines.map(l=>l.p);singClassify(song.singers);const n=K.lines.filter((l,i)=>l.p!==before[i]).length;partClasses();saveLyr();if(n)toast('Ho ricalcolato le altre righe: '+n+(n===1?' cambiata':' cambiate'))},1200)}
 function singAuto(){if(!song||!song.singers||!song.singers.duet||!K.lines.length||K.lines.some(l=>l.p))return;const key=song.id+'/'+K.lines.length;if(K._sAuto===key)return;K._sAuto=key;if(singClassify(song.singers))setTimeout(saveLyr,0)}
 async function voicesRun(){if(!song||song.id==='demo'){toast('Apri prima un tuo brano');return}if(sepBusy){toast('Aspetta che finisca il lavoro in corso');return}
@@ -1898,18 +1909,23 @@ async function voicesRun(){if(!song||song.id==='demo'){toast('Apri prima un tuo 
     K._sAuto=song.id+'/'+K.lines.length;kBuild();saveLyr();sepEnd();spShow(msg+(out.seconds?' Scheda video: '+fmt(out.seconds)+'.':''),1);$$('#spSteps span').forEach(el=>el.className='ok')}
   catch(e){if(!sepAbort)sepFail(e)}}
 /* parte scelta nel duetto: le righe dell'altro restano visibili ma più tenui */
-K.mine=+(prefGet('duoPart')||0);
-function partUI(){const has=K.lines.some(l=>l.p===1||l.p===2);$$('[data-partsel]').forEach(el=>{el.hidden=!has;el.querySelectorAll('[data-part]').forEach(b=>b.classList.toggle('on',+b.dataset.part===K.mine))});
+K.mine=+(prefGet('duoPart')||0);K.duo=prefGet('duoOn')==='1';
+/* duetto sì/no: senza duetto il testo ha un solo colore; con il duetto blu, rosso e giallo (insieme) */
+function lyrDuoSet(v,quiet){K.duo=!!v;prefSet('duoOn',v?'1':'0');lyrDuoUI();partClasses();$$('.kpanel').forEach(P=>delete P.dataset.ci);
+  if(!quiet)toast(v?(K.lines.some(l=>l.p)?'🎭 Duetto: ogni voce ha il suo colore':'🎭 Duetto acceso, ma le voci di questo brano non sono ancora riconosciute: usa «🎭 Riconosci le voci»'):'Una voce sola: testo di un solo colore')}
+function lyrDuoUI(){$$('[data-duosel] [data-duo]').forEach(b=>b.classList.toggle('on',+b.dataset.duo===(K.duo?1:0)));const b=$('#pDuo');if(b){b.classList.toggle('on',K.duo);b.setAttribute('aria-pressed',String(K.duo))}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-duosel] [data-duo]');if(b)lyrDuoSet(b.dataset.duo==='1')});
+function partUI(){const has=K.duo&&K.lines.some(l=>l.p===1||l.p===2);lyrDuoUI();$$('[data-partsel]').forEach(el=>{el.hidden=!has;el.querySelectorAll('[data-part]').forEach(b=>b.classList.toggle('on',+b.dataset.part===K.mine))});
   $$('.kpanel [data-kl]').forEach(el=>{const l=K.lines[+el.dataset.kl];el.classList.toggle('oth',!!(has&&K.mine&&l&&(l.p===1||l.p===2)&&l.p!==K.mine));el.classList.toggle('mine',!!(has&&K.mine&&l&&(l.p===K.mine||l.p===3)))})}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-partsel] [data-part]');if(!b)return;K.mine=+b.dataset.part;prefSet('duoPart',String(K.mine));partUI();
   toast(K.mine===1?'Canti tu le righe blu (e le gialle insieme)':K.mine===2?'Canti tu le righe rosse (e le gialle insieme)':'Canti tutto il testo')});
 function kBuild(){singAuto();setTimeout(partUI,0);const L=K.lines;
-  const html=L.length?`<div class="kcount" aria-hidden="true"></div><div class="klines">${L.map((l,i)=>`<div class="kl ${l.st&&i?'st':''} ${l.p?'p'+l.p:''} ${l.pq?'pq':''} ${l.pm?'pmx':''}" data-kl="${i}">${lyrWords(l).map(w=>`<span class="kw">${esc(w.s)}</span>`).join(' ')}</div>`).join('')}</div>`
+  const html=L.length?`<div class="kcount" aria-hidden="true"></div><div class="klines">${L.map((l,i)=>`<div class="kl ${l.st&&i?'st':''} ${l.p&&(K.duo||K.duoEdit)?'p'+l.p:''} ${l.pq&&(K.duo||K.duoEdit)?'pq':''} ${l.pm?'pmx':''}" data-kl="${i}">${lyrWords(l).map(w=>`<span class="kw">${esc(w.s)}</span>`).join(' ')}</div>`).join('')}</div>`
     :`<div class="kempty"><div>Nessun testo per questo brano.<br>Tocca <b>Cerca su LRCLIB</b>, <b>Modifica</b> per incollarlo, oppure <b>Trascrivi dalla voce</b>.</div></div>`;
   $$('.kpanel').forEach(P=>{P.innerHTML=html;delete P.dataset.ci});
   $$('.kpanel [data-kl]').forEach(el=>el.onclick=()=>{if(K.duoEdit){const l=K.lines[+el.dataset.kl];if(!l)return;l.p=((l.p||0)+1)%4;l.pm=1;l.pq=0;singRecalc();$$(`.kpanel [data-kl="${el.dataset.kl}"]`).forEach(x=>{x.classList.remove('p1','p2','p3','pq');if(l.p)x.classList.add('p'+l.p);x.classList.add('pmx')});saveLyr();partUI();return}if(K.sync)return;const l=K.lines[+el.dataset.kl];if(l){seek(Math.max(0,l.t+K.off-.6));if(!playing())play()}})}
 $('#bVoices').onclick=voicesRun;
-$('#bDuo').onclick=()=>{K.duoEdit=!K.duoEdit;$('#bDuo').setAttribute('aria-pressed',K.duoEdit);$('#bDuo').textContent=K.duoEdit?'✓ Fatto':'🎭 Correggi a mano';$('#duoLeg').hidden=!K.duoEdit;$$('.kpanel').forEach(P=>P.classList.toggle('duoedit',K.duoEdit));if(K.duoEdit){if(playing())pause();toast('Tocca le righe da correggere: 1 blu, 2 rosso, insieme giallo')}};
+$('#bDuo').onclick=()=>{K.duoEdit=!K.duoEdit;$('#bDuo').setAttribute('aria-pressed',K.duoEdit);$('#bDuo').textContent=K.duoEdit?'✓ Fatto':'🎭 Correggi a mano';$('#duoLeg').hidden=!K.duoEdit;$$('.kpanel').forEach(P=>P.classList.toggle('duoedit',K.duoEdit));partClasses();if(K.duoEdit){if(playing())pause();toast('Tocca le righe da correggere: 1 blu, 2 rosso, insieme giallo')}};
 function karaUpdate(cur,only){const L=K.lines;if(!L.length)return;const tt=cur-K.off;let idx=-1;for(let i=0;i<L.length;i++){if(L[i].t<=tt)idx=i;else break}
   const sy=K.sync;const focus=sy?sy.i:Math.max(0,idx);
   (only?[only]:Array.from(document.querySelectorAll('.kpanel')).filter(P=>!P.closest('#salaOv'))).forEach(P=>{const box=P.querySelector('.klines');if(!box||!P.offsetParent)return;
@@ -2229,7 +2245,7 @@ let palOn=false,palTabOn=prefGet('palTab')!=='0';
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
 async function palOpen(v){palOn=v;$('#palco').hidden=!v;try{pmShow(false)}catch(e){}if(!v){if(LV.on)lvStop();$('#palMic').hidden=true}document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;palLayout();slPlace();
   try{if(v){const el=$('#palco');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el);try{await screen.orientation.lock('landscape')}catch(e){}}else if(fsEl())await(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
-$('#bPalco').onclick=()=>palOpen(true);$('#pX').onclick=()=>palOpen(false);
+$('#bPalco').onclick=()=>palOpen(true);$('#pSl').onclick=()=>slOpen();$('#pDuo').onclick=()=>lyrDuoSet(!K.duo);$('#pX').onclick=()=>palOpen(false);
 /* palco a schermo intero: tracce (accese/spente e volume) e scelta del brano senza uscire */
 function pmRender(){const box=$('#pmRows');if(!box)return;box.innerHTML=order.map(k=>{const g=gains[k],on=!g.mute;
     return `<div class="pmrow ${on?'':'off'}" data-k="${k}"><b>${SL[k]}</b><button class="pbtn pmon ${on?'on':''}" data-pm="${k}" aria-pressed="${on}">${on?'Accesa':'Spenta'}</button><input type="range" min="0" max="1.2" step="0.01" value="${g.vol}" data-pv="${k}" aria-label="Volume ${SL[k]}"><span class="pmv">${Math.round(g.vol*100)}%</span></div>`}).join('')||'<p class="lvhint">Nessuna traccia.</p>';
@@ -3053,8 +3069,8 @@ $$('#recVox button').forEach(b=>b.onclick=()=>{const v=+b.dataset.v;if(stems.voc
 function recWrap(g,words,maxW){const rows=[];let cur=[],w=0;const sp=g.measureText(' ').width;for(const x of words){const ww=g.measureText(x.s).width;if(cur.length&&w+sp+ww>maxW){rows.push(cur);cur=[];w=0}cur.push({...x,ww});w+=(cur.length>1?sp:0)+ww}if(cur.length)rows.push(cur);return rows}
 function recLyrics(g,W,H,t){const L=K.lines;if(!L.length)return;const tt=t-K.off;let i=-1;for(let j=0;j<L.length;j++){if(L[j].t<=tt)i=j;else break}
   const base=Math.round(Math.min(W,H)*0.062),hi=css('--stage-hi')||TC('#e8c8a6','#6fd8ff');g.textAlign='left';g.textBaseline='middle';
-  const pc=l=>l&&l.p===1?'#3d8bff':l&&l.p===2?'#ff4d4d':l&&l.p===3?'#ffd23f':null;
-  const drawLine=(l,y,size,alpha,prog)=>{const hiL=pc(l)||hi;if(K.mine&&l&&(l.p===1||l.p===2)&&l.p!==K.mine)alpha*=.45;g.font=`700 ${size}px "Josefin Sans","Avenir Next",sans-serif`;const words=lyrWords(l);const rows=recWrap(g,words,W*0.88);const sp=g.measureText(' ').width;const lh=size*1.22;let yy=y-(rows.length-1)*lh/2;
+  const pc=l=>!K.duo?null:l&&l.p===1?'#3d8bff':l&&l.p===2?'#ff4d4d':l&&l.p===3?'#ffd23f':null;
+  const drawLine=(l,y,size,alpha,prog)=>{const hiL=pc(l)||hi;if(K.duo&&K.mine&&l&&(l.p===1||l.p===2)&&l.p!==K.mine)alpha*=.45;g.font=`700 ${size}px "Josefin Sans","Avenir Next",sans-serif`;const words=lyrWords(l);const rows=recWrap(g,words,W*0.88);const sp=g.measureText(' ').width;const lh=size*1.22;let yy=y-(rows.length-1)*lh/2;
     for(const r of rows){const rw=r.reduce((a,x)=>a+x.ww,0)+sp*(r.length-1);let x=(W-rw)/2;
       for(const w of r){g.globalAlpha=alpha;g.shadowColor='rgba(0,0,0,.85)';g.shadowBlur=size*.25;g.fillStyle=!prog&&pc(l)?pc(l):'#ffffff';g.fillText(w.s,x,yy);g.shadowBlur=0;
         if(prog){const p=Math.max(0,Math.min(1,(tt-w.t)/Math.max(.08,w.e-w.t)));if(p>0){g.save();g.beginPath();g.rect(x,yy-size,w.ww*p,size*2);g.clip();g.fillStyle=hiL;g.fillText(w.s,x,yy);g.restore()}}
@@ -3111,7 +3127,7 @@ $$('#recBgS button').forEach(b=>b.onclick=()=>{FX.bg=b.dataset.v;prefSet('recBg'
 fxSegUI();recQUI();setTimeout(bgThumbs,0);
 let OVL_NOLOGO=false;
 let rdT=0,rdAvg=16,rdSlow=0;
-function recDraw(){const _t0=performance.now();OVL_NOLOGO=FX.bg==='white'&&!!FX.mask;const cv=$('#recCv');const [W,H]=recSize();if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}const g=cv.getContext('2d');const v=$('#recCam');
+function recDraw(){const _t0=performance.now();OVL_NOLOGO=false;const cv=$('#recCv');const [W,H]=recSize();if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}const g=cv.getContext('2d');const v=$('#recCam');
   g.fillStyle='#000';g.fillRect(0,0,W,H);
   duoSync();DUO_LAY=!!(R.duo&&DUO.el);
   if(DUO_LAY){const HH=Math.round(H/2);drawCover(g,DUO.el,0,0,W,H-HH);if(v.videoWidth){const hc=fxCanvas('rhalf',W,HH),hg=hc.getContext('2d');hg.fillStyle='#000';hg.fillRect(0,0,W,HH);const s=Math.max(W/v.videoWidth,HH/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;fxDrawCam(hg,v,W,HH,(W-dw)/2,(HH-dh)/2,dw,dh,R.facing==='user');g.drawImage(hc,0,H-HH)}g.fillStyle='rgba(255,255,255,.85)';g.fillRect(0,H-HH-1,W,2)}
@@ -3122,7 +3138,7 @@ function recDraw(){const _t0=performance.now();OVL_NOLOGO=FX.bg==='white'&&!!FX.
   if($('#recTxt').checked){ly.hidden=true;recLyrics(g,W,H,t)}
   else{ly.hidden=!K.lines.length;if(K.lines.length){const tt=t-K.off;let i=-1;for(let j=0;j<K.lines.length;j++){if(K.lines[j].t<=tt)i=j;else break}
     const cur=i>=0&&tt<=K.lines[i].e+1.2?K.lines[i].s:'',nx=(K.lines[i+1]||{}).s||'';if($('#recLy1').textContent!==cur)$('#recLy1').textContent=cur;if($('#recLy2').textContent!==nx)$('#recLy2').textContent=nx;const pcc=l=>l&&l.p===1?'#7fb0ff':l&&l.p===2?'#ff8080':l&&l.p===3?'#ffd23f':'';$('#recLy1').style.color=pcc(i>=0?K.lines[i]:null);$('#recLy2').style.color=pcc(K.lines[i+1])}}
-  const u=Math.min(W,H);g.globalAlpha=.9;if(recLogo.complete&&recLogo.naturalWidth&&!OVL_NOLOGO){const lw=u*.16,lh=lw*recLogo.naturalHeight/recLogo.naturalWidth;g.fillStyle='rgba(255,255,255,.9)';g.fillRect(u*.04-6,H-u*.04-lh-6,lw+12,lh+12);g.drawImage(recLogo,u*.04,H-u*.04-lh,lw,lh)}
+  const u=Math.min(W,H);drawLogo(g,W,H);g.globalAlpha=.9;
   g.font=`600 ${Math.round(u*.032)}px Figtree,sans-serif`;g.textAlign='right';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=6;g.fillText((song&&song.title)||'',W-u*.04,H-u*.04);g.shadowBlur=0;g.globalAlpha=1;
   if(R.count>0){g.font=`800 ${Math.round(u*.32)}px "Josefin Sans",sans-serif`;g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=20;g.fillText(String(R.count),W/2,H*.42);g.shadowBlur=0}
   if(R.on)$('#recTime').textContent=fmt((Date.now()-R.t0)/1000);
@@ -3391,7 +3407,7 @@ $('#stMaster').oninput=e=>{PV.vol=+e.target.value;if(PV.mg)PV.mg.gain.setTargetA
 /* sfondo «Bianco»: neutro, con il logo in alto a sinistra */
 function whiteBg(W,H){const c=fxCanvas('white',W,H);const ok=recLogo.complete&&recLogo.naturalWidth;if(c._k===W+'x'+H+ok)return c;c._k=W+'x'+H+ok;const g=c.getContext('2d');
   const gr=g.createRadialGradient(W/2,H*.42,Math.min(W,H)*.15,W/2,H/2,Math.max(W,H)*.75);gr.addColorStop(0,'#ffffff');gr.addColorStop(1,'#ececea');g.fillStyle=gr;g.fillRect(0,0,W,H);
-  if(ok){const u=Math.min(W,H),lw=u*.24,lh=lw*recLogo.naturalHeight/recLogo.naturalWidth;g.globalCompositeOperation='multiply';g.drawImage(recLogo,u*.05,u*.05,lw,lh);g.globalCompositeOperation='source-over'}return c}
+  return c}
 /* sfondo «Studio»: parete con pannelli fonoassorbenti e luce calda */
 function studioBg(W,H){const c=fxCanvas('studio',W,H);if(c._k===W+'x'+H)return c;c._k=W+'x'+H;const g=c.getContext('2d');
   let gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#1d2533');gr.addColorStop(.78,'#151b27');gr.addColorStop(1,'#0b0f17');g.fillStyle=gr;g.fillRect(0,0,W,H);
@@ -3480,8 +3496,12 @@ function fxFaceMask(W,H,faces,ix,mp){const c=fxCanvas('ffm',W,H),g=c.getContext(
     let x0=1e9,x1=-1e9;for(const p of ov){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0])}out.push({lips:H_('lips'),w:x1-x0,ch:[mp(lm[50]),mp(lm[280])]})}
   let m=c;if(HAS_FILTER){const c2=fxCanvas('ffm2',W,H),g2=c2.getContext('2d');g2.clearRect(0,0,W,H);g2.filter='blur('+Math.max(2,Math.round(W/70))+'px)';g2.drawImage(c,0,0);g2.filter='none';m=c2}return{m,info:out}}
 const HAS_FILTER=(()=>{try{const g=document.createElement('canvas').getContext('2d');g.filter='blur(1px)';return g.filter==='blur(1px)'}catch(e){return false}})();
-function finalOverlay(g,W,H,t,txt){OVL_NOLOGO=ST.bg==='white';const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);if(txt)recLyrics(g,W,H,t);
-  const u=Math.min(W,H);g.globalAlpha=.9;if(recLogo.complete&&recLogo.naturalWidth&&!OVL_NOLOGO){const lw=u*.16,lh=lw*recLogo.naturalHeight/recLogo.naturalWidth;g.fillStyle='rgba(255,255,255,.9)';g.fillRect(u*.04-6,H-u*.04-lh-6,lw+12,lh+12);g.drawImage(recLogo,u*.04,H-u*.04-lh,lw,lh)}
+/* logo sul video: sempre in alto a sinistra, su un rettangolo nero perché si legga bene */
+function drawLogo(g,W,H){if(!(recLogo.complete&&recLogo.naturalWidth)||OVL_NOLOGO)return;const u=Math.min(W,H),lw=Math.round(u*.22),lh=Math.round(lw*recLogo.naturalHeight/recLogo.naturalWidth),pad=Math.max(5,Math.round(u*.012)),x=Math.round(u*.035),y=Math.round(u*.035);
+  g.save();g.globalAlpha=1;g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=u*.02;g.fillStyle='#000';const r=pad*1.4;g.beginPath();if(g.roundRect)g.roundRect(x-pad,y-pad,lw+2*pad,lh+2*pad,r);else g.rect(x-pad,y-pad,lw+2*pad,lh+2*pad);g.fill();g.shadowBlur=0;
+  g.strokeStyle='rgba(111,227,255,.55)';g.lineWidth=Math.max(1,u*.003);g.stroke();g.imageSmoothingQuality='high';g.drawImage(recLogo,x,y,lw,lh);g.restore()}
+function finalOverlay(g,W,H,t,txt){OVL_NOLOGO=false;const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);if(txt)recLyrics(g,W,H,t);
+  const u=Math.min(W,H);drawLogo(g,W,H);g.globalAlpha=.9;
   g.font=`600 ${Math.round(u*.032)}px Figtree,sans-serif`;g.textAlign='right';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=6;g.fillText((song&&song.title)||'',W-u*.04,H-u*.04);g.shadowBlur=0;g.globalAlpha=1;}
 function makeFinalPainter(W,H,seg,face){const F={ema:null,mw:0,mh:0,inv:null,col:[70,90,120],colT:-9,mask:null,lm:null,fk:0,faces:0};
   return function paint(g,v,t){const mirror=R.facingRec==='user';const cam=fxCanvas('fcam',W,H),cg=cam.getContext('2d');cg.save();cg.clearRect(0,0,W,H);
@@ -3588,11 +3608,11 @@ async function recServer({mixed,voice,vsr,lag,dur,useRaw,say}){if(sepBusy)throw 
     const files=[['cam'+ext(cam),cam,'il video'],[mp3.type==='audio/wav'?'audio.wav':'audio.mp3',mp3,'l\'audio']];if(duo)files.push(['duo'+ext(duo.blob),duo.blob,'il video dell\'amico']);
     for(const[n,b,label]of files){say('Carico nel cloud '+label+' ('+(b.size/1048576).toFixed(1)+' MB)…');await r2Req('PUT',base+n,{body:b,ctype:b.type||'application/octet-stream'});put.push(base+n)}
     const P={W,H,fps:Q().fps,mirror:R.facingRec==='user',vstart:useRaw?Math.max(0,lag):0,av:+$('#stAv').value/1000,plain:!useRaw,
-      bg:ST.bg==='clothes'?'auto':['real','blur'].includes(ST.bg)?ST.bg:'img',beauty:useRaw?ST.beauty:0,kF:Math.min(.8,LRN.smooth()+.1),title:(song&&song.title)||'',nologo:ST.bg==='white',
+      bg:ST.bg==='clothes'?'auto':['real','blur'].includes(ST.bg)?ST.bg:'img',beauty:useRaw?ST.beauty:0,kF:Math.min(.8,LRN.smooth()+.1),title:(song&&song.title)||'',nologo:false,
       lyr_t0:R.startSong,duo_start:duo?R.startSong+duo.off:0,lipsync:useRaw&&$('#stLips').checked,env_hz:50};
     if(useRaw&&P.bg==='img'){const c=bgPaint(ST.bg,W,HH);if(c)P.bg_b64=imgB64(c);else P.bg='auto'}
     if(recLogo.complete&&recLogo.naturalWidth){const c=document.createElement('canvas');c.width=recLogo.naturalWidth;c.height=recLogo.naturalHeight;c.getContext('2d').drawImage(recLogo,0,0);P.logo_b64=imgB64(c,'image/png')}
-    if(useRaw){P.lyr={show:!!R.txtRec&&K.lines.length>0,lines:K.lines.map(l=>({t:l.t,e:l.e,p:l.p||0,w:lyrWords(l).map(w=>({s:w.s,t:w.t,e:w.e}))})),off:K.off||0,mine:K.mine||0,hi:css('--stage-hi')||'#6fe3ff',duoLay:!!duo};
+    if(useRaw){P.lyr={show:!!R.txtRec&&K.lines.length>0,lines:K.lines.map(l=>({t:l.t,e:l.e,p:K.duo?l.p||0:0,w:lyrWords(l).map(w=>({s:w.s,t:w.t,e:w.e}))})),off:K.off||0,mine:K.duo?K.mine||0:0,hi:css('--stage-hi')||'#6fe3ff',duoLay:!!duo};
       if(P.lipsync)P.env=voiceEnv(voice,vsr,lag,dur)}
     const inp={mode:'video',video_url:await r2Presign('GET',put[0]),audio_url:await r2Presign('GET',put[1]),out_url:await r2Presign('PUT',base+'finale.mp4'),p:P};if(duo)inp.duo_url=await r2Presign('GET',put[2]);
     put.push(base+'finale.mp4');sepAbort=false;say('Mando il lavoro a RunPod…');
@@ -3680,7 +3700,7 @@ drCount();
 
 $('#recGo').onclick=()=>R.on?recStop():recStart();
 {const rt=n=>{if(R.on){toast('Cambia la tonalità prima di registrare');return}setTr(n);R.guideBuf=null;if(tr)toast('Base in tonalità '+$('#recTrVal').textContent+': il video userà questa')};$('#recTrDown').onclick=()=>rt(tr-1);$('#recTrUp').onclick=()=>rt(tr+1);$('#recTrZero').onclick=()=>rt(0)}
-$('#recX').onclick=recClose;
+$('#recX').onclick=recClose;$('#recHome').onclick=recClose;
 $('#recFlip').onclick=async()=>{if(R.on)return;R.facing=R.facing==='user'?'environment':'user';try{await recCamera()}catch(e){toast('Non riesco a cambiare fotocamera')}};
 $('#bRec').onclick=recOpen;$('#pRec').onclick=()=>{palOpen(false);setTimeout(recOpen,200)};
 
@@ -4645,8 +4665,8 @@ const TVC={req:null,conn:null,sig:'',iv:0};
 const tvLive=()=>!!(TVC.conn&&TVC.conn.state==='connected');
 function tvUI(){const b=$('#pCast');if(!b)return;const on=tvLive();b.classList.toggle('on',on);b.setAttribute('aria-label',on?'Smetti di trasmettere sul TV':'Trasmetti sul TV');b.title=on?'Sul TV · tocca per smettere':'Trasmetti sul TV'}
 function tvSend(o){try{if(tvLive())TVC.conn.send(JSON.stringify(o))}catch(e){}}
-function tvSig(){const L=K.lines,n=(TB[inst]&&TB[inst].notes)||[];return [song&&song.id,L.length,L[0]&&L[0].t,L.length&&L[L.length-1].t,K.off,inst,tabMode,tr,five,palTabOn,kscale,n.length,(CH.base||[]).length].join('|')}
-function tvSong(){TVC.sig=tvSig();tvSend({k:'song',title:(song&&song.title)||'',artist:(song&&song.artist)||'',lines:K.lines.map(l=>({s:l.s,t:l.t,e:l.e,w:l.w||null,p:l.p||0,st:l.st||0,pq:l.pq||0})),off:K.off,inst,tabMode,tr,five,tab:palTabOn,notes:(TB[inst]&&TB[inst].notes)||null,chords:CH.base||null,kscale})}
+function tvSig(){const L=K.lines,n=(TB[inst]&&TB[inst].notes)||[];return [song&&song.id,K.duo,L.length,L[0]&&L[0].t,L.length&&L[L.length-1].t,K.off,inst,tabMode,tr,five,palTabOn,kscale,n.length,(CH.base||[]).length].join('|')}
+function tvSong(){TVC.sig=tvSig();tvSend({k:'song',title:(song&&song.title)||'',artist:(song&&song.artist)||'',lines:K.lines.map(l=>({s:l.s,t:l.t,e:l.e,w:l.w||null,p:K.duo?l.p||0:0,st:l.st||0,pq:0})),off:K.off,inst,tabMode,tr,five,tab:palTabOn,notes:(TB[inst]&&TB[inst].notes)||null,chords:CH.base||null,kscale})}
 function tvTick(){if(!tvLive()){clearInterval(TVC.iv);TVC.iv=0;tvUI();return}if(tvSig()!==TVC.sig)tvSong();tvSend({k:'t',t:viewT(),p:playing(),r:A.playbackRate||1})}
 function tvBind(c){TVC.conn=c;const up=()=>{tvUI();if(tvLive()){tvSong();toast('📺 Il palco è sul TV');if(!TVC.iv)TVC.iv=setInterval(tvTick,250)}};
   c.onconnect=up;c.onclose=c.onterminate=()=>{if(TVC.conn===c)TVC.conn=null;tvUI()};if(c.state==='connected')up()}
