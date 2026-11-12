@@ -178,7 +178,8 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 
 .drrow{justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
 .rdgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.rdgrid .chip{width:100%;justify-content:center;min-height:48px;margin:0}.rdgrid .rdwide{grid-column:1/-1}.rdgrid [hidden]{display:none!important}
-.rdsub{grid-template-columns:repeat(auto-fit,minmax(118px,1fr))}.rdsub .chip{min-height:44px;font-size:15px}.rdsave #drInfo{text-align:center}
+.rdsub{grid-template-columns:repeat(auto-fit,minmax(118px,1fr))}.rdsub .chip{min-height:46px;font-size:15px}
+.rdgrid .chip{display:flex;align-items:center;gap:10px;border-radius:16px!important;font-weight:700}.rdgrid .chip .ico{width:22px;height:22px;flex:none}.rdgrid .chip:not(.pri) .ico{color:var(--stage-hi)}.rdgrid #drDel .ico{color:#ff7a70}.rdsave #drInfo{text-align:center}
 .drlist li{gap:10px}.drlist .slbt{display:grid!important;grid-template-columns:2fr 1fr!important;gap:6px;min-width:180px}.drlist .slbt>*{min-height:44px;width:100%}.drlist li img{width:54px;height:96px;object-fit:cover;border-radius:8px;background:#000;flex:none}.drlist li::before{display:none}
 @media (max-width:599px){.drlist li{grid-template-columns:54px minmax(0,1fr)!important;grid-template-areas:'n t' 'b b'!important}.drlist li img{grid-area:n}}
 .banks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
@@ -418,8 +419,8 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .recbar{grid-row:3;grid-column:1;margin-top:0;max-height:44vh;overflow-y:auto;background:var(--h0a0f16)!important;border-top:1px solid rgba(255,255,255,.12)}
 .recov.recording .recbar{max-height:none}
 .recbar>.recrow:last-child{position:sticky;bottom:calc(-1 * max(12px,env(safe-area-inset-bottom,0px)));background:var(--h0a0f16);padding:8px 0 4px;z-index:2}
-@media (min-width:900px) and (orientation:landscape){
-  .recov{grid-template-columns:minmax(0,1fr) minmax(340px,420px);grid-template-rows:auto minmax(0,1fr)}
+@media (min-width:900px) and (orientation:landscape),(orientation:landscape) and (max-height:560px){
+  .recov{grid-template-columns:minmax(0,1fr) minmax(300px,420px);grid-template-rows:auto minmax(0,1fr)}
   .recbar{grid-row:2;grid-column:2;max-height:none;height:100%;border-top:0;border-left:1px solid rgba(255,255,255,.12);justify-content:flex-start;padding-top:16px}
   .recbar .recrow{flex-direction:column;align-items:stretch}.recbar .recsl{flex:none}
   .recov.recording .recbar{justify-content:center}
@@ -640,6 +641,24 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
   .panel.kp{height:56vh;min-height:320px}
   .panel.bp{height:42vh;min-height:250px}
 }
+
+/* ===== Registra: stesso stile della pagina principale ===== */
+.rectop{gap:6px}.rbtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:64px;min-height:54px;padding:4px 8px;border-radius:14px;border:1px solid rgba(255,255,255,.22);background:rgba(10,14,24,.72);color:#fff;font:700 12.5px/1.1 Figtree,system-ui;cursor:pointer;flex:none}
+.rbtn .ico{width:22px;height:22px}.rbtn em{font-style:normal;display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-size:11px}.rbtn em:empty{display:none}
+.recsets{display:flex;flex-direction:column;gap:8px}
+.rsec{border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.04)}
+.rsec>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:10px 12px;cursor:pointer;min-height:56px}.rsec>summary::-webkit-details-marker{display:none}
+.rsec>summary .ico{color:var(--stage-hi);width:26px;height:26px}.rst{flex:1;min-width:0;display:flex;flex-direction:column}.rst b{font-size:16px}.rst small{font-size:12.5px;color:rgba(255,255,255,.62);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chev{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s;flex:none;opacity:.8}.rsec[open]>summary .chev{transform:rotate(180deg)}.rsec[open]>summary{border-bottom:1px solid rgba(255,255,255,.1)}
+.rsbody{display:flex;flex-direction:column;gap:10px;padding:10px 12px 12px}
+.recgo{display:grid!important;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;column-gap:12px}.recgo .rechint{grid-row:1/3}
+#recGo.shutter{grid-column:2;grid-row:1;justify-self:center;width:72px;height:72px;min-height:0;padding:0;border-radius:50%;border:4px solid #fff!important;background:rgba(0,0,0,.35)!important;display:grid;place-items:center;box-shadow:0 4px 18px rgba(0,0,0,.45);margin:0;text-shadow:none}
+#recGo.shutter i{display:block;width:52px;height:52px;border-radius:50%;background:#e53935;transition:all .2s}
+#recGo.shutter.stop i{width:26px;height:26px;border-radius:6px}#recGo.shutter:disabled{opacity:.5!important}#recGo.shutter:active i{transform:scale(.92)}
+.shlbl{grid-column:2;grid-row:2;justify-self:center;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.85);margin-top:2px}
+.recov.recording .recsets,.recov.recording .recgh{display:none!important}.recov.recording .recgo{grid-template-columns:1fr;justify-items:center}.recov.recording .recgo .rechint{display:none}
+.recov.recording .recgo #recGo,.recov.recording .shlbl{grid-column:1}
+@media (orientation:landscape) and (max-height:560px){.recbar{padding:8px 10px!important}.rsec>summary{min-height:48px;padding:6px 10px}.rbtn{min-height:44px;min-width:56px}#recGo.shutter{width:62px;height:62px}#recGo.shutter i{width:44px;height:44px}}
 @media (prefers-reduced-motion:reduce){.klines{transition:none}.kl{transition:none}.bar.ind i{animation-duration:4s}}
 #splash{position:fixed;inset:0;z-index:200;background:var(--splashbg);display:grid;place-items:center;transition:opacity .6s ease;cursor:pointer}
 #splash.out{opacity:0;pointer-events:none}
@@ -1370,9 +1389,10 @@ themeApply();</script>
   <canvas id="recCv"></canvas>
   <video id="recCam" playsinline muted autoplay></video>
   <div class="recly" id="recLy" hidden><b id="recLy1"></b><span id="recLy2"></span></div>
-  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="pbtn" id="recDrafts" title="Registrazioni da completare">📂 Bozze <span id="recDraftsN"></span></button><button class="pbtn" id="recFlip" aria-label="Cambia fotocamera">Fotocamera</button><button class="pbtn" id="recX" aria-label="Torna alla pagina principale">🏠 Home</button></div>
+  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="rbtn" id="recDrafts" title="Registrazioni da completare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10.5h18" opacity=".6"/></svg><span>Bozze <em id="recDraftsN"></em></span></button><button class="rbtn" id="recFlip" aria-label="Cambia fotocamera"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5a2 2 0 0 1 2-2h1.6L9 4.5h6l1.4 2H18a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M15.2 11.2a3.4 3.4 0 0 0-5.9-.9M8.8 13.8a3.4 3.4 0 0 0 5.9.9"/><path d="M9.2 8.9v1.6h1.6M14.8 16.1v-1.6h-1.6"/></svg><span>Fotocamera</span></button><button class="rbtn" id="recX" aria-label="Torna alla pagina principale"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></svg><span>Home</span></button></div>
   <div class="recbar" id="recBar">
-    <div class="recgh">🎵 Audio</div>
+   <div class="recsets">
+   <details class="rsec" id="rsAudio"><summary><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span class="rst"><b>Audio</b><small id="rsAudioS"></small></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="rsbody">
     <div class="recrow">
       <div class="pseg" id="recVox"><span>Voce originale</span><div class="seg"><button data-v="0">No</button><button data-v="0.25">Guida</button><button data-v="1">Sì</button></div></div>
       <label class="recsl"><span>Musica</span><input type="range" id="recMus" min="0" max="1.5" step="0.05" value="0.8"></label>
@@ -1390,7 +1410,8 @@ themeApply();</script>
       <label class="rechint" title="Il filtro anti-eco del telefono può rendere la voce metallica: usalo solo senza cuffie e solo se serve"><input type="checkbox" id="recEcho"> Filtro anti-eco</label>
       <span class="rechint" id="recDev" title="Si cambia da Impostazioni → Audio"></span>
     </div>
-    <div class="recgh">🖼 Immagine</div>
+   </div></details>
+   <details class="rsec" id="rsImg"><summary><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5.5-5 3.5 3 2.5-2 4.5 4"/></svg><span class="rst"><b>Immagine</b><small id="rsImgS"></small></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="rsbody">
     <div class="recrow">
       <div class="pseg" id="recQ"><span>Qualità</span><div class="seg"><button data-q="leggera">Leggera</button><button data-q="normale">Normale</button><button data-q="alta">Alta</button></div></div><span class="rechint" id="recQInfo"></span>
     </div>
@@ -1399,9 +1420,11 @@ themeApply();</script>
       <div class="pseg bgpick" id="recBgS"><span>Sfondo</span><div class="seg bgseg"><button data-v="0" class="bgt"><canvas data-bgt="0" width="60" height="96"></canvas><em class="bgl">Vero</em></button><button data-v="clothes" class="bgt"><canvas data-bgt="clothes" width="60" height="96"></canvas><em class="bgl">Colore dei vestiti</em></button><button data-v="blur" class="bgt"><canvas data-bgt="blur" width="60" height="96"></canvas><em class="bgl">Sfocato</em></button><button data-v="studio" class="bgt"><canvas data-bgt="studio" width="60" height="96"></canvas><em class="bgl">Studio</em></button><button data-v="white" class="bgt"><canvas data-bgt="white" width="60" height="96"></canvas><em class="bgl">Bianco con logo</em></button><button data-v="stage" class="bgt"><canvas data-bgt="stage" width="60" height="96"></canvas><em class="bgl">Palco con luci</em></button><button data-v="sunset" class="bgt"><canvas data-bgt="sunset" width="60" height="96"></canvas><em class="bgl">Tramonto sul mare</em></button><button data-v="city" class="bgt"><canvas data-bgt="city" width="60" height="96"></canvas><em class="bgl">Città di notte</em></button><button data-v="neon" class="bgt"><canvas data-bgt="neon" width="60" height="96"></canvas><em class="bgl">Neon</em></button><button data-v="brick" class="bgt"><canvas data-bgt="brick" width="60" height="96"></canvas><em class="bgl">Muro di mattoni</em></button><button data-v="sky" class="bgt"><canvas data-bgt="sky" width="60" height="96"></canvas><em class="bgl">Cielo</em></button><button data-v="photo" class="bgt"><canvas data-bgt="photo" width="60" height="96"></canvas><em class="bgl">La tua foto</em></button></div></div>
       <label class="rechint"><input type="checkbox" id="recTxt" checked> Testo nel video</label>
     </div>
+   </div></details>
+   </div>
     <div class="recrow recgo">
       <span class="rechint" id="recHint">Con le cuffie il risultato è migliore.</span>
-      <button class="big" id="recGo">● Registra</button>
+      <button class="shutter" id="recGo" aria-label="Registra"><i></i></button><span class="shlbl" id="recGoL">Registra</span>
     </div>
   </div>
   <div class="recdone" id="recDone" hidden><div class="recdone-in">
@@ -1456,17 +1479,17 @@ themeApply();</script>
     <div class="stsec" id="fbBox" hidden><h5>Com'è venuto? Me lo segno e la prossima volta faccio meglio</h5>
       <div class="row" style="gap:6px"><button class="mini fb" data-fb="ok">👍 Bene</button><button class="mini fb" data-fb="metal">Gracchia / metallico</button><button class="mini fb" data-fb="bg">Sfondo instabile</button><button class="mini fb" data-fb="late">Voce in ritardo</button><button class="mini fb" data-fb="early">Voce in anticipo</button><button class="mini fb" data-fb="lipsfirst">Labbra prima della voce</button><button class="mini fb" data-fb="lipsafter">Labbra dopo la voce</button><button class="mini fb" data-fb="low">Voce troppo bassa</button><button class="mini fb" data-fb="high">Voce troppo alta</button></div>
       <span class="rechint" id="lrnInfo"></span></div>
-    <div class="stsec rdsave"><h5>💾 Il tuo video</h5>
+    <div class="stsec rdsave"><h5>Il tuo video</h5>
       <div class="rdgrid">
-        <button class="chip pri rdwide" id="recSave">⬇ Salva sul telefono</button>
-        <button class="chip" id="recShare" hidden>📤 Condividi</button>
-        <button class="chip" id="recFolder" hidden>📁 Salva nella cartella</button>
+        <button class="chip pri rdwide" id="recSave"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/></svg><span>Salva sul telefono</span></button>
+        <button class="chip" id="recShare" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/></svg><span>Condividi</span></button>
+        <button class="chip" id="recFolder" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 11v5M9.5 13.5h5"/></svg><span>Salva nella cartella</span></button>
       </div>
       <div class="rdgrid rdsub">
-        <button class="chip" id="drSave">📂 Salva bozza</button>
-        <button class="chip" id="drDel" hidden>🗑 Elimina bozza</button>
-        <button class="chip" id="recAgain">↺ Rifai</button>
-        <button class="chip" id="recHome">🏠 Home</button>
+        <button class="chip" id="drSave"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h11a1 1 0 0 1 1 1v16l-6.5-4-6.5 4v-16a1 1 0 0 1 1-1z"/></svg><span>Salva bozza</span></button>
+        <button class="chip" id="drDel" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16M9.5 6.5V4.5h5v2M6.5 6.5l1 13a1.5 1.5 0 0 0 1.5 1.4h6a1.5 1.5 0 0 0 1.5-1.4l1-13"/><path d="M10 10.5v6.5M14 10.5v6.5"/></svg><span>Elimina bozza</span></button>
+        <button class="chip" id="recAgain"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4v4h4"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg><span>Rifai</span></button>
+        <button class="chip" id="recHome"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></svg><span>Home</span></button>
       </div>
       <span class="rechint" id="drInfo"></span>
     </div>
@@ -3233,7 +3256,7 @@ function duoUI(){$('#duoInfo').textContent=R.duo?'🎭 '+DUO.name:'';$('#duoOff'
 function duoSync(){if(!R.duo||!DUO.el)return;const v=DUO.el,t=now()+DUO.off;if(playing()&&t>=0&&t<(v.duration||1e9)){if(v.paused){try{v.currentTime=t}catch(e){}v.play().catch(()=>{})}else if(Math.abs(v.currentTime-t)>.15){try{v.currentTime=t}catch(e){}}}else if(!v.paused)v.pause();else if(!playing()&&Math.abs(v.currentTime-Math.max(0,t))>.3){try{v.currentTime=Math.max(0,t)}catch(e){}}}
 $('#duoLoad').onclick=()=>{if(R.on)return;$('#duoFile').value='';$('#duoFile').click()};$('#duoFile').onchange=e=>{const f=e.target.files&&e.target.files[0];if(f)duoSet(f)};$('#duoOff').onclick=duoClear;
 $('#duoSync').oninput=e=>{DUO.off=+e.target.value/1000;$('#duoSyncV').textContent=e.target.value+' ms'};
-async function recOpen(){if(!song){toast('Apri prima un brano');return}if(R.duo)A.muted=true;
+async function recOpen(){if(!song){toast('Apri prima un brano');return}setTimeout(()=>{try{rsSum()}catch(e){}},400);if(R.duo)A.muted=true;
   if(!navigator.mediaDevices||!window.MediaRecorder){toast(window.self!==window.top?'Qui la fotocamera è bloccata: apri Pure Voltage dal suo indirizzo web':'Questo browser non permette di registrare video');return}
   pause();if(stems.vocals&&gains.vocals.vol>.3&&!gains.vocals.mute)preset('karaoke');
   ['Mus','Voc','Lat'].forEach(k=>{const v=prefGet('rec'+k);if(v!=null)$('#recM'.slice(0,4)+k).value=v});
@@ -3261,8 +3284,8 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   R.vchunks=[];R.vrec=null;try{const at=R.vdest?R.vdest.stream.getAudioTracks():R.stream.getAudioTracks();if(at.length){const vm=['audio/webm;codecs=opus','audio/mp4','audio/webm'].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m));R.vrec=new MediaRecorder(new MediaStream(at),vm?{mimeType:vm,audioBitsPerSecond:256000}:{audioBitsPerSecond:256000});R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
   R.vDec=R.mBuf=R.vAi=R.lagC=null;R.trRec=tr;R.duoRec=R.duo&&DUO.blob?{blob:DUO.blob,off:DUO.off}:null;R.lagMan=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
   try{const vt2=Q().raw?R.stream.getVideoTracks():[];if(vt2.length){R.rawch=[];R.rawrec=new MediaRecorder(new MediaStream(vt2),{videoBitsPerSecond:Q().vbr*1.4});R.rawrec.ondataavailable=e=>{if(e.data&&e.data.size)R.rawch.push(e.data)};R.rawstop=new Promise(ok=>R.rawrec.onstop=ok)}}catch(e){R.rawrec=null}
-  R.startSong=now();if(R.rawrec)R.rawrec.start(1000);if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').textContent='■ Stop';$('#recGo').classList.add('stop');A.addEventListener('playing',recGuideStart,{once:true});play()}
-function recStop(){if(!R.on)return;R.on=false;recGuideOff();$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}try{if(R.rawrec)R.rawrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').textContent='● Registra';$('#recGo').classList.remove('stop')}
+  R.startSong=now();if(R.rawrec)R.rawrec.start(1000);if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').setAttribute('aria-label','Ferma');$('#recGoL').textContent='Stop';$('#recGo').classList.add('stop');A.addEventListener('playing',recGuideStart,{once:true});play()}
+function recStop(){if(!R.on)return;R.on=false;recGuideOff();$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}try{if(R.rawrec)R.rawrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').setAttribute('aria-label','Registra');$('#recGoL').textContent='Registra';$('#recGo').classList.remove('stop')}
 A.addEventListener('ended',()=>{if(R.on)recStop()});
 function recName(){const ext=((R.blob&&R.blob.type)||R.mime||'').includes('mp4')?'mp4':'webm';const d=new Date();const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'.'+String(d.getMinutes()).padStart(2,'0');return safeName((song.artist?song.artist+' - ':'')+(song.title||'Brano'))+' - Pure Voltage '+ds+'.'+ext}
 async function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});R.orig=R.blob;R.voiceBlob=null;if(R.rawrec){await R.rawstop;R.raw=new Blob(R.rawch,{type:R.rawrec.mimeType||'video/webm'})}stOnFinish();if(R.vrec){await R.vstop;R.voiceBlob=new Blob(R.vchunks,{type:R.vrec.mimeType||'audio/webm'})}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
@@ -3740,7 +3763,7 @@ $('#recAgain').onclick=()=>{$('#recDone').hidden=true;$('#recPlay').pause();DR_C
 let DR_CUR=null;
 const drIndex=async()=>{try{return(await setGet('drafts'))||[]}catch(e){return[]}};
 const drPutIdx=L=>setPut('drafts',L);
-async function drCount(){const L=await drIndex();$('#recDraftsN').textContent=L.length?'('+L.length+')':''}
+async function drCount(){const L=await drIndex();$('#recDraftsN').textContent=L.length?String(L.length):''}
 async function drThumb(){try{const v=$('#recPlay');if(!v.videoWidth)return null;const c=document.createElement('canvas');c.width=108;c.height=192;const g=c.getContext('2d');const s=Math.max(108/v.videoWidth,192/v.videoHeight);g.drawImage(v,(108-v.videoWidth*s)/2,(192-v.videoHeight*s)/2,v.videoWidth*s,v.videoHeight*s);return c.toDataURL('image/jpeg',.7)}catch(e){return null}}
 async function drSave(quiet){if(!R.orig||!song){toast('Non c\'è una registrazione da salvare');return}const id=DR_CUR||('dr'+Date.now());
   const data={id,songId:song.id,title:song.title||'',artist:song.artist||'',orig:R.orig,raw:R.raw||null,voice:R.voiceBlob||null,mime:R.mime||'',startSong:R.startSong||0,trRec:R.trRec||0,
@@ -3771,6 +3794,13 @@ $('#drDel').onclick=async()=>{if(!DR_CUR||!confirm('Elimino questa bozza?'))retu
 drCount();
 
 $('#recGo').onclick=()=>R.on?recStop():recStart();
+/* Registra: impostazioni in due finestre a discesa (una aperta alla volta) con il riassunto delle scelte */
+{const secs=[$('#rsAudio'),$('#rsImg')];secs.forEach(d=>d.addEventListener('toggle',()=>{if(d.open)secs.forEach(x=>{if(x!==d)x.open=false})}));
+  const on=sel=>{const b=$(sel+' button.on');return b?b.textContent.trim():''};
+  window.rsSum=function(){try{const v=on('#recVox');$('#rsAudioS').textContent=['Voce originale: '+(v||'No'),K.duo?'duetto':'una voce',$('#recTrVal').textContent,$('#recBase').checked?'base nel video':'senza base'].join(' · ');
+    const bg=$('#recBgS button.on .bgl');$('#rsImgS').textContent=['Qualità '+(on('#recQ')||'normale').toLowerCase(),'trucco '+(on('#recBeauty')||'No').toLowerCase(),'sfondo '+(bg?bg.textContent.toLowerCase():'vero'),$('#recTxt').checked?'con testo':'senza testo'].join(' · ')}catch(e){}};
+  $('#recBar').addEventListener('click',()=>setTimeout(rsSum,30));$('#recBar').addEventListener('change',()=>setTimeout(rsSum,30));}
+
 {const rt=n=>{if(R.on){toast('Cambia la tonalità prima di registrare');return}setTr(n);R.guideBuf=null;if(tr)toast('Base in tonalità '+$('#recTrVal').textContent+': il video userà questa')};$('#recTrDown').onclick=()=>rt(tr-1);$('#recTrUp').onclick=()=>rt(tr+1);$('#recTrZero').onclick=()=>rt(0)}
 $('#recX').onclick=recClose;$('#recHome').onclick=recClose;
 $('#recFlip').onclick=async()=>{if(R.on)return;R.facing=R.facing==='user'?'environment':'user';try{await recCamera()}catch(e){toast('Non riesco a cambiare fotocamera')}};
