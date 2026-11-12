@@ -180,6 +180,10 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .rdgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.rdgrid .chip{width:100%;justify-content:center;min-height:48px;margin:0}.rdgrid .rdwide{grid-column:1/-1}.rdgrid [hidden]{display:none!important}
 .rdsub{grid-template-columns:repeat(auto-fit,minmax(118px,1fr))}.rdsub .chip{min-height:46px;font-size:15px}
 .rdgrid .chip{display:flex;align-items:center;gap:10px;border-radius:16px!important;font-weight:700}.rdgrid .chip .ico{width:22px;height:22px;flex:none}.rdgrid .chip:not(.pri) .ico{color:var(--stage-hi)}.rdgrid #drDel .ico{color:#ff7a70}.rdsave #drInfo{text-align:center}
+.cvplay{display:grid;gap:8px;margin-bottom:10px}.cvplay video{width:100%;max-height:55vh;border-radius:12px;background:#000}.cvplay[hidden]{display:none}
+.cvlist .slbt.cvbt{grid-template-columns:repeat(2,1fr)!important;min-width:260px}.cvlist .chip{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700}.cvlist .chip .ei{width:18px;height:18px}.cvlist .cvdel .ei{color:#ff7a70}.cvlist li img:not([src]){display:none}.cvlist .cvth{width:54px;height:96px;border-radius:8px;background:#000;display:grid;place-items:center;flex:none;color:var(--stage-hi)}.cvlist .cvth .ei{width:26px;height:26px}@media (max-width:599px){.cvlist .cvth{grid-area:n}}.cvlist .slempty .chip{margin-top:8px}
+#recCloudUp.on{opacity:.75}
+@media (max-width:480px){.rectop .rbtn{min-width:52px;padding:4px 5px;font-size:11.5px}.rectop b{font-size:15px}}
 .drlist li{gap:10px}.drlist .slbt{display:grid!important;grid-template-columns:2fr 1fr!important;gap:6px;min-width:180px}.drlist .slbt>*{min-height:44px;width:100%}.drlist li img{width:54px;height:96px;object-fit:cover;border-radius:8px;background:#000;flex:none}.drlist li::before{display:none}
 @media (max-width:599px){.drlist li{grid-template-columns:54px minmax(0,1fr)!important;grid-template-areas:'n t' 'b b'!important}.drlist li img{grid-area:n}}
 .banks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
@@ -1455,7 +1459,7 @@ themeApply();</script>
   <canvas id="recCv"></canvas>
   <video id="recCam" playsinline muted autoplay></video>
   <div class="recly" id="recLy" hidden><b id="recLy1"></b><span id="recLy2"></span></div>
-  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="rbtn" id="recDrafts" title="Registrazioni da completare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10.5h18" opacity=".6"/></svg><span>Bozze <em id="recDraftsN"></em></span></button><button class="rbtn" id="recFlip" aria-label="Cambia fotocamera"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5a2 2 0 0 1 2-2h1.6L9 4.5h6l1.4 2H18a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M15.2 11.2a3.4 3.4 0 0 0-5.9-.9M8.8 13.8a3.4 3.4 0 0 0 5.9.9"/><path d="M9.2 8.9v1.6h1.6M14.8 16.1v-1.6h-1.6"/></svg><span>Fotocamera</span></button><button class="rbtn" id="recX" aria-label="Torna alla pagina principale"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></svg><span>Home</span></button></div>
+  <div class="rectop"><b id="recTitle">Registra video</b><span class="recrec" id="recDot" hidden>● REC <span id="recTime">0:00</span></span><button class="rbtn" id="recDrafts" title="Registrazioni da completare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10.5h18" opacity=".6"/></svg><span>Bozze <em id="recDraftsN"></em></span></button><button class="rbtn" id="recCloud" title="Video salvati nel cloud: guardali, ricondividili o cancellali"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/><path d="M10.5 11.5v4.5l3.8-2.25z" fill="currentColor" stroke="none"/></svg><span>Cloud <em id="recCloudN"></em></span></button><button class="rbtn" id="recFlip" aria-label="Cambia fotocamera"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5a2 2 0 0 1 2-2h1.6L9 4.5h6l1.4 2H18a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M15.2 11.2a3.4 3.4 0 0 0-5.9-.9M8.8 13.8a3.4 3.4 0 0 0 5.9.9"/><path d="M9.2 8.9v1.6h1.6M14.8 16.1v-1.6h-1.6"/></svg><span>Fotocamera</span></button><button class="rbtn" id="recX" aria-label="Torna alla pagina principale"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></svg><span>Home</span></button></div>
   <div class="recbar" id="recBar">
    <div class="recsets">
    <details class="rsec" id="rsAudio"><summary><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span class="rst"><b>Audio</b><small id="rsAudioS"></small></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="rsbody">
@@ -1550,6 +1554,7 @@ themeApply();</script>
         <button class="chip pri rdwide" id="recSave"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/></svg><span>Salva sul telefono</span></button>
         <button class="chip" id="recShare" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/></svg><span>Condividi</span></button>
         <button class="chip" id="recFolder" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 11v5M9.5 13.5h5"/></svg><span>Salva nella cartella</span></button>
+        <button class="chip" id="recCloudUp"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/><path d="M12 16v-5.5M9.6 12.6 12 10.2l2.4 2.4"/></svg><span>Salva nel cloud</span></button>
       </div>
       <div class="rdgrid rdsub">
         <button class="chip" id="drSave"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h11a1 1 0 0 1 1 1v16l-6.5-4-6.5 4v-16a1 1 0 0 1 1-1z"/></svg><span>Salva bozza</span></button>
@@ -1620,6 +1625,13 @@ themeApply();</script>
   <p class="snote">Le registrazioni restano qui finché non le elimini: riaprile per cambiare effetti, sfondo e sincronia e creare il video finale quando vuoi.</p>
   <ol class="sllist drlist" id="drList"></ol>
   <p class="snote" id="drSpace"></p>
+</div></div>
+<div class="ov" id="ovCloudV" hidden><div class="sheet slsheet">
+  <div class="slhead"><h3>☁️ Video nel cloud</h3><button class="mini" data-close>Chiudi</button></div>
+  <p class="snote" id="cvNote">I video finiti che hai salvato nel cloud: guardali, mandali di nuovo a chi vuoi, scaricali o cancellali. Li ritrovi da qualunque telefono, tablet o PC collegato allo stesso cloud.</p>
+  <div class="cvplay" id="cvPlay" hidden><video id="cvVid" controls playsinline></video><button class="mini" id="cvPlayX">Chiudi il video</button></div>
+  <ol class="sllist drlist cvlist" id="cvList"></ol>
+  <p class="snote" id="cvSpace"></p>
 </div></div>
 <div class="ov" id="ovPed" hidden><div class="sheet"><div class="row"><h3 class="grow" id="pedTitle">🎛 Pedaliera</h3><button class="mini" data-close>Chiudi</button></div><p class="snote">Interruttore per accendere o spegnere, manopole da trascinare su o giù. Si sente subito, anche mentre canti.</p><div class="pdpre" id="pedPre"><label class="field"><span>Preset</span><select class="sel" data-prsel aria-label="Preset dei pedali"></select></label><button class="chip" data-prload>📂 Carica</button><button class="chip pri" data-prsave>💾 Salva preset</button><button class="mini" data-prdel hidden>🗑 Elimina</button><button class="mini" data-prord title="Rimette i pedali nell'ordine classico">↺ Ordine classico</button><button class="mini prauto" data-prbarauto>✨ Adatto al brano</button></div><div class="pboard" id="pedBoard"></div></div></div>
 <div class="ov" id="ovTrAsk" hidden><div class="sheet slsheet">
@@ -2413,6 +2425,9 @@ mic:'<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 
 duet:'<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 19.5a5.5 5.5 0 0 1 11 0M13 19.5a4.5 4.5 0 0 1 8.5-2"/>',
 spark:'<path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>',
 cloud:'<path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/>',
+cloudup:'<path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/><path d="M12 16v-5.5M9.6 12.6 12 10.2l2.4 2.4"/>',
+share:'<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/>',
+down:'<path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/>',
 note:'<path d="M9 18V5l10-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
 phones:'<path d="M3.5 14v-2a8.5 8.5 0 0 1 17 0v2"/><rect x="2.5" y="13.5" width="5" height="7" rx="2"/><rect x="16.5" y="13.5" width="5" height="7" rx="2"/>',
 save:'<path d="M5 3.5h11l3.5 3.5v12a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V5A1.5 1.5 0 0 1 5 3.5z"/><path d="M7.5 3.5v5h8v-5M7.5 20.5v-6h9v6"/>',
@@ -3170,7 +3185,7 @@ const R2MSG={R2NET:'Non riesco a raggiungere il cloud: controlla internet, l\'ID
 const r2Err=e=>R2MSG[e&&e.message]||String(e&&e.message||e);
 async function r2List(prefix){const out=[];let tok='';do{const q={'list-type':'2',prefix,'max-keys':'1000'};if(tok)q['continuation-token']=tok;
     const x=new DOMParser().parseFromString(await (await r2Req('GET','',{query:q})).text(),'application/xml');
-    for(const c of x.getElementsByTagName('Contents'))out.push({key:c.getElementsByTagName('Key')[0].textContent,size:+(c.getElementsByTagName('Size')[0]||{}).textContent||0});
+    for(const c of x.getElementsByTagName('Contents'))out.push({key:c.getElementsByTagName('Key')[0].textContent,size:+(c.getElementsByTagName('Size')[0]||{}).textContent||0,date:Date.parse((c.getElementsByTagName('LastModified')[0]||{}).textContent||'')||0});
     tok=x.getElementsByTagName('IsTruncated')[0]&&x.getElementsByTagName('IsTruncated')[0].textContent==='true'?(x.getElementsByTagName('NextContinuationToken')[0]||{}).textContent||'':''}while(tok);return out}
 /* testo con i dati del brano in testa ([ar:] artista, [ti:] titolo, [al:] album): è la «scheda» che accompagna le tracce */
 function songLrcText(s){return (s.lyr&&s.lyr.length)?s.lyr.map(l=>ts(l.t)+' '+l.s).join('\n'):(s.lyrics||'')}
@@ -3422,14 +3437,14 @@ A.addEventListener('ended',()=>{if(R.on)recStop()});
 function recName(){const ext=((R.blob&&R.blob.type)||R.mime||'').includes('mp4')?'mp4':'webm';const d=new Date();const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'.'+String(d.getMinutes()).padStart(2,'0');return safeName((song.artist?song.artist+' - ':'')+(song.title||'Brano'))+' - Pure Voltage '+ds+'.'+ext}
 async function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});R.orig=R.blob;R.voiceBlob=null;if(R.rawrec){await R.rawstop;R.raw=new Blob(R.rawch,{type:R.rawrec.mimeType||'video/webm'})}stOnFinish();if(R.vrec){await R.vstop;R.voiceBlob=new Blob(R.vchunks,{type:R.vrec.mimeType||'audio/webm'})}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
   $('#recDone').hidden=false;$('#recMsg').textContent='Video pronto ('+(R.blob.size/1048576).toFixed(1)+' MB). Guardalo, poi salvalo o condividilo.';
-  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored);
+  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));cvUpUI();$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored);
   DR_CUR=null;setTimeout(()=>drSave(true).then(()=>{if(DR_CUR)$('#recMsg').textContent+=' Salvato anche nelle 📂 Bozze.'}),600)}
 $('#recSave').onclick=()=>{if(!R.blob)return;if(window.self!==window.top){$('#recMsg').textContent='Qui non si possono salvare file: apri Pure Voltage dal suo indirizzo web.';return}
   const a=document.createElement('a');a.href=URL.createObjectURL(R.blob);a.download=recName();document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);$('#recMsg').textContent='Salvato nella cartella Download del telefono.'};
 $('#recShare').onclick=async()=>{try{await navigator.share({files:[new File([R.blob],recName(),{type:R.blob.type})],title:(song&&song.title)||'Pure Voltage'})}catch(e){if(e&&e.name!=='AbortError')$('#recMsg').textContent='Condivisione non riuscita: prova «Salva sul telefono».'}};
 $('#recFolder').onclick=async()=>{try{if(!await dirReady(true))return;const d=await (await songDirHandle(song)).getDirectoryHandle('Video',{create:true});const fh=await d.getFileHandle(recName(),{create:true});const w=await fh.createWritable();await w.write(R.blob);await w.close();$('#recMsg').textContent='Salvato in «'+[dirHandle.name,...songDirs(song),'Video'].join(' / ')+'».'}catch(e){$('#recMsg').textContent='Non riesco a salvare nella cartella: '+(e.message||e)}};
 /* ---------- dopo la registrazione: voce a tempo e autotune ---------- */
-function recSetUrl(blob){const u=URL.createObjectURL(blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u}
+function recSetUrl(blob){setTimeout(cvUpUI,0);const u=URL.createObjectURL(blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u}
 function monoOf(b){const n=b.length,o=new Float32Array(n);const c=b.numberOfChannels;for(let ch=0;ch<c;ch++){const d=b.getChannelData(ch);for(let i=0;i<n;i++)o[i]+=d[i]/c}return o}
 function envOf(x,sr,hop){const H=Math.round(sr*hop),F=Math.floor(x.length/H),e=new Float32Array(F);for(let f=0;f<F;f++){let s=0;for(let i=f*H;i<f*H+H;i++)s+=x[i]*x[i];e[f]=Math.log(1e-6+Math.sqrt(s/H))}
   const o=new Float32Array(F);for(let f=1;f<F;f++)o[f]=Math.max(0,e[f]-e[f-1]);return o}
@@ -3919,9 +3934,52 @@ async function drOpen(id){const d=await setGet('draft:'+id);if(!d){toast('Bozza 
   stOnFinish();if(d.lagMan!=null){R.lagMan=d.lagMan;lagUI(d.lagMan)}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;
   const u=URL.createObjectURL(R.blob),pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;$('#recDone').hidden=false;
   $('#recMsg').textContent='Bozza riaperta ('+(R.blob.size/1048576).toFixed(1)+' MB): cambia quello che vuoi e premi «Crea il video finale».';
-  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));DR_CUR=id;drUI();stUI()}
+  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));cvUpUI();DR_CUR=id;drUI();stUI()}
 $('#recDrafts').onclick=()=>{if(R.on)return;drList();openOv('#ovDrafts')};
 $('#drSave').onclick=()=>drSave(false);
+/* ===================== VIDEO NEL CLOUD: video finiti salvati su R2, da riprendere, ricondividere o cancellare ===================== */
+const CVP=R2P+'_video/',CV_RX=/\.(mp4|webm)$/i;
+const cvName=k=>k.slice(CVP.length).replace(CV_RX,'');
+function cvUpUI(){const b=$('#recCloudUp');if(!b)return;const done=R.blob&&R.cloudFor===R.blob;b.classList.toggle('on',!!done);b.querySelector('span').textContent=done?'Già nel cloud':'Salva nel cloud'}
+async function cvCount(){if(!r2Ok()){$('#recCloudN').textContent='';return}try{const n=(await r2List(CVP)).filter(o=>CV_RX.test(o.key)).length;$('#recCloudN').textContent=n?String(n):''}catch(e){}}
+async function cvUpload(){if(!R.blob){toast('Non c\'è un video da salvare');return}
+  if(!r2Ok()){toast('Prima collega il cloud: si fa una volta sola');r2Open();return}
+  if(R.cloudFor===R.blob){toast('☁️ Questo video è già nel cloud');return}
+  const b=$('#recCloudUp'),say=t=>$('#recMsg').textContent=t,blob=R.blob,key=CVP+recName();b.disabled=true;
+  try{say('Carico il video nel cloud ('+(blob.size/1048576).toFixed(1)+' MB)… tieni l\'app aperta');
+    await r2Req('PUT',key,{body:blob,ctype:blob.type||'video/mp4'});
+    try{const t=await drThumb();if(t){const tb=await (await fetch(t)).blob();await r2Req('PUT',key.replace(CV_RX,'.jpg'),{body:tb,ctype:'image/jpeg'})}}catch(e){}
+    R.cloudFor=blob;say('☁️ Video salvato nel cloud. Lo ritrovi in «Cloud», in alto.');cvCount()}
+  catch(e){say('Non sono riuscito a salvarlo nel cloud: '+r2Err(e))}finally{b.disabled=false;cvUpUI()}}
+$('#recCloudUp').onclick=cvUpload;
+let CV=[];
+async function cvList(){const ol=$('#cvList');$('#cvSpace').textContent='';
+  if(!r2Ok()){ol.innerHTML='<li class="slempty">Il cloud non è ancora collegato. <button class="chip pri" id="cvConn">Collega il cloud</button></li>';$('#cvConn').onclick=()=>{closeOv($('#ovCloudV'));r2Open()};return}
+  ol.innerHTML='<li class="slempty">Cerco i tuoi video nel cloud…</li>';
+  let all;try{all=await r2List(CVP)}catch(e){ol.innerHTML='<li class="slempty">'+esc(r2Err(e))+'</li>';return}
+  const jpg=new Set(all.filter(o=>/\.jpg$/i.test(o.key)).map(o=>o.key));CV=all.filter(o=>CV_RX.test(o.key)).sort((a,b)=>b.date-a.date);
+  $('#recCloudN').textContent=CV.length?String(CV.length):'';
+  if(!CV.length){ol.innerHTML='<li class="slempty">Nessun video nel cloud. Quando un video è finito premi «Salva nel cloud».</li>';return}
+  const share=!!(navigator.canShare&&navigator.canShare({files:[new File([new Blob(['x'],{type:'video/mp4'})],'v.mp4',{type:'video/mp4'})]}));
+  ol.innerHTML=CV.map((o,i)=>`<li data-cv="${i}">${jpg.has(o.key.replace(CV_RX,'.jpg'))?'<img alt="" data-th="1">':''}<i class="cvth">${EI('video')}</i><span class="slt"><b>${esc(cvName(o.key).replace(/ - Pure Voltage .*$/,''))}</b><small>${o.date?new Date(o.date).toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short'})+' · ':''}${(o.size/1048576).toFixed(1)} MB</small></span>
+    <span class="slbt cvbt"><button class="chip pri" data-cvp>${EI('play')}<span>Guarda</span></button><button class="chip" data-cvs>${EI('share')}<span>${share?'Condividi':'Copia link'}</span></button><button class="chip" data-cvd>${EI('down')}<span>Scarica</span></button><button class="chip cvdel" data-cvx>${EI('trash')}<span>Elimina</span></button></span></li>`).join('');
+  ol.querySelectorAll('[data-cv]').forEach(li=>{const o=CV[+li.dataset.cv],nm=o.key.slice(CVP.length);
+    const img=li.querySelector('img');if(img){img.onload=()=>li.querySelector('.cvth').remove();img.onerror=()=>img.remove();r2Presign('GET',o.key.replace(CV_RX,'.jpg'),3600).then(u=>img.src=u).catch(()=>{});}
+    li.querySelector('[data-cvp]').onclick=async()=>{const v=$('#cvVid');v.src=await r2Presign('GET',o.key,7200);$('#cvPlay').hidden=false;$('#cvPlay').scrollIntoView({block:'nearest'});v.play().catch(()=>{})};
+    li.querySelector('[data-cvs]').onclick=async e=>{const btn=e.currentTarget;
+      if(share){btn.disabled=true;try{toast('Scarico il video per condividerlo…');const b=await (await r2Req('GET',o.key)).blob();
+          await navigator.share({files:[new File([b],nm,{type:/webm$/i.test(nm)?'video/webm':'video/mp4'})],title:'Pure Voltage'})}
+        catch(err){if(err&&err.name!=='AbortError')toast('Condivisione non riuscita: '+r2Err(err))}finally{btn.disabled=false}return}
+      try{const u=await r2Presign('GET',o.key,604800);await navigator.clipboard.writeText(u);toast('🔗 Link copiato: incollalo in un messaggio o in una mail. Funziona per 7 giorni.')}catch(err){toast('Non riesco a copiare il link: '+r2Err(err))}};
+    li.querySelector('[data-cvd]').onclick=async e=>{const btn=e.currentTarget;btn.disabled=true;try{toast('Scarico il video…');const b=await (await r2Req('GET',o.key)).blob();
+        const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=nm;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);toast('Video scaricato nella cartella Download')}
+      catch(err){toast('Download non riuscito: '+r2Err(err))}finally{btn.disabled=false}};
+    li.querySelector('[data-cvx]').onclick=async()=>{if(!confirm('Cancello questo video dal cloud? Non si potrà recuperare.'))return;
+      try{await r2Req('DELETE',o.key);await r2Req('DELETE',o.key.replace(CV_RX,'.jpg')).catch(()=>{});toast('Video cancellato dal cloud');const v=$('#cvVid');if(v.src&&v.src.includes(encodeURIComponent(nm).slice(0,20))){v.pause();$('#cvPlay').hidden=true}cvList()}catch(err){toast('Non riesco a cancellarlo: '+r2Err(err))}}});
+  const tot=CV.reduce((a,o)=>a+o.size,0);$('#cvSpace').textContent=CV.length+(CV.length===1?' video':' video')+', '+(tot/1048576).toFixed(0)+' MB in tutto nel cloud.'}
+$('#cvPlayX').onclick=()=>{const v=$('#cvVid');v.pause();v.removeAttribute('src');v.load();$('#cvPlay').hidden=true};
+$('#recCloud').onclick=()=>{if(R.on)return;$('#cvPlay').hidden=true;cvList();openOv('#ovCloudV')};
+setTimeout(cvCount,1500);
 $('#drDel').onclick=async()=>{if(!DR_CUR||!confirm('Elimino questa bozza?'))return;await drDelete(DR_CUR)};
 drCount();
 
