@@ -669,6 +669,8 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
 .sdock #sRecGoL{font-weight:700;font-size:14px;margin-left:-2px}
 .sdock #sListen.on{background:var(--accent);color:var(--accent-ink)}
 .sdock #sPerf{display:inline-flex;align-items:center;gap:6px}
+@media (max-width:1280px){.sala-top{gap:6px;padding:8px 10px}.sala-top .rbtn{min-width:54px;padding:4px 6px;font-size:11.5px}.sala-top .rbtn .ico{width:20px;height:20px}.sala-top .songpick{flex:1 1 150px!important;max-width:240px!important;min-width:0}.sala-title{font-size:15px}}
+@media (max-width:900px){.sala-top .sala-title{display:none}.sala-top .slat{order:9}}
 .ico.sm{width:17px;height:17px;vertical-align:-3px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.stracks .mini{display:inline-flex;align-items:center;gap:5px}
 
 /* icone al posto delle emoji, in tutta l'app */
@@ -2582,7 +2584,7 @@ const openOv=id=>{const o=$(id),host=ovHost();if(o.parentNode!==host||o!==host.l
 $$('[data-close]').forEach(b=>b.onclick=()=>closeOv(b));
 $$('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o&&!(o.id==='ovLegal'&&prefGet('legal1')!=='1'))o.hidden=true}));
 function legalOpen(){$('#legalX').hidden=prefGet('legal1')!=='1';$('#legalOk').hidden=prefGet('legal1')==='1';openOv('#ovLegal')}
-$('#legalOk').onclick=()=>{prefSet('legal1','1');$('#ovLegal').hidden=true;setTimeout(()=>{firstSetup();if(isMobile&&prefGet('salaInfo1')!=='1')salaInfo(true)},250)};
+$('#legalOk').onclick=()=>{prefSet('legal1','1');$('#ovLegal').hidden=true;setTimeout(()=>{firstSetup();if(isMobile&&!SALA_OK&&prefGet('salaInfo1')!=='1')salaInfo(true)},250)};
 /* primo accesso: dopo le note legali porta a collegare RunPod */
 function firstSetup(){if(rp.key&&rp.ep)return;setSepMode('rp');openSet();const m=$('#setMsg');
   m.innerHTML='<b>Benvenuto in Pure Voltage!</b> Per separare i brani in voce, basso, batteria e chitarra collega il <b>tuo account RunPod</b>: lo fai una volta sola, in circa 30 minuti, seguendo la guida passo passo. Puoi farlo anche più tardi da <b>Impostazioni</b>.<div class="row" style="margin-top:10px"><button class="chip pri" id="fsGuide">Apri la guida di RunPod</button><a class="chip" href="https://runpod.io?ref=71bp02hn" target="_blank" rel="noopener">Non hai RunPod? Crealo qui (bonus&nbsp;5&nbsp;$)</a><button class="mini" id="fsLater">Più tardi</button></div><span class="refnote">Il link per creare l&#39;account è un invito: tu ricevi 5 $ di bonus e Pure Voltage riceve crediti che la aiutano a crescere.</span>';m.hidden=false;
@@ -4114,7 +4116,9 @@ $('#donBanX').onclick=donBanHide;$('#donBanGo').addEventListener('click',()=>set
    SALA PROVE (solo PC): più ingressi, amplificatori NAM, TONE3000,
    registrazione multitraccia, grafico delle tracce, mix ed esportazione
    ===================================================================== */
-const SALA_OK=!isMobile&&!(matchMedia('(pointer:coarse)').matches&&innerWidth<1100);
+/* Sala prove: computer e tablet (iPad, tablet Android); sui telefoni no, lo schermo è troppo piccolo */
+const IS_TAB=isMobile&&Math.min(screen.width,screen.height)>=700;const DEVN=IS_TAB?'tablet':'PC';
+const SALA_OK=!isMobile||IS_TAB;
 const ROLES={voce:'Voce',chitarra:'Chitarra',basso:'Basso',altro:'Altro'};
 const ROLE_COL={voce:TC('#e8c8a6','#6fd8ff'),chitarra:'#7fb4e0',basso:'#9ad08f',altro:'#d39ad6'};
 const SA={ctx:null,devs:[],chans:[],tracks:[],takes:[],cur:-1,rec:null,on:false,base:null,t0:0,timer:0,cal:{},mods:{},nam:null,namLoading:null,view:'rec'};
@@ -4243,16 +4247,17 @@ async function sOpenDevices(){const c=sCtx();await c.resume();
   try{const s=await navigator.mediaDevices.getUserMedia({audio:true});s.getTracks().forEach(t=>t.stop())}catch(e){throw new Error(e&&e.name==='NotAllowedError'?'Serve il permesso per il microfono: consentilo dal lucchetto vicino all\'indirizzo.':'Nessun ingresso audio trovato.')}
   const ds=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='audioinput'&&d.deviceId!=='default'&&d.deviceId!=='communications');
   const seen=new Set(),list=[];for(const d of ds){const k=d.groupId+'|'+d.label;if(seen.has(k))continue;seen.add(k);list.push(d)}
+  if(!list.length)list.push({deviceId:'',label:IS_TAB?'Ingresso del tablet (scheda audio collegata)':'Ingresso del sistema',groupId:''});
   for(const d of SA.devs)try{d.stream.getTracks().forEach(t=>t.stop())}catch(e){}
   SA.devs=[];SA.chans=[];
-  for(const d of list){try{const stream=await navigator.mediaDevices.getUserMedia({audio:{deviceId:{exact:d.deviceId},channelCount:{ideal:2},echoCancellation:false,noiseSuppression:false,autoGainControl:false,latency:0}});
+  for(const d of list){try{const stream=await navigator.mediaDevices.getUserMedia({audio:{...(d.deviceId?{deviceId:{exact:d.deviceId}}:{}),channelCount:{ideal:2},echoCancellation:false,noiseSuppression:false,autoGainControl:false,latency:0}});
       const tr=stream.getAudioTracks()[0],st=tr.getSettings?tr.getSettings():{};const n=Math.max(1,Math.min(2,st.channelCount||1));
       const src=c.createMediaStreamSource(stream),sp=c.createChannelSplitter(2);src.connect(sp);const dev={id:d.deviceId,label:d.label||('Ingresso '+(SA.devs.length+1)),stream,n,lat:st.latency||0};SA.devs.push(dev);
       for(let i=0;i<n;i++){const g=c.createGain();sp.connect(g,i);const an=c.createAnalyser();an.fftSize=2048;g.connect(an);SA.chans.push({dev,i,node:g,an,key:dev.label+'#'+i,name:(n>1?dev.label+' – In '+(i+1):dev.label)})}}
     catch(e){console.warn('dispositivo non apribile',d.label,e)}}
-  $('#sDevInfo').textContent=SA.chans.length?`Ho trovato ${SA.chans.length} ingress${SA.chans.length>1?'i':'o'} su ${SA.devs.length} dispositiv${SA.devs.length>1?'i':'o'}. I browser leggono al massimo 2 canali per dispositivo: se vi servono più ingressi collegate un altro dispositivo o usate la sovraincisione.`:'Nessun ingresso trovato: collega la scheda audio e riapri la Sala prove.';
+  $('#sDevInfo').textContent=SA.chans.length?`Ho trovato ${SA.chans.length} ingress${SA.chans.length>1?'i':'o'} su ${SA.devs.length} dispositiv${SA.devs.length>1?'i':'o'}. I browser leggono al massimo 2 canali per dispositivo: se vi servono più ingressi collegate un altro dispositivo o usate la sovraincisione.`:(IS_TAB?'Nessun ingresso trovato: collega la scheda audio al tablet (vedi «Guida») e riapri la Sala prove.':'Nessun ingresso trovato: collega la scheda audio e riapri la Sala prove.');
   for(const t of SA.tracks)if(!SA.chans.some(ch=>ch.key===t.dev))t.dev=(SA.chans[0]||{}).key||'';sBuildAll();sRender();
-  try{await audResolve(false);if(AE.outId&&c.setSinkId)await c.setSinkId(AE.outId)}catch(e){}if(SA.chans.length)$('#sDevInfo').textContent+=' Le cuffie suonano da: '+(AE.outLabel?devShort(AE.outLabel):'uscita del sistema di Windows')+'. Se non ti senti, collega le cuffie lì e accendi la 🎧 accanto al livello.'}
+  try{await audResolve(false);if(AE.outId&&c.setSinkId)await c.setSinkId(AE.outId)}catch(e){}if(SA.chans.length)$('#sDevInfo').textContent+=' Le cuffie suonano da: '+(AE.outLabel?devShort(AE.outLabel):IS_TAB?'la scheda audio collegata al tablet (o le cuffie del tablet)':'uscita del sistema di Windows')+'. Se non ti senti, collega le cuffie lì e accendi la 🎧 accanto al livello.'}
 const chanOf=t=>SA.chans.find(c=>c.key===t.dev);
 /* ---------- NAM (motore in WebAssembly) ---------- */
 async function sNam(){if(SA.nam)return SA.nam;if(!SA.namLoading)SA.namLoading=(async()=>{let last=null;
@@ -4447,7 +4452,7 @@ const devShort=l=>String(l||'').replace(/^(Predefinito|Default) - /,'').replace(
 function sDevOpts(t){const cur=chanOf(t);const devs=SA.devs.filter(d=>SA.chans.some(c=>c.dev===d));
   const dv=devs.map(d=>`<option value="${esc(d.id)}" ${cur&&cur.dev===d?'selected':''}>${esc(devShort(d.label))}${isIface(d.label)?' 🎛':''}</option>`).join('')||'<option value="">nessun ingresso</option>';
   const dd=cur?cur.dev:devs[0];const cv=SA.chans.filter(c=>c.dev===dd).map(c=>`<option value="${esc(c.key)}" ${cur===c?'selected':''}>In ${c.i+1}</option>`).join('');return{dv,cv}}
-const hearTxt=t=>t.hear!==false?'🎧 Mi sento dal PC':'🎛 Monitor della scheda';
+const hearTxt=t=>t.hear!==false?'🎧 Mi sento dal '+DEVN:'🎛 Monitor della scheda';
 /* cuffia accanto al livello: accende o spegne l'ascolto di quell'entrata in cuffia */
 const hpBtn=t=>`<button class="hp ${t.hear!==false?'on':''}" data-hp="${t.id}" aria-pressed="${t.hear!==false}" title="${t.hear!==false?'Ti senti in cuffia: tocca per spegnere':'In cuffia spento: tocca per sentirti'}"><span>🎧</span><b>${t.hear!==false?'Sì':'No'}</b></button>`;
 function sHearUI(t){const on=t.hear!==false;document.querySelectorAll(`[data-hp="${t.id}"]`).forEach(b=>{b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.title=on?'Ti senti in cuffia: tocca per spegnere':'In cuffia spento: tocca per sentirti';b.querySelector('b').textContent=on?'Sì':'No'});const hb=document.querySelector(`[data-hear="${t.id}"]`);if(hb){hb.classList.toggle('hot',on);hb.textContent=hearTxt(t)}}
@@ -4474,7 +4479,7 @@ function sRender(){try{sStemApply();SA.baseMono=null}catch(e){}
       <button class="mini" data-del="${t.id}" aria-label="Togli ${esc(t.name)}"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <div class="stio"><select class="sel" data-f="devid" aria-label="Scheda audio">${sDevOpts(t).dv}</select><select class="sel" data-f="dev" aria-label="Canale">${sDevOpts(t).cv||'<option value="">–</option>'}</select></div>
     <div class="stmeter"><div class="stvurow"><div class="vu"><i></i><em>–∞ dB</em></div>${hpBtn(t)}</div><div class="sthint">Suona qualche nota per vedere il livello</div></div>
-    <div class="stmon"><button class="mini ${t.hear!==false?'hot':''}" data-hear="${t.id}" title="Acceso: ti senti in cuffia dal PC, con gli effetti. Spento: ti senti con la manopola «Direct Monitor» della scheda audio, senza ritardo (la registrazione avviene comunque).">${hearTxt(t)}</button>
+    <div class="stmon"><button class="mini ${t.hear!==false?'hot':''}" data-hear="${t.id}" title="Acceso: ti senti in cuffia dal ${DEVN}, con gli effetti. Spento: ti senti con la manopola «Direct Monitor» della scheda audio, senza ritardo (la registrazione avviene comunque).">${hearTxt(t)}</button>
       <label class="field"><span>Volume cuffia</span><input type="range" data-f="mon" min="0" max="1.5" step="0.05" value="${t.mon}"></label>
       ${origBtn(t)}</div>
     ${t.role!=='voce'?`<div class="stsnd"><label class="field"><span>🎸 Tono NAM</span><select class="sel" data-snd="amp"></select></label><label class="field"><span>🔈 Cassa IR</span><select class="sel" data-snd="ir"></select></label></div>`:''}
@@ -4784,9 +4789,10 @@ async function salaOpen(){if(!SALA_OK){salaInfo(true);return}if(!song){toast('Ap
   try{await sOpenDevices()}catch(e){$('#sDevInfo').textContent=e.message||String(e)}
   cancelAnimationFrame(sRaf);sRaf=requestAnimationFrame(sMeters);SP.from=0;sStemsUI();sTabUI();cancelAnimationFrame(sFr);sFr=requestAnimationFrame(sFrame);if(prefGet('salaIntro')!=='1')salaInfo(false)}
 function salaClose(){if(SA.on)sRecStop();sListenStop();cancelAnimationFrame(sFr);wvStop();$('#salaOv').hidden=true;document.body.style.overflow='';cancelAnimationFrame(sRaf);for(const d of SA.devs)try{d.stream.getTracks().forEach(t=>t.stop())}catch(e){}SA.devs=[];SA.chans=[];for(const t of SA.tracks)if(t.node){try{t.node.mon.disconnect()}catch(e){}t.node=null}}
-function salaInfo(mobile){if(mobile&&[...document.querySelectorAll('.ov')].some(o=>!o.hidden&&o.id!=='ovSalaInfo')||mobile&&document.getElementById('splash')&&!document.getElementById('splash').hidden&&document.getElementById('splash').isConnected&&getComputedStyle(document.getElementById('splash')).display!=='none'){clearTimeout(salaInfo.w);salaInfo.w=setTimeout(()=>salaInfo(mobile),800);return}$('#salaInfoT').textContent=mobile?'Sala prove: solo su PC':'Benvenuto nella Sala prove';
-  $('#salaInfoB').innerHTML=mobile?'<p>La <b>Sala prove</b> serve per registrare la band con la scheda audio: più ingressi (voce, chitarra, basso), amplificatori <b>NAM</b> e suoni di <b>TONE3000</b>, tracce separate e mix finale.</p><p>Per ora funziona <b>solo sul computer</b> (Windows o Mac, con Chrome o Edge). Sul telefono e sul tablet trovi «Ascolto e studio» e «Video».</p>'
-    :'<ol class="steps"><li><b>Usate le cuffie</b>: con le casse il suono rientra nei microfoni.</li><li><b>«Suona e riconosco»</b>: ogni musicista suona qualche nota e l\'app trova il suo ingresso.</li><li><b>«Taratura ritardo»</b> una volta per scheda audio: avvicina un microfono alle casse, parte un bip e l\'app misura il ritardo al millisecondo.</li><li><b>🎛 Suono</b>: amplificatore NAM e cassa per chitarra e basso (da TONE3000 o da file). Se senti ritardo o gracchi, togli «dal vivo»: l\'amplificatore si applica dopo, con il re-amp.</li><li>All\'inizio della ripresa <b>battete una volta le mani</b>: con «Allinea sul colpo» le tracce combaciano.</li><li>In <b>«Mix e sincronia»</b> trascini le tracce sul grafico, regoli volumi e esporti mix e tracce.</li></ol><p class="snote">Il browser legge al massimo 2 canali per dispositivo audio: per più strumenti collega un altro dispositivo o usa la sovraincisione.</p>';
+const TAB_TIPS='<h4>Sul tablet</h4><ol class="steps"><li><b>Collega la scheda audio prima di aprire la Sala prove.</b> iPad con presa USB-C: cavo USB-C diretto. iPad con presa Lightning: serve l\'adattatore Apple «da Lightning a USB 3 per fotocamere» con il caricatore attaccato. Tablet Android: cavo o adattatore USB-C OTG.</li><li><b>La scheda deve funzionare senza driver</b> («class compliant»): quasi tutte le schede USB recenti, comprese Behringer UMC e Focusrite Scarlett. Se non si accende, il tablet non le dà abbastanza corrente: usa un hub USB alimentato.</li><li><b>Le cuffie vanno nella presa della scheda audio:</b> quando la scheda è collegata, il tablet manda lì il suono. Sul tablet non si può scegliere un\'altra uscita.</li><li>Di solito il tablet vede <b>un ingresso o due alla volta</b>: per più musicisti registrate a turno con la sovraincisione.</li><li>Il ritardo può essere un po\' più alto che sul computer: se ti senti in ritardo, spegni «Mi sento dal tablet» e ascoltati con il <b>Direct Monitor</b> della scheda.</li><li>Senza scheda audio funziona il microfono del tablet, con le cuffie: va bene per la voce.</li></ol>';
+function salaInfo(mobile){if(mobile&&[...document.querySelectorAll('.ov')].some(o=>!o.hidden&&o.id!=='ovSalaInfo')||mobile&&document.getElementById('splash')&&!document.getElementById('splash').hidden&&document.getElementById('splash').isConnected&&getComputedStyle(document.getElementById('splash')).display!=='none'){clearTimeout(salaInfo.w);salaInfo.w=setTimeout(()=>salaInfo(mobile),800);return}$('#salaInfoT').textContent=mobile?'Sala prove: su computer e tablet':'Benvenuto nella Sala prove';
+  $('#salaInfoB').innerHTML=mobile?'<p>La <b>Sala prove</b> serve per registrare la band con la scheda audio: più ingressi (voce, chitarra, basso), amplificatori <b>NAM</b> e suoni di <b>TONE3000</b>, tracce separate e mix finale.</p><p>Funziona sul <b>computer</b> (Windows o Mac, con Chrome o Edge) e sul <b>tablet</b> (iPad o tablet Android). Sul telefono lo schermo è troppo piccolo: qui trovi «Palco» e «Video».</p>'
+    :'<ol class="steps"><li><b>Usate le cuffie</b>: con le casse il suono rientra nei microfoni.</li><li><b>«Suona e riconosco»</b>: ogni musicista suona qualche nota e l\'app trova il suo ingresso.</li><li><b>«Taratura ritardo»</b> una volta per scheda audio: avvicina un microfono alle casse, parte un bip e l\'app misura il ritardo al millisecondo.</li><li><b>🎛 Suono</b>: amplificatore NAM e cassa per chitarra e basso (da TONE3000 o da file). Se senti ritardo o gracchi, togli «dal vivo»: l\'amplificatore si applica dopo, con il re-amp.</li><li>All\'inizio della ripresa <b>battete una volta le mani</b>: con «Allinea sul colpo» le tracce combaciano.</li><li>In <b>«Mix e sincronia»</b> trascini le tracce sul grafico, regoli volumi e esporti mix e tracce.</li></ol><p class="snote">Il browser legge al massimo 2 canali per dispositivo audio: per più strumenti collega un altro dispositivo o usa la sovraincisione.</p>'+(IS_TAB?TAB_TIPS:'');
   openOv('#ovSalaInfo');$('#salaInfoOk').onclick=()=>{closeOv($('#salaInfoOk'));if(!mobile)prefSet('salaIntro','1');else prefSet('salaInfo1','1')}}
 async function salaFull(on){if(on==null)on=!fsEl();if(on)await fsEnter();else if(fsEl())try{await document.exitFullscreen()}catch(e){}salaFullUI()}
 function salaFullUI(){const b=$('#salaFull');b.querySelector('span').textContent=fsEl()?'Riduci':'Schermo intero';b.title=fsEl()?'Esci dallo schermo intero':'Schermo intero';b.hidden=appInstalled()}
@@ -5025,7 +5031,7 @@ t3Return();
 
 $('#t3Key').value=prefGet('t3key')||'';$('#t3Save').onclick=()=>{const v=$('#t3Key').value.trim();if(v&&!/^t3k_pub_/.test(v)){$('#t3St').textContent='Questa non sembra la chiave pubblica: deve iniziare con t3k_pub_ (mai la chiave segreta t3k_cs_).';return}prefSet('t3key',v);$('#t3St').textContent=v?'Chiave salvata. Ora nella Sala prove usa «Scegli su TONE3000».':'Chiave tolta.'};
 $('#t3Box').hidden=!SALA_OK;$('#t3Redir').textContent=T3.redirect;
-if(!TVMODE&&isMobile&&prefGet('legal1')==='1'&&prefGet('salaInfo1')!=='1')setTimeout(()=>salaInfo(true),9500);
+if(!TVMODE&&isMobile&&!SALA_OK&&prefGet('legal1')==='1'&&prefGet('salaInfo1')!=='1')setTimeout(()=>salaInfo(true),9500);
 
 readColors();loadDir();rpLoad();mvLoad();
 (async()=>{if(TVMODE){tvBoot();requestAnimationFrame(frame);return}const last=prefGet('last');let opened=false;
