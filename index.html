@@ -167,9 +167,15 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .slbar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(10px,env(safe-area-inset-bottom,0px));z-index:95;display:flex;align-items:center;gap:6px;max-width:calc(100vw - 20px);padding:6px;border-radius:999px;background:var(--h0a1827);color:#fff;border:1px solid var(--he8c8a6);box-shadow:0 8px 24px rgba(0,0,0,.45)}
 .slbar[hidden]{display:none}.slbar .mini{min-height:42px;background:var(--h16293d);color:#fff;border-color:var(--h26405a)}.slnow{flex:1 1 auto;min-width:0;max-width:52vw;min-height:42px;border:0;background:transparent;color:#fff;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;padding:0 6px}
 .slbar.count .slnow{color:var(--he8c8a6)}
-#palco .slbar{position:absolute;z-index:30;padding:4px;max-width:calc(100% - 20px)}#palco .slbar #slPrev,#palco .slbar #slNext{display:none}#palco .slbar .mini,#palco .slnow{min-height:38px}#palco .slnow{max-width:none}
+/* scaletta ferma sotto (o accanto) alla scelta del brano, non più volante */
+.hsong .slbar{position:static;transform:none;left:auto;bottom:auto;z-index:auto;grid-column:1/-1;max-width:none;border-radius:14px;box-shadow:none;background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--fg);border:1px solid color-mix(in srgb,var(--accent) 50%,transparent);padding:5px}
+.hsong .slnow{max-width:none;color:var(--fg);text-align:left}.hsong .slbar .mini{background:var(--raise);color:var(--fg);border-color:var(--line)}.hsong .slbar.count .slnow{color:var(--accent)}
+#bScal.on{border-color:var(--accent);color:var(--accent)}
+.pnmw{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}.psl{font-family:Figtree,system-ui;font-size:12.5px;font-weight:600;color:var(--stage-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.psl[hidden]{display:none}
+.hsong #songPickBtn{grid-column:1;grid-row:1}.hsong #bScal{grid-column:2;grid-row:1}.hsong .slbar{grid-row:2;grid-column:1/-1}
+@media (min-width:1200px){.hsong{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto}.hsong #songPickBtn{grid-column:1/3}.hsong .slbar{grid-row:1;grid-column:2}.hsong .slbar:not([hidden])~#songPickBtn,.hsong:has(.slbar:not([hidden])) #songPickBtn{grid-column:1}.hsong #bScal{grid-column:3}}
 .pbtn.round.slb{border-color:var(--stage-hi);color:var(--stage-hi)}.pbtn.round.slb:disabled{opacity:.3}
-.salaov:not([hidden])~.slbar,.salaov.perf~.slbar{bottom:auto;top:64px}
+
 .drrow{justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
 .rdgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.rdgrid .chip{width:100%;justify-content:center;min-height:48px;margin:0}.rdgrid .rdwide{grid-column:1/-1}.rdgrid [hidden]{display:none!important}
 .rdsub{grid-template-columns:repeat(auto-fit,minmax(118px,1fr))}.rdsub .chip{min-height:44px;font-size:15px}.rdsave #drInfo{text-align:center}
@@ -594,7 +600,7 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
   .pal-top{padding-block:6px}
   .pal-bar{flex-wrap:nowrap;flex-direction:row;align-items:center;padding-block:6px}
   .pal-bar .pbtn.round{width:42px;height:42px}.pal-bar .pbtn.round.main{width:50px;height:50px}
-  .ptools{display:flex;margin-left:auto}.ptool{min-width:58px;min-height:44px;gap:1px;font-size:11px}.ptool i{font-size:17px}
+  .ptools{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));flex:1 1 auto;min-width:0;margin-left:6px;gap:4px}.ptool{min-width:0;min-height:44px;gap:1px;font-size:10.5px;padding:3px 1px}.ptool span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ptool i{font-size:17px}
 }
 .pseg{display:inline-flex;align-items:center;gap:6px}
 .pseg span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--stage-dim)}
@@ -751,6 +757,7 @@ themeApply();</script>
       <div class="nowsong" id="nowSong" hidden><b id="sTitle">—</b><span id="sArtist"></span><button class="mini tgbtn" id="bTag" title="Modifica titolo, artista e testo">✏️</button></div>
         <button class="chip pri" id="bLoadSong" hidden>Carica brano</button>
         <button class="sel songpick pkbtn" id="songPickBtn" data-pk="main" aria-haspopup="dialog">🎵 Scegli un brano…</button><select class="sel songpick" id="songPick" hidden aria-hidden="true" tabindex="-1"><option value="">📚 Scegli un brano…</option></select>
+      <div class="slbar" id="slBar" hidden><button class="mini" id="slPrev" aria-label="Brano precedente della scaletta">⏮</button><button class="slnow" id="slNow" title="Apri la scaletta"></button><button class="mini" id="slNext" aria-label="Brano successivo della scaletta">⏭ Prossimo</button></div>
       <button class="chip hscal" id="bScal" title="Scaletta dei brani da suonare uno dopo l'altro"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="m8 9 1.2 1.2L11.5 8M13 9.3h3.5M8 14l1.2 1.2 2.3-2.2M13 14.3h3.5"/></svg><span>Scaletta</span></button>
     </div>
     <div class="transport">
@@ -830,7 +837,7 @@ themeApply();</script>
 <div id="palco" hidden>
   <div class="pal-top">
     <button class="pbtn pico" id="pX" aria-label="Torna alla pagina principale" title="Pagina principale">🏠</button>
-    <button class="pal-name" id="pSong" title="Cambia brano" aria-label="Cambia brano"><span class="pnm" id="palName"></span><span class="pdd" aria-hidden="true">▾</span></button>
+    <button class="pal-name" id="pSong" title="Cambia brano" aria-label="Cambia brano"><span class="pnmw"><span class="pnm" id="palName"></span><small class="psl" id="palSl" hidden></small></span><span class="pdd" aria-hidden="true">▾</span></button>
     <button class="pbtn pico" id="pSm" aria-label="Testo più piccolo" title="Testo più piccolo">A−</button><button class="pbtn pico" id="pLg" aria-label="Testo più grande" title="Testo più grande">A+</button>
     <button class="pbtn pico" id="pCast" aria-label="Trasmetti sul TV" title="Trasmetti sul TV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></button>
   </div>
@@ -1487,10 +1494,11 @@ themeApply();</script>
   <div class="slfoot">
     <div class="sladd"><select class="sel" id="slAdd" aria-label="Aggiungi un brano alla scaletta"></select><button class="mini" id="slAddAll" title="Mette in scaletta tutta la libreria">+ Tutti</button></div>
     <label class="rowchk"><input type="checkbox" id="slAuto"> Alla fine passa da solo al prossimo (5 s)</label>
+    <button class="chip" id="slStop" hidden>⏹ Smetti di seguire la scaletta</button>
     <button class="chip pri" id="slGo">▶ Suona dal primo</button>
   </div>
 </div></div>
-<div class="slbar" id="slBar" hidden><button class="mini" id="slPrev" aria-label="Brano precedente">⏮</button><button class="slnow" id="slNow"></button><button class="mini" id="slNext" aria-label="Brano successivo">⏭ Prossimo</button><button class="mini" id="slStop" aria-label="Chiudi la scaletta">✕ Chiudi</button></div>
+
 <div class="ov" id="ovR2" hidden><div class="sheet">
   <div class="row"><h3 class="grow">☁️ Collega Cloudflare R2</h3><button class="mini" data-close>Chiudi</button></div>
   <p>Inserisci i dati del tuo spazio R2. Restano solo su questo dispositivo (e nel file «Salva le chiavi in un file»).</p>
@@ -2523,15 +2531,14 @@ async function slGo(id){const t0=Date.now();const ready=()=>song&&song.id===id&&
   while(!ready()){if(Date.now()-t0>30000||!song||song.id!==id)return;await new Promise(z=>setTimeout(z,150))}
   if(!$('#salaOv').hidden){try{if(!SP.on&&!SA.on){SP.from=0;sListen()}}catch(e){}}else{seek(0);play()}}
 /* nel palco la scaletta va sopra la barra dei comandi; ⏮ ⏭ diventano tasti del player */
-function slPlace(){const b=$('#slBar'),pal=$('#palco'),inPal=pal&&!pal.hidden;const host=inPal?pal:document.body;if(b.parentNode!==host)host.appendChild(b);
-  const bar=inPal?pal.querySelector('.pal-bar'):null;b.style.bottom=bar&&bar.offsetHeight?(bar.offsetHeight+8)+'px':'';const d=$('#donBan');if(d&&!d.hidden)donBanPlace(d)}
+function slPlace(){const on=SCL.items.length>0&&SCL.i>=0,ps=$('#palSl');ps.hidden=!on;$('#bScal').classList.toggle('on',on);$('#slStop').hidden=!on;if(on)ps.textContent=$('#slNow').textContent}
 function slBarUI(){const b=$('#slBar');const on=SCL.items.length>0&&SCL.i>=0;b.hidden=!on;$('#pSPrev').hidden=$('#pSNext').hidden=!on;slPlace();if(!on)return;const it=SCL.items[SCL.i];b.classList.remove('count');const nx0=SCL.items[SCL.i+1];$('#slNow').textContent='📋 '+(SCL.i+1)+'/'+SCL.items.length+' · '+(it?it.title:'')+(nx0?'  ·  poi: '+nx0.title:'');$('#slNext').disabled=$('#pSNext').disabled=SCL.i>=SCL.items.length-1;$('#slPrev').disabled=$('#pSPrev').disabled=SCL.i<=0;
-  const nx=SCL.items[SCL.i+1];$('#slNext').title=nx?'Prossimo: '+nx.title:'È l\'ultimo brano'}
-$('#slPrev').onclick=$('#pSPrev').onclick=()=>slPlay(Math.max(0,SCL.i-1));$('#pSNext').onclick=()=>$('#slNext').click();addEventListener('resize',()=>{if(!$('#slBar').hidden)slPlace()});$('#slNext').onclick=()=>{if(SCL.i<SCL.items.length-1)slPlay(SCL.i+1)};$('#slNow').onclick=()=>slOpen();
-$('#slStop').onclick=()=>{clearInterval(SCL.timer);SCL.timer=0;SCL.i=-1;slKeep();slBarUI()};
+  const nx=SCL.items[SCL.i+1];$('#slNext').title=nx?'Prossimo: '+nx.title:'È l\'ultimo brano';slPlace()}
+$('#slPrev').onclick=$('#pSPrev').onclick=()=>slPlay(Math.max(0,SCL.i-1));$('#pSNext').onclick=()=>$('#slNext').click();$('#slNext').onclick=()=>{if(SCL.i<SCL.items.length-1)slPlay(SCL.i+1)};$('#slNow').onclick=()=>{if(SCL.timer){clearInterval(SCL.timer);SCL.timer=0;slBarUI();toast('Passaggio automatico fermato')}else slOpen()};
+$('#slStop').onclick=()=>{clearInterval(SCL.timer);SCL.timer=0;SCL.i=-1;slKeep();slBarUI();toast('Scaletta fermata: la ritrovi in 📋 Scaletta')};
 /* alla fine del brano: prossimo da solo, con 5 secondi per fermarlo */
-function slEnded(){if(!SCL.auto||SCL.i<0||SCL.i>=SCL.items.length-1||SCL.timer)return;let n=5;const b=$('#slBar');b.classList.add('count');const nx=SCL.items[SCL.i+1];$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca ✕ per fermare)';
-  SCL.timer=setInterval(async()=>{n--;if(n>0){$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca ✕ per fermare)';return}clearInterval(SCL.timer);SCL.timer=0;await slPlay(SCL.i+1);setTimeout(()=>{try{if($('#salaOv').hidden)play()}catch(e){}},700)},1000)}
+function slEnded(){if(!SCL.auto||SCL.i<0||SCL.i>=SCL.items.length-1||SCL.timer)return;let n=5;const b=$('#slBar');b.classList.add('count');const nx=SCL.items[SCL.i+1];$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca qui per fermare)';slPlace();
+  SCL.timer=setInterval(async()=>{n--;if(n>0){$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca qui per fermare)';slPlace();return}clearInterval(SCL.timer);SCL.timer=0;await slPlay(SCL.i+1);setTimeout(()=>{try{if($('#salaOv').hidden)play()}catch(e){}},700)},1000)}
 A.addEventListener('ended',slEnded);
 $('#bScal').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
 async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
