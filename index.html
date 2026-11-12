@@ -659,6 +659,17 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
 .recov.recording .recsets,.recov.recording .recgh{display:none!important}.recov.recording .recgo{grid-template-columns:1fr;justify-items:center}.recov.recording .recgo .rechint{display:none}
 .recov.recording .recgo #recGo,.recov.recording .shlbl{grid-column:1}
 @media (orientation:landscape) and (max-height:560px){.recbar{padding:8px 10px!important}.rsec>summary{min-height:48px;padding:6px 10px}.rbtn{min-height:44px;min-width:56px}#recGo.shutter{width:62px;height:62px}#recGo.shutter i{width:44px;height:44px}}
+
+/* ===== Sala prove: stesso stile della pagina principale ===== */
+.sala-top{gap:8px 10px}.sala-top .rbtn{background:var(--raise);border-color:var(--line);color:var(--fg);min-width:72px}.sala-top .rbtn .ico{color:var(--accent)}.sala-top #salaX .ico{color:var(--fg)}
+.sala-top .rbtn:hover,.sic:hover{border-color:var(--accent)}.sala-title{font-size:17px;flex:none;white-space:nowrap;overflow:visible}
+.sic{display:inline-flex;align-items:center;gap:8px}.sic .ico{width:20px;height:20px;flex:none}.chip.sic:not(.pri) .ico{color:var(--accent)}
+.sdock #sRecGo.shutter{width:64px;height:64px;min-width:0;min-height:0;padding:0;border-radius:50%;border:4px solid #fff!important;background:rgba(0,0,0,.3)!important;display:grid;place-items:center;flex:none;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.sdock #sRecGo.shutter i{display:block;width:46px;height:46px;border-radius:50%;background:#e53935;transition:all .2s}.sdock #sRecGo.shutter.stop i{width:24px;height:24px;border-radius:6px}
+.sdock #sRecGoL{font-weight:700;font-size:14px;margin-left:-2px}
+.sdock #sListen.on{background:var(--accent);color:var(--accent-ink)}
+.sdock #sPerf{display:inline-flex;align-items:center;gap:6px}
+.ico.sm{width:17px;height:17px;vertical-align:-3px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.stracks .mini{display:inline-flex;align-items:center;gap:5px}
 @media (prefers-reduced-motion:reduce){.klines{transition:none}.kl{transition:none}.bar.ind i{animation-duration:4s}}
 #splash{position:fixed;inset:0;z-index:200;background:var(--splashbg);display:grid;place-items:center;transition:opacity .6s ease;cursor:pointer}
 #splash.out{opacity:0;pointer-events:none}
@@ -996,13 +1007,14 @@ themeApply();</script>
 <!-- Sala prove (solo PC) -->
 <div id="salaOv" class="salaov" hidden>
   <div class="sala-top">
+    <button class="rbtn" id="salaX" aria-label="Torna alla pagina principale"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></svg><span>Home</span></button>
     <b class="sala-title" id="salaTitle">Sala prove</b>
     <button class="sel songpick pkbtn" id="sSongPickBtn" data-pk="sala" aria-haspopup="dialog">🎵 Scegli un brano…</button><select class="sel songpick" id="sSongPick" hidden aria-hidden="true" tabindex="-1"></select>
     <div class="sala-tabs seg" role="tablist"><button data-sv="rec" class="on">Registra</button><button data-sv="mix">Mix e sincronia</button></div>
     <span class="slat" id="sLat" title="Ritardo tra quando suoni e quando ti senti in cuffia">Ritardo – ms</span>
-    <button class="mini" id="salaFull">⛶ Schermo intero</button>
-    <button class="mini" id="sSetTop">📋 Scaletta</button><button class="mini" id="sTuneTop">🎵 Accordatore</button><button class="mini" id="salaHelp">Come funziona</button>
-    <button class="mini" id="salaX" aria-label="Torna alla pagina principale">🏠 Home</button>
+    <span class="grow"></span>
+    <button class="rbtn" id="sSetTop"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="m8 9 1.2 1.2L11.5 8M13 9.3h3.5M8 14l1.2 1.2 2.3-2.2M13 14.3h3.5"/></svg><span>Scaletta</span></button><button class="rbtn" id="sTuneTop"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M12 17l3.6-6.3"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/><path d="M3 20.5h18"/></svg><span>Accordatore</span></button>
+    <button class="rbtn" id="salaFull"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Schermo intero</span></button><button class="rbtn" id="salaHelp"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9v.5"/><circle cx="12" cy="17" r=".9" fill="currentColor" stroke="none"/></svg><span>Guida</span></button>
   </div>
   <div class="sala-body">
     <!-- ===== REGISTRA ===== -->
@@ -1013,17 +1025,17 @@ themeApply();</script>
           <div class="seg" id="sInst"><button data-i="bass">Basso</button><button data-i="guitar">Chitarra</button></div>
           <div class="seg" id="sMode"><button data-m="notes">Note</button><button data-m="chords">Accordi</button></div>
           <span class="snote" id="sNote"></span><span class="grow"></span>
-          <button class="chip pri" id="sListen">▶ Ascolta e prova</button>
+          <button class="chip pri sic" id="sListen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg><span>Ascolta e prova</span></button>
           <input type="range" id="sPos" min="0" max="1000" value="0" aria-label="Posizione nel brano" style="flex:1 1 220px"><span class="stime" id="sPosT">0:00</span>
         </div>
         <div class="stab"><canvas id="sTab"></canvas></div>
       </div>
       <div class="sbox">
         <div class="row"><h4 class="grow">Musicisti e ingressi</h4>
-          <button class="chip" id="sDetect">🎤 Suona e riconosco</button>
-          <button class="chip prauto" data-prauto="all" title="Per ogni musicista sceglie il preset dei pedali più adatto al brano">✨ Pedali adatti al brano</button>
-          <button class="chip" id="sCal">⏱ Taratura ritardo</button>
-          <button class="chip pri" id="sAdd">+ Aggiungi musicista</button></div>
+          <button class="chip sic" id="sDetect"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/><path d="M2.5 8v4M21.5 8v4M4.5 6v8M19.5 6v8" stroke-width="1.5"/></svg><span>Suona e riconosco</span></button>
+          <button class="chip prauto sic" data-prauto="all" title="Per ogni musicista sceglie il preset dei pedali più adatto al brano"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m12 8 1.3 2.7L16 12l-2.7 1.3L12 16l-1.3-2.7L8 12l2.7-1.3z"/></svg><span>Pedali adatti al brano</span></button>
+          <button class="chip sic" id="sCal"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M9.5 2.5h5M12 2.5v3"/></svg><span>Taratura ritardo</span></button>
+          <button class="chip pri sic" id="sAdd"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 20a6.5 6.5 0 0 1 13 0M19 8v6M16 11h6"/></svg><span>Aggiungi musicista</span></button></div>
         <p class="snote" id="sDevInfo">Collega la scheda audio e premi «Suona e riconosco»: ogni musicista suona qualche nota e l'app trova il suo ingresso.</p>
         <div id="sTracks" class="stracks"></div>
       </div>
@@ -1042,7 +1054,7 @@ themeApply();</script>
       </div>
       <div class="smini" id="sMini"></div>
       <div class="sbox stransport">
-        <button class="big" id="sRecGo">● Registra</button>
+        <button class="shutter" id="sRecGo" aria-label="Registra"><i></i></button><span class="shlbl" id="sRecGoL">Registra</span>
         <button class="chip" id="sRecX" hidden title="Ferma e butta via questa registrazione">✕ Annulla registrazione</button>
         <label class="rowchk" id="sOverL" hidden><input type="checkbox" id="sOver"> Sovraincidi: ascolta la ripresa scelta e aggiungi nuove tracce</label>
         <span class="stime" id="sTime">0:00</span>
@@ -2566,7 +2578,7 @@ A.addEventListener('ended',slEnded);
 $('#bScal').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
 async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
   toast('Apro il brano…');if(id==='demo')await loadDemo();else await openStored(id);
-  if(inSala&&song){$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}try{donBanMaybe()}catch(e){}}
+  if(inSala&&song){$('#salaTitle').textContent='Sala prove';SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}try{donBanMaybe()}catch(e){}}
 async function renderLib(){const all=(await dbAll()).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(a.title||'').localeCompare(b.title||'','it'));const el=$('#songlist');const fsOk=!!window.showDirectoryPicker;
   const row=(id,t,a,tags,stored)=>`<div class="si ${song&&song.id===id?'cur':''}"><div class="meta"><b>${esc(t||'Senza titolo')}</b><small>${esc(a||'')}</small></div>${tags}
     <button class="mini" data-open="${id}">Apri</button>${stored?`<button class="mini" data-tag="${id}" title="Titolo, artista e testo">✏️ Scheda</button><button class="mini" data-exp="${id}">Salva tracce${fsOk?' in cartella':''}</button><button class="mini" data-del="${id}">${delArm===id?'Conferma elimina':'Elimina'}</button>`:''}</div>`;
@@ -4207,8 +4219,8 @@ function sNow(){const c=SA.ctx;if(!c)return SP.from;if(SA.on)return Math.max(0,S
 const sDur=()=>Math.max(1,...Object.values(stems).filter(Boolean).map(b=>b.duration||0));
 async function sListen(){if(SA.on)return;if(SP.on){sListenStop();return}const c=sCtx();await c.resume();const at=c.currentTime+.08;SP.srcs=await sBaseStart(c,at,SP.from);
   if($('#sClick').checked&&CLK2.beats){const m=CLK2.meter;CLK2.beats.forEach((b,i)=>{if(b>=SP.from&&b<SP.from+900)sClickAt(c,at+(b-SP.from),m>0&&((i-CLK2.down)%m+m)%m===0)})}
-  SP.at=at;SP.on=true;$('#sListen').textContent='■ Ferma';SP.srcs[0]&&(SP.srcs[0].onended=()=>{if(SP.on)sListenStop()})}
-function sListenStop(keep){if(!SP.on)return;SP.from=keep?sNow():0;SP.srcs.forEach(s=>{try{s.stop()}catch(e){}});SP.srcs=[];SP.on=false;$('#sListen').textContent='▶ Ascolta e prova'}
+  SP.at=at;SP.on=true;$('#sListen span').textContent='Ferma';$('#sListen').classList.add('on');SP.srcs[0]&&(SP.srcs[0].onended=()=>{if(SP.on)sListenStop()})}
+function sListenStop(keep){if(!SP.on)return;SP.from=keep?sNow():0;SP.srcs.forEach(s=>{try{s.stop()}catch(e){}});SP.srcs=[];SP.on=false;$('#sListen span').textContent='Ascolta e prova';$('#sListen').classList.remove('on')}
 $('#sListen').onclick=sListen;$('#sPos').oninput=e=>{const was=SP.on;if(was)sListenStop(true);SP.from=+e.target.value/1000*sDur();if(was)sListen()};
 $$('#sInst button').forEach(b=>b.onclick=()=>{setInst(b.dataset.i);sTabUI()});$$('#sMode button').forEach(b=>b.onclick=()=>{setTabMode(b.dataset.m);sTabUI()});
 function sTabUI(){$$('#sInst button').forEach(b=>b.classList.toggle('on',b.dataset.i===inst));$$('#sMode button').forEach(b=>b.classList.toggle('on',b.dataset.m===tabMode))}
@@ -4236,10 +4248,10 @@ async function sRecStart(){if(SA.on){sRecStop();return}if(!song){toast('Apri pri
   if(over){for(const tk of over.tracks){if(tk.mute)continue;const s=c.createBufferSource();s.buffer=tk.proc||tk.buf;const g=c.createGain();g.gain.value=tk.vol;s.connect(g);g.connect(SA.out);const off=from+tk.off/1000;if(off>=0)s.start(startAt,off);else s.start(startAt-off,0);SA.srcs.push(s)}}
   const chunks=SA.tapTracks.map(()=>[]);SA.recInfo={tracks:SA.tapTracks.slice(),chunks,from,over:over?SA.cur:-1,startAt};
   SA.tap.port.onmessage=e=>{const d=e.data;if(d.chunks)for(const q of d.chunks)q.forEach((a,i)=>chunks[i].push(a));if(d.end){if(I0.cancel){SA.recInfo=null;return}sRecFinish()}};const I0=SA.recInfo;
-  SA.tap.port.postMessage({cmd:'start',at:startAt});SA.on=true;$('#sRecGo').textContent='■ Stop e tieni';$('#sRecGo').classList.add('stop');$('#sRecX').hidden=false;$('#salaOv').classList.add('recording');
+  SA.tap.port.postMessage({cmd:'start',at:startAt});SA.on=true;$('#sRecGoL').textContent='Stop e tieni';$('#sRecGo').setAttribute('aria-label','Ferma e tieni');$('#sRecGo').classList.add('stop');$('#sRecX').hidden=false;$('#salaOv').classList.add('recording');
   const dur=Math.max(...base.map(b=>b.buf.duration),1)-from;SA.t0=startAt;clearInterval(SA.timer);SA.timer=setInterval(()=>{const el=c.currentTime-SA.t0;$('#sTime').textContent=el<0?'…'+Math.ceil(-el/beat):fmt(el);if(el>dur+1.5)sRecStop()},200);
   $('#sMsg').textContent=cnt?'Conteggio… poi suonate!':'Registrazione in corso'}
-function sRecStop(){if(!SA.on)return;SA.on=false;clearInterval(SA.timer);SA.srcs.forEach(s=>{try{s.stop()}catch(e){}});SA.tap.port.postMessage({cmd:'stop'});$('#sRecGo').textContent='● Registra';$('#sRecGo').classList.remove('stop');$('#sRecX').hidden=true;$('#salaOv').classList.remove('recording');$('#sMsg').textContent=SA.recInfo&&SA.recInfo.cancel?'Registrazione annullata: premi «Registra» per riprovare.':'Preparo la ripresa…';if(SA.recInfo&&SA.recInfo.cancel)$('#sTime').textContent='0:00'}
+function sRecStop(){if(!SA.on)return;SA.on=false;clearInterval(SA.timer);SA.srcs.forEach(s=>{try{s.stop()}catch(e){}});SA.tap.port.postMessage({cmd:'stop'});$('#sRecGoL').textContent='Registra';$('#sRecGo').setAttribute('aria-label','Registra');$('#sRecGo').classList.remove('stop');$('#sRecX').hidden=true;$('#salaOv').classList.remove('recording');$('#sMsg').textContent=SA.recInfo&&SA.recInfo.cancel?'Registrazione annullata: premi «Registra» per riprovare.':'Preparo la ripresa…';if(SA.recInfo&&SA.recInfo.cancel)$('#sTime').textContent='0:00'}
 function sRecCancel(){if(!SA.on)return;if(SA.recInfo)SA.recInfo.cancel=true;sRecStop();toast('Registrazione annullata')}
 function joinF(arr){let n=0;for(const a of arr)n+=a.length;const o=new Float32Array(n);let p=0;for(const a of arr){o.set(a,p);p+=a.length}return o}
 async function sRecFinish(){const I=SA.recInfo,c=sCtx(),sr=c.sampleRate;const prev=I.over>=0?SA.takes[I.over]:null;
@@ -4339,18 +4351,18 @@ function sRender(){try{sStemApply();SA.baseMono=null}catch(e){}
   $('#sTracks').innerHTML=SA.tracks.length?SA.tracks.map(t=>`<div class="strack ${t.arm?'':'unarmed'}" data-tr="${t.id}" style="--tc:${ROLE_COL[t.role]}">
     <div class="sthead"><input class="inp stname" data-f="name" value="${esc(t.name)}" aria-label="Nome">
       <select class="sel" data-f="role" aria-label="Strumento">${Object.entries(ROLES).map(([k,v])=>`<option value="${k}" ${k===t.role?'selected':''}>${ROLE_IC[k]||''} ${v}</option>`).join('')}</select>
-      <button class="mini tuner" data-tune="${t.id}" title="Apri l'accordatore per ${esc(t.name)}">${t.role==='chitarra'||t.role==='basso'?'🎵 –':'🎵'}</button>
+      <button class="mini tuner" data-tune="${t.id}" title="Apri l'accordatore per ${esc(t.name)}">${t.role==='chitarra'||t.role==='basso'?'<svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M12 17l3.6-6.3"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/></svg> –':'<svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M12 17l3.6-6.3"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/></svg>'}</button>
       <label class="recarm ${t.arm?'on':''}" title="Registra questo musicista"><input type="checkbox" data-f="arm" ${t.arm?'checked':''}><i></i>REC</label>
-      <button class="mini" data-del="${t.id}" aria-label="Togli ${esc(t.name)}">✕</button></div>
+      <button class="mini" data-del="${t.id}" aria-label="Togli ${esc(t.name)}"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <div class="stio"><select class="sel" data-f="devid" aria-label="Scheda audio">${sDevOpts(t).dv}</select><select class="sel" data-f="dev" aria-label="Canale">${sDevOpts(t).cv||'<option value="">–</option>'}</select></div>
     <div class="stmeter"><div class="stvurow"><div class="vu"><i></i><em>–∞ dB</em></div>${hpBtn(t)}</div><div class="sthint">Suona qualche nota per vedere il livello</div></div>
     <div class="stmon"><button class="mini ${t.hear!==false?'hot':''}" data-hear="${t.id}" title="Acceso: ti senti in cuffia dal PC, con gli effetti. Spento: ti senti con la manopola «Direct Monitor» della scheda audio, senza ritardo (la registrazione avviene comunque).">${hearTxt(t)}</button>
       <label class="field"><span>Volume cuffia</span><input type="range" data-f="mon" min="0" max="1.5" step="0.05" value="${t.mon}"></label>
-      <button class="mini" data-rig="${t.id}" title="Tutte le opzioni del suono">🎛 Altro</button>${origBtn(t)}</div>
+      <button class="mini" data-rig="${t.id}" title="Tutte le opzioni del suono"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v18M12 3v18M18 3v18"/><rect x="4" y="13" width="4" height="3" rx="1" fill="currentColor"/><rect x="10" y="6" width="4" height="3" rx="1" fill="currentColor"/><rect x="16" y="10" width="4" height="3" rx="1" fill="currentColor"/></svg> Altro</button>${origBtn(t)}</div>
     ${t.role!=='voce'?`<div class="stsnd"><label class="field"><span>🎸 Tono NAM</span><select class="sel" data-snd="amp"></select></label><label class="field"><span>🔈 Cassa IR</span><select class="sel" data-snd="ir"></select></label></div>`:''}
     <div class="knobs">${FXS[t.role].map(([k,l,mn,mx,st])=>`<label class="kn"><input type="range" data-fx="${k}" min="${mn}" max="${mx}" step="${st}" value="${t.rig[k]}" data-def="${defRig(t.role)[k]}"><span class="knob" tabindex="0" role="slider" aria-label="${l}" title="${l}: trascina su o giù · doppio clic per tornare all'inizio"><b></b></span><span>${({Ingresso:'Gain',Compressore:'Comp',Riverbero:'Riverb',Overdrive:'Drive',Volume:'Vol'})[l]||l}</span><em></em></label>`).join('')}</div>
-    <div class="stpeds"><b>🎛 Banchi dei pedali</b><div class="banks">${bankBtns(t)}</div>${pedChips(fxOf(t.rig,t.role),`data-pdt="${t.id}"`)}<button class="mini" data-board="${t.id}">🎛 Manopole e banchi</button></div></div>`).join(''):'<p class="snote">Nessun musicista: premi «+ Aggiungi musicista» o «Suona e riconosco».</p>';
-  $('#sMini').innerHTML=SA.tracks.filter(t=>t.arm).map(t=>`<div data-mm="${t.id}"><div class="mmtop"><span class="mmname">${ROLE_IC[t.role]||''} ${esc(t.name)}</span><span class="vu"><i></i></span>${hpBtn(t)}${origBtn(t)}<button class="mini" data-board="${t.id}" aria-label="Manopole dei pedali di ${esc(t.name)}">🎛</button></div><div class="banks mm">${bankBtns(t,'sm')}</div></div>`).join('');
+    <div class="stpeds"><b>Banchi dei pedali</b><div class="banks">${bankBtns(t)}</div>${pedChips(fxOf(t.rig,t.role),`data-pdt="${t.id}"`)}<button class="mini" data-board="${t.id}"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v18M12 3v18M18 3v18"/><rect x="4" y="13" width="4" height="3" rx="1" fill="currentColor"/><rect x="10" y="6" width="4" height="3" rx="1" fill="currentColor"/><rect x="16" y="10" width="4" height="3" rx="1" fill="currentColor"/></svg> Manopole e banchi</button></div></div>`).join(''):'<p class="snote">Nessun musicista: premi «+ Aggiungi musicista» o «Suona e riconosco».</p>';
+  $('#sMini').innerHTML=SA.tracks.filter(t=>t.arm).map(t=>`<div data-mm="${t.id}"><div class="mmtop"><span class="mmname">${ROLE_IC[t.role]||''} ${esc(t.name)}</span><span class="vu"><i></i></span>${hpBtn(t)}${origBtn(t)}<button class="mini" data-board="${t.id}" aria-label="Manopole dei pedali di ${esc(t.name)}"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v18M12 3v18M18 3v18"/><rect x="4" y="13" width="4" height="3" rx="1" fill="currentColor"/><rect x="10" y="6" width="4" height="3" rx="1" fill="currentColor"/><rect x="16" y="10" width="4" height="3" rx="1" fill="currentColor"/></svg></button></div><div class="banks mm">${bankBtns(t,'sm')}</div></div>`).join('');
   $$('#sTracks .kn').forEach(knobify);
   for(const t of SA.tracks){const el=document.querySelector(`[data-tr="${t.id}"]`);const sel=el.querySelector('[data-f="dev"]');if(t.dev&&chanOf(t))sel.value=t.dev;
     el.querySelector('[data-hear]').onclick=()=>sHearSet(t,t.hear===false);
@@ -4627,8 +4639,8 @@ function sAutoSaveSoon(){}
 async function sView(v){SA.view=v;$$('.sala-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.sv===v));$('#salaRec').hidden=v!=='rec';$('#salaMix').hidden=v!=='mix';
   if(v==='mix'){wvStop();const tk=SA.takes[SA.cur];if(tk&&!SA.baseMono){try{const base=await sBaseBufs(),len=Math.max(...tk.tracks.map(t=>t.buf.duration),1);const oc=new OfflineAudioContext(1,Math.ceil(len*48000),48000);for(const b of base){if(!b.g||b.guide)continue;const s=oc.createBufferSource();s.buffer=b.buf;const g=oc.createGain();g.gain.value=b.g;s.connect(g);g.connect(oc.destination);s.start(0,Math.min(tk.from,b.buf.duration-.01))}SA.baseMono=await oc.startRendering()}catch(e){console.error(e)}}
     WV.pos=0;WV.t0=0;{const tk2=SA.takes[SA.cur];WV.span=tk2?Math.min(30,Math.max(4,Math.max(...tk2.tracks.map(t=>t.buf.duration))+1)):30}sMixRows();wvSelInfo();requestAnimationFrame(wvDraw)}}
-async function salaOpen(){if(!SALA_OK){salaInfo(true);return}if(!song){toast('Apri prima un brano');return}pause();
-  $('#salaOv').hidden=false;document.body.style.overflow='hidden';$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');
+async function salaOpen(){if(!SALA_OK){salaInfo(true);return}if(!song){toast('Apri prima un brano');return}pause();fsEnter().then(salaFullUI);
+  $('#salaOv').hidden=false;document.body.style.overflow='hidden';$('#salaTitle').textContent='Sala prove';
   if(!SA.loaded){sLoad();SA.loaded=true;wvBind()}SA.baseMono=null;sRender();sTakesUI();$('#sOverL').hidden=!SA.takes.length;
   try{await sOpenDevices()}catch(e){$('#sDevInfo').textContent=e.message||String(e)}
   cancelAnimationFrame(sRaf);sRaf=requestAnimationFrame(sMeters);SP.from=0;sStemsUI();sTabUI();cancelAnimationFrame(sFr);sFr=requestAnimationFrame(sFrame);if(prefGet('salaIntro')!=='1')salaInfo(false)}
@@ -4637,9 +4649,10 @@ function salaInfo(mobile){if(mobile&&[...document.querySelectorAll('.ov')].some(
   $('#salaInfoB').innerHTML=mobile?'<p>La <b>Sala prove</b> serve per registrare la band con la scheda audio: più ingressi (voce, chitarra, basso), amplificatori <b>NAM</b> e suoni di <b>TONE3000</b>, tracce separate e mix finale.</p><p>Per ora funziona <b>solo sul computer</b> (Windows o Mac, con Chrome o Edge). Sul telefono e sul tablet trovi «Ascolto e studio» e «Video».</p>'
     :'<ol class="steps"><li><b>Usate le cuffie</b>: con le casse il suono rientra nei microfoni.</li><li><b>«Suona e riconosco»</b>: ogni musicista suona qualche nota e l\'app trova il suo ingresso.</li><li><b>«Taratura ritardo»</b> una volta per scheda audio: avvicina un microfono alle casse, parte un bip e l\'app misura il ritardo al millisecondo.</li><li><b>🎛 Suono</b>: amplificatore NAM e cassa per chitarra e basso (da TONE3000 o da file). Se senti ritardo o gracchi, togli «dal vivo»: l\'amplificatore si applica dopo, con il re-amp.</li><li>All\'inizio della ripresa <b>battete una volta le mani</b>: con «Allinea sul colpo» le tracce combaciano.</li><li>In <b>«Mix e sincronia»</b> trascini le tracce sul grafico, regoli volumi e esporti mix e tracce.</li></ol><p class="snote">Il browser legge al massimo 2 canali per dispositivo audio: per più strumenti collega un altro dispositivo o usa la sovraincisione.</p>';
   openOv('#ovSalaInfo');$('#salaInfoOk').onclick=()=>{closeOv($('#salaInfoOk'));if(!mobile)prefSet('salaIntro','1');else prefSet('salaInfo1','1')}}
-async function salaFull(on){const o=$('#salaOv');if(on==null)on=!o.classList.contains('full');if(on){sView('rec');o.classList.add('full');try{await o.requestFullscreen()}catch(e){}}else{o.classList.remove('full');if(document.fullscreenElement)try{await document.exitFullscreen()}catch(e){}}$('#salaFull').textContent=on?'Esci da schermo intero':'⛶ Schermo intero';$('#kpSala').dataset.ci='';delete $('#kpSala').dataset.ci}
-$('#salaFull').onclick=()=>salaFull();document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&$('#salaOv').classList.contains('full'))salaFull(false)});
-$('#salaX').onclick=()=>{salaFull(false);salaClose()};$('#salaHelp').onclick=()=>salaInfo(false);$$('.sala-tabs button').forEach(b=>b.onclick=()=>sView(b.dataset.sv));
+async function salaFull(on){if(on==null)on=!fsEl();if(on)await fsEnter();else if(fsEl())try{await document.exitFullscreen()}catch(e){}salaFullUI()}
+function salaFullUI(){const b=$('#salaFull');b.querySelector('span').textContent=fsEl()?'Riduci':'Schermo intero';b.title=fsEl()?'Esci dallo schermo intero':'Schermo intero';b.hidden=appInstalled()}
+$('#salaFull').onclick=()=>salaFull();document.addEventListener('fullscreenchange',()=>{if(!$('#salaOv').hidden)salaFullUI()});
+$('#salaX').onclick=()=>salaClose();$('#salaHelp').onclick=()=>salaInfo(false);$$('.sala-tabs button').forEach(b=>b.onclick=()=>sView(b.dataset.sv));
 $('#sAdd').onclick=async()=>{const t=newTrack(SA.tracks.some(x=>x.role==='voce')?(SA.tracks.some(x=>x.role==='chitarra')?(SA.tracks.some(x=>x.role==='basso')?'altro':'basso'):'chitarra'):'voce');const free=SA.chans.find(ch=>!SA.tracks.some(x=>x.dev===ch.key));t.dev=(free||SA.chans[0]||{}).key||'';SA.tracks.push(t);await sBuild(t);sTapBuild();sRender();sSave()};
 $('#sDetect').onclick=sDetect;$('#sCal').onclick=sCalibrate;
 /* ===== accordatore: dal microfono/scheda audio, o dall'ingresso di un musicista in Sala prove ===== */
@@ -4675,12 +4688,12 @@ new MutationObserver(()=>{if($('#ovTune').hidden&&TUNE.on)tuStop()}).observe($('
 $('#sTuneTop').onclick=()=>{const t=SA.tracks.find(x=>x.role==='chitarra'||x.role==='basso');tuneOpen(t||null)};
 (function sDock(){const d=$('.stransport');d.classList.add('sdock');const r1=document.createElement('div'),r2=document.createElement('div');r1.className='sdrow';r2.className='sdrow';
   const tr=document.createElement('span');tr.className='sdtr';tr.innerHTML='Tonalità ';const tv=$('#sTrVal'),og=tv.parentNode;tv.style.minWidth='70px';tr.append($('#sTrDown'),tv,$('#sTrUp'),$('#sTrZero'));og.remove();
-  const pv=document.createElement('button');pv.className='mini';pv.id='sPerf';pv.textContent='🎤 Vista palco';pv.title='Testo e tablatura grandi (si attiva da sola quando registri)';
-  r1.append($('#sListen'),$('#sRecGo'),$('#sRecX'),$('#sTime'),$('#sPosT'),$('#sPos'));r2.append(tr,$('#sClick').closest('label'),$('#sCount').closest('label'),$('#sFromStart').closest('label'),pv,$('#sOverL'),$('#sMsg'));
+  const pv=document.createElement('button');pv.className='mini sic';pv.id='sPerf';pv.innerHTML='<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/></svg><span>Vista palco</span>';pv.title='Testo e tablatura grandi (si attiva da sola quando registri)';
+  r1.append($('#sListen'),$('#sRecGo'),$('#sRecGoL'),$('#sRecX'),$('#sTime'),$('#sPosT'),$('#sPos'));r2.append(tr,$('#sClick').closest('label'),$('#sCount').closest('label'),$('#sFromStart').closest('label'),pv,$('#sOverL'),$('#sMsg'));
   d.prepend(r1,r2);d.append($('#sTakes'));$('#sListen').classList.remove('pri');
   pv.onclick=()=>{SA.perfMan=!SA.perfMan;sPerfUI()};
   const rec=$('#salaRec');rec.append($('.sbrano'),$('#sMini'),d)})();
-function sPerfUI(){const on=!!(SA.on||SA.perfMan);$('#salaOv').classList.toggle('perf',on);$('#sPerf').classList.toggle('hot',on);$('#sPerf').textContent=on?'🎛 Vista preparazione':'🎤 Vista palco'}
+function sPerfUI(){const on=!!(SA.on||SA.perfMan);$('#salaOv').classList.toggle('perf',on);$('#sPerf').classList.toggle('hot',on);$('#sPerf span').textContent=on?'Vista preparazione':'Vista palco'}
 setInterval(()=>{if(!$('#salaOv').hidden){const on=!!(SA.on||SA.perfMan);if($('#salaOv').classList.contains('perf')!==on)sPerfUI()}},250);
 $('#sRecGo').onclick=sRecStart;$('#songPick').onchange=e=>songPickGo(e.target.value);$('#sSongPick').onchange=e=>songPickGo(e.target.value);
 const sTr=async n=>{if(SA.on){toast('Cambia la tonalità prima di registrare');return}const was=SP.on;if(was)sListenStop(true);setTr(n);SA.baseMono=null;$('#sMsg').textContent=tr?'Preparo la base nella nuova tonalità…':'';try{await sourcesFor(tr)}catch(e){}$('#sMsg').textContent=tr?'Base in tonalità '+$('#sTrVal').textContent+': anche la registrazione userà questa.':'';if(was)sListen()};
