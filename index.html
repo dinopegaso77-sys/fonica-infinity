@@ -1493,7 +1493,7 @@ const SL=Object.fromEntries(STEMS.map(s=>[s.k,s.label]));
 /* presentazione all'avvio: si chiude da sola alla fine, toccando lo schermo o con «Salta» */
 {const sp=$('#splash'),v=$('#splashV'),snd=$('#splashSnd');let done=false,tm=0;const fromT3=/[?&](code|error)=/.test(location.search);
   /* aprendo il sito: intro, poi la pagina di presentazione (non per l'app installata, non tornando dalla presentazione, non se l'utente ha scelto di saltarla) */
-  const fromPres=/[?&]app\b/.test(location.search),installed=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  const fromPres=/[?&]app\b/.test(location.search),installed=matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;
   const toPres=!TVMODE&&!fromT3&&!fromPres&&!installed&&(()=>{try{return localStorage.getItem('f8_skipPres')!=='1'}catch(e){return true}})();
   if(fromPres)try{history.replaceState(null,'',location.pathname+location.hash)}catch(e){}
   const end=()=>{if(done)return;done=true;clearTimeout(tm);try{v.pause()}catch(e){}if(toPres){location.replace('presentazione.html');return}sp.classList.add('out');setTimeout(()=>{sp.remove()},700)};
@@ -2243,8 +2243,12 @@ $('#bSyncLy').onclick=()=>startSync('ly');$('#bSyncTab').onclick=()=>startSync('
 /* ================= palco a schermo intero ================= */
 let palOn=false,palTabOn=prefGet('palTab')!=='0';
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+/* schermo intero: il browser mostra il suo avviso ogni volta che si entra, quindi si entra una volta sola (tutta la pagina) e ci si resta;
+   nell'app installata non serve: è già a tutto schermo e l'avviso non compare mai */
+const appInstalled=()=>matchMedia('(display-mode: fullscreen)').matches||matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+async function fsEnter(){if(appInstalled()||fsEl())return;const el=document.documentElement,f=el.requestFullscreen||el.webkitRequestFullscreen;if(!f)return;try{await f.call(el,{navigationUI:'hide'})}catch(e){}}
 async function palOpen(v){palOn=v;$('#palco').hidden=!v;try{pmShow(false)}catch(e){}if(!v){if(LV.on)lvStop();$('#palMic').hidden=true}document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;palLayout();slPlace();
-  try{if(v){const el=$('#palco');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el);try{await screen.orientation.lock('landscape')}catch(e){}}else if(fsEl())await(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
+  try{if(v){await fsEnter();try{await screen.orientation.lock('landscape')}catch(e){}}else{try{screen.orientation.unlock()}catch(e){}}}catch(e){}}
 $('#bPalco').onclick=()=>palOpen(true);$('#pSl').onclick=()=>slOpen();$('#pDuo').onclick=()=>lyrDuoSet(!K.duo);$('#pX').onclick=()=>palOpen(false);
 /* palco a schermo intero: tracce (accese/spente e volume) e scelta del brano senza uscire */
 function pmRender(){const box=$('#pmRows');if(!box)return;box.innerHTML=order.map(k=>{const g=gains[k],on=!g.mute;
@@ -2332,7 +2336,6 @@ $$('#lvRev button').forEach(b=>b.onclick=()=>{LV.rev=+b.dataset.v;if(LV.rg)LV.rg
 
 $('#pInst').onclick=()=>{setInst(inst==='guitar'?'bass':'guitar');$$('.kpanel').forEach(P=>delete P.dataset.ci)};
 $('#pTab').onclick=()=>{palTabOn=!palTabOn;prefSet('palTab',palTabOn?'1':'0');$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;palLayout()};
-document.addEventListener('fullscreenchange',()=>{if(palOn&&!fsEl())palOpen(false)});
 
 /* ================= ciclo di disegno ================= */
 let lastColorT=0;
@@ -2352,7 +2355,7 @@ function frame(){const t=now(),tv=viewT();clickTick();if(performance.now()-LAT.t
 
 /* ================= overlay ================= */
 /* le finestre si aprono sempre in primo piano, anche sopra Palco e Video a schermo intero */
-const ovHost=()=>document.fullscreenElement||document.webkitFullscreenElement||document.body;
+const ovHost=()=>{const f=document.fullscreenElement||document.webkitFullscreenElement;return f&&f!==document.documentElement?f:document.body};
 const openOv=id=>{const o=$(id),host=ovHost();if(o.parentNode!==host||o!==host.lastElementChild)host.appendChild(o);o.hidden=false;const b=$('#donBan');if(b&&!b.hidden)donBanPlace(b)},closeOv=el=>{el.closest('.ov').hidden=true};
 $$('[data-close]').forEach(b=>b.onclick=()=>closeOv(b));
 $$('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o&&!(o.id==='ovLegal'&&prefGet('legal1')!=='1'))o.hidden=true}));
@@ -3165,8 +3168,8 @@ async function recOpen(){if(!song){toast('Apri prima un brano');return}if(R.duo)
   try{const c=ctx();await c.resume();recGraph();await recCamera();$('#recHint').textContent=K.lines.length?'Con le cuffie il risultato è migliore. Premi Registra: parte un conto alla rovescia.':'Questo brano non ha il testo: puoi registrare lo stesso, oppure cercalo prima su LRCLIB.'}
   catch(e){$('#recHint').textContent=e&&e.name==='NotAllowedError'?'Serve il permesso per fotocamera e microfono: consentilo dal lucchetto vicino all\'indirizzo.':window.self!==window.top?'Qui la fotocamera è bloccata: apri Pure Voltage dal suo indirizzo web.':'Non riesco ad aprire la fotocamera: '+(e.message||e)}
   recVoxUI();recLevels();cancelAnimationFrame(R.raf);R.raf=requestAnimationFrame(recDraw);
-  try{const el=$('#recOv');const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f&&!fsEl())await f.call(el)}catch(e){}}
-function recClose(){if(DR_CUR&&R.orig&&!$('#recDone').hidden)drSave(true);if(R.monG)R.monG.gain.value=0;if(R.on)recStop();try{stPrevStop()}catch(e){}try{$('#recPlay').pause()}catch(e){}try{recGuideOff()}catch(e){}try{if(DUO.el)DUO.el.pause()}catch(e){}A.muted=false;cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
+  await fsEnter()}
+function recClose(){if(DR_CUR&&R.orig&&!$('#recDone').hidden)drSave(true);if(R.monG)R.monG.gain.value=0;if(R.on)recStop();try{stPrevStop()}catch(e){}try{$('#recPlay').pause()}catch(e){}try{recGuideOff()}catch(e){}try{if(DUO.el)DUO.el.pause()}catch(e){}A.muted=false;cancelAnimationFrame(R.raf);if(R.stream){R.stream.getTracks().forEach(t=>t.stop());R.stream=null}$('#recOv').hidden=true;document.body.style.overflow='';pause();try{screen.orientation.unlock()}catch(e){}}
 function recMime(){for(const m of ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=h264,opus','video/mp4','video/webm;codecs=vp8,opus','video/webm','video/webm;codecs=vp9,opus'])if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))return m;return ''}
 /* voce guida separata: in cuffia sì, nella registrazione no */
 async function recGuideOn(){R.guideBuf=null;R.guideRec=false;if(!stems.vocals)return;const g=gains.vocals;if(g.mute||g.vol<=0||g.vol>=.9)return;
@@ -3869,7 +3872,7 @@ if(DONATE_URL){['#bDonate','#bDonate2'].forEach(s=>{const a=$(s);a.href=DONATE_U
 const DONB={ready:false,t:0};setTimeout(()=>DONB.ready=true,8000);
 function donBanHide(){clearTimeout(DONB.t);const b=$('#donBan');b.hidden=true;if(b.parentNode!==document.body)document.body.appendChild(b)}
 /* il banner va sempre in primo piano: dentro lo schermo intero attivo (palco, video, sala) e sopra la barra dei comandi del palco */
-function donBanPlace(b){const pal=$('#palco'),fs=document.fullscreenElement||document.webkitFullscreenElement,host=fs||(pal&&!pal.hidden?pal:document.body);if(b.parentNode!==host||b!==host.lastElementChild)host.appendChild(b);
+function donBanPlace(b){const pal=$('#palco'),fs0=document.fullscreenElement||document.webkitFullscreenElement,fs=fs0===document.documentElement?null:fs0,host=fs||(pal&&!pal.hidden?pal:document.body);if(b.parentNode!==host||b!==host.lastElementChild)host.appendChild(b);
   const bar=host===pal||host.contains&&host.contains(pal)&&!pal.hidden?pal.querySelector('.pal-bar'):null;const sl=$('#slBar'),slh=bar&&sl&&!sl.hidden&&sl.parentNode===pal?sl.offsetHeight+8:0;b.style.bottom=bar&&bar.offsetHeight?(bar.offsetHeight+12+slh)+'px':''}
 document.addEventListener('fullscreenchange',()=>{const b=$('#donBan');if(b&&!b.hidden)donBanPlace(b)});
 function donBanMaybe(){if(!DONATE_URL||!DONB.ready)return;try{if(R&&R.on)return}catch(e){}
