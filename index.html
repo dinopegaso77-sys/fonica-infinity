@@ -112,7 +112,9 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .rigslot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0}.rigslot b{min-width:120px}.rigslot span{flex:1;min-width:120px;color:var(--steel)}
 .rigslot label.chip{cursor:pointer}
 .r2cors{white-space:pre-wrap;word-break:break-all;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;font:12px/1.4 var(--f-mono);max-height:180px;overflow:auto}
-.rigfx{gap:10px 16px}.rigfx .field{min-width:150px;flex:1 1 150px}
+.rigfx{gap:10px 16px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 10px}@media (max-width:520px){.tgrid{grid-template-columns:1fr}}.tgrid .field{min-width:0}#tgLyr{width:100%;min-height:180px;font-family:var(--f-mono,monospace);font-size:14px;line-height:1.5;resize:vertical}
+.tgacts .chip{min-height:46px}.tgbtn{margin-left:6px;padding:2px 8px;min-height:30px}#tgList .si{cursor:pointer}.rigfx .field{min-width:150px;flex:1 1 150px}
 .t3credit{display:flex;flex-direction:column;gap:4px}.t3c{display:flex;align-items:center;gap:8px;font-size:14px}.t3c img{width:26px;height:26px;border-radius:50%}
 @media (max-width:1200px){.smrow{grid-template-columns:1fr 1fr 1fr}}
 /* ===== Sala prove: studio scuro ===== */
@@ -697,7 +699,7 @@ function themeApply(){document.documentElement.dataset.theme='pv';const l=docume
   const v=document.getElementById('splashV');if(v&&!v.dataset.set){v.dataset.set=1;v.src='intro-pv.mp4'}if(window.recLogo)recLogo.src=THEME_LOGO.pv}
 themeApply();</script>
       <div class="song"><p class="tagline">Pure Voltage è la tua saletta prove: divertiti a cantare e suonare i tuoi brani preferiti.</p>
-        <div class="nowsong" id="nowSong" hidden><b id="sTitle">—</b><span id="sArtist"></span></div>
+        <div class="nowsong" id="nowSong" hidden><b id="sTitle">—</b><span id="sArtist"></span><button class="mini tgbtn" id="bTag" title="Modifica titolo, artista e testo">✏️</button></div>
         <button class="chip pri" id="bLoadSong" hidden>Carica brano</button>
         <button class="sel songpick pkbtn" id="songPickBtn" data-pk="main" aria-haspopup="dialog">🎵 Scegli un brano…</button><select class="sel songpick" id="songPick" hidden aria-hidden="true" tabindex="-1"><option value="">📚 Scegli un brano…</option></select></div>
     </div>
@@ -874,6 +876,20 @@ themeApply();</script>
 </div></div>
 
 <!-- Libreria -->
+<div class="ov" id="ovTag" hidden><div class="sheet">
+  <div class="row"><h3 class="grow">✏️ Scheda del brano</h3><button class="mini" data-close>Chiudi</button></div>
+  <div class="tgrid">
+    <label class="field"><span>Titolo</span><input class="inp" id="tgTitle" autocomplete="off"></label>
+    <label class="field"><span>Artista</span><input class="inp" id="tgArtist" autocomplete="off" placeholder="Se il brano è tuo, scrivi il tuo nome"></label>
+    <label class="field"><span>Album</span><input class="inp" id="tgAlbum" autocomplete="off"></label>
+    <label class="field"><span>Anno</span><input class="inp" id="tgYear" autocomplete="off" inputmode="numeric" maxlength="4"></label>
+  </div>
+  <div class="row"><button class="chip" id="tgFind">🔎 Non sai l'artista? Cercalo</button></div>
+  <div id="tgList"></div>
+  <label class="field"><span>Testo · i tempi come [00:12.34] all'inizio delle righe tengono il testo a tempo</span><textarea class="inp" id="tgLyr" rows="9" spellcheck="false"></textarea></label>
+  <p class="status" id="tgMsg"></p>
+  <div class="row tgacts"><button class="chip pri" id="tgSave">💾 Salva</button><button class="chip" id="tgMp3">⬇ Scarica l'MP3 con titolo, artista e testo</button></div>
+</div></div>
 <div class="ov" id="ovLib" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Libreria</h3><button class="mini" data-close>Chiudi</button></div>
   <div class="sepmsg" id="originWarn" hidden></div>
@@ -2478,10 +2494,11 @@ async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add
   if(inSala&&song){$('#salaTitle').textContent='Sala prove · '+(song.title||'')+(song.artist?' · '+song.artist:'');SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}try{donBanMaybe()}catch(e){}}
 async function renderLib(){const all=(await dbAll()).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(a.title||'').localeCompare(b.title||'','it'));const el=$('#songlist');const fsOk=!!window.showDirectoryPicker;
   const row=(id,t,a,tags,stored)=>`<div class="si ${song&&song.id===id?'cur':''}"><div class="meta"><b>${esc(t||'Senza titolo')}</b><small>${esc(a||'')}</small></div>${tags}
-    <button class="mini" data-open="${id}">Apri</button>${stored?`<button class="mini" data-exp="${id}">Salva tracce${fsOk?' in cartella':''}</button><button class="mini" data-del="${id}">${delArm===id?'Conferma elimina':'Elimina'}</button>`:''}</div>`;
+    <button class="mini" data-open="${id}">Apri</button>${stored?`<button class="mini" data-tag="${id}" title="Titolo, artista e testo">✏️ Scheda</button><button class="mini" data-exp="${id}">Salva tracce${fsOk?' in cartella':''}</button><button class="mini" data-del="${id}">${delArm===id?'Conferma elimina':'Elimina'}</button>`:''}</div>`;
   el.innerHTML=`<div class="si addrow"><div class="meta"><b>Carica i brani già separati</b><small>Dalla cartella delle tracce (Artista / Titolo), con il loro testo</small></div><button class="chip pri" id="libAdd">Carica</button></div>`+(all.length?'':'<p class="status">La libreria è vuota: premi «Aggiungi brano» in alto per separare il tuo primo brano.</p>')+(()=>{let last=null;return all.map(s=>{const a=s.artist||'Artista sconosciuto';const hd=a!==last?`<div class="lbl" style="margin-top:8px">${esc(a)}</div>`:'';last=a;return hd+row(s.id,s.title,'',`<span class="tag">${Object.keys(s.stems).map(k=>SL[k]).join(' · ')}</span>${(s.lyr&&s.lyr.length)||s.lyrics?'<span class="tag good">con testo</span>':''}`,true)}).join('')})();
   $('#libAdd').onclick=()=>{closeOv($('#libAdd'));openAdd()};songPickFill();
   el.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{closeOv(b);b.dataset.open==='demo'?loadDemo():openStored(b.dataset.open)});
+  el.querySelectorAll('[data-tag]').forEach(b=>b.onclick=()=>tagOpen(b.dataset.tag));
   el.querySelectorAll('[data-exp]').forEach(b=>b.onclick=async()=>{const s=await dbGet(b.dataset.exp);if(s)exportSong(s,true)});
   el.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{const id=b.dataset.del;if(delArm!==id){delArm=id;renderLib();return}delArm=null;await dbDel(id);toast('Brano eliminato');if(song&&song.id===id)loadDemo();renderLib()})}
 let pending=[];
@@ -2490,14 +2507,14 @@ function readID3(ab){const b=new Uint8Array(ab);const out={};if(b.length<10||b[0
   const dec=(d,enc)=>{try{const lab=enc===0?'latin1':enc===1?'utf-16':enc===2?'utf-16be':'utf-8';return new TextDecoder(lab).decode(d).replace(/\0+$/,'').replace(/^﻿/,'')}catch(e){return ''}};
   while(p+10<size+10&&p+10<b.length){const id=String.fromCharCode(b[p],b[p+1],b[p+2],b[p+3]);if(!/^[A-Z0-9]{4}$/.test(id))break;
     const fs=ver===4?ss(p+4):(((b[p+4]<<24)|(b[p+5]<<16)|(b[p+6]<<8)|b[p+7])>>>0);const d=b.subarray(p+10,p+10+fs);
-    if(id==='TIT2')out.title=dec(d.subarray(1),d[0]);if(id==='TPE1')out.artist=dec(d.subarray(1),d[0]);
+    if(id==='TIT2')out.title=dec(d.subarray(1),d[0]);if(id==='TPE1')out.artist=dec(d.subarray(1),d[0]);if(id==='TALB')out.album=dec(d.subarray(1),d[0]);if((id==='TYER'||id==='TDRC')&&!out.year)out.year=(dec(d.subarray(1),d[0]).match(/\d{4}/)||[''])[0];
     if(id==='USLT'&&d.length>5){const enc=d[0];let q=4;if(enc===1||enc===2){while(q+1<d.length&&!(d[q]===0&&d[q+1]===0))q+=2;q+=2}else{while(q<d.length&&d[q]!==0)q++;q++}out.lyrics=dec(d.subarray(q),enc)}
     p+=10+fs}return out}
 function guessStem(name,taken){const base=name.replace(/\.[^.]+$/,'');for(const s of STEMS){if(s.re&&s.re.test(base)&&!taken.has(s.k))return s.k}return taken.has('mix')?'other':'mix'}
 const cleanName=n=>n.replace(/\.[^.]+$/,'').replace(/_+/g,' ').replace(/\b(vocals?|bass|drums|other|guitar|piano)\b/ig,'').trim();
 $('#fileIn').onchange=e=>importFiles([...e.target.files]);
 async function importFiles(fs){if(!fs.length)return;pending=[];const taken=new Set();let meta={};
-  for(const f of fs){const ab=await f.arrayBuffer();const k=guessStem(f.name,taken);taken.add(k);pending.push({name:f.name,k,ab});const m=readID3(ab);meta={title:meta.title||m.title,artist:meta.artist||m.artist,lyrics:meta.lyrics||m.lyrics}}
+  for(const f of fs){const ab=await f.arrayBuffer();const k=guessStem(f.name,taken);taken.add(k);pending.push({name:f.name,k,ab});const m=readID3(ab);meta={title:meta.title||m.title,artist:meta.artist||m.artist,album:meta.album||m.album,year:meta.year||m.year,lyrics:meta.lyrics||m.lyrics}}
   $('#fileRows').innerHTML=pending.map((p,i)=>`<div class="fi"><span>${esc(p.name)}</span><select class="sel" data-i="${i}" aria-label="Traccia per ${esc(p.name)}">${STEMS.map(s=>`<option value="${s.k}" ${s.k===p.k?'selected':''}>${s.label}</option>`).join('')}</select></div>`).join('');
   $$('#fileRows select').forEach(s=>s.onchange=()=>pending[+s.dataset.i].k=s.value);
   $('#impTitle').value=meta.title||cleanName(fs[0].name)||'';$('#impArtist').value=meta.artist||'';pending.meta=meta;
@@ -2505,7 +2522,7 @@ async function importFiles(fs){if(!fs.length)return;pending=[];const taken=new S
 $('#bSave').onclick=async()=>{if(!pending.length)return;const ks=pending.map(p=>p.k);if(new Set(ks).size!==ks.length){$('#impStatus').textContent='Due file sono assegnati alla stessa traccia: cambiane uno.';return}
   $('#impStatus').textContent='Leggo l\'audio…';const bufs={};
   for(const p of pending){try{bufs[p.k]=await decode(p.ab)}catch(e){$('#impStatus').textContent='Non riesco a leggere '+p.name+'. Prova a esportarlo di nuovo in MP3 o WAV.';return}}
-  const id='s'+Date.now().toString(36);const rec={id,title:$('#impTitle').value.trim(),artist:$('#impArtist').value.trim(),created:Date.now(),lyrics:pending.meta.lyrics||'',tab:'',stems:Object.fromEntries(pending.map(p=>[p.k,{name:p.name,data:p.ab}]))};
+  const id='s'+Date.now().toString(36);const rec={id,title:$('#impTitle').value.trim(),artist:$('#impArtist').value.trim(),created:Date.now(),album:(pending.meta&&pending.meta.album)||'',year:(pending.meta&&pending.meta.year)||'',lyrics:pending.meta.lyrics||'',tab:'',stems:Object.fromEntries(pending.map(p=>[p.k,{name:p.name,data:p.ab}]))};
   const ok=await dbPut(rec);pending=[];$('#importBox').hidden=true;$('#fileIn').value='';closeOv($('#bSave'));
   await loadSong({...rec,stems:undefined,stored:!!ok},bufs);toast(ok?'Brano salvato':'Brano aperto, ma questo browser non permette di salvarlo');
   if(!rec.lyrics&&rec.title)findLyrics(true)};
@@ -2521,7 +2538,7 @@ async function dirReady(ask){if(!dirHandle||!dirHandle.queryPermission)return fa
 const safeName=s=>String(s||'').replace(/[\\/:*?"<>|]+/g,' ').replace(/\s+/g,' ').trim().slice(0,80)||'Brano';
 async function exportSong(s,ask){const folder=folderName(s);
   const files=Object.entries(s.stems).map(([k,v])=>{const ext=(v.name&&v.name.match(/\.[a-z0-9]+$/i)||['.wav'])[0];return [k+ext,new Blob([v.data])]});
-  const lrc=(s.lyr&&s.lyr.length)?s.lyr.map(l=>ts(l.t)+' '+l.s).join('\n'):(s.lyrics||'');if(lrc)files.push([folder+'.lrc',new Blob([(s.artist?'[ar:'+s.artist+']\n':'')+(s.title?'[ti:'+s.title+']\n':'')+lrc],{type:'text/plain'})]);
+  {const l=songLrc(s);if(l)files.push(l)}
   if(window.showDirectoryPicker){if(!dirHandle&&ask){try{dirHandle=await window.showDirectoryPicker({id:'fonica-tracce',mode:'readwrite'});await setPut('dir',dirHandle);renderDir()}catch(e){return false}}
     if(dirHandle&&await dirReady(ask)){try{const sub=await songDirHandle(s);for(const [n,b] of files){const fh=await sub.getFileHandle(n,{create:true});const w=await fh.createWritable();await w.write(b);await w.close()}
         toast('Tracce salvate in «'+[dirHandle.name,...songDirs(s)].join(' / ')+'»');return true}catch(e){console.error(e);toast('Non riesco a scrivere nella cartella scelta: '+(e.message||e))}return false}
@@ -2601,7 +2618,7 @@ async function sepLrcCheck(meta,dur){const q=songQuery({title:meta.title||cleanN
 function showAsrSkip(msg){spSetSteps([]);$('#spTitle').textContent='Testo trovato';$('#spPct').textContent='';$('#spPhase').textContent=msg;$('#spBar').classList.remove('ind');$('#spFill').style.width='100%';$('#spStat').textContent='';$('#spStop').textContent='Chiudi';
   const b=document.createElement('button');b.className='mini';b.textContent='Trascrivi comunque';b.onclick=()=>{$('#sepCard').hidden=true;asrRun(true)};$('#spFile').textContent='';$('#spFile').appendChild(b);$('#sepCard').hidden=false}
 async function sepFinish(meta,stemsRec,bufs,note,asr,sing){
-  const id='s'+Date.now().toString(36);const rec={id,title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',created:Date.now(),lyrics:meta.lyrics||'',tab:'',stems:stemsRec};if(meta.lrc)rec.lrclib=meta.lrc;if(asr&&asr.segments&&asr.segments.length)rec.asr=asr;if(sing&&!sing.error&&sing.k!=null)rec.singers=sing;
+  const id='s'+Date.now().toString(36);const rec={id,title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',album:meta.album||'',year:meta.year||'',created:Date.now(),lyrics:meta.lyrics||'',tab:'',stems:stemsRec};if(meta.lrc)rec.lrclib=meta.lrc;if(asr&&asr.segments&&asr.segments.length)rec.asr=asr;if(sing&&!sing.error&&sing.k!=null)rec.singers=sing;
   const ok=await dbPut(rec);let saved=false;if(window.showDirectoryPicker&&dirHandle)saved=await exportSong(rec,false);
   if(BATCH.on){if(!ok){sepFail(new Error('non riesco a salvare: '+await saveFailMsg()));return}if(r2On()){spShow('☁️ Salvo «'+rec.title+'» anche nel cloud…',null,'save');await r2Auto(rec)}BATCH.res='ok';sepEnd();spShow(`«${rec.title}» pronto in Libreria`,1);return}
   sepEnd();const took=fmt((Date.now()-sepT0)/1000);
@@ -2872,9 +2889,11 @@ function linesFromAsr(asr){const out=[];let prevEnd=-9;
 const linesText=()=>K.lines.map((l,i)=>(l.st&&i?'\n':'')+l.s).join('\n');
 const folderName=s=>safeName(s.title||'Brano');
 let lrcT=null;function writeLrcSoon(){clearTimeout(lrcT);lrcT=setTimeout(writeLrc,800)}
-async function writeLrc(){if(!song||!song.stored||!K.lines.length||!dirHandle||!window.showDirectoryPicker)return;if(!await dirReady(false))return;
-  try{const f=folderName(song);const sub=await songDirHandle(song);const fh=await sub.getFileHandle(f+'.lrc',{create:true});const w=await fh.createWritable();
-    await w.write(new Blob([(song.artist?'[ar:'+song.artist+']\n':'')+(song.title?'[ti:'+song.title+']\n':'')+K.lines.map(l=>ts(l.t)+' '+l.s).join('\n')],{type:'text/plain'}));await w.close()}catch(e){}}
+async function writeLrc(){if(!song||!song.stored||!K.lines.length)return;const s=await dbGet(song.id);if(s)await lrcCopies(s)}
+/* il testo e i dati del brano vanno anche nelle copie: cartella del PC e cloud R2 */
+async function lrcCopies(s){const l=songLrc(s);if(!l)return;
+  if(dirHandle&&window.showDirectoryPicker&&await dirReady(false)){try{const sub=await songDirHandle(s);const fh=await sub.getFileHandle(l[0],{create:true});const w=await fh.createWritable();await w.write(l[1]);await w.close()}catch(e){}}
+  if(r2On()){try{await r2Req('PUT',R2P+songDirs(s).join('/')+'/'+l[0],{body:l[1],ctype:r2Type(l[0])})}catch(e){}}}
 function mono16k(b){const sr=16000;const oc=new OfflineAudioContext(1,Math.ceil(b.duration*sr),sr);const s=oc.createBufferSource();s.buffer=b;s.connect(oc.destination);s.start();
   return oc.startRendering().then(r=>{const d=r.getChannelData(0),n=d.length,buf=new ArrayBuffer(44+n*2),v=new DataView(buf);const w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
     w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
@@ -2946,9 +2965,11 @@ async function r2List(prefix){const out=[];let tok='';do{const q={'list-type':'2
     const x=new DOMParser().parseFromString(await (await r2Req('GET','',{query:q})).text(),'application/xml');
     for(const c of x.getElementsByTagName('Contents'))out.push({key:c.getElementsByTagName('Key')[0].textContent,size:+(c.getElementsByTagName('Size')[0]||{}).textContent||0});
     tok=x.getElementsByTagName('IsTruncated')[0]&&x.getElementsByTagName('IsTruncated')[0].textContent==='true'?(x.getElementsByTagName('NextContinuationToken')[0]||{}).textContent||'':''}while(tok);return out}
-function songFiles(s){const folder=folderName(s);
-  const files=Object.entries(s.stems||{}).map(([k,v])=>{const ext=(v.name&&v.name.match(/\.[a-z0-9]+$/i)||['.wav'])[0];return [k+ext,new Blob([v.data])]});
-  const lrc=(s.lyr&&s.lyr.length)?s.lyr.map(l=>ts(l.t)+' '+l.s).join('\n'):(s.lyrics||'');if(lrc)files.push([folder+'.lrc',new Blob([(s.artist?'[ar:'+s.artist+']\n':'')+(s.title?'[ti:'+s.title+']\n':'')+lrc],{type:'text/plain'})]);return files}
+/* testo con i dati del brano in testa ([ar:] artista, [ti:] titolo, [al:] album): è la «scheda» che accompagna le tracce */
+function songLrcText(s){return (s.lyr&&s.lyr.length)?s.lyr.map(l=>ts(l.t)+' '+l.s).join('\n'):(s.lyrics||'')}
+function songLrc(s){const t=songLrcText(s);if(!t&&!s.artist&&!s.album)return null;return[folderName(s)+'.lrc',new Blob([(s.artist?'[ar:'+s.artist+']\n':'')+(s.title?'[ti:'+s.title+']\n':'')+(s.album?'[al:'+s.album+']\n':'')+(s.year?'[year:'+s.year+']\n':'')+t.replace(/^\[(ar|ti|al|year):.*\]\n?/gm,'')],{type:'text/plain'})]}
+function songFiles(s){const files=Object.entries(s.stems||{}).map(([k,v])=>{const ext=(v.name&&v.name.match(/\.[a-z0-9]+$/i)||['.wav'])[0];return [k+ext,new Blob([v.data])]});
+  const l=songLrc(s);if(l)files.push(l);return files}
 const r2Type=n=>/\.lrc$/i.test(n)?'text/plain; charset=utf-8':/\.m4a$/i.test(n)?'audio/mp4':/\.mp3$/i.test(n)?'audio/mpeg':/\.wav$/i.test(n)?'audio/wav':/\.flac$/i.test(n)?'audio/flac':'application/octet-stream';
 async function r2SaveSong(s,onp){const base=R2P+songDirs(s).join('/')+'/';const files=songFiles(s);let i=0;
   for(const [n,b] of files){if(onp)onp(i,files.length,n);await r2Req('PUT',base+n,{body:b,ctype:r2Type(n)});i++}return files.length}
@@ -3029,9 +3050,9 @@ const asFile=async f=>f.getFile?await f.getFile():f;
 $('#addGo').onclick=async()=>{const todo=addFound.filter(x=>x.sel);if(!todo.length)return;const btn=$('#addGo');btn.disabled=true;let done=0,firstId=null,why='';const bad=[];IDBERR='';try{if(navigator.storage&&navigator.storage.persist)await navigator.storage.persist()}catch(e){}
   for(const x of todo){$('#addStatus').textContent=`Aggiungo ${done+1} di ${todo.length}: ${x.title}…`;
     try{const stemsRec={};for(const [k,f] of x.stems){const file=await asFile(f);stemsRec[k]={name:file.name,data:await file.arrayBuffer()}}
-      let lyrics='';if(x.lrc){lyrics=await (await asFile(x.lrc)).text();const ar=lyrics.match(/^\[ar:(.*)\]$/m),ti=lyrics.match(/^\[ti:(.*)\]$/m);if(!x.artist&&ar)x.artist=ar[1].trim();if(ti&&x.title==='Brano')x.title=ti[1].trim()}
+      let lyrics='';if(x.lrc){lyrics=await (await asFile(x.lrc)).text();const ar=lyrics.match(/^\[ar:(.*)\]$/m),ti=lyrics.match(/^\[ti:(.*)\]$/m);if(!x.artist&&ar)x.artist=ar[1].trim();if(ti&&x.title==='Brano')x.title=ti[1].trim();const al=lyrics.match(/^\[al:(.*)\]$/m),yr=lyrics.match(/^\[year:(.*)\]$/m);if(al)x.album=al[1].trim();if(yr)x.year=yr[1].trim()}
       const id='s'+Date.now().toString(36)+done;const lib=await dbAll();const old=lib.find(s=>normKey(s.artist,s.title)===normKey(x.artist,x.title));
-      const rec={id:old?old.id:id,title:x.title,artist:x.artist,created:old?old.created:Date.now(),lyrics,tab:old?old.tab||'':'',stems:stemsRec};
+      const rec={id:old?old.id:id,title:x.title,artist:x.artist,created:old?old.created:Date.now(),album:x.album||(old&&old.album)||'',year:x.year||(old&&old.year)||'',lyrics,tab:old?old.tab||'':'',stems:stemsRec};
       if(await dbPut(rec)){done++;firstId=firstId||rec.id;x.inLib=true;x.sel=false;if(r2On()&&!x.fromCloud){$('#addStatus').textContent=`☁️ Copio nel cloud: ${x.title}…`;try{await r2SaveSong(rec)}catch(e){toast('☁️ '+r2Err(e))}}}
       else{why=why||await saveFailMsg();if(IDBERR==='QuotaExceededError'||IDBERR==='NODB')break}}
     catch(e){console.error(e);bad.push(x.title);if(!why&&e&&e.name==='NotReadableError')why='alcuni file non si possono leggere (forse sono aperti da un altro programma o la cartella è stata spostata).'}}
@@ -3598,10 +3619,6 @@ async function r2Presign(method,objKey,exp=7200){const host=R2.acc.trim()+'.r2.c
 function voiceEnv(x,sr,lag,dur){const hz=50,n=Math.floor(dur*hz),e=new Array(n),w=Math.round(sr/hz);let mx=1e-9;
   for(let k=0;k<n;k++){const c=Math.round((k/hz+lag)*sr);let s2=0,m=0;for(let i=Math.max(0,c-w);i<Math.min(x.length,c+w);i+=2){s2+=x[i]*x[i];m++}e[k]=m?Math.sqrt(s2/m):0;if(e[k]>mx)mx=e[k]}
   return e.map(v=>Math.round(v/mx*1000)/1000)}
-/* audio stereo 16 bit (se il compressore MP3 non è disponibile) */
-function wavOf(b){const n=b.length,ch=Math.min(2,b.numberOfChannels),ab=new ArrayBuffer(44+n*ch*2),v=new DataView(ab),w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
-  w(0,'RIFF');v.setUint32(4,36+n*ch*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,ch,true);v.setUint32(24,b.sampleRate,true);v.setUint32(28,b.sampleRate*ch*2,true);v.setUint16(32,ch*2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*ch*2,true);
-  const q=new Int16Array(ab,44),d=[...Array(ch)].map((_,c)=>b.getChannelData(c));for(let i=0;i<n;i++)for(let c=0;c<ch;c++){const x=d[c][i];q[i*ch+c]=(x>1?1:x<-1?-1:x)*32767}return new Blob([ab],{type:'audio/wav'})}
 const imgB64=(c,type='image/jpeg',q=.9)=>c.toDataURL(type,q).split(',')[1]||'';
 async function recServer({mixed,voice,vsr,lag,dur,useRaw,say}){if(sepBusy)throw new Error('aspetta che finisca la separazione in corso');
   const base=R2P+'_lavoro/'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)+'/',put=[];
@@ -4599,6 +4616,57 @@ function tabsUI(which){$$('#mainTabs button').forEach(b=>b.classList.toggle('on'
 
 
 
+
+/* ===== ✏️ scheda del brano: titolo, artista, album, anno e testo =====
+   Si salva nella libreria e nelle copie (cartella del PC e cloud R2, spostandole se cambiano artista o titolo);
+   con «Scarica l'MP3» i dati finiscono dentro al file (tag ID3), così li vede qualunque lettore. */
+const TG={id:null,lyr0:''};
+async function tagOpen(id){const s=await dbGet(id);if(!s){toast('Brano non trovato');return}TG.id=id;TG.lyr0=songLrcText(s);
+  $('#tgTitle').value=s.title||'';$('#tgArtist').value=s.artist||'';$('#tgAlbum').value=s.album||'';$('#tgYear').value=s.year||'';$('#tgLyr').value=TG.lyr0;$('#tgList').innerHTML='';
+  $('#tgMsg').textContent=s.artist?'':'Questo brano non ha l\'artista: scrivilo tu, oppure premi «Cercalo».';openOv('#ovTag')}
+async function tagSave(){const s=await dbGet(TG.id);if(!s)return;const old={artist:s.artist,title:s.title},oldDirs=songDirs(s);
+  const t=$('#tgTitle').value.trim(),a=$('#tgArtist').value.trim(),al=$('#tgAlbum').value.trim(),y=$('#tgYear').value.trim().replace(/\D/g,'').slice(0,4),ly=$('#tgLyr').value;
+  if(!t){$('#tgMsg').textContent='Il titolo non può restare vuoto.';return}
+  Object.assign(s,{title:t,artist:a,album:al,year:y});const lyrCh=ly.trim()!==TG.lyr0.trim();if(lyrCh){s.lyrics=ly;s.lyr=null}await dbPut(s);
+  const cur=song&&song.id===s.id;if(cur){Object.assign(song,{title:t,artist:a,album:al,year:y});$('#sTitle').textContent=t;$('#sArtist').textContent=a;$('#palName').textContent=t+(a?' · '+a:'');
+    if(lyrCh){song.lyrics=ly;song.lyr=null;applyLyricsText(ly,true);kBuild();saveLyr()}}
+  const moved=songDirs(s).join('/')!==oldDirs.join('/');$('#tgMsg').textContent='Salvo…';
+  try{await tagCopies(s,oldDirs,moved)}catch(e){console.warn(e)}
+  closeOv($('#tgSave'));toast('✏️ Scheda di «'+t+'» salvata'+(moved&&(dirHandle||r2On())?' (copie spostate in '+songDirs(s).join(' / ')+')':''));try{renderLib()}catch(e){}try{songPickFill()}catch(e){}}
+async function tagCopies(s,oldDirs,moved){
+  if(!moved){await lrcCopies(s);return}
+  if(dirHandle&&window.showDirectoryPicker&&await dirReady(false)){try{let had=false;try{const ad=await dirHandle.getDirectoryHandle(oldDirs[0]);await ad.getDirectoryHandle(oldDirs[1]);had=true}catch(e){}
+      if(had){await exportSong(s,false);const ad=await dirHandle.getDirectoryHandle(oldDirs[0]);await ad.removeEntry(oldDirs[1],{recursive:true});let empty=true;for await(const _ of ad.keys()){empty=false;break}if(empty)await dirHandle.removeEntry(oldDirs[0])}}catch(e){console.warn('cartella',e)}}
+  if(r2On()){try{const pre=R2P+oldDirs.join('/')+'/',old=await r2List(pre);if(old.length){await r2SaveSong(s);for(const o of old)await r2Req('DELETE',o.key).catch(()=>{})}}catch(e){console.warn('r2',e)}}}
+/* cerca titolo e artista su LRCLIB (con la durata del brano per scegliere quello giusto) */
+async function tagFind(){const s=await dbGet(TG.id);const q={t:$('#tgTitle').value.trim(),a:$('#tgArtist').value.trim()};const box=$('#tgList');if(!q.t){box.innerHTML='<p class="status">Scrivi almeno una parte del titolo.</p>';return}
+  box.innerHTML='<p class="status">Cerco…</p>';let dur=song&&song.id===TG.id?DUR:0;
+  try{const {list}=await lrcFind(q,dur);const L=(list||[]).slice(0,8);if(!L.length){box.innerHTML='<p class="status">Non trovato. Se il brano è tuo o inedito, scrivi tu l\'artista (anche il tuo nome).</p>';return}
+    box.innerHTML='<p class="status">Tocca quello giusto:</p>'+L.map((r,i)=>{const x=r.x;return`<div class="si" data-tf="${i}"><div class="meta"><b>${esc(x.trackName||'')}</b><small>${esc(x.artistName||'')}${x.albumName?' · '+esc(x.albumName):''}${x.duration?' · '+fmt(x.duration):''}</small></div><span class="tag ${r.kind==='synced'?'good':''}">${r.kind==='synced'?'testo a tempo':r.kind==='plain'?'testo':'senza testo'}</span></div>`}).join('');
+    box.querySelectorAll('[data-tf]').forEach(el=>el.onclick=()=>{const x=L[+el.dataset.tf].x;$('#tgTitle').value=x.trackName||$('#tgTitle').value;$('#tgArtist').value=x.artistName||'';if(x.albumName)$('#tgAlbum').value=x.albumName;
+      const txt=x.syncedLyrics||x.plainLyrics||'';if(txt&&!$('#tgLyr').value.trim())$('#tgLyr').value=txt;box.innerHTML='';$('#tgMsg').textContent='Dati presi da LRCLIB: controlla e premi «Salva».'+(txt&&$('#tgLyr').value!==txt?' Il testo che avevi è rimasto.':'')})}
+  catch(e){box.innerHTML='<p class="status">'+(e.message==='LRC429'?'LRCLIB è occupato: riprova tra un minuto.':'Non riesco a contattare LRCLIB. Controlla internet.')+'</p>'}}
+/* MP3 con i tag ID3 (v2.3): titolo, artista, album, anno e testo */
+function id3Tag(m){const fr=[],u16=x=>{x=String(x);const u=new Uint8Array(2+x.length*2);u[0]=255;u[1]=254;for(let i=0;i<x.length;i++){const c=x.charCodeAt(i);u[2+i*2]=c&255;u[3+i*2]=c>>8}return u};
+  const frame=(id,body)=>{const h=new Uint8Array(10+body.length);for(let i=0;i<4;i++)h[i]=id.charCodeAt(i);const n=body.length;h[4]=n>>>24&255;h[5]=n>>>16&255;h[6]=n>>>8&255;h[7]=n&255;h.set(body,10);fr.push(h)};
+  const txt=(id,v)=>{if(!v)return;const e=u16(v),b=new Uint8Array(1+e.length);b[0]=1;b.set(e,1);frame(id,b)};
+  txt('TIT2',m.title);txt('TPE1',m.artist);txt('TALB',m.album);txt('TYER',m.year);
+  if(m.lyrics){const d=u16(''),t=u16(m.lyrics),b=new Uint8Array(4+d.length+2+t.length);b[0]=1;b.set([105,116,97],1);b.set(d,4);b.set(t,4+d.length+2);frame('USLT',b)}
+  const tot=fr.reduce((a,f)=>a+f.length,0),h=new Uint8Array(10);h.set([73,68,51,3,0,0,tot>>>21&127,tot>>>14&127,tot>>>7&127,tot&127]);return new Blob([h,...fr])}
+function stripId3(ab){const b=new Uint8Array(ab);if(b.length>10&&b[0]===73&&b[1]===68&&b[2]===51){const n=((b[6]&127)<<21)|((b[7]&127)<<14)|((b[8]&127)<<7)|(b[9]&127);return ab.slice(10+n+(b[5]&16?10:0))}return ab}
+async function tagMp3(){const s=await dbGet(TG.id);if(!s)return;const say=t=>$('#tgMsg').textContent=t;const btn=$('#tgMp3');btn.disabled=true;
+  try{const m={title:$('#tgTitle').value.trim()||s.title,artist:$('#tgArtist').value.trim(),album:$('#tgAlbum').value.trim(),year:$('#tgYear').value.trim(),lyrics:$('#tgLyr').value.trim()};let audio;
+    const mix=s.stems&&s.stems.mix;
+    if(mix&&/\.mp3$/i.test(mix.name||'')){audio=new Blob([stripId3(mix.data)])}
+    else{say('Preparo il brano completo dalle tracce…');const ks=Object.keys(s.stems||{}).filter(k=>k==='mix'||!s.stems.mix);let out=null;
+      const bs=[];for(const k of ks)bs.push(await decode(s.stems[k].data));if(!bs.length)throw new Error('questo brano non ha tracce');
+      out=new OfflineAudioContext(2,Math.max(...bs.map(b=>b.length)),bs[0].sampleRate);for(const b of bs){const src=out.createBufferSource();src.buffer=b;src.connect(out.destination);src.start()}const mixed=await out.startRendering();
+      audio=await toMp3(mixed,192,p=>say('Creo l\'MP3… '+Math.round(p*100)+'%'))}
+    const blob=new Blob([id3Tag(m),audio],{type:'audio/mpeg'}),name=safeName((m.artist?m.artist+' - ':'')+m.title)+'.mp3';
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);
+    say('Scaricato «'+name+'»: dentro ci sono titolo, artista, album, anno e testo.')}
+  catch(e){console.error(e);say('Non sono riuscito a creare l\'MP3: '+(e.message||e))}finally{btn.disabled=false}}
+$('#tgSave').onclick=tagSave;$('#tgFind').onclick=tagFind;$('#tgMp3').onclick=tagMp3;$('#bTag').onclick=()=>{if(song&&song.stored)tagOpen(song.id)};
 /* ===== 🎤 estensione vocale: misura la voce di chi canta e porta il brano nella sua zona comoda ===== */
 const VR={list:[],sel:'',on:false,stream:null,an:null,c:null,raf:0,step:0,hist:[],lo:null,hi:null,stab:[],song:null};
 const nmIt=m=>{m=Math.round(m);return NOTE_IT[((m%12)+12)%12]+(Math.floor(m/12)-1)};
