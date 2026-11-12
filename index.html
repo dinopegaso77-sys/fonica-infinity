@@ -496,9 +496,10 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 #palco{position:fixed;inset:0;z-index:60;background:var(--stage2);display:flex;flex-direction:column;color:var(--stage-fg)}
 .palmic{position:absolute;top:64px;right:14px;z-index:5;width:min(440px,calc(100vw - 28px));max-height:calc(100% - 150px);overflow:auto;background:#0d1826;border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.55);color:#fff;display:flex;flex-direction:column;gap:10px}.palmic[hidden]{display:none}
 .lvtop{display:flex;align-items:center;justify-content:space-between;gap:8px}.lvtop b{font-size:17px}
-.donban{position:fixed;left:50%;bottom:max(96px,calc(env(safe-area-inset-bottom,0px) + 96px));transform:translateX(-50%);z-index:110;width:min(600px,calc(100vw - 24px));display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;padding:12px 14px;border-radius:16px;background:var(--surface);color:var(--fg);border:1px solid var(--btnline);box-shadow:0 0 0 1px rgba(110,140,255,.25),0 10px 30px rgba(0,0,0,.5),0 0 24px rgba(120,90,255,.25);animation:donIn .4s ease}
+.donban{position:fixed;left:50%;bottom:max(96px,calc(env(safe-area-inset-bottom,0px) + 96px));transform:translateX(-50%);z-index:2147483000;width:min(600px,calc(100vw - 24px));display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;padding:12px 14px;border-radius:16px;background:var(--surface);color:var(--fg);border:1px solid var(--btnline);box-shadow:0 0 0 1px rgba(110,140,255,.25),0 10px 30px rgba(0,0,0,.5),0 0 24px rgba(120,90,255,.25);animation:donIn .4s ease}
 .donban .dbt{flex:1 1 260px;font-size:16px;line-height:1.35}.donban .chip{min-height:44px}
 #palco .donban{position:absolute}
+.donban[hidden]{display:none!important}
 @keyframes donIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
 @media (prefers-reduced-motion:reduce){.donban{animation:none}}
 .pmrow{display:grid;grid-template-columns:minmax(84px,auto) auto minmax(0,1fr) 3.2em;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.12)}
@@ -516,7 +517,19 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 .lvhint{font-size:13.5px;color:var(--hcfd8e2);line-height:1.45}.lvhint b{color:#fff}
 #pMic.live{background:#1f7a46;border-color:#2fae62;color:#fff}
 .pal-top{display:flex;align-items:center;gap:8px;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top,0px));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
-.pal-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--f-display);font-size:18px;font-weight:600}
+.pal-name{flex:1;min-width:0;display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:1px solid var(--stage-dim);border-radius:10px;background:rgba(255,255,255,.04);color:var(--stage-fg);font-family:var(--f-display);font-size:18px;font-weight:600;text-align:left;cursor:pointer}
+.pal-name .pnm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pal-name .pdd{flex:none;opacity:.8;font-size:14px}
+.pbtn.pico{min-width:46px;padding:0 10px;display:inline-grid;place-items:center;flex:none}.pbtn.pico svg{width:24px;height:24px}
+#pCast.on{background:var(--stage-hi);color:var(--stage2);border-color:var(--stage-hi)}
+.ptabh{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.ptabh .now{flex:1;min-width:0}.pbtn.sm{min-height:34px;padding:4px 12px;font-size:14px;border-color:var(--line);color:var(--fg)}
+.ptrans{display:flex;align-items:center;gap:10px}
+.castl{margin:6px 0 6px 18px;padding:0;display:flex;flex-direction:column;gap:10px;line-height:1.45}
+html.tvmode body>*:not(#palco){display:none!important}html.tvmode .pal-bar,html.tvmode .pal-top .pbtn,html.tvmode .ptabh .pbtn,html.tvmode .pal-name .pdd{display:none!important}
+html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #palco .kempty{font-size:clamp(22px,3vw,44px);line-height:1.5}html.tvmode .pal-name{font-size:clamp(18px,2vw,30px)}html.tvmode #palco .kl{font-size:calc(clamp(30px,4.4vw,64px) * var(--kscale))}
+.ptools{display:flex;gap:6px;margin-left:auto}
+.ptool{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:68px;min-height:54px;padding:4px 6px;border:1px solid var(--stage-dim);border-radius:12px;background:transparent;color:var(--stage-fg);font:600 12.5px Figtree,system-ui;cursor:pointer}
+.ptool i{font-style:normal;font-size:21px;line-height:1}.ptool.on{background:var(--stage-hi);color:var(--stage2);border-color:var(--stage-hi)}
+#pMic.live{background:#1f7a46;border-color:#2fae62;color:#fff}
 .pbtn{background:transparent;border:1px solid var(--stage-dim);color:var(--stage-fg);border-radius:10px;padding:8px 12px;min-height:42px;font-weight:600}
 .pbtn.on{background:var(--stage-hi);color:var(--stage2);border-color:var(--stage-hi)}
 .pbtn.round{width:52px;height:52px;border-radius:50%;padding:0;display:grid;place-items:center}
@@ -534,7 +547,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 #palco[hidden]{display:none}
 #palco>*{min-width:0}
 #palco .kpanel{min-height:0}#palco .kpanel::after{height:10%}#palco .kpanel::before{height:12%}
-.pal-top{overflow-x:auto;scrollbar-width:none}.pal-top::-webkit-scrollbar{display:none}.pal-top .pbtn{flex:none}
+.pal-top .pbtn{flex:none}
 .pal-tab canvas{height:clamp(120px,24vh,210px)}
 /* testo a sinistra (metà schermo); a destra tablatura in alto e tracce in basso; se ne è aperta una sola, metà e metà */
 #palco{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) minmax(0,1fr) auto}
@@ -555,9 +568,11 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
   #palco>.pal-bar{grid-row:5}
 }
 @media (max-width:599px){
-  .pal-name{font-size:15px;min-width:90px}
-  .pal-bar{gap:8px;justify-content:center;padding-top:8px}
-  .pal-bar .grow{display:none}
+  .pal-name{font-size:15px;padding:0 10px}.pal-top{gap:6px;padding-inline:max(10px,env(safe-area-inset-left,0px)) max(10px,env(safe-area-inset-right,0px))}
+  .pbtn.pico{min-width:42px;padding:0 8px}
+  .pal-bar{gap:8px;flex-direction:column;align-items:stretch;padding-top:8px}
+  .ptrans{justify-content:center}
+  .ptools{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0}.ptool{min-width:0;font-size:11.5px}
   .pal-bar .pseg span{font-size:10px}
   .pal-tab canvas{height:clamp(120px,22vh,180px)}
 }
@@ -565,8 +580,9 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 @media (orientation:landscape) and (max-height:560px){
   #palco .kl{font-size:calc(clamp(18px,3.2vw,30px) * var(--kscale));padding:6px 0}
   .pal-top{padding-block:6px}
-  .pal-bar{flex-wrap:nowrap;overflow-x:auto;padding-block:6px}
-  .pal-bar .pbtn.round{width:42px;height:42px}
+  .pal-bar{flex-wrap:nowrap;flex-direction:row;align-items:center;padding-block:6px}
+  .pal-bar .pbtn.round{width:42px;height:42px}.pal-bar .pbtn.round.main{width:50px;height:50px}
+  .ptools{display:flex;margin-left:auto}.ptool{min-width:58px;min-height:44px;gap:1px;font-size:11px}.ptool i{font-size:17px}
 }
 .pseg{display:inline-flex;align-items:center;gap:6px}
 .pseg span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--stage-dim)}
@@ -795,17 +811,10 @@ themeApply();</script>
 <!-- Palco -->
 <div id="palco" hidden>
   <div class="pal-top">
-    <div class="pal-name" id="palName"></div>
-    <button class="pbtn" id="pSong">🎵 Brano</button>
-    <button class="pbtn" id="pMixB" aria-expanded="false">🎚 Tracce</button>
-    <button class="pbtn" id="pSm" aria-label="Testo più piccolo">A−</button><button class="pbtn" id="pLg" aria-label="Testo più grande">A+</button>
-    <button class="pbtn" id="pMic" aria-expanded="false">🎤 Microfono</button>
-    <button class="pbtn" id="pRec">Registra video</button>
-    <button class="pbtn on" id="pTab">Tablatura</button>
-    <button class="pbtn" id="pInst" aria-label="Cambia strumento della tablatura">Basso</button>
-    <button class="pbtn" id="pMode" aria-label="Note o accordi">Note</button>
-    <button class="pbtn" id="pClick" aria-pressed="false">Click</button>
-    <button class="pbtn" id="pX">Esci</button>
+    <button class="pbtn pico" id="pX" aria-label="Esci dal palco" title="Esci dal palco">✕</button>
+    <button class="pal-name" id="pSong" title="Cambia brano" aria-label="Cambia brano"><span class="pnm" id="palName"></span><span class="pdd" aria-hidden="true">▾</span></button>
+    <button class="pbtn pico" id="pSm" aria-label="Testo più piccolo" title="Testo più piccolo">A−</button><button class="pbtn pico" id="pLg" aria-label="Testo più grande" title="Testo più grande">A+</button>
+    <button class="pbtn pico" id="pCast" aria-label="Trasmetti sul TV" title="Trasmetti sul TV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></button>
   </div>
   <div class="palmic" id="palMic" hidden role="dialog" aria-label="Microfono e strumenti">
     <div class="lvtop"><b>🎤 <span id="lvTitle">Microfono e strumenti</span></b><button class="pbtn" id="lvX" aria-label="Chiudi">✕</button></div>
@@ -821,15 +830,34 @@ themeApply();</script>
     <div class="row" style="gap:8px"><button class="pbtn" id="pmAll">🔊 Tutte accese</button></div>
   </div>
   <div class="kpanel" id="kpPal"></div>
-  <div class="pal-tab" id="palTabWrap"><div class="now"><span class="nowLbl">Nota</span>: <b id="noteNow2">–</b></div><canvas id="palTab"></canvas></div>
-  <div class="pal-bar">
+  <div class="pal-tab" id="palTabWrap"><div class="ptabh"><div class="now"><span class="nowLbl">Nota</span>: <b id="noteNow2">–</b></div><button class="pbtn sm" id="pInst" aria-label="Cambia strumento della tablatura">Basso</button><button class="pbtn sm" id="pMode" aria-label="Note o accordi">Note</button></div><canvas id="palTab"></canvas></div>
+  <div class="pal-bar"><div class="ptrans">
     <button class="pbtn round" id="pBack" aria-label="Indietro 5 secondi"><svg viewBox="0 0 24 24"><path d="M11 6 3 12l8 6zM21 6l-8 6 8 6z"/></svg></button>
     <button class="pbtn round main" id="pPlay" aria-label="Riproduci"><svg viewBox="0 0 24 24" class="playIco"><path d="M7 4v16l13-8z"/></svg></button>
     <button class="pbtn round" id="pFwd" aria-label="Avanti 5 secondi"><svg viewBox="0 0 24 24"><path d="m13 6 8 6-8 6zM3 6l8 6-8 6z"/></svg></button>
-    <span class="time" id="tTime2">0:00</span>
-    <span class="grow"></span>
+    <span class="time" id="tTime2">0:00</span></div>
+    <div class="ptools">
+      <button class="ptool" id="pMixB" aria-expanded="false"><i aria-hidden="true">🎚</i><span>Tracce</span></button>
+      <button class="ptool on" id="pTab"><i aria-hidden="true">🎸</i><span>Tablatura</span></button>
+      <button class="ptool" id="pClick" aria-pressed="false"><i aria-hidden="true">⏱</i><span>Click</span></button>
+      <button class="ptool" id="pMic" aria-expanded="false"><i aria-hidden="true">🎤</i><span>Microfono</span></button>
+      <button class="ptool" id="pRec"><i aria-hidden="true">🎬</i><span>Video</span></button>
+    </div>
 </div>
 </div>
+
+<!-- Trasmetti sul TV -->
+<div class="ov" id="ovCast" hidden><div class="sheet" role="dialog" aria-label="Trasmetti sul TV">
+  <div class="row"><h3 class="grow">📺 Trasmetti sul TV</h3><button class="mini" data-close>Chiudi</button></div>
+  <p id="castWhy" style="margin:6px 0;line-height:1.45"></p>
+  <ol class="castl">
+    <li><b>Telefono Android:</b> scorri dall'alto verso il basso due volte e tocca <b>«Trasmissione schermo»</b> (sui Samsung si chiama <b>«Smart View»</b>), poi scegli il TV.</li>
+    <li><b>iPhone o iPad:</b> apri il Centro di Controllo e tocca <b>«Duplicazione schermo»</b>, poi scegli il TV (serve un TV con AirPlay o una Apple TV).</li>
+    <li><b>PC con Chrome:</b> tocca <b>⋮</b> in alto a destra → <b>«Trasmetti, salva e condividi»</b> → <b>«Trasmetti…»</b> e scegli il TV.</li>
+  </ol>
+  <p style="margin:6px 0;line-height:1.45">Il TV e il dispositivo devono essere sulla <b>stessa rete Wi-Fi</b>. Gira il telefono in orizzontale: il palco riempie il TV.</p>
+  <div class="row" style="justify-content:center"><button class="chip pri" id="castRetry">🔄 Cerca di nuovo il TV</button></div>
+</div></div>
 
 <!-- Libreria -->
 <div class="ov" id="ovLib" hidden><div class="sheet">
@@ -1410,6 +1438,9 @@ themeApply();</script>
 <script>
 (()=>{
 'use strict';
+/* 📺 pagina aperta sul TV dalla trasmissione: mostra solo il palco e segue il telefono */
+const TVMODE=/[?&]tv=1\b/.test(location.search);const TVR={t:0,at:0,p:false,r:1};
+if(TVMODE)document.documentElement.classList.add('tvmode');
 const TC=(blu,oro)=>document.documentElement.dataset.theme==='blu'?blu:oro;
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const STEMS=[
@@ -1425,11 +1456,11 @@ const SL=Object.fromEntries(STEMS.map(s=>[s.k,s.label]));
 {const sp=$('#splash'),v=$('#splashV'),snd=$('#splashSnd');let done=false,tm=0;const fromT3=/[?&](code|error)=/.test(location.search);
   /* aprendo il sito: intro, poi la pagina di presentazione (non per l'app installata, non tornando dalla presentazione, non se l'utente ha scelto di saltarla) */
   const fromPres=/[?&]app\b/.test(location.search),installed=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-  const toPres=!fromT3&&!fromPres&&!installed&&(()=>{try{return localStorage.getItem('f8_skipPres')!=='1'}catch(e){return true}})();
+  const toPres=!TVMODE&&!fromT3&&!fromPres&&!installed&&(()=>{try{return localStorage.getItem('f8_skipPres')!=='1'}catch(e){return true}})();
   if(fromPres)try{history.replaceState(null,'',location.pathname+location.hash)}catch(e){}
   const end=()=>{if(done)return;done=true;clearTimeout(tm);try{v.pause()}catch(e){}if(toPres){location.replace('presentazione.html');return}sp.classList.add('out');setTimeout(()=>{sp.remove()},700)};
   const arm=s=>{clearTimeout(tm);tm=setTimeout(end,s*1000)};
-  if(fromT3||fromPres){sp.remove();try{v.pause()}catch(e){}}else{v.addEventListener('ended',end);v.addEventListener('error',end);arm(12);
+  if(fromT3||fromPres||TVMODE){sp.remove();try{v.pause()}catch(e){}}else{v.addEventListener('ended',end);v.addEventListener('error',end);arm(12);
   /* prima prova con la musica; se il browser la blocca, parte senza suono e compare «Attiva il suono» */
   v.muted=false;v.volume=1;v.play().catch(()=>{v.muted=true;v.play().catch(end);snd.hidden=false});}
   snd.addEventListener('click',e=>{e.stopPropagation();snd.hidden=true;v.muted=false;try{v.currentTime=0}catch(x){}v.play().catch(()=>{});arm(12)});
@@ -1482,7 +1513,7 @@ let song=null, stems={}, order=[], gains={}, SR=44100, DUR=0;
 let rate=1, tr=0, trCache={tr:0,bufs:null}, voiceOff=false;
 let mixUrl=null, mixBusy=false, mixPend=false, wantTime=0, newSong=false;
 let loopA=null, loopB=null;
-const playing=()=>!A.paused&&!A.ended;
+const playing=()=>TVMODE?TVR.p:(!A.paused&&!A.ended);
 /* orologio fluido: alcuni browser aggiornano il tempo dell'audio solo a scatti */
 const CLK={a:-1,p:0,t:0};
 function smoothNow(){const a=now();if(!playing()){CLK.a=-1;return a}const p=performance.now();if(CLK.a<0){CLK.a=a;CLK.p=p;CLK.t=a;return a}
@@ -1492,7 +1523,7 @@ const LAT={auto:prefGet('latAuto')!=='0',man:+(prefGet('latMan')||150),val:.03,m
 function latMeasure(){let v=0;try{const c=ctx();if(c.state==='running')v=(c.outputLatency||0)+(c.baseLatency||0)}catch(e){}if(!v)v=.03;LAT.meas=Math.min(.6,v);LAT.val=LAT.auto?LAT.meas:LAT.man/1000;latUI()}
 function latUI(){const el=$('#latVal');if(!el)return;el.textContent=Math.round(LAT.val*1000)+' ms';$('#latAuto').checked=LAT.auto;$('#latMan').hidden=LAT.auto;$('#latMan').value=LAT.man}
 const viewT=()=>Math.max(0,smoothNow()-(playing()?LAT.val:0));
-const now=()=>A.currentTime||wantTime||0;
+const now=()=>TVMODE?(TVR.p?TVR.t+(performance.now()-TVR.at)/1000*TVR.r:TVR.t):(A.currentTime||wantTime||0);
 function setBusy(msg){const b=$('#aBusy');if(msg){b.textContent=msg;b.hidden=false}else b.hidden=true}
 
 function effGain(k){const anySolo=order.some(x=>gains[x].solo);const g=gains[k];return (g.mute||(anySolo&&!g.solo))?0:g.vol}
@@ -2217,7 +2248,7 @@ async function lvStart(){const c=ctx();try{await c.resume()}catch(e){}lvStop();i
       if(o){AE.outId=o.deviceId;AE.outLabel=o.label;try{if(A.setSinkId)await A.setSinkId(o.deviceId)}catch(e){}try{if(c.setSinkId)await c.setSinkId(o.deviceId)}catch(e){}audSink.cur=o.deviceId;toast('🎧 Cuffie sulla scheda: '+o.label.replace(/^(Predefinito|Default) - /,''))}}}catch(e){console.error(e)}lvOutFill();
   LV.on=true;$('#lvGo').disabled=false;lvRender();lvMeter();if(isMobile&&!LV.rows[0].hear)toast('Microfono acceso. Metti le cuffie e tocca 🎧 per sentirti')}
 function lvRender(){const box=$('#lvRows');if(!box)return;const g=$('#lvGo');g.classList.toggle('on',LV.on);if(!g.disabled)g.textContent=LV.on?'■ Spegni il microfono':'🎤 Accendi '+(isMobile?'il microfono':'microfono e strumenti');
-  $('#lvTitle').textContent=isMobile?'Microfono':'Microfono e strumenti';$('#pMic').classList.toggle('live',LV.on);$('#pMic').textContent=LV.on?'🎤 Microfono acceso':'🎤 Microfono';$('#lvRev').hidden=!LV.rows.some(r=>r.role==='voce');
+  $('#lvTitle').textContent=isMobile?'Microfono':'Microfono e strumenti';$('#pMic').classList.toggle('live',LV.on);$('#pMic span').textContent=LV.on?'Acceso':'Microfono';$('#lvRev').hidden=!LV.rows.some(r=>r.role==='voce');
   $$('#lvRev button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-LV.rev)<.01));
   box.innerHTML=LV.rows.map((r,i)=>`<div class="lvrow" data-lv="${i}"><div class="lvhead"><b>${esc(r.name)}</b>${isMobile?'':`<select data-lvrole aria-label="Cosa c'è su ${esc(r.name)}">${Object.entries(LV_ROLE).map(([k,v])=>`<option value="${k}" ${k===r.role?'selected':''}>${v}</option>`).join('')}</select>`}</div>
     <div class="lvvu"><i></i></div><button class="hp ${r.hear?'on':''}" data-lvhp aria-pressed="${r.hear}" title="${r.hear?'Ti senti in cuffia: tocca per spegnere':'In cuffia spento: tocca per sentirti'}"><span>🎧</span><b>${r.hear?'Sì':'No'}</b></button>
@@ -2279,7 +2310,7 @@ function frame(){const t=now(),tv=viewT();clickTick();if(performance.now()-LAT.t
 /* ================= overlay ================= */
 /* le finestre si aprono sempre in primo piano, anche sopra Palco e Video a schermo intero */
 const ovHost=()=>document.fullscreenElement||document.webkitFullscreenElement||document.body;
-const openOv=id=>{const o=$(id),host=ovHost();if(o.parentNode!==host||o!==host.lastElementChild)host.appendChild(o);o.hidden=false},closeOv=el=>{el.closest('.ov').hidden=true};
+const openOv=id=>{const o=$(id),host=ovHost();if(o.parentNode!==host||o!==host.lastElementChild)host.appendChild(o);o.hidden=false;const b=$('#donBan');if(b&&!b.hidden)donBanPlace(b)},closeOv=el=>{el.closest('.ov').hidden=true};
 $$('[data-close]').forEach(b=>b.onclick=()=>closeOv(b));
 $$('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o&&!(o.id==='ovLegal'&&prefGet('legal1')!=='1'))o.hidden=true}));
 function legalOpen(){$('#legalX').hidden=prefGet('legal1')!=='1';$('#legalOk').hidden=prefGet('legal1')==='1';openOv('#ovLegal')}
@@ -2289,7 +2320,7 @@ function firstSetup(){if(rp.key&&rp.ep)return;setSepMode('rp');openSet();const m
   m.innerHTML='<b>Benvenuto in Pure Voltage!</b> Per separare i brani in voce, basso, batteria e chitarra collega il <b>tuo account RunPod</b>: lo fai una volta sola, in circa 30 minuti, seguendo la guida passo passo. Puoi farlo anche più tardi da <b>Impostazioni</b>.<div class="row" style="margin-top:10px"><button class="chip pri" id="fsGuide">Apri la guida di RunPod</button><a class="chip" href="https://runpod.io?ref=71bp02hn" target="_blank" rel="noopener">Non hai RunPod? Crealo qui (bonus&nbsp;5&nbsp;$)</a><button class="mini" id="fsLater">Più tardi</button></div><span class="refnote">Il link per creare l&#39;account è un invito: tu ricevi 5 $ di bonus e Pure Voltage riceve crediti che la aiutano a crescere.</span>';m.hidden=false;
   $('#fsGuide').onclick=()=>$('#rpGuideOpen').click();$('#fsLater').onclick=()=>closeOv($('#fsLater'));m.scrollIntoView({block:'start'})}
 [$('#bLegal'),...$$('.legalLink')].forEach(a=>a.onclick=e=>{e.preventDefault();legalOpen()});
-if(prefGet('legal1')!=='1')setTimeout(legalOpen,300);
+if(prefGet('legal1')!=='1'&&!TVMODE)setTimeout(legalOpen,300);
 $('#bHelp').onclick=()=>openOv('#ovHelp');
 $('#bLib').onclick=()=>{renderLib();openOv('#ovLib')};
 function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});openOv('#ovSet');try{themeUI()}catch(e){}try{renderDir()}catch(e){console.error(e)}try{audList()}catch(e){console.error(e)}try{spaceInfo()}catch(e){}}
@@ -3751,10 +3782,14 @@ if(DONATE_URL){['#bDonate','#bDonate2'].forEach(s=>{const a=$(s);a.href=DONATE_U
 /* ogni tanto, tra una canzone e l'altra, un piccolo invito a sostenere il progetto */
 const DONB={ready:false,t:0};setTimeout(()=>DONB.ready=true,8000);
 function donBanHide(){clearTimeout(DONB.t);const b=$('#donBan');b.hidden=true;if(b.parentNode!==document.body)document.body.appendChild(b)}
+/* il banner va sempre in primo piano: dentro lo schermo intero attivo (palco, video, sala) e sopra la barra dei comandi del palco */
+function donBanPlace(b){const pal=$('#palco'),fs=document.fullscreenElement||document.webkitFullscreenElement,host=fs||(pal&&!pal.hidden?pal:document.body);if(b.parentNode!==host||b!==host.lastElementChild)host.appendChild(b);
+  const bar=host===pal||host.contains&&host.contains(pal)&&!pal.hidden?pal.querySelector('.pal-bar'):null;b.style.bottom=bar&&bar.offsetHeight?(bar.offsetHeight+12)+'px':''}
+document.addEventListener('fullscreenchange',()=>{const b=$('#donBan');if(b&&!b.hidden)donBanPlace(b)});
 function donBanMaybe(){if(!DONATE_URL||!DONB.ready)return;try{if(R&&R.on)return}catch(e){}
   const n=(+prefGet('donCnt')||0)+1;prefSet('donCnt',String(n));const last=+prefGet('donLast')||0;
   if(n%3!==0||Date.now()-last<20*60*1000)return;prefSet('donLast',String(Date.now()));
-  const b=$('#donBan');$('#donBanGo').href=DONATE_URL;const pal=$('#palco');if(pal&&!pal.hidden)pal.appendChild(b);else if(b.parentNode!==document.body)document.body.appendChild(b);
+  const b=$('#donBan');$('#donBanGo').href=DONATE_URL;donBanPlace(b);
   b.hidden=false;clearTimeout(DONB.t);DONB.t=setTimeout(donBanHide,12000)}
 $('#donBanX').onclick=donBanHide;$('#donBanGo').addEventListener('click',()=>setTimeout(donBanHide,300));
 /* =====================================================================
@@ -4473,6 +4508,35 @@ addEventListener('resize',()=>{if(!$('#salaOv').hidden&&SA.view==='mix')wvDraw()
 /* ---------- schede principali ---------- */
 function tabsUI(which){$$('#mainTabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===which))}
 
+
+/* ===== 📺 Trasmetti sul TV =====
+   Telefono o PC: con Chromecast / Google TV la pagina del palco si apre sul TV e segue il brano (testo e tablatura).
+   Il suono resta dove suona adesso. Se il browser non lo permette, una guida spiega la trasmissione dello schermo. */
+const TVC={req:null,conn:null,sig:'',iv:0};
+const tvLive=()=>!!(TVC.conn&&TVC.conn.state==='connected');
+function tvUI(){const b=$('#pCast');if(!b)return;const on=tvLive();b.classList.toggle('on',on);b.setAttribute('aria-label',on?'Smetti di trasmettere sul TV':'Trasmetti sul TV');b.title=on?'Sul TV · tocca per smettere':'Trasmetti sul TV'}
+function tvSend(o){try{if(tvLive())TVC.conn.send(JSON.stringify(o))}catch(e){}}
+function tvSig(){const L=K.lines,n=(TB[inst]&&TB[inst].notes)||[];return [song&&song.id,L.length,L[0]&&L[0].t,L.length&&L[L.length-1].t,K.off,inst,tabMode,tr,five,palTabOn,kscale,n.length,(CH.base||[]).length].join('|')}
+function tvSong(){TVC.sig=tvSig();tvSend({k:'song',title:(song&&song.title)||'',artist:(song&&song.artist)||'',lines:K.lines.map(l=>({s:l.s,t:l.t,e:l.e,w:l.w||null,p:l.p||0,st:l.st||0,pq:l.pq||0})),off:K.off,inst,tabMode,tr,five,tab:palTabOn,notes:(TB[inst]&&TB[inst].notes)||null,chords:CH.base||null,kscale})}
+function tvTick(){if(!tvLive()){clearInterval(TVC.iv);TVC.iv=0;tvUI();return}if(tvSig()!==TVC.sig)tvSong();tvSend({k:'t',t:viewT(),p:playing(),r:A.playbackRate||1})}
+function tvBind(c){TVC.conn=c;const up=()=>{tvUI();if(tvLive()){tvSong();toast('📺 Il palco è sul TV');if(!TVC.iv)TVC.iv=setInterval(tvTick,250)}};
+  c.onconnect=up;c.onclose=c.onterminate=()=>{if(TVC.conn===c)TVC.conn=null;tvUI()};if(c.state==='connected')up()}
+async function tvStart(){if(tvLive()){try{TVC.conn.terminate()}catch(e){}TVC.conn=null;tvUI();toast('Trasmissione sul TV fermata');return}
+  if(!('PresentationRequest' in window)){tvHelp('');return}
+  try{TVC.req=TVC.req||new PresentationRequest([new URL('./?tv=1',location.href).href]);tvBind(await TVC.req.start())}
+  catch(e){console.warn(e);tvHelp(e&&e.name==='NotAllowedError'?'Nessun TV scelto.':'Il browser non ha trovato un TV con Chromecast.')}}
+function tvHelp(why){$('#castWhy').textContent=why?why+' Puoi trasmettere tutto lo schermo:':'Questo browser non trasmette da solo: trasmetti tutto lo schermo.';$('#castRetry').hidden=!('PresentationRequest' in window);openOv('#ovCast')}
+$('#pCast').onclick=tvStart;$('#castRetry').onclick=()=>{$('#ovCast').hidden=true;tvStart()};
+/* lato TV */
+function tvBoot(){palOn=true;$('#palco').hidden=false;document.body.style.overflow='hidden';$('#palTabWrap').hidden=true;palLayout();
+  $('#kpPal').innerHTML='<div class="kempty"><div>📺 <b>Pure Voltage</b><br>In attesa del telefono…</div></div>';
+  const on=c=>{c.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(x){return}
+    if(m.k==='t'){TVR.t=m.t;TVR.at=performance.now();TVR.p=!!m.p;TVR.r=m.r||1}
+    else if(m.k==='song'){$('#palName').textContent=(m.title||'')+(m.artist?' · '+m.artist:'');
+      K.lines=m.lines||[];K.off=m.off||0;tr=m.tr||0;five=!!m.five;try{setK(m.kscale||1)}catch(x){}
+      try{if(inst!==m.inst)setInst(m.inst)}catch(x){inst=m.inst}TB[inst].notes=m.notes;CH.base=m.chords;try{setTabMode(m.tabMode)}catch(x){tabMode=m.tabMode}
+      try{kBuild()}catch(x){console.warn(x)}palTabOn=!!m.tab&&!!(m.tabMode==='chords'?m.chords&&m.chords.length:m.notes&&m.notes.length);$('#palTabWrap').hidden=!palTabOn;palLayout()}}};
+  try{navigator.presentation.receiver.connectionList.then(l=>{l.connections.forEach(on);l.onconnectionavailable=e=>on(e.connection)})}catch(e){}}
 /* ===== menu ⚙ e barra rapida ===== */
 (function(){const b=$('#bMenu'),m=$('#navMenu');const close=()=>{m.hidden=true;b.setAttribute('aria-expanded','false')};
   b.onclick=e=>{e.stopPropagation();m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden))};
@@ -4488,10 +4552,10 @@ t3Return();
 
 $('#t3Key').value=prefGet('t3key')||'';$('#t3Save').onclick=()=>{const v=$('#t3Key').value.trim();if(v&&!/^t3k_pub_/.test(v)){$('#t3St').textContent='Questa non sembra la chiave pubblica: deve iniziare con t3k_pub_ (mai la chiave segreta t3k_cs_).';return}prefSet('t3key',v);$('#t3St').textContent=v?'Chiave salvata. Ora nella Sala prove usa «Scegli su TONE3000».':'Chiave tolta.'};
 $('#t3Box').hidden=!SALA_OK;$('#t3Redir').textContent=T3.redirect;
-if(isMobile&&prefGet('legal1')==='1'&&prefGet('salaInfo1')!=='1')setTimeout(()=>salaInfo(true),9500);
+if(!TVMODE&&isMobile&&prefGet('legal1')==='1'&&prefGet('salaInfo1')!=='1')setTimeout(()=>salaInfo(true),9500);
 
 readColors();loadDir();rpLoad();mvLoad();
-(async()=>{const last=prefGet('last');let opened=false;
+(async()=>{if(TVMODE){tvBoot();requestAnimationFrame(frame);return}const last=prefGet('last');let opened=false;
   if(last&&last!=='demo'){const s=await dbGet(last);if(s){await openStored(last);opened=!!song}}
   if(!opened)await loadDemo();
   requestAnimationFrame(frame)})();
