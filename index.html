@@ -681,6 +681,34 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 .lbtn .ei{width:19px;height:19px;color:var(--accent)}.lbtn.pri{background:var(--btnbg);color:var(--btnink);border-color:transparent}.lbtn.pri .ei{color:currentColor}
 .lbtn.del .ei{color:#ff7a70}.lbtn.del.arm{background:#5a1a1a;border-color:#ff7a70;color:#fff}.lbtn:hover{border-color:var(--accent)}
 @media (min-width:700px){.lrow{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"meta acts" "tags acts"}.lrow .meta{grid-area:meta}.ltags{grid-area:tags}.lacts{grid-area:acts;display:flex;flex-wrap:wrap;justify-content:flex-end;max-width:470px}.lbtn{min-height:40px}}
+
+/* ===== finestra Suono stile pedaliera digitale ===== */
+#ovRig .sheet.rigsheet{max-width:min(1100px,96vw);width:100%}
+.rigtop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}
+.rignum{font:800 24px ui-monospace,monospace;color:var(--accent);background:#000;border-radius:8px;padding:2px 10px;min-width:40px;text-align:center}.rigname{font-size:20px;letter-spacing:.02em;text-transform:uppercase}
+.rigtop .pdpre{margin:0;flex:1 1 420px;justify-content:flex-end}
+.rigchainbox{background:radial-gradient(ellipse at 50% 0%,rgba(92,200,255,.08),transparent 70%),var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 12px;overflow-x:auto}
+.rigchain{display:flex;align-items:center;min-width:max-content}
+.rwire{width:16px;height:3px;background:linear-gradient(90deg,#3c4670,var(--accent));flex:none}
+.rio{width:42px;height:42px;border-radius:50%;border:2px solid #3c4670;display:grid;place-items:center;font:800 11px Figtree,system-ui;color:var(--dim);flex:none}
+.rblk{width:76px;height:78px;border-radius:14px;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 14%,#0b0e19);color:var(--fg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;position:relative;flex:none;cursor:pointer;padding:0}
+.rblk svg{width:28px;height:28px;fill:none;stroke:var(--c);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.rblk b{font-size:11.5px;letter-spacing:.05em;white-space:nowrap;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.rled{position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+.rblk.off{--c:#4a5272!important;opacity:.6}.rblk.off .rled{background:#1c2033;box-shadow:none}
+.rblk.sel{outline:3px solid #fff;outline-offset:3px;opacity:1}.rblk.big{width:94px;height:88px}
+.righint{margin:6px 2px 10px;font-size:13px;color:var(--dim)}
+.rigedit{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.redp{display:flex;flex-direction:column;gap:10px}.redh{display:flex;align-items:center;gap:10px}.redh b{font-size:17px}.redtag{font-size:12px;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:1px 9px}
+.rknobs{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:flex-start}.rknobs #rigDriveF{display:contents}.rknobs #rigDriveF[hidden]{display:none}
+#ovRig .rk .knob{width:62px;height:62px}#ovRig .rk{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:70px}#ovRig .rk .pdl{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--dim)}#ovRig .rk em{font:700 13px ui-monospace,monospace;font-style:normal}
+.rigone{display:block}.rigone[hidden],.redp[hidden]{display:none!important}.rigone .pedal{display:none}.rigone .pedal.cur{display:flex;max-width:520px;margin:0 auto}
+.rigfoot{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:12px 0 6px}
+.bankb.fsw{min-height:84px;border-radius:14px;background:linear-gradient(#1a2036,#0c0f1c);border:1px solid var(--line);color:var(--fg);gap:4px;position:relative;padding-top:16px}
+.bankb.fsw::before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:34px;height:5px;border-radius:3px;background:#2a304a}
+.bankb.fsw.on{border-color:var(--accent);background:linear-gradient(#1a2a44,#0c0f1c);color:var(--fg)}.bankb.fsw.on::before{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.bankb.fsw b{font-size:17px}.bankb.fsw span{font-size:12px}
+.rigbankcfg>summary{cursor:pointer;font-weight:700;padding:6px 2px;color:var(--accent)}
+@media (max-width:600px){.rblk{width:66px;height:70px}.rblk.big{width:78px;height:76px}.rigfoot{gap:5px}.bankb.fsw{min-height:70px}.rigname{font-size:17px}}
 @media (prefers-reduced-motion:reduce){.klines{transition:none}.kl{transition:none}.bar.ind i{animation-duration:4s}}
 #splash{position:fixed;inset:0;z-index:200;background:var(--splashbg);display:grid;place-items:center;transition:opacity .6s ease;cursor:pointer}
 #splash.out{opacity:0;pointer-events:none}
@@ -1094,29 +1122,30 @@ themeApply();</script>
   </div>
 </div>
 <!-- rig di un musicista -->
-<div class="ov" id="ovRig" hidden><div class="sheet">
+<div class="ov" id="ovRig" hidden><div class="sheet rigsheet">
   <div class="row"><h3 class="grow" id="rigTitle">Suono</h3><button class="mini" data-close>Chiudi</button></div>
-  <div class="box" id="rigAmpBox">
-    <h4>Amplificatore e cassa (NAM)</h4>
-    <div class="rigslot"><b>Tono NAM</b><span id="rigAmpName" hidden>nessuno</span><select class="sel" id="rigAmpSel" style="flex:1 1 260px;min-width:220px" aria-label="Tono NAM"></select>
-      <button class="chip" id="rigT3" hidden>Scegli su TONE3000</button><label class="chip"><input type="file" id="rigAmpFile" hidden>Carica file .nam</label><button class="mini" id="rigAmpDel">Togli</button></div>
-    <div class="rigslot"><b>Cassa IR</b><span id="rigIrName" hidden>nessuna</span><select class="sel" id="rigIrSel" style="flex:1 1 260px;min-width:220px" aria-label="Cassa IR"></select>
-      <button class="chip" id="rigT3ir" hidden>Scegli su TONE3000</button><label class="chip"><input type="file" id="rigIrFile" accept=".wav,audio/wav" hidden>Carica file .wav</label><button class="mini" id="rigIrDel">Togli</button></div>
-    <div class="t3credit" id="rigCredit"></div>
-    <label class="rowchk"><input type="checkbox" id="rigLive" checked> Amplificatore dal vivo in cuffia (se il PC è lento toglilo: il suono si applica dopo con il re-amp)</label>
-  </div>
-  <div class="box"><h4>Effetti</h4>
-    <div class="row rigfx">
-      <label class="field"><span>Volume in ingresso</span><input type="range" id="rigGain" min="0" max="4" step="0.05"></label>
-      <label class="field" id="rigDriveF"><span>Overdrive</span><input type="range" id="rigDrive" min="0" max="1" step="0.01"></label>
-      <label class="field"><span>Bassi</span><input type="range" id="rigBass" min="-12" max="12" step="0.5"></label>
-      <label class="field"><span>Medi</span><input type="range" id="rigMid" min="-12" max="12" step="0.5"></label>
-      <label class="field"><span>Alti</span><input type="range" id="rigTreble" min="-12" max="12" step="0.5"></label>
-      <label class="field"><span>Volume</span><input type="range" id="rigLevel" min="0" max="2" step="0.05"></label>
+  <div class="rigtop"><span class="rignum" id="rigNum">–</span><b class="rigname" id="rigName">Suono</b><span class="grow"></span><div class="pdpre" id="rigPre"><label class="field"><span>Preset</span><select class="sel" data-prsel aria-label="Preset dei pedali"></select></label><button class="chip" data-prload>📂 Carica</button><button class="chip pri" data-prsave>💾 Salva preset</button><button class="mini" data-prdel hidden>🗑 Elimina</button><button class="mini" data-prord title="Rimette i pedali nell'ordine classico">↺ Ordine classico</button><button class="mini prauto" data-prbarauto>✨ Adatto al brano</button></div></div>
+  <div class="rigchainbox"><div class="rigchain" id="rigChain"></div></div>
+  <p class="righint">Tocca un blocco per regolarlo · toccalo due volte per accenderlo o spegnerlo</p>
+  <div class="rigedit" id="rigEdit">
+    <div class="redp" data-ed="amp" id="rigAmpBox"><div class="redh"><b>Amplificatore</b><span class="redtag">NAM</span></div>
+      <div class="rigslot"><b>Tono NAM</b><span id="rigAmpName" hidden>nessuno</span><select class="sel" id="rigAmpSel" style="flex:1 1 260px;min-width:220px" aria-label="Tono NAM"></select>
+<button class="chip" id="rigT3" hidden>Scegli su TONE3000</button><label class="chip"><input type="file" id="rigAmpFile" hidden>Carica file .nam</label><button class="mini" id="rigAmpDel">Togli</button></div>
+      <div class="rknobs"><label class="kn pdkn rk"><input type="range" id="rigGain" min="0" max="4" step="0.05"><span class="knob" tabindex="0" role="slider" aria-label="Ingresso" title="Ingresso: trascina su o giù"><b></b></span><span class="pdl">Ingresso</span><em></em></label><span id="rigDriveF"><label class="kn pdkn rk"><input type="range" id="rigDrive" min="0" max="1" step="0.01"><span class="knob" tabindex="0" role="slider" aria-label="Drive" title="Drive: trascina su o giù"><b></b></span><span class="pdl">Drive</span><em></em></label></span><label class="kn pdkn rk"><input type="range" id="rigLevel" min="0" max="2" step="0.05"><span class="knob" tabindex="0" role="slider" aria-label="Volume" title="Volume: trascina su o giù"><b></b></span><span class="pdl">Volume</span><em></em></label></div>
+      <div class="t3credit" id="rigCredit"></div>
+      <label class="rowchk"><input type="checkbox" id="rigLive" checked> Amplificatore dal vivo in cuffia (se il PC è lento toglilo: il suono si applica dopo con il re-amp)</label>
     </div>
+    <div class="redp" data-ed="cab"><div class="redh"><b>Cassa</b><span class="redtag">IR</span></div>
+      <div class="rigslot"><b>Cassa IR</b><span id="rigIrName" hidden>nessuna</span><select class="sel" id="rigIrSel" style="flex:1 1 260px;min-width:220px" aria-label="Cassa IR"></select>
+<button class="chip" id="rigT3ir" hidden>Scegli su TONE3000</button><label class="chip"><input type="file" id="rigIrFile" accept=".wav,audio/wav" hidden>Carica file .wav</label><button class="mini" id="rigIrDel">Togli</button></div>
+    </div>
+    <div class="redp" data-ed="eq"><div class="redh"><b>Equalizzatore</b></div>
+      <div class="rknobs"><label class="kn pdkn rk"><input type="range" id="rigBass" min="-12" max="12" step="0.5"><span class="knob" tabindex="0" role="slider" aria-label="Bassi" title="Bassi: trascina su o giù"><b></b></span><span class="pdl">Bassi</span><em></em></label><label class="kn pdkn rk"><input type="range" id="rigMid" min="-12" max="12" step="0.5"><span class="knob" tabindex="0" role="slider" aria-label="Medi" title="Medi: trascina su o giù"><b></b></span><span class="pdl">Medi</span><em></em></label><label class="kn pdkn rk"><input type="range" id="rigTreble" min="-12" max="12" step="0.5"><span class="knob" tabindex="0" role="slider" aria-label="Alti" title="Alti: trascina su o giù"><b></b></span><span class="pdl">Alti</span><em></em></label></div>
+    </div>
+    <div class="pboard rigone" id="rigBoard"></div>
   </div>
-  <div class="box" id="rigBankBox"><h4>🔢 Banchi</h4><p class="snote">Cinque suoni pronti da cambiare con un tocco mentre suoni. Il banco 1 è sempre il più adatto al brano caricato.</p><div id="rigBanks"></div></div>
-  <div class="box"><h4>🎛 Pedaliera</h4><p class="snote">Tocca l'interruttore per accendere o spegnere un pedale; gira le manopole trascinando su o giù; per cambiare l'ordine trascina il pedale dal nome o usa ◀ ▶. Funziona anche mentre suoni e registri: la registrazione resta pulita e i pedali si sentono anche nel mix.</p><div class="pdpre" id="rigPre"><label class="field"><span>Preset</span><select class="sel" data-prsel aria-label="Preset dei pedali"></select></label><button class="chip" data-prload>📂 Carica</button><button class="chip pri" data-prsave>💾 Salva preset</button><button class="mini" data-prdel hidden>🗑 Elimina</button><button class="mini" data-prord title="Rimette i pedali nell'ordine classico">↺ Ordine classico</button><button class="mini prauto" data-prbarauto>✨ Adatto al brano</button></div><div class="pboard" id="rigBoard"></div></div>
+  <div id="rigBankBox"><div class="rigfoot" id="rigFoot"></div>
+    <details class="rigbankcfg"><summary>Scegli cosa c'è in ogni banco</summary><p class="snote">Cinque suoni pronti da cambiare con un tocco mentre suoni. Il banco 1 è sempre il più adatto al brano caricato.</p><div id="rigBanks"></div></details></div>
   <p class="legalnote">I modelli NAM e le casse IR di TONE3000 appartengono ai loro autori, con la licenza indicata da ciascuno. <a href="https://www.tone3000.com/search" target="_blank" rel="noopener">Sfoglia tutto il catalogo TONE3000</a></p>
 </div></div>
 <!-- informazioni -->
@@ -4455,12 +4484,33 @@ function sRender(){try{sStemApply();SA.baseMono=null}catch(e){}
     let tmr=0;el.querySelectorAll('[data-fx]').forEach(inp=>inp.oninput=()=>{t.rig[inp.dataset.fx]=+inp.value;clearTimeout(tmr);tmr=setTimeout(()=>{sBuild(t).then(sTapBuild);sSave()},250)})}}
 /* ---------- finestra «Suono» (rig) ---------- */
 let RIG=null;const RIG_SL={rigGain:'gain',rigDrive:'drive',rigBass:'bass',rigMid:'mid',rigTreble:'treble',rigLevel:'level'};
-function rigOpen(t){RIG=t;$('#rigTitle').textContent='Suono di '+t.name+' ('+ROLES[t.role]+')';for(const[id,k]of Object.entries(RIG_SL))$('#'+id).value=t.rig[k];
-  $('#rigAmpBox').hidden=t.role==='voce';$('#rigDriveF').hidden=!(t.role==='chitarra'||t.role==='altro');rigBoardDraw(t);$('#rigLive').checked=t.rig.live!==false;rigInfo();openOv('#ovRig')}
-function rigInfo(){if(!RIG.__mix)setTimeout(sRender,50);const r=RIG.rig;{const t=RIG;for(const[id,k]of[['#rigAmpSel','nam'],['#rigIrSel','ir']]){const sel=$(id);sSndFill(sel,t,k);sel.onchange=()=>sSndPick(t,k,sel.value,sel)}}$('#rigAmpName').textContent=r.amp?r.amp.name:'nessuno';$('#rigIrName').textContent=r.ir?r.ir.name:'nessuna';
-  const cr=[r.amp,r.ir].filter(x=>x&&x.creator);$('#rigCredit').innerHTML=cr.map(x=>`<span class="t3c">${x.avatar?`<img src="${esc(x.avatar)}" alt="">`:''}<b>${esc(x.name)}</b> di <a href="${esc(x.url||'https://www.tone3000.com')}" target="_blank" rel="noopener">${esc(x.creator)}</a> · TONE3000</span>`).join('')}
+function rigOpen(t){RIG=t;$('#rigTitle').textContent='Suono di '+t.name+' ('+ROLES[t.role]+')';for(const[id,k]of Object.entries(RIG_SL))$('#'+id).value=t.rig[k];rkSync();
+  RIGSEL=t.role==='voce'?'eq':'amp';$('#rigDriveF').hidden=!(t.role==='chitarra'||t.role==='altro');rigBoardDraw(t);$('#rigLive').checked=t.rig.live!==false;rigInfo();openOv('#ovRig')}
 
-function pedApply(t,k,full){const F=fxOf(t.rig,t.role);if(t.node&&t.node.fxb)t.node.fxb.set(F);
+/* ===== finestra «Suono» in stile pedaliera digitale: catena di blocchi, manopole del blocco scelto, banchi a pedale ===== */
+let RIGSEL='amp',RIGLAST=0;
+const RBI={gate:'<path d="M3 12h4l2-6 3 12 2-6h7"/>',comp:'<path d="M4 7h16M4 17h16M9 10l3 2-3 2M15 10l-3 2 3 2"/>',wah:'<path d="M4 18c3-12 13-12 16 0"/><path d="M12 6v-2"/>',oct:'<path d="M5 17V7l7 5 7-5v10"/>',pitch:'<path d="M8 19V5M5 8l3-3 3 3M16 5v14M13 16l3 3 3-3"/>',
+ od:'<path d="M3 12c3-6 5 6 8 0s5 6 8 0"/>',ds:'<path d="M3 15l3-6 3 6 3-6 3 6 3-6 3 6"/>',phaser:'<path d="M3 12c2-5 4-5 6 0s4 5 6 0 4-5 6 0"/>',flanger:'<path d="M3 9c3 6 6-6 9 0s6 6 9 0M3 15c3 6 6-6 9 0s6 6 9 0" opacity=".9"/>',chorus:'<path d="M3 12c2.5-5 5.5-5 9 0s6.5 5 9 0"/><path d="M3 16c2.5-3 5.5-3 9 0s6.5 3 9 0" opacity=".6"/>',
+ vibrato:'<path d="M3 12c1.5-4 3-4 4.5 0s3 4 4.5 0 3-4 4.5 0 3 4 4.5 0"/>',trem:'<path d="M4 16V8M8 14v-4M12 17V7M16 14v-4M20 16V8"/>',delay:'<path d="M4 15h3M9 12h3M14 9h3M19 6h1" stroke-width="2.4"/>',rev:'<path d="M4 18c3-9 6-9 8 0M10 18c3-6 5-6 7 0M15 18c2-3 3.5-3 5 0"/>',
+ amp:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="9.5" r="1.3"/><circle cx="12" cy="9.5" r="1.3"/><circle cx="16" cy="9.5" r="1.3"/><path d="M6 14.5h12"/>',cab:'<rect x="4" y="3.5" width="16" height="17" rx="2"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',eq:'<path d="M6 4v16M12 4v16M18 4v16"/><circle cx="6" cy="14" r="2"/><circle cx="12" cy="8" r="2"/><circle cx="18" cy="12" r="2"/>'};
+function rkSync(){$$('#ovRig .rk').forEach(L=>{const inp=L.querySelector('input'),k=L.querySelector('.knob'),em=L.querySelector('em'),mn=+inp.min,mx=+inp.max,v=+inp.value;k.style.setProperty('--p',Math.round((v-mn)/(mx-mn)*100));em.textContent=mx<=1.01&&mn>=0?Math.round(v*100)+'%':mn<0?(v>0?'+':'')+(Math.round(v*10)/10)+' dB':(Math.round(v*100)/100)+'×'})}
+function rigChainDraw(t){const box=$('#rigChain');if(!box||!t)return;const F=fxOf(t.rig,t.role),r=t.rig,voice=t.role==='voce';
+  const blk=(k,name,col,on,big)=>`<button class="rblk ${on?'':'off'} ${RIGSEL===k?'sel':''} ${big?'big':''}" data-rb="${k}" style="--c:${col}" aria-pressed="${RIGSEL===k}" title="${esc(name)}${on?' · acceso':' · spento'}"><i class="rled"></i><svg viewBox="0 0 24 24" aria-hidden="true">${RBI[k]||RBI.eq}</svg><b>${esc(name)}</b></button>`;
+  const eqOn=!!(r.bass||r.mid||r.treble),parts=['<span class="rio">IN</span>'];
+  for(const k of fxOrder(F)){if(k==='amp'){if(!voice){parts.push(blk('amp',r.amp?'Ampli NAM':'Ampli','#ff5f57',!!(r.amp||r.drive>0),1),blk('cab','Cassa IR','#ffd23f',!!r.ir,1))}parts.push(blk('eq','EQ','#7fd6a5',eqOn||voice));continue}
+    const p=PED_BY[k];parts.push(blk(k,p.s,`color-mix(in srgb,${p.c} 75%,#fff)`,!!F[k].on))}
+  parts.push('<span class="rio">OUT</span>');box.innerHTML=parts.join('<span class="rwire"></span>');
+  box.querySelectorAll('[data-rb]').forEach(b=>b.onclick=()=>{const k=b.dataset.rb,now=Date.now(),dbl=RIGSEL===k&&now-RIGLAST<450;RIGLAST=now;
+    if(dbl&&PED_BY[k]){F[k].on=F[k].on?0:1;pedApply(t,k,true);const card=$(`#rigBoard .pedal[data-pd="${k}"]`);if(card)pedSync(card,F[k],PED_BY[k]);toast(PED_BY[k].n+' '+(F[k].on?'acceso':'spento'));return}
+    RIGSEL=k;rigSelUI(t);rigChainDraw(t)});
+  const bi=t.rig.bank,ref=bi!=null?bankRefs(t)[bi]:null,rr=ref!=null?bankResolve(ref,t.role):null;$('#rigNum').textContent=bi!=null?String(bi+1):'–';$('#rigName').textContent=rr?rr.name:'Suono personale';
+  rigSelUI(t);const sb=box.querySelector('.rblk.sel');if(sb){const bx=box.parentElement,l=sb.offsetLeft,r=l+sb.offsetWidth;if(l<bx.scrollLeft+20||r>bx.scrollLeft+bx.clientWidth-20)bx.scrollLeft=l-bx.clientWidth/2+sb.offsetWidth/2}}
+function rigSelUI(t){const k=RIGSEL;$$('#rigEdit .redp').forEach(d=>d.hidden=d.dataset.ed!==k);$$('#rigBoard .pedal').forEach(c=>c.classList.toggle('cur',c.dataset.pd===k&&!c.classList.contains('ampcard')));$('#rigBoard').hidden=!PED_BY[k]}
+$$('#ovRig .rk').forEach(L=>knobify(L));
+function rigInfo(){if(!RIG.__mix)setTimeout(sRender,50);const r=RIG.rig;{const t=RIG;for(const[id,k]of[['#rigAmpSel','nam'],['#rigIrSel','ir']]){const sel=$(id);sSndFill(sel,t,k);sel.onchange=()=>sSndPick(t,k,sel.value,sel)}}$('#rigAmpName').textContent=r.amp?r.amp.name:'nessuno';$('#rigIrName').textContent=r.ir?r.ir.name:'nessuna';
+  rigChainDraw(RIG);const cr=[r.amp,r.ir].filter(x=>x&&x.creator);$('#rigCredit').innerHTML=cr.map(x=>`<span class="t3c">${x.avatar?`<img src="${esc(x.avatar)}" alt="">`:''}<b>${esc(x.name)}</b> di <a href="${esc(x.url||'https://www.tone3000.com')}" target="_blank" rel="noopener">${esc(x.creator)}</a> · TONE3000</span>`).join('')}
+
+function pedApply(t,k,full){const F=fxOf(t.rig,t.role);if(t.node&&t.node.fxb)t.node.fxb.set(F);if(RIG===t&&!$('#ovRig').hidden)rigChainDraw(t);
   if(t.__mix||RIG&&RIG===t&&RIG.__mix){if(WV.play){wvStop();wvPlay()}sAutoSaveSoon&&sAutoSaveSoon()}else sSave();
   $$(`[data-pdt="${t.id}"][data-pd="${k}"]`).forEach(b=>{b.classList.toggle('on',!!F[k].on);b.setAttribute('aria-pressed',!!F[k].on)})}
 
@@ -4555,13 +4605,13 @@ function prBar(id,getFx,apply,role){const bar=$('#'+id);if(!bar)return;const sel
   bar.querySelector('[data-prbarauto]').onclick=()=>{const r=prAutoApply(role,getFx());if(r)apply(true)};
   bar.querySelector('[data-prord]').onclick=()=>{getFx()._order=ORDER0.slice();apply(true);toast('Pedali nell\'ordine classico')};
   del.onclick=()=>{const v=sel.value;if(!v.startsWith('u'))return;const L=prList(),m=L[+v.slice(1)];if(!m||!confirm('Elimino il preset «'+m.name+'»?'))return;L.splice(+v.slice(1),1);prPut(L);fill('');toast('Preset eliminato')};fill('')}
-function rigBoardDraw(t){const box=$('#rigBoard');if(!box)return;$('#rigBankBox').hidden=!!(t.__mix||RIG&&RIG.__mix);if(!$('#rigBankBox').hidden)bankCfgDraw(t);const F=fxOf(t.rig,t.role);box.innerHTML=pedHTML(F,{bpm:true,noAmp:t.role==='voce'});pedBind(box,F,(k)=>pedApply(t,k),()=>pedReorder(t));
-  prBar('rigPre',()=>fxOf(t.rig,t.role),()=>pedReorder(t),t.role)}
+function rigBoardDraw(t){const box=$('#rigBoard');if(!box)return;$('#rigBankBox').hidden=!!(t.__mix||RIG&&RIG.__mix);if(!$('#rigBankBox').hidden){bankCfgDraw(t);$('#rigFoot').innerHTML=bankBtns(t,'fsw')}const F=fxOf(t.rig,t.role);box.innerHTML=pedHTML(F,{bpm:true,noAmp:t.role==='voce'});pedBind(box,F,(k)=>pedApply(t,k),()=>pedReorder(t));
+  prBar('rigPre',()=>fxOf(t.rig,t.role),()=>pedReorder(t),t.role);rigChainDraw(t)}
 function pedReorder(t){rigBoardDraw(t);if(t.__mix||RIG&&RIG===t&&RIG.__mix){if(WV.play){wvStop();wvPlay()}sAutoSaveSoon&&sAutoSaveSoon();return}sBuild(t).then(sTapBuild);sSave();sRender()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-pdt][data-pd]');if(b){e.preventDefault();const t=SA.tracks.find(x=>x.id===b.dataset.pdt);if(!t)return;const F=fxOf(t.rig,t.role),k=b.dataset.pd;F[k].on=F[k].on?0:1;pedApply(t,k,true);
     const card=document.querySelector(`#rigBoard .pedal[data-pd="${k}"]`);if(card&&RIG===t)pedSync(card,F[k],PED_BY[k]);toast(PED_BY[k].n+' '+(F[k].on?'acceso':'spento')+' · '+t.name);return}
   const bb=e.target.closest('[data-board]');if(bb){const t=SA.tracks.find(x=>x.id===bb.dataset.board);if(t){rigOpen(t);setTimeout(()=>{const x=$('#rigBoard');if(x)x.scrollIntoView({block:'start'})},120)}}});
-let rigT=0;for(const[id,k]of Object.entries(RIG_SL))$('#'+id).oninput=e=>{if(!RIG)return;RIG.rig[k]=+e.target.value;clearTimeout(rigT);rigT=setTimeout(()=>{if(RIG.__mix){RIG.proc=null;return}sBuild(RIG).then(sTapBuild);sSave()},250)};
+let rigT=0;for(const[id,k]of Object.entries(RIG_SL))$('#'+id).oninput=e=>{if(!RIG)return;RIG.rig[k]=+e.target.value;rigChainDraw(RIG);clearTimeout(rigT);rigT=setTimeout(()=>{if(RIG.__mix){RIG.proc=null;return}sBuild(RIG).then(sTapBuild);sSave()},250)};
 $('#rigLive').onchange=e=>{RIG.rig.live=e.target.checked;sBuild(RIG).then(sTapBuild);sSave()};
 $('#rigAmpFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!RIG)return;const bytes=await f.arrayBuffer();try{namCheck(bytes)}catch(x){toast('File non valido: '+x.message);return}
   const key=await ampPut({kind:'nam',name:f.name.replace(/\.nam$/i,''),bytes});RIG.rig.amp={key,name:f.name.replace(/\.nam$/i,'')};rigInfo();await sBuild(RIG);sTapBuild();sSave();sRender();toast('Amplificatore caricato')};
