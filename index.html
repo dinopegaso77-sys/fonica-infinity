@@ -153,7 +153,9 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .slhead{display:flex;align-items:center;gap:10px}.slhead h3{flex:1;margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .slmore{border:1px solid var(--line);border-radius:12px;padding:0 10px}.slmore summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700}.slmore[open]{padding-bottom:10px}
 .slgrid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;align-items:end}.slbtns{display:flex;gap:6px;flex-wrap:wrap}.slfull{grid-column:1/-1}
-.slfoot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:10px}.sladd{display:flex;gap:8px}.sladd .sel{flex:1;min-width:0}.slfoot #slGo{min-height:52px;font-size:17px}
+.slpick{border:1px solid var(--line);border-radius:14px;background:var(--raise);padding:8px 10px;margin:6px 0 4px}.slpick[hidden]{display:none}.slpickh{display:flex;align-items:center;gap:8px;margin-bottom:6px}.slpickh b{flex:1;min-width:0}.slpickh .mini[hidden]{display:none}
+.slpickl{display:flex;flex-wrap:wrap;gap:6px;max-height:34vh;overflow:auto}.slpk{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 14px Figtree,system-ui;cursor:pointer;text-align:left}.slpk span{font-weight:900;color:var(--accent)}.slpk small{color:var(--dim);font-weight:500}.slpk.in{opacity:.6;border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.slfoot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:10px}.sladd{display:flex;gap:8px;flex-wrap:wrap}.sladd .sel{flex:1 1 200px;min-width:0}.sladd #slQ{flex:1 1 160px;min-width:0}.slfoot #slGo{min-height:52px;font-size:17px}
 .sllist{list-style:none;margin:0;padding:0 2px 0 0;display:flex;flex-direction:column;gap:6px;counter-reset:sl;flex:1 1 auto!important;min-height:120px;overflow:auto;overscroll-behavior:contain}
 .sllist li{flex-shrink:0}
 
@@ -1735,7 +1737,8 @@ themeApply();</script>
   </details>
   <ol class="sllist" id="slList"></ol>
   <div class="slfoot">
-    <div class="sladd"><select class="sel" id="slAdd" aria-label="Aggiungi un brano alla scaletta"></select><button class="mini" id="slAddAll" title="Mette in scaletta tutta la libreria">+ Tutti</button></div>
+    <div class="sladd"><select class="sel" id="slArt" aria-label="Scegli l'artista"></select><input class="inp" id="slQ" type="search" placeholder="🔍 Cerca un titolo" autocomplete="off" aria-label="Cerca un brano"><button class="mini" id="slAddAll" title="Mette in scaletta tutta la libreria">+ Tutta la libreria</button></div>
+    <div class="slpick" id="slPick" hidden><div class="slpickh"><b id="slPickT"></b><button class="mini" id="slPickAll">+ Tutti i suoi brani</button></div><div class="slpickl" id="slPickL"></div></div>
     <label class="rowchk"><input type="checkbox" id="slAuto"> Alla fine passa da solo al prossimo (5 s)</label>
     <button class="chip" id="slStop" hidden>⏹ Smetti di seguire la scaletta</button>
     <button class="chip pri" id="slGo">▶ Suona dal primo</button>
@@ -2827,14 +2830,23 @@ let SCLLIB=[];
 async function slOpen(){SCLLIB=(await libMeta())||[];SCLLIB.sort((a,b)=>pkSort((a.artist||'')+' '+(a.title||''),(b.artist||'')+' '+(b.title||'')));$('#slAuto').checked=SCL.auto;$('#slName').value=SCL.name||'';slDraw();openOv('#ovSet2')}
 function slFind(it){return SCLLIB.find(x=>x.id===it.id)||SCLLIB.find(x=>(x.title||'').toLowerCase()===(it.title||'').toLowerCase()&&(x.artist||'').toLowerCase()===(it.artist||'').toLowerCase())}
 function slDraw(){const L=slSaved();$('#slTitle').textContent='📋 '+(SCL.name||'Scaletta')+(SCL.items.length?' · '+SCL.items.length+' brani':'');$('#slSaved').innerHTML='<option value="">— scegli —</option>'+L.map((x,i)=>`<option value="${i}" ${x.name===SCL.name?'selected':''}>${esc(x.name)} (${x.items.length})</option>`).join('');
-  $('#slAdd').innerHTML='<option value="">— scegli un brano dalla libreria —</option>'+SCLLIB.map(x=>`<option value="${esc(x.id)}">${esc((x.artist?x.artist+' · ':'')+(x.title||'Senza titolo'))}</option>`).join('');
+  {const by=new Map();for(const x of SCLLIB){const a=(x.artist||'').trim()||'Artista sconosciuto';by.set(a,(by.get(a)||0)+1)}const arts=[...by.keys()].sort((a,b)=>pkSort(a,b)),cur=$('#slArt').value;
+   $('#slArt').innerHTML='<option value="">— scegli l\'artista ('+arts.length+') —</option>'+arts.map(a=>`<option value="${esc(a)}" ${a===cur?'selected':''}>${esc(a)} (${by.get(a)})</option>`).join('');slPickDraw()}
   const ol=$('#slList');ol.innerHTML=SCL.items.length?SCL.items.map((it,i)=>{const ok=!!slFind(it);return`<li class="${i===SCL.i?'cur':''} ${ok?'':'miss'}" data-sli="${i}"><span class="slt"><b>${esc(it.title||'Senza titolo')}</b><small>${esc(it.artist||'')}${ok?'':' · non è nella libreria di questo dispositivo'}</small></span>
     <span class="slbt"><button class="mini" data-slp="${i}" aria-label="Suona questo brano" ${ok?'':'disabled'}>▶</button><button class="mini" data-slm="-1" aria-label="Sposta su">▲</button><button class="mini" data-slm="1" aria-label="Sposta giù">▼</button><button class="mini" data-slx aria-label="Togli dalla scaletta">✕</button></span></li>`}).join(''):'<li class="slempty">La scaletta è vuota: aggiungi i brani qui sotto.</li>';
   ol.querySelectorAll('[data-sli]').forEach(li=>{const i=+li.dataset.sli;li.querySelector('[data-slp]').onclick=()=>{closeOvAll();slPlay(i)};
     li.querySelectorAll('[data-slm]').forEach(b=>b.onclick=()=>{const j=i+(+b.dataset.slm);if(j<0||j>=SCL.items.length)return;const[x]=SCL.items.splice(i,1);SCL.items.splice(j,0,x);if(SCL.i===i)SCL.i=j;else if(SCL.i===j)SCL.i=i;slKeep();slDraw()});
     li.querySelector('[data-slx]').onclick=()=>{SCL.items.splice(i,1);if(SCL.i>=SCL.items.length)SCL.i=SCL.items.length-1;else if(i<SCL.i)SCL.i--;slKeep();slDraw();slBarUI()}})}
 function closeOvAll(){$$('.ov').forEach(o=>{if(o.id==='ovSet2')o.hidden=true})}
-$('#slAdd').onchange=e=>{const x=SCLLIB.find(y=>y.id===e.target.value);if(!x)return;SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});slKeep();slDraw();$('#slList').lastElementChild&&$('#slList').lastElementChild.scrollIntoView({block:'nearest'})};
+/* scelta dei brani: prima l'artista, poi i suoi brani (oppure cerca per titolo) */
+function slPickList(){const a=$('#slArt').value,q=$('#slQ').value.trim().toLowerCase();if(q.length>=2)return SCLLIB.filter(x=>((x.title||'')+' '+(x.artist||'')).toLowerCase().includes(q));if(!a)return null;return SCLLIB.filter(x=>((x.artist||'').trim()||'Artista sconosciuto')===a).sort((x,y)=>pkSort(x.title||'',y.title||''))}
+function slPickDraw(){const L=slPickList(),box=$('#slPick');if(!L){box.hidden=true;return}box.hidden=false;const q=$('#slQ').value.trim();
+  $('#slPickT').textContent=q.length>=2?(L.length?L.length+' trovati per «'+q+'»':'Nessun brano trovato per «'+q+'»'):$('#slArt').value;$('#slPickAll').hidden=q.length>=2||!L.length;
+  $('#slPickL').innerHTML=L.map(x=>{const inn=SCL.items.some(it=>it.id===x.id);return`<button class="slpk ${inn?'in':''}" data-pk="${esc(x.id)}" ${inn?'title="Già in scaletta"':''}><span>${inn?'✓':'+'}</span><b>${esc(x.title||'Senza titolo')}</b>${q.length>=2?`<small>${esc(x.artist||'')}</small>`:''}</button>`}).join('');
+  $$('#slPickL [data-pk]').forEach(b=>b.onclick=()=>{const x=SCLLIB.find(y=>y.id===b.dataset.pk);if(!x)return;SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});slKeep();slDraw();toast('Aggiunto: '+(x.title||'brano'))})}
+$('#slArt').onchange=()=>{$('#slQ').value='';slPickDraw()};
+$('#slQ').oninput=()=>slPickDraw();
+$('#slPickAll').onclick=()=>{const L=slPickList()||[];let n=0;for(const x of L)if(!SCL.items.some(it=>it.id===x.id)){SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});n++}slKeep();slDraw();toast(n?'Aggiunti '+n+' brani':'Sono già tutti in scaletta')};
 $('#slAddAll').onclick=()=>{for(const x of SCLLIB)if(!SCL.items.some(it=>it.id===x.id))SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});slKeep();slDraw()};
 $('#slAuto').onchange=e=>{SCL.auto=e.target.checked;prefSet('slAuto',SCL.auto?'1':'0')};
 $('#slSave').onclick=()=>{const name=$('#slName').value.trim();if(!name){toast('Scrivi un nome per la scaletta');$('#slName').focus();return}if(!SCL.items.length){toast('La scaletta è vuota');return}
