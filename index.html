@@ -194,6 +194,22 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .cpbar{position:relative;height:40px;border-radius:12px;background:var(--raise);border:1px solid var(--line);overflow:hidden}.cpbar i{position:absolute;inset:0 auto 0 0;width:0;background:color-mix(in srgb,var(--accent) 45%,transparent);transition:width .1s linear}.cpbar b{position:relative;display:grid;place-items:center;height:100%;font-weight:800}
 .cpcurve{display:grid;gap:4px}.cpcurve canvas{width:100%;height:auto;border-radius:12px;background:var(--raise);border:1px solid var(--line)}.cpcurve small{display:flex;gap:14px;justify-content:center;color:var(--muted)}.cpk1::before,.cpk2::before{content:'';display:inline-block;width:16px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle;background:#ff9f43}.cpk2::before{background:var(--accent)}
 [hidden]{display:none!important}
+.legacc{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface)}.legacc[hidden]{display:none}
+.legchk{display:flex;align-items:center;gap:12px;flex:1;min-width:220px;cursor:pointer;font-size:16px}.legchk input{width:26px;height:26px;flex:none;accent-color:var(--accent)}.legacc .chip{min-height:48px;padding:0 22px;font-weight:800}.legacc .chip:disabled{opacity:.45}
+.supsheet{max-width:min(760px,96vw)}.supload{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:12px;border:1px dashed var(--line);margin:8px 0;font-size:14px}.supload span{flex:1;min-width:200px;color:var(--muted)}
+.supnav{list-style:none;display:flex;gap:6px;margin:10px 0;padding:0;overflow-x:auto}.supnav li{flex:1;min-width:0;display:grid;justify-items:center;gap:4px;padding:8px 4px;border-radius:12px;cursor:pointer;border:1px solid var(--line);background:var(--surface);font-size:12.5px;font-weight:700;color:var(--muted)}
+.supnav li i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:var(--raise);border:2px solid var(--line);color:var(--ink)}
+.supnav li span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media (max-width:420px){.supnav{gap:4px}.supnav li{font-size:11px;padding:7px 2px}}
+.supnav li.ok i{background:#22c55e;border-color:#22c55e;color:#fff}.supnav li.cur{border-color:var(--accent);color:var(--ink);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 35%,transparent)}.supnav li.cur i{border-color:var(--accent)}
+.supstep{display:grid;gap:10px;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--surface)}.supstep[hidden]{display:none}.supstep h4{margin:0;font-size:18px}.supstep h4 small{font-weight:600;color:var(--muted)}.supstep p{margin:0}
+.supst{padding:8px 12px;border-radius:10px;background:var(--raise);font-weight:700;color:var(--muted)}.supst.ok{background:color-mix(in srgb,#22c55e 18%,transparent);color:#4ade80}
+.supstep .field{display:grid;gap:4px}.supstep .field span{text-transform:none;letter-spacing:0;font-size:14px;font-weight:700;color:var(--muted)}.supstep .inp{width:100%}.supfoot{margin-top:12px}.supfoot .chip{min-height:46px}
+.supsum{list-style:none;margin:0;padding:0;display:grid;gap:6px}.supsum li{padding:8px 12px;border-radius:10px;background:var(--raise)}.supsum li.ok b{color:#4ade80}.supsafe{padding:12px;border-radius:12px;border:1px solid color-mix(in srgb,var(--accent) 50%,transparent)}
+.linklist{list-style:none;margin:6px 0;padding:0;display:grid;gap:6px}.linklist li{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:12px;background:var(--raise);border:1px solid var(--line)}.linklist li>div{flex:1;min-width:0;display:grid}.linklist small{color:var(--muted)}
+.linklist .lk{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--surface);border:2px solid var(--line)}.linklist li.ok .lk{background:#22c55e;border-color:#22c55e;color:#fff}
+.chip.danger{color:#ff8a80;border-color:color-mix(in srgb,#ff5a4f 50%,transparent)}.chip.dangerpri{background:#d93a30;border-color:#d93a30;color:#fff}.chip.dangerpri:disabled{opacity:.4}
+.kdel{padding:12px;border-radius:12px;border:1px solid #d93a30;background:color-mix(in srgb,#d93a30 10%,transparent);display:grid;gap:8px}.kdel[hidden]{display:none}.kdel p{margin:0}
+details.advset{padding:0}details.advset>summary{cursor:pointer;padding:14px 16px;list-style:revert}details.advset>summary small{color:var(--muted);font-weight:500}details.advset[open]>summary{border-bottom:1px solid var(--line)}details.advset>.box{margin:10px;border-style:dashed}
 .drlist li{gap:10px}.drlist .slbt{display:grid!important;grid-template-columns:2fr 1fr!important;gap:6px;min-width:180px}.drlist .slbt>*{min-height:44px;width:100%}.drlist li img{width:54px;height:96px;object-fit:cover;border-radius:8px;background:#000;flex:none}.drlist li::before{display:none}
 @media (max-width:599px){.drlist li{grid-template-columns:54px minmax(0,1fr)!important;grid-template-areas:'n t' 'b b'!important}.drlist li img{grid-area:n}}
 .banks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
@@ -1249,13 +1265,22 @@ themeApply();</script>
 <div class="ov" id="ovSet" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Impostazioni generali</h3><button class="mini" data-close>Chiudi</button></div>
   <div class="sepmsg" id="setMsg" role="alert" hidden></div>
+  <div class="box linkbox">
+    <h4>🔗 Collegamenti</h4>
+    <p>I servizi che fanno funzionare Pure Voltage. Con la configurazione guidata li colleghi uno alla volta, nell'ordine giusto.</p>
+    <ol class="linklist" id="linkList"></ol>
+    <div class="row"><button class="chip pri" id="linkWiz">🧭 Configurazione guidata</button></div>
+  </div>
   <div class="box bkbox">
-    <h4>💾 Copia di sicurezza delle chiavi</h4>
-    <p>Salva in un file le chiavi di RunPod, MVSEP e TONE3000 e le tue impostazioni (Sala prove, pedali, sfondo, preferenze). Se il browser le cancella quando lo chiudi, con «Ricarica dal file» tornano tutte in un attimo.</p>
+    <h4>💾 Le tue chiavi: salva, ricarica, cancella</h4>
+    <p>Salva in un file le chiavi di R2, RunPod, TONE3000 e MVSEP con le tue impostazioni. Se il browser le cancella, o vuoi usare l'app su un altro dispositivo, con «Ricarica dal file» tornano tutte in un attimo.</p>
     <div class="row"><button class="chip pri" id="bkSave">💾 Salva le chiavi in un file</button><button class="chip" id="bkLoad">📂 Ricarica dal file</button><input type="file" id="bkFile" accept=".json,application/json" hidden></div>
     <p class="snote" id="bkInfo"></p>
     <p class="snote">⚠️ Il file contiene le tue chiavi personali: tienilo solo sul tuo PC o telefono e non mandarlo a nessuno.</p>
-    <p class="snote" id="spaceInfo"></p><div class="row"><button class="mini" id="spaceTest">🧪 Prova il salvataggio</button><button class="mini" id="spaceFix">🛠 Ripara l'archivio</button><button class="mini" id="spaceDrafts">🗑 Elimina tutte le bozze video</button></div>
+    <div class="row"><button class="chip danger" id="kDel">🗑 Cancella le chiavi da questo dispositivo</button></div>
+    <div class="kdel" id="kDelBox" hidden><p><b>Sei sicuro?</b> Tolgo da questo dispositivo le chiavi di R2, RunPod, TONE3000 e MVSEP. Brani e bozze restano. Se vorrai riaverle, prima salvale in un file.</p>
+      <label class="rowchk"><input type="checkbox" id="kDelChk"> Ho capito: cancella le chiavi</label>
+      <div class="row"><button class="chip" id="kDelNo">Annulla</button><button class="chip dangerpri" id="kDelGo" disabled>Cancella definitivamente</button></div></div>
   </div>
   <div class="box">
     <h4>☁️ Dove salvo i brani</h4>
@@ -1265,6 +1290,24 @@ themeApply();</script>
     <div class="row" id="r2Acts" hidden><button class="chip" id="r2Edit">🔑 Collegamento R2</button><button class="chip" id="r2All">☁️ Salva tutta la Libreria nel cloud</button><button class="chip" id="r2SyncGo">🔄 Sincronizza adesso</button></div>
     <p class="snote" id="r2Sync"></p>
   </div>
+  <div class="box" id="audBox">
+    <h4>Audio: scheda audio, microfono e cuffie</h4>
+    <p>Scegli da dove entra la tua voce o il tuo strumento (anche una scheda audio esterna) e dove senti la musica. Valgono per il microfono e per «Registra».</p>
+    <div class="row"><label class="field"><span>Ingresso (microfono o scheda audio)</span><select class="sel" id="audIn"><option value="">Predefinito del sistema</option></select></label>
+      <label class="field"><span>Canale di ingresso</span><select class="sel" id="audCh"><option value="auto">Automatico</option><option value="L">Solo ingresso 1 (sinistro)</option><option value="R">Solo ingresso 2 (destro)</option><option value="stereo">Stereo: 1 a sinistra, 2 a destra</option></select></label></div>
+    <div class="row" id="audOutRow"><label class="field"><span>Uscita (cuffie o altoparlanti)</span><select class="sel" id="audOut"><option value="">Predefinita del sistema</option></select></label></div>
+    <div class="row" style="gap:6px 16px">
+      <label class="rowchk"><input type="checkbox" id="audEcho"> Riduci l'eco (con gli altoparlanti)</label>
+      <label class="rowchk"><input type="checkbox" id="audNoise"> Riduci il rumore</label>
+      <label class="rowchk"><input type="checkbox" id="audAgc"> Volume automatico</label>
+    </div>
+    <div class="row" style="gap:6px 16px"><label class="rowchk"><input type="checkbox" id="audMon"> Ascoltami in cuffia mentre suono e canto</label>
+      <label class="field" style="min-width:160px"><span>Volume dell'ascolto</span><input type="range" id="audMonV" min="0" max="1.5" step="0.05" value="0.8"></label></div>
+    <div class="row"><button class="mini" id="audTest">Prova l'ingresso</button><div class="vu" aria-hidden="true"><i id="audVu"></i></div><span class="status grow" id="audMsg"></span></div>
+    <p class="legalnote">Per una scheda audio o uno strumento collegato togli «Riduci l'eco», «Riduci il rumore» e «Volume automatico»: il suono resta naturale. Per ascoltarti usa le cuffie, altrimenti fischia.</p>
+  </div>
+  <details class="box advset">
+    <summary><b>Altre impostazioni</b> <small>separazione, TONE3000, cartella delle tracce, archivio</small></summary>
   <div class="box">
     <h4>Separazione delle tracce</h4>
     <p>Scegli dove vengono separati i brani che aggiungi.</p>
@@ -1306,22 +1349,6 @@ themeApply();</script>
       </details>
     </div>
   </div>
-  <div class="box" id="audBox">
-    <h4>Audio: scheda audio, microfono e cuffie</h4>
-    <p>Scegli da dove entra la tua voce o il tuo strumento (anche una scheda audio esterna) e dove senti la musica. Valgono per il microfono e per «Registra».</p>
-    <div class="row"><label class="field"><span>Ingresso (microfono o scheda audio)</span><select class="sel" id="audIn"><option value="">Predefinito del sistema</option></select></label>
-      <label class="field"><span>Canale di ingresso</span><select class="sel" id="audCh"><option value="auto">Automatico</option><option value="L">Solo ingresso 1 (sinistro)</option><option value="R">Solo ingresso 2 (destro)</option><option value="stereo">Stereo: 1 a sinistra, 2 a destra</option></select></label></div>
-    <div class="row" id="audOutRow"><label class="field"><span>Uscita (cuffie o altoparlanti)</span><select class="sel" id="audOut"><option value="">Predefinita del sistema</option></select></label></div>
-    <div class="row" style="gap:6px 16px">
-      <label class="rowchk"><input type="checkbox" id="audEcho"> Riduci l'eco (con gli altoparlanti)</label>
-      <label class="rowchk"><input type="checkbox" id="audNoise"> Riduci il rumore</label>
-      <label class="rowchk"><input type="checkbox" id="audAgc"> Volume automatico</label>
-    </div>
-    <div class="row" style="gap:6px 16px"><label class="rowchk"><input type="checkbox" id="audMon"> Ascoltami in cuffia mentre suono e canto</label>
-      <label class="field" style="min-width:160px"><span>Volume dell'ascolto</span><input type="range" id="audMonV" min="0" max="1.5" step="0.05" value="0.8"></label></div>
-    <div class="row"><button class="mini" id="audTest">Prova l'ingresso</button><div class="vu" aria-hidden="true"><i id="audVu"></i></div><span class="status grow" id="audMsg"></span></div>
-    <p class="legalnote">Per una scheda audio o uno strumento collegato togli «Riduci l'eco», «Riduci il rumore» e «Volume automatico»: il suono resta naturale. Per ascoltarti usa le cuffie, altrimenti fischia.</p>
-  </div>
   <div class="box" id="t3Box">
     <h4>TONE3000: suoni NAM per chitarra e basso (Sala prove)</h4>
     <p>Per scegliere amplificatori e casse dal catalogo TONE3000 serve la <b>chiave pubblica</b> dell'app (inizia con <code>t3k_pub_</code>). La crei su TONE3000 in <b>Settings → API Keys</b>, registrando come indirizzo di ritorno <code id="t3Redir"></code>. Non inserire mai la chiave segreta (<code>t3k_cs_</code>).</p>
@@ -1333,7 +1360,68 @@ themeApply();</script>
     <p>Le tracce separate vengono salvate anche sul PC, divise per artista: <code>Artista / Titolo</code>, con voce, basso, batteria, altro e il testo (.lrc). Con «Aggiungi brano» li ritrovi tutti.</p>
     <div class="row"><button class="mini" id="bPickDir">Scegli la cartella</button><span class="status grow" id="dirStatus">Nessuna cartella scelta.</span></div>
   </div>
+  <div class="box">
+    <h4>Archivio di questo dispositivo</h4>
+    <p class="snote" id="spaceInfo"></p><div class="row"><button class="mini" id="spaceTest">🧪 Prova il salvataggio</button><button class="mini" id="spaceFix">🛠 Ripara l'archivio</button><button class="mini" id="spaceDrafts">🗑 Elimina tutte le bozze video</button></div>
+  </div>
+  </details>
 
+</div></div>
+<div class="ov" id="ovSetup" hidden><div class="sheet supsheet">
+  <div class="row"><h3 class="grow">Prepara Pure Voltage</h3><button class="mini" id="supX">Lo faccio dopo</button></div>
+  <p class="snote">Quattro collegamenti, <b>uno alla volta e in quest'ordine</b>. Ogni passo fatto prende la spunta. Si fa una volta sola; quello che salti lo ritrovi in <b>Impostazioni</b>.</p>
+  <div class="supload"><span>Hai già il file con le chiavi (salvato su un altro dispositivo)?</span><button class="mini" id="supFile">📂 Carica il file delle chiavi</button></div>
+  <ol class="supnav" id="supNav">
+    <li data-s="0"><i>1</i><span>Cloud R2</span></li><li data-s="1"><i>2</i><span>RunPod</span></li><li data-s="2"><i>3</i><span>TONE3000</span></li><li data-s="3"><i>4</i><span>MVSEP</span></li><li data-s="4"><i>✓</i><span>Fine</span></li>
+  </ol>
+  <section class="supstep" data-s="0">
+    <h4>Passo 1 · Cloud R2: il tuo archivio</h4>
+    <p>Qui si salvano brani, testi, bozze e video: li ritrovi su telefono, tablet e PC e non li perdi se cambi dispositivo. <b>Gratis fino a 10 GB.</b> Circa 10 minuti, una volta sola.</p>
+    <div class="supst" id="supSt0"></div>
+    <div class="row"><button class="chip pri" id="supR2">☁️ Collega R2 passo passo</button></div>
+    <p class="snote">Si apre la finestra con i quattro campi da compilare e, sotto, la guida schermata per schermata. Quando compare ✅ chiudila: qui troverai la spunta.</p>
+  </section>
+  <section class="supstep" data-s="1" hidden>
+    <h4>Passo 2 · RunPod: separazione, testi e video</h4>
+    <p>Separa i brani in voce, basso, batteria e chitarra, trascrive i testi, migliora i video e copia il suono del brano. Funziona con il <b>tuo</b> account e il <b>tuo</b> credito: di solito pochi centesimi a brano. Circa 30 minuti, una volta sola.</p>
+    <div class="supst" id="supSt1"></div>
+    <div class="row"><button class="chip pri" id="supRpGuide">📖 Apri la guida passo passo</button><a class="chip" href="https://runpod.io?ref=71bp02hn" target="_blank" rel="noopener">Crea l'account RunPod</a></div>
+    <label class="field"><span>Chiave RunPod (inizia con <code>rpa_</code>)</span><input class="inp" id="supRpKey" type="text" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-secret spellcheck="false" placeholder="rpa_…"></label>
+    <label class="field"><span>ID dell'endpoint (la sigla sotto il nome, in Serverless)</span><input class="inp" id="supRpEp" autocomplete="off" spellcheck="false" placeholder="es. abc123xyz"></label>
+    <div class="row"><button class="chip pri" id="supRpGo">Salva e prova</button></div>
+    <div class="rpmsg" id="supRpMsg" role="status" aria-live="polite"></div>
+  </section>
+  <section class="supstep" data-s="2" hidden>
+    <h4>Passo 3 · TONE3000: ampli e casse per chitarra e basso</h4>
+    <p>I suoni veri di amplificatori e casse (NAM) per la Sala prove. <b>Gratis.</b> Circa 5 minuti.</p>
+    <div class="supst" id="supSt2"></div>
+    <ol class="wiz">
+      <li><div><b>Entra su TONE3000</b><span>Con <b>Sign up</b> crei l'account gratuito, con <b>Log in</b> entri se ce l'hai già.</span></div><a class="mini" href="https://www.tone3000.com" target="_blank" rel="noopener">Apri TONE3000</a></li>
+      <li><div><b>Apri Settings → API Keys</b><span>Come indirizzo di ritorno (redirect) registra questo: <code id="supT3Redir"></code></span></div><div class="row"><button class="mini" id="supT3Copy">Copia l'indirizzo</button><a class="mini" href="https://www.tone3000.com/settings" target="_blank" rel="noopener">Apri Settings</a></div></li>
+      <li><div><b>Copia la chiave pubblica e incollala qui</b><span>Inizia con <code>t3k_pub_</code>. <b>Mai</b> la chiave segreta, quella che inizia con <code>t3k_cs_</code>.</span>
+        <div class="row" style="margin-top:8px"><input class="inp grow" id="supT3Key" placeholder="t3k_pub_…" spellcheck="false" autocomplete="off"><button class="chip pri" id="supT3Go">Salva</button></div></div></li>
+    </ol>
+    <div class="rpmsg" id="supT3Msg" role="status" aria-live="polite"></div>
+  </section>
+  <section class="supstep" data-s="3" hidden>
+    <h4>Passo 4 · MVSEP: separazione gratuita di riserva <small>(facoltativo)</small></h4>
+    <p>Separa i brani gratis se RunPod non c'è o non risponde. È più lento (si aspetta in coda) e testo e voci del duetto si fanno dopo. Se hai collegato RunPod puoi saltarlo.</p>
+    <div class="supst" id="supSt3"></div>
+    <ol class="wiz">
+      <li><div><b>Crea un account gratuito su MVSEP</b><span>Serve solo un indirizzo email.</span></div><a class="mini" href="https://mvsep.com/register" target="_blank" rel="noopener">Apri MVSEP</a></li>
+      <li><div><b>Copia la tua chiave</b><span>Nella pagina «API» del tuo profilo MVSEP trovi la chiave (api token): copiala.</span></div><a class="mini" href="https://mvsep.com/user-api" target="_blank" rel="noopener">Apri la chiave</a></li>
+      <li><div><b>Incolla la chiave qui e premi «Collega»</b>
+        <div class="row" style="margin-top:8px"><input class="inp grow" id="supMvKey" type="text" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-secret spellcheck="false" placeholder="Incolla qui la chiave MVSEP"><button class="chip pri" id="supMvGo">Collega</button></div></div></li>
+    </ol>
+    <div class="rpmsg" id="supMvMsg" role="status" aria-live="polite"></div>
+  </section>
+  <section class="supstep" data-s="4" hidden>
+    <h4>Fatto!</h4>
+    <ul class="supsum" id="supSum"></ul>
+    <div class="supsafe"><b>Ultimo consiglio, importante:</b> salva le chiavi in un file e tienilo da parte. Se il browser le cancella, o vuoi usare l'app su un altro dispositivo, le ricarichi in un attimo con «Carica il file delle chiavi».
+      <div class="row" style="margin-top:8px"><button class="chip pri" id="supBk">💾 Salva le chiavi in un file</button></div></div>
+  </section>
+  <div class="row supfoot"><button class="chip" id="supBack">← Indietro</button><span class="grow"></span><button class="chip" id="supSkip">Salta per ora</button><button class="chip pri" id="supNext">Avanti →</button></div>
 </div></div>
 <div class="ov" id="ovPick" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Cerca il testo su LRCLIB</h3><button class="mini" data-close>Chiudi</button></div>
@@ -1434,7 +1522,7 @@ themeApply();</script>
     <p><b>Responsabilità.</b> L'autore di Pure Voltage non controlla i file caricati e non è responsabile dell'uso che l'utente fa dell'app o dei contenuti che crea: ogni utente ne risponde personalmente. L'autore si dissocia da qualsiasi utilizzo che violi i diritti d'autore o la legge. L'app è fornita gratuitamente «così com'è», senza garanzie.</p>
     <p><b>Servizi esterni.</b> I brani inviati a MVSEP o al proprio account RunPod per la separazione, e le ricerche su LRCLIB e iTunes, seguono le condizioni di quei servizi. Il pulsante per creare l'account RunPod è un <b>link di invito</b>: chi si iscrive riceve 5 $ di bonus dopo la prima ricarica e l'autore di Pure Voltage riceve crediti RunPod. I file restano sul tuo dispositivo, salvo quelli che scegli di inviare per la separazione.</p>
   </div>
-  <div class="row"><button class="chip pri" id="legalOk">Ho capito e accetto</button></div>
+  <div class="legacc" id="legalRow"><label class="legchk"><input type="checkbox" id="legalChk"><span><b>Ho letto e accetto</b> le condizioni qui sopra</span></label><button class="chip pri" id="legalOk" disabled>Continua</button></div>
 </div></div>
 <div class="donban" id="donBan" hidden role="note" aria-live="polite"><span class="dbt">💙 Ti piace <b>Pure Voltage</b>? Sostieni il progetto con una piccola donazione.</span><a class="chip pri" id="donBanGo" href="#" target="_blank" rel="noopener">Dona con PayPal</a><button class="mini" id="donBanX" aria-label="Chiudi">✕</button></div>
 <div class="ov" id="ovDonate" hidden><div class="sheet">
@@ -2643,17 +2731,15 @@ const ovHost=()=>{const f=document.fullscreenElement||document.webkitFullscreenE
 const openOv=id=>{const o=$(id),host=ovHost();if(o.parentNode!==host||o!==host.lastElementChild)host.appendChild(o);o.hidden=false;const b=$('#donBan');if(b&&!b.hidden)donBanPlace(b)},closeOv=el=>{el.closest('.ov').hidden=true};
 $$('[data-close]').forEach(b=>b.onclick=()=>closeOv(b));
 $$('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o&&!(o.id==='ovLegal'&&prefGet('legal1')!=='1'))o.hidden=true}));
-function legalOpen(){$('#legalX').hidden=prefGet('legal1')!=='1';$('#legalOk').hidden=prefGet('legal1')==='1';openOv('#ovLegal')}
-$('#legalOk').onclick=()=>{prefSet('legal1','1');$('#ovLegal').hidden=true;setTimeout(()=>{firstSetup();if(isMobile&&!SALA_OK&&prefGet('salaInfo1')!=='1')salaInfo(true)},250)};
+function legalOpen(){const ok=prefGet('legal1')==='1';$('#legalX').hidden=!ok;$('#legalRow').hidden=ok;$('#legalChk').checked=false;$('#legalOk').disabled=true;openOv('#ovLegal')}
+$('#legalChk').onchange=()=>{$('#legalOk').disabled=!$('#legalChk').checked};
+$('#legalOk').onclick=()=>{if(!$('#legalChk').checked)return;prefSet('legal1','1');$('#ovLegal').hidden=true;setTimeout(()=>{if(prefGet('setupDone')!=='1')setupOpen();else if(isMobile&&!SALA_OK&&prefGet('salaInfo1')!=='1')salaInfo(true)},250)};
 /* primo accesso: dopo le note legali porta a collegare RunPod */
-function firstSetup(){if(rp.key&&rp.ep)return;setSepMode('rp');openSet();const m=$('#setMsg');
-  m.innerHTML='<b>Benvenuto in Pure Voltage!</b> Per separare i brani in voce, basso, batteria e chitarra collega il <b>tuo account RunPod</b>: lo fai una volta sola, in circa 30 minuti, seguendo la guida passo passo. Puoi farlo anche più tardi da <b>Impostazioni</b>.<div class="row" style="margin-top:10px"><button class="chip pri" id="fsGuide">Apri la guida di RunPod</button><a class="chip" href="https://runpod.io?ref=71bp02hn" target="_blank" rel="noopener">Non hai RunPod? Crealo qui (bonus&nbsp;5&nbsp;$)</a><button class="mini" id="fsLater">Più tardi</button></div><span class="refnote">Il link per creare l&#39;account è un invito: tu ricevi 5 $ di bonus e Pure Voltage riceve crediti che la aiutano a crescere.</span>';m.hidden=false;
-  $('#fsGuide').onclick=()=>$('#rpGuideOpen').click();$('#fsLater').onclick=()=>closeOv($('#fsLater'));m.scrollIntoView({block:'start'})}
 [$('#bLegal'),...$$('.legalLink')].forEach(a=>a.onclick=e=>{e.preventDefault();legalOpen()});
 if(prefGet('legal1')!=='1'&&!TVMODE)setTimeout(legalOpen,300);
 $('#bHelp').onclick=()=>openOv('#ovHelp');
 $('#bLib').onclick=()=>{renderLib();openOv('#ovLib')};
-function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});openOv('#ovSet');try{themeUI()}catch(e){}try{renderDir()}catch(e){console.error(e)}try{audList()}catch(e){console.error(e)}try{spaceInfo()}catch(e){}}
+function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});openOv('#ovSet');try{linkUI()}catch(e){}try{themeUI()}catch(e){}try{renderDir()}catch(e){console.error(e)}try{audList()}catch(e){console.error(e)}try{spaceInfo()}catch(e){}}
 $('#ovSet').addEventListener('click',e=>{if(e.target.closest('[data-close]')||e.target.id==='ovSet')audTestStop()});
 document.addEventListener('pointerdown',()=>audSink(),{once:true});
 $('#bSet').onclick=()=>{$('#setMsg').hidden=true;openSet()};
@@ -5302,6 +5388,59 @@ async function toneUI(){const box=$('#toneList'),who=$('#toneWho');let ready={};
 t3Return();
 
 $('#t3Key').value=prefGet('t3key')||'';$('#t3Save').onclick=()=>{const v=$('#t3Key').value.trim();if(v&&!/^t3k_pub_/.test(v)){$('#t3St').textContent='Questa non sembra la chiave pubblica: deve iniziare con t3k_pub_ (mai la chiave segreta t3k_cs_).';return}prefSet('t3key',v);$('#t3St').textContent=v?'Chiave salvata. Ora nella Sala prove usa «Scegli su TONE3000».':'Chiave tolta.'};
+/* ===================== PRIMA CONFIGURAZIONE GUIDATA: R2 → RunPod → TONE3000 → MVSEP ===================== */
+const SUP={s:0,t:0};
+const supDone=()=>[r2On(),!!(rp.key&&rp.ep),!!prefGet('t3key'),!!mv.key];
+const SUP_N=['Cloud R2','RunPod','TONE3000','MVSEP'];
+function supUI(){const d=supDone(),s=SUP.s;$$('#supNav li').forEach(li=>{const i=+li.dataset.s;li.classList.toggle('cur',i===s);li.classList.toggle('ok',i<4&&d[i]);li.querySelector('i').textContent=i<4?(d[i]?'✓':String(i+1)):'✓'});
+  $$('#ovSetup .supstep').forEach(x=>x.hidden=+x.dataset.s!==s);
+  const st=(i,ok,no)=>{const el=$('#supSt'+i);if(el){el.className='supst'+(ok?' ok':'');el.textContent=ok?'✓ '+ok:no}};
+  st(0,d[0]&&'Collegato: brani, bozze e video si salvano anche nel cloud.','Non ancora collegato.');
+  st(1,d[1]&&'Collegato: '+(rp.ep||''),'Non ancora collegato.');
+  st(2,d[2]&&'Chiave salvata.','Non ancora collegato.');
+  st(3,d[3]&&'Collegato.','Non collegato (facoltativo).');
+  $('#supBack').hidden=s===0;$('#supSkip').hidden=s>=4||d[s];$('#supNext').textContent=s>=4?'Inizia a usare Pure Voltage':s===3?'Fine →':'Avanti →';$('#supNext').classList.toggle('pri',s>=4||!!d[s]);
+  if(s===4)$('#supSum').innerHTML=SUP_N.map((n,i)=>`<li class="${d[i]?'ok':''}"><b>${d[i]?'✓':'–'}</b> ${n}: ${d[i]?'collegato':i===3?'non collegato (facoltativo)':'da fare, lo trovi in Impostazioni'}</li>`).join('');
+  try{linkUI()}catch(e){}}
+function setupOpen(step){const d=supDone();SUP.s=step!=null?step:Math.max(0,d.findIndex(x=>!x));if(SUP.s<0)SUP.s=4;
+  $('#supRpKey').value=rp.key||'';$('#supRpEp').value=rp.ep||'';$('#supT3Key').value=prefGet('t3key')||'';$('#supMvKey').value=mv.key||'';$('#supT3Redir').textContent=T3.redirect;
+  ['#supRpMsg','#supT3Msg','#supMvMsg'].forEach(i=>$(i).textContent='');supUI();openOv('#ovSetup');clearInterval(SUP.t);SUP.t=setInterval(()=>{if($('#ovSetup').hidden){clearInterval(SUP.t);return}supUI()},1200)}
+function supClose(){prefSet('setupDone','1');$('#ovSetup').hidden=true;clearInterval(SUP.t);try{linkUI()}catch(e){}if(isMobile&&!SALA_OK&&prefGet('salaInfo1')!=='1')setTimeout(()=>salaInfo(true),300)}
+$('#supX').onclick=supClose;
+$('#supBack').onclick=()=>{SUP.s=Math.max(0,SUP.s-1);supUI()};
+$('#supSkip').onclick=()=>{SUP.s=Math.min(4,SUP.s+1);supUI()};
+$('#supNext').onclick=()=>{if(SUP.s>=4){supClose();toast('Tutto pronto: buona musica!');return}SUP.s++;supUI()};
+$$('#supNav li').forEach(li=>li.onclick=()=>{SUP.s=+li.dataset.s;supUI()});
+$('#supFile').onclick=()=>{prefSet('setupDone','1');$('#bkLoad').click()};
+$('#supR2').onclick=()=>{r2Open();const det=$('#ovR2 details.slmore');if(det&&!r2Ok())det.open=true};
+$('#supRpGuide').onclick=()=>{rpView();openOv('#ovRpGuide')};
+$('#supRpGo').onclick=async()=>{const k=$('#supRpKey').value.trim(),v=$('#supRpEp').value.trim().replace(/^.*\/v2\//,'').replace(/\/.*$/,''),m=$('#supRpMsg');
+  if(!k){m.textContent='Incolla prima la chiave RunPod (inizia con rpa_).';m.className='rpmsg err';return}if(!v){m.textContent='Incolla l\'ID dell\'endpoint.';m.className='rpmsg err';return}
+  const b=$('#supRpGo');b.disabled=true;m.className='rpmsg';m.textContent='Provo il collegamento…';
+  rp.key=k;rp.ep=v;$('#rpKey').value=k;$('#rpEpManual').value=v;$('#rpEp').value=v;await setPut('runpod',rp);let ok=false;try{ok=await rpHealth(true)}catch(e){}
+  const t=$('#rpStatus').textContent.trim();m.className='rpmsg '+(ok?'ok':'err');m.textContent=ok?'✅ RunPod risponde: collegato!':(t||'RunPod non risponde ancora: se hai appena creato l\'endpoint aspetta un minuto e riprova.');
+  try{rpView()}catch(e){}b.disabled=false;supUI();if(ok)setTimeout(()=>{if(SUP.s===1){SUP.s=2;supUI()}},1200)};
+$('#supT3Copy').onclick=()=>{navigator.clipboard.writeText(T3.redirect).then(()=>toast('Indirizzo copiato')).catch(()=>toast(T3.redirect))};
+$('#supT3Go').onclick=()=>{const v=$('#supT3Key').value.trim(),m=$('#supT3Msg');if(!/^t3k_pub_\w+/.test(v)){m.className='rpmsg err';m.textContent=/^t3k_cs_/.test(v)?'Questa è la chiave SEGRETA: non va mai messa nell\'app. Copia quella pubblica, che inizia con t3k_pub_.':'Questa non sembra la chiave pubblica: deve iniziare con t3k_pub_.';return}
+  prefSet('t3key',v);$('#t3Key').value=v;m.className='rpmsg ok';m.textContent='✅ Chiave TONE3000 salvata.';supUI();setTimeout(()=>{if(SUP.s===2){SUP.s=3;supUI()}},1200)};
+$('#supMvGo').onclick=async()=>{const v=$('#supMvKey').value.trim(),m=$('#supMvMsg');if(!v){m.className='rpmsg err';m.textContent='Prima incolla la chiave copiata da MVSEP.';return}
+  const b=$('#supMvGo');b.disabled=true;m.className='rpmsg';m.textContent='Provo il collegamento…';$('#mvKey').value=v;try{await $('#mvConnect').onclick()}catch(e){}
+  m.className='rpmsg '+(mv.key?'ok':'err');m.innerHTML=$('#mvStatus').innerHTML||(mv.key?'✅ Collegato.':'Non sono riuscito a collegarlo.');b.disabled=false;supUI();if(mv.key)setTimeout(()=>{if(SUP.s===3){SUP.s=4;supUI()}},1200)};
+$('#supBk').onclick=()=>$('#bkSave').click();
+/* Impostazioni: i quattro collegamenti con la loro spunta */
+function linkUI(){const el=$('#linkList');if(!el)return;const d=supDone(),w=['brani, bozze e video nel cloud','separazione, testi, video, suono del brano','ampli e casse per la Sala prove','separazione gratuita di riserva (facoltativo)'];
+  el.innerHTML=SUP_N.map((n,i)=>`<li class="${d[i]?'ok':''}"><b class="lk">${d[i]?'✓':'–'}</b><div><b>${n}</b><small>${w[i]}</small></div><button class="mini" data-lk="${i}">${d[i]?'Cambia':'Collega'}</button></li>`).join('');
+  el.querySelectorAll('[data-lk]').forEach(b=>b.onclick=()=>setupOpen(+b.dataset.lk))}
+$('#linkWiz').onclick=()=>setupOpen();
+/* cancellazione delle chiavi: due passaggi, per non farlo per sbaglio */
+$('#kDel').onclick=()=>{$('#kDelBox').hidden=false;$('#kDelChk').checked=false;$('#kDelGo').disabled=true;$('#kDel').hidden=true;$('#kDelBox').scrollIntoView({block:'nearest'})};
+$('#kDelNo').onclick=()=>{$('#kDelBox').hidden=true;$('#kDel').hidden=false};
+$('#kDelChk').onchange=()=>{$('#kDelGo').disabled=!$('#kDelChk').checked};
+$('#kDelGo').onclick=async()=>{if(!$('#kDelChk').checked)return;clearTimeout(keysT);
+  ['#rpKey','#rpEp','#rpEpManual','#mvKey','#t3Key','#r2Acc','#r2Bucket','#r2Key','#r2Secret','#supRpKey','#supRpEp','#supT3Key','#supMvKey'].forEach(i=>{const e=$(i);if(e)e.value=''});
+  rp.key='';rp.ep='';mv.key='';try{await setPut('runpod',rp);await setPut('mvsep',mv)}catch(e){}
+  ['keyRp','keyMv','keyR2','t3key','t3tok','syncAt'].forEach(k=>{try{localStorage.removeItem('f8_'+k)}catch(e){}});R2={mode:'local'};r2Save();
+  toast('Chiavi cancellate da questo dispositivo: riapro l\'app…');setTimeout(()=>location.reload(),1000)};
 $('#t3Box').hidden=!SALA_OK;$('#t3Redir').textContent=T3.redirect;
 if(!TVMODE&&isMobile&&!SALA_OK&&prefGet('legal1')==='1'&&prefGet('salaInfo1')!=='1')setTimeout(()=>salaInfo(true),9500);
 
