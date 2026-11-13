@@ -153,6 +153,12 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .slhead{display:flex;align-items:center;gap:10px}.slhead h3{flex:1;margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .slmore{border:1px solid var(--line);border-radius:12px;padding:0 10px}.slmore summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700}.slmore[open]{padding-bottom:10px}
 .slgrid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;align-items:end}.slbtns{display:flex;gap:6px;flex-wrap:wrap}.slfull{grid-column:1/-1}
+.slpickbox{max-height:44vh;overflow:auto;display:grid;gap:6px}.slpickbox .slpickl{max-height:none;overflow:visible}
+.slalb{display:flex;align-items:center;gap:10px;margin-top:6px}.slalb .alh{flex:1;min-width:0;display:grid}.slalb .alh small{color:var(--dim)}
+.alcov{width:52px;height:52px;flex:none;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;padding:0;overflow:hidden;cursor:pointer;color:var(--dim)}.alcov img{width:100%;height:100%;object-fit:cover;display:block}.alcov .ei,.alcov svg{width:26px;height:26px}.alcov.none{cursor:default;opacity:.5}
+.lalb{display:flex;align-items:center;gap:10px;margin:8px 0 4px 6px}.lalb .alcov{width:44px;height:44px}.lalb b{font-size:15px;color:var(--fg)}
+.cvwtop{display:flex;gap:14px;align-items:center;margin:6px 0 10px}.cvwtop small{display:block;color:var(--dim)}.cvwimg{width:120px;height:120px;border-radius:14px;border:1px solid var(--line);background:var(--raise);display:grid;place-items:center;overflow:hidden;flex:none}.cvwimg img{width:100%;height:100%;object-fit:cover}.cvwimg svg{width:48px;height:48px;color:var(--dim)}
+.cvwlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}.cvwopt{display:grid;gap:4px;padding:6px;border-radius:12px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer;text-align:left}.cvwopt img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}.cvwopt small{font-size:11.5px;color:var(--dim);line-height:1.3}.cvwopt:hover{border-color:var(--accent)}
 .slpick{border:1px solid var(--line);border-radius:14px;background:var(--raise);padding:8px 10px;margin:6px 0 4px}.slpick[hidden]{display:none}.slpickh{display:flex;align-items:center;gap:8px;margin-bottom:6px}.slpickh b{flex:1;min-width:0}.slpickh .mini[hidden]{display:none}
 .slpickl{display:flex;flex-wrap:wrap;gap:6px;max-height:34vh;overflow:auto}.slpk{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 14px Figtree,system-ui;cursor:pointer;text-align:left}.slpk span{font-weight:900;color:var(--accent)}.slpk small{color:var(--dim);font-weight:500}.slpk.in{opacity:.6;border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
 .slfoot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:10px}.sladd{display:flex;gap:8px;flex-wrap:wrap}.sladd .sel{flex:1 1 200px;min-width:0}.sladd #slQ{flex:1 1 160px;min-width:0}.slfoot #slGo{min-height:52px;font-size:17px}
@@ -1444,6 +1450,13 @@ themeApply();</script>
   <ol class="sllist spclist" id="spcList"></ol>
   <div class="row"><span class="grow"></span><button class="chip pri" id="spcGo">Applica</button></div>
 </div></div>
+<div class="ov" id="ovCover" hidden><div class="sheet slsheet cvwsheet">
+  <div class="slhead"><h3>Copertina dell'album</h3><button class="mini" data-close>Chiudi</button></div>
+  <div class="cvwtop"><div class="cvwimg" id="cvwImg"></div><div><b id="cvwT"></b><small id="cvwA"></small></div></div>
+  <div class="row"><button class="chip pri" id="cvwFind">🔍 Cerca su internet</button><button class="chip" id="cvwUp">📷 Carica un'immagine</button><button class="chip" id="cvwDel">Togli</button></div>
+  <input type="file" id="cvwFile" accept="image/*" hidden>
+  <p class="snote" id="cvwMsg"></p><div class="cvwlist" id="cvwList"></div>
+</div></div>
 <div class="ov" id="ovPick" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Cerca il testo su LRCLIB</h3><button class="mini" data-close>Chiudi</button></div>
   <p>Controllo titolo, artista e durata del brano. «Sincronizzato, stessa durata» è la scelta migliore: testo e tempi sono già pronti.</p>
@@ -1738,7 +1751,7 @@ themeApply();</script>
   <ol class="sllist" id="slList"></ol>
   <div class="slfoot">
     <div class="sladd"><select class="sel" id="slArt" aria-label="Scegli l'artista"></select><input class="inp" id="slQ" type="search" placeholder="🔍 Cerca un titolo" autocomplete="off" aria-label="Cerca un brano"><button class="mini" id="slAddAll" title="Mette in scaletta tutta la libreria">+ Tutta la libreria</button></div>
-    <div class="slpick" id="slPick" hidden><div class="slpickh"><b id="slPickT"></b><button class="mini" id="slPickAll">+ Tutti i suoi brani</button></div><div class="slpickl" id="slPickL"></div></div>
+    <div class="slpick" id="slPick" hidden><div class="slpickh"><b id="slPickT"></b><button class="mini" id="slPickAll">+ Tutti i suoi brani</button></div><div class="slpickbox" id="slPickL"></div></div>
     <label class="rowchk"><input type="checkbox" id="slAuto"> Alla fine passa da solo al prossimo (5 s)</label>
     <button class="chip" id="slStop" hidden>⏹ Smetti di seguire la scaletta</button>
     <button class="chip pri" id="slGo">▶ Suona dal primo</button>
@@ -2583,6 +2596,7 @@ mic:'<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 
 duet:'<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 19.5a5.5 5.5 0 0 1 11 0M13 19.5a4.5 4.5 0 0 1 8.5-2"/>',
 spark:'<path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>',
 cloud:'<path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/>',
+disc:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M7.5 9.5a5 5 0 0 1 2-2.2" opacity=".6"/>',
 split:'<path d="M3 12h6M9 12c3 0 4-6 8-6h4M9 12h12M9 12c3 0 4 6 8 6h4"/>',
 cloudup:'<path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/><path d="M12 16v-5.5M9.6 12.6 12 10.2l2.4 2.4"/>',
 share:'<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/>',
@@ -2840,10 +2854,15 @@ function slDraw(){const L=slSaved();$('#slTitle').textContent='📋 '+(SCL.name|
 function closeOvAll(){$$('.ov').forEach(o=>{if(o.id==='ovSet2')o.hidden=true})}
 /* scelta dei brani: prima l'artista, poi i suoi brani (oppure cerca per titolo) */
 function slPickList(){const a=$('#slArt').value,q=$('#slQ').value.trim().toLowerCase();if(q.length>=2)return SCLLIB.filter(x=>((x.title||'')+' '+(x.artist||'')).toLowerCase().includes(q));if(!a)return null;return SCLLIB.filter(x=>((x.artist||'').trim()||'Artista sconosciuto')===a).sort((x,y)=>pkSort(x.title||'',y.title||''))}
-function slPickDraw(){const L=slPickList(),box=$('#slPick');if(!L){box.hidden=true;return}box.hidden=false;const q=$('#slQ').value.trim();
-  $('#slPickT').textContent=q.length>=2?(L.length?L.length+' trovati per «'+q+'»':'Nessun brano trovato per «'+q+'»'):$('#slArt').value;$('#slPickAll').hidden=q.length>=2||!L.length;
-  $('#slPickL').innerHTML=L.map(x=>{const inn=SCL.items.some(it=>it.id===x.id);return`<button class="slpk ${inn?'in':''}" data-pk="${esc(x.id)}" ${inn?'title="Già in scaletta"':''}><span>${inn?'✓':'+'}</span><b>${esc(x.title||'Senza titolo')}</b>${q.length>=2?`<small>${esc(x.artist||'')}</small>`:''}</button>`}).join('');
-  $$('#slPickL [data-pk]').forEach(b=>b.onclick=()=>{const x=SCLLIB.find(y=>y.id===b.dataset.pk);if(!x)return;SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});slKeep();slDraw();toast('Aggiunto: '+(x.title||'brano'))})}
+function slPickDraw(){const L=slPickList(),box=$('#slPick');if(!L){box.hidden=true;return}box.hidden=false;const q=$('#slQ').value.trim(),srch=q.length>=2,art=$('#slArt').value;
+  $('#slPickT').textContent=srch?(L.length?L.length+' trovati per «'+q+'»':'Nessun brano trovato per «'+q+'»'):art;$('#slPickAll').hidden=srch||!L.length;
+  const chip=x=>{const inn=SCL.items.some(it=>it.id===x.id);return`<button class="slpk ${inn?'in':''}" data-pk="${esc(x.id)}" ${inn?'title="Già in scaletta"':''}><span>${inn?'✓':'+'}</span><b>${esc(x.title||'Senza titolo')}</b>${srch?`<small>${esc(x.artist||'')}</small>`:''}</button>`};
+  const G=srch?null:albGroups(L);SLG=G;
+  $('#slPickL').innerHTML=srch?`<div class="slpickl">${L.map(chip).join('')}</div>`:G.map((g,i)=>`<div class="slalb">${covBtn(art,g.al)}<div class="alh"><b>${esc(g.al||'Senza album')}</b><small>${g.year?esc(g.year)+' · ':''}${g.songs.length} ${g.songs.length===1?'brano':'brani'}</small></div>${g.songs.length>1?`<button class="mini" data-alb="${i}">+ Tutto l'album</button>`:''}</div><div class="slpickl">${g.songs.map(chip).join('')}</div>`).join('');
+  $$('#slPickL [data-pk]').forEach(b=>b.onclick=()=>{const x=SCLLIB.find(y=>y.id===b.dataset.pk);if(!x)return;SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});slKeep();slDraw();toast('Aggiunto: '+(x.title||'brano'))});
+  $$('#slPickL [data-alb]').forEach(b=>b.onclick=()=>{const g=SLG[+b.dataset.alb];let n=0;for(const x of g.songs)if(!SCL.items.some(it=>it.id===x.id)){SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});n++}slKeep();slDraw();toast(n?'Aggiunto l\'album: '+n+' brani':'L\'album è già in scaletta')});
+  covFill($('#slPickL'))}
+let SLG=null;
 $('#slArt').onchange=()=>{$('#slQ').value='';slPickDraw()};
 $('#slQ').oninput=()=>slPickDraw();
 $('#slPickAll').onclick=()=>{const L=slPickList()||[];let n=0;for(const x of L)if(!SCL.items.some(it=>it.id===x.id)){SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});n++}slKeep();slDraw();toast(n?'Aggiunti '+n+' brani':'Sono già tutti in scaletta')};
@@ -2880,7 +2899,7 @@ $('#bScal').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
 async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
   toast('Apro il brano…');if(id==='demo')await loadDemo();else await openStored(id);
   if(inSala&&song){$('#salaTitle').textContent='Sala prove';SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}try{donBanMaybe()}catch(e){}}
-async function renderLib(){const all=(await libMeta()).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(a.title||'').localeCompare(b.title||'','it'));const el=$('#songlist');const fsOk=!!window.showDirectoryPicker,canSep=!!((rp.key&&rp.ep)||mv.key),cl=r2On();
+async function renderLib(){const all=(await libMeta()).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(!albName(a))-(!albName(b))||(a.year||'9999').localeCompare(b.year||'9999')||albName(a).localeCompare(albName(b),'it')||(a.title||'').localeCompare(b.title||'','it'));const el=$('#songlist');const fsOk=!!window.showDirectoryPicker,canSep=!!((rp.key&&rp.ep)||mv.key),cl=r2On();
   const nCloud=all.filter(s=>s.cloudOnly).length,e=await spaceEst();
   const row=s=>{const id=s.id,co=!!s.cloudOnly,mixOnly=s.sk.length===1&&s.sk[0]==='mix',refine=!mixOnly&&s.sk.length>1&&s.sepModel!=='mix6'&&!!(rp.key&&rp.ep);
     const tags=`<span class="tag">${s.sk.map(k=>SL[k]||k).join(' · ')||'—'}</span>${(s.lyr&&s.lyr.length)||s.lyrics?'<span class="tag good">con testo</span>':''}${co?'<span class="tag cloud">☁️ solo nel cloud · si scarica quando lo apri</span>':''}`;
@@ -2889,8 +2908,8 @@ async function renderLib(){const all=(await libMeta()).sort((a,b)=>(a.artist||'~
     return`<div class="si lrow ${song&&song.id===id?'cur':''} ${co?'iscloud':''}"><div class="meta"><b>${esc(s.title||'Senza titolo')}</b></div><div class="ltags">${tags}</div>
     <div class="lacts"><button class="lbtn pri" data-open="${id}">${EI('play')}<span>Apri</span></button>${mixOnly&&canSep?`<button class="lbtn sep" data-sep="${id}" ${sepBusy?'disabled':''} title="Divide il brano in voce, basso, batteria, chitarra e altro">${EI('split')}<span>Separa il brano</span></button>`:''}${refine&&canSep&&!co?`<button class="lbtn" data-sep="${id}" ${sepBusy?'disabled':''} title="Rifà la separazione a 6 tracce con voce, basso e batteria più puliti (per esempio se nel basso si sente la batteria)">${EI('split')}<span>Affina la separazione</span></button>`:''}${co?'':`<button class="lbtn" data-tag="${id}" title="Titolo, artista, album, anno e testo dentro all'MP3">${EI('tag')}<span>Modifica tag MP3</span></button><button class="lbtn" data-exp="${id}">${EI('folderdown')}<span>Salva tracce${fsOk?' in cartella':''}</span></button>`}${del}</div></div>`};
   const q=MB(e.quota),u=MB(e.usage),spRow=`<div class="si spacerow ${q&&u/q>.9?'full':''}"><div class="meta"><b>💽 Spazio: ${q?fmtMB(u)+' usati su '+fmtMB(q):'—'}</b><small>${nCloud?nCloud+(nCloud===1?' brano è':' brani sono')+' solo nel cloud: si aprono lo stesso. Scegli quali tenere qui.':all.length?'Tutti i brani sono su questo dispositivo.':''}</small></div><button class="chip" id="libSpace">Spazio</button></div>`;
-  el.innerHTML=`<div class="si addrow"><div class="meta"><b>Carica i brani già separati</b><small>Dalla cartella delle tracce (Artista / Titolo), con il loro testo</small></div><button class="chip pri" id="libAdd">Carica</button></div>`+(all.length?spRow:'<p class="status">La libreria è vuota: premi «Aggiungi brano» in alto per separare il tuo primo brano.</p>')+(()=>{let last=null;return all.map(s=>{const a=s.artist||'Artista sconosciuto';const hd=a!==last?`<div class="lbl" style="margin-top:8px">${esc(a)}</div>`:'';last=a;return hd+row(s)}).join('')})();
-  $('#libAdd').onclick=()=>{closeOv($('#libAdd'));openAdd()};const sb=$('#libSpace');if(sb)sb.onclick=spaceOpen;songPickFill();
+  el.innerHTML=`<div class="si addrow"><div class="meta"><b>Carica i brani già separati</b><small>Dalla cartella delle tracce (Artista / Titolo), con il loro testo</small></div><button class="chip pri" id="libAdd">Carica</button></div>`+(all.length?spRow:'<p class="status">La libreria è vuota: premi «Aggiungi brano» in alto per separare il tuo primo brano.</p>')+(()=>{let last=null,lastA=null;const albArt=new Map();{const seen=new Map();for(const s of all){const a=s.artist||'Artista sconosciuto';if(!seen.has(a))seen.set(a,new Set());seen.get(a).add(albName(s))}for(const [a,st] of seen)albArt.set(a,st.size)}return all.map(s=>{const a=s.artist||'Artista sconosciuto';const hd=a!==last?`<div class="lbl" style="margin-top:8px">${esc(a)}</div>`:'';const al=albName(s),ak=a+'|'+al,sub=(a!==last||ak!==lastA)&&(al||albArt.get(a)>1)?`<div class="lalb">${covBtn(a,al)}<b>${esc(al||'Senza album')}</b></div>`:'';last=a;lastA=ak;return hd+sub+row(s)}).join('')})();
+  $('#libAdd').onclick=()=>{closeOv($('#libAdd'));openAdd()};covFill(el);const sb=$('#libSpace');if(sb)sb.onclick=spaceOpen;songPickFill();
   el.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{closeOv(b);b.dataset.open==='demo'?loadDemo():openStored(b.dataset.open)});
   el.querySelectorAll('[data-sep]').forEach(b=>b.onclick=()=>sepFromLib(b.dataset.sep));
   el.querySelectorAll('[data-tag]').forEach(b=>b.onclick=()=>tagOpen(b.dataset.tag));
@@ -3407,6 +3426,45 @@ $('#r2All').onclick=async()=>{const b=$('#r2All');if(b.disabled)return;b.disable
 /* brano appena separato: copia anche nel cloud, in sottofondo */
 async function r2Auto(s){if(!r2On()||!s||!s.stems)return;try{await r2SaveSong(s);toast('☁️ «'+(s.title||'brano')+'» salvato anche nel cloud')}catch(e){toast('☁️ Non sono riuscito a salvarlo nel cloud: '+r2Err(e))}}
 setTimeout(()=>{try{r2UI()}catch(e){}},0);
+/* ===================== ALBUM E COPERTINE =====================
+   I brani di un artista si dividono per album (dal tag «Album» del brano). La copertina si cerca da sola
+   su internet (iTunes, poi MusicBrainz) oppure si carica dal dispositivo; resta salvata qui. */
+const COV=new Map(),COV_WAIT=new Map();
+const albName=s=>(s.album||'').trim();
+const covK=(a,al)=>normKey(a||'',al||'');
+async function covGet(a,al){const k=covK(a,al);if(COV.has(k))return COV.get(k);let v=null;try{v=await setGet('cover:'+k)}catch(e){}COV.set(k,v||null);return v||null}
+async function covPut(a,al,v){const k=covK(a,al);COV.set(k,v);try{await setPut('cover:'+k,v)}catch(e){}}
+async function covFind(a,al){const out=[];const nA=normT(a);
+  try{const r=await fetch('https://itunes.apple.com/search?entity=album&limit=8&country=IT&term='+encodeURIComponent((a+' '+al).trim()));const j=await r.json();
+    for(const x of j.results||[])if(x.artworkUrl100)out.push({url:x.artworkUrl100.replace(/100x100bb/,'400x400bb'),name:x.collectionName||'',artist:x.artistName||'',year:(x.releaseDate||'').slice(0,4),ok:normT(x.artistName||'').includes(nA)||nA.includes(normT(x.artistName||''))})}catch(e){}
+  if(!out.some(x=>x.ok)){try{const q=`releasegroup:"${al.replace(/"/g,'')}" AND artist:"${a.replace(/"/g,'')}"`;const r=await fetch('https://musicbrainz.org/ws/2/release-group/?fmt=json&limit=5&query='+encodeURIComponent(q));const j=await r.json();
+    for(const g of j['release-groups']||[])out.push({url:'https://coverartarchive.org/release-group/'+g.id+'/front-250',name:g.title||'',artist:((g['artist-credit']||[])[0]||{}).name||'',year:(g['first-release-date']||'').slice(0,4),ok:true,mb:true})}catch(e){}}
+  return out}
+async function covAuto(a,al){if(!al)return null;const k=covK(a,al);if(COV_WAIT.has(k))return COV_WAIT.get(k);
+  const p=(async()=>{const v=await covGet(a,al);if(v&&(v.url||v.data))return v.url||v.data;if(v&&v.none&&Date.now()-v.t<30*864e5)return null;if(!navigator.onLine)return null;
+    const L=await covFind(a,al),nAl=normT(al),best=L.find(x=>x.ok&&normT(x.name).includes(nAl))||L.find(x=>x.ok&&nAl.includes(normT(x.name)))||L.find(x=>x.ok);
+    if(best){await covPut(a,al,{url:best.url,src:'internet'});return best.url}await covPut(a,al,{none:true,t:Date.now()});return null})();
+  COV_WAIT.set(k,p);try{return await p}finally{COV_WAIT.delete(k)}}
+/* riempie le copertine visibili (pulsanti .alcov con data-a e data-al) */
+function covFill(root){(root||document).querySelectorAll('.alcov[data-al]').forEach(async b=>{if(b.dataset.done)return;b.dataset.done=1;const u=await covAuto(b.dataset.a,b.dataset.al);if(u){b.innerHTML=`<img alt="" src="${esc(u)}">`;const im=b.querySelector('img');im.onerror=()=>{b.innerHTML=EI('disc')}}})}
+const covBtn=(a,al)=>al?`<button class="alcov" data-a="${esc(a)}" data-al="${esc(al)}" title="Copertina dell'album: tocca per cambiarla">${EI('disc')}</button>`:`<span class="alcov none">${EI('disc')}</span>`;
+function albGroups(L){const m=new Map();for(const s of L){const k=albName(s);if(!m.has(k))m.set(k,[]);m.get(k).push(s)}
+  return[...m.entries()].map(([al,songs])=>({al,songs:songs.sort((x,y)=>pkSort(x.title||'',y.title||'')),year:(songs.find(s=>s.year)||{}).year||''})).sort((x,y)=>(!x.al)-(!y.al)||(x.year||'9999').localeCompare(y.year||'9999')||pkSort(x.al,y.al))}
+/* finestra della copertina: cerca su internet, carica dal dispositivo, togli */
+let CVW=null;
+async function covOpen(a,al){CVW={a,al};$('#cvwT').textContent=al;$('#cvwA').textContent=a;$('#cvwList').innerHTML='';$('#cvwMsg').textContent='';const v=await covGet(a,al),u=v&&(v.url||v.data);
+  $('#cvwImg').innerHTML=u?`<img alt="" src="${esc(u)}">`:EI('disc');openOv('#ovCover')}
+function covRefresh(){$$('.alcov[data-al]').forEach(b=>{if(b.dataset.a===CVW.a&&b.dataset.al===CVW.al){b.dataset.done='';b.innerHTML=EI('disc')}});covFill()}
+$('#cvwFind').onclick=async()=>{const m=$('#cvwMsg');m.textContent='Cerco su internet…';$('#cvwList').innerHTML='';const L=await covFind(CVW.a,CVW.al);
+  if(!L.length){m.textContent='Non ho trovato copertine: puoi caricarne una tu.';return}m.textContent='Tocca quella giusta:';
+  $('#cvwList').innerHTML=L.map((x,i)=>`<button class="cvwopt" data-i="${i}"><img alt="" src="${esc(x.url)}" loading="lazy"><small>${esc(x.name)}${x.year?' · '+x.year:''}<br>${esc(x.artist)}</small></button>`).join('');
+  $$('#cvwList .cvwopt').forEach(b=>{const im=b.querySelector('img');im.onerror=()=>b.remove();b.onclick=async()=>{const x=L[+b.dataset.i];await covPut(CVW.a,CVW.al,{url:x.url,src:'internet'});$('#cvwImg').innerHTML=`<img alt="" src="${esc(x.url)}">`;covRefresh();toast('Copertina salvata')}})};
+$('#cvwUp').onclick=()=>$('#cvwFile').click();
+$('#cvwFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{const bm=await createImageBitmap(f),S=320,c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d'),m=Math.min(bm.width,bm.height);
+    g.drawImage(bm,(bm.width-m)/2,(bm.height-m)/2,m,m,0,0,S,S);const d=c.toDataURL('image/jpeg',.85);await covPut(CVW.a,CVW.al,{data:d,src:'mia'});$('#cvwImg').innerHTML=`<img alt="" src="${d}">`;covRefresh();toast('Copertina salvata')}
+  catch(err){toast('Non riesco a leggere questa immagine')}};
+$('#cvwDel').onclick=async()=>{await covPut(CVW.a,CVW.al,{none:true,t:Date.now()});$('#cvwImg').innerHTML=EI('disc');covRefresh();toast('Copertina tolta')};
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.alcov[data-al]');if(b){e.preventDefault();e.stopPropagation();covOpen(b.dataset.a,b.dataset.al)}},true);
 /* ===================== BRANI NEL CLOUD E SPAZIO SUL DISPOSITIVO =====================
    Un brano può stare «sul PC» (tracce salvate qui) oppure «solo nel cloud» (in Libreria c'è lo stesso:
    le tracce si scaricano quando lo apri). Così la Libreria è sempre completa anche con poco spazio. */
