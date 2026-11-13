@@ -210,6 +210,11 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .chip.danger{color:#ff8a80;border-color:color-mix(in srgb,#ff5a4f 50%,transparent)}.chip.dangerpri{background:#d93a30;border-color:#d93a30;color:#fff}.chip.dangerpri:disabled{opacity:.4}
 .kdel{padding:12px;border-radius:12px;border:1px solid #d93a30;background:color-mix(in srgb,#d93a30 10%,transparent);display:grid;gap:8px}.kdel[hidden]{display:none}.kdel p{margin:0}
 details.advset{padding:0}details.advset>summary{cursor:pointer;padding:14px 16px;list-style:revert}details.advset>summary small{color:var(--muted);font-weight:500}details.advset[open]>summary{border-bottom:1px solid var(--line)}details.advset>.box{margin:10px;border-style:dashed}
+.spacerow{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}.spacerow.full{border-color:#e0a030}.spacerow small{color:var(--muted)}.spacerow .meta{flex:1;min-width:0}.spacerow .meta b{white-space:normal;overflow:visible;text-overflow:clip}.spclist{counter-reset:none}.spclist li::before{display:none!important}
+.tag.cloud{background:color-mix(in srgb,var(--accent) 16%,transparent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}.lrow.iscloud .meta b{opacity:.85}.lbtn.sep{border-color:var(--accent);color:var(--accent)}
+.spcbar{height:12px;border-radius:6px;background:var(--raise);overflow:hidden;border:1px solid var(--line)}.spcbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#6fe3ff,#a78bfa)}.spcbar i.full{background:linear-gradient(90deg,#f59e0b,#ef4444)}
+#spcTxt{margin:8px 0 0}#spcSum.over b{color:#ff7a70}.spcrow{align-items:center;gap:10px;flex-wrap:wrap}
+.spclist li{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.spclist .slt{flex:1;min-width:160px}.spcseg button{min-height:40px;font-size:13px}.spclist li.on{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
 .drlist li{gap:10px}.drlist .slbt{display:grid!important;grid-template-columns:2fr 1fr!important;gap:6px;min-width:180px}.drlist .slbt>*{min-height:44px;width:100%}.drlist li img{width:54px;height:96px;object-fit:cover;border-radius:8px;background:#000;flex:none}.drlist li::before{display:none}
 @media (max-width:599px){.drlist li{grid-template-columns:54px minmax(0,1fr)!important;grid-template-areas:'n t' 'b b'!important}.drlist li img{grid-area:n}}
 .banks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
@@ -1423,6 +1428,14 @@ themeApply();</script>
   </section>
   <div class="row supfoot"><button class="chip" id="supBack">← Indietro</button><span class="grow"></span><button class="chip" id="supSkip">Salta per ora</button><button class="chip pri" id="supNext">Avanti →</button></div>
 </div></div>
+<div class="ov" id="ovSpace" hidden><div class="sheet slsheet">
+  <div class="slhead"><h3>💽 Spazio: quali brani tenere qui</h3><button class="mini" data-close>Chiudi</button></div>
+  <div class="spcbar"><i id="spcBar"></i></div><p id="spcTxt"></p>
+  <p class="snote" id="spcWhy"></p>
+  <div class="row spcrow"><button class="chip" id="spcAuto">Scegli per me</button><span class="grow"></span><span id="spcSum"></span></div>
+  <ol class="sllist spclist" id="spcList"></ol>
+  <div class="row"><span class="grow"></span><button class="chip pri" id="spcGo">Applica</button></div>
+</div></div>
 <div class="ov" id="ovPick" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Cerca il testo su LRCLIB</h3><button class="mini" data-close>Chiudi</button></div>
   <p>Controllo titolo, artista e durata del brano. «Sincronizzato, stessa durata» è la scelta migliore: testo e tempi sono già pronti.</p>
@@ -1832,8 +1845,9 @@ async function saveFailMsg(){const n=IDBERR;const sp=await spaceMsg();if(n==='Qu
     return'l\'archivio dell\'app nel browser sembra danneggiato ('+(o||'errore')+'). Vai in ⚙️ Impostazioni › «🛠 Ripara l\'archivio».'}return'il browser ha rifiutato il salvataggio ('+(n||'errore sconosciuto')+')'+sp+'.'}
 const dbAll=async()=>(await idb('songs','readonly',s=>s.getAll()))||[];
 /* elenco leggero della Libreria: legge un brano alla volta e tiene solo nome, artista e testo (non le tracce) */
-const libMeta=()=>new Promise(ok=>{const out=[];db().then(d=>{if(!d){ok(out);return}const tx=d.transaction('songs','readonly'),rq=tx.objectStore('songs').openCursor();
-  rq.onsuccess=()=>{const c=rq.result;if(!c){ok(out);return}const v=c.value||{};out.push({id:v.id,title:v.title||'',artist:v.artist||'',lyrics:v.lyrics||'',album:v.album||'',year:v.year||'',stems:!!(v.stems&&Object.keys(v.stems).length)});c.continue()};rq.onerror=()=>ok(out)}).catch(()=>ok(out))});
+const libMeta=()=>new Promise(ok=>{const out=[];db().then(d=>{if(!d){ok(out);return}const rq=d.transaction('songs','readonly').objectStore('songs').openCursor();
+  rq.onsuccess=()=>{const c=rq.result;if(!c){ok(out);return}const v=c.value||{},st=v.stems||{},sk=Object.keys(st);let b=0;for(const k of sk)b+=(st[k]&&st[k].data&&st[k].data.byteLength)||0;
+    const m={...v};delete m.stems;delete m.asr;m.sk=sk;m.stems=sk.length>0;m.mb=b/1048576;if(v.cloudOnly){const cf=v.cloudFiles||[];m.sk=cf.map(f=>f.k);m.mb=cf.reduce((a,f)=>a+(f.size||0),0)/1048576}out.push(m);c.continue()};rq.onerror=()=>ok(out)}).catch(()=>ok(out))});
 const dbGet=id=>idb('songs','readonly',s=>s.get(id));
 const dbPut=v=>idb('songs','readwrite',s=>s.put(v));
 const dbDel=async id=>{const r=await idb('songs','readwrite',s=>s.delete(id));trvDrop(id);return r};
@@ -1997,7 +2011,9 @@ async function loadSong(s,bufs){
   updPalSegs();prefSet('last',s.id);setTimeout(songPickFill,0);
   await rebuildMix();
 }
-async function openStored(id){const s=await dbGet(id);if(!s){toast('Brano non trovato');return}
+async function openStored(id){let s=await dbGet(id);if(!s){toast('Brano non trovato');return}markOpened(id);
+  if(s.cloudOnly){if(!r2Ok()){toast('Questo brano è solo nel cloud: collega il cloud per aprirlo');return}
+    toast('☁️ Scarico «'+(s.title||'il brano')+'» dal cloud…');try{const r=await cloudFetch(s,true);s=r.full;if(!r.kept)toast('💽 Spazio pieno: lo ascolti dal cloud senza salvarlo qui')}catch(e){toast('Non riesco a scaricarlo dal cloud: '+(r2Err(e)||e.message));return}}
   toast('Apro “'+(s.title||'il brano')+'”…');const bufs={};
   for(const k of Object.keys(s.stems)){try{bufs[k]=await decode(s.stems[k].data)}catch(e){}}
   if(!Object.keys(bufs).length){toast('Non riesco a leggere l\'audio di questo brano');return}
@@ -2558,6 +2574,7 @@ mic:'<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 
 duet:'<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 19.5a5.5 5.5 0 0 1 11 0M13 19.5a4.5 4.5 0 0 1 8.5-2"/>',
 spark:'<path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>',
 cloud:'<path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/>',
+split:'<path d="M3 12h6M9 12c3 0 4-6 8-6h4M9 12h12M9 12c3 0 4 6 8 6h4"/>',
 cloudup:'<path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/><path d="M12 16v-5.5M9.6 12.6 12 10.2l2.4 2.4"/>',
 share:'<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/>',
 down:'<path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/>',
@@ -2761,7 +2778,7 @@ document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea,sele
 /* ================= libreria e importazione ================= */
 let delArm=null;
 /* menu a tendina dei brani in libreria (pagina principale e Sala prove) */
-async function songPickFill(){const all=((await dbAll())||[]).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(a.title||'').localeCompare(b.title||'','it'));
+async function songPickFill(){const all=((await libMeta())||[]).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(a.title||'').localeCompare(b.title||'','it'));
   const by=new Map();for(const x of all){const a=x.artist||'Artista sconosciuto';if(!by.has(a))by.set(a,[]);by.get(a).push(x)}
   const cur=song&&song.id;const opts=`<option value="demo">Prova di palco (brano di prova)</option>`+[...by].map(([a,L])=>`<optgroup label="${esc(a)}">${L.map(x=>`<option value="${esc(x.id)}">${esc(x.title||'Senza titolo')}</option>`).join('')}</optgroup>`).join('');
   const acts=`<optgroup label="Aggiungi"><option value="__add">➕ Separa un nuovo brano</option><option value="__load">📁 Carica tracce già separate</option><option value="__shop">🔎 Cerca e compra un brano</option><option value="__lib">📚 Apri la libreria</option></optgroup>`;
@@ -2786,7 +2803,7 @@ function pkRender(){const q=pkNorm($('#bpQ').value.trim()),cur=song&&song.id,box
     if(!q){if(op)PK.open.add(a);else PK.open.delete(a);try{sessionStorage.setItem('pkOpen',JSON.stringify([...PK.open]))}catch(e){}}});
   box.querySelectorAll('[data-ps]').forEach(b=>b.onclick=()=>{pkClose();songPickGo(b.dataset.ps)});
   const c=box.querySelector('.pksong.cur');if(c&&!q&&!pkRender.done){pkRender.done=true;c.scrollIntoView({block:'center'})}}
-async function pkOpen(from){PK.from=from;PK.all=(await dbAll())||[];$('#bpOv').classList.toggle('dark',from==='sala'||from==='palco');$('#bpActs').hidden=from==='sala'||from==='palco';$('#bpQ').value='';pkRender.done=false;$('#bpOv').hidden=false;pkRender();if(!isMobile)setTimeout(()=>$('#bpQ').focus(),50)}
+async function pkOpen(from){PK.from=from;PK.all=(await libMeta())||[];$('#bpOv').classList.toggle('dark',from==='sala'||from==='palco');$('#bpActs').hidden=from==='sala'||from==='palco';$('#bpQ').value='';pkRender.done=false;$('#bpOv').hidden=false;pkRender();if(!isMobile)setTimeout(()=>$('#bpQ').focus(),50)}
 function pkClose(){const ov=$('#bpOv');ov.hidden=true;if(ov.parentNode!==document.body)document.body.appendChild(ov)}
 $('#bpQ').oninput=pkRender;$('#bpX').onclick=pkClose;$('#bpOv').onclick=e=>{if(e.target===$('#bpOv'))pkClose()};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#bpOv').hidden){e.preventDefault();e.stopPropagation();pkClose()}},true);
@@ -2801,7 +2818,7 @@ const slSaved=()=>{try{return JSON.parse(prefGet('setlists')||'[]')}catch(e){ret
 function slCur(){try{const o=JSON.parse(prefGet('slCur')||'null');if(o){SCL.name=o.name||'';SCL.items=o.items||[];SCL.i=o.i==null?-1:o.i}}catch(e){}}slCur();
 const slKeep=()=>prefSet('slCur',JSON.stringify({name:SCL.name,items:SCL.items,i:SCL.i}));
 let SCLLIB=[];
-async function slOpen(){SCLLIB=(await dbAll())||[];SCLLIB.sort((a,b)=>pkSort((a.artist||'')+' '+(a.title||''),(b.artist||'')+' '+(b.title||'')));$('#slAuto').checked=SCL.auto;$('#slName').value=SCL.name||'';slDraw();openOv('#ovSet2')}
+async function slOpen(){SCLLIB=(await libMeta())||[];SCLLIB.sort((a,b)=>pkSort((a.artist||'')+' '+(a.title||''),(b.artist||'')+' '+(b.title||'')));$('#slAuto').checked=SCL.auto;$('#slName').value=SCL.name||'';slDraw();openOv('#ovSet2')}
 function slFind(it){return SCLLIB.find(x=>x.id===it.id)||SCLLIB.find(x=>(x.title||'').toLowerCase()===(it.title||'').toLowerCase()&&(x.artist||'').toLowerCase()===(it.artist||'').toLowerCase())}
 function slDraw(){const L=slSaved();$('#slTitle').textContent='📋 '+(SCL.name||'Scaletta')+(SCL.items.length?' · '+SCL.items.length+' brani':'');$('#slSaved').innerHTML='<option value="">— scegli —</option>'+L.map((x,i)=>`<option value="${i}" ${x.name===SCL.name?'selected':''}>${esc(x.name)} (${x.items.length})</option>`).join('');
   $('#slAdd').innerHTML='<option value="">— scegli un brano dalla libreria —</option>'+SCLLIB.map(x=>`<option value="${esc(x.id)}">${esc((x.artist?x.artist+' · ':'')+(x.title||'Senza titolo'))}</option>`).join('');
@@ -2825,7 +2842,7 @@ $('#slFile').onclick=()=>{if(!SCL.items.length){toast('La scaletta è vuota');re
 $('#slOpen').onclick=()=>{$('#slFileIn').value='';$('#slFileIn').click()};
 $('#slFileIn').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||d.kind!=='scaletta'||!Array.isArray(d.items))throw 0;SCL.name=d.name||f.name.replace(/\.json$/i,'');SCL.items=d.items.filter(x=>x&&(x.id||x.title)).map(x=>({id:x.id||'',title:x.title||'',artist:x.artist||''}));SCL.i=-1;$('#slName').value=SCL.name;slKeep();slDraw();slBarUI();
     const miss=SCL.items.filter(x=>!slFind(x)).length;toast('Scaletta «'+SCL.name+'» aperta'+(miss?' · '+miss+' brani non sono in libreria':''))}catch(x){toast('Questo file non è una scaletta di Pure Voltage')}};
-async function slPlay(i){if(!SCL.items.length)return;if(!SCLLIB.length)SCLLIB=(await dbAll())||[];let j=i;while(j<SCL.items.length&&!slFind(SCL.items[j]))j++;if(j>=SCL.items.length){toast('Fine della scaletta 🎉');SCL.i=SCL.items.length-1;slKeep();slBarUI();return}
+async function slPlay(i){if(!SCL.items.length)return;if(!SCLLIB.length)SCLLIB=(await libMeta())||[];let j=i;while(j<SCL.items.length&&!slFind(SCL.items[j]))j++;if(j>=SCL.items.length){toast('Fine della scaletta 🎉');SCL.i=SCL.items.length-1;slKeep();slBarUI();return}
   if(j!==i)toast('Salto «'+SCL.items[i].title+'»: non è in libreria');clearInterval(SCL.timer);SCL.timer=0;SCL.i=j;slKeep();slBarUI();const x=slFind(SCL.items[j]);if(song&&song.id===x.id){pause();seek(0);try{if(SP.on)sListenStop()}catch(e){}SP.from=0;toast('▶ '+(j+1)+'/'+SCL.items.length+' · '+(x.title||''));slGo(x.id);return}await songPickGo(x.id);slBarUI();slGo(x.id)}
 /* scaletta: appena il brano è caricato parte da solo, dall'inizio (in sala prove parte «Ascolta e prova») */
 async function slGo(id){const t0=Date.now();const ready=()=>song&&song.id===id&&!mixBusy&&!mixPend&&!newSong&&A.src&&A.readyState>=2;
@@ -2845,15 +2862,27 @@ $('#bScal').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
 async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
   toast('Apro il brano…');if(id==='demo')await loadDemo();else await openStored(id);
   if(inSala&&song){$('#salaTitle').textContent='Sala prove';SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}try{donBanMaybe()}catch(e){}}
-async function renderLib(){const all=(await dbAll()).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(a.title||'').localeCompare(b.title||'','it'));const el=$('#songlist');const fsOk=!!window.showDirectoryPicker;
-  const row=(id,t,a,tags,stored)=>`<div class="si lrow ${song&&song.id===id?'cur':''}"><div class="meta"><b>${esc(t||'Senza titolo')}</b><small>${esc(a||'')}</small></div><div class="ltags">${tags}</div>
-    <div class="lacts"><button class="lbtn pri" data-open="${id}">${EI('play')}<span>Apri</span></button>${stored?`<button class="lbtn" data-tag="${id}" title="Titolo, artista, album, anno e testo dentro all'MP3">${EI('tag')}<span>Modifica tag MP3</span></button><button class="lbtn" data-exp="${id}">${EI('folderdown')}<span>Salva tracce${fsOk?' in cartella':''}</span></button><button class="lbtn del ${delArm===id?'arm':''}" data-del="${id}">${EI('trash')}<span>${delArm===id?'Conferma elimina':'Elimina'}</span></button>`:''}</div></div>`;
-  el.innerHTML=`<div class="si addrow"><div class="meta"><b>Carica i brani già separati</b><small>Dalla cartella delle tracce (Artista / Titolo), con il loro testo</small></div><button class="chip pri" id="libAdd">Carica</button></div>`+(all.length?'':'<p class="status">La libreria è vuota: premi «Aggiungi brano» in alto per separare il tuo primo brano.</p>')+(()=>{let last=null;return all.map(s=>{const a=s.artist||'Artista sconosciuto';const hd=a!==last?`<div class="lbl" style="margin-top:8px">${esc(a)}</div>`:'';last=a;return hd+row(s.id,s.title,'',`<span class="tag">${Object.keys(s.stems).map(k=>SL[k]).join(' · ')}</span>${(s.lyr&&s.lyr.length)||s.lyrics?'<span class="tag good">con testo</span>':''}`,true)}).join('')})();
-  $('#libAdd').onclick=()=>{closeOv($('#libAdd'));openAdd()};songPickFill();
+async function renderLib(){const all=(await libMeta()).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(a.title||'').localeCompare(b.title||'','it'));const el=$('#songlist');const fsOk=!!window.showDirectoryPicker,canSep=!!((rp.key&&rp.ep)||mv.key),cl=r2On();
+  const nCloud=all.filter(s=>s.cloudOnly).length,e=await spaceEst();
+  const row=s=>{const id=s.id,co=!!s.cloudOnly,mixOnly=s.sk.length===1&&s.sk[0]==='mix',refine=!mixOnly&&s.sk.length>1&&!s.sk.includes('guitar');
+    const tags=`<span class="tag">${s.sk.map(k=>SL[k]||k).join(' · ')||'—'}</span>${(s.lyr&&s.lyr.length)||s.lyrics?'<span class="tag good">con testo</span>':''}${co?'<span class="tag cloud">☁️ solo nel cloud · si scarica quando lo apri</span>':''}`;
+    const arm=delArm===id;
+    const del=arm?(cl?`<button class="lbtn" data-keep="${id}" ${co?'hidden':''}>${EI('cloud')}<span>Lascia solo nel cloud</span></button><button class="lbtn del arm" data-delall="${id}">${EI('trash')}<span>Elimina ovunque</span></button><button class="lbtn" data-delno>Annulla</button>`:`<button class="lbtn del arm" data-delall="${id}">${EI('trash')}<span>Conferma elimina</span></button><button class="lbtn" data-delno>Annulla</button>`):`<button class="lbtn del" data-del="${id}">${EI('trash')}<span>Elimina</span></button>`;
+    return`<div class="si lrow ${song&&song.id===id?'cur':''} ${co?'iscloud':''}"><div class="meta"><b>${esc(s.title||'Senza titolo')}</b></div><div class="ltags">${tags}</div>
+    <div class="lacts"><button class="lbtn pri" data-open="${id}">${EI('play')}<span>Apri</span></button>${mixOnly&&canSep?`<button class="lbtn sep" data-sep="${id}" title="Divide il brano in voce, basso, batteria, chitarra e altro">${EI('split')}<span>Separa il brano</span></button>`:''}${refine&&canSep&&!co?`<button class="lbtn" data-sep="${id}" title="Rifà la separazione a 6 tracce, con la chitarra a parte">${EI('split')}<span>Affina la separazione</span></button>`:''}${co?'':`<button class="lbtn" data-tag="${id}" title="Titolo, artista, album, anno e testo dentro all'MP3">${EI('tag')}<span>Modifica tag MP3</span></button><button class="lbtn" data-exp="${id}">${EI('folderdown')}<span>Salva tracce${fsOk?' in cartella':''}</span></button>`}${del}</div></div>`};
+  const q=MB(e.quota),u=MB(e.usage),spRow=`<div class="si spacerow ${q&&u/q>.9?'full':''}"><div class="meta"><b>💽 Spazio: ${q?fmtMB(u)+' usati su '+fmtMB(q):'—'}</b><small>${nCloud?nCloud+(nCloud===1?' brano è':' brani sono')+' solo nel cloud: si aprono lo stesso. Scegli quali tenere qui.':all.length?'Tutti i brani sono su questo dispositivo.':''}</small></div><button class="chip" id="libSpace">Spazio</button></div>`;
+  el.innerHTML=`<div class="si addrow"><div class="meta"><b>Carica i brani già separati</b><small>Dalla cartella delle tracce (Artista / Titolo), con il loro testo</small></div><button class="chip pri" id="libAdd">Carica</button></div>`+(all.length?spRow:'<p class="status">La libreria è vuota: premi «Aggiungi brano» in alto per separare il tuo primo brano.</p>')+(()=>{let last=null;return all.map(s=>{const a=s.artist||'Artista sconosciuto';const hd=a!==last?`<div class="lbl" style="margin-top:8px">${esc(a)}</div>`:'';last=a;return hd+row(s)}).join('')})();
+  $('#libAdd').onclick=()=>{closeOv($('#libAdd'));openAdd()};const sb=$('#libSpace');if(sb)sb.onclick=spaceOpen;songPickFill();
   el.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{closeOv(b);b.dataset.open==='demo'?loadDemo():openStored(b.dataset.open)});
+  el.querySelectorAll('[data-sep]').forEach(b=>b.onclick=()=>sepFromLib(b.dataset.sep));
   el.querySelectorAll('[data-tag]').forEach(b=>b.onclick=()=>tagOpen(b.dataset.tag));
   el.querySelectorAll('[data-exp]').forEach(b=>b.onclick=async()=>{const s=await dbGet(b.dataset.exp);if(s)exportSong(s,true)});
-  el.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{const id=b.dataset.del;if(delArm!==id){delArm=id;renderLib();return}delArm=null;await dbDel(id);toast('Brano eliminato');if(song&&song.id===id)loadDemo();renderLib()})}
+  el.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{delArm=b.dataset.del;renderLib()});
+  el.querySelectorAll('[data-delno]').forEach(b=>b.onclick=()=>{delArm=null;renderLib()});
+  el.querySelectorAll('[data-keep]').forEach(b=>b.onclick=async()=>{const id=b.dataset.keep;delArm=null;b.disabled=true;try{const fr=await toCloudOnly(id);toast('☁️ Ora è solo nel cloud: liberati '+fmtMB(MB(fr)))}catch(e){toast('Non riesco: '+(r2Err(e)||e.message))}renderLib()});
+  el.querySelectorAll('[data-delall]').forEach(b=>b.onclick=async()=>{const id=b.dataset.delall;delArm=null;const s=await dbGet(id);
+    if(s&&r2On()){try{for(const o of await r2List(R2P+songDirs(s).join('/')+'/'))await r2Req('DELETE',o.key)}catch(e){toast('Dal cloud non sono riuscito a toglierlo: '+r2Err(e));renderLib();return}}
+    await dbDel(id);toast(r2On()?'Brano eliminato, anche dal cloud':'Brano eliminato');if(song&&song.id===id)loadDemo();renderLib()})}
 let pending=[];
 function readID3(ab){const b=new Uint8Array(ab);const out={};if(b.length<10||b[0]!==73||b[1]!==68||b[2]!==51)return out;
   const ver=b[3],ss=o=>(b[o]<<21)|(b[o+1]<<14)|(b[o+2]<<7)|b[o+3];const size=ss(6);let p=10;if(b[5]&0x40){p+=ver===4?ss(10):((b[10]<<24)|(b[11]<<16)|(b[12]<<8)|b[13])+4}
@@ -2971,7 +3000,8 @@ async function sepLrcCheck(meta,dur){const q=songQuery({title:meta.title||cleanN
 function showAsrSkip(msg){spSetSteps([]);$('#spTitle').textContent='Testo trovato';$('#spPct').textContent='';$('#spPhase').textContent=msg;$('#spBar').classList.remove('ind');$('#spFill').style.width='100%';$('#spStat').textContent='';$('#spStop').textContent='Chiudi';
   const b=document.createElement('button');b.className='mini';b.textContent='Trascrivi comunque';b.onclick=()=>{$('#sepCard').hidden=true;asrRun(true)};$('#spFile').textContent='';$('#spFile').appendChild(b);$('#sepCard').hidden=false}
 async function sepFinish(meta,stemsRec,bufs,note,asr,sing){
-  const id='s'+Date.now().toString(36);const rec={id,title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',album:meta.album||'',year:meta.year||'',created:Date.now(),lyrics:meta.lyrics||'',tab:'',stems:stemsRec};if(meta.lrc)rec.lrclib=meta.lrc;if(asr&&asr.segments&&asr.segments.length)rec.asr=asr;if(sing&&!sing.error&&sing.k!=null)rec.singers=sing;
+  const RP0=SEP_REPLACE&&SEP_REPLACE.f===sepFileObj?SEP_REPLACE:null;SEP_REPLACE=null;
+  const id=RP0?RP0.id:'s'+Date.now().toString(36);const rec={id,title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',album:meta.album||'',year:meta.year||'',created:Date.now(),lyrics:meta.lyrics||'',tab:'',stems:stemsRec};if(meta.lrc)rec.lrclib=meta.lrc;if(asr&&asr.segments&&asr.segments.length)rec.asr=asr;if(sing&&!sing.error&&sing.k!=null)rec.singers=sing;if(RP0)Object.assign(rec,RP0.keep,{stems:stemsRec});
   const ok=await dbPut(rec);let saved=false;if(window.showDirectoryPicker&&dirHandle)saved=await exportSong(rec,false);
   if(BATCH.on){if(!ok){sepFail(new Error('non riesco a salvare: '+await saveFailMsg()));return}if(r2On()){spShow('☁️ Salvo «'+rec.title+'» anche nel cloud…',null,'save');await r2Auto(rec)}BATCH.res='ok';sepEnd();spShow(`«${rec.title}» pronto in Libreria`,1);return}
   sepEnd();const took=fmt((Date.now()-sepT0)/1000);
@@ -2979,7 +3009,7 @@ async function sepFinish(meta,stemsRec,bufs,note,asr,sing){
   await loadSong({...rec,stems:undefined,stored:!!ok},bufs);
   if(!saved){const b=document.createElement('button');b.className='mini';b.textContent=window.showDirectoryPicker?'Salva tracce in una cartella':'Scarica le tracce';b.onclick=async()=>{if(await exportSong(rec,true))b.remove()};$('#spFile').textContent='';$('#spFile').appendChild(b)}
   if(!rec.lyrics&&rec.title&&!meta.lrcTried)findLyrics(true);
-  if(ok)r2Auto(rec);
+  if(ok)r2Auto(rec).then(()=>{if(RP0&&r2On()){const base=R2P+songDirs(rec).join('/')+'/',kp=new Set(songFiles(rec).map(x=>x[0]));RP0.oldFiles.filter(n=>!kp.has(n)).forEach(n=>r2Req('DELETE',base+n).catch(()=>{}))}});
   const tl=trList(SEPTR);if(ok&&rp.key&&rp.ep&&tl.length)setTimeout(()=>{if(song&&song.id===rec.id&&!sepBusy)trvBackground(rec.id,tl)},4000)}
 const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
 function sepNotice(html,target){let el=$('#sepMsg');if(target){el=$('#setMsg');openSet()}else if($('#ovLib').hidden){renderLib();openOv('#ovLib')}el.innerHTML=html;el.hidden=false;el.scrollIntoView({behavior:'smooth',block:'center'});if(target)setTimeout(()=>{const t=$(target);if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.focus&&t.focus()}},2600)}
@@ -3329,7 +3359,7 @@ async function r2SaveSong(s,onp){const base=R2P+songDirs(s).join('/')+'/';const 
 /* lettura: stessa forma della scansione di una cartella, così «Aggiungi» funziona uguale */
 async function r2Scan(list){const all=(list||await r2List(R2P)).filter(o=>!/^[_.]/.test(o.key.slice(R2P.length))&&(AUDIO_RX.test(o.key)||/\.lrc$/i.test(o.key)));const by=new Map();
   for(const o of all){const parts=o.key.slice(R2P.length).split('/');const name=parts.pop();const k=parts.join('/');if(!by.has(k))by.set(k,{path:parts,files:[]});
-    by.get(k).files.push({name,size:o.size,getFile:async()=>new File([await (await r2Req('GET',o.key)).blob()],name)})}
+    by.get(k).files.push({name,key:o.key,size:o.size,getFile:async()=>new File([await (await r2Req('GET',o.key)).blob()],name)})}
   return [...by.values()].filter(g=>g.files.some(f=>AUDIO_RX.test(f.name)))}
 function r2UI(){try{syncInfo()}catch(e){}const on=r2On();$('#stLocal').classList.toggle('on',!on);$('#stR2').classList.toggle('on',on);$('#r2Acts').hidden=!on;$('#addR2').hidden=!r2Ok();
   $('#r2Info').textContent=on?'☁️ Cloud collegato: bucket «'+R2.bucket+'». I brani nuovi si salvano anche lì, da soli.':r2Ok()?'Il cloud R2 è configurato ma spento: i brani restano solo su questo dispositivo.':'I brani restano solo su questo dispositivo.'}
@@ -3355,6 +3385,68 @@ $('#r2All').onclick=async()=>{const b=$('#r2All');if(b.disabled)return;b.disable
 /* brano appena separato: copia anche nel cloud, in sottofondo */
 async function r2Auto(s){if(!r2On()||!s||!s.stems)return;try{await r2SaveSong(s);toast('☁️ «'+(s.title||'brano')+'» salvato anche nel cloud')}catch(e){toast('☁️ Non sono riuscito a salvarlo nel cloud: '+r2Err(e))}}
 setTimeout(()=>{try{r2UI()}catch(e){}},0);
+/* ===================== BRANI NEL CLOUD E SPAZIO SUL DISPOSITIVO =====================
+   Un brano può stare «sul PC» (tracce salvate qui) oppure «solo nel cloud» (in Libreria c'è lo stesso:
+   le tracce si scaricano quando lo apri). Così la Libreria è sempre completa anche con poco spazio. */
+const MB=b=>b/1048576,fmtMB=m=>m>=1024?(m/1024).toFixed(1).replace('.',',')+' GB':Math.round(m)+' MB';
+async function spaceEst(){try{const e=await navigator.storage.estimate();return{usage:e.usage||0,quota:e.quota||0}}catch(x){return{usage:0,quota:0}}}
+const openedMap=()=>{try{return JSON.parse(prefGet('opened')||'{}')||{}}catch(e){return{}}};
+function markOpened(id){const o=openedMap();o[id]=Date.now();prefSet('opened',JSON.stringify(o))}
+/* scheda «solo nel cloud» di un brano trovato nel cloud: pochi byte, niente tracce */
+async function cloudRec(x,n){let lyrics='';if(x.lrc){try{lyrics=await (await x.lrc.getFile()).text()}catch(e){}}
+  const tag=t=>{const m=lyrics.match(new RegExp('^\\['+t+':(.*)\\]$','m'));return m&&m[1].trim()};
+  return{id:'s'+Date.now().toString(36)+n,title:tag('ti')||x.title,artist:tag('ar')||x.artist,album:tag('al')||x.album||'',year:tag('year')||x.year||'',created:Date.now(),lyrics,tab:'',stems:{},
+    cloudOnly:true,cloudFiles:x.stems.map(([k,f])=>({k,key:f.key,name:f.name,size:f.size||0}))}}
+async function cloudFiles(s){const base=R2P+songDirs(s).join('/')+'/';return(await r2List(base)).filter(o=>AUDIO_RX.test(o.key)).map(o=>{const name=o.key.slice(base.length),k=name.replace(/\.[^.]+$/,'');return{k,key:o.key,name,size:o.size}})}
+/* scarica le tracce di un brano dal cloud; se c'è posto le tiene sul dispositivo */
+async function cloudFetch(s,keep){let files=s.cloudFiles&&s.cloudFiles.length?s.cloudFiles:await cloudFiles(s);if(!files.length)throw new Error('nel cloud non trovo le tracce di questo brano');
+  const stems={};let i=0;for(const f of files){banSync('Scarico dal cloud «'+(s.title||'brano')+'»',i++,files.length);stems[f.k]={name:f.name,data:await (await r2Req('GET',f.key)).arrayBuffer()}}
+  const full={...s,stems,cloudFiles:files};let kept=false;
+  if(keep){const tot=Object.values(stems).reduce((a,v)=>a+v.data.byteLength,0),e=await spaceEst();if(!e.quota||e.quota-e.usage>tot*1.2+150*1048576){const rec={...full,cloudOnly:false};if(await dbPut(rec)){kept=true;Object.assign(full,rec)}}}
+  banSyncEnd('');return{full,kept}}
+/* toglie le tracce dal dispositivo e lascia il brano nel cloud */
+async function toCloudOnly(id){const s=await dbGet(id);if(!s||s.cloudOnly)return 0;if(!r2Ok())throw new Error('il cloud non è collegato');
+  let files=await cloudFiles(s);const need=songFiles(s).map(x=>x[0]);if(need.some(n=>!files.some(f=>f.name===n))){await r2SaveSong(s);files=await cloudFiles(s)}
+  const freed=Object.values(s.stems||{}).reduce((a,v)=>a+((v.data&&v.data.byteLength)||0),0);s.stems={};s.cloudOnly=true;s.cloudFiles=files;await dbPut(s);return freed}
+/* dopo la sincronizzazione: scarica sul dispositivo i brani del cloud finché c'è spazio (prima i più usati) */
+async function cloudFill(){if(!r2On()||R.on)return;const op=openedMap(),L=(await libMeta()).filter(s=>s.cloudOnly).sort((a,b)=>(op[b.id]||0)-(op[a.id]||0)||(b.created||0)-(a.created||0));if(!L.length)return;
+  let got=0,full=false;for(const [i,s] of L.entries()){if(R.on||sepBusy)break;const e=await spaceEst(),need=s.mb*1048576*1.2+300*1048576;if(e.quota&&e.quota-e.usage<need){full=true;break}
+    try{const r=await dbGet(s.id);if(!r||!r.cloudOnly)continue;banSync('Copio sul dispositivo i brani del cloud: «'+(s.title||'brano')+'»',i,L.length);const {kept}=await cloudFetch(r,true);if(kept)got++;else{full=true;break}}catch(e){console.warn('cloudFill',e);break}}
+  banSyncEnd(got?'Copiati sul dispositivo '+got+(got===1?' brano':' brani')+'.':'');try{if(!$('#ovLib').hidden)renderLib()}catch(e){}
+  if(full){const n=(await libMeta()).filter(s=>s.cloudOnly).length;if(n&&prefGet('spaceTold')!==String(n)){prefSet('spaceTold',String(n));toast('💽 Spazio pieno: '+n+(n===1?' brano resta':' brani restano')+' solo nel cloud. Si aprono lo stesso; in Libreria → «Spazio» scegli quali tenere qui.')}}}
+/* ----- finestra «Spazio»: perché non ci sta tutto e quali brani tenere sul dispositivo ----- */
+let SPC={L:[],want:{},e:null};
+async function spaceOpen(){openOv('#ovSpace');$('#spcList').innerHTML='<li class="slempty">Controllo lo spazio…</li>';const e=await spaceEst(),L=(await libMeta()).filter(s=>s.id!=='demo'),op=openedMap(),dr=await drIndex();
+  SPC={L,e,want:{},dr:dr.reduce((a,x)=>a+(x.mb||0),0)};L.forEach(s=>SPC.want[s.id]=!s.cloudOnly);L.sort((a,b)=>(op[b.id]||0)-(op[a.id]||0)||(a.artist||'').localeCompare(b.artist||'','it'));spaceDraw()}
+function spaceBudget(){const e=SPC.e,local=SPC.L.filter(s=>!s.cloudOnly).reduce((a,s)=>a+s.mb,0);return e.quota?MB(e.quota-e.usage)+local-200:Infinity}
+function spaceDraw(){const e=SPC.e,L=SPC.L,cloud=r2Ok(),op=openedMap(),bud=spaceBudget(),pick=L.filter(s=>SPC.want[s.id]).reduce((a,s)=>a+s.mb,0),nCloud=L.filter(s=>s.cloudOnly).length;
+  const used=MB(e.usage),q=MB(e.quota);$('#spcBar').style.width=q?Math.min(100,used/q*100)+'%':'0';$('#spcBar').classList.toggle('full',q&&used/q>.9);
+  $('#spcTxt').innerHTML=q?`<b>${fmtMB(used)}</b> usati su <b>${fmtMB(q)}</b> che il browser concede all'app su questo dispositivo.`:'Il browser non dice quanto spazio concede.';
+  $('#spcWhy').innerHTML=(nCloud?`<b>Perché non ci stanno tutti:</b> il browser dà a Pure Voltage solo una parte dello spazio libero del disco${q?` (qui ${fmtMB(q)})`:''}. Ogni brano separato pesa dai 30 ai 60 MB, quindi <b>${nCloud} ${nCloud===1?'brano è rimasto':'brani sono rimasti'} solo nel cloud</b>: si aprono lo stesso, scaricandoli al momento (serve internet). `:'Tutti i brani sono su questo dispositivo. ')+
+    `Qui sotto scegli quali tenere <b>sul dispositivo</b> (si aprono subito, anche senza internet) e quali lasciare <b>solo nel cloud</b>. Per avere più spazio in assoluto libera il disco del PC (Windows: Impostazioni → Sistema → Archiviazione).`+(SPC.dr>20?` Le bozze dei video occupano ${fmtMB(SPC.dr)}: se non ti servono le elimini in «Bozze».`:'');
+  $('#spcSum').innerHTML=`Sul dispositivo: <b>${fmtMB(pick)}</b>${isFinite(bud)?` su circa <b>${fmtMB(Math.max(0,bud))}</b> disponibili`:''}`;$('#spcSum').classList.toggle('over',isFinite(bud)&&pick>bud);
+  $('#spcList').innerHTML=L.map(s=>{const on=SPC.want[s.id],lo=op[s.id];return`<li class="${on?'on':''}"><span class="slt"><b>${esc(s.title||'Senza titolo')}</b><small>${esc(s.artist||'')} · ${fmtMB(s.mb)}${lo?' · aperto '+new Date(lo).toLocaleDateString('it-IT',{day:'numeric',month:'short'}):''}</small></span>
+    <span class="seg spcseg" role="group"><button data-sp="${s.id}" data-v="1" class="${on?'on':''}">Sul dispositivo</button><button data-sp="${s.id}" data-v="0" class="${on?'':'on'}" ${cloud?'':'disabled title="Collega il cloud per lasciare i brani solo lì"'}>Solo cloud</button></span></li>`}).join('')||'<li class="slempty">La Libreria è vuota.</li>';
+  $('#spcList').querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{SPC.want[b.dataset.sp]=b.dataset.v==='1';spaceDraw()});
+  $('#spcGo').disabled=!L.some(s=>SPC.want[s.id]===!!s.cloudOnly);$('#spcAuto').disabled=!cloud}
+$('#spcAuto').onclick=()=>{const op=openedMap(),bud=spaceBudget()*.9;let t=0;[...SPC.L].sort((a,b)=>(op[b.id]||0)-(op[a.id]||0)||(b.created||0)-(a.created||0)).forEach(s=>{const ok=t+s.mb<=bud;SPC.want[s.id]=ok;if(ok)t+=s.mb});spaceDraw();toast('Ho tenuto sul dispositivo i brani che apri più spesso, finché c\'è posto')};
+$('#spcGo').onclick=async()=>{const b=$('#spcGo');b.disabled=true;const out=SPC.L.filter(s=>!s.cloudOnly&&!SPC.want[s.id]),inn=SPC.L.filter(s=>s.cloudOnly&&SPC.want[s.id]);let fr=0,got=0,stop='';
+  try{for(const [i,s] of out.entries()){banSync('Lascio solo nel cloud «'+(s.title||'brano')+'»',i,out.length);fr+=await toCloudOnly(s.id)}
+    for(const [i,s] of inn.entries()){const r=await dbGet(s.id);if(!r||!r.cloudOnly)continue;banSync('Copio sul dispositivo «'+(s.title||'brano')+'»',i,inn.length);const {kept}=await cloudFetch(r,true);if(kept)got++;else{stop='spazio';break}}}
+  catch(e){stop=r2Err(e)||e.message}
+  banSyncEnd((fr?'Liberati '+fmtMB(MB(fr))+'. ':'')+(got?got+(got===1?' brano copiato':' brani copiati')+' sul dispositivo.':''));
+  toast(stop==='spazio'?'Lo spazio è finito prima: alcuni brani restano solo nel cloud':stop?'Interrotto: '+stop:'Fatto');renderLib();spaceOpen()};
+/* ----- separare (o rifare a 6 tracce) un brano che è già in Libreria ----- */
+let SEP_REPLACE=null;
+async function sepFromLib(id){if(sepBusy){toast('Aspetta che finisca la separazione in corso');return}if(!(rp.key&&rp.ep)&&!mv.key){toast('Per separare serve RunPod (o MVSEP)');setupOpen(1);return}
+  let s=await dbGet(id);if(!s)return;if(s.cloudOnly){try{s=(await cloudFetch(s,true)).full}catch(e){toast('Non riesco a scaricarlo dal cloud: '+r2Err(e));return}}
+  const nm=((s.artist?s.artist+' - ':'')+(s.title||'brano')).replace(/[\\/:*?"<>|]/g,' ');let f;
+  if(s.stems.mix){const ext=(s.stems.mix.name.match(/\.[a-z0-9]+$/i)||['.mp3'])[0];f=new File([s.stems.mix.data],nm+ext,{type:r2Type('x'+ext)})}
+  else{toast('Rimetto insieme le tracce per separarle di nuovo…');const bufs=[];for(const v of Object.values(s.stems)){try{bufs.push(await decode(v.data.slice(0)))}catch(e){}}if(!bufs.length){toast('Non riesco a leggere le tracce');return}
+    const sr=bufs[0].sampleRate,len=Math.max(...bufs.map(b=>b.length)),oc=new OfflineAudioContext(2,len,sr);bufs.forEach(b=>{const n=oc.createBufferSource();n.buffer=b;n.connect(oc.destination);n.start()});const mixd=await oc.startRendering();
+    try{f=await toMp3(mixd,320,null)}catch(e){f=wavOf(mixd)}f=new File([f],nm+(/wav/.test(f.type)?'.wav':'.mp3'),{type:f.type})}
+  const keep={};['title','artist','album','year','lyrics','lyr','lyrOff','tab','created','lrclib','asr','singers'].forEach(k=>{if(s[k]!=null&&s[k]!=='')keep[k]=s[k]});
+  SEP_REPLACE={id,f,keep,oldFiles:songFiles(s).map(x=>x[0])};sepFiles=[f];sepFileObj=f;$('#sepFile').textContent=f.name;$('#ovLib').hidden=true;$('#bSep').disabled=false;$('#bSep').click()}
 /* ===================== SINCRONIZZAZIONE AUTOMATICA CON IL CLOUD =====================
    All'apertura (e quando torna internet, l'app torna in primo piano o il cloud viene ricollegato):
    - brani: quelli nuovi del cloud arrivano in Libreria, quelli solo su questo dispositivo vanno nel cloud; testi aggiornati
@@ -3387,7 +3479,7 @@ async function syncSongs(all,sum){const lib=await libMeta(),byDir=new Map(lib.ma
   if(!syncHeavyOk())return;
   /* brani nuovi nel cloud → Libreria */
   const dirs=new Set(byDir.keys()),found=(await describe(await r2Scan(all))).filter(x=>x.single?!have.has(normKey(x.artist,x.title)):!dirs.has(x.dir)&&!have.has(normKey(x.artist,x.title)));found.forEach(x=>x.fromCloud=true);
-  for(const [i,x] of found.entries()){if(R.on)break;syncSay('☁️ Arriva dal cloud: '+x.title+'…');banSync('Arrivano i tuoi brani dal cloud: «'+x.title+'»',i,found.length);try{if(await addOne(x,sum.inn)){sum.inn++;have.add(normKey(x.artist,x.title));dirs.add(x.dir)}else break}catch(e){console.warn('sync in',e)}}
+  for(const [i,x] of found.entries()){syncSay('☁️ Arriva dal cloud: '+x.title+'…');banSync('Arrivano i tuoi brani dal cloud: «'+x.title+'»',i,found.length);try{if(await dbPut(await cloudRec(x,i))){sum.inn++;have.add(normKey(x.artist,x.title));dirs.add(x.dir)}}catch(e){console.warn('sync in',e)}}
   /* brani solo qui → cloud */
   const outs=lib.filter(s=>s.id!=='demo'&&s.stems&&!cloudDirs.has(songDirs(s).join('/')));
   for(const [i,s] of outs.entries()){if(R.on)break;syncSay('☁️ Salvo nel cloud: '+(s.title||'brano')+'…');banSync('Salvo i tuoi brani nel cloud: «'+(s.title||'brano')+'»',i,outs.length);
@@ -3420,7 +3512,7 @@ async function syncAll(why,light){if(!r2On()){SY.pending=true;syncInfo();return}
   SY.busy=true;SY.pending=false;const sum={inn:0,out:0,lyr:0,set:0,drIn:0,drOut:0,drDel:0},t0=Date.now();const b=$('#r2SyncGo');if(b)b.disabled=true;
   try{syncSay('☁️ Sincronizzo con il cloud…');sum.set=await syncSettings();
     if(!light){const all=await r2List(R2P);await syncSongs(all,sum);await syncDrafts(all,sum);try{cvCount()}catch(e){}}
-    SY.at=t0;prefSet('syncAt',String(t0));
+    SY.at=t0;prefSet('syncAt',String(t0));if(!light&&syncHeavyOk())setTimeout(()=>cloudFill().catch(e=>console.warn(e)),2500);
     const parts=[];if(sum.inn)parts.push(sum.inn===1?'1 brano arrivato':sum.inn+' brani arrivati');if(sum.out)parts.push(sum.out===1?'1 brano salvato nel cloud':sum.out+' brani salvati nel cloud');if(sum.lyr)parts.push(sum.lyr===1?'1 testo aggiornato':sum.lyr+' testi aggiornati');
     if(sum.drIn)parts.push(sum.drIn===1?'1 bozza da un altro dispositivo':sum.drIn+' bozze da un altro dispositivo');if(sum.drOut)parts.push(sum.drOut===1?'1 bozza nel cloud':sum.drOut+' bozze nel cloud');if(sum.set)parts.push('scalette e preset aggiornati');
     banSyncEnd(parts.length?'Fatto: '+parts.join(', ')+'.':'');
