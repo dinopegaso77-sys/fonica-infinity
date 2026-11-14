@@ -164,6 +164,7 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .artsrc{font-size:12px;color:var(--dim);border-top:1px solid var(--line);padding-top:8px}@media (max-width:520px){.arttop{flex-direction:column;text-align:center}.arttop .row{justify-content:center}}
 .shsheet{max-width:min(900px,96vw)}.shwrap{background:#888;border-radius:12px;padding:12px;overflow:auto;max-height:60vh;display:flex;justify-content:center}.shwrap iframe{border:0;background:#fff;height:1123px;box-shadow:0 6px 24px rgba(0,0,0,.4);flex:none;transform-origin:top center}
 @media (max-width:820px){.shwrap{max-height:55vh}.shwrap iframe{zoom:.45}}
+.shasksheet{max-width:min(640px,96vw)}.shklist{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:8px 0 12px}.shk{display:grid;gap:2px;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer;text-align:left;font-family:Figtree,system-ui}.shk small{color:var(--dim)}.shk em{font-style:normal;font-size:11px;color:var(--accent)}.shk.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 40%,transparent)}.shbtns{flex-wrap:wrap}
 .slpickbox{max-height:44vh;overflow:auto;display:grid;gap:6px}.slpickbox .slpickl{max-height:none;overflow:visible}
 .slalb{display:flex;align-items:center;gap:10px;margin-top:6px}.slalb .alh{flex:1;min-width:0;display:grid}.slalb .alh small{color:var(--dim)}
 .alcov{width:52px;height:52px;flex:none;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;padding:0;overflow:hidden;cursor:pointer;color:var(--dim)}.alcov img{width:100%;height:100%;object-fit:cover;display:block}.alcov .ei,.alcov svg{width:26px;height:26px}.alcov.none{cursor:default;opacity:.5}
@@ -231,7 +232,7 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .kdel{padding:12px;border-radius:12px;border:1px solid #d93a30;background:color-mix(in srgb,#d93a30 10%,transparent);display:grid;gap:8px}.kdel[hidden]{display:none}.kdel p{margin:0}
 details.advset{padding:0}details.advset>summary{cursor:pointer;padding:14px 16px;list-style:revert}details.advset>summary small{color:var(--muted);font-weight:500}details.advset[open]>summary{border-bottom:1px solid var(--line)}details.advset>.box{margin:10px;border-style:dashed}
 .spacerow{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}.spacerow.full{border-color:#e0a030}.spacerow small{color:var(--muted)}.spacerow .meta{flex:1;min-width:0}.spacerow .meta b{white-space:normal;overflow:visible;text-overflow:clip}.spclist{counter-reset:none}.spclist li::before{display:none!important}
-.tag.cloud{background:color-mix(in srgb,var(--accent) 16%,transparent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}.lrow.iscloud .meta b{opacity:.85}.lbtn.inq{border-color:color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent)}.lrow .meta b.lopen{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}.lbtn.sep{border-color:var(--accent);color:var(--accent)}
+.tag.cloud{background:color-mix(in srgb,var(--accent) 16%,transparent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}.lrow.iscloud .meta b{opacity:.85}.ldelq{flex-basis:100%;font-weight:700;font-size:14px;color:#ff8a80}.lbtn.inq{border-color:color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent)}.lrow .meta b.lopen{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}.lbtn.sep{border-color:var(--accent);color:var(--accent)}
 .spcbar{height:12px;border-radius:6px;background:var(--raise);overflow:hidden;border:1px solid var(--line)}.spcbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#6fe3ff,#a78bfa)}.spcbar i.full{background:linear-gradient(90deg,#f59e0b,#ef4444)}
 #spcTxt{margin:8px 0 0}#spcSum.over b{color:#ff7a70}.spcrow{align-items:center;gap:10px;flex-wrap:wrap}
 .spclist li{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.spk{display:inline-block;font-style:normal;font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:999px;margin:2px 6px 2px 0;border:1px solid var(--line)}.spk.both{color:#4ade80;border-color:#22c55e66}.spk.cloud{color:#6fe3ff;border-color:#6fe3ff66}.spk.here{color:#fbbf24;border-color:#f59e0b66}
@@ -846,7 +847,7 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 .hsong .songpick{max-width:none!important;width:100%;min-height:52px!important;font-size:17px!important}
 .hscal{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:6px 16px;border-radius:14px;font-weight:700}.hscal .ico{width:22px;height:22px}
 .hdr .transport .trow{justify-content:center}
-.htools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.htools{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
 .htool{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;min-height:84px;padding:8px 6px;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;text-align:center}
 .htool .ico{color:var(--accent);width:28px;height:28px}.htool b{font-size:14px;line-height:1.15}.htool small{max-width:100%;font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .htool:hover,.hbtn:hover{border-color:var(--accent)}.htool.dim{opacity:.55}
@@ -862,7 +863,7 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
   .hlogo{grid-area:logo}.hnav{grid-area:nav}.hsong{grid-area:song}.hdr .transport{grid-area:tr}.htools{grid-area:tools}
   .htool{min-height:58px;padding:6px 10px;flex-direction:row;justify-content:flex-start;text-align:left;gap:10px;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto}.htool .ico{width:26px;height:26px;grid-row:1/3}.htool b{font-size:14px}.htool small{text-align:left}
 }
-@media (max-width:899px){.htools{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:899px){.htools{grid-template-columns:repeat(3,minmax(0,1fr))}#tlSheet{grid-column:1/-1;flex-direction:row;justify-content:center;gap:10px}#tlSheet small{margin-left:4px}}
 @media (max-width:379px){.hlogo #brandLogo{height:46px!important}.hlogo #bShare{padding:4px 8px}.hlogo .hshare b{font-size:12.5px}.hlogo #bDonate img{height:32px}}
 @media (max-width:599px){
   .hlogo{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"logo share pay" "txt txt txt";gap:8px 8px}.hlogo #bShare{grid-area:share;justify-self:center;min-height:42px;padding:4px 10px;gap:6px;min-width:0}.hshare .ico{width:22px;height:22px}.hshare b{font-size:13.5px}.hshare small{display:none}.hlogo #bDonate img{height:36px}
@@ -932,6 +933,7 @@ themeApply();</script>
       <button class="htool" id="tlRange"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/><path d="M2.5 5v12M21.5 5v12M1.5 5h2M1.5 17h2M20.5 5h2M20.5 17h2" stroke-width="1.5"/></svg><b>Estensione vocale</b><small id="tlRangeS"></small></button>
       <button class="htool" id="tlTune"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M12 17l3.6-6.3"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/><path d="M5.6 11.2l1.1.8M12 8.5v1.3M18.4 11.2l-1.1.8" stroke-width="1.6"/><path d="M3 20.5h18"/></svg><b>Accordatore</b><small>chitarra, basso e voce</small></button>
       <button class="htool" id="tlTag" title="Modifica tag MP3: titolo, artista, album, anno e testo"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4.5L19 9.5 14.5 5 4 15.5z"/><path d="m12.8 6.7 4.5 4.5"/><path d="M13 20h7" opacity=".6"/></svg><b>Tag MP3</b><small id="tlTagS">titolo, artista, testo</small></button>
+      <button class="htool" id="tlSheet" title="Testo con gli accordi in un foglio A4 da stampare o salvare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 11h6M9 15h6M9 19h3" opacity=".7"/></svg><b>Foglio A4</b><small>testo e accordi</small></button>
     </div>
   </header>
 
@@ -975,7 +977,6 @@ themeApply();</script>
         <label class="lbl" id="fiveL" data-notes><input type="checkbox" id="five"> 5 corde</label>
         <select class="sel" id="sens" aria-label="Quante note" data-notes><option value="0.5">pochissime note</option><option value="0.7" selected>meno note</option><option value="1">note normali</option><option value="1.5">più note</option></select>
         <button class="mini" id="bRedo">Rifai</button>
-        <button class="mini" data-sheet title="Testo con gli accordi sopra le parole, in un foglio A4 da stampare o salvare">📄 Foglio accordi A4</button>
         </div>
         <div class="optrow" id="tabFootWritten" hidden>
         <button class="mini" id="bEditTab">Modifica</button><button class="mini" id="bSyncTab">Sincronizza</button>
@@ -1469,11 +1470,18 @@ themeApply();</script>
   <div class="arttext" id="artText"></div><div id="artAlb"></div>
   <p class="artsrc" id="artSrc"></p>
 </div></div>
+<div class="ov" id="ovShAsk" hidden><div class="sheet slsheet shasksheet">
+  <div class="slhead"><h3>📄 Foglio A4: tonalità</h3><button class="mini" data-close>Chiudi</button></div>
+  <div class="row"><span class="lbl">Per</span><span class="seg" id="shkInst" role="group"><button data-b="0">Chitarra (accordi)</button><button data-b="1">Basso (note)</button></span></div>
+  <p class="snote" id="shkOrig"></p>
+  <div class="shklist" id="shkList"></div>
+  <div class="row"><span class="grow"></span><button class="chip pri" id="shkGo">Crea il foglio</button></div>
+</div></div>
 <div class="ov" id="ovSheet" hidden><div class="sheet slsheet shsheet">
   <div class="slhead"><h3>📄 Foglio accordi A4</h3><button class="mini" data-close>Chiudi</button></div>
   <p class="snote" id="shInfo"></p>
-  <div class="row"><button class="chip pri" id="shPrint">🖨 Stampa o salva in PDF</button><button class="chip" id="shTxt">Scarica il testo (.txt)</button></div>
-  <p class="snote">Per cambiare tonalità o strumento chiudi, cambia «Tonalità» o «Basso / Chitarra» e riapri il foglio: usa sempre quelli scelti adesso.</p>
+  <div class="row shbtns"><button class="chip pri" id="shPrint">🖨 Stampa o salva in PDF</button><button class="chip" id="shTxt">Scarica il testo (.txt)</button><button class="chip" id="shShare">Condividi il foglio</button><button class="chip" id="shAgain">Cambia tonalità o strumento</button></div>
+  <p class="snote">«Stampa o salva in PDF»: nella finestra di stampa scegli la stampante oppure «Salva come PDF».</p>
   <div class="shwrap"><iframe id="shFrame" title="Anteprima del foglio A4"></iframe></div>
 </div></div>
 <div class="ov" id="ovCover" hidden><div class="sheet slsheet cvwsheet">
@@ -2932,7 +2940,7 @@ async function renderLib(){const all=(await libMeta()).sort((a,b)=>(a.artist||'~
   const nCloud=all.filter(s=>s.cloudOnly).length,e=await spaceEst();
   const row=s=>{const id=s.id,co=!!s.cloudOnly,mixOnly=s.sk.length===1&&s.sk[0]==='mix',refine=!mixOnly&&s.sk.length>1&&s.sepModel!=='mix6'&&!!(rp.key&&rp.ep);
     const tags=`<span class="tag">${s.sk.map(k=>SL[k]||k).join(' · ')||'—'}</span>${(s.lyr&&s.lyr.length)||s.lyrics?'<span class="tag good">con testo</span>':''}${co?'<span class="tag cloud">☁️ solo nel cloud · si scarica quando lo apri</span>':''}`;
-    const del='';
+    const del=delArm===id?`<span class="ldelq">Eliminarlo per sempre, anche dal cloud e dagli altri dispositivi?</span><button class="lbtn del arm" data-delall="${id}">${EI('trash')}<span>Sì, elimina ovunque</span></button><button class="lbtn" data-delno>No</button>`:`<button class="lbtn del" data-del="${id}">${EI('trash')}<span>Elimina ovunque</span></button>`;
     return`<div class="si lrow ${song&&song.id===id?'cur':''} ${co?'iscloud':''}"><div class="meta"><b>${esc(s.title||'Senza titolo')}</b></div><div class="ltags">${tags}</div>
     <div class="lacts">${SCL.items.some(it=>it.id===id)?`<button class="lbtn inq" data-unq="${id}" data-qid="${id}" title="È nella coda: toccalo per toglierlo">${EI('queue')}<span>✓ In coda · Togli dalla coda</span></button>`:`<button class="lbtn pri" data-queue="${id}" data-qid="${id}" title="Lo mette in fondo alla coda di ascolto (la scaletta)">${EI('queue')}<span>Aggiungi alla coda</span></button>`}${mixOnly&&canSep?`<button class="lbtn sep" data-sep="${id}" ${sepBusy?'disabled':''} title="Divide il brano in voce, basso, batteria, chitarra e altro">${EI('split')}<span>Separa il brano</span></button>`:''}${refine&&canSep&&!co?`<button class="lbtn" data-sep="${id}" ${sepBusy?'disabled':''} title="Rifà la separazione a 6 tracce con voce, basso e batteria più puliti (per esempio se nel basso si sente la batteria)">${EI('split')}<span>Affina la separazione</span></button>`:''}${co?'':`<button class="lbtn" data-tag="${id}" title="Titolo, artista, album, anno e testo dentro all'MP3">${EI('tag')}<span>Modifica tag MP3</span></button><button class="lbtn" data-exp="${id}">${EI('folderdown')}<span>Salva tracce${fsOk?' in cartella':''}</span></button>`}${del}</div></div>`};
   const q=MB(e.quota),u=MB(e.usage),spRow=`<div class="si spacerow ${q&&u/q>.9?'full':''}"><div class="meta"><b>💽 Dove sono i tuoi brani</b><small>${q?fmtMB(u)+' usati su '+fmtMB(q)+' · ':''}${nCloud?nCloud+(nCloud===1?' brano solo nel cloud':' brani solo nel cloud'):'tutti su questo dispositivo'} · qui scarichi, togli, converti in MP3 ed elimini</small></div><button class="chip pri" id="libSpace">Gestisci</button></div>`;
@@ -2946,6 +2954,9 @@ async function renderLib(){const all=(await libMeta()).sort((a,b)=>(a.artist||'~
     SCL.i=cur?SCL.items.indexOf(cur):-1;if(SCL.i<0&&cur&&cur.id===id)SCL.i=Math.min(SCL.items.length-1,SCL.i);slKeep();try{slBarUI();slPlace()}catch(e){}toast('Tolto dalla coda: «'+((x&&x.title)||'brano')+'»');renderLib()});
   el.querySelectorAll('.lrow .meta b').forEach(t=>{const r=t.closest('.lrow'),q=r&&r.querySelector('[data-qid]');if(!q)return;t.classList.add('lopen');t.title='Tocca il titolo per aprirlo subito';t.onclick=()=>{closeOv(t);openStored(q.dataset.qid)}});
   el.querySelectorAll('[data-sep]').forEach(b=>b.onclick=()=>sepFromLib(b.dataset.sep));
+  el.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{delArm=b.dataset.del;renderLib()});
+  el.querySelectorAll('[data-delno]').forEach(b=>b.onclick=()=>{delArm=null;renderLib()});
+  el.querySelectorAll('[data-delall]').forEach(b=>b.onclick=async()=>{const id=b.dataset.delall;delArm=null;b.disabled=true;try{await delEverywhere(id);toast(r2Ok()?'Eliminato ovunque: non tornerà più':'Eliminato')}catch(e){toast('Dal cloud non sono riuscito a toglierlo: '+(r2Err(e)||e.message))}renderLib()});
   el.querySelectorAll('[data-tag]').forEach(b=>b.onclick=()=>tagOpen(b.dataset.tag));
   el.querySelectorAll('[data-exp]').forEach(b=>b.onclick=async()=>{const s=await dbGet(b.dataset.exp);if(s)exportSong(s,true)})}
 let pending=[];
@@ -2971,7 +2982,7 @@ $('#bSave').onclick=async()=>{if(!pending.length)return;const ks=pending.map(p=>
   for(const p of pending){try{bufs[p.k]=await decode(p.ab)}catch(e){$('#impStatus').textContent='Non riesco a leggere '+p.name+'. Prova a esportarlo di nuovo in MP3 o WAV.';return}}
   const id='s'+Date.now().toString(36);const rec={id,title:$('#impTitle').value.trim(),artist:$('#impArtist').value.trim(),created:Date.now(),album:(pending.meta&&pending.meta.album)||'',year:(pending.meta&&pending.meta.year)||'',lyrics:pending.meta.lyrics||'',tab:'',stems:Object.fromEntries(pending.map(p=>[p.k,{name:p.name,data:p.ab}]))};
   $('#bSave').disabled=true;await slimStems(rec.stems,p=>$('#impStatus').textContent='Lo salvo in MP3, più leggero… '+Math.round(p*100)+'%');$('#bSave').disabled=false;
-  const ok=await dbPut(rec);pending=[];$('#importBox').hidden=true;$('#fileIn').value='';closeOv($('#bSave'));
+  const ok=await dbPut(rec);if(ok)tombClear(rec);pending=[];$('#importBox').hidden=true;$('#fileIn').value='';closeOv($('#bSave'));
   await loadSong({...rec,stems:undefined,stored:!!ok},bufs);toast(ok?'Brano salvato':'Brano aperto, ma questo browser non permette di salvarlo');
   if(!rec.lyrics&&rec.title)findLyrics(true)};
 
@@ -3069,7 +3080,7 @@ async function sepFinish(meta,stemsRec,bufs,note,asr,sing){
   const RP0=SEP_REPLACE&&SEP_REPLACE.f===sepFileObj?SEP_REPLACE:null;SEP_REPLACE=null;
   const id=RP0?RP0.id:'s'+Date.now().toString(36);const rec={id,title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',album:meta.album||'',year:meta.year||'',created:Date.now(),lyrics:meta.lyrics||'',tab:'',stems:stemsRec};if(meta.lrc)rec.lrclib=meta.lrc;if(asr&&asr.segments&&asr.segments.length)rec.asr=asr;if(sing&&!sing.error&&sing.k!=null)rec.singers=sing;if(RP0)Object.assign(rec,RP0.keep,{stems:stemsRec});if(sepInfo.ep==='runpod'&&sepInfo.model)rec.sepModel=sepInfo.model;
   if(Object.values(stemsRec).some(v=>!LIGHT_RX.test(v.name||'')))await slimStems(stemsRec,p=>spShow('Salvo le tracce in MP3, più leggere… '+Math.round(p*100)+'%',p,'save'));
-  const ok=await dbPut(rec);let saved=false;if(window.showDirectoryPicker&&dirHandle)saved=await exportSong(rec,false);
+  const ok=await dbPut(rec);if(ok)tombClear(rec);let saved=false;if(window.showDirectoryPicker&&dirHandle)saved=await exportSong(rec,false);
   if(BATCH.on){if(!ok){sepFail(new Error('non riesco a salvare: '+await saveFailMsg()));return}if(r2On()){spShow('☁️ Salvo «'+rec.title+'» anche nel cloud…',null,'save');await r2Auto(rec)}BATCH.res='ok';sepEnd();spShow(`«${rec.title}» pronto in Libreria`,1);return}
   sepEnd();const took=fmt((Date.now()-sepT0)/1000);
   spShow(`Fatto in ${took}${note?' ('+note+')':''}. ${saved?'Tracce salvate anche nella cartella «'+dirHandle.name+'».':'Il brano è in Libreria.'}`,1);$$('#spSteps span').forEach(el=>el.className='ok');
@@ -3458,14 +3469,14 @@ setTimeout(()=>{try{r2UI()}catch(e){}},0);
    Titolo, artista, logo in alto a destra; il testo con gli accordi sopra la parola dove cambiano.
    Accordi nella tonalità scelta adesso (trasposizione), per lo strumento scelto: chitarra = accordi, basso = note.
    Le parti solo suonate (intro, strumentali, finale) sono scritte con la loro sequenza. Tutto in un foglio A4. */
-const SH={txt:'',html:''};
+const SH={txt:'',html:'',tr:0,bass:false};
 function shName(r,q,bass){return bass?NOTE_IT[r]:NOTE_IT[r]+(q?'m':'')}
-function shChords(bass){const B=(CH.base||[]).filter(c=>c[2]>=0);let last='';const out=[];for(const c of B){const r=((c[2]+tr)%12+12)%12,n=shName(r,c[3],bass);if(n===last&&out.length){out[out.length-1].b=c[1];continue}out.push({a:c[0],b:c[1],n});last=n}return out}
+function shChords(bass){const B=(CH.base||[]).filter(c=>c[2]>=0);let last='';const out=[];for(const c of B){const r=((c[2]+SH.tr)%12+12)%12,n=shName(r,c[3],bass);if(n===last&&out.length){out[out.length-1].b=c[1];continue}out.push({a:c[0],b:c[1],n});last=n}return out}
 /* sequenze ripetute: (La Re Mi) ×4 */
 function shSeq(names){const N=names.length;if(N<4)return names.join('  ');for(let p=1;p<=4;p++){if(N%p)continue;const rep=N/p;if(rep<2)continue;let ok=true;for(let i=p;i<N;i++)if(names[i]!==names[i%p]){ok=false;break}if(ok)return(p===1?names[0]:'( '+names.slice(0,p).join('  ')+' )')+'  ×'+rep}
   const out=[];let i=0;while(i<N){let best=null;for(let p=4;p>=2;p--){let r=1;while(i+(r+1)*p<=N&&names.slice(i+r*p,i+(r+1)*p).join()===names.slice(i,i+p).join())r++;if(r>=2&&(!best||p*r>best.p*best.r))best={p,r}}
     if(best){out.push('( '+names.slice(i,i+best.p).join('  ')+' ) ×'+best.r);i+=best.p*best.r}else{out.push(names[i]);i++}}return out.join('  ')}
-function shBuild(){const bass=inst==='bass',CHS=shChords(bass),L=K.lines.filter(l=>l.s&&l.s.trim()),off=K.off||0,dur=(typeof sDur==='function'&&sDur())||(CHS.length?CHS[CHS.length-1].b:0);
+function shBuild(){const bass=SH.bass,CHS=shChords(bass),L=K.lines.filter(l=>l.s&&l.s.trim()),off=K.off||0,dur=(typeof sDur==='function'&&sDur())||(CHS.length?CHS[CHS.length-1].b:0);
   const out=[];const at=t=>{for(const c of CHS)if(c.a<=t+.05&&t<c.b)return c;return null};
   const gap=(t0,t1,label)=>{const cs=CHS.filter(c=>c.b>t0+.4&&c.a<t1-.4);if(!cs.length)return;out.push({sec:label,seq:shSeq(cs.map(c=>c.n))})};
   if(!L.length){gap(0,dur,bass?'Note del basso':'Accordi');return out}
@@ -3478,7 +3489,7 @@ function shBuild(){const bass=inst==='bass',CHS=shChords(bass),L=K.lines.filter(
     out.push({ch:line,ly:txt});
     const nx=L[i+1];if(nx){const g0=t1,g1=nx.t+off;if(g1-g0>6)gap(g0,g1,i<L.length/2?'Strumentale':'Assolo / strumentale')}});
   const tl=L[L.length-1],tEnd=((tl.e!=null?tl.e:tl.t+4)+off);if(dur-tEnd>4)gap(tEnd,dur,'Finale');return out}
-function shKey(bass){const d=new Map();for(const c of (CH.base||[]))if(c[2]>=0){const k=((c[2]+tr)%12+12)%12+'|'+c[3];d.set(k,(d.get(k)||0)+(c[1]-c[0]))}let b=null,v=0;for(const [k,x] of d)if(x>v){v=x;b=k}if(!b)return'';const [r,q]=b.split('|').map(Number);return NOTE_IT[r]+(q?' minore':' maggiore')}
+function shKey(bass,trv){const T=trv==null?SH.tr:trv;const d=new Map();for(const c of (CH.base||[]))if(c[2]>=0){const k=((c[2]+T)%12+12)%12+'|'+c[3];d.set(k,(d.get(k)||0)+(c[1]-c[0]))}let b=null,v=0;for(const [k,x] of d)if(x>v){v=x;b=k}if(!b)return'';const [r,q]=b.split('|').map(Number);return NOTE_IT[r]+(q?' minore':' maggiore')}
 function shText(rows,head){const T=[head.title,head.artist,head.sub,''];for(const r of rows){if(r.sec){T.push('['+r.sec+']  '+r.seq,'')}else{if(r.ch)T.push(r.ch);T.push(r.ly)}}T.push('','Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio');return T.join('\n')}
 function shHTML(rows,head,fs,cols){const e=x=>esc(x).replace(/ /g,'&nbsp;');const logo=($('#brandLogo')||{}).src||'';
   const body=rows.map(r=>r.sec?`<div class="sec"><b>[${esc(r.sec)}]</b> <span class="ch">${e(r.seq)}</span></div>`:`<div class="ln">${r.ch?`<div class="ch">${e(r.ch)}</div>`:''}<div class="ly">${e(r.ly)||'&nbsp;'}</div></div>`).join('');
@@ -3493,14 +3504,25 @@ footer{margin-top:6px;font:10px Arial,sans-serif;color:#777;border-top:1px solid
 async function shFit(rows,head){const fr=$('#shFrame');const A4H=Math.round(297/25.4*96-2*12/25.4*96),W=Math.round(186/25.4*96);
   for(const cols of [1,2])for(let fs=cols===1?15:13;fs>=7;fs--){const h=shHTML(rows,head,fs,cols);fr.style.width=W+'px';fr.srcdoc=h;await new Promise(r=>fr.onload=r);const d=fr.contentDocument;if(d.body.scrollHeight<=A4H)return{h,fs,cols}}
   return{h:shHTML(rows,head,7,2),fs:7,cols:2}}
-async function shOpen(){if(!song){toast('Apri prima un brano');return}
-  if(!CH.base){toast('Cerco gli accordi del brano…');try{await chordAnalyze()}catch(e){}}if(!CH.base||!CH.base.some(c=>c[2]>=0)){toast('In questo brano non trovo accordi: non posso fare il foglio');return}
-  const bass=inst==='bass',rows=shBuild(),k=shKey(bass);const head={title:song.title||'Brano',artist:artQ(song.artist||''),sub:[bass?'Note del basso':'Accordi per chitarra',k?'tonalità '+k:'',tr?'trasposto '+(tr>0?'+':'')+tr+' semitoni':'tonalità originale'].filter(Boolean).join(' · ')};
+/* prima la domanda: strumento e tonalità; poi il foglio */
+async function shAsk(){if(!song){toast('Scegli prima un brano');return}
+  if(!CH.base){openOv('#ovShAsk');$('#shkList').innerHTML='<p class="snote">Cerco gli accordi del brano… (serve una volta sola)</p>';try{await chordAnalyze()}catch(e){}}
+  if(!CH.base||!CH.base.some(c=>c[2]>=0)){$('#ovShAsk').hidden=true;toast('In questo brano non trovo accordi: non posso fare il foglio');return}
+  SH.bass=inst==='bass';SH.tr=tr;shAskDraw();openOv('#ovShAsk')}
+function shAskDraw(){$$('#shkInst button').forEach(b=>b.classList.toggle('on',(b.dataset.b==='1')===SH.bass));const o=shKey(false,0);
+  $('#shkOrig').textContent=o?'Tonalità originale del brano: '+o:'';const L=[];for(let t=-6;t<=6;t++)L.push(t);
+  $('#shkList').innerHTML=L.map(t=>`<button class="shk ${t===SH.tr?'on':''}" data-t="${t}"><b>${t===0?'Originale':(t>0?'+':'')+t}</b><small>${esc(shKey(false,t))}</small>${t===tr&&t!==0?'<em>quella che usi adesso</em>':''}</button>`).join('');
+  $$('#shkList .shk').forEach(b=>b.onclick=()=>{SH.tr=+b.dataset.t;shAskDraw()})}
+$$('#shkInst button').forEach(b=>b.onclick=()=>{SH.bass=b.dataset.b==='1';shAskDraw()});
+$('#shkGo').onclick=()=>{$('#ovShAsk').hidden=true;shOpen()};
+async function shOpen(){if(!song)return;const bass=SH.bass,rows=shBuild(),k=shKey(bass);const head={title:song.title||'Brano',artist:artQ(song.artist||''),sub:[bass?'Note del basso':'Accordi per chitarra',k?'tonalità '+k:'',SH.tr?'trasposto '+(SH.tr>0?'+':'')+SH.tr+' semitoni':'tonalità originale'].filter(Boolean).join(' · ')};
   openOv('#ovSheet');$('#shInfo').textContent='Preparo il foglio…';const r=await shFit(rows,head);SH.html=r.h;SH.txt=shText(rows,head);SH.name=(head.artist?head.artist+' - ':'')+head.title;
-  $('#shInfo').textContent=(bass?'Note del basso':'Accordi per chitarra')+' · '+(tr?'trasposto '+(tr>0?'+':'')+tr:'tonalità originale')+(r.cols>1?' · su due colonne':'')+' · un foglio A4';}
+  $('#shInfo').textContent=head.sub+(r.cols>1?' · su due colonne':'')+' · un foglio A4';}
 $('#shPrint').onclick=()=>{const w=$('#shFrame').contentWindow;try{w.focus();w.print()}catch(e){const x=window.open('','_blank');if(x){x.document.write(SH.html);x.document.close();setTimeout(()=>x.print(),400)}}};
 $('#shTxt').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([SH.txt],{type:'text/plain;charset=utf-8'}));a.download=(SH.name||'accordi').replace(/[\\/:*?"<>|]/g,' ')+' - accordi.txt';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},3000)};
-$$('[data-sheet]').forEach(b=>b.onclick=shOpen);
+$('#shAgain').onclick=()=>{$('#ovSheet').hidden=true;shAskDraw();openOv('#ovShAsk')};
+$('#shShare').onclick=async()=>{const f=new File([SH.html],(SH.name||'accordi').replace(/[\/:*?"<>|]/g,' ')+' - accordi.html',{type:'text/html'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:SH.name})}catch(e){}}else{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},3000)}};
 /* ===================== ARTISTI, ALBUM E IMMAGINI =====================
    Libreria e scaletta: artista (con la sua foto) → album (con la copertina) → brani.
    Le immagini si cercano da sole su internet (copertine: iTunes, poi MusicBrainz; artisti: Deezer),
@@ -3684,7 +3706,7 @@ function spaceDraw(){const {e,L,cloud}=SPC,used=MB(e.usage),q=MB(e.quota),cl=r2O
       (!s.local&&s.inCloud&&cl?`<button class="mini pri" data-sx="get" data-id="${s.id}">${EI('down')}<span>Scarica qui</span></button>`:'')+
       (s.local&&s.inCloud?`<button class="mini" data-sx="out" data-id="${s.id}" title="Libera ${fmtMB(s.mb)}: resta nel cloud">${EI('cloud')}<span>Togli da qui</span></button>`:'')+
       (s.local&&!s.inCloud&&cl?`<button class="mini pri" data-sx="up" data-id="${s.id}">${EI('cloudup')}<span>Salva nel cloud</span></button>`:'')+
-      `<button class="mini danger" data-sx="arm" data-id="${s.id}">${EI('trash')}<span>Elimina</span></button>`;
+      `<button class="mini danger" data-sx="arm" data-id="${s.id}">${EI('trash')}<span>Elimina ovunque</span></button>`;
     return`<li class="spc-${st[0]}"><span class="slt"><b>${esc(s.title||'Senza titolo')}</b><small>${esc(s.artist||'')}${s.lo?' · aperto '+new Date(s.lo).toLocaleDateString('it-IT',{day:'numeric',month:'short'}):''}</small><small class="spcw"><em class="spk ${st[0]}">${st[1]}</em> ${[sz,csz].filter(Boolean).join(' · ')}</small></span><span class="spca">${acts}</span></li>`}).join('')||'<li class="slempty">Nessun brano qui.</li>';
   $$('#spcList [data-sx]').forEach(b=>b.onclick=()=>spaceAct(b.dataset.sx,b.dataset.id));
   $$('#spcList .spca button,#spcMp3,#spcAuto').forEach(b=>b.disabled=SPC.busy||(b.dataset.sx==='no'?false:false)||SPC.busy)}
@@ -3695,7 +3717,15 @@ async function spaceAct(a,id){if(a==='arm'){SPC.arm=id;spaceDraw();return}if(a==
     else if(a==='up'){const r=await dbGet(id);banSync('Salvo «'+(r.title||'brano')+'» nel cloud',0,1);await r2SaveSong(r);banSyncEnd('');toast('Salvato nel cloud')}
     else if(a==='del'){await delEverywhere(id);toast(s&&s.inCloud?'Eliminato, anche dal cloud':'Eliminato')}}
   catch(e){toast('Non riesco: '+(r2Err(e)||e.message))}finally{SPC.busy=false;await spaceLoad();try{renderLib()}catch(e){}}}
-async function delEverywhere(id){const s=await dbGet(id);if(s&&r2Ok()){for(const o of await r2List(R2P+songDirs(s).join('/')+'/'))await r2Req('DELETE',o.key)}await dbDel(id);if(song&&song.id===id)loadDemo()}
+/* ----- brani eliminati ovunque: un elenco nel cloud (_eliminati.json) così gli altri dispositivi
+   non li rimettono nel cloud e li tolgono anche da loro. Se lo stesso brano viene aggiunto di nuovo a mano, esce dall'elenco ----- */
+const TOMBF=R2P+'_eliminati.json',tombK=s=>grpK(s.artist||'')+'|'+grpK(s.title||'');
+async function tombLoad(){try{const j=await (await r2Req('GET',TOMBF)).json();return j&&j.del||{}}catch(e){if(e.message==='R2NOFILE')return{};throw e}}
+async function tombEdit(fn){if(!r2Ok())return;const d=await tombLoad();if(fn(d)===false)return;await r2Req('PUT',TOMBF,{body:JSON.stringify({v:1,del:d}),ctype:'application/json'})}
+const tombAdd=s=>tombEdit(d=>{d[tombK(s)]=Date.now()}),tombClear=s=>{if(!r2Ok())return;tombEdit(d=>{const k=tombK(s);if(!(k in d))return false;delete d[k]}).catch(()=>{})};
+async function delEverywhere(id){const s=await dbGet(id);if(!s){await dbDel(id);return}
+  if(r2Ok()){for(const o of await r2List(R2P+songDirs(s).join('/')+'/'))await r2Req('DELETE',o.key);await tombAdd(s)}
+  await dbDel(id);SCL.items=SCL.items.filter(it=>it.id!==id);if(SCL.i>=SCL.items.length)SCL.i=SCL.items.length-1;slKeep();try{slBarUI();slPlace()}catch(e){}if(song&&song.id===id)loadDemo()}
 /* converte in MP3 qui e nel cloud (i FLAC/WAV nel cloud vengono sostituiti) */
 async function slimEverywhere(id){const s=await dbGet(id);if(!s)return 0;let saved=0;const base=R2P+songDirs(s).join('/')+'/';
   if(!s.cloudOnly&&s.stems&&Object.keys(s.stems).length){const r=await slimStems(s.stems,p=>banSync('Converto in MP3 «'+(s.title||'brano')+'»',Math.round(p*100),100));saved+=r.saved;if(r.saved)await dbPut(s)}
@@ -3766,18 +3796,32 @@ async function syncSettings(){let c={v:1,keys:{}};try{c=await (await r2Req('GET'
     else if(!cv&&lv!=null&&lv!=='[]'){const t=Date.now();prefSet('syT_'+k,String(t));c.keys[k]={v:lv,t};dirty=true}}
   if(dirty)await r2Req('PUT',SETF,{body:JSON.stringify(c),ctype:'application/json'});
   if(got){try{vrLoad()}catch(e){}try{slPlace()}catch(e){}}return got}
-async function syncSongs(all,sum){const lib=await libMeta(),byDir=new Map(lib.map(s=>[songDirs(s).join('/'),s])),have=new Set(lib.map(s=>normKey(s.artist,s.title)));
-  const cloudDirs=new Set(),lrcs=[];for(const o of all){const rel=o.key.slice(R2P.length);if(/^[_.]/.test(rel))continue;const parts=rel.split('/');parts.pop();if(AUDIO_RX.test(o.key))cloudDirs.add(parts.join('/'));if(/\.lrc$/i.test(o.key))lrcs.push({o,dir:parts.join('/')})}
+async function syncSongs(all,sum){let tomb={};try{tomb=await tombLoad()}catch(e){}
+  /* eliminati ovunque da un altro dispositivo: li tolgo anche da qui */
+  for(const s of await libMeta()){const t=tomb[tombK(s)];if(t&&t>(s.created||0)&&s.id!=='demo'){await dbDel(s.id);SCL.items=SCL.items.filter(it=>it.id!==s.id);sum.del=(sum.del||0)+1;if(song&&song.id===s.id)loadDemo()}}
+  /* stesso cloud = stessi brani: un brano è lo stesso se artista e titolo coincidono (anche scritti diversi: AC\DC, AC/DC, Ac/dc) */
+  const scan=await describe(await r2Scan(all)),CK=new Map();for(const x of scan){if(x.single)continue;const k=grpK(x.artist||'')+'|'+grpK(x.title||'');if(!CK.has(k))CK.set(k,[]);CK.get(k).push(x)}
+  /* doppioni nel cloud: tengo la cartella più completa, le altre le tolgo */
+  for(const [k,L] of CK){if(L.length<2)continue;L.sort((a,b)=>b.stems.length-a.stems.length||(b.lrc?1:0)-(a.lrc?1:0));for(const x of L.slice(1)){try{for(const o of all.filter(o=>o.key.startsWith(R2P+x.dir+'/')))await r2Req('DELETE',o.key);sum.dup=(sum.dup||0)+1}catch(e){console.warn('doppione',e)}}CK.set(k,[L[0]])}
+  /* doppioni qui: tengo quello con le tracce (o quello aperto), gli altri li tolgo */
+  {const G=new Map();for(const s of await libMeta()){if(s.id==='demo')continue;const k=tombK(s);if(!G.has(k))G.set(k,[]);G.get(k).push(s)}
+   for(const [k,L] of G){if(L.length<2)continue;L.sort((a,b)=>(song&&b.id===song.id)-(song&&a.id===song.id)||(b.stems?1:0)-(a.stems?1:0)||b.sk.length-a.sk.length||(b.lyrics?1:0)-(a.lyrics?1:0));const keep=await dbGet(L[0].id);
+     for(const x of L.slice(1)){const r=await dbGet(x.id);if(keep&&r){if(!keep.lyrics&&r.lyrics)keep.lyrics=r.lyrics;if(!keep.album&&r.album){keep.album=r.album;keep.year=keep.year||r.year}}SCL.items.forEach(it=>{if(it.id===x.id)it.id=L[0].id});await dbDel(x.id);sum.dup=(sum.dup||0)+1}if(keep)await dbPut(keep);slKeep()}}
+  const lib=await libMeta(),LK=new Map(lib.map(s=>[tombK(s),s]));
   /* testi cambiati su un altro dispositivo */
-  for(const {o,dir} of lrcs){if(o.date&&SY.at&&o.date<SY.at-120000)continue;const s=byDir.get(dir);if(!s)continue;
+  const dirKey=new Map();for(const [k,L] of CK)dirKey.set(L[0].dir,k);
+  for(const o of all){if(!/\.lrc$/i.test(o.key))continue;const rel=o.key.slice(R2P.length);if(/^[_.]/.test(rel))continue;if(o.date&&SY.at&&o.date<SY.at-120000)continue;const s=LK.get(dirKey.get(rel.slice(0,rel.lastIndexOf('/'))));if(!s)continue;
     try{const txt=await (await r2Req('GET',o.key)).text(),full=await dbGet(s.id);if(!full||!txt.trim())continue;const mine=songLrcText(full)||'';
       if(txt.trim()!==mine.trim()&&txt.trim()!==(full.lyrics||'').trim()){full.lyrics=txt;await dbPut(full);sum.lyr++;if(song&&song.id===full.id){song.lyrics=txt;song.lyr=null;applyLyricsText(txt,true)}}}catch(e){}}
+  /* brani «solo nel cloud» di questo elenco: le tracce sono nella cartella giusta? se il brano non c'è più, è stato eliminato */
+  for(const s of lib){if(!s.cloudOnly)continue;const c=CK.get(tombK(s));if(!c){await dbDel(s.id);sum.del=(sum.del||0)+1;continue}const x=c[0],cf=x.stems.map(([k,f])=>({k,key:f.key,name:f.name,size:f.size||0}));
+    if(JSON.stringify((s.cloudFiles||[]).map(f=>f.key).sort())!==JSON.stringify(cf.map(f=>f.key).sort())){const r=await dbGet(s.id);if(r){r.cloudFiles=cf;await dbPut(r)}}}
   if(!syncHeavyOk())return;
-  /* brani nuovi nel cloud → Libreria */
-  const dirs=new Set(byDir.keys()),found=(await describe(await r2Scan(all))).filter(x=>x.single?!have.has(normKey(x.artist,x.title)):!dirs.has(x.dir)&&!have.has(normKey(x.artist,x.title)));found.forEach(x=>x.fromCloud=true);
-  for(const [i,x] of found.entries()){syncSay('☁️ Arriva dal cloud: '+x.title+'…');banSync('Arrivano i tuoi brani dal cloud: «'+x.title+'»',i,found.length);try{if(await dbPut(await cloudRec(x,i))){sum.inn++;have.add(normKey(x.artist,x.title));dirs.add(x.dir)}}catch(e){console.warn('sync in',e)}}
-  /* brani solo qui → cloud */
-  const outs=lib.filter(s=>s.id!=='demo'&&s.stems&&!cloudDirs.has(songDirs(s).join('/')));
+  /* brani nuovi nel cloud → Libreria (una scheda leggera, le tracce si scaricano dopo) */
+  const found=[...CK.entries()].filter(([k])=>!LK.has(k)&&!tomb[k]).map(([k,L])=>L[0]);found.forEach(x=>x.fromCloud=true);
+  for(const [i,x] of found.entries()){syncSay('☁️ Arriva dal cloud: '+x.title+'…');banSync('Arrivano i tuoi brani dal cloud: «'+x.title+'»',i,found.length);try{if(await dbPut(await cloudRec(x,i)))sum.inn++}catch(e){console.warn('sync in',e)}}
+  /* brani solo qui → cloud (solo se nel cloud non c'è già lo stesso brano) */
+  const outs=lib.filter(s=>s.id!=='demo'&&s.stems&&!CK.has(tombK(s))&&!tomb[tombK(s)]);
   for(const [i,s] of outs.entries()){if(R.on)break;syncSay('☁️ Salvo nel cloud: '+(s.title||'brano')+'…');banSync('Salvo i tuoi brani nel cloud: «'+(s.title||'brano')+'»',i,outs.length);
     try{const full=await dbGet(s.id);if(full&&full.stems){await r2SaveSong(full);sum.out++}}catch(e){console.warn('sync out',e);if(/R2AUTH|R2NET/.test(e.message))throw e}}}
 /* ----- bozze nel cloud: cartella _bozze/<id>/ con bozza.json e i file video e voce ----- */
@@ -3809,10 +3853,10 @@ async function syncAll(why,light){if(!r2On()){SY.pending=true;syncInfo();return}
   try{syncSay('☁️ Sincronizzo con il cloud…');sum.set=await syncSettings();try{const ni=await imgSync();if(ni)try{if(!$('#ovLib').hidden)covFill($('#songlist'))}catch(e){}}catch(e){console.warn('immagini',e)}
     if(!light){const all=await r2List(R2P);await syncSongs(all,sum);await syncDrafts(all,sum);try{cvCount()}catch(e){}}
     SY.at=t0;prefSet('syncAt',String(t0));if(!light)setTimeout(()=>libEnrich().catch(e=>console.warn(e)),4000);if(!light&&syncHeavyOk())setTimeout(()=>cloudFill().catch(e=>console.warn(e)),2500);
-    const parts=[];if(sum.inn)parts.push(sum.inn===1?'1 brano arrivato':sum.inn+' brani arrivati');if(sum.out)parts.push(sum.out===1?'1 brano salvato nel cloud':sum.out+' brani salvati nel cloud');if(sum.lyr)parts.push(sum.lyr===1?'1 testo aggiornato':sum.lyr+' testi aggiornati');
+    const parts=[];if(sum.inn)parts.push(sum.inn===1?'1 brano arrivato':sum.inn+' brani arrivati');if(sum.out)parts.push(sum.out===1?'1 brano salvato nel cloud':sum.out+' brani salvati nel cloud');if(sum.lyr)parts.push(sum.lyr===1?'1 testo aggiornato':sum.lyr+' testi aggiornati');if(sum.del)parts.push(sum.del===1?'1 brano eliminato anche qui':sum.del+' brani eliminati anche qui');if(sum.dup)parts.push(sum.dup===1?'1 doppione unito':sum.dup+' doppioni uniti');
     if(sum.drIn)parts.push(sum.drIn===1?'1 bozza da un altro dispositivo':sum.drIn+' bozze da un altro dispositivo');if(sum.drOut)parts.push(sum.drOut===1?'1 bozza nel cloud':sum.drOut+' bozze nel cloud');if(sum.set)parts.push('scalette e preset aggiornati');
     banSyncEnd(parts.length?'Fatto: '+parts.join(', ')+'.':'');
-    if(parts.length){toast('☁️ Sincronizzato: '+parts.join(', '));if(sum.inn||sum.lyr){try{songPickFill()}catch(e){}try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}}
+    if(parts.length){toast('☁️ Sincronizzato: '+parts.join(', '));if(sum.inn||sum.lyr||sum.del||sum.dup){try{songPickFill()}catch(e){}try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}}
     if(!syncHeavyOk()&&!light)toast('☁️ Risparmio dati attivo: brani e bozze si sincronizzano quando lo togli o sei in Wi-Fi');}
   catch(e){console.warn('sync',e);SY.pending=true;banSyncEnd('Sincronizzazione interrotta: riprovo più tardi.');syncSay('☁️ Sincronizzazione non riuscita: '+r2Err(e)+' Riprovo più tardi.')}
   finally{SY.busy=false;if(b)b.disabled=false;if(!SY.msg.startsWith('☁️ Sincronizzazione non riuscita'))syncInfo();if(SY.again){SY.again=false;setTimeout(()=>syncAll('di nuovo'),2000)}}}
@@ -5763,7 +5807,7 @@ function tvBoot(){palOn=true;$('#palco').hidden=false;document.body.style.overfl
 $('#bSala').hidden=!SALA_OK;$('#bSala').onclick=()=>salaOpen();
 {const f=$('#bFull'),up=()=>{f.textContent=document.fullscreenElement===document.documentElement?'⤢ Esci da schermo intero':'⛶ Schermo intero'};f.onclick=()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else document.documentElement.requestFullscreen().catch(()=>toast('Schermo intero non disponibile'))};document.addEventListener('fullscreenchange',up);if(appInstalled())f.hidden=true}
 $('#tlMix').onclick=()=>openOv('#ovMix');$('#tlTempo').onclick=()=>openOv('#ovTempo');$('#tlTone').onclick=toneOpen;$('#tlRange').onclick=vrOpen;$('#tlTune').onclick=()=>tuneOpen(null);
-$('#tlTag').onclick=()=>{if(song&&song.stored)tagOpen(song.id);else toast('Scegli prima un brano della libreria')};
+$('#tlSheet').onclick=shAsk;$('#tlTag').onclick=()=>{if(song&&song.stored)tagOpen(song.id);else toast('Scegli prima un brano della libreria')};
 function toolsUI(){$('#tlTempoS').textContent=($('#rate').selectedOptions[0]||{}).textContent?.replace(/\s*\(originale\)/,'')+(CLK2&&CLK2.on?' · click sì':'');
   $('#tlToneS').textContent=$('#trVal').textContent;const me=(VR.list||[]).find(x=>x.n===VR.sel);$('#tlRangeS').textContent=me&&me.lo!=null?me.n+': '+nmIt(me.lo)+'–'+nmIt(me.hi):'misura chi canta';
   $('#tlTag').classList.toggle('dim',!(song&&song.stored));$('#tlTagS').textContent=song&&song.stored?(song.artist?song.artist:'manca l\'artista'):'titolo, artista, testo';
