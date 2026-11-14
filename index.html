@@ -879,7 +879,7 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
   .hlogo{grid-area:logo}.hnav{grid-area:nav}.hsong{grid-area:song}.hdr .transport{grid-area:tr}.htools{grid-area:tools}
   .htool{min-height:58px;padding:6px 10px;flex-direction:row;justify-content:flex-start;text-align:left;gap:10px;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto}.htool .ico{width:26px;height:26px;grid-row:1/3}.htool b{font-size:14px}.htool small{text-align:left}
 }
-@media (max-width:899px){.htools{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:899px){.htools{grid-template-columns:repeat(3,minmax(0,1fr))}.htools.nosala #tlSheet{grid-column:1/-1;flex-direction:row;justify-content:center;gap:10px}.htools.nosala #tlSheet small{margin-left:4px}}
 @media (max-width:379px){.hlogo #brandLogo{height:46px!important}.hlogo #bShare{padding:4px 8px}.hlogo .hshare b{font-size:12.5px}.hlogo #bDonate img{height:32px}}
 @media (max-width:599px){
   .hlogo{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"logo share pay" "txt txt txt";gap:8px 8px}.hlogo #bShare{grid-area:share;justify-self:center;min-height:42px;padding:4px 10px;gap:6px;min-width:0}.hshare .ico{width:22px;height:22px}.hshare b{font-size:13.5px}.hshare small{display:none}.hlogo #bDonate img{height:36px}
@@ -6109,7 +6109,7 @@ $('#tlLat').onclick=()=>{latDraw();openOv('#ovLat');clearInterval(LAT.iv);LAT.iv
   m.addEventListener('click',()=>setTimeout(close,0));document.addEventListener('click',e=>{if(!m.hidden&&!m.contains(e.target)&&e.target!==b)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   {const tv=$('#trVal');tv.title='Tocca per tornare alla tonalità originale';tv.onclick=()=>$('#trZero').click()}})();
 /* ===== pagina principale: sezioni in alto e strumenti in finestre ===== */
-$('#bSala').hidden=!SALA_OK;$('#bSala').onclick=()=>salaOpen();
+$('#bSala').hidden=!SALA_OK;/* latenza e pedaliera servono solo dove c'è la Sala prove (tablet e PC) */$('#tlLat').hidden=$('#tlPed').hidden=!SALA_OK;$('#hTools').classList.toggle('nosala',!SALA_OK);$('#bSala').onclick=()=>salaOpen();
 {const f=$('#bFull'),up=()=>{f.textContent=document.fullscreenElement===document.documentElement?'⤢ Esci da schermo intero':'⛶ Schermo intero'};f.onclick=()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else document.documentElement.requestFullscreen().catch(()=>toast('Schermo intero non disponibile'))};document.addEventListener('fullscreenchange',up);if(appInstalled())f.hidden=true}
 $('#tlMix').onclick=()=>openOv('#ovMix');$('#tlTempo').onclick=()=>openOv('#ovTempo');$('#tlTone').onclick=toneOpen;$('#tlRange').onclick=vrOpen;$('#tlTune').onclick=()=>tuneOpen(null);
 $('#tlSheet').onclick=()=>shStart(false);$('#pSheet').onclick=()=>shStart(true);$('#tlTag').onclick=()=>{if(song&&song.stored)tagOpen(song.id);else toast('Scegli prima un brano della libreria')};
