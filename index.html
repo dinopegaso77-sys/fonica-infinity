@@ -162,8 +162,16 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .artpic{width:120px;height:120px;border-radius:50%;overflow:hidden;flex:none;border:3px solid color-mix(in srgb,var(--accent) 50%,var(--line));display:grid;place-items:center;background:var(--raise)}.artpic img{width:100%;height:100%;object-fit:cover}.artpic svg{width:56px;height:56px;color:var(--dim)}
 .arttext p{line-height:1.55;margin:0 0 10px}.artalb{list-style:none;padding:0;margin:4px 0 10px;display:grid;gap:4px;max-height:34vh;overflow:auto}.artalb li{display:flex;gap:10px;align-items:baseline;padding:5px 10px;border-radius:8px;background:var(--raise)}.artalb li b{min-width:44px;color:var(--dim)}.artalb li span{flex:1}.artalb li em{font-style:normal;font-size:12px;color:#4ade80}.artalb li.mine{border-left:3px solid #22c55e}
 .artsrc{font-size:12px;color:var(--dim);border-top:1px solid var(--line);padding-top:8px}@media (max-width:520px){.arttop{flex-direction:column;text-align:center}.arttop .row{justify-content:center}}
-.shsheet{max-width:min(900px,96vw)}.shwrap{background:#888;border-radius:12px;padding:12px;overflow:auto;max-height:60vh;display:flex;justify-content:center}.shwrap iframe{border:0;background:#fff;height:1123px;box-shadow:0 6px 24px rgba(0,0,0,.4);flex:none;transform-origin:top center}
-@media (max-width:820px){.shwrap{max-height:55vh}.shwrap iframe{zoom:.45}}
+.ov.shview{padding:0;place-items:stretch;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);background:#2a2a2e}@media (min-width:700px){.shvctl{flex-wrap:wrap;justify-content:center}}.shv{display:flex;flex-direction:column;height:100%;width:100%;min-height:0;background:#2a2a2e;color:#fff}
+.shvbar{display:flex;align-items:center;gap:8px;padding:8px 10px;padding-top:max(8px,env(safe-area-inset-top));background:#18181b}.shvt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:16px}
+.shvctl{display:flex;align-items:center;gap:8px;padding:6px 10px 8px;background:#18181b;overflow-x:auto;scrollbar-width:thin;border-bottom:1px solid #000}.shvctl>*{flex:none}
+.shvgrp{display:inline-flex;align-items:center;gap:4px}.shvk{display:grid;text-align:center;min-width:92px;line-height:1.15}.shvk small{font-size:11px;color:#aaa}.shvk b{font-size:13.5px;white-space:nowrap}
+.shv .chip{min-height:40px}.shv .chip .ico{width:18px;height:18px;vertical-align:-4px}
+.shvpages{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
+.shvpg{flex:0 0 100%;scroll-snap-align:start;overflow:auto;display:flex;justify-content:flex-start;align-items:flex-start;padding:8px;box-sizing:border-box}.shvpg canvas{background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.5);flex:none;margin:0 auto}@media (min-width:700px){.shvpg:not(.z) canvas{margin:auto}}@media (max-width:599px){.shvbar .chip span{display:none}.shvbar .chip{min-width:44px;justify-content:center}}
+.shvnav{display:flex;align-items:center;justify-content:center;gap:14px;padding:6px;padding-bottom:max(6px,env(safe-area-inset-bottom));background:#18181b;font-weight:600}.shvnav .chip{min-width:56px;font-size:20px}
+.shlsheet{max-width:min(560px,96vw)}.shl{display:grid;gap:6px;margin:6px 0 10px;max-height:50vh;overflow:auto}.shlrow{display:flex;gap:8px;align-items:center}.shlopen{flex:1;min-width:0;display:flex;gap:10px;align-items:center;text-align:left;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer}
+.shlopen:hover{border-color:var(--accent)}.shlic{width:40px;height:40px;flex:none;border-radius:10px;display:grid;place-items:center;background:var(--surface);color:var(--accent)}.shlic .ico{width:22px;height:22px}.shlt{display:grid;min-width:0}.shlt small{color:var(--dim)}
 .shasksheet{max-width:min(640px,96vw)}.shklist{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:8px 0 12px}.shk{display:grid;gap:2px;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer;text-align:left;font-family:Figtree,system-ui}.shk small{color:var(--dim)}.shk em{font-style:normal;font-size:11px;color:var(--accent)}.shk.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 40%,transparent)}.shbtns{flex-wrap:wrap}
 .slpickbox{max-height:44vh;overflow:auto;display:grid;gap:6px}.slpickbox .slpickl{max-height:none;overflow:visible}
 .slalb{display:flex;align-items:center;gap:10px;margin-top:6px}.slalb .alh{flex:1;min-width:0;display:grid}.slalb .alh small{color:var(--dim)}
@@ -659,7 +667,7 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
   .pal-top{padding-block:6px}
   .pal-bar{flex-wrap:nowrap;flex-direction:row;align-items:center;padding-block:6px}
   .pal-bar .pbtn.round{width:42px;height:42px}.pal-bar .pbtn.round.main{width:50px;height:50px}
-  .ptools{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));flex:1 1 auto;min-width:0;margin-left:6px;gap:4px}.ptool{min-width:0;min-height:44px;gap:1px;font-size:10.5px;padding:3px 1px}.ptool span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ptool i{font-size:17px}
+  .ptools{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));flex:1 1 auto;min-width:0;margin-left:6px;gap:4px}.ptool{min-width:0;min-height:44px;gap:1px;font-size:10.5px;padding:3px 1px}.ptool span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ptool i{font-size:17px}
 }
 .pseg{display:inline-flex;align-items:center;gap:6px}
 .pseg span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--stage-dim)}
@@ -933,7 +941,7 @@ themeApply();</script>
       <button class="htool" id="tlRange"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/><path d="M2.5 5v12M21.5 5v12M1.5 5h2M1.5 17h2M20.5 5h2M20.5 17h2" stroke-width="1.5"/></svg><b>Estensione vocale</b><small id="tlRangeS"></small></button>
       <button class="htool" id="tlTune"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M12 17l3.6-6.3"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/><path d="M5.6 11.2l1.1.8M12 8.5v1.3M18.4 11.2l-1.1.8" stroke-width="1.6"/><path d="M3 20.5h18"/></svg><b>Accordatore</b><small>chitarra, basso e voce</small></button>
       <button class="htool" id="tlTag" title="Modifica tag MP3: titolo, artista, album, anno e testo"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4.5L19 9.5 14.5 5 4 15.5z"/><path d="m12.8 6.7 4.5 4.5"/><path d="M13 20h7" opacity=".6"/></svg><b>Tag MP3</b><small id="tlTagS">titolo, artista, testo</small></button>
-      <button class="htool" id="tlSheet" title="Testo con gli accordi in un foglio A4 da stampare o salvare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 11h6M9 15h6M9 19h3" opacity=".7"/></svg><b>Foglio A4</b><small>testo e accordi</small></button>
+      <button class="htool" id="tlSheet" title="Testo con gli accordi su fogli A4 da leggere, stampare o salvare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 11h6M9 15h6M9 19h3" opacity=".7"/></svg><b>Foglio A4</b><small>testo e accordi</small></button>
     </div>
   </header>
 
@@ -1028,6 +1036,7 @@ themeApply();</script>
       <button class="ptool" id="pClick" aria-pressed="false"><i aria-hidden="true">⏱</i><span>Click</span></button>
       <button class="ptool" id="pMic" aria-expanded="false"><i aria-hidden="true">🎤</i><span>Microfono</span></button>
       <button class="ptool" id="pRec"><i aria-hidden="true">🎬</i><span>Video</span></button>
+      <button class="ptool" id="pSheet"><i aria-hidden="true">📄</i><span>Foglio</span></button>
     </div>
 </div>
 </div>
@@ -1477,12 +1486,31 @@ themeApply();</script>
   <div class="shklist" id="shkList"></div>
   <div class="row"><span class="grow"></span><button class="chip pri" id="shkGo">Crea il foglio</button></div>
 </div></div>
-<div class="ov" id="ovSheet" hidden><div class="sheet slsheet shsheet">
-  <div class="slhead"><h3>📄 Foglio accordi A4</h3><button class="mini" data-close>Chiudi</button></div>
-  <p class="snote" id="shInfo"></p>
-  <div class="row shbtns"><button class="chip pri" id="shPdf">💾 Salva PDF</button><button class="chip" id="shShare">Condividi</button><button class="chip" id="shPrint">🖨 Stampa</button><button class="chip" id="shTxt">Testo (.txt)</button><button class="chip" id="shAgain">Cambia tonalità o strumento</button></div>
-  <p class="snote">Il file si chiama con artista e titolo, per esempio «Vasco Rossi - Albachiara (accordi).pdf». Il foglio si adatta a una pagina A4; solo i brani lunghissimi vanno su più pagine.</p>
-  <div class="shwrap"><iframe id="shFrame" title="Anteprima del foglio A4"></iframe></div>
+<div class="ov" id="ovShList" hidden><div class="sheet slsheet shlsheet">
+  <div class="slhead"><h3>Fogli del brano</h3><button class="mini" data-close>Chiudi</button></div>
+  <p class="snote" id="shlSong"></p>
+  <div class="shl" id="shlList"></div>
+  <p class="snote">Ogni foglio resta collegato al brano. Aprilo a tutto schermo; da lì puoi cambiare tonalità o strumento: se quel foglio non c'è ancora lo creo e lo salvo.</p>
+  <div class="row"><span class="grow"></span><button class="chip pri" id="shlNew">+ Nuovo foglio</button></div>
+</div></div>
+<div class="ov shview" id="ovShView" hidden><div class="shv">
+  <div class="shvbar">
+    <button class="chip" id="shvX"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Chiudi</span></button>
+    <b class="shvt" id="shvTitle"></b>
+    <button class="chip" id="shvList"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Tutti i fogli</span></button>
+    <button class="chip" id="shvFs" title="Schermo intero"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+  <div class="shvctl">
+    <span class="seg" id="shvInst" role="group"><button data-b="0">Chitarra</button><button data-b="1">Basso</button></span>
+    <span class="shvgrp"><button class="chip" id="shvDn" aria-label="Tonalità giù">−</button><span class="shvk"><small>Tonalità</small><b id="shvKey"></b></span><button class="chip" id="shvUp" aria-label="Tonalità su">+</button></span>
+    <span class="shvgrp"><button class="chip" id="shvZout" aria-label="Rimpicciolisci"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M8 11h6M16 16l4 4"/></svg></button><span class="shvk"><small>Zoom</small><b id="shvZoom">100%</b></span><button class="chip" id="shvZin" aria-label="Ingrandisci"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M8 11h6M11 8v6M16 16l4 4"/></svg></button></span>
+    <button class="chip pri" id="shPdf"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Salva PDF</button>
+    <button class="chip" id="shShare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 11l7.6-4M8.2 13l7.6 4"/></svg> Condividi</button>
+    <button class="chip" id="shPrint"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5v-7h14v7h-2M7 14h10v6H7z"/></svg> Stampa</button>
+    <button class="chip" id="shTxt">Testo (.txt)</button>
+  </div>
+  <div class="shvpages" id="shvPages"></div>
+  <div class="shvnav" id="shvNav" hidden><button class="chip" id="shvPrev" aria-label="Foglio precedente">‹</button><span id="shvPg"></span><button class="chip" id="shvNext" aria-label="Foglio successivo">›</button></div>
 </div></div>
 <div class="ov" id="ovCover" hidden><div class="sheet slsheet cvwsheet">
   <div class="slhead"><h3 id="cvwH">Copertina dell'album</h3><button class="mini" data-close>Chiudi</button></div>
@@ -2620,6 +2648,7 @@ let palOn=false,palTabOn=prefGet('palTab')!=='0';
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
 /* ===== icone: un solo disegno per tutta l'app (al posto delle emoji) ===== */
 const ICO={
+sheet:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/>',
 play:'<path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/>',
 tag:'<path d="M3.5 12.5V5a1.5 1.5 0 0 1 1.5-1.5h7.5l8 8-9 9z"/><circle cx="8" cy="8" r="1.5"/>',
 folderdown:'<path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 10.5v5.5M9.5 13.5 12 16l2.5-2.5"/>',
@@ -2682,7 +2711,7 @@ camera:'<path d="M4 8.5a2 2 0 0 1 2-2h1.6L9 4.5h6l1.4 2H18a2 2 0 0 1 2 2V17a2 2 
 drum:'<ellipse cx="12" cy="8" rx="8.5" ry="3.5"/><path d="M3.5 8v8c0 1.9 3.8 3.5 8.5 3.5s8.5-1.6 8.5-3.5V8M7 11.2v8M17 11.2v8M2 2.5l7 4.5M22 2.5l-7 4.5"/>',
 };
 const EI=(n,c)=>`<svg class="ei${c?' '+c:''}" viewBox="0 0 24 24" aria-hidden="true">${ICO[n]||''}</svg>`;
-const EMO={'🎛':'sliders','🎚':'sliders','🎤':'mic','🎙':'mic','🎭':'duet','✨':'spark','☁':'cloud','🎵':'note','🎶':'notes','🎧':'phones','💾':'save','📂':'folder','📁':'folder','🔊':'speaker','🔈':'speaker','⭐':'star','✏':'pencil','🎸':'guitar','📋':'clipboard','🗑':'trash','⏭':'next','⏮':'prev','📺':'tv','✅':'okc','❌':'noc','🔎':'search','🔄':'refresh','⚠':'warn','📚':'books','⚙':'gear','⛶':'full','⏱':'timer','🎬':'video','✚':'plus','➕':'plus','🧪':'flask','🛠':'wrench','🔑':'key','☰':'menu','⏸':'pause','🎹':'keys','🏠':'home','🎼':'score','👏':'clap','🎯':'target','🔢':'hash','📱':'phone','💙':'heart','👍':'thumb','🛒':'cart','⏹':'stop','📖':'book','💽':'disc','📷':'camera','🥁':'drum'};
+const EMO={'🎛':'sliders','🎚':'sliders','🎤':'mic','🎙':'mic','🎭':'duet','✨':'spark','☁':'cloud','🎵':'note','🎶':'notes','🎧':'phones','💾':'save','📂':'folder','📁':'folder','🔊':'speaker','🔈':'speaker','⭐':'star','✏':'pencil','🎸':'guitar','📋':'clipboard','🗑':'trash','⏭':'next','⏮':'prev','📺':'tv','✅':'okc','❌':'noc','🔎':'search','🔄':'refresh','⚠':'warn','📚':'books','⚙':'gear','⛶':'full','⏱':'timer','🎬':'video','✚':'plus','➕':'plus','🧪':'flask','🛠':'wrench','🔑':'key','☰':'menu','⏸':'pause','🎹':'keys','🏠':'home','🎼':'score','👏':'clap','🎯':'target','🔢':'hash','📱':'phone','💙':'heart','👍':'thumb','🛒':'cart','⏹':'stop','📖':'book','💽':'disc','📷':'camera','🥁':'drum','📄':'sheet'};
 const EMORE=new RegExp('('+Object.keys(EMO).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')\\uFE0F?','gu');
 const ICO_SKIP='OPTION,SELECT,TEXTAREA,INPUT,SCRIPT,STYLE,CANVAS,TITLE,svg';
 function iconize(root){if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||!EMORE.test(n.nodeValue)){EMORE.lastIndex=0;return NodeFilter.FILTER_REJECT}EMORE.lastIndex=0;if(p.closest(ICO_SKIP)||p.closest('[data-noico],.kpanel,.toast,#toast'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT}});
@@ -3467,57 +3496,50 @@ async function r2Auto(s){if(!r2On()||!s||!s.stems)return;try{await r2SaveSong(s)
 setTimeout(()=>{try{r2UI()}catch(e){}},0);
 /* ===================== FOGLIO ACCORDI A4 =====================
    Titolo, artista, logo in alto a destra; il testo con gli accordi sopra la parola dove cambiano.
-   Accordi nella tonalità scelta adesso (trasposizione), per lo strumento scelto: chitarra = accordi, basso = note.
-   Le parti solo suonate (intro, strumentali, finale) sono scritte con la loro sequenza. Tutto in un foglio A4. */
-const SH={txt:'',html:'',tr:0,bass:false};
+   Accordi nella tonalità scelta (trasposizione), per lo strumento scelto: chitarra = accordi, basso = note.
+   Le parti solo suonate (intro, strumentali, finale) sono scritte con la loro sequenza.
+   I fogli creati restano collegati al brano (anche sugli altri dispositivi con lo stesso cloud):
+   del brano si salva una fotografia di testo e accordi, e ogni foglio è solo «strumento + tonalità». */
+const SH={src:null,tr:0,bass:false,rows:null,head:null,txt:'',lay:null,zoom:1,pg:0};
 function shName(r,q,bass){return bass?NOTE_IT[r]:NOTE_IT[r]+(q?'m':'')}
-function shChords(bass){const B=(CH.base||[]).filter(c=>c[2]>=0);let last='';const out=[];for(const c of B){const r=((c[2]+SH.tr)%12+12)%12,n=shName(r,c[3],bass);if(n===last&&out.length){out[out.length-1].b=c[1];continue}out.push({a:c[0],b:c[1],n});last=n}return out}
+const shSK=s=>grpK((s&&s.artist)||'')+'|'+grpK((s&&s.title)||'');
+function shAll(){try{const o=JSON.parse(prefGet('sheets')||'{}');return o&&typeof o==='object'?o:{}}catch(e){return{}}}
+function shSaveAll(o){prefSet('sheets',JSON.stringify(o))}
+function shEntry(s){const e=shAll()[shSK(s||song)];return e&&e.src?e:null}
+const shList=s=>{const e=shEntry(s);return e?(e.list||[]):[]};
+/* fotografia del brano: righe con le parole e i loro tempi, accordi, spostamento del testo, durata */
+function shSnap(){const L=K.lines.filter(l=>l.s&&l.s.trim()).map(l=>({t:+(+l.t).toFixed(2),e:l.e!=null?+(+l.e).toFixed(2):null,w:lyrWords(l).map(w=>[w.s,+(+w.t).toFixed(2)])}));
+  const base=(CH.base||[]).map(c=>[+(+c[0]).toFixed(2),+(+c[1]).toFixed(2),c[2],c[3]?1:0]);const dur=(typeof sDur==='function'&&sDur()>1&&sDur())||(base.length?base[base.length-1][1]:0);
+  return{lines:L,base,off:K.off||0,dur:+(+dur).toFixed(2)}}
+function shStore(src,tr,bass){const all=shAll(),k=shSK(song),e=all[k]||{list:[]};e.title=song.title||'';e.artist=song.artist||'';if(src)e.src=src;e.list=e.list||[];
+  let added=false;if(tr!=null&&!e.list.some(x=>x.tr===tr&&!!x.bass===!!bass)){e.list.push({tr,bass:!!bass,at:Date.now()});added=true}
+  e.list.sort((a,b)=>(a.bass-b.bass)||(a.tr-b.tr));e.at=Date.now();all[k]=e;shSaveAll(all);return added}
+function shForget(tr,bass){const all=shAll(),k=shSK(song),e=all[k];if(!e)return;e.list=(e.list||[]).filter(x=>!(x.tr===tr&&!!x.bass===!!bass));e.at=Date.now();if(!e.list.length)delete e.src;all[k]=e;shSaveAll(all)}
+/* unione dei fogli di due dispositivi: per ogni brano vince la modifica più recente */
+function shMerge(a,b){let A={},B={};try{A=JSON.parse(a||'{}')||{}}catch(e){}try{B=JSON.parse(b||'{}')||{}}catch(e){}const o={...A};for(const k in B)if(!o[k]||(+B[k].at||0)>(+o[k].at||0))o[k]=B[k];return JSON.stringify(o)}
+
+function shChords(src,tr,bass){const B=(src.base||[]).filter(c=>c[2]>=0);let last='';const out=[];for(const c of B){const r=((c[2]+tr)%12+12)%12,n=shName(r,c[3],bass);if(n===last&&out.length){out[out.length-1].b=c[1];continue}out.push({a:c[0],b:c[1],n});last=n}return out}
 /* sequenze ripetute: (La Re Mi) ×4 */
 function shSeq(names){const N=names.length;if(N<4)return names.join('  ');for(let p=1;p<=4;p++){if(N%p)continue;const rep=N/p;if(rep<2)continue;let ok=true;for(let i=p;i<N;i++)if(names[i]!==names[i%p]){ok=false;break}if(ok)return(p===1?names[0]:'( '+names.slice(0,p).join('  ')+' )')+'  ×'+rep}
   const out=[];let i=0;while(i<N){let best=null;for(let p=4;p>=2;p--){let r=1;while(i+(r+1)*p<=N&&names.slice(i+r*p,i+(r+1)*p).join()===names.slice(i,i+p).join())r++;if(r>=2&&(!best||p*r>best.p*best.r))best={p,r}}
     if(best){out.push('( '+names.slice(i,i+best.p).join('  ')+' ) ×'+best.r);i+=best.p*best.r}else{out.push(names[i]);i++}}return out.join('  ')}
-function shBuild(){const bass=SH.bass,CHS=shChords(bass),L=K.lines.filter(l=>l.s&&l.s.trim()),off=K.off||0,dur=(typeof sDur==='function'&&sDur())||(CHS.length?CHS[CHS.length-1].b:0);
+function shBuild(src,tr,bass){const CHS=shChords(src,tr,bass),L=src.lines||[],off=src.off||0,dur=src.dur||(CHS.length?CHS[CHS.length-1].b:0);
   const out=[];const at=t=>{for(const c of CHS)if(c.a<=t+.05&&t<c.b)return c;return null};
   const gap=(t0,t1,label)=>{const cs=CHS.filter(c=>c.b>t0+.4&&c.a<t1-.4);if(!cs.length)return;out.push({sec:label,seq:shSeq(cs.map(c=>c.n))})};
   if(!L.length){gap(0,dur,bass?'Note del basso':'Accordi');return out}
   gap(0,L[0].t+off,'Intro');let lastN='';
-  L.forEach((l,i)=>{const t0=l.t+off,t1=(l.e!=null?l.e:(L[i+1]?L[i+1].t:l.t+4))+off;const ws=lyrWords(l);let txt='',pos=[];ws.forEach(w=>{pos.push(txt.length);txt+=(txt?' ':'')+w.s;if(pos.length>1)pos[pos.length-1]+=1});
+  L.forEach((l,i)=>{const t0=l.t+off,t1=(l.e!=null?l.e:(L[i+1]?L[i+1].t:l.t+4))+off;const ws=l.w;let txt='',pos=[];ws.forEach(w=>{pos.push(txt.length);txt+=(txt?' ':'')+w[0];if(pos.length>1)pos[pos.length-1]+=1});
     const marks=[];const first=at(t0);if(first&&first.n!==lastN)marks.push({c:0,n:first.n});
-    for(const c of CHS){if(c.a<=t0+.05||c.a>=t1-.05)continue;let wi=0;for(let k=0;k<ws.length;k++)if(ws[k].t+off<=c.a+.15)wi=k;const col=pos[wi]||0,lm=marks[marks.length-1];if(lm&&lm.c===col)lm.n=c.n;else marks.push({c:col,n:c.n})}
-    const cl=[];let cur=0;let line='';for(const m of marks){let c=Math.max(m.c,line.length?line.length+1:0);line=line.padEnd(c,' ')+m.n;lastN=m.n}
+    for(const c of CHS){if(c.a<=t0+.05||c.a>=t1-.05)continue;let wi=0;for(let k=0;k<ws.length;k++)if(ws[k][1]+off<=c.a+.15)wi=k;const col=pos[wi]||0,lm=marks[marks.length-1];if(lm&&lm.c===col)lm.n=c.n;else marks.push({c:col,n:c.n})}
+    let line='';for(const m of marks){const c=Math.max(m.c,line.length?line.length+1:0);line=line.padEnd(c,' ')+m.n}
     if(marks.length)lastN=marks[marks.length-1].n;else{const c=at(t1-.1);if(c)lastN=c.n}
     out.push({ch:line,ly:txt});
     const nx=L[i+1];if(nx){const g0=t1,g1=nx.t+off;if(g1-g0>6)gap(g0,g1,i<L.length/2?'Strumentale':'Assolo / strumentale')}});
   const tl=L[L.length-1],tEnd=((tl.e!=null?tl.e:tl.t+4)+off);if(dur-tEnd>4)gap(tEnd,dur,'Finale');return out}
-function shKey(bass,trv){const T=trv==null?SH.tr:trv;const d=new Map();for(const c of (CH.base||[]))if(c[2]>=0){const k=((c[2]+T)%12+12)%12+'|'+c[3];d.set(k,(d.get(k)||0)+(c[1]-c[0]))}let b=null,v=0;for(const [k,x] of d)if(x>v){v=x;b=k}if(!b)return'';const [r,q]=b.split('|').map(Number);return NOTE_IT[r]+(q?' minore':' maggiore')}
+function shKeyOf(src,tr){const d=new Map();for(const c of (src.base||[]))if(c[2]>=0){const k=((c[2]+tr)%12+12)%12+'|'+c[3];d.set(k,(d.get(k)||0)+(c[1]-c[0]))}let b=null,v=0;for(const [k,x] of d)if(x>v){v=x;b=k}if(!b)return'';const [r,q]=b.split('|').map(Number);return NOTE_IT[r]+(q?' minore':' maggiore')}
+const shTrTxt=t=>t?(t>0?'+':'')+t:'originale';
 function shText(rows,head){const T=[head.title,head.artist,head.sub,''];for(const r of rows){if(r.sec){T.push('['+r.sec+']  '+r.seq,'')}else{if(r.ch)T.push(r.ch);T.push(r.ly)}}T.push('','Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio');return T.join('\n')}
-function shHTML(rows,head,fs,cols){const e=x=>esc(x).replace(/ /g,'&nbsp;');const logo=($('#brandLogo')||{}).src||'';
-  const body=rows.map(r=>r.sec?`<div class="sec"><b>[${esc(r.sec)}]</b> <span class="ch">${e(r.seq)}</span></div>`:`<div class="ln">${r.ch?`<div class="ch">${e(r.ch)}</div>`:''}<div class="ly">${e(r.ly)||'&nbsp;'}</div></div>`).join('');
-  return`<!doctype html><html lang="it"><head><meta charset="utf-8"><title>${esc(head.title)} - ${esc(head.artist)}</title><style>
-@page{size:A4;margin:12mm}*{box-sizing:border-box}html,body{margin:0;background:#fff;color:#111}body{width:186mm;font-family:"Courier New",Courier,monospace;font-size:${fs}px}
-header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111;padding-bottom:6px;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif}
-h1{margin:0;font-size:24px;line-height:1.1}h2{margin:2px 0 0;font-size:16px;font-weight:600;color:#333}.sub{font-size:11px;color:#555;margin-top:4px}header img{height:56px;width:auto;border-radius:6px}
-main{column-count:${cols};column-gap:8mm;column-rule:1px solid #ddd}.ln,.sec{break-inside:avoid;margin:0 0 ${Math.round(fs*.35)}px}.ch{color:#b4200f;font-weight:700;white-space:pre}.ly{white-space:pre}.sec{margin:${Math.round(fs*.6)}px 0}.sec b{font-family:Arial,sans-serif}
-footer{margin-top:6px;font:10px Arial,sans-serif;color:#777;border-top:1px solid #ccc;padding-top:4px}</style></head><body>
-<header><div><h1>${esc(head.title)}</h1><h2>${esc(head.artist)}</h2><div class="sub">${esc(head.sub)}</div></div>${logo?`<img src="${logo}" alt="Pure Voltage">`:''}</header><main>${body}</main>
-<footer>Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio</footer></body></html>`}
-async function shFit(rows,head){const fr=$('#shFrame');const A4H=Math.round(297/25.4*96-2*12/25.4*96),W=Math.round(186/25.4*96);
-  for(const cols of [1,2])for(let fs=cols===1?21:15;fs>=7;fs--){const h=shHTML(rows,head,fs,cols);fr.style.width=W+'px';fr.srcdoc=h;await new Promise(r=>fr.onload=r);const d=fr.contentDocument;if(d.body.scrollHeight<=A4H*.94&&d.body.scrollWidth<=W+2)return{h,fs,cols}}
-  return{h:shHTML(rows,head,7,2),fs:7,cols:2}}
-/* prima la domanda: strumento e tonalità; poi il foglio */
-async function shAsk(){if(!song){toast('Scegli prima un brano');return}
-  if(!CH.base){openOv('#ovShAsk');$('#shkList').innerHTML='<p class="snote">Cerco gli accordi del brano… (serve una volta sola)</p>';try{await chordAnalyze()}catch(e){}}
-  if(!CH.base||!CH.base.some(c=>c[2]>=0)){$('#ovShAsk').hidden=true;toast('In questo brano non trovo accordi: non posso fare il foglio');return}
-  SH.bass=inst==='bass';SH.tr=tr;shAskDraw();openOv('#ovShAsk')}
-function shAskDraw(){$$('#shkInst button').forEach(b=>b.classList.toggle('on',(b.dataset.b==='1')===SH.bass));const o=shKey(false,0);
-  $('#shkOrig').textContent=o?'Tonalità originale del brano: '+o:'';const L=[];for(let t=-6;t<=6;t++)L.push(t);
-  $('#shkList').innerHTML=L.map(t=>`<button class="shk ${t===SH.tr?'on':''}" data-t="${t}"><b>${t===0?'Originale':(t>0?'+':'')+t}</b><small>${esc(shKey(false,t))}</small>${t===tr&&t!==0?'<em>quella che usi adesso</em>':''}</button>`).join('');
-  $$('#shkList .shk').forEach(b=>b.onclick=()=>{SH.tr=+b.dataset.t;shAskDraw()})}
-$$('#shkInst button').forEach(b=>b.onclick=()=>{SH.bass=b.dataset.b==='1';shAskDraw()});
-$('#shkGo').onclick=()=>{$('#ovShAsk').hidden=true;shOpen()};
-async function shOpen(){if(!song)return;const bass=SH.bass,rows=shBuild(),k=shKey(bass);const head={title:song.title||'Brano',artist:artQ(song.artist||''),sub:[bass?'Note del basso':'Accordi per chitarra',k?'tonalità '+k:'',SH.tr?'trasposto '+(SH.tr>0?'+':'')+SH.tr+' semitoni':'tonalità originale'].filter(Boolean).join(' · ')};
-  openOv('#ovSheet');$('#shInfo').textContent='Preparo il foglio…';const r=await shFit(rows,head);SH.html=r.h;SH.rows=rows;SH.head=head;SH.txt=shText(rows,head);SH.name=(head.artist?head.artist+' - ':'')+head.title;
-  $('#shInfo').textContent=head.sub+(r.cols>1?' · su due colonne':'')+' · un foglio A4';}
+
 /* PDF scritto direttamente dall'app (niente librerie esterne, funziona anche senza internet):
    caratteri standard Helvetica e Courier, colori, linee e il logo JPEG */
 function MiniPDF(){const P=[];let cur=null;const imgs=[];const mm=v=>v*72/25.4;const PH=841.89;
@@ -3529,7 +3551,7 @@ function MiniPDF(){const P=[];let cur=null;const imgs=[];const mm=v=>v*72/25.4;c
   this.line=(x1,y1,x2,y2,w=.5,c=17)=>{cur.ops.push(`${col(c)} RG ${mm(w).toFixed(2)} w ${mm(x1).toFixed(2)} ${(PH-mm(y1)).toFixed(2)} m ${mm(x2).toFixed(2)} ${(PH-mm(y2)).toFixed(2)} l S`);return this};
   this.image=(bytes,pw,ph,x,y,w,h)=>{const id=imgs.length;imgs.push({bytes,pw,ph});cur.ops.push(`q ${mm(w).toFixed(2)} 0 0 ${mm(h).toFixed(2)} ${mm(x).toFixed(2)} ${(PH-mm(y+h)).toFixed(2)} cm /Im${id} Do Q`);return this};
   this.pages=()=>P.length;this.setPage=i=>{cur=P[i]};
-  this.blob=(title)=>{const parts=[],offs=[];let len=0;const te=new TextEncoder();
+  this.blob=(title)=>{const parts=[],offs=[];let len=0;
     const add=x=>{if(typeof x==='string'){const b=new Uint8Array(x.length);for(let i=0;i<x.length;i++)b[i]=x.charCodeAt(i)&255;x=b}parts.push(x);len+=x.length};
     const obj=(n,body)=>{offs[n]=len;add(n+' 0 obj\n');if(Array.isArray(body))body.forEach(add);else add(body);add('\nendobj\n')};
     add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');const nF=4,fBase=3,imBase=fBase+nF,pBase=imBase+imgs.length;
@@ -3548,28 +3570,120 @@ const helvW=(s,size,bold)=>String(s).length*size*(bold?.56:.52)*.3528;
 function wrapTo(s,size,bold,max){const w=String(s).split(/\s+/),out=[];let l='';for(const x of w){const t=l?l+' '+x:x;if(helvW(t,size,bold)>max&&l){out.push(l);l=x}else l=t}if(l)out.push(l);return out}
 const shFile=ext=>((SH.head&&SH.head.artist?SH.head.artist+' - ':'')+((SH.head&&SH.head.title)||'brano')+' (accordi).'+ext).replace(/[\\/:*?"<>|]+/g,' ').replace(/\s+/g,' ').trim();
 function shLines(rows){const L=[];for(const r of rows){if(r.sec){L.push(['g','']);L.push(['s','['+r.sec+']  '+r.seq]);L.push(['g',''])}else{if(r.ch)L.push(['c',r.ch]);L.push(['l',r.ly||''])}}return L}
-async function shPDF(){const doc=new MiniPDF(),W=210,H=297,M=12,head=SH.head,L=shLines(SH.rows),pt=.3528;
-  let logoW=0;try{const im=$('#brandLogo');if(im&&im.naturalWidth&&/^data:image\/jpe?g;base64,/.test(im.src)){const b=Uint8Array.from(atob(im.src.split(',')[1]),c=>c.charCodeAt(0));logoW=34;const lh=logoW*im.naturalHeight/im.naturalWidth;doc.image(b,im.naturalWidth,im.naturalHeight,W-M-logoW,M-2,logoW,lh)}}catch(e){logoW=0}
-  const tw=W-2*M-logoW-4,tl=wrapTo(head.title,22,true,tw);let y=M+6;tl.forEach((t,i)=>doc.text(t,M,y+i*8.5,{font:'hb',size:22}));y+=(tl.length-1)*8.5;
-  y+=7;doc.text(head.artist||'',M,y,{size:14,color:60});y+=5.5;doc.text(head.sub,M,y,{size:8.5,color:110});y=Math.max(y+3,M+24);doc.line(M,y,W-M,y,.6);
-  const top=y+5,bottom=H-M-6,avail=bottom-top,maxCh=Math.max(10,...L.map(([,t])=>t.length));
-  const cols_needed=(f)=>{const lh=f*pt*1.22;let c=1,h=0;for(const [k] of L){const dh=k==='g'?lh*.5:lh;if(h+dh>avail){c++;h=0}h+=dh}return c};
-  const fit=cols=>{const cw=(W-2*M-(cols-1)*8)/cols;let fs=Math.min(16,cw/(maxCh*.6*pt));while(fs>6.5&&cols_needed(fs)>cols)fs-=.25;return{fs,cols,ok:cols_needed(fs)<=cols}};
-  let F=fit(1);if(!F.ok||F.fs<9.5){const F2=fit(2);if(F2.ok&&(!F.ok||F2.fs>F.fs+1.5))F=F2}
-  const fs=F.ok?F.fs:7,cols=F.ok?F.cols:2,cw=(W-2*M-(cols-1)*8)/cols,lh=fs*pt*1.22;let col=0,yy=top,first=true;
-  for(const [k,t] of L){const dh=k==='g'?lh*.5:lh;if(yy+dh>bottom){col++;yy=first?top:M+4;if(col>=cols){doc.addPage();first=false;col=0;yy=M+4}}if(k==='g'){yy+=dh;continue}
-    doc.text(t,M+col*(cw+8),yy+fs*pt*.8,{font:k==='l'?'c':'cb',size:+fs.toFixed(2),color:k==='c'?[180,32,15]:17});yy+=dh}
-  const n=doc.pages();for(let i=0;i<n;i++){doc.setPage(i);doc.text('Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio'+(n>1?'  ·  pagina '+(i+1)+' di '+n:''),M,H-M+2,{size:7.5,color:130})}
-  return{blob:doc.blob(head.title+' - '+head.artist),pages:n,fs,cols}}
+/* impaginazione unica (in millimetri) usata sia per il PDF sia per la vista a schermo:
+   ['t',testo,x,y,font,size,colore] · ['l',x1,y1,x2,y2,spessore,colore] · ['i',x,y,w,h] (logo)
+   Leggibile da lontano: carattere grande e in grassetto, una sola colonna, spazio tra le righe;
+   le righe lunghe vanno a capo tenendo l'accordo sopra la sua parola; si usano tutte le pagine che servono. */
+function shLogo(){try{const im=$('#brandLogo');if(im&&im.naturalWidth&&/^data:image\/jpe?g;base64,/.test(im.src))return im}catch(e){}return null}
+/* va a capo una coppia accordi/testo senza spezzare parole né nomi di accordi */
+function shWrapPair(ch,ly,max){const out=[];ch=ch||'';ly=ly||'';
+  while(Math.max(ch.length,ly.length)>max){let b=-1;for(let k=max;k>=Math.floor(max*.45);k--){const lyOk=k>=ly.length||ly[k]===' ',chOk=k>=ch.length||ch[k]===' ';if(lyOk&&chOk){b=k;break}}
+    if(b<0){for(let k=max;k>=Math.floor(max*.45);k--)if(k>=ly.length||ly[k]===' '){b=k;break}}if(b<0)b=max;
+    out.push([ch.slice(0,b).trimEnd(),ly.slice(0,b)]);ch=ch.slice(b+1);ly=ly.slice(b+1);if(!ch.trim())ch=''}
+  out.push([ch,ly]);return out}
+function shWrapWords(s,max){const w=String(s).split(/\s+/).filter(Boolean),out=[];let l='';for(const x of w){const t=l?l+' '+x:x;if(t.length>max&&l){out.push(l);l=x}else l=t}if(l)out.push(l);return out}
+/* carattere il più grande possibile (da 16 a 13 punti) senza aggiungere pagine inutili */
+function shLayout(rows,head){let best=null;for(let f=16;f>=13;f-=.5){const r=shLayoutFs(rows,head,f);if(!best||r.pages.length<best.pages.length)best=r}return best}
+function shLayoutFs(rows,head,fs){const W=210,H=297,M=12,pt=.3528,cw=fs*.6*pt,maxCh=Math.floor((W-2*M)/cw),lh=fs*pt*1.18,pages=[];let P;
+  const T=(s,x,y,font,size,color)=>P.push(['t',s,x,y,font,size,color]);const im=shLogo();let top,y;
+  const newPage=()=>{P=[];pages.push(P);if(pages.length===1){let logoW=0;if(im){logoW=34;P.push(['i',W-M-logoW,M-2,logoW,logoW*im.naturalHeight/im.naturalWidth])}
+      const tw=W-2*M-logoW-4,tl=wrapTo(head.title,24,true,tw);let yy=M+7;tl.forEach((t,i)=>T(t,M,yy+i*9.2,'hb',24,17));yy+=(tl.length-1)*9.2;
+      yy+=7.5;T(head.artist||'',M,yy,'h',15,50);yy+=6;T(head.sub,M,yy,'h',9.5,90);yy=Math.max(yy+3,M+26);P.push(['l',M,yy,W-M,yy,.7,17]);top=yy+7}
+    else{T(head.title+(head.artist?'  ·  '+head.artist:''),M,M+4,'hb',11,60);P.push(['l',M,M+7,W-M,M+7,.4,150]);top=M+13}
+    y=top};
+  /* blocchi da tenere interi: una coppia accordi+testo, oppure una sezione suonata */
+  const blocks=[];for(const r of rows){if(r.sec){const lab='['+r.sec+']',seq=shWrapWords(r.seq,maxCh-lab.length-2);blocks.push({sec:true,lines:seq.map((s,i)=>({lab:i?'':lab,ind:lab.length+2,s}))})}
+    else blocks.push({sec:false,lines:shWrapPair(r.ch,r.ly,maxCh).flatMap(([c,l])=>[...(c?[{k:'c',s:c}]:[]),{k:'l',s:l}])})}
+  const bottom=H-M-7;newPage();let prevSec=null;
+  for(const b of blocks){const gapB=y===top?0:(b.sec||prevSec?lh*.9:lh*.45),hB=b.lines.length*lh;
+    if(y+gapB+hB>bottom&&y>top){newPage()}else y+=gapB;
+    for(const l of b.lines){const base=y+fs*pt*.82;
+      if(b.sec){if(l.lab)T(l.lab,M,base,'cb',fs,17);T(l.s,M+l.ind*cw,base,'cb',fs,[180,32,15])}
+      else T(l.s,M,base,'cb',fs,l.k==='c'?[180,32,15]:17);y+=lh}
+    prevSec=b.sec}
+  const n=pages.length;pages.forEach((pg,i)=>pg.push(['t','Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio'+(n>1?'  ·  pagina '+(i+1)+' di '+n:''),M,H-M+2,'h',7.5,130]));
+  return{pages,fs,cols:1}}
+async function shPDF(){const doc=new MiniPDF(),lay=SH.lay||shLayout(SH.rows,SH.head),im=shLogo();let jpg=null;if(im)try{jpg=Uint8Array.from(atob(im.src.split(',')[1]),c=>c.charCodeAt(0))}catch(e){}
+  lay.pages.forEach((pg,i)=>{if(i)doc.addPage();for(const o of pg){if(o[0]==='t')doc.text(o[1],o[2],o[3],{font:o[4],size:o[5],color:o[6]});else if(o[0]==='l')doc.line(o[1],o[2],o[3],o[4],o[5],o[6]);else if(o[0]==='i'&&jpg)doc.image(jpg,im.naturalWidth,im.naturalHeight,o[1],o[2],o[3],o[4])}});
+  return{blob:doc.blob(SH.head.title+' - '+SH.head.artist),pages:lay.pages.length,fs:lay.fs,cols:lay.cols}}
 async function shPdfFile(){const r=await shPDF();return{file:new File([r.blob],shFile('pdf'),{type:'application/pdf'}),...r}}
 const shDl=f=>{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000)};
+/* disegno di una pagina su un canvas largo wpx */
+function shDraw(cv,pg,wpx){const dpr=Math.min(3,window.devicePixelRatio||1),k=wpx/210,hpx=Math.round(297*k);cv.style.width=wpx+'px';cv.style.height=hpx+'px';
+  cv.width=Math.min(5000,Math.round(wpx*dpr));cv.height=Math.round(cv.width*297/210);const g=cv.getContext('2d'),s=cv.width/210;g.setTransform(1,0,0,1,0,0);g.fillStyle='#fff';g.fillRect(0,0,cv.width,cv.height);
+  const fam={h:'Arial,Helvetica,sans-serif',hb:'Arial,Helvetica,sans-serif',c:'"Courier New",Courier,monospace',cb:'"Courier New",Courier,monospace'},rgb=c=>{if(typeof c==='number')c=[c,c,c];return`rgb(${c.join(',')})`};g.textBaseline='alphabetic';
+  for(const o of pg){if(o[0]==='t'){g.font=(o[4]==='hb'||o[4]==='cb'?'700 ':'')+(o[5]*.3528*s).toFixed(2)+'px '+fam[o[4]];g.fillStyle=rgb(o[6]);g.fillText(o[1],o[2]*s,o[3]*s)}
+    else if(o[0]==='l'){g.strokeStyle=rgb(o[6]);g.lineWidth=o[5]*s;g.beginPath();g.moveTo(o[1]*s,o[2]*s);g.lineTo(o[3]*s,o[4]*s);g.stroke()}
+    else if(o[0]==='i'){const im=shLogo();if(im)try{g.drawImage(im,o[1]*s,o[2]*s,o[3]*s,o[4]*s)}catch(e){}}}}
+
+/* ---- elenco dei fogli del brano ---- */
+function shStart(fromStage){if(!song){toast('Scegli prima un brano');return}const L=shList();
+  if(fromStage&&L.length){const last=L.slice().sort((a,b)=>(b.at||0)-(a.at||0))[0];shView(last.tr,last.bass);return}
+  if(!L.length){shAsk();return}shListOpen()}
+function shListOpen(){shListDraw();openOv('#ovShList')}
+function shListDraw(){const e=shEntry(),L=e?e.list:[];$('#shlSong').textContent=(song.title||'Brano')+(song.artist?' · '+artQ(song.artist):'');
+  $('#shlList').innerHTML=L.length?L.map((x,i)=>{const k=shKeyOf(e.src,x.tr);return`<div class="shlrow"><button class="shlopen" data-i="${i}"><span class="shlic" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg></span><span class="shlt"><b>${x.bass?'Basso (note)':'Chitarra (accordi)'}</b><small>${esc(k||'')}${k?' · ':''}${x.tr?'trasposto '+shTrTxt(x.tr):'tonalità originale'}${x.at?' · '+new Date(x.at).toLocaleDateString('it-IT'):''}</small></span></button><button class="chip" data-del="${i}">Elimina</button></div>`}).join('')
+    :'<p class="snote">Nessun foglio ancora per questo brano.</p>';
+  $$('#shlList .shlopen').forEach(b=>b.onclick=()=>{const x=L[+b.dataset.i];$('#ovShList').hidden=true;shView(x.tr,x.bass)});
+  $$('#shlList [data-del]').forEach(b=>b.onclick=()=>{if(b.dataset.arm!=='1'){b.dataset.arm='1';b.textContent='Sì, elimina';b.classList.add('danger');setTimeout(()=>{if(b.isConnected&&b.dataset.arm==='1'){b.dataset.arm='';b.textContent='Elimina';b.classList.remove('danger')}},4000);return}
+    const x=L[+b.dataset.del];shForget(x.tr,x.bass);toast('Foglio eliminato');shListDraw()})}
+$('#shlNew').onclick=()=>{$('#ovShList').hidden=true;shAsk()};
+
+/* ---- prima la domanda: strumento e tonalità; poi il foglio ---- */
+async function shAsk(){if(!song){toast('Scegli prima un brano');return}
+  if(!CH.base){openOv('#ovShAsk');$('#shkList').innerHTML='<p class="snote">Cerco gli accordi del brano… (serve una volta sola)</p>';try{await chordAnalyze()}catch(e){}}
+  if(!CH.base||!CH.base.some(c=>c[2]>=0)){$('#ovShAsk').hidden=true;const e=shEntry();if(e){toast('Gli accordi di questo brano non ci sono qui: uso quelli già salvati con i fogli');SH.src=e.src}else{toast('In questo brano non trovo accordi: non posso fare il foglio');return}}
+  else SH.src=shSnap();
+  SH.bass=inst==='bass';SH.tr=tr;shAskDraw();openOv('#ovShAsk')}
+function shAskDraw(){$$('#shkInst button').forEach(b=>b.classList.toggle('on',(b.dataset.b==='1')===SH.bass));const o=shKeyOf(SH.src,0),have=shList();
+  $('#shkOrig').textContent=o?'Tonalità originale del brano: '+o:'';const L=[];for(let t=-6;t<=6;t++)L.push(t);
+  $('#shkList').innerHTML=L.map(t=>`<button class="shk ${t===SH.tr?'on':''}" data-t="${t}"><b>${t===0?'Originale':(t>0?'+':'')+t}</b><small>${esc(shKeyOf(SH.src,t))}</small>${t===tr&&t!==0?'<em>quella che usi adesso</em>':''}${have.some(x=>x.tr===t&&!!x.bass===SH.bass)?'<em>già salvato</em>':''}</button>`).join('');
+  $$('#shkList .shk').forEach(b=>b.onclick=()=>{SH.tr=+b.dataset.t;shAskDraw()})}
+$$('#shkInst button').forEach(b=>b.onclick=()=>{SH.bass=b.dataset.b==='1';shAskDraw()});
+$('#shkGo').onclick=()=>{$('#ovShAsk').hidden=true;shStore(SH.src,null);shView(SH.tr,SH.bass,true)};
+
+/* ---- vista a tutto schermo: pagine affiancate, si scorre col dito o con le frecce ---- */
+function shView(trv,bass,isNew){const e=shEntry();if(e&&!isNew)SH.src=e.src;if(!SH.src){shAsk();return}
+  SH.tr=Math.max(-11,Math.min(11,trv|0));SH.bass=!!bass;const added=shStore(null,SH.tr,SH.bass);
+  const k=shKeyOf(SH.src,SH.tr);SH.rows=shBuild(SH.src,SH.tr,SH.bass);
+  SH.head={title:song.title||'Brano',artist:artQ(song.artist||''),sub:[SH.bass?'Note del basso':'Accordi per chitarra',k?'tonalità '+k:'',SH.tr?'trasposto '+shTrTxt(SH.tr)+' semitoni':'tonalità originale'].filter(Boolean).join(' · ')};
+  SH.txt=shText(SH.rows,SH.head);SH.lay=shLayout(SH.rows,SH.head);
+  $('#shvTitle').textContent=SH.head.title+(SH.head.artist?' · '+SH.head.artist:'');$('#shvKey').textContent=(k||'—')+' ('+shTrTxt(SH.tr)+')';
+  $$('#shvInst button').forEach(b=>b.classList.toggle('on',(b.dataset.b==='1')===SH.bass));
+  const ov=$('#ovShView');if(ov.hidden)openOv('#ovShView');SH.pg=0;$('#shvNav').hidden=SH.lay.pages.length<2;shRender();$('#shvPages').scrollLeft=0;shPgUpd();
+  if(added)toast(isNew?'Foglio creato e collegato al brano':'Nuovo foglio salvato nel brano');}
+function shFitW(){const box=$('#shvPages'),w=box.clientWidth-16,h=box.clientHeight-16;return Math.max(200,Math.min(w,h*210/297))}
+function shRender(){const box=$('#shvPages'),base=shFitW(),w=Math.round(base*SH.zoom);box.innerHTML='';
+  SH.lay.pages.forEach(pg=>{const d=document.createElement('div');d.className='shvpg'+(SH.zoom>1?' z':'');const cv=document.createElement('canvas');d.appendChild(cv);box.appendChild(d);shDraw(cv,pg,w)});
+  $('#shvZoom').textContent=Math.round(SH.zoom*100)+'%';box.scrollLeft=SH.pg*box.clientWidth}
+function shPgUpd(){const box=$('#shvPages'),n=SH.lay?SH.lay.pages.length:1,i=Math.max(0,Math.min(n-1,Math.round(box.scrollLeft/Math.max(1,box.clientWidth))));SH.pg=i;
+  $('#shvPg').textContent='Foglio '+(i+1)+' di '+n;$('#shvNav').hidden=n<2;$('#shvPrev').disabled=i<=0;$('#shvNext').disabled=i>=n-1}
+const shGoPg=d=>{const box=$('#shvPages');box.scrollTo({left:(SH.pg+d)*box.clientWidth,behavior:'smooth'})};
+$('#shvPages').addEventListener('scroll',()=>{clearTimeout(SH.st);SH.st=setTimeout(shPgUpd,80)},{passive:true});
+$('#shvPrev').onclick=()=>shGoPg(-1);$('#shvNext').onclick=()=>shGoPg(1);
+$('#shvDn').onclick=()=>shView(SH.tr<=-6?SH.tr+11:SH.tr-1,SH.bass);$('#shvUp').onclick=()=>shView(SH.tr>=6?SH.tr-11:SH.tr+1,SH.bass);
+$$('#shvInst button').forEach(b=>b.onclick=()=>shView(SH.tr,b.dataset.b==='1'));
+const shZ=[1,1.5,2,3];$('#shvZin').onclick=()=>{SH.zoom=shZ[Math.min(shZ.length-1,shZ.indexOf(SH.zoom)+1)]||1;shRender();shPgUpd()};$('#shvZout').onclick=()=>{SH.zoom=shZ[Math.max(0,shZ.indexOf(SH.zoom)-1)]||1;shRender();shPgUpd()};
+$('#shvList').onclick=()=>{shViewClose();shListOpen()};
+function shViewClose(){const f=document.fullscreenElement||document.webkitFullscreenElement;if(f&&f.id==='ovShView'){try{(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}$('#ovShView').hidden=true;SH.zoom=1}
+$('#shvX').onclick=shViewClose;
+$('#shvFs').hidden=!(document.fullscreenEnabled||document.webkitFullscreenEnabled);
+$('#shvFs').onclick=()=>{const o=$('#ovShView'),f=document.fullscreenElement||document.webkitFullscreenElement;try{if(f===o)(document.exitFullscreen||document.webkitExitFullscreen).call(document);else(o.requestFullscreen||o.webkitRequestFullscreen).call(o)}catch(e){}};
+document.addEventListener('fullscreenchange',()=>{if(!$('#ovShView').hidden)setTimeout(()=>{shRender();shPgUpd()},120)});
+window.addEventListener('resize',()=>{if(!$('#ovShView').hidden){clearTimeout(SH.rt);SH.rt=setTimeout(()=>{shRender();const b=$('#shvPages');b.scrollLeft=SH.pg*b.clientWidth;shPgUpd()},150)}});
+document.addEventListener('keydown',e=>{if($('#ovShView').hidden||e.target.matches('input,textarea,select'))return;
+  if(e.key==='Escape'){e.stopImmediatePropagation();e.preventDefault();shViewClose()}else if(e.key==='ArrowRight'||e.key==='PageDown'){e.stopImmediatePropagation();e.preventDefault();shGoPg(1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.stopImmediatePropagation();e.preventDefault();shGoPg(-1)}else if(e.code==='Space'){e.stopImmediatePropagation()}},true);
+
 $('#shPdf').onclick=async()=>{const b=$('#shPdf');b.disabled=true;try{const r=await shPdfFile();shDl(r.file);toast('Salvato: '+r.file.name+(r.pages>1?' ('+r.pages+' pagine)':''))}catch(e){console.error(e);toast('Non riesco a creare il PDF')}finally{b.disabled=false}};
-$('#shPrint').onclick=async()=>{const t0=document.title;document.title=shFile('pdf').replace(/\.pdf$/,'');const w=$('#shFrame').contentWindow;try{w.document.title=document.title;w.focus();w.print()}catch(e){}setTimeout(()=>document.title=t0,3000)};
+/* stampa: le pagine come immagini A4, una per foglio */
+$('#shPrint').onclick=async()=>{const t0=document.title,name=shFile('pdf').replace(/\.pdf$/,'');const imgs=SH.lay.pages.map(pg=>{const cv=document.createElement('canvas');const d0=window.devicePixelRatio;shDraw(cv,pg,Math.round(1240/Math.min(3,d0||1)));return cv.toDataURL('image/png')});
+  let fr=$('#shPrintFr');if(!fr){fr=document.createElement('iframe');fr.id='shPrintFr';fr.style.cssText='position:fixed;width:0;height:0;border:0;left:-9999px';document.body.appendChild(fr)}
+  fr.srcdoc=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(name)}</title><style>@page{size:A4;margin:0}html,body{margin:0}img{display:block;width:210mm;height:297mm;break-after:page}img:last-child{break-after:auto}</style></head><body>${imgs.map(s=>`<img src="${s}">`).join('')}</body></html>`;
+  await new Promise(r=>fr.onload=r);document.title=name;try{fr.contentWindow.focus();fr.contentWindow.print()}catch(e){}setTimeout(()=>document.title=t0,3000)};
 $('#shTxt').onclick=()=>shDl(new File([SH.txt],shFile('txt'),{type:'text/plain;charset=utf-8'}));
 $('#shShare').onclick=async()=>{const b=$('#shShare');b.disabled=true;try{const {file}=await shPdfFile();
     if(navigator.canShare&&navigator.canShare({files:[file]}))await navigator.share({files:[file],title:file.name.replace(/\.pdf$/,''),text:(SH.head.title||'')+' - '+(SH.head.artist||'')+' · accordi'});else{shDl(file);toast('Questo dispositivo non condivide file: l\'ho salvato, allegalo tu ('+file.name+')')}}
   catch(e){if(e&&e.name!=='AbortError')toast('Condivisione non riuscita')}finally{b.disabled=false}};
-$('#shAgain').onclick=()=>{$('#ovSheet').hidden=true;shAskDraw();openOv('#ovShAsk')};
 /* ===================== ARTISTI, ALBUM E IMMAGINI =====================
    Libreria e scaletta: artista (con la sua foto) → album (con la copertina) → brani.
    Le immagini si cercano da sole su internet (copertine: iTunes, poi MusicBrainz; artisti: Deezer),
@@ -3826,7 +3940,7 @@ async function sepFromLib(id){
    - bozze dei video: vanno nel cloud; quelle fatte su un altro dispositivo compaiono in «Bozze» e si scaricano quando le apri
    - scalette, preset dei pedali ed estensioni vocali: sempre uguali su tutti i dispositivi
    Senza chiavi del cloud non fa niente e riparte da sola appena il cloud è di nuovo collegato. */
-var SYNC_KEYS=['setlists','fxPresets','vrange','vrSel'];
+var SYNC_KEYS=['setlists','fxPresets','vrange','vrSel','sheets'];
 var SY={busy:false,again:false,applying:false,at:+(prefGet('syncAt')||0),t:null,msg:''};
 const DRP=R2P+'_bozze/',SETF=R2P+'_impostazioni.json';
 function syncSoon(){clearTimeout(SY.t);SY.t=setTimeout(()=>syncAll('impostazioni',true),15000)}
@@ -3838,7 +3952,8 @@ function banSyncEnd(msg){const b=$('#syncBan');if(b.hidden)return;if(msg){$('#sy
 function syncInfo(){if(SY.busy)return;syncSay(!r2Ok()?'Sincronizzazione ferma: il cloud non è collegato. Riparte da sola appena lo ricolleghi.':!r2On()?'Sincronizzazione ferma: il cloud è spento.':SY.at?'Ultima sincronizzazione: '+new Date(SY.at).toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short'})+'.':'Non ancora sincronizzato.')}
 async function syncSettings(){let c={v:1,keys:{}};try{c=await (await r2Req('GET',SETF)).json()}catch(e){if(e.message!=='R2NOFILE')throw e}c.keys=c.keys||{};
   let dirty=false,got=0;for(const k of SYNC_KEYS){const lt=+(prefGet('syT_'+k)||0),cv=c.keys[k],ct=cv?+cv.t||0:0,lv=prefGet(k);
-    if(ct>lt&&cv&&typeof cv.v==='string'){if(cv.v!==lv){SY.applying=true;try{prefSet(k,cv.v)}finally{SY.applying=false}got++}prefSet('syT_'+k,String(ct))}
+    if(k==='sheets'&&cv&&typeof cv.v==='string'&&lv!=null&&cv.v!==lv){const m=shMerge(lv,cv.v),t=Math.max(lt,ct,1);if(m!==lv){SY.applying=true;try{prefSet(k,m)}finally{SY.applying=false}got++}prefSet('syT_'+k,String(t));if(m!==cv.v){c.keys[k]={v:m,t};dirty=true}}
+    else if(ct>lt&&cv&&typeof cv.v==='string'){if(cv.v!==lv){SY.applying=true;try{prefSet(k,cv.v)}finally{SY.applying=false}got++}prefSet('syT_'+k,String(ct))}
     else if(lt>ct&&lv!=null){c.keys[k]={v:lv,t:lt};dirty=true}
     else if(!cv&&lv!=null&&lv!=='[]'){const t=Date.now();prefSet('syT_'+k,String(t));c.keys[k]={v:lv,t};dirty=true}}
   if(dirty)await r2Req('PUT',SETF,{body:JSON.stringify(c),ctype:'application/json'});
@@ -5854,7 +5969,7 @@ function tvBoot(){palOn=true;$('#palco').hidden=false;document.body.style.overfl
 $('#bSala').hidden=!SALA_OK;$('#bSala').onclick=()=>salaOpen();
 {const f=$('#bFull'),up=()=>{f.textContent=document.fullscreenElement===document.documentElement?'⤢ Esci da schermo intero':'⛶ Schermo intero'};f.onclick=()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else document.documentElement.requestFullscreen().catch(()=>toast('Schermo intero non disponibile'))};document.addEventListener('fullscreenchange',up);if(appInstalled())f.hidden=true}
 $('#tlMix').onclick=()=>openOv('#ovMix');$('#tlTempo').onclick=()=>openOv('#ovTempo');$('#tlTone').onclick=toneOpen;$('#tlRange').onclick=vrOpen;$('#tlTune').onclick=()=>tuneOpen(null);
-$('#tlSheet').onclick=shAsk;$('#tlTag').onclick=()=>{if(song&&song.stored)tagOpen(song.id);else toast('Scegli prima un brano della libreria')};
+$('#tlSheet').onclick=()=>shStart(false);$('#pSheet').onclick=()=>shStart(true);$('#tlTag').onclick=()=>{if(song&&song.stored)tagOpen(song.id);else toast('Scegli prima un brano della libreria')};
 function toolsUI(){$('#tlTempoS').textContent=($('#rate').selectedOptions[0]||{}).textContent?.replace(/\s*\(originale\)/,'')+(CLK2&&CLK2.on?' · click sì':'');
   $('#tlToneS').textContent=$('#trVal').textContent;const me=(VR.list||[]).find(x=>x.n===VR.sel);$('#tlRangeS').textContent=me&&me.lo!=null?me.n+': '+nmIt(me.lo)+'–'+nmIt(me.hi):'misura chi canta';
   $('#tlTag').classList.toggle('dim',!(song&&song.stored));$('#tlTagS').textContent=song&&song.stored?(song.artist?song.artist:'manca l\'artista'):'titolo, artista, testo';
