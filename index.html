@@ -170,6 +170,14 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .shvpages{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
 .shvpg{flex:0 0 100%;scroll-snap-align:start;overflow:auto;display:flex;justify-content:flex-start;align-items:flex-start;padding:8px;box-sizing:border-box}.shvpg canvas{background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.5);flex:none;margin:0 auto}@media (min-width:700px){.shvpg:not(.z) canvas{margin:auto}}@media (max-width:599px){.shvbar .chip span{display:none}.shvbar .chip{min-width:44px;justify-content:center}}
 .shvnav{display:flex;align-items:center;justify-content:center;gap:14px;padding:6px;padding-bottom:max(6px,env(safe-area-inset-bottom));background:#18181b;font-weight:600}.shvnav .chip{min-width:56px;font-size:20px}
+.ltgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0}.ltgrid>div{display:grid;gap:2px;text-align:center;padding:10px 6px;border-radius:14px;border:1px solid var(--line);background:var(--raise)}.ltgrid small{color:var(--dim);font-size:12px}.ltgrid b{font-size:22px;font-variant-numeric:tabular-nums}.ltgrid .tot{border-color:var(--accent)}
+.ltj{margin:4px 0 8px;font-weight:600}.ltj.ok{color:#5fd38d}.ltj.mid{color:#ffc34d}.ltj.bad{color:#ff6b6b}.ltt summary{cursor:pointer;font-weight:700;padding:6px 0}.ltt ol{margin:4px 0 4px 18px;padding:0;line-height:1.5}
+.pdlamp{width:16px;height:16px;border-radius:50%;background:#333;border:1px solid var(--line);flex:none;transition:background .1s}.pdlamp.on{background:#5fd38d;box-shadow:0 0 12px #5fd38d}
+.pddevs{display:grid;gap:4px;margin:6px 0}.pddev{display:flex;gap:8px;align-items:center}.pddev small{color:var(--dim)}.pdled{width:10px;height:10px;border-radius:50%;background:#666}.pdled.on{background:#5fd38d}
+.pdwarn{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px;border-radius:12px;border:1px solid #ffc34d;margin:6px 0}
+.pdrows{display:grid;gap:6px;margin:8px 0}.pdrow{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:14px;border:1px solid var(--line);background:var(--raise)}.pdrow.cur{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.pdn{width:36px;height:36px;flex:none;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:18px;background:var(--surface);color:var(--accent)}.pdt{flex:1;min-width:0;display:grid}.pdt b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pdt small{color:var(--dim)}
+.sbrow{gap:8px}.sbtag{padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:13px;font-weight:600}.sbtag.own{border-color:var(--accent);color:var(--accent)}
 .shlsheet{max-width:min(560px,96vw)}.shl{display:grid;gap:6px;margin:6px 0 10px;max-height:50vh;overflow:auto}.shlrow{display:flex;gap:8px;align-items:center}.shlopen{flex:1;min-width:0;display:flex;gap:10px;align-items:center;text-align:left;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer}
 .shlopen:hover{border-color:var(--accent)}.shlic{width:40px;height:40px;flex:none;border-radius:10px;display:grid;place-items:center;background:var(--surface);color:var(--accent)}.shlic .ico{width:22px;height:22px}.shlt{display:grid;min-width:0}.shlt small{color:var(--dim)}
 .shasksheet{max-width:min(640px,96vw)}.shklist{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:8px 0 12px}.shk{display:grid;gap:2px;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer;text-align:left;font-family:Figtree,system-ui}.shk small{color:var(--dim)}.shk em{font-style:normal;font-size:11px;color:var(--accent)}.shk.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 40%,transparent)}.shbtns{flex-wrap:wrap}
@@ -855,7 +863,7 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 .hsong .songpick{max-width:none!important;width:100%;min-height:52px!important;font-size:17px!important}
 .hscal{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:6px 16px;border-radius:14px;font-weight:700}.hscal .ico{width:22px;height:22px}
 .hdr .transport .trow{justify-content:center}
-.htools{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.htools{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px}@media (min-width:900px) and (max-width:1199px){.htools{grid-template-columns:repeat(5,minmax(0,1fr))}}
 .htool{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;min-height:84px;padding:8px 6px;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;text-align:center}
 .htool .ico{color:var(--accent);width:28px;height:28px}.htool b{font-size:14px;line-height:1.15}.htool small{max-width:100%;font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .htool:hover,.hbtn:hover{border-color:var(--accent)}.htool.dim{opacity:.55}
@@ -871,7 +879,7 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
   .hlogo{grid-area:logo}.hnav{grid-area:nav}.hsong{grid-area:song}.hdr .transport{grid-area:tr}.htools{grid-area:tools}
   .htool{min-height:58px;padding:6px 10px;flex-direction:row;justify-content:flex-start;text-align:left;gap:10px;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto}.htool .ico{width:26px;height:26px;grid-row:1/3}.htool b{font-size:14px}.htool small{text-align:left}
 }
-@media (max-width:899px){.htools{grid-template-columns:repeat(3,minmax(0,1fr))}#tlSheet{grid-column:1/-1;flex-direction:row;justify-content:center;gap:10px}#tlSheet small{margin-left:4px}}
+@media (max-width:899px){.htools{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:379px){.hlogo #brandLogo{height:46px!important}.hlogo #bShare{padding:4px 8px}.hlogo .hshare b{font-size:12.5px}.hlogo #bDonate img{height:32px}}
 @media (max-width:599px){
   .hlogo{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"logo share pay" "txt txt txt";gap:8px 8px}.hlogo #bShare{grid-area:share;justify-self:center;min-height:42px;padding:4px 10px;gap:6px;min-width:0}.hshare .ico{width:22px;height:22px}.hshare b{font-size:13.5px}.hshare small{display:none}.hlogo #bDonate img{height:36px}
@@ -942,6 +950,8 @@ themeApply();</script>
       <button class="htool" id="tlTune"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M12 17l3.6-6.3"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/><path d="M5.6 11.2l1.1.8M12 8.5v1.3M18.4 11.2l-1.1.8" stroke-width="1.6"/><path d="M3 20.5h18"/></svg><b>Accordatore</b><small>chitarra, basso e voce</small></button>
       <button class="htool" id="tlTag" title="Modifica tag MP3: titolo, artista, album, anno e testo"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4.5L19 9.5 14.5 5 4 15.5z"/><path d="m12.8 6.7 4.5 4.5"/><path d="M13 20h7" opacity=".6"/></svg><b>Tag MP3</b><small id="tlTagS">titolo, artista, testo</small></button>
       <button class="htool" id="tlSheet" title="Testo con gli accordi su fogli A4 da leggere, stampare o salvare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 11h6M9 15h6M9 19h3" opacity=".7"/></svg><b>Foglio A4</b><small>testo e accordi</small></button>
+      <button class="htool" id="tlLat" title="Ritardo tra quando suoni e quando ti senti, e come ridurlo"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 13V8.5M10 2.5h4M18.5 6.5l1.3-1.3"/><path d="M12 13l3 2" stroke-width="1.6"/></svg><b>Latenza</b><small id="tlLatS">ritardo in cuffia</small></button>
+      <button class="htool" id="tlPed" title="Pedaliera MIDI: un pedale per ogni banco del brano"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="9" width="19" height="11" rx="2"/><circle cx="7" cy="15" r="2"/><circle cx="12" cy="15" r="2"/><circle cx="17" cy="15" r="2"/><path d="M7 9V6M12 9V4M17 9V6" stroke-width="1.6"/></svg><b>La mia pedaliera</b><small>pedali MIDI per banco</small></button>
     </div>
   </header>
 
@@ -1261,7 +1271,7 @@ themeApply();</script>
     </div>
     <div class="pboard rigone" id="rigBoard"></div>
   </div>
-  <div id="rigBankBox"><div class="rigfoot" id="rigFoot"></div>
+  <div id="rigBankBox"><div class="row sbrow" id="rigSB"></div><div class="rigfoot" id="rigFoot"></div>
     <details class="rigbankcfg"><summary>Scegli cosa c'è in ogni banco</summary><p class="snote">Cinque suoni pronti da cambiare con un tocco mentre suoni. Il banco 1 è sempre il più adatto al brano caricato.</p><div id="rigBanks"></div></details></div>
   <p class="legalnote">I modelli NAM e le casse IR di TONE3000 appartengono ai loro autori, con la licenza indicata da ciascuno. <a href="https://www.tone3000.com/search" target="_blank" rel="noopener">Sfoglia tutto il catalogo TONE3000</a></p>
 </div></div>
@@ -1485,6 +1495,36 @@ themeApply();</script>
   <p class="snote" id="shkOrig"></p>
   <div class="shklist" id="shkList"></div>
   <div class="row"><span class="grow"></span><button class="chip pri" id="shkGo">Crea il foglio</button></div>
+</div></div>
+<div class="ov" id="ovLat" hidden><div class="sheet toolsheet">
+  <div class="slhead"><h3>Latenza</h3><button class="mini" data-close>Chiudi</button></div>
+  <p class="snote">È il ritardo tra quando suoni (o canti) e quando ti senti in cuffia. Sotto i 20 ms non lo senti; sopra i 35 ms si nota.</p>
+  <div class="ltgrid"><div><small>Uscita (cuffia)</small><b id="ltOut">—</b></div><div><small>Ingresso (scheda)</small><b id="ltIn">—</b></div><div class="tot"><small>Totale</small><b id="ltTot">—</b></div></div>
+  <p class="ltj" id="ltJudge"></p>
+  <div class="twin"><div class="grp"><span class="lbl">Modalità audio</span><span class="seg" id="ltMode" role="group"><button data-m="0">Minima</button><button data-m="i">Normale</button><button data-m="b">Sicura</button></span></div>
+    <small class="snote" id="ltModeD"></small><div class="grp" id="ltApplyW"><button class="chip pri" id="ltApply" hidden>Applica (riavvia l'audio)</button></div></div>
+  <div class="twin"><div class="grp"><span class="lbl">Testo e suono</span><label><input type="checkbox" id="ltAuto"> allinea da solo</label><b id="ltSync" class="trval"></b></div>
+    <input type="range" id="ltMan" min="0" max="500" step="10" aria-label="Ritardo del testo rispetto al suono in millisecondi" hidden style="width:100%">
+    <small class="snote">Tiene il testo del karaoke a tempo con quello che senti (utile con casse o cuffie Bluetooth).</small></div>
+  <details class="ltt"><summary>Consigli per sentirti senza ritardo</summary><ol>
+    <li>Cuffie con il filo collegate alla <b>presa Phones della scheda</b>; niente Bluetooth (aggiunge 150-250 ms).</li>
+    <li>Scheda audio impostata a <b>48 kHz</b> (frequenza di lavoro attuale: <b id="ltSr">—</b>).</li>
+    <li>Su PC Windows: nel pannello della Behringer metti il buffer più piccolo che non gracchia; chiudi le altre app e schede del browser.</li>
+    <li>Su tablet Android: tieni il tablet in carica, chiudi le altre app, usa la modalità «Minima» se non gracchia.</li>
+    <li>Gli amplificatori e le casse simulate pesanti aggiungono qualche millisecondo: se serve, spegnili mentre provi.</li></ol></details>
+</div></div>
+<div class="ov" id="ovMidi" hidden><div class="sheet toolsheet">
+  <div class="slhead"><h3>La mia pedaliera</h3><button class="mini" data-close>Chiudi</button></div>
+  <div id="pdNo" hidden><p class="snote">Questo browser non legge il MIDI. Usa <b>Chrome</b> su PC o su tablet/telefono Android.</p></div>
+  <div id="pdBody">
+    <p class="snote">Collega la pedaliera MIDI al <b>MIDI IN</b> della scheda audio (o con il suo cavo USB). Ogni pedale richiama un banco: i banchi sono quelli del brano aperto, se li ha, altrimenti quelli generali.</p>
+    <div class="row"><button class="chip pri" id="pdGo">Collega la pedaliera</button><span class="pdlamp" id="pdLamp" aria-hidden="true"></span><small class="snote" id="pdLast"></small></div>
+    <div id="pdDevs" class="pddevs"></div>
+    <div id="pdNoSala" class="pdwarn" hidden><span id="pdNoSalaT"></span><button class="chip" id="pdSala">Apri la Sala prove</button></div>
+    <div class="twin"><div class="grp"><span class="lbl">Strumento</span><select class="sel" id="pdTgt" aria-label="Strumento comandato dalla pedaliera"></select></div><div class="grp sbrow" id="pdSB"></div></div>
+    <div class="pdrows" id="pdRows"></div>
+    <div class="row"><span class="grow"></span><button class="chip" id="pdBanks">Scegli i suoni dei banchi</button></div>
+  </div>
 </div></div>
 <div class="ov" id="ovShList" hidden><div class="sheet slsheet shlsheet">
   <div class="slhead"><h3>Fogli del brano</h3><button class="mini" data-close>Chiudi</button></div>
@@ -1946,7 +1986,8 @@ function themeUI(){}
    Le tracce restano separate in memoria; il mix (volumi + tonalità) viene ricostruito
    e suonato da un solo lettore, che cambia velocità senza cambiare il tono. */
 let actx=null;
-const ctx=()=>actx||(actx=new (window.AudioContext||window.webkitAudioContext)());
+function latHint(){const m=prefGet('latMode')||'i';return m==='0'?0:m==='b'?'balanced':'interactive'}
+const ctx=()=>actx||(actx=new (window.AudioContext||window.webkitAudioContext)({latencyHint:latHint()}));
 const A=new Audio();A.preload='auto';try{A.preservesPitch=true;A.mozPreservesPitch=true;A.webkitPreservesPitch=true}catch(e){}
 let song=null, stems={}, order=[], gains={}, SR=44100, DUR=0;
 let rate=1, tr=0, trCache={tr:0,bufs:null}, voiceOff=false;
@@ -2092,7 +2133,7 @@ async function loadSong(s,bufs){
   CH.tok++;CH.busy=false;CH.base=s.chordsBase||null;setTimeout(()=>bpmEnsure(s),600);TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;
   tabRemap();updTr();setInst(inst);
   guide=null;analyzeGuide();
-  updPalSegs();prefSet('last',s.id);setTimeout(songPickFill,0);
+  updPalSegs();prefSet('last',s.id);setTimeout(()=>{try{sbSongChanged()}catch(e){console.warn(e)}},0);setTimeout(songPickFill,0);
   await rebuildMix();
 }
 async function openStored(id){let s=await dbGet(id);if(!s){toast('Brano non trovato');return}markOpened(id);
@@ -3954,7 +3995,7 @@ async function sepFromLib(id){
    - bozze dei video: vanno nel cloud; quelle fatte su un altro dispositivo compaiono in «Bozze» e si scaricano quando le apri
    - scalette, preset dei pedali ed estensioni vocali: sempre uguali su tutti i dispositivi
    Senza chiavi del cloud non fa niente e riparte da sola appena il cloud è di nuovo collegato. */
-var SYNC_KEYS=['setlists','fxPresets','vrange','vrSel','sheets'];
+var SYNC_KEYS=['setlists','fxPresets','vrange','vrSel','sheets','songBanks'];
 var SY={busy:false,again:false,applying:false,at:+(prefGet('syncAt')||0),t:null,msg:''};
 const DRP=R2P+'_bozze/',SETF=R2P+'_impostazioni.json';
 function syncSoon(){clearTimeout(SY.t);SY.t=setTimeout(()=>syncAll('impostazioni',true),15000)}
@@ -3966,7 +4007,7 @@ function banSyncEnd(msg){const b=$('#syncBan');if(b.hidden)return;if(msg){$('#sy
 function syncInfo(){if(SY.busy)return;syncSay(!r2Ok()?'Sincronizzazione ferma: il cloud non è collegato. Riparte da sola appena lo ricolleghi.':!r2On()?'Sincronizzazione ferma: il cloud è spento.':SY.at?'Ultima sincronizzazione: '+new Date(SY.at).toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short'})+'.':'Non ancora sincronizzato.')}
 async function syncSettings(){let c={v:1,keys:{}};try{c=await (await r2Req('GET',SETF)).json()}catch(e){if(e.message!=='R2NOFILE')throw e}c.keys=c.keys||{};
   let dirty=false,got=0;for(const k of SYNC_KEYS){const lt=+(prefGet('syT_'+k)||0),cv=c.keys[k],ct=cv?+cv.t||0:0,lv=prefGet(k);
-    if(k==='sheets'&&cv&&typeof cv.v==='string'&&lv!=null&&cv.v!==lv){const m=shMerge(lv,cv.v),t=Math.max(lt,ct,1);if(m!==lv){SY.applying=true;try{prefSet(k,m)}finally{SY.applying=false}got++}prefSet('syT_'+k,String(t));if(m!==cv.v){c.keys[k]={v:m,t};dirty=true}}
+    if((k==='sheets'||k==='songBanks')&&cv&&typeof cv.v==='string'&&lv!=null&&cv.v!==lv){const m=shMerge(lv,cv.v),t=Math.max(lt,ct,1);if(m!==lv){SY.applying=true;try{prefSet(k,m)}finally{SY.applying=false}got++}prefSet('syT_'+k,String(t));if(m!==cv.v){c.keys[k]={v:m,t};dirty=true}}
     else if(ct>lt&&cv&&typeof cv.v==='string'){if(cv.v!==lv){SY.applying=true;try{prefSet(k,cv.v)}finally{SY.applying=false}got++}prefSet('syT_'+k,String(ct))}
     else if(lt>ct&&lv!=null){c.keys[k]={v:lv,t:lt};dirty=true}
     else if(!cv&&lv!=null&&lv!=='[]'){const t=Date.now();prefSet('syT_'+k,String(t));c.keys[k]={v:lv,t};dirty=true}}
@@ -5017,8 +5058,8 @@ const SALA_OK=!isMobile||IS_TAB;
 const ROLES={voce:'Voce',chitarra:'Chitarra',basso:'Basso',altro:'Altro'};
 const ROLE_COL={voce:TC('#e8c8a6','#6fd8ff'),chitarra:'#7fb4e0',basso:'#9ad08f',altro:'#d39ad6'};
 const SA={ctx:null,devs:[],chans:[],tracks:[],takes:[],cur:-1,rec:null,on:false,base:null,t0:0,timer:0,cal:{},mods:{},nam:null,namLoading:null,view:'rec'};
-const sSave=()=>prefSet('sala',JSON.stringify({tracks:SA.tracks.map(t=>({orig:t.orig===true?true:t.orig==='guide'?'guide':false,origSet:!!t.origSet,id:t.id,name:t.name,role:t.role,dev:t.dev,ch:t.ch,mon:t.mon,hear:t.hear!==false,arm:t.arm,rig:t.rig})),cal:SA.cal,
-  base:{vol:+$('#sBaseVol').value,auto:$('#sAutoMute').checked,guide:$('#sGuide').checked,click:$('#sClick').checked,count:$('#sCount').checked}}));
+const sSave=()=>{sbPersist();prefSet('sala',JSON.stringify({tracks:SA.tracks.map(t=>({orig:t.orig===true?true:t.orig==='guide'?'guide':false,origSet:!!t.origSet,id:t.id,name:t.name,role:t.role,dev:t.dev,ch:t.ch,mon:t.mon,hear:t.hear!==false,arm:t.arm,rig:t.rig})),cal:SA.cal,
+  base:{vol:+$('#sBaseVol').value,auto:$('#sAutoMute').checked,guide:$('#sGuide').checked,click:$('#sClick').checked,count:$('#sCount').checked}}))};
 function sLoad(){let o={};try{o=JSON.parse(prefGet('sala')||'{}')}catch(e){}SA.cal=o.cal||{};SA.tracks=(o.tracks||[]).map(t=>Object.assign(newTrack(t.role),t,{rig:Object.assign(defRig(t.role),t.rig||{},t.rig&&t.rig.fx?{}:{fx:fxMigrate(t.rig||{},t.role)})}));SA.tracks.forEach(t=>fxOf(t.rig,t.role));
   if(o.base){$('#sBaseVol').value=o.base.vol;$('#sAutoMute').checked=o.base.auto!==false;$('#sGuide').checked=!!o.base.guide;$('#sClick').checked=!!o.base.click;$('#sCount').checked=o.base.count!==false}}
 
@@ -5136,7 +5177,7 @@ function defRig(role){return{gain:1,drive:role==='chitarra'?.25:0,comp:role==='b
 let tid=0;function newTrack(role){return{id:'t'+Date.now().toString(36)+(tid++),name:ROLES[role]||'Musicista',role:role||'voce',dev:'',ch:0,mon:.9,hear:true,arm:true,rig:defRig(role||'voce'),node:null}}
 
 /* ---------- contesto audio a 48 kHz, bassa latenza ---------- */
-function sCtx(){if(!SA.ctx||SA.ctx.state==='closed'){SA.ctx=new AudioContext({sampleRate:48000,latencyHint:'interactive'});audResolve(false).then(()=>{if(AE.outId&&SA.ctx.setSinkId)SA.ctx.setSinkId(AE.outId).catch(e=>console.warn(e))});SA.out=SA.ctx.createGain();SA.out.connect(SA.ctx.destination)}return SA.ctx}
+function sCtx(){if(!SA.ctx||SA.ctx.state==='closed'){SA.ctx=new AudioContext({sampleRate:48000,latencyHint:latHint()});audResolve(false).then(()=>{if(AE.outId&&SA.ctx.setSinkId)SA.ctx.setSinkId(AE.outId).catch(e=>console.warn(e))});SA.out=SA.ctx.createGain();SA.out.connect(SA.ctx.destination)}return SA.ctx}
 /* ---------- dispositivi e canali ---------- */
 async function sOpenDevices(){const c=sCtx();await c.resume();
   try{const s=await navigator.mediaDevices.getUserMedia({audio:true});s.getTracks().forEach(t=>t.stop())}catch(e){throw new Error(e&&e.name==='NotAllowedError'?'Serve il permesso per il microfono: consentilo dal lucchetto vicino all\'indirizzo.':'Nessun ingresso audio trovato.')}
@@ -5488,14 +5529,14 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-prauto]');
    Il banco 1 è sempre il preset più adatto al brano (✨), gli altri si scelgono. ===== */
 const BANK_DEF={chitarra:['Pulito (tutto spento)','Rock','Assolo','Anni \'80'],altro:['Pulito (tutto spento)','Rock','Anni \'80','Spazio'],tastiere:['Pulito (tutto spento)','Anni \'80','Spazio','Rock'],
   basso:['Basso morbido','Basso rock','Basso funk','Basso con ottava'],voce:['Voce pop','Voce ballata','Voce rock (slapback)','Voce con coro (ottava)']};
-function bankRefs(t){const r=t.rig;if(!Array.isArray(r.banks)||r.banks.length!==5)r.banks=['auto',...(BANK_DEF[t.role]||BANK_DEF.chitarra).map(n=>'F:'+n)];r.banks[0]='auto';return r.banks}
+function bankRefs(t){{const o=sbGet(t.role);if(o)return o}const r=t.rig;if(!Array.isArray(r.banks)||r.banks.length!==5)r.banks=['auto',...(BANK_DEF[t.role]||BANK_DEF.chitarra).map(n=>'F:'+n)];r.banks[0]='auto';return r.banks}
 function bankResolve(ref,role){if(ref==='auto'&&(role==='chitarra'||role==='basso')){const tn=toneNow(role),s0=tn&&tn.sounds&&tn.sounds[0];if(s0)return{name:'Brano · '+s0.name,fx:s0.fx,auto:true,why:'copiato dal brano'}}if(ref==='auto'){const a=prAutoPick(role);const nm=a?a.name:(role==='basso'?'Basso morbido':role==='voce'?'Voce pop':'Pulito (tutto spento)');const f=PRESET_F.find(x=>x[0]===nm);return f?{name:nm,fx:f[1],auto:!!a,why:a&&a.why}:null}
   if(!ref)return null;if(ref.startsWith('F:')){const f=PRESET_F.find(x=>x[0]===ref.slice(2));return f?{name:f[0],fx:f[1]}:null}if(ref.startsWith('U:')){const m=prList().find(x=>x.name===ref.slice(2)&&(!x.role||x.role===role));return m?{name:m.name,fx:m.fx}:null}return null}
 const bankShort=n=>(n||'—').replace(/^Voce |^Basso /,'').replace(' (tutto spento)','').replace(' (slapback)','').replace(' (ottava)','').replace('con ottava','ottava').replace('con coro','coro');
 function bankBtns(t,cls){const refs=bankRefs(t),cur=t.rig.bank;return refs.map((ref,i)=>{const r=bankResolve(ref,t.role);const nm=r?r.name:'vuoto';return`<button class="bankb ${cls||''} ${cur===i?'on':''}" data-bank="${t.id}:${i}" aria-pressed="${cur===i}" title="Banco ${i+1}: ${esc(nm)}${i===0?' (adatto al brano)':''}"><b>${i+1}${i===0?'✨':''}</b><span>${esc(bankShort(nm))}</span></button>`}).join('')}
-function bankSel(t,i){const r=bankResolve(bankRefs(t)[i],t.role);if(!r){toast('Banco '+(i+1)+' vuoto: sceglilo in «Manopole dei pedali»');return}const F=fxOf(t.rig,t.role),o0=fxOrder(F).join();prCopy(F,r.fx);F._pr=null;t.rig.bank=i;
-  if(t.node&&t.node.fxb&&fxOrder(F).join()===o0)t.node.fxb.set(F);else sBuild(t).then(sTapBuild);sSave();bankUI(t);if(RIG===t&&!$('#ovRig').hidden)rigBoardDraw(t);
-  toast('Banco '+(i+1)+' · '+r.name+' · '+t.name+(i===0&&r.why?' ('+r.why+')':''))}
+function bankSel(t,i,quiet){const r=bankResolve(bankRefs(t)[i],t.role);if(!r){toast('Banco '+(i+1)+' vuoto: sceglilo in «Manopole dei pedali»');return}const F=fxOf(t.rig,t.role),o0=fxOrder(F).join();prCopy(F,r.fx);F._pr=null;t.rig.bank=i;
+  if(t.node&&t.node.fxb&&fxOrder(F).join()===o0)t.node.fxb.set(F);else if(!quiet||t.node)sBuild(t).then(sTapBuild);sSave();bankUI(t);if(RIG===t&&!$('#ovRig').hidden)rigBoardDraw(t);
+  if(!quiet)toast('Banco '+(i+1)+' · '+r.name+' · '+t.name+(i===0&&r.why?' ('+r.why+')':''))}
 function bankUI(t){const F=fxOf(t.rig,t.role);$$(`[data-bank^="${t.id}:"]`).forEach(b=>{const on=+b.dataset.bank.split(':')[1]===t.rig.bank;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
   $$(`[data-pdt="${t.id}"][data-pd]`).forEach(b=>{const on=!!F[b.dataset.pd].on;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-bank]');if(!b)return;e.preventDefault();const[id,i]=b.dataset.bank.split(':');const t=SA.tracks.find(x=>x.id===id);if(t)bankSel(t,+i)});
@@ -5517,7 +5558,7 @@ function prBar(id,getFx,apply,role){const bar=$('#'+id);if(!bar)return;const sel
   bar.querySelector('[data-prbarauto]').onclick=()=>{const r=prAutoApply(role,getFx());if(r)apply(true)};
   bar.querySelector('[data-prord]').onclick=()=>{getFx()._order=ORDER0.slice();apply(true);toast('Pedali nell\'ordine classico')};
   del.onclick=()=>{const v=sel.value;if(!v.startsWith('u'))return;const L=prList(),m=L[+v.slice(1)];if(!m||!confirm('Elimino il preset «'+m.name+'»?'))return;L.splice(+v.slice(1),1);prPut(L);fill('');toast('Preset eliminato')};fill('')}
-function rigBoardDraw(t){const box=$('#rigBoard');if(!box)return;$('#rigBankBox').hidden=!!(t.__mix||RIG&&RIG.__mix);if(!$('#rigBankBox').hidden){bankCfgDraw(t);$('#rigFoot').innerHTML=bankBtns(t,'fsw')}const F=fxOf(t.rig,t.role);box.innerHTML=pedHTML(F,{bpm:true,noAmp:t.role==='voce'});pedBind(box,F,(k)=>pedApply(t,k),()=>pedReorder(t));
+function rigBoardDraw(t){const box=$('#rigBoard');if(!box)return;$('#rigBankBox').hidden=!!(t.__mix||RIG&&RIG.__mix);if(!$('#rigBankBox').hidden){$('#rigSB').innerHTML=sbRowHTML(t);bankCfgDraw(t);$('#rigFoot').innerHTML=bankBtns(t,'fsw')}const F=fxOf(t.rig,t.role);box.innerHTML=pedHTML(F,{bpm:true,noAmp:t.role==='voce'});pedBind(box,F,(k)=>pedApply(t,k),()=>pedReorder(t));
   prBar('rigPre',()=>fxOf(t.rig,t.role),()=>pedReorder(t),t.role);rigChainDraw(t)}
 function pedReorder(t){rigBoardDraw(t);if(t.__mix||RIG&&RIG===t&&RIG.__mix){if(WV.play){wvStop();wvPlay()}sAutoSaveSoon&&sAutoSaveSoon();return}sBuild(t).then(sTapBuild);sSave();sRender()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-pdt][data-pd]');if(b){e.preventDefault();const t=SA.tracks.find(x=>x.id===b.dataset.pdt);if(!t)return;const F=fxOf(t.rig,t.role),k=b.dataset.pd;F[k].on=F[k].on?0:1;pedApply(t,k,true);
@@ -5578,7 +5619,7 @@ async function cpAnalyze(){if(!CP)return;const say=m=>$('#cpMsg').textContent=m,
   finally{b.disabled=false;if(up)r2Req('DELETE',key).catch(()=>{})}}
 $('#cpGo').onclick=cpAnalyze;
 /* banchi: 1 = suono principale (automatico), 2 e 3 = gli altri suoni del brano, salvati come preset */
-$('#cpBanks').onclick=()=>{const t=CP.t,r=CP.res;if(!r)return;const refs=bankRefs(t),L=prList(),nm=(song.title||'Brano').slice(0,40);
+$('#cpBanks').onclick=()=>{const t=CP.t,r=CP.res;if(!r)return;if(!sbGet(t.role))sbMake(t);const refs=bankRefs(t),L=prList(),nm=(song.title||'Brano').slice(0,40);
   const extra=r.sounds.slice(1,4);if(extra.length&&!confirm('Metto '+(extra.length===1?'l\'altro suono nel banco 2':'gli altri suoni nei banchi 2'+(extra.length>2?'-4':' e 3'))+' al posto di quello che c\'è adesso?'))return;
   extra.forEach((s,k)=>{const name=nm+' · '+s.name,rec={name,fx:prSnap(Object.assign(fxDefaults(t.role),JSON.parse(JSON.stringify(s.fx)),{_order:fxOrder(fxOf(t.rig,t.role))})),role:t.role,date:Date.now()};
     for(const p of PEDALS){if(!s.fx[p.k])rec.fx[p.k].on=0}const j=L.findIndex(x=>x.name===name&&x.role===t.role);if(j>=0)L[j]=rec;else L.push(rec);refs[k+1]='U:'+name});
@@ -5762,7 +5803,7 @@ async function sView(v){SA.view=v;$$('.sala-tabs button').forEach(b=>b.classList
     WV.pos=0;WV.t0=0;{const tk2=SA.takes[SA.cur];WV.span=tk2?Math.min(30,Math.max(4,Math.max(...tk2.tracks.map(t=>t.buf.duration))+1)):30}sMixRows();wvSelInfo();requestAnimationFrame(wvDraw)}}
 async function salaOpen(){if(!SALA_OK){salaInfo(true);return}if(!song){toast('Apri prima un brano');return}Promise.all([toneLoad('chitarra'),toneLoad('basso')]).then(()=>{try{sRender()}catch(e){}});pause();fsEnter().then(salaFullUI);
   $('#salaOv').hidden=false;document.body.style.overflow='hidden';$('#salaTitle').textContent='Sala prove';
-  if(!SA.loaded){sLoad();SA.loaded=true;wvBind()}SA.baseMono=null;sRender();sTakesUI();$('#sOverL').hidden=!SA.takes.length;
+  sEnsure();SA.baseMono=null;sRender();sTakesUI();$('#sOverL').hidden=!SA.takes.length;
   try{await sOpenDevices()}catch(e){$('#sDevInfo').textContent=e.message||String(e)}
   cancelAnimationFrame(sRaf);sRaf=requestAnimationFrame(sMeters);SP.from=0;sStemsUI();sTabUI();cancelAnimationFrame(sFr);sFr=requestAnimationFrame(sFrame);if(prefGet('salaIntro')!=='1')salaInfo(false)}
 function salaClose(){if(SA.on)sRecStop();sListenStop();cancelAnimationFrame(sFr);wvStop();$('#salaOv').hidden=true;document.body.style.overflow='';cancelAnimationFrame(sRaf);for(const d of SA.devs)try{d.stream.getTracks().forEach(t=>t.stop())}catch(e){}SA.devs=[];SA.chans=[];for(const t of SA.tracks)if(t.node){try{t.node.mon.disconnect()}catch(e){}t.node=null}}
@@ -5974,6 +6015,94 @@ function tvBoot(){palOn=true;$('#palco').hidden=false;document.body.style.overfl
       try{if(inst!==m.inst)setInst(m.inst)}catch(x){inst=m.inst}TB[inst].notes=m.notes;CH.base=m.chords;try{setTabMode(m.tabMode)}catch(x){tabMode=m.tabMode}
       try{kBuild()}catch(x){console.warn(x)}palTabOn=!!m.tab&&!!(m.tabMode==='chords'?m.chords&&m.chords.length:m.notes&&m.notes.length);$('#palTabWrap').hidden=!palTabOn;palLayout()}}};
   try{navigator.presentation.receiver.connectionList.then(l=>{l.connections.forEach(on);l.onconnectionavailable=e=>on(e.connection)})}catch(e){}}
+/* ===================== BANCHI PER BRANO =====================
+   Ogni strumento (chitarra, basso, voce…) ha i suoi 5 banchi generali.
+   Un brano può avere i suoi 5 banchi: aprendo il brano si caricano da soli; se non li ha, valgono quelli generali.
+   Si salvano con le altre impostazioni e passano agli altri dispositivi con lo stesso cloud. */
+const SB={all:null,seen:{}};
+function sbAll(){const raw=prefGet('songBanks')||'{}';if(!SB.all||raw!==SB.raw){SB.raw=raw;SB.seen={};try{SB.all=JSON.parse(raw)||{}}catch(e){SB.all={}}for(const k in SB.all)SB.seen[k]=JSON.stringify(SB.all[k].r||{})}return SB.all}
+function sbWrite(){SB.raw=JSON.stringify(SB.all);prefSet('songBanks',SB.raw)}
+const sbKey=()=>song&&song.id!=='demo'?shSK(song):null;
+function sbGet(role){const k=sbKey();if(!k)return null;const e=sbAll()[k];const r=e&&e.r&&e.r[role];if(Array.isArray(r)&&r.length===5){r[0]='auto';return r}return null}
+/* salva le modifiche fatte ai banchi del brano (chiamata insieme al salvataggio della Sala) */
+function sbPersist(){const all=sbAll();let ch=false;for(const k in all){const s=JSON.stringify(all[k].r||{});if(SB.seen[k]!==s){SB.seen[k]=s;all[k].at=Date.now();ch=true}}if(ch)sbWrite()}
+function sbMake(t){const k=sbKey();if(!k)return false;const all=sbAll(),e=all[k]||(all[k]={r:{},title:song.title||'',artist:song.artist||''});const r=t.rig;
+  if(!Array.isArray(r.banks)||r.banks.length!==5)bankRefs(t);e.r[t.role]=(sbGet(t.role)||r.banks).slice();e.r[t.role][0]='auto';e.at=Date.now();SB.seen[k]=JSON.stringify(e.r);sbWrite();return true}
+function sbDrop(role){const k=sbKey(),all=sbAll(),e=k&&all[k];if(!e||!e.r)return;delete e.r[role];e.at=Date.now();SB.seen[k]=JSON.stringify(e.r);sbWrite()}
+/* riga «banchi generali / di questo brano» nella finestra dei pedali e nella pedaliera */
+function sbRowHTML(t){const own=!!sbGet(t.role),k=sbKey();if(!k)return'<span class="snote">Apri un brano per dargli banchi suoi.</span>';
+  return own?`<span class="sbtag own">Banchi di «${esc(song.title||'questo brano')}»</span><button class="mini" data-sbdrop="${t.id}">Torna ai banchi generali</button>`
+    :`<span class="sbtag">Banchi generali</span><button class="mini" data-sbmake="${t.id}">Fai banchi solo per «${esc((song.title||'questo brano').slice(0,30))}»</button>`}
+document.addEventListener('click',e=>{const m=e.target.closest('[data-sbmake],[data-sbdrop]');if(!m)return;const id=m.dataset.sbmake||m.dataset.sbdrop,t=SA.tracks.find(x=>x.id===id);if(!t)return;
+  if(m.dataset.sbmake){sbMake(t);toast('Ora '+t.name+' ha banchi solo per questo brano: cambiali in «Manopole dei pedali»')}else{sbDrop(t.role);toast(t.name+': di nuovo i banchi generali')}
+  if(t.rig.bank!=null)bankSel(t,t.rig.bank,true);sSave();sRender();if(RIG===t&&!$('#ovRig').hidden)rigBoardDraw(t);if(!$('#ovMidi').hidden)pdDraw()});
+/* brano nuovo: ogni strumento riprende lo stesso numero di banco, con i suoni del brano (o generali) */
+function sbSongChanged(){for(const t of SA.tracks){if(t.rig&&t.rig.bank!=null){try{bankSel(t,t.rig.bank,true)}catch(e){}}}if(!$('#ovMidi').hidden)pdDraw()}
+
+/* ===================== LA MIA PEDALIERA (MIDI) =====================
+   Una pedaliera MIDI qualsiasi, collegata al MIDI IN della scheda audio (o via USB).
+   L'app impara ogni pedale: premi «Impara» e poi il pedale. Pedale 1-5 = banco 1-5 del brano. */
+const MD={acc:null,map:{},tgt:prefGet('midiTgt')||'',learn:null,last:'',lastAt:0};
+try{MD.map=JSON.parse(prefGet('midiMap')||'{}')||{}}catch(e){}
+const mdOk=()=>!!navigator.requestMIDIAccess;
+function sEnsure(){if(!SA.loaded){sLoad();SA.loaded=true;try{wvBind()}catch(e){}for(const t of SA.tracks)if(t.rig&&t.rig.bank!=null)try{bankSel(t,t.rig.bank,true)}catch(e){}}}
+function mdName(k){const [ty,ch,n]=k.split(':');return(ty==='pc'?'Programma '+(+n+1):ty==='cc'?'Controllo '+n:'Nota '+n)+' · canale '+(+ch+1)}
+function mdTargets(){sEnsure();const T=SA.tracks;if(MD.tgt==='all')return T;const t=T.find(x=>x.id===MD.tgt);if(t)return[t];
+  const g=T.find(x=>x.arm&&(x.role==='chitarra'||x.role==='basso'))||T.find(x=>x.role==='chitarra'||x.role==='basso')||T[0];return g?[g]:[]}
+function mdMsg(e){const d=e.data;if(!d||d.length<2)return;const st=d[0]&0xF0,ch=d[0]&15;let k=null;
+  if(st===0xC0)k='pc:'+ch+':'+d[1];else if(st===0xB0&&d[2]>=64)k='cc:'+ch+':'+d[1];else if(st===0x90&&d[2]>0)k='nt:'+ch+':'+d[1];if(!k)return;
+  MD.last=k;MD.lastAt=Date.now();mdLamp();
+  if(MD.learn!=null){const i=MD.learn;for(const x in MD.map)if(MD.map[x]===i||x===k)delete MD.map[x];MD.map[k]=i;MD.learn=null;prefSet('midiMap',JSON.stringify(MD.map));toast('Pedale imparato: banco '+(i+1)+' = '+mdName(k));pdDraw();return}
+  const i=MD.map[k];if(i==null)return;const T=mdTargets();if(!T.length){toast('Prima prepara la Sala prove con il tuo strumento');return}
+  const live=!!(SA.ctx&&SA.ctx.state!=='closed');for(const t of T)bankSel(t,i,T.length>1||!live);
+  if(!live){const r=bankResolve(bankRefs(T[0])[i],T[0].role);toast('Banco '+(i+1)+(r?' · '+r.name:'')+': lo senti quando apri la Sala prove')}else if(T.length>1)toast('Banco '+(i+1)+' per tutti');if(!$('#ovMidi').hidden)pdDraw()}
+function mdBind(){if(!MD.acc)return;MD.acc.inputs.forEach(inp=>{inp.onmidimessage=mdMsg});pdDevs()}
+async function mdStart(ask){if(!mdOk()){if(ask)toast('Questo browser non legge il MIDI: usa Chrome su PC o su Android');return false}
+  if(MD.acc){mdBind();return true}
+  if(!ask){try{const p=await navigator.permissions.query({name:'midi'});if(p.state!=='granted')return false}catch(e){return false}}
+  try{MD.acc=await navigator.requestMIDIAccess({sysex:false});MD.acc.onstatechange=()=>{mdBind();if(!$('#ovMidi').hidden)pdDraw()};mdBind();prefSet('midiOn','1');return true}
+  catch(e){if(ask)toast('Permesso MIDI negato: consentilo dal lucchetto vicino all\'indirizzo');return false}}
+function pdDevs(){const box=$('#pdDevs');if(!box)return;const L=[];if(MD.acc)MD.acc.inputs.forEach(i=>L.push(i));
+  box.innerHTML=!MD.acc?'<p class="snote">Pedaliera non ancora collegata.</p>':L.length?L.map(i=>`<div class="pddev"><span class="pdled ${i.state==='connected'?'on':''}"></span><b>${esc(i.name||'Ingresso MIDI')}</b><small>${esc(i.manufacturer||'')}</small></div>`).join('')
+    :'<p class="snote">Nessun ingresso MIDI trovato. Collega la pedaliera al <b>MIDI IN</b> della scheda (o via USB), accendila e controlla che la scheda sia collegata.</p>'}
+function mdLamp(){const l=$('#pdLamp');if(l){l.classList.add('on');clearTimeout(MD.lt);MD.lt=setTimeout(()=>l.classList.remove('on'),220)}const s=$('#pdLast');if(s)s.textContent=MD.last?'Ultimo pedale premuto: '+mdName(MD.last):'Premi un pedale: qui vedi se arriva'}
+function pdDraw(){sEnsure();const ok=mdOk();$('#pdNo').hidden=ok;$('#pdBody').hidden=!ok;if(!ok)return;$('#pdGo').hidden=!!MD.acc;pdDevs();mdLamp();
+  const T=SA.tracks;$('#pdNoSala').hidden=!!T.length;{const ns=$('#bSala').hidden;$('#pdSala').hidden=ns;$('#pdNoSalaT').textContent=ns?'Per cambiare suono serve la Sala prove, che si usa su tablet o PC.':'Per cambiare suono serve il tuo strumento nella Sala prove.'}
+  $('#pdTgt').innerHTML='<option value="">Automatico (chitarra o basso)</option>'+T.map(t=>`<option value="${t.id}" ${MD.tgt===t.id?'selected':''}>${esc(t.name)}</option>`).join('')+(T.length>1?`<option value="all" ${MD.tgt==='all'?'selected':''}>Tutti gli strumenti</option>`:'');
+  const t=mdTargets()[0];$('#pdSB').innerHTML=t?sbRowHTML(t):'';
+  const refs=t?bankRefs(t):[null,null,null,null,null];
+  $('#pdRows').innerHTML=refs.map((ref,i)=>{const r=t&&bankResolve(ref,t.role),keys=Object.keys(MD.map).filter(k=>MD.map[k]===i),cur=t&&t.rig.bank===i,lr=MD.learn===i;
+    return`<div class="pdrow ${cur?'cur':''}"><span class="pdn">${i+1}</span><span class="pdt"><b>${esc(r?r.name:(t?'vuoto':'Banco '+(i+1)))}</b><small>${lr?'Premi adesso il pedale da usare…':keys.length?esc(keys.map(mdName).join(', ')):'nessun pedale'}</small></span>
+      <button class="chip ${lr?'pri':''}" data-pdlearn="${i}" ${MD.acc?'':'disabled'}>${lr?'Annulla':'Impara'}</button>${keys.length?`<button class="mini" data-pdclr="${i}" aria-label="Togli il pedale del banco ${i+1}">✕</button>`:''}</div>`}).join('');
+  $$('#pdRows [data-pdlearn]').forEach(b=>b.onclick=()=>{const i=+b.dataset.pdlearn;MD.learn=MD.learn===i?null:i;pdDraw()});
+  $$('#pdRows [data-pdclr]').forEach(b=>b.onclick=()=>{const i=+b.dataset.pdclr;for(const x in MD.map)if(MD.map[x]===i)delete MD.map[x];prefSet('midiMap',JSON.stringify(MD.map));pdDraw()})}
+$('#pdTgt').onchange=e=>{MD.tgt=e.target.value;prefSet('midiTgt',MD.tgt);pdDraw()};
+$('#pdGo').onclick=async()=>{if(await mdStart(true)){toast('Pedaliera pronta: premi un pedale');pdDraw()}};
+$('#pdSala').onclick=()=>{$('#ovMidi').hidden=true;try{$('#bSala').click()}catch(e){}};
+$('#pdBanks').onclick=()=>{const t=mdTargets()[0];if(!t){toast('Prima prepara la Sala prove');return}$('#ovMidi').hidden=true;try{rigOpen(t)}catch(e){toast('Apri la Sala prove e tocca «Manopole dei pedali»')}};
+$('#tlPed').onclick=()=>{MD.learn=null;pdDraw();openOv('#ovMidi');if(!MD.acc)mdStart(false).then(ok=>{if(ok)pdDraw()})};
+/* se il permesso c'era già, la pedaliera si collega da sola all'apertura */
+if(prefGet('midiOn')==='1')setTimeout(()=>mdStart(false),1500);
+
+/* ===================== LATENZA =====================
+   Quanto ritardo c'è tra quando suoni e quando ti senti in cuffia, e come ridurlo.
+   Il browser decide il buffer: si può chiedere il più piccolo possibile («Minima»), ma su alcuni dispositivi gracchia. */
+const LATM={'0':{n:'Minima',d:'il ritardo più basso; se senti gracchiare usa «Normale»',h:0},i:{n:'Normale',d:'consigliata: basso ritardo e suono pulito',h:'interactive'},b:{n:'Sicura',d:'per dispositivi lenti: più ritardo ma niente scatti',h:'balanced'}};
+function latRead(){const c=SA.ctx&&SA.ctx.state!=='closed'?SA.ctx:actx;let out=0,inp=0;if(c){out=(c.outputLatency||0)+(c.baseLatency||0)}
+  for(const d of (SA.devs||[]))inp=Math.max(inp,d.lat||0);try{for(const r of (LV.rows||[]))inp=Math.max(inp,r.lat||0)}catch(e){}return{out,inp,run:!!(c&&c.state==='running'),sr:c?c.sampleRate:0}}
+function latDraw(){const r=latRead(),ms=v=>v?Math.round(v*1000)+' ms':'—',tot=r.out+r.inp;
+  $('#ltOut').textContent=r.run?ms(r.out):'—';$('#ltIn').textContent=r.inp?ms(r.inp):'—';$('#ltTot').textContent=r.run?ms(tot):'—';
+  $('#ltJudge').textContent=!r.run?'Apri la Sala prove o il Microfono e suona: qui vedi il ritardo vero.':tot<.02?'Ottimo: non lo senti.':tot<.035?'Buono: si suona bene.':tot<.06?'Si sente un po\': prova la modalità «Minima» e i consigli sotto.':'Alto: segui i consigli sotto.';
+  $('#ltJudge').className='ltj '+(!r.run?'':tot<.035?'ok':tot<.06?'mid':'bad');$('#ltSr').textContent=r.sr?(r.sr/1000).toFixed(1)+' kHz':'—';
+  const m=prefGet('latMode')||'i';$$('#ltMode button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));$('#ltModeD').textContent=LATM[m].d;
+  $('#ltApply').hidden=(LAT.mode0||'i')===m;
+  $('#ltAuto').checked=LAT.auto;$('#ltMan').hidden=LAT.auto;$('#ltMan').value=LAT.man;$('#ltSync').textContent=Math.round(LAT.val*1000)+' ms'}
+LAT.mode0=prefGet('latMode')||'i';
+$$('#ltMode button').forEach(b=>b.onclick=()=>{prefSet('latMode',b.dataset.m);latDraw()});
+$('#ltApply').onclick=()=>{if(playing()||SA.on){toast('Ferma prima il brano o la registrazione');return}toast('Riavvio l\'audio con la nuova modalità…');setTimeout(()=>location.reload(),600)};
+$('#ltAuto').onchange=e=>{LAT.auto=e.target.checked;prefSet('latAuto',LAT.auto?'1':'0');latMeasure();latDraw()};
+$('#ltMan').oninput=e=>{LAT.man=+e.target.value;prefSet('latMan',LAT.man);latMeasure();latDraw()};
+$('#tlLat').onclick=()=>{latDraw();openOv('#ovLat');clearInterval(LAT.iv);LAT.iv=setInterval(()=>{if($('#ovLat').hidden){clearInterval(LAT.iv);return}latDraw()},700)};
 /* ===== menu ⚙ e barra rapida ===== */
 (function(){const b=$('#bMenu'),m=$('#navMenu');const close=()=>{m.hidden=true;b.setAttribute('aria-expanded','false')};
   b.onclick=e=>{e.stopPropagation();m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden))};
