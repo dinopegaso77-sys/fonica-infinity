@@ -1480,8 +1480,8 @@ themeApply();</script>
 <div class="ov" id="ovSheet" hidden><div class="sheet slsheet shsheet">
   <div class="slhead"><h3>📄 Foglio accordi A4</h3><button class="mini" data-close>Chiudi</button></div>
   <p class="snote" id="shInfo"></p>
-  <div class="row shbtns"><button class="chip pri" id="shPrint">🖨 Stampa o salva in PDF</button><button class="chip" id="shTxt">Scarica il testo (.txt)</button><button class="chip" id="shShare">Condividi il foglio</button><button class="chip" id="shAgain">Cambia tonalità o strumento</button></div>
-  <p class="snote">«Stampa o salva in PDF»: nella finestra di stampa scegli la stampante oppure «Salva come PDF».</p>
+  <div class="row shbtns"><button class="chip pri" id="shPdf">💾 Salva PDF</button><button class="chip" id="shShare">Condividi</button><button class="chip" id="shPrint">🖨 Stampa</button><button class="chip" id="shTxt">Testo (.txt)</button><button class="chip" id="shAgain">Cambia tonalità o strumento</button></div>
+  <p class="snote">Il file si chiama con artista e titolo, per esempio «Vasco Rossi - Albachiara (accordi).pdf». Il foglio si adatta a una pagina A4; solo i brani lunghissimi vanno su più pagine.</p>
   <div class="shwrap"><iframe id="shFrame" title="Anteprima del foglio A4"></iframe></div>
 </div></div>
 <div class="ov" id="ovCover" hidden><div class="sheet slsheet cvwsheet">
@@ -3502,7 +3502,7 @@ footer{margin-top:6px;font:10px Arial,sans-serif;color:#777;border-top:1px solid
 <header><div><h1>${esc(head.title)}</h1><h2>${esc(head.artist)}</h2><div class="sub">${esc(head.sub)}</div></div>${logo?`<img src="${logo}" alt="Pure Voltage">`:''}</header><main>${body}</main>
 <footer>Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio</footer></body></html>`}
 async function shFit(rows,head){const fr=$('#shFrame');const A4H=Math.round(297/25.4*96-2*12/25.4*96),W=Math.round(186/25.4*96);
-  for(const cols of [1,2])for(let fs=cols===1?15:13;fs>=7;fs--){const h=shHTML(rows,head,fs,cols);fr.style.width=W+'px';fr.srcdoc=h;await new Promise(r=>fr.onload=r);const d=fr.contentDocument;if(d.body.scrollHeight<=A4H)return{h,fs,cols}}
+  for(const cols of [1,2])for(let fs=cols===1?21:15;fs>=7;fs--){const h=shHTML(rows,head,fs,cols);fr.style.width=W+'px';fr.srcdoc=h;await new Promise(r=>fr.onload=r);const d=fr.contentDocument;if(d.body.scrollHeight<=A4H*.94&&d.body.scrollWidth<=W+2)return{h,fs,cols}}
   return{h:shHTML(rows,head,7,2),fs:7,cols:2}}
 /* prima la domanda: strumento e tonalità; poi il foglio */
 async function shAsk(){if(!song){toast('Scegli prima un brano');return}
@@ -3516,13 +3516,60 @@ function shAskDraw(){$$('#shkInst button').forEach(b=>b.classList.toggle('on',(b
 $$('#shkInst button').forEach(b=>b.onclick=()=>{SH.bass=b.dataset.b==='1';shAskDraw()});
 $('#shkGo').onclick=()=>{$('#ovShAsk').hidden=true;shOpen()};
 async function shOpen(){if(!song)return;const bass=SH.bass,rows=shBuild(),k=shKey(bass);const head={title:song.title||'Brano',artist:artQ(song.artist||''),sub:[bass?'Note del basso':'Accordi per chitarra',k?'tonalità '+k:'',SH.tr?'trasposto '+(SH.tr>0?'+':'')+SH.tr+' semitoni':'tonalità originale'].filter(Boolean).join(' · ')};
-  openOv('#ovSheet');$('#shInfo').textContent='Preparo il foglio…';const r=await shFit(rows,head);SH.html=r.h;SH.txt=shText(rows,head);SH.name=(head.artist?head.artist+' - ':'')+head.title;
+  openOv('#ovSheet');$('#shInfo').textContent='Preparo il foglio…';const r=await shFit(rows,head);SH.html=r.h;SH.rows=rows;SH.head=head;SH.txt=shText(rows,head);SH.name=(head.artist?head.artist+' - ':'')+head.title;
   $('#shInfo').textContent=head.sub+(r.cols>1?' · su due colonne':'')+' · un foglio A4';}
-$('#shPrint').onclick=()=>{const w=$('#shFrame').contentWindow;try{w.focus();w.print()}catch(e){const x=window.open('','_blank');if(x){x.document.write(SH.html);x.document.close();setTimeout(()=>x.print(),400)}}};
-$('#shTxt').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([SH.txt],{type:'text/plain;charset=utf-8'}));a.download=(SH.name||'accordi').replace(/[\\/:*?"<>|]/g,' ')+' - accordi.txt';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},3000)};
+/* PDF scritto direttamente dall'app (niente librerie esterne, funziona anche senza internet):
+   caratteri standard Helvetica e Courier, colori, linee e il logo JPEG */
+function MiniPDF(){const P=[];let cur=null;const imgs=[];const mm=v=>v*72/25.4;const PH=841.89;
+  const enc=s=>{let o='';for(const ch of String(s)){let c=ch.codePointAt(0);const map={8211:150,8212:151,8216:145,8217:146,8220:147,8221:148,8230:133,8364:128,8226:149};if(map[c])c=map[c];else if(c>255)c=63;
+      const h=String.fromCharCode(c);o+=(h==='('||h===')'||h==='\\')?'\\'+h:h}return o};
+  const col=c=>{if(typeof c==='number')c=[c,c,c];return c.map(v=>(v/255).toFixed(3)).join(' ')};
+  this.addPage=()=>{cur={ops:[]};P.push(cur);return this};this.addPage();
+  this.text=(s,x,y,o={})=>{const f={h:'F1',hb:'F2',c:'F3',cb:'F4'}[o.font||'h'];cur.ops.push(`BT /${f} ${o.size||12} Tf ${col(o.color||17)} rg ${mm(x).toFixed(2)} ${(PH-mm(y)).toFixed(2)} Td (${enc(s)}) Tj ET`);return this};
+  this.line=(x1,y1,x2,y2,w=.5,c=17)=>{cur.ops.push(`${col(c)} RG ${mm(w).toFixed(2)} w ${mm(x1).toFixed(2)} ${(PH-mm(y1)).toFixed(2)} m ${mm(x2).toFixed(2)} ${(PH-mm(y2)).toFixed(2)} l S`);return this};
+  this.image=(bytes,pw,ph,x,y,w,h)=>{const id=imgs.length;imgs.push({bytes,pw,ph});cur.ops.push(`q ${mm(w).toFixed(2)} 0 0 ${mm(h).toFixed(2)} ${mm(x).toFixed(2)} ${(PH-mm(y+h)).toFixed(2)} cm /Im${id} Do Q`);return this};
+  this.pages=()=>P.length;this.setPage=i=>{cur=P[i]};
+  this.blob=(title)=>{const parts=[],offs=[];let len=0;const te=new TextEncoder();
+    const add=x=>{if(typeof x==='string'){const b=new Uint8Array(x.length);for(let i=0;i<x.length;i++)b[i]=x.charCodeAt(i)&255;x=b}parts.push(x);len+=x.length};
+    const obj=(n,body)=>{offs[n]=len;add(n+' 0 obj\n');if(Array.isArray(body))body.forEach(add);else add(body);add('\nendobj\n')};
+    add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');const nF=4,fBase=3,imBase=fBase+nF,pBase=imBase+imgs.length;
+    const fonts=['Helvetica','Helvetica-Bold','Courier','Courier-Bold'];
+    obj(1,'<< /Type /Catalog /Pages 2 0 R >>');
+    const kids=P.map((_,i)=>(pBase+i*2)+' 0 R').join(' ');obj(2,`<< /Type /Pages /Kids [${kids}] /Count ${P.length} >>`);
+    fonts.forEach((f,i)=>obj(fBase+i,`<< /Type /Font /Subtype /Type1 /BaseFont /${f} /Encoding /WinAnsiEncoding >>`));
+    imgs.forEach((im,i)=>obj(imBase+i,[`<< /Type /XObject /Subtype /Image /Width ${im.pw} /Height ${im.ph} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.bytes.length} >>\nstream\n`,im.bytes,'\nendstream']));
+    const res=`<< /Font << ${fonts.map((_,i)=>`/F${i+1} ${fBase+i} 0 R`).join(' ')} >> /XObject << ${imgs.map((_,i)=>`/Im${i} ${imBase+i} 0 R`).join(' ')} >> >>`;
+    P.forEach((pg,i)=>{const n=pBase+i*2,st=pg.ops.join('\n');obj(n,`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources ${res} /Contents ${n+1} 0 R >>`);obj(n+1,[`<< /Length ${st.length} >>\nstream\n`,st,'\nendstream'])});
+    const infoN=pBase+P.length*2;obj(infoN,`<< /Title (${enc(title||'')}) /Creator (Pure Voltage) >>`);
+    const xref=len,N=infoN+1;let x=`xref\n0 ${N}\n0000000000 65535 f \n`;for(let i=1;i<N;i++)x+=String(offs[i]).padStart(10,'0')+' 00000 n \n';
+    add(x+`trailer\n<< /Size ${N} /Root 1 0 R /Info ${infoN} 0 R >>\nstartxref\n${xref}\n%%EOF`);return new Blob(parts,{type:'application/pdf'})}}
+/* larghezza approssimata dell'Helvetica per andare a capo nel titolo */
+const helvW=(s,size,bold)=>String(s).length*size*(bold?.56:.52)*.3528;
+function wrapTo(s,size,bold,max){const w=String(s).split(/\s+/),out=[];let l='';for(const x of w){const t=l?l+' '+x:x;if(helvW(t,size,bold)>max&&l){out.push(l);l=x}else l=t}if(l)out.push(l);return out}
+const shFile=ext=>((SH.head&&SH.head.artist?SH.head.artist+' - ':'')+((SH.head&&SH.head.title)||'brano')+' (accordi).'+ext).replace(/[\\/:*?"<>|]+/g,' ').replace(/\s+/g,' ').trim();
+function shLines(rows){const L=[];for(const r of rows){if(r.sec){L.push(['g','']);L.push(['s','['+r.sec+']  '+r.seq]);L.push(['g',''])}else{if(r.ch)L.push(['c',r.ch]);L.push(['l',r.ly||''])}}return L}
+async function shPDF(){const doc=new MiniPDF(),W=210,H=297,M=12,head=SH.head,L=shLines(SH.rows),pt=.3528;
+  let logoW=0;try{const im=$('#brandLogo');if(im&&im.naturalWidth&&/^data:image\/jpe?g;base64,/.test(im.src)){const b=Uint8Array.from(atob(im.src.split(',')[1]),c=>c.charCodeAt(0));logoW=34;const lh=logoW*im.naturalHeight/im.naturalWidth;doc.image(b,im.naturalWidth,im.naturalHeight,W-M-logoW,M-2,logoW,lh)}}catch(e){logoW=0}
+  const tw=W-2*M-logoW-4,tl=wrapTo(head.title,22,true,tw);let y=M+6;tl.forEach((t,i)=>doc.text(t,M,y+i*8.5,{font:'hb',size:22}));y+=(tl.length-1)*8.5;
+  y+=7;doc.text(head.artist||'',M,y,{size:14,color:60});y+=5.5;doc.text(head.sub,M,y,{size:8.5,color:110});y=Math.max(y+3,M+24);doc.line(M,y,W-M,y,.6);
+  const top=y+5,bottom=H-M-6,avail=bottom-top,maxCh=Math.max(10,...L.map(([,t])=>t.length));
+  const cols_needed=(f)=>{const lh=f*pt*1.22;let c=1,h=0;for(const [k] of L){const dh=k==='g'?lh*.5:lh;if(h+dh>avail){c++;h=0}h+=dh}return c};
+  const fit=cols=>{const cw=(W-2*M-(cols-1)*8)/cols;let fs=Math.min(16,cw/(maxCh*.6*pt));while(fs>6.5&&cols_needed(fs)>cols)fs-=.25;return{fs,cols,ok:cols_needed(fs)<=cols}};
+  let F=fit(1);if(!F.ok||F.fs<9.5){const F2=fit(2);if(F2.ok&&(!F.ok||F2.fs>F.fs+1.5))F=F2}
+  const fs=F.ok?F.fs:7,cols=F.ok?F.cols:2,cw=(W-2*M-(cols-1)*8)/cols,lh=fs*pt*1.22;let col=0,yy=top,first=true;
+  for(const [k,t] of L){const dh=k==='g'?lh*.5:lh;if(yy+dh>bottom){col++;yy=first?top:M+4;if(col>=cols){doc.addPage();first=false;col=0;yy=M+4}}if(k==='g'){yy+=dh;continue}
+    doc.text(t,M+col*(cw+8),yy+fs*pt*.8,{font:k==='l'?'c':'cb',size:+fs.toFixed(2),color:k==='c'?[180,32,15]:17});yy+=dh}
+  const n=doc.pages();for(let i=0;i<n;i++){doc.setPage(i);doc.text('Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio'+(n>1?'  ·  pagina '+(i+1)+' di '+n:''),M,H-M+2,{size:7.5,color:130})}
+  return{blob:doc.blob(head.title+' - '+head.artist),pages:n,fs,cols}}
+async function shPdfFile(){const r=await shPDF();return{file:new File([r.blob],shFile('pdf'),{type:'application/pdf'}),...r}}
+const shDl=f=>{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000)};
+$('#shPdf').onclick=async()=>{const b=$('#shPdf');b.disabled=true;try{const r=await shPdfFile();shDl(r.file);toast('Salvato: '+r.file.name+(r.pages>1?' ('+r.pages+' pagine)':''))}catch(e){console.error(e);toast('Non riesco a creare il PDF')}finally{b.disabled=false}};
+$('#shPrint').onclick=async()=>{const t0=document.title;document.title=shFile('pdf').replace(/\.pdf$/,'');const w=$('#shFrame').contentWindow;try{w.document.title=document.title;w.focus();w.print()}catch(e){}setTimeout(()=>document.title=t0,3000)};
+$('#shTxt').onclick=()=>shDl(new File([SH.txt],shFile('txt'),{type:'text/plain;charset=utf-8'}));
+$('#shShare').onclick=async()=>{const b=$('#shShare');b.disabled=true;try{const {file}=await shPdfFile();
+    if(navigator.canShare&&navigator.canShare({files:[file]}))await navigator.share({files:[file],title:file.name.replace(/\.pdf$/,''),text:(SH.head.title||'')+' - '+(SH.head.artist||'')+' · accordi'});else{shDl(file);toast('Questo dispositivo non condivide file: l\'ho salvato, allegalo tu ('+file.name+')')}}
+  catch(e){if(e&&e.name!=='AbortError')toast('Condivisione non riuscita')}finally{b.disabled=false}};
 $('#shAgain').onclick=()=>{$('#ovSheet').hidden=true;shAskDraw();openOv('#ovShAsk')};
-$('#shShare').onclick=async()=>{const f=new File([SH.html],(SH.name||'accordi').replace(/[\/:*?"<>|]/g,' ')+' - accordi.html',{type:'text/html'});
-  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:SH.name})}catch(e){}}else{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},3000)}};
 /* ===================== ARTISTI, ALBUM E IMMAGINI =====================
    Libreria e scaletta: artista (con la sua foto) → album (con la copertina) → brani.
    Le immagini si cercano da sole su internet (copertine: iTunes, poi MusicBrainz; artisti: Deezer),
