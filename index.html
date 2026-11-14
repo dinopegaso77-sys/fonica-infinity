@@ -626,7 +626,7 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
 .pal-tab{background:var(--paper);color:var(--fg);padding:6px 10px 4px;flex:none}
 .pal-tab canvas{display:block;width:100%;height:min(28vh,210px)}
 .pal-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;padding-bottom:max(10px,env(safe-area-inset-bottom,0px));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));background:var(--stage2);border-top:1px solid var(--stage1)}
-.pal-bar .time{color:var(--stage-dim)}
+.pal-bar .time{color:var(--stage-dim)}#palco>.pal-top,#palco>.pal-bar,#palco>#slBar{transition:opacity .35s}#palco.uihide>.pal-top,#palco.uihide>.pal-bar,#palco.uihide>#slBar{opacity:0;pointer-events:none}#palco.uihide{cursor:none}.pseekw{flex:1 1 100%;order:-1;display:flex;min-width:0}.pseek{flex:1;min-width:0;width:100%;margin:0;height:26px;accent-color:var(--accent);cursor:pointer;touch-action:none}
 /* Palco: griglia, così testo, tablatura e comandi non si sovrappongono mai */
 #palco{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto}
 #palco[hidden]{display:none}
@@ -655,7 +655,7 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
 @media (max-width:599px){
   .pal-name{font-size:15px;padding:0 10px}.pal-top{gap:6px;padding-inline:max(10px,env(safe-area-inset-left,0px)) max(10px,env(safe-area-inset-right,0px))}
   .pbtn.pico{min-width:42px;padding:0 8px}
-  .pal-bar{gap:8px;flex-direction:column;align-items:stretch;padding-top:8px}
+  .pal-bar{gap:8px;flex-direction:column;align-items:stretch;padding-top:8px}.pseekw{flex:none;width:100%}
   .ptrans{justify-content:center}
   .ptools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:0}.ptool{min-width:0;min-height:48px;padding:3px 2px;font-size:11.5px;flex-direction:row;gap:5px}.ptool i{font-size:18px}
   .pal-bar .pseg span{font-size:10px}
@@ -665,7 +665,7 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
 @media (orientation:landscape) and (max-height:560px){
   #palco .kl{font-size:calc(clamp(18px,3.2vw,30px) * var(--kscale));padding:6px 0}
   .pal-top{padding-block:6px}
-  .pal-bar{flex-wrap:nowrap;flex-direction:row;align-items:center;padding-block:6px}
+  .pal-bar{flex-wrap:wrap;flex-direction:row;align-items:center;padding-block:4px 6px;row-gap:2px}.pseek{height:22px}.pal-bar>.ptools{flex:1 1 0}
   .pal-bar .pbtn.round{width:42px;height:42px}.pal-bar .pbtn.round.main{width:50px;height:50px}
   .ptools{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));flex:1 1 auto;min-width:0;margin-left:6px;gap:4px}.ptool{min-width:0;min-height:44px;gap:1px;font-size:10.5px;padding:3px 1px}.ptool span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ptool i{font-size:17px}
 }
@@ -1021,7 +1021,7 @@ themeApply();</script>
   </div>
   <div class="kpanel" id="kpPal"></div>
   <div class="pal-tab" id="palTabWrap"><div class="ptabh"><div class="now"><span class="nowLbl">Nota</span>: <b id="noteNow2">–</b></div><button class="pbtn sm" id="pInst" aria-label="Cambia strumento della tablatura">Basso</button><button class="pbtn sm" id="pMode" aria-label="Note o accordi">Note</button></div><canvas id="palTab"></canvas></div>
-  <div class="pal-bar"><div class="ptrans">
+  <div class="pal-bar"><div class="pseekw"><input type="range" class="pseek" id="pSeek" min="0" max="1000" value="0" aria-label="Posizione nel brano"></div><div class="ptrans">
     <button class="pbtn round slb" id="pSPrev" aria-label="Brano precedente della scaletta" title="Brano precedente" hidden><svg viewBox="0 0 24 24"><path d="M6 6h2.2v12H6zM20 6l-10 6 10 6z"/></svg></button>
     <button class="pbtn round" id="pBack" aria-label="Indietro 5 secondi"><svg viewBox="0 0 24 24"><path d="M11 6 3 12l8 6zM21 6l-8 6 8 6z"/></svg></button>
     <button class="pbtn round main" id="pPlay" aria-label="Riproduci"><svg viewBox="0 0 24 24" class="playIco"><path d="M7 4v16l13-8z"/></svg></button>
@@ -2218,7 +2218,7 @@ $('#bLoop').onclick=()=>{loopA=loopB=null;updAB()};
 $('#bPlay').onclick=$('#pPlay').onclick=()=>playing()?pause():play();
 $('#bBack').onclick=$('#pBack').onclick=()=>seek(now()-5);
 $('#bFwd').onclick=$('#pFwd').onclick=()=>seek(now()+5);
-const sk=$('#seek');let seeking=false;sk.addEventListener('pointerdown',()=>seeking=true);sk.addEventListener('input',()=>{seeking=true;$('#tTime').textContent=fmt(sk.value/1000*DUR)+' / '+fmt(DUR)});sk.addEventListener('change',()=>{seeking=false;seek(sk.value/1000*DUR)});
+const sk=$('#seek');let seeking=false;{const ps=$('#pSeek');ps.addEventListener('pointerdown',()=>seeking=true);ps.addEventListener('input',()=>{seeking=true;$('#tTime2').textContent=fmt(ps.value/1000*DUR)+' / '+fmt(DUR)});ps.addEventListener('change',()=>{seeking=false;seek(ps.value/1000*DUR)})}sk.addEventListener('pointerdown',()=>seeking=true);sk.addEventListener('input',()=>{seeking=true;$('#tTime').textContent=fmt(sk.value/1000*DUR)+' / '+fmt(DUR)});sk.addEventListener('change',()=>{seeking=false;seek(sk.value/1000*DUR)});
 
 /* ================= karaoke parola per parola ================= */
 const K={lines:[],off:0,sync:null,venv:null,vhop:0,vs:null,vthr:0};
@@ -2816,10 +2816,24 @@ $('#pTab').onclick=()=>{palTabOn=!palTabOn;prefSet('palTab',palTabOn?'1':'0');$(
 
 /* ================= ciclo di disegno ================= */
 let lastColorT=0;
+/* Palco: 2 secondi dopo il play spariscono intestazione e pulsanti; tornano al tocco o muovendo il mouse */
+const PUI={was:null,tm:0};
+function palUiBusy(){const pal=$('#palco');if(!pal||pal.hidden||!playing()||seeking)return true;if(!$('#palMic').hidden||!$('#palMix').hidden)return true;
+  if([...pal.querySelectorAll('.ov')].some(o=>!o.hidden))return true;const a=document.activeElement;if(a&&a.matches&&a.matches('select,input:not([type=range]),textarea')&&pal.contains(a))return true;
+  return [...pal.querySelectorAll(':scope>.pal-top,:scope>.pal-bar')].some(e=>e.matches(':hover')&&PUI.mouse)}
+function palUiKick(){const pal=$('#palco');if(!pal)return;pal.classList.remove('uihide');clearTimeout(PUI.tm);
+  PUI.tm=setTimeout(function h(){if(palUiBusy()){if(playing()&&palOn)PUI.tm=setTimeout(h,1000);return}pal.classList.add('uihide')},2000)}
+{const pal=$('#palco');let eat=0;/* il primo tocco a schermo pulito fa solo riapparire i comandi */
+  pal.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'&&pal.classList.contains('uihide'))eat=Date.now();PUI.mouse=e.pointerType==='mouse';palUiKick()},true);
+  pal.addEventListener('click',e=>{if(eat&&Date.now()-eat<800){eat=0;e.preventDefault();e.stopPropagation()}},true);
+  pal.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'){PUI.mouse=true;palUiKick()}},{passive:true});
+  pal.addEventListener('wheel',palUiKick,{passive:true});pal.addEventListener('touchmove',palUiKick,{passive:true});
+  document.addEventListener('keydown',()=>{if(palOn)palUiKick()},true)}
 function frame(){const t=now(),tv=viewT();clickTick();if(performance.now()-LAT.t>2000){LAT.t=performance.now();latMeasure()}
   if(playing()&&loopA!=null&&loopB!=null&&t>=loopB)seek(loopA);
   const tt=fmt(t)+' / '+fmt(DUR);$('#tTime').textContent=tt;$('#tTime2').textContent=tt;
-  if(!seeking)$('#seek').value=DUR?Math.round(t/DUR*1000):0;
+  if(!seeking){const v=DUR?Math.round(t/DUR*1000):0;$('#seek').value=v;$('#pSeek').value=v}
+  if(palOn){const p=playing();if(p!==PUI.was){PUI.was=p;palUiKick()}}
   karaUpdate(tv);updTab(tv);sampleMic(tv);drawPitch(tv);
   if(performance.now()-lastColorT>1000){readColors();lastColorT=performance.now()}
   let active=null;
