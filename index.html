@@ -3312,6 +3312,8 @@ const BATCH={on:false,i:0,n:0,res:null};
 async function libKeys(){const set=new Set();try{for(const v of await libMeta())set.add(normKey(v.artist,v.title))}catch(e){}return set}
 async function albumRun(){const files=sepFiles.slice();
   if(!rp.key||!rp.ep){sepNotice('Per separare un album intero serve <b>RunPod</b> collegato (Impostazioni → RunPod): i brani vanno uno dopo l\'altro senza attese in coda.','#rpKey');return}
+  /* anche con più brani si chiede quali tonalità preparare (vale per tutti i brani scelti) */
+  $('#taGo').textContent='Separa i '+files.length+' brani';const go=await trAsk();$('#taGo').textContent='Separa il brano';if(!go)return;
   try{const e=await navigator.storage.estimate();const free=(e.quota||0)-(e.usage||0);const need=files.length*30e6;if(e.quota&&free<need&&!confirm(`Lo spazio libero per l'app è circa ${Math.round(free/1e6)} MB, per ${files.length} brani ne servono circa ${Math.round(need/1e6)} MB. Provo lo stesso?`))return}catch(e){}
   const have=await libKeys();Object.assign(BATCH,{on:true,i:0,n:files.length});const ok=[],skip=[],ko=[];wakeOn();
   try{for(let i=0;i<files.length;i++){BATCH.i=i;const f=files[i];sepFileObj=f;
@@ -3350,7 +3352,7 @@ function sepFail(e){const m=String(e&&e.message||e);if(BATCH.on)BATCH.err=m;sepE
     NOEP:'RunPod non trova l\'endpoint: controlla l\'ID in Impostazioni → RunPod.',
     LONG:'La traccia è troppo lunga per una sola richiesta.',
     BIG:'Il brano è troppo lungo per RunPod (massimo circa 9 minuti).',MP3:'Non riesco a comprimere il brano (serve internet per lo strumento di compressione): controlla la connessione e riprova.'}[m]
-    ||(/^MVERR:/.test(m)?'Il servizio gratuito ha dato un errore: '+m.slice(6,200):/import|module|Failed to fetch dynamically/i.test(m)?'Non riesco ad avviare il motore di calcolo. Usa Chrome o Edge sul PC, con internet attivo.'
+    ||(/^RunPod: /.test(m)?'RunPod ha dato un errore: '+m.slice(8,320)+'. Riprova; se si ripete, mandami una foto di questo messaggio.':/^MVERR:/.test(m)?'Il servizio gratuito ha dato un errore: '+m.slice(6,200):/import|module|Failed to fetch dynamically/i.test(m)?'Non riesco ad avviare il motore di calcolo. Usa Chrome o Edge sul PC, con internet attivo.'
     :/memory|alloc|OOM|Array buffer/i.test(m)?'Memoria insufficiente per questo brano. Chiudi altre schede o prova un brano più corto.':'Qualcosa è andato storto: '+(m.length>260?'… '+m.slice(-260):m));
   spShow(msg,null);$('#spBar').classList.remove('ind');$('#spPct').textContent=''}
 /* controllo LRCLIB prima di separare: se c'è il testo sincronizzato con la stessa durata non serve trascriverlo */
@@ -3648,6 +3650,8 @@ function mono16k(b){const sr=16000;const oc=new OfflineAudioContext(1,Math.ceil(
   return oc.startRendering().then(r=>{const d=r.getChannelData(0),n=d.length,buf=new ArrayBuffer(44+n*2),v=new DataView(buf);const w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
     w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
     const q=new Int16Array(buf,44,n);for(let i=0;i<n;i++){const x=d[i];q[i]=(x>1?1:x<-1?-1:x)*32767}return buf})}
+/* errore di RunPod in parole brevi: tipo + messaggio (senza tutto il traceback di Python) */
+function rpFailTxt(e){try{const o=typeof e==='string'?JSON.parse(e):e;if(o&&(o.error_message||o.error_type))return(o.error_type?String(o.error_type).replace(/^<class '|'>$/g,'')+': ':'')+String(o.error_message||'').slice(0,300)}catch(x){}return String(e).slice(0,300)}
 async function rpCall(input,say){const show=say||spShow;let r;try{r=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/run`,{method:'POST',headers:rpH(),body:JSON.stringify({input})})}catch(e){throw new Error('NET')}
   if(r.status===401||r.status===403)throw new Error('AUTH');if(r.status===404)throw new Error('NOEP');if(!r.ok)throw new Error('RunPod ha risposto '+r.status);
   const job=await r.json();const jid=job.id;rpJob=jid;RP_JOBS.add(jid);const tQ=Date.now();let tRun=0,fails=0;
@@ -3656,7 +3660,7 @@ async function rpCall(input,say){const show=say||spShow;let r;try{r=await fetch(
     if(s.status==='IN_QUEUE'){sepInfo.extra='in coda da '+fmt((Date.now()-tQ)/1000);show('In coda: accendo la scheda video (dopo un periodo di pausa può volerci qualche minuto)…',null,'queue')}
     else if(s.status==='IN_PROGRESS'){if(!tRun)tRun=Date.now();sepInfo.extra='sulla scheda video da '+fmt((Date.now()-tRun)/1000);const msg=typeof s.output==='string'?s.output:(s.output&&s.output.message)||'Lavoro sulla scheda video';show(msg+'…',null,'split')}
     else if(s.status==='COMPLETED'){sepInfo.extra='';return s.output}
-    else if(['FAILED','CANCELLED','TIMED_OUT'].includes(s.status)){throw new Error(s.error||('RunPod: '+s.status))}}
+    else if(['FAILED','CANCELLED','TIMED_OUT'].includes(s.status)){throw new Error('RunPod: '+(s.error?rpFailTxt(s.error):s.status))}}
   return null}finally{RP_JOBS.delete(jid);if(rpJob===jid)rpJob=null}}
 const RP_JOBS=new Set();
 async function asrRun(force){if(!song)return;
