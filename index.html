@@ -210,6 +210,8 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .hsong .slbar{position:static;transform:none;left:auto;bottom:auto;z-index:auto;grid-column:1/-1;max-width:none;border-radius:14px;box-shadow:none;background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--fg);border:1px solid color-mix(in srgb,var(--accent) 50%,transparent);padding:5px}
 .hsong .slnow{max-width:none;color:var(--fg);text-align:left}.hsong .slbar .mini{background:var(--raise);color:var(--fg);border-color:var(--line)}.hsong .slbar.count .slnow{color:var(--accent)}
 #bScal.on{border-color:var(--accent);color:var(--accent)}
+#bScal .swt{flex:0 0 auto;width:32px;height:18px;border-radius:9px;background:var(--line);position:relative;transition:background .15s}#bScal .swt::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--dim);transition:left .15s,background .15s}#bScal.on .swt{background:var(--accent)}#bScal.on .swt::after{left:16px;background:var(--accent-ink)}
+.slqlist .pksong{display:flex;gap:10px;align-items:baseline}.slqlist .pksong .n{flex:0 0 auto;min-width:1.6em;font-weight:800;opacity:.75}.slqlist .pksong small{display:block;font-size:13px;font-weight:500;opacity:.8}.slqlist .pksong:disabled{opacity:.45}.slqsel{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--dim)}
 .pnmw{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}.psl{font-family:Figtree,system-ui;font-size:12.5px;font-weight:600;color:var(--stage-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.psl[hidden]{display:none}
 .hsong #songPickBtn{grid-column:1;grid-row:1}.hsong #bScal{grid-column:2;grid-row:1}.hsong .slbar{grid-row:2;grid-column:1/-1}
 @media (min-width:1200px){.hsong{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto}.hsong #songPickBtn{grid-column:1/3}.hsong .slbar{grid-row:1;grid-column:2}.hsong .slbar:not([hidden])~#songPickBtn,.hsong:has(.slbar:not([hidden])) #songPickBtn{grid-column:1}.hsong #bScal{grid-column:3}}
@@ -964,7 +966,7 @@ themeApply();</script>
         <button class="chip pri" id="bLoadSong" hidden>Carica brano</button>
         <button class="sel songpick pkbtn" id="songPickBtn" data-pk="main" aria-haspopup="dialog">🎵 Scegli un brano…</button><select class="sel songpick" id="songPick" hidden aria-hidden="true" tabindex="-1"><option value="">📚 Scegli un brano…</option></select>
       <div class="slbar" id="slBar" hidden><button class="mini" id="slPrev" aria-label="Brano precedente della scaletta">⏮</button><button class="slnow" id="slNow" title="Apri la scaletta"></button><button class="mini" id="slNext" aria-label="Brano successivo della scaletta">⏭ Prossimo</button></div>
-      <button class="chip hscal" id="bScal" title="Scaletta dei brani da suonare uno dopo l'altro"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="m8 9 1.2 1.2L11.5 8M13 9.3h3.5M8 14l1.2 1.2 2.3-2.2M13 14.3h3.5"/></svg><span>Scaletta</span></button>
+      <button class="chip hscal" id="bScal" aria-pressed="false" title="Accendi o spegni la scaletta: accesa, l'app segue solo i brani della scaletta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="m8 9 1.2 1.2L11.5 8M13 9.3h3.5M8 14l1.2 1.2 2.3-2.2M13 14.3h3.5"/></svg><span>Scaletta</span><i class="swt" aria-hidden="true"></i></button>
     </div>
     <div class="transport">
       <div class="trow">
@@ -1868,6 +1870,12 @@ themeApply();</script>
    </div>
   </div></div>
 </div>
+<div class="pkov" id="slqOv" hidden><div class="pkbox" role="dialog" aria-modal="true" aria-labelledby="slqTitle">
+  <div class="pktop"><b id="slqTitle">📋 Scaletta</b><button class="mini" id="slqX" aria-label="Chiudi">✕</button></div>
+  <label class="slqsel"><span>Scaletta da seguire</span><select class="sel" id="slqSel"></select></label>
+  <div class="pklist slqlist" id="slqList"></div>
+  <div class="pkacts"><button class="chip" id="slqEdit">✏️ Modifica la scaletta</button><button class="chip" id="slqOff">⏹ Spegni la scaletta</button></div>
+</div></div>
 <div class="pkov" id="bpOv" hidden><div class="pkbox" role="dialog" aria-modal="true" aria-labelledby="pkTitle">
   <div class="pktop"><b id="bpTitle">🎵 Scegli un brano</b><button class="mini" id="bpX" aria-label="Chiudi">✕</button></div>
   <input class="inp pksearch" id="bpQ" type="search" placeholder="🔎 Cerca artista o brano" aria-label="Cerca artista o brano" autocomplete="off">
@@ -1890,7 +1898,7 @@ themeApply();</script>
     <div class="sladd"><select class="sel" id="slArt" aria-label="Scegli l'artista"></select><input class="inp" id="slQ" type="search" placeholder="🔍 Cerca un titolo" autocomplete="off" aria-label="Cerca un brano"><button class="mini" id="slAddAll" title="Mette in scaletta tutta la libreria">+ Tutta la libreria</button></div>
     <div class="slpick" id="slPick" hidden><div class="slpickh"><b id="slPickT"></b><button class="mini" id="slPickAll">+ Tutti i suoi brani</button></div><div class="slpickbox" id="slPickL"></div></div>
     <label class="rowchk"><input type="checkbox" id="slAuto"> Alla fine passa da solo al prossimo (5 s)</label>
-    <button class="chip" id="slStop" hidden>⏹ Smetti di seguire la scaletta</button>
+    <button class="chip" id="slStop" hidden>⏹ Spegni la scaletta</button>
     <button class="chip pri" id="slGo">▶ Suona dal primo</button>
   </div>
 </div></div>
@@ -2004,12 +2012,31 @@ async function saveFailMsg(){const n=IDBERR;const sp=await spaceMsg();if(n==='Qu
     return'l\'archivio dell\'app nel browser sembra danneggiato ('+(o||'errore')+'). Vai in ⚙️ Impostazioni › «🛠 Ripara l\'archivio».'}return'il browser ha rifiutato il salvataggio ('+(n||'errore sconosciuto')+')'+sp+'.'}
 const dbAll=async()=>(await idb('songs','readonly',s=>s.getAll()))||[];
 /* elenco leggero della Libreria: legge un brano alla volta e tiene solo nome, artista e testo (non le tracce) */
-const libMeta=()=>new Promise(ok=>{const out=[];db().then(d=>{if(!d){ok(out);return}const rq=d.transaction('songs','readonly').objectStore('songs').openCursor();
-  rq.onsuccess=()=>{const c=rq.result;if(!c){ok(out);return}const v=c.value||{},st=v.stems||{},sk=Object.keys(st);let b=0;for(const k of sk)b+=(st[k]&&st[k].data&&st[k].data.byteLength)||0;
-    const m={...v};delete m.stems;delete m.asr;m.sk=sk;m.stems=sk.length>0;m.mb=b/1048576;m.heavyMB=sk.filter(k=>!LIGHT_RX.test((st[k]&&st[k].name)||'')).reduce((a,k)=>a+((st[k].data&&st[k].data.byteLength)||0),0)/1048576;if(v.cloudOnly){const cf=v.cloudFiles||[];m.sk=cf.map(f=>f.k);m.mb=cf.reduce((a,f)=>a+(f.size||0),0)/1048576}out.push(m);c.continue()};rq.onerror=()=>ok(out)}).catch(()=>ok(out))});
+/* scheda di un brano senza le tracce audio */
+function metaOf(v){v=v||{};const st=v.stems||{},sk=Object.keys(st);let b=0;for(const k of sk)b+=(st[k]&&st[k].data&&st[k].data.byteLength)||0;
+  const m={...v};delete m.stems;delete m.asr;m.sk=sk;m.stems=sk.length>0;m.mb=b/1048576;m.heavyMB=sk.filter(k=>!LIGHT_RX.test((st[k]&&st[k].name)||'')).reduce((a,k)=>a+((st[k].data&&st[k].data.byteLength)||0),0)/1048576;if(v.cloudOnly){const cf=v.cloudFiles||[];m.sk=cf.map(f=>f.k);m.mb=cf.reduce((a,f)=>a+(f.size||0),0)/1048576}return m}
+/* lettura completa (vecchio metodo, legge anche l'audio): solo di riserva */
+const libMetaScan=()=>new Promise(ok=>{const out=[];db().then(d=>{if(!d){ok(out);return}const rq=d.transaction('songs','readonly').objectStore('songs').openCursor();
+  rq.onsuccess=()=>{const c=rq.result;if(!c){ok(out);return}out.push(metaOf(c.value));c.continue()};rq.onerror=()=>ok(out)}).catch(()=>ok(out))});
+/* elenco dei brani tenuto in memoria e salvato a parte: aprire libreria, scaletta e scelta del brano non rilegge più l'audio di tutti i brani */
+const MC={map:null,p:null,t:0,pend:new Set()};
+const mcDirty=()=>{try{const d=JSON.parse(prefGet('metaDirty')||'[]');return Array.isArray(d)?d:null}catch(e){return null}};
+function mcMark(id){const d=mcDirty();if(!d)return;if(!d.includes(id)){d.push(id);prefSet('metaDirty',d.length>400?'"tutto"':JSON.stringify(d))}}
+function mcSave(now){clearTimeout(MC.t);MC.t=setTimeout(async()=>{if(!MC.map)return;const sent=mcDirty()||[];const r=await idb('settings','readwrite',x=>x.put([...MC.map.values()],'libmeta'));
+  if(r!=null){const d=mcDirty();if(d)prefSet('metaDirty',JSON.stringify(d.filter(x=>!sent.includes(x))))}},now?0:4000)}
+async function metaLoad(){if(MC.map)return MC.map;if(MC.p)return MC.p;
+  MC.p=(async()=>{const keys=(await idb('songs','readonly',x=>x.getAllKeys()))||[];const dirty=mcDirty();let snap=null;
+    if(dirty)try{snap=await idb('settings','readonly',x=>x.get('libmeta'))}catch(e){}
+    const m=new Map(),ks=new Set(keys),ds=new Set(dirty||[]);if(Array.isArray(snap))for(const x of snap)if(x&&ks.has(x.id)&&!ds.has(x.id))m.set(x.id,x);
+    const miss=keys.filter(k=>!m.has(k));for(const k of miss){const v=await dbGet(k);if(v)m.set(k,metaOf(v))}
+    for(const k of MC.pend){const v=await dbGet(k);if(v)m.set(k,metaOf(v));else m.delete(k)}MC.pend.clear();
+    MC.map=m;if(miss.length||!Array.isArray(snap)||snap.length!==m.size)mcSave(true);return m})();
+  try{return await MC.p}finally{MC.p=null}}
+const libMeta=async()=>{try{const m=await metaLoad();return[...m.values()].map(x=>({...x}))}catch(e){console.warn('elenco brani',e);return libMetaScan()}};
+addEventListener('pagehide',()=>{if(MC.map&&(mcDirty()||[]).length)mcSave(true)});
 const dbGet=id=>idb('songs','readonly',s=>s.get(id));
-const dbPut=v=>idb('songs','readwrite',s=>s.put(v));
-const dbDel=async id=>{const r=await idb('songs','readwrite',s=>s.delete(id));trvDrop(id);return r};
+const dbPut=async v=>{const r=await idb('songs','readwrite',s=>s.put(v));if(r!=null&&v&&v.id!=null){mcMark(v.id);if(MC.map)MC.map.set(v.id,metaOf(v));else if(MC.p)MC.pend.add(v.id);mcSave()}return r};
+const dbDel=async id=>{const r=await idb('songs','readwrite',s=>s.delete(id));trvDrop(id);mcMark(id);if(MC.map)MC.map.delete(id);else if(MC.p)MC.pend.add(id);mcSave();return r};
 const setGet=k=>idb('settings','readonly',s=>s.get(k));
 const KEYS_LS={runpod:'keyRp',mvsep:'keyMv'};
 const setPut=(k,v)=>{if(KEYS_LS[k])try{prefSet(KEYS_LS[k],JSON.stringify(v))}catch(e){}return idb('settings','readwrite',s=>s.put(v,k))};
@@ -2181,9 +2208,9 @@ function noVox(L,R){const n=L.length,oL=new Float32Array(n),oR=new Float32Array(
 const NOVOX={src:null,b:null};
 function noVoxBuf(b){if(NOVOX.src===b&&NOVOX.b)return NOVOX.b;const c0=b.getChannelData(0),c1=b.numberOfChannels>1?b.getChannelData(1):c0;const [x,y]=noVox(c0,c1);
   const o=new AudioBuffer({length:b.length,numberOfChannels:2,sampleRate:b.sampleRate});o.copyToChannel(x,0);o.copyToChannel(y,1);NOVOX.src=b;NOVOX.b=o;return o}
-/* picco della somma (un campione ogni 7, come prima): serve solo a non far saturare */
-function mixPeak(use,gm){const ks=order.filter(k=>gm[k]>0&&use[k]);if(!ks.length)return 0;const n=Math.max(...ks.map(k=>use[k].length)),m=Math.ceil(n/7);const L=new Float32Array(m),R=new Float32Array(m);
-  for(const k of ks){const b=use[k],g=gm[k],c0=b.getChannelData(0),c1=b.numberOfChannels>1?b.getChannelData(1):c0;for(let i=0,j=0;i<c0.length;i+=7,j++){L[j]+=g*c0[i];R[j]+=g*c1[i]}}
+/* picco della somma (un campione ogni 16): serve solo a non far saturare */
+function mixPeak(use,gm){const ks=order.filter(k=>gm[k]>0&&use[k]);if(!ks.length)return 0;const n=Math.max(...ks.map(k=>use[k].length)),m=Math.ceil(n/16);const L=new Float32Array(m),R=new Float32Array(m);
+  for(const k of ks){const b=use[k],g=gm[k],c0=b.getChannelData(0),c1=b.numberOfChannels>1?b.getChannelData(1):c0;for(let i=0,j=0;i<c0.length;i+=16,j++){L[j]+=g*c0[i];R[j]+=g*c1[i]}}
   let pk=0;for(let j=0;j<m;j++){const a=Math.abs(L[j]),b=Math.abs(R[j]);if(a>pk)pk=a;if(b>pk)pk=b}return pk}
 const curGains=()=>{const gm={};for(const k of order)gm[k]=effGain(k);return gm};
 async function rebuildMix(){if(!order.length)return;if(mixBusy){mixPend=true;return}mixBusy=true;
@@ -2228,8 +2255,8 @@ const BGW={loading:0,fill:false};
 async function bgIdle(){let n=0;while((BGW.loading||playing()||(typeof SA!=='undefined'&&SA.on)||(typeof R!=='undefined'&&R.on))&&n<2400){await new Promise(r=>setTimeout(r,1500));n++}}
 async function resampleTo(b,sr){if(b.sampleRate===sr)return b;const oc=new OfflineAudioContext(b.numberOfChannels,Math.ceil(b.duration*sr),sr);const s=oc.createBufferSource();s.buffer=b;s.connect(oc.destination);s.start();return await oc.startRendering()}
 /* traccia con i due canali praticamente uguali (differenza sotto −35 dB): basta un canale, metà memoria */
-function monoIfSame(b){if(!b||b.numberOfChannels!==2)return b;const L=b.getChannelData(0),R=b.getChannelData(1),n=b.length;let m=0,d=0;for(let i=0;i<n;i+=8){const a=L[i],c=R[i];m+=(a+c)*(a+c);d+=(a-c)*(a-c)}
-  if(!(m>0)||d>m*3e-4)return b;try{const o=new AudioBuffer({length:n,numberOfChannels:1,sampleRate:b.sampleRate});const x=o.getChannelData(0);for(let i=0;i<n;i++)x[i]=(L[i]+R[i])*.5;return o}catch(e){return b}}
+function monoIfSame(b){if(!b||b.numberOfChannels!==2)return b;const L=b.getChannelData(0),R=b.getChannelData(1),n=b.length;let m=0,d=0;for(let i=0;i<n;i+=8){const a=L[i],c=R[i];m+=(a+c)*(a+c);d+=(a-c)*(a-c);if((i&262143)===0&&i>n/5&&d>m*3e-3)return b}/* chiaramente stereo: si smette prima */
+  if(!(m>0)||d>m*3e-4)return b;try{const o=new AudioBuffer({length:n,numberOfChannels:1,sampleRate:b.sampleRate});o.copyToChannel(L,0);return o}catch(e){return b}}
 async function loadSong(s,bufs){
   pause();A._reset();stems={};NOVOX.src=NOVOX.b=null;loopA=loopB=null;updAB();tr=0;trCache={tr:0,bufs:null};voiceOff=false;updTr();
   order=STEMS.map(x=>x.k).filter(k=>bufs[k]);SR=bufs[order[0]].sampleRate;
@@ -2255,16 +2282,19 @@ async function loadSong(s,bufs){
   /* le analisi lunghe (melodia, bpm) partono dopo, quando il brano è già pronto da suonare */
   setTimeout(()=>{if(song===s){bpmEnsure(s);analyzeGuide()}},700);
 }
-async function openStored(id){let s=await dbGet(id);if(!s){toast('Brano non trovato');return}markOpened(id);
+/* un solo brano alla volta: se ne chiedi un altro mentre carica, quello di mezzo non si apre (niente brani doppi in memoria) */
+const LQ={tok:0,p:Promise.resolve()};
+async function openStored(id){const tok=++LQ.tok,prev=LQ.p;let rel;LQ.p=new Promise(r=>rel=r);try{await prev;if(tok!==LQ.tok)return;await openStored0(id,tok)}finally{rel()}}
+async function openStored0(id,tok){let s=await dbGet(id);if(tok!==LQ.tok)return;if(!s){toast('Brano non trovato');return}markOpened(id);
   if(s.cloudOnly){if(!r2Ok()){toast('Questo brano è solo nel cloud: collega il cloud per aprirlo');return}
     /* prima lo ascolti, poi (in sottofondo) si salva sul dispositivo in MP3 */
-    toast('☁️ Scarico «'+(s.title||'il brano')+'» dal cloud…');const rec0=s;try{const r=await cloudFetch(s,false);s=r.full;const st2={...r.full.stems};setTimeout(()=>{cloudKeep(rec0,r.files,st2,true).then(x=>{if(x&&x.kept){try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}else toast('💽 Spazio pieno: questo brano resta solo nel cloud')}).catch(e=>console.warn('cloudKeep',e))},4000)}catch(e){toast('Non riesco a scaricarlo dal cloud: '+(r2Err(e)||e.message));return}}
-  toast('Apro “'+(s.title||'il brano')+'”…');const bufs={};BGW.loading++;
+    toast('☁️ Scarico «'+(s.title||'il brano')+'» dal cloud…');const rec0=s;try{const r=await cloudFetch(s,false);if(tok!==LQ.tok)return;s=r.full;const st2={...r.full.stems};setTimeout(()=>{cloudKeep(rec0,r.files,st2,true).then(x=>{if(x&&x.kept){try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}else toast('💽 Spazio pieno: questo brano resta solo nel cloud')}).catch(e=>console.warn('cloudKeep',e))},4000)}catch(e){toast('Non riesco a scaricarlo dal cloud: '+(r2Err(e)||e.message));return}}
+  if(tok!==LQ.tok)return;toast('Apro “'+(s.title||'il brano')+'”…');const bufs={};BGW.loading++;
   try{pause();trCache={tr:0,bufs:null};
   /* libera subito le tracce del brano di prima: così in memoria non ci sono due brani insieme */
   A._reset();stems={};order=[];NOVOX.src=NOVOX.b=null;
   await Promise.all(Object.keys(s.stems).map(async k=>{try{bufs[k]=await decode(s.stems[k].data)}catch(e){}}));
-  if(!Object.keys(bufs).length){toast('Non riesco a leggere l\'audio di questo brano');return}
+  if(tok!==LQ.tok)return;if(!Object.keys(bufs).length){toast('Non riesco a leggere l\'audio di questo brano');return}
   await loadSong({...s,stems:undefined,stored:true},bufs)}finally{BGW.loading--}}
 async function saveCur(fields){if(!song||!song.stored)return;const s=await dbGet(song.id);if(!s)return;Object.assign(s,fields);Object.assign(song,fields);await dbPut(s)}
 function saveLyr(){writeLrcSoon();const lyr=K.lines.map(l=>({t:l.t,s:l.s,st:l.st,w:l.w||null,p:l.p||0,pm:l.pm||0,pq:l.pq||0}));if(song){song.lyr=lyr;song.lyrOff=K.off}saveCur({lyr,lyrOff:K.off,lyrics:K.lines.map(l=>ts(l.t)+' '+l.s).join('\n')})}
@@ -2900,7 +2930,7 @@ function palLayout(){const p=$('#palco');if(!p)return;const t=!$('#palTabWrap').
 function pmShow(v){$('#palMix').hidden=!v;palLayout();$('#pMixB').classList.toggle('on',v);$('#pMixB').setAttribute('aria-expanded',v);if(v){$('#palMic').hidden=true;$('#pMic').setAttribute('aria-expanded','false');pmRender()}}
 $('#pMixB').onclick=()=>pmShow($('#palMix').hidden);$('#pmX').onclick=()=>pmShow(false);
 $('#pmAll').onclick=()=>{order.forEach(k=>{gains[k].mute=false;gains[k].solo=false;if(!gains[k].vol)gains[k].vol=1});syncChanUI();mixSoon()};
-$('#pSong').onclick=()=>{const ov=$('#bpOv');if(ov.parentNode!==$('#palco'))$('#palco').appendChild(ov);pkOpen('palco')};
+$('#pSong').onclick=()=>{if(slActive()){slqOpen('palco');return}const ov=$('#bpOv');if(ov.parentNode!==$('#palco'))$('#palco').appendChild(ov);pkOpen('palco')};
 /* ===== PALCO: microfono e strumenti dal vivo in cuffia (PC: scheda audio; telefono e tablet: solo microfono) ===== */
 const LV={on:false,rows:[],streams:[],nodes:[],rev:+(prefGet('lvRev')||0.2),cfg:(()=>{try{return JSON.parse(prefGet('lvCfg')||'{}')}catch(e){return{}}})()};
 const LV_ROLE={voce:'🎤 Voce',chitarra:'🎸 Chitarra',basso:'🎸 Basso',tastiere:'🎹 Tastiere',altro:'🎶 Strumento'};
@@ -3074,15 +3104,23 @@ function pkClose(){const ov=$('#bpOv');ov.hidden=true;if(ov.parentNode!==documen
 $('#bpQ').oninput=pkRender;$('#bpX').onclick=pkClose;$('#bpOv').onclick=e=>{if(e.target===$('#bpOv'))pkClose()};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#bpOv').hidden){e.preventDefault();e.stopPropagation();pkClose()}},true);
 $$('#bpActs [data-pa]').forEach(b=>b.onclick=()=>{pkClose();songPickGo(b.dataset.pa)});
-$('#songPickBtn').onclick=()=>pkOpen('main');$('#sSongPickBtn').onclick=()=>pkOpen('sala');
-function pkBtnUI(n){const t=song&&song.id&&song.id!=='demo'?('🎵 '+(song.title||'Senza titolo')+(song.artist?' · '+song.artist:'')):song&&song.id==='demo'?'🎤 Prova di palco':'🎵 Scegli un brano…';
+$('#songPickBtn').onclick=()=>slActive()?slqOpen('main'):pkOpen('main');$('#sSongPickBtn').onclick=()=>pkOpen('sala');
+function pkBtnUI(n){if(slActive()){const b=$('#songPickBtn');if(b){b.textContent='📋 '+(SCL.name||'Scaletta')+' · '+SCL.items.length+' brani  ▾';b.title='Scaletta accesa: tocca per scegliere la scaletta o un suo brano'}const b2=$('#sSongPickBtn');if(b2){const t2=song&&song.id&&song.id!=='demo'?('🎵 '+(song.title||'Senza titolo')+(song.artist?' · '+song.artist:'')):'🎵 Scegli un brano…';b2.textContent=t2+'  ▾'}return}
+  const t=song&&song.id&&song.id!=='demo'?('🎵 '+(song.title||'Senza titolo')+(song.artist?' · '+song.artist:'')):song&&song.id==='demo'?'🎤 Prova di palco':'🎵 Scegli un brano…';
   for(const id of ['#songPickBtn','#sSongPickBtn']){const b=$(id);if(b){b.textContent=t+'  ▾';b.title='Scegli un brano ('+n+' in libreria)'}}}
 
 /* ===================== SCALETTA ===================== */
-const SCL={name:'',items:[],i:-1,auto:prefGet('slAuto')==='1',timer:0};
+const SCL={name:'',items:[],i:-1,auto:prefGet('slAuto')==='1',timer:0,on:prefGet('slOn')==='1'};
 const slSaved=()=>{try{return JSON.parse(prefGet('setlists')||'[]')}catch(e){return[]}};const slPut=L=>prefSet('setlists',JSON.stringify(L));
 function slCur(){try{const o=JSON.parse(prefGet('slCur')||'null');if(o){SCL.name=o.name||'';SCL.items=o.items||[];SCL.i=o.i==null?-1:o.i}}catch(e){}}slCur();
 const slKeep=()=>prefSet('slCur',JSON.stringify({name:SCL.name,items:SCL.items,i:SCL.i}));
+if(prefGet('slOn')==null&&SCL.items.length&&SCL.i>=0)SCL.on=true;
+/* scaletta accesa: l'app segue solo la scaletta; spenta: si sceglie un brano alla volta */
+const slActive=()=>SCL.on&&SCL.items.length>0;
+function slSetOn(v){SCL.on=!!v;prefSet('slOn',v?'1':'0');if(!v){clearInterval(SCL.timer);SCL.timer=0}else if(SCL.i<0||SCL.i>=SCL.items.length)SCL.i=0;slKeep();slBarUI();try{pkBtnUI(PK.all.length||0)}catch(e){}}
+function slToggle(){if(SCL.on&&SCL.items.length){slSetOn(false);toast('Scaletta spenta: scegli i brani uno alla volta');return}
+  if(!SCL.items.length){slOpen();toast('Prepara la scaletta, poi premi «▶ Suona dal primo»');return}
+  slSetOn(true);toast('📋 Scaletta accesa: «'+(SCL.name||'Scaletta')+'»');const x=SCL.items[SCL.i];if(!(song&&x&&song.id===x.id))slPlay(SCL.i,{noPlay:true,now:true})}
 let SCLLIB=[];
 async function slOpen(){SCLLIB=(await libMeta())||[];SCLLIB.sort((a,b)=>pkSort((a.artist||'')+' '+(a.title||''),(b.artist||'')+' '+(b.title||'')));$('#slAuto').checked=SCL.auto;$('#slName').value=SCL.name||'';slDraw();openOv('#ovSet2')}
 function slFind(it){return SCLLIB.find(x=>x.id===it.id)||SCLLIB.find(x=>(x.title||'').toLowerCase()===(it.title||'').toLowerCase()&&(x.artist||'').toLowerCase()===(it.artist||'').toLowerCase())}
@@ -3114,33 +3152,54 @@ $('#slAddAll').onclick=()=>{for(const x of SCLLIB)if(!SCL.items.some(it=>it.id==
 $('#slAuto').onchange=e=>{SCL.auto=e.target.checked;prefSet('slAuto',SCL.auto?'1':'0')};
 $('#slSave').onclick=()=>{const name=$('#slName').value.trim();if(!name){toast('Scrivi un nome per la scaletta');$('#slName').focus();return}if(!SCL.items.length){toast('La scaletta è vuota');return}
   const L=slSaved(),k=L.findIndex(x=>x.name.toLowerCase()===name.toLowerCase());if(k>=0&&!confirm('Esiste già la scaletta «'+L[k].name+'». La sostituisco?'))return;const rec={name,items:SCL.items.slice(),date:Date.now()};if(k>=0)L[k]=rec;else L.push(rec);L.sort((a,b)=>a.name.localeCompare(b.name,'it'));slPut(L);SCL.name=name;slKeep();slDraw();toast('Scaletta «'+name+'» salvata')};
-$('#slLoad').onclick=()=>{const L=slSaved(),x=L[+$('#slSaved').value];if(!x){toast('Scegli una scaletta salvata');return}SCL.name=x.name;SCL.items=x.items.slice();SCL.i=-1;$('#slName').value=x.name;slKeep();slDraw();slBarUI();toast('Scaletta «'+x.name+'» caricata: '+x.items.length+' brani')};
+$('#slLoad').onclick=()=>{const L=slSaved(),x=L[+$('#slSaved').value];if(!x){toast('Scegli una scaletta salvata');return}SCL.name=x.name;SCL.items=x.items.slice();SCL.i=-1;$('#slName').value=x.name;slKeep();slDraw();slBarUI();if(SCL.on)slPlay(0,{noPlay:true,now:true});toast('Scaletta «'+x.name+'» caricata: '+x.items.length+' brani')};
 $('#slSaved').onchange=()=>$('#slLoad').click();
 $('#slDel').onclick=()=>{const L=slSaved(),k=+$('#slSaved').value,x=L[k];if(!x)return;if(!confirm('Elimino la scaletta «'+x.name+'»?'))return;L.splice(k,1);slPut(L);slDraw();toast('Scaletta eliminata')};
-$('#slNew').onclick=()=>{if(SCL.items.length&&!confirm('Svuoto la scaletta che hai aperta? (quelle salvate restano)'))return;SCL.name='';SCL.items=[];SCL.i=-1;$('#slName').value='';slKeep();slDraw();slBarUI()};
-$('#slGo').onclick=()=>{if(!SCL.items.length){toast('La scaletta è vuota');return}closeOvAll();slPlay(0)};
+$('#slNew').onclick=()=>{if(SCL.items.length&&!confirm('Svuoto la scaletta che hai aperta? (quelle salvate restano)'))return;SCL.name='';SCL.items=[];SCL.i=-1;$('#slName').value='';slSetOn(false);slDraw()};
+$('#slGo').onclick=()=>{if(!SCL.items.length){toast('La scaletta è vuota');return}closeOvAll();slSetOn(true);slPlay(0,{now:true})};
 $('#slFile').onclick=()=>{if(!SCL.items.length){toast('La scaletta è vuota');return}const nm=(SCL.name||'scaletta').replace(/[^\w\- ]+/g,'').trim()||'scaletta';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({app:'fonica-infinity',kind:'scaletta',name:SCL.name,items:SCL.items},null,1)],{type:'application/json'}));a.download='Scaletta '+nm+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('Scaletta salvata nella cartella Download')};
 $('#slOpen').onclick=()=>{$('#slFileIn').value='';$('#slFileIn').click()};
 $('#slFileIn').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||d.kind!=='scaletta'||!Array.isArray(d.items))throw 0;SCL.name=d.name||f.name.replace(/\.json$/i,'');SCL.items=d.items.filter(x=>x&&(x.id||x.title)).map(x=>({id:x.id||'',title:x.title||'',artist:x.artist||''}));SCL.i=-1;$('#slName').value=SCL.name;slKeep();slDraw();slBarUI();
     const miss=SCL.items.filter(x=>!slFind(x)).length;toast('Scaletta «'+SCL.name+'» aperta'+(miss?' · '+miss+' brani non sono in libreria':''))}catch(x){toast('Questo file non è una scaletta di Pure Voltage')}};
-async function slPlay(i){if(!SCL.items.length)return;if(!SCLLIB.length)SCLLIB=(await libMeta())||[];let j=i;while(j<SCL.items.length&&!slFind(SCL.items[j]))j++;if(j>=SCL.items.length){toast('Fine della scaletta 🎉');SCL.i=SCL.items.length-1;slKeep();slBarUI();return}
-  if(j!==i)toast('Salto «'+SCL.items[i].title+'»: non è in libreria');clearInterval(SCL.timer);SCL.timer=0;SCL.i=j;slKeep();slBarUI();const x=slFind(SCL.items[j]);if(song&&song.id===x.id){pause();seek(0);try{if(SP.on)sListenStop()}catch(e){}SP.from=0;toast('▶ '+(j+1)+'/'+SCL.items.length+' · '+(x.title||''));slGo(x.id);return}await songPickGo(x.id);slBarUI();slGo(x.id)}
+let SLQ=0;
+async function slPlay(i,o){o=o||{};if(!SCL.items.length)return;if(!SCL.on){SCL.on=true;prefSet('slOn','1')}
+  /* la posizione si aggiorna subito, così più tocchi veloci su ⏭ contano tutti */
+  i=Math.max(0,Math.min(i,SCL.items.length-1));SCL.i=i;slKeep();slBarUI();const t0=++SLQ;SCLLIB=(await libMeta())||[];if(t0!==SLQ)return;let j=i;while(j<SCL.items.length&&!slFind(SCL.items[j]))j++;if(j>=SCL.items.length){toast('Fine della scaletta 🎉');SCL.i=SCL.items.length-1;slKeep();slBarUI();return}
+  if(j!==i)toast('Salto «'+SCL.items[i].title+'»: non è in libreria');clearInterval(SCL.timer);SCL.timer=0;SCL.i=j;slKeep();slBarUI();try{pkBtnUI(SCLLIB.length)}catch(e){}
+  /* tocchi veloci su ⏮ ⏭: si aspetta un attimo e si apre solo l'ultimo brano scelto */
+  const t=++SLQ;if(!o.now)await new Promise(r=>setTimeout(r,350));if(t!==SLQ)return;
+  const x=slFind(SCL.items[j]);if(song&&song.id===x.id){pause();seek(0);try{if(SP.on)sListenStop()}catch(e){}SP.from=0;if(!o.noPlay){toast('▶ '+(j+1)+'/'+SCL.items.length+' · '+(x.title||''));slGo(x.id)}return}
+  await songPickGo(x.id,true);if(t!==SLQ)return;slBarUI();if(!o.noPlay)slGo(x.id)}
 /* scaletta: appena il brano è caricato parte da solo, dall'inizio (in sala prove parte «Ascolta e prova») */
 async function slGo(id){const t0=Date.now();const ready=()=>song&&song.id===id&&!mixBusy&&!mixPend&&!newSong&&A.src&&A.readyState>=2;
   while(!ready()){if(Date.now()-t0>30000||!song||song.id!==id)return;await new Promise(z=>setTimeout(z,150))}
   if(!$('#salaOv').hidden){try{if(!SP.on&&!SA.on){SP.from=0;sListen()}}catch(e){}}else{seek(0);play()}}
 /* nel palco la scaletta va sopra la barra dei comandi; ⏮ ⏭ diventano tasti del player */
-function slPlace(){const on=SCL.items.length>0&&SCL.i>=0,ps=$('#palSl');ps.hidden=!on;$('#bScal').classList.toggle('on',on);$('#slStop').hidden=!on;if(on)ps.textContent=$('#slNow').textContent}
-function slBarUI(){const b=$('#slBar');const on=SCL.items.length>0&&SCL.i>=0;b.hidden=!on;$('#pSPrev').hidden=$('#pSNext').hidden=!on;slPlace();if(!on)return;const it=SCL.items[SCL.i];b.classList.remove('count');const nx0=SCL.items[SCL.i+1];$('#slNow').textContent='📋 '+(SCL.i+1)+'/'+SCL.items.length+' · '+(it?it.title:'')+(nx0?'  ·  poi: '+nx0.title:'');$('#slNext').disabled=$('#pSNext').disabled=SCL.i>=SCL.items.length-1;$('#slPrev').disabled=$('#pSPrev').disabled=SCL.i<=0;
+function slPlace(){const on=slActive()&&SCL.i>=0,ps=$('#palSl');ps.hidden=!on;$('#bScal').classList.toggle('on',on);$('#bScal').setAttribute('aria-pressed',on?'true':'false');$('#slStop').hidden=!on;if(on)ps.textContent=$('#slNow').textContent}
+function slBarUI(){const b=$('#slBar');if(slActive()&&(SCL.i<0||SCL.i>=SCL.items.length))SCL.i=0;const on=slActive()&&SCL.i>=0;b.hidden=!on;$('#pSPrev').hidden=$('#pSNext').hidden=!on;slPlace();if(!on)return;const it=SCL.items[SCL.i];b.classList.remove('count');const nx0=SCL.items[SCL.i+1];$('#slNow').textContent='📋 '+(SCL.i+1)+'/'+SCL.items.length+' · '+(it?it.title:'')+(nx0?'  ·  poi: '+nx0.title:'');$('#slNext').disabled=$('#pSNext').disabled=SCL.i>=SCL.items.length-1;$('#slPrev').disabled=$('#pSPrev').disabled=SCL.i<=0;
   const nx=SCL.items[SCL.i+1];$('#slNext').title=nx?'Prossimo: '+nx.title:'È l\'ultimo brano';slPlace()}
-$('#slPrev').onclick=$('#pSPrev').onclick=()=>slPlay(Math.max(0,SCL.i-1));$('#pSNext').onclick=()=>$('#slNext').click();$('#slNext').onclick=()=>{if(SCL.i<SCL.items.length-1)slPlay(SCL.i+1)};$('#slNow').onclick=()=>{if(SCL.timer){clearInterval(SCL.timer);SCL.timer=0;slBarUI();toast('Passaggio automatico fermato')}else slOpen()};
-$('#slStop').onclick=()=>{clearInterval(SCL.timer);SCL.timer=0;SCL.i=-1;slKeep();slBarUI();toast('Scaletta fermata: la ritrovi in 📋 Scaletta')};
+$('#slPrev').onclick=$('#pSPrev').onclick=()=>slPlay(Math.max(0,SCL.i-1));$('#pSNext').onclick=()=>$('#slNext').click();$('#slNext').onclick=()=>{if(SCL.i<SCL.items.length-1)slPlay(SCL.i+1)};$('#slNow').onclick=()=>{if(SCL.timer){clearInterval(SCL.timer);SCL.timer=0;slBarUI();toast('Passaggio automatico fermato')}else slqOpen()};
+$('#slStop').onclick=()=>{slSetOn(false);closeOvAll();toast('Scaletta spenta: la ritrovi in 📋 Scaletta')};
 /* alla fine del brano: prossimo da solo, con 5 secondi per fermarlo */
-function slEnded(){if(!SCL.auto||SCL.i<0||SCL.i>=SCL.items.length-1||SCL.timer)return;let n=5;const b=$('#slBar');b.classList.add('count');const nx=SCL.items[SCL.i+1];$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca qui per fermare)';slPlace();
+function slEnded(){if(!slActive()||SCL.i<0||SCL.timer)return;
+  if(SCL.i>=SCL.items.length-1){toast('🎉 Fine della scaletta: torno al primo brano');setTimeout(()=>slPlay(0,{noPlay:true,now:true}),600);return}
+  if(!SCL.auto)return;let n=5;const b=$('#slBar');b.classList.add('count');const nx=SCL.items[SCL.i+1];$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca qui per fermare)';slPlace();
   SCL.timer=setInterval(async()=>{n--;if(n>0){$('#slNow').textContent='⏭ Tra '+n+' s: '+nx.title+' (tocca qui per fermare)';slPlace();return}clearInterval(SCL.timer);SCL.timer=0;await slPlay(SCL.i+1);setTimeout(()=>{try{if($('#salaOv').hidden)play()}catch(e){}},700)},1000)}
 A.addEventListener('ended',slEnded);
-$('#bScal').onclick=slOpen;$('#sSetTop').onclick=slOpen;slBarUI();
-async function songPickGo(id){if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
+$('#bScal').onclick=slToggle;
+/* finestra veloce della scaletta: quale scaletta seguire e i suoi brani (non legge l'audio, si apre subito) */
+function slqOpen(from){const ov=$('#slqOv');ov.classList.toggle('dark',from==='palco');const host=from==='palco'?$('#palco'):document.body;if(ov.parentNode!==host)host.appendChild(ov);slqRender();ov.hidden=false;const c=$('#slqList .pksong.cur');if(c)c.scrollIntoView({block:'center'})}
+function slqClose(){$('#slqOv').hidden=true}
+function slqRender(){const L=slSaved(),k=L.findIndex(x=>x.name===SCL.name);$('#slqTitle').textContent='📋 '+(SCL.name||'Scaletta')+' · '+SCL.items.length+' brani';
+  $('#slqSel').innerHTML=(k<0?`<option value="cur" selected>${esc(SCL.name||'Scaletta in uso')} (non salvata)</option>`:'')+L.map((x,i)=>`<option value="${i}" ${i===k?'selected':''}>${esc(x.name)} (${x.items.length})</option>`).join('');
+  const lib=SCLLIB.length?SCLLIB:null;$('#slqList').innerHTML=SCL.items.map((it,i)=>{const ok=!lib||!!slFind(it);return`<button class="pksong ${i===SCL.i?'cur':''}" data-slq="${i}" ${ok?'':'disabled'}><span class="n">${i+1}</span><span><b>${esc(it.title||'Senza titolo')}</b><small>${esc(it.artist||'')}${ok?'':' · non è in libreria'}</small></span></button>`}).join('');
+  $$('#slqList [data-slq]').forEach(b=>b.onclick=()=>{slqClose();slPlay(+b.dataset.slq,{now:true})})}
+$('#slqX').onclick=slqClose;$('#slqOv').onclick=e=>{if(e.target===$('#slqOv'))slqClose()};
+$('#slqSel').onchange=e=>{const v=e.target.value;if(v==='cur')return;const x=slSaved()[+v];if(!x)return;SCL.name=x.name;SCL.items=x.items.slice();SCL.i=0;slKeep();slBarUI();slqRender();toast('📋 Scaletta «'+x.name+'»: pronto il primo brano');slPlay(0,{noPlay:true,now:true})};
+$('#slqEdit').onclick=()=>{slqClose();slOpen()};$('#slqOff').onclick=()=>{slqClose();slSetOn(false);toast('Scaletta spenta: scegli i brani uno alla volta')};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#slqOv').hidden){e.preventDefault();e.stopPropagation();slqClose()}},true);$('#sSetTop').onclick=slOpen;slBarUI();
+async function songPickGo(id,fromSl){if(id&&!id.startsWith('__')&&!fromSl&&slActive()){const k=SCL.items.findIndex(it=>it.id===id);if(k>=0){SCL.i=k;slKeep();slBarUI()}else{slSetOn(false);toast('Scaletta spenta: hai scelto un brano che non è in scaletta')}}
+  if(id&&id.startsWith('__')){songPickFill();({__add:()=>$('#bAdd').click(),__load:()=>openAdd(),__shop:()=>$('#bShop').click(),__lib:()=>$('#bLib').click()})[id]();return}if(!id||(song&&song.id===id))return;const inSala=!$('#salaOv').hidden;if(inSala){if(SA.on){toast('Ferma prima la registrazione');songPickFill();return}sListenStop()}
   toast('Apro il brano…');if(id==='demo')await loadDemo();else await openStored(id);
   if(inSala&&song){$('#salaTitle').textContent='Sala prove';SA.baseMono=null;SP.from=0;try{sStemsUI();sTabUI()}catch(e){console.warn(e)}}try{donBanMaybe()}catch(e){}}
 async function renderLib(){const all=(await libMeta()).sort((a,b)=>(a.artist||'~').localeCompare(b.artist||'~','it')||(!albName(a))-(!albName(b))||(a.year||'9999').localeCompare(b.year||'9999')||albName(a).localeCompare(albName(b),'it')||(a.title||'').localeCompare(b.title||'','it'));const el=$('#songlist');const fsOk=!!window.showDirectoryPicker,canSep=!!((rp.key&&rp.ep)||mv.key),cl=r2On();
@@ -3156,7 +3215,7 @@ async function renderLib(){const all=(await libMeta()).sort((a,b)=>(a.artist||'~
   $('#libAdd').onclick=()=>{closeOv($('#libAdd'));openAdd()};covFill(el);el.querySelectorAll('[data-artinfo]').forEach(b=>b.onclick=()=>artOpen(b.dataset.artinfo));const sb=$('#libSpace');if(sb)sb.onclick=spaceOpen;songPickFill();
   el.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{closeOv(b);b.dataset.open==='demo'?loadDemo():openStored(b.dataset.open)});
   el.querySelectorAll('[data-queue]').forEach(b=>b.onclick=()=>{const x=all.find(s=>s.id===b.dataset.queue);if(!x)return;SCL.items.push({id:x.id,title:x.title||'',artist:x.artist||''});slKeep();try{slBarUI();slPlace()}catch(e){}
-    toast('In coda: «'+(x.title||'brano')+'» è il n. '+SCL.items.length+(x.cloudOnly?' · si scarica quando arriva il suo turno':'')+(SCL.i<0?' · per farla partire apri la Scaletta':''));renderLib()});
+    toast('In coda: «'+(x.title||'brano')+'» è il n. '+SCL.items.length+(x.cloudOnly?' · si scarica quando arriva il suo turno':'')+(!slActive()?' · per seguirla accendi la Scaletta':''));renderLib()});
   el.querySelectorAll('[data-unq]').forEach(b=>b.onclick=()=>{const id=b.dataset.unq,x=all.find(s=>s.id===id);const cur=SCL.items[SCL.i];SCL.items=SCL.items.filter(it=>it.id!==id);
     SCL.i=cur?SCL.items.indexOf(cur):-1;if(SCL.i<0&&cur&&cur.id===id)SCL.i=Math.min(SCL.items.length-1,SCL.i);slKeep();try{slBarUI();slPlace()}catch(e){}toast('Tolto dalla coda: «'+((x&&x.title)||'brano')+'»');renderLib()});
   el.querySelectorAll('.lrow .meta b').forEach(t=>{const r=t.closest('.lrow'),q=r&&r.querySelector('[data-qid]');if(!q)return;t.classList.add('lopen');t.title='Tocca il titolo per aprirlo subito';t.onclick=()=>{closeOv(t);openStored(q.dataset.qid)}});
@@ -3230,7 +3289,7 @@ function wakeOff(){WAKE.want=Math.max(0,WAKE.want-1);if(!WAKE.want&&WAKE.lock){t
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')wakeGet();else if(WAKE.want&&BATCH.on)toast('Tieni Pure Voltage in primo piano: se la finestra è nascosta il dispositivo può andare in sospensione')});
 /* ===== album intero: un brano alla volta su RunPod, senza domande sulle tonalità ===== */
 const BATCH={on:false,i:0,n:0,res:null};
-async function libKeys(){const set=new Set();try{const d=await db();if(!d)return set;await new Promise(r=>{const c=d.transaction('songs').objectStore('songs').openCursor();c.onsuccess=()=>{const x=c.result;if(!x)return r();const v=x.value;set.add(normKey(v.artist,v.title));x.continue()};c.onerror=()=>r()})}catch(e){}return set}
+async function libKeys(){const set=new Set();try{for(const v of await libMeta())set.add(normKey(v.artist,v.title))}catch(e){}return set}
 async function albumRun(){const files=sepFiles.slice();
   if(!rp.key||!rp.ep){sepNotice('Per separare un album intero serve <b>RunPod</b> collegato (Impostazioni → RunPod): i brani vanno uno dopo l\'altro senza attese in coda.','#rpKey');return}
   try{const e=await navigator.storage.estimate();const free=(e.quota||0)-(e.usage||0);const need=files.length*30e6;if(e.quota&&free<need&&!confirm(`Lo spazio libero per l'app è circa ${Math.round(free/1e6)} MB, per ${files.length} brani ne servono circa ${Math.round(need/1e6)} MB. Provo lo stesso?`))return}catch(e){}
