@@ -2018,12 +2018,67 @@ const prefSet=(k,v)=>{try{localStorage.setItem('f8_'+k,v)}catch(e){}if(typeof SY
 function themeUI(){}
 
 /* ================= motore audio =================
-   Le tracce restano separate in memoria; il mix (volumi + tonalità) viene ricostruito
-   e suonato da un solo lettore, che cambia velocità senza cambiare il tono. */
+   Le tracce restano separate in memoria. A velocità normale suonano direttamente (volumi istantanei);
+   a velocità cambiata si prepara un mix per il lettore classico, che rallenta senza cambiare il tono. */
 let actx=null;
 function latHint(){const m=prefGet('latMode')||'i';return m==='0'?0:m==='b'?'balanced':'interactive'}
 const ctx=()=>actx||(actx=new (window.AudioContext||window.webkitAudioContext)({latencyHint:latHint()}));
-const A=new Audio();A.preload='auto';try{A.preservesPitch=true;A.mozPreservesPitch=true;A.webkitPreservesPitch=true}catch(e){}
+/* lettore del brano, con gli stessi comandi di un <audio>:
+   - velocità normale: ogni traccia suona direttamente nel motore audio con il suo volume (volumi istantanei, nessun mix in memoria);
+   - velocità cambiata: un mix in un file solo per il lettore classico, che rallenta senza cambiare l'intonazione. */
+const A=(()=>{const EL=new Audio();EL.preload='auto';try{EL.preservesPitch=true;EL.mozPreservesPitch=true;EL.webkitPreservesPitch=true}catch(e){}
+  try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+  const LS={},P={mode:'wa',bufs:null,gn:{},srcs:[],pos:0,t0:0,paused:true,ended:false,rate:1,muted:false,dur:0,out:null,norm:null,fade:null,elN:null,url:null,sw:false};
+  const emit=t=>(LS[t]||[]).slice().forEach(f=>{try{f()}catch(e){console.error(e)}});
+  const slow=r=>Math.abs((r||1)-1)>1e-3;
+  function graph(){const c=ctx();if(!P.out){P.out=c.createGain();P.out.gain.value=P.muted?0:1;P.out.connect(c.destination);P.fade=c.createGain();P.fade.connect(P.out);P.norm=c.createGain();P.norm.connect(P.fade)}return c}
+  function elOn(){const c=graph();if(!P.elN){P.elN=c.createMediaElementSource(EL);P.elN.connect(P.out)}}
+  const waRun=()=>P.mode==='wa'&&P.srcs.length>0;
+  function cur(){if(P.paused)return P.pos;if(waRun()){const c=ctx();return Math.min(P.dur||1e9,P.pos+Math.max(0,c.currentTime-P.t0))}
+    if(P.mode==='el'&&P.url&&EL.readyState>0)return EL.currentTime;return P.pos}
+  function waStop(){if(!P.srcs.length)return;const c=ctx(),t=c.currentTime,g=P.fade.gain;try{g.cancelScheduledValues(t);g.setValueAtTime(g.value,t);g.linearRampToValueAtTime(0,t+.012)}catch(e){g.value=0}
+    for(const s of P.srcs){s.onended=null;try{s.stop(t+.013)}catch(e){}}P.srcs=[]}
+  function waStart(){if(P.paused||P.mode!=='wa'||!P.bufs)return;const c=graph();try{c.resume()}catch(e){}
+    if(P.pos>=P.dur-.01){P.pos=0}
+    const t=c.currentTime+.02,g=P.fade.gain;try{g.cancelScheduledValues(t);g.setValueAtTime(0,t);g.linearRampToValueAtTime(1,t+.012)}catch(e){g.value=1}
+    let longest=null;for(const[k,b]of Object.entries(P.bufs)){if(!b||!P.gn[k]||P.pos>=b.duration)continue;const s=c.createBufferSource();s.buffer=b;s.connect(P.gn[k]);s.start(t,P.pos);P.srcs.push(s);if(!longest||b.duration>longest.buffer.duration)longest=s}
+    P.t0=t;if(longest)longest.onended=()=>{if(!P.srcs.includes(longest)||P.paused)return;P.srcs=[];P.pos=P.dur;P.paused=true;P.ended=true;emit('pause');emit('ended')}}
+  function elDrop(){const u=P.url;P.url=null;try{EL.pause()}catch(e){}try{EL.removeAttribute('src');EL.load()}catch(e){}if(u)URL.revokeObjectURL(u)}
+  EL.addEventListener('ended',()=>{if(P.mode!=='el'||P.sw)return;P.pos=P.dur||EL.currentTime;P.paused=true;P.ended=true;emit('pause');emit('ended')});
+  EL.addEventListener('pause',()=>{if(P.mode!=='el'||P.paused||P.sw||EL.ended)return;P.pos=EL.currentTime;P.paused=true;emit('pause')});
+  const api={
+    get src(){return P.mode==='wa'?(P.bufs?'pv:tracce':''):(P.url||'')},
+    get readyState(){return P.mode==='wa'?(P.bufs?4:0):(P.url?EL.readyState:0)},
+    get paused(){return P.paused},get ended(){return P.ended},get duration(){return P.dur||0},
+    get currentTime(){return cur()},
+    set currentTime(t){t=Math.max(0,+t||0);P.ended=false;
+      if(P.mode==='wa'){const run=waRun();if(run)waStop();P.pos=t;if(run)waStart()}
+      else{P.pos=t;if(P.url&&EL.readyState>0)try{EL.currentTime=t}catch(e){}}},
+    get playbackRate(){return P.rate},set playbackRate(v){v=+v||1;const was=P.rate;P.rate=v;if(P.mode==='el'&&P.url)try{EL.playbackRate=v}catch(e){}if(slow(was)!==slow(v))mixSoon()},
+    get defaultPlaybackRate(){return P.rate},set defaultPlaybackRate(v){},
+    get muted(){return P.muted},set muted(v){P.muted=!!v;if(P.out)P.out.gain.value=P.muted?0:1},
+    play(){if(!P.paused)return Promise.resolve();P.paused=false;P.ended=false;if(P.pos>=(P.dur||0)-.05)P.pos=0;emit('play');
+      if(P.mode==='wa')waStart();else if(P.url){try{ctx().resume()}catch(e){}try{EL.currentTime=P.pos}catch(e){}EL.playbackRate=P.rate;return EL.play().catch(()=>{})}return Promise.resolve()},
+    pause(){if(P.paused)return;P.pos=cur();P.paused=true;if(P.mode==='wa')waStop();else try{EL.pause()}catch(e){}emit('pause')},
+    addEventListener(t,f){(LS[t]=LS[t]||[]).push(f)},removeEventListener(t,f){if(LS[t])LS[t]=LS[t].filter(x=>x!==f)},
+    _slow(){return slow(P.rate)},
+    /* tracce dirette: bufs = traccia → AudioBuffer, gm = traccia → volume, sc = riduzione per non saturare */
+    _live(bufs,gm,sc){const c=graph();if(P.mode==='el'){P.pos=cur();P.sw=true;elDrop();P.sw=false;P.mode='wa'}
+      for(const k of Object.keys(P.gn))if(!bufs[k]){try{P.gn[k].disconnect()}catch(e){}delete P.gn[k]}
+      for(const k of Object.keys(bufs))if(!P.gn[k]){const g=c.createGain();g.gain.value=gm[k]||0;g.connect(P.norm);P.gn[k]=g}
+      const same=P.bufs&&Object.keys(bufs).length===Object.keys(P.bufs).length&&Object.keys(bufs).every(k=>P.bufs[k]===bufs[k]);
+      api._gains(gm,sc);P.dur=Math.max(0,...Object.values(bufs).map(b=>b.duration));
+      if(!same){const run=waRun();if(run){P.pos=cur();waStop()}P.bufs=bufs;if(run||!P.paused)waStart()}},
+    _gains(gm,sc){if(!P.out)return;const c=ctx(),t=c.currentTime;for(const[k,g]of Object.entries(P.gn)){const v=gm[k]||0;try{g.gain.setTargetAtTime(v,t,.012)}catch(e){g.gain.value=v}}
+      if(sc!=null)try{P.norm.gain.setTargetAtTime(sc,t,.02)}catch(e){P.norm.gain.value=sc}},
+    /* mix in un file (velocità cambiata) */
+    _mix(url,dur){elOn();const t=cur(),run=!P.paused;if(P.mode==='wa'){waStop();P.bufs=null}P.mode='el';P.pos=t;P.dur=dur||P.dur;const old=P.url;P.url=url;P.sw=true;
+      const on=()=>{EL.removeEventListener('loadedmetadata',on);try{EL.currentTime=Math.min(P.pos,(EL.duration||P.dur)-.05)}catch(e){}EL.playbackRate=P.rate;P.sw=false;if(!P.paused)EL.play().catch(()=>{});if(old)URL.revokeObjectURL(old)};
+      EL.addEventListener('loadedmetadata',on);EL.src=url;EL.load();void run},
+    _reset(){const was=!P.paused;P.paused=true;P.ended=false;waStop();P.sw=true;elDrop();P.sw=false;P.mode='wa';P.bufs=null;P.pos=0;P.dur=0;if(was)emit('pause')},
+    _node(){graph();return P.out},
+    setSinkId:EL.setSinkId?(id=>EL.setSinkId(id)):undefined};
+  return api})();
 let song=null, stems={}, order=[], gains={}, SR=44100, DUR=0;
 let rate=1, tr=0, trCache={tr:0,bufs:null}, voiceOff=false;
 let mixUrl=null, mixBusy=false, mixPend=false, wantTime=0, newSong=false;
@@ -2107,12 +2162,12 @@ async function trvNeed(t){
   if(sepAbort){sepEnd();$('#sepCard').hidden=true;throw trvErr('Cambio di tonalità annullato')}
   sepEnd();spShow('Tonalità '+trTxt(t)+' pronta e salvata con il brano. Premi Play per ascoltare.',1);$$('#spSteps span').forEach(el=>el.className='ok');
   setTimeout(()=>{if(!sepBusy)$('#sepCard').hidden=true},6000)}
-async function sourcesFor(t){if(!t)return stems;if(trCache.tr===t&&trCache.bufs)return trCache.bufs;
+async function sourcesFor(t){if(!t){if(trCache.bufs&&!trJob)trCache={tr:0,bufs:null};return stems}if(trCache.tr===t&&trCache.bufs)return trCache.bufs;
   while(trJob){const j=trJob;try{await j.p}catch(e){}if(trCache.tr===t&&trCache.bufs)return trCache.bufs;if(t!==tr&&R.trRec!==t)return stems}
   const job={t};job.p=(async()=>{trCache={tr:0,bufs:null};const id=song&&song.id;if(!id)return stems;
     if(!trvDone(await trvIdx(id),t,order))await trvNeed(t);
     setBusy('Carico la tonalità '+trTxt(t)+'…');const out={};
-    for(const k of order){const r=await idb('settings','readonly',x=>x.get('trv:'+id+':'+t+':'+k));out[k]=r&&r.data?await resampleTo(await decode(r.data),SR):stems[k]}
+    for(const k of order){const r=await idb('settings','readonly',x=>x.get('trv:'+id+':'+t+':'+k));out[k]=r&&r.data?(stems[k].numberOfChannels===1?monoIfSame(await resampleTo(await decode(r.data),SR)):await resampleTo(await decode(r.data),SR)):stems[k]}
     trCache={tr:t,bufs:out};return out})();
   trJob=job;try{return await job.p}
   catch(e){if(e&&e.trv!=null){if(e.trv)toast(e.trv);tr=0;tabRemap();updTr();return stems}throw e}
@@ -2122,11 +2177,26 @@ async function sourcesFor(t){if(!t)return stems;if(trCache.tr===t&&trCache.bufs)
 function noVox(L,R){const n=L.length,oL=new Float32Array(n),oR=new Float32Array(n);const a=Math.exp(-2*Math.PI*140/SR);let y1=0,y2=0;
   for(let i=0;i<n;i++){const m=(L[i]+R[i])*.5;y1=(1-a)*m+a*y1;y2=(1-a)*y1+a*y2;const s=(L[i]-R[i])*.5;oL[i]=s*1.4+y2;oR[i]=-s*1.4+y2}return [oL,oR]}
 
+/* voce tolta «rapida» già pronta come traccia (si calcola una volta per brano) */
+const NOVOX={src:null,b:null};
+function noVoxBuf(b){if(NOVOX.src===b&&NOVOX.b)return NOVOX.b;const c0=b.getChannelData(0),c1=b.numberOfChannels>1?b.getChannelData(1):c0;const [x,y]=noVox(c0,c1);
+  const o=new AudioBuffer({length:b.length,numberOfChannels:2,sampleRate:b.sampleRate});o.copyToChannel(x,0);o.copyToChannel(y,1);NOVOX.src=b;NOVOX.b=o;return o}
+/* picco della somma (un campione ogni 7, come prima): serve solo a non far saturare */
+function mixPeak(use,gm){const ks=order.filter(k=>gm[k]>0&&use[k]);if(!ks.length)return 0;const n=Math.max(...ks.map(k=>use[k].length)),m=Math.ceil(n/7);const L=new Float32Array(m),R=new Float32Array(m);
+  for(const k of ks){const b=use[k],g=gm[k],c0=b.getChannelData(0),c1=b.numberOfChannels>1?b.getChannelData(1):c0;for(let i=0,j=0;i<c0.length;i+=7,j++){L[j]+=g*c0[i];R[j]+=g*c1[i]}}
+  let pk=0;for(let j=0;j<m;j++){const a=Math.abs(L[j]),b=Math.abs(R[j]);if(a>pk)pk=a;if(b>pk)pk=b}return pk}
+const curGains=()=>{const gm={};for(const k of order)gm[k]=effGain(k);return gm};
 async function rebuildMix(){if(!order.length)return;if(mixBusy){mixPend=true;return}mixBusy=true;
   try{const src=await sourcesFor(tr);if(!song)return;
+    const noVoxCase=voiceOff&&!stems.vocals&&order.includes('mix');
+    if(!A._slow()){/* velocità normale: le tracce suonano direttamente, niente mix da preparare */
+      const use={};for(const k of order)use[k]=(k==='mix'&&noVoxCase&&src.mix.numberOfChannels>1)?noVoxBuf(src.mix):src[k];
+      const gm=curGains(),pk=mixPeak(use,gm);A._live(use,gm,pk>0.98?0.98/pk:1)}
+    else{
+    setBusy('Preparo l\'audio per la velocità scelta…');
     const n=Math.max(...order.map(k=>src[k].length));let L,R;
     /* il mix lo fa il motore audio del browser (più veloce, in parallelo); a mano solo per «senza voce» */
-    const noVoxCase=voiceOff&&!stems.vocals&&order.includes('mix');let native=false;
+    let native=false;
     if(!noVoxCase){try{const oc=new OfflineAudioContext(2,n,SR);for(const k of order){const g=effGain(k);if(!g)continue;const s=oc.createBufferSource();s.buffer=src[k];const gn=oc.createGain();gn.gain.value=g;s.connect(gn).connect(oc.destination);s.start(0)}
       const rb=await oc.startRendering();if(!song)return;L=rb.getChannelData(0);R=rb.getChannelData(1);native=true}catch(e){console.warn('mix nativo',e)}}
     if(!native){L=new Float32Array(n);R=new Float32Array(n);
@@ -2135,16 +2205,15 @@ async function rebuildMix(){if(!order.length)return;if(mixBusy){mixPend=true;ret
       else for(let i=0;i<c0.length;i++){L[i]+=g*c0[i];R[i]+=g*c1[i]}}}
     let pk=0;for(let i=0;i<n;i+=7){const a=Math.abs(L[i]),b=Math.abs(R[i]);if(a>pk)pk=a;if(b>pk)pk=b}
     if(pk>0.98){const s=0.98/pk;for(let i=0;i<n;i++){L[i]*=s;R[i]*=s}}
-    const url=URL.createObjectURL(new Blob([wavFromLR(L,R,SR)],{type:'audio/wav'}));swapSrc(url)}
+    if(!A._slow()){mixPend=true;return}/* nel frattempo è tornata la velocità normale */
+    A._mix(URL.createObjectURL(new Blob([wavFromLR(L,R,SR)],{type:'audio/wav'})),n/SR)}
+    newSong=false}
   catch(e){console.error(e);toast('Non sono riuscito a preparare l\'audio su questo dispositivo')}
   finally{mixBusy=false;setBusy('');if(mixPend){mixPend=false;rebuildMix()}}}
-function swapSrc(url){const t=A.src&&!newSong?A.currentTime:wantTime,was=playing()&&!newSong;newSong=false;const old=mixUrl;mixUrl=url;wantTime=t;
-  const on=()=>{A.removeEventListener('loadedmetadata',on);try{A.currentTime=Math.min(wantTime,(A.duration||DUR)-0.05)}catch(e){}A.playbackRate=rate;if(was)A.play().catch(()=>{});if(old)URL.revokeObjectURL(old)};
-  A.addEventListener('loadedmetadata',on);A.src=url;A.defaultPlaybackRate=rate;A.load()}
-let mixT=null;const mixSoon=()=>{clearTimeout(mixT);mixT=setTimeout(rebuildMix,220)};
+let mixT=null;const mixSoon=()=>{if(!A._slow()&&A.src&&!trJob&&!(voiceOff&&!stems.vocals))try{A._gains(curGains())}catch(e){}clearTimeout(mixT);mixT=setTimeout(rebuildMix,220)};
 
 let wake=null;async function holdWake(on){try{if(on&&navigator.wakeLock&&!wake)wake=await navigator.wakeLock.request('screen');else if(!on&&wake){await wake.release();wake=null}}catch(e){wake=null}}
-function play(){if(!A.src)return;A.playbackRate=rate;A.play().catch(()=>{})}
+function play(){if(!A.src)return;A.playbackRate=rate;A.play()}
 function pause(){A.pause()}
 function seek(t){t=Math.max(0,Math.min(DUR||A.duration||0,t));wantTime=t;try{A.currentTime=t}catch(e){}}
 A.addEventListener('play',()=>{setPlayIco();holdWake(true)});A.addEventListener('pause',()=>{setPlayIco();holdWake(false)});A.addEventListener('ended',()=>{setPlayIco();holdWake(false);try{donBanMaybe()}catch(e){}/* finita la canzone torna all'inizio */setTimeout(()=>{if(A.paused){wantTime=0;try{A.currentTime=0}catch(e){}}},0)});
@@ -2158,10 +2227,13 @@ async function decode(ab){const c=decCtx();if(c){try{return await c.decodeAudioD
 const BGW={loading:0,fill:false};
 async function bgIdle(){let n=0;while((BGW.loading||playing()||(typeof SA!=='undefined'&&SA.on)||(typeof R!=='undefined'&&R.on))&&n<2400){await new Promise(r=>setTimeout(r,1500));n++}}
 async function resampleTo(b,sr){if(b.sampleRate===sr)return b;const oc=new OfflineAudioContext(b.numberOfChannels,Math.ceil(b.duration*sr),sr);const s=oc.createBufferSource();s.buffer=b;s.connect(oc.destination);s.start();return await oc.startRendering()}
+/* traccia con i due canali praticamente uguali (differenza sotto −35 dB): basta un canale, metà memoria */
+function monoIfSame(b){if(!b||b.numberOfChannels!==2)return b;const L=b.getChannelData(0),R=b.getChannelData(1),n=b.length;let m=0,d=0;for(let i=0;i<n;i+=8){const a=L[i],c=R[i];m+=(a+c)*(a+c);d+=(a-c)*(a-c)}
+  if(!(m>0)||d>m*3e-4)return b;try{const o=new AudioBuffer({length:n,numberOfChannels:1,sampleRate:b.sampleRate});const x=o.getChannelData(0);for(let i=0;i<n;i++)x[i]=(L[i]+R[i])*.5;return o}catch(e){return b}}
 async function loadSong(s,bufs){
-  pause();loopA=loopB=null;updAB();tr=0;trCache={tr:0,bufs:null};voiceOff=false;updTr();
+  pause();A._reset();stems={};NOVOX.src=NOVOX.b=null;loopA=loopB=null;updAB();tr=0;trCache={tr:0,bufs:null};voiceOff=false;updTr();
   order=STEMS.map(x=>x.k).filter(k=>bufs[k]);SR=bufs[order[0]].sampleRate;
-  for(const k of order)bufs[k]=await resampleTo(bufs[k],SR);
+  for(const k of order)bufs[k]=monoIfSame(await resampleTo(bufs[k],SR));
   stems=bufs;DUR=Math.max(...order.map(k=>stems[k].duration));gains={};order.forEach(k=>gains[k]={vol:1,mute:false,solo:false});
   song=s;$('#sTitle').textContent=s.title||'Senza titolo';$('#sArtist').textContent=s.artist||'';{const demo=s.id==='demo';$('#nowSong').hidden=demo;$('#bLoadSong').hidden=!demo}$('#palName').textContent=(s.title||'')+(s.artist?' · '+s.artist:'');
   /* brano nuovo: si riparte sempre da zero, fermo */
@@ -2189,6 +2261,8 @@ async function openStored(id){let s=await dbGet(id);if(!s){toast('Brano non trov
     toast('☁️ Scarico «'+(s.title||'il brano')+'» dal cloud…');const rec0=s;try{const r=await cloudFetch(s,false);s=r.full;const st2={...r.full.stems};setTimeout(()=>{cloudKeep(rec0,r.files,st2,true).then(x=>{if(x&&x.kept){try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}else toast('💽 Spazio pieno: questo brano resta solo nel cloud')}).catch(e=>console.warn('cloudKeep',e))},4000)}catch(e){toast('Non riesco a scaricarlo dal cloud: '+(r2Err(e)||e.message));return}}
   toast('Apro “'+(s.title||'il brano')+'”…');const bufs={};BGW.loading++;
   try{pause();trCache={tr:0,bufs:null};
+  /* libera subito le tracce del brano di prima: così in memoria non ci sono due brani insieme */
+  A._reset();stems={};order=[];NOVOX.src=NOVOX.b=null;
   await Promise.all(Object.keys(s.stems).map(async k=>{try{bufs[k]=await decode(s.stems[k].data)}catch(e){}}));
   if(!Object.keys(bufs).length){toast('Non riesco a leggere l\'audio di questo brano');return}
   await loadSong({...s,stems:undefined,stored:true},bufs)}finally{BGW.loading--}}
@@ -4254,7 +4328,7 @@ async function recCamera(){if(R.stream)R.stream.getTracks().forEach(t=>t.stop())
   R.micSrc=c.createMediaStreamSource(R.stream);R.inN=audNode(c,R.micSrc);R.inN.connect(R.vocG);R.inN.connect(R.vdest);R.inN.connect(R.monG);audMonApply()}
 function recGraph(){const c=ctx();
   if(!R.dest){R.vdest=c.createMediaStreamDestination();R.monG=c.createGain();R.monG.gain.value=0;R.monG.connect(c.destination);R.dest=c.createMediaStreamDestination();R.musG=c.createGain();R.vocG=c.createGain();R.musD=c.createDelay(1);R.musG.connect(R.musD);R.musD.connect(R.dest);R.vocG.connect(R.dest)}
-  if(!R.elSrc){R.elSrc=c.createMediaElementSource(A);R.elSrc.connect(c.destination);R.elSrc.connect(R.musG)}  // la musica va sempre anche agli altoparlanti
+  if(!R.elSrc){R.elSrc=A._node();R.elSrc.connect(R.musG)}  // la musica va già agli altoparlanti; qui va anche nella registrazione
   recLevels()}
 function recAutoLat(){let inL=.02;try{const tr=R.stream&&R.stream.getAudioTracks()[0];const s=tr&&tr.getSettings();if(s&&s.latency)inL=s.latency}catch(e){}latMeasure();return Math.round(Math.min(.5,LAT.meas+inL)*100)*10}
 function recLevels(){if(!R.musG)return;R.musG.gain.value=$('#recBase').checked?+$('#recMus').value:0;R.vocG.gain.value=+$('#recVoc').value;const auto=$('#recLatAuto').checked;if(auto)$('#recLat').value=recAutoLat();$('#recLat').disabled=auto;const ms=+$('#recLat').value;R.musD.delayTime.value=ms/1000;$('#recLatV').textContent=ms+' ms'+(auto?' (automatica)':'')}
