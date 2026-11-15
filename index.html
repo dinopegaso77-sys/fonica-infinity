@@ -4374,12 +4374,18 @@ $('#recShare').onclick=async()=>{try{await navigator.share({files:[new File([R.b
 /* ===== TikTok =====
    Su telefono e tablet il video va all'app TikTok dal menu «Condividi» (TikTok non si può aprire direttamente da una pagina web).
    Dal PC il video si scarica e si apre la pagina di caricamento di TikTok. La descrizione con gli hashtag viene copiata, pronta da incollare. */
-const TT={cache:null};const TT_UP='https://www.tiktok.com/tiktokstudio/upload';
+const TT={cache:null,go:u=>{location.href=u}};
+const IS_ANDROID=/Android/i.test(navigator.userAgent)||(navigator.maxTouchPoints>0&&/Linux|X11/.test(navigator.userAgent)&&!/CrOS/.test(navigator.userAgent)&&matchMedia('(pointer:coarse)').matches);
+/* apre direttamente l'app TikTok (se non c'è, la pagina di TikTok su Google Play) */
+const TT_APP='intent://www.tiktok.com/#Intent;scheme=https;package=com.zhiliaoapp.musically;S.browser_fallback_url='+encodeURIComponent('https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically')+';end';const TT_UP='https://www.tiktok.com/tiktokstudio/upload';
 const ttCap=t=>(t?t+' · ':'')+'#PureVoltage #cover #musica';
 async function ttShare(getBlob,name,title){const cap=ttCap(title);try{navigator.clipboard.writeText(cap).catch(()=>{})}catch(e){}
   const mp4=!/\.webm$/i.test(name),type=mp4?'video/mp4':'video/webm';let b=TT.cache&&TT.cache.name===name?TT.cache.blob:null;
   if(!b){try{b=await getBlob()}catch(e){toast('Non riesco a preparare il video: '+((e&&e.message)||e));return}TT.cache={name,blob:b}}
   const f=new File([b],name,{type});
+  /* Android: il video si salva nel telefono/tablet e si apre subito TikTok; lì si tocca «+» e il video è il primo della galleria */
+  if(IS_ANDROID){if(!mp4&&!confirm('Questo video è in formato WebM: TikTok potrebbe non accettarlo. Provo lo stesso?'))return;
+    shDl(f);TT.cache=null;toast('Video salvato. In TikTok tocca «+» e scegli il primo video della galleria; la descrizione è copiata: incollala');setTimeout(()=>TT.go(TT_APP),900);return}
   if(isMobile&&navigator.canShare&&navigator.canShare({files:[f]})){
     if(!mp4&&!confirm('Questo video è in formato WebM: TikTok potrebbe non accettarlo. Provo lo stesso?'))return;
     try{await navigator.share({files:[f]});TT.cache=null}
@@ -4387,7 +4393,7 @@ async function ttShare(getBlob,name,title){const cap=ttCap(title);try{navigator.
     return}
   shDl(f);TT.cache=null;try{window.open(TT_UP,'_blank','noopener')}catch(e){}
   toast('Video scaricato. Su TikTok scegli «'+name+'» dalla cartella Download; la descrizione è già copiata: incollala')}
-$('#recTT').onclick=()=>{const t=song?(song.title||'')+(song.artist?' - '+song.artist:''):'';ttShare(async()=>R.blob,recName(),t);if(isMobile)toast('Nel menu che si apre scegli TikTok · la descrizione è copiata, incollala lì')};
+$('#recTT').onclick=()=>{const t=song?(song.title||'')+(song.artist?' - '+song.artist:''):'';ttShare(async()=>R.blob,recName(),t);if(isMobile&&!IS_ANDROID)toast('Nel menu che si apre scegli TikTok · la descrizione è copiata, incollala lì')};
 $('#recFolder').onclick=async()=>{try{if(!await dirReady(true))return;const d=await (await songDirHandle(song)).getDirectoryHandle('Video',{create:true});const fh=await d.getFileHandle(recName(),{create:true});const w=await fh.createWritable();await w.write(R.blob);await w.close();$('#recMsg').textContent='Salvato in «'+[dirHandle.name,...songDirs(song),'Video'].join(' / ')+'».'}catch(e){$('#recMsg').textContent='Non riesco a salvare nella cartella: '+(e.message||e)}};
 /* ---------- dopo la registrazione: voce a tempo e autotune ---------- */
 function recSetUrl(blob){setTimeout(cvUpUI,0);const u=URL.createObjectURL(blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u}
