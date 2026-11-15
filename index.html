@@ -172,7 +172,16 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .shv .chip{min-height:40px}.shv .chip .ico{width:18px;height:18px;vertical-align:-4px}
 .shvpages{flex:1;min-height:0;display:block;overflow-x:hidden;overflow-y:auto;touch-action:pan-y;overscroll-behavior:contain;padding:8px 0}.shvin{transform-origin:50% 0}
 .shvpg{display:flex;justify-content:center;padding:0 8px 12px}.shvcol{display:flex;flex-direction:column;flex:none;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.5)}.shvcol canvas{display:block}@media (max-width:599px){.shvbar .chip span{display:none}.shvbar .chip{min-width:44px;justify-content:center}}
-.shvnav{display:flex;align-items:center;justify-content:center;gap:14px;font-weight:600}.shvnav .chip{min-width:56px;font-size:20px}
+.shvnav{display:flex;align-items:center;justify-content:center;gap:14px;font-weight:600}
+#shvMark.on{background:#ffd84d;color:#18181b;border-color:#ffd84d}.shv.marking .shvpages canvas{cursor:pointer}
+.shvhint{background:#ffd84d;color:#18181b;font-weight:600;font-size:14px;text-align:center;padding:6px 10px}.shvhint[hidden],.shv.fs .shvhint{display:none}
+.pkov.shm{z-index:30;position:absolute}.pkbox.shmbox{height:auto;max-height:100%;overflow:auto;width:min(520px,100%)}
+.shmline{font-family:"Courier New",monospace;font-weight:700;font-size:16px;padding:10px;border-radius:10px;background:#fff;color:#111;line-height:1.5;word-break:break-word}.shmline mark{background:#ffd84d;color:#111;border-radius:3px;padding:0 2px}
+.shmwhat{align-self:flex-start}.shmwhat[hidden]{display:none}
+.shmkinds{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}.shmk{display:flex;align-items:center;gap:8px;min-height:46px;padding:6px 10px;border-radius:12px;border:2px solid transparent;color:#111;font-weight:700;font-size:15px;cursor:pointer;text-align:left}
+.shmk i{flex:0 0 auto;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#111;color:#fff;font-style:normal;font-size:13px}.shmk.on{border-color:var(--fg,#fff);box-shadow:0 0 0 2px #111 inset}
+.shmnote{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--dim)}.shmacts{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.shmnames summary{cursor:pointer;color:var(--dim);font-size:13.5px;padding:4px 0}.shmnames>div{display:grid;gap:6px;margin:6px 0}.shmnames label{display:flex;align-items:center;gap:8px}.shmnames label i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#111;color:#fff;font-style:normal;font-size:12px;flex:0 0 auto}.shvnav .chip{min-width:56px;font-size:20px}
 .ltgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0}.ltgrid>div{display:grid;gap:2px;text-align:center;padding:10px 6px;border-radius:14px;border:1px solid var(--line);background:var(--raise)}.ltgrid small{color:var(--dim);font-size:12px}.ltgrid b{font-size:22px;font-variant-numeric:tabular-nums}.ltgrid .tot{border-color:var(--accent)}
 .ltj{margin:4px 0 8px;font-weight:600}.ltj.ok{color:#5fd38d}.ltj.mid{color:#ffc34d}.ltj.bad{color:#ff6b6b}.ltt summary{cursor:pointer;font-weight:700;padding:6px 0}.ltt ol{margin:4px 0 4px 18px;padding:0;line-height:1.5}
 .pdlamp{width:16px;height:16px;border-radius:50%;background:#333;border:1px solid var(--line);flex:none;transition:background .1s}.pdlamp.on{background:#5fd38d;box-shadow:0 0 12px #5fd38d}
@@ -1581,10 +1590,21 @@ themeApply();</script>
   <div class="shvctl">
     <span class="seg" id="shvInst" role="group"><button data-b="0">Chitarra</button><button data-b="1">Basso</button></span>
     <span class="shvgrp"><button class="chip" id="shvDn" aria-label="Tonalità giù">−</button><span class="shvk"><small>Tonalità</small><b id="shvKey"></b></span><button class="chip" id="shvUp" aria-label="Tonalità su">+</button></span>
+    <button class="chip" id="shvMark" aria-pressed="false" title="Segna parole o righe e scrivi note"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h5l10-10-5-5L4 15z"/><path d="M13 6l5 5"/></svg><span>Segna</span></button>
     <span class="shvgrp"><button class="chip" id="shvZout" aria-label="Rimpicciolisci"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M8 11h6M16 16l4 4"/></svg></button><span class="shvk"><small>Zoom</small><b id="shvZoom">100%</b></span><button class="chip" id="shvZin" aria-label="Ingrandisci"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M8 11h6M11 8v6M16 16l4 4"/></svg></button></span>
   </div>
   <div class="shvpages" id="shvPages"></div>
   <div class="shvfoot"><span class="shvnav" id="shvNav" hidden><button class="chip" id="shvPrev" aria-label="Foglio precedente">‹</button><span id="shvPg"></span><button class="chip" id="shvNext" aria-label="Foglio successivo">›</button></span><span class="shvacts"><button class="chip pri" id="shPdf"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Salva PDF</button><button class="chip" id="shShare"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 11l7.6-4M8.2 13l7.6 4"/></svg> Condividi</button><button class="chip" id="shPrint"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5v-7h14v7h-2M7 14h10v6H7z"/></svg> Stampa</button><button class="chip" id="shTxt"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M9 12h6M9 16h4"/></svg> Testo</button></span></div>
+  <div class="shvhint" id="shvHint" hidden>Tocca una parola o una riga del testo per segnarla. Premi di nuovo «Segna» per finire.</div>
+  <div class="pkov shm" id="shmOv" hidden><div class="pkbox shmbox" role="dialog" aria-modal="true" aria-labelledby="shmT">
+    <div class="pktop"><b id="shmT">Segna</b><button class="mini" id="shmX" aria-label="Chiudi">✕</button></div>
+    <div class="shmline" id="shmLine"></div>
+    <span class="seg shmwhat" id="shmWhat" role="group"><button data-w="w" id="shmW">Solo la parola</button><button data-w="l">Tutta la riga</button></span>
+    <div class="shmkinds" id="shmKinds"></div>
+    <label class="shmnote"><span>Nota accanto alla riga</span><input class="inp" id="shmNote" maxlength="60" placeholder="Es. entra la batteria" autocomplete="off"></label>
+    <div class="shmacts"><button class="chip" id="shmClear">Togli i segni della riga</button><button class="chip pri" id="shmOk">Fatto</button></div>
+    <details class="shmnames"><summary>Cambia i nomi dei segni</summary><div id="shmNames"></div><button class="chip" id="shmNamesOk">Salva i nomi</button></details>
+  </div></div>
   <button class="shvfsx" id="shvFsX" aria-label="Esci dallo schermo intero"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button><span class="shvfspg" id="shvFsPg"></span>
 </div></div>
 <div class="ov" id="ovCover" hidden><div class="sheet slsheet cvwsheet">
@@ -3771,12 +3791,13 @@ function shBuild(src,tr,bass){const CHS=shChords(src,tr,bass),L=src.lines||[],of
     for(const c of CHS){if(c.a<=t0+.05||c.a>=t1-.05)continue;let wi=0;for(let k=0;k<ws.length;k++)if(ws[k][1]+off<=c.a+.15)wi=k;const col=pos[wi]||0,lm=marks[marks.length-1];if(lm&&lm.c===col)lm.n=c.n;else marks.push({c:col,n:c.n})}
     let line='';for(const m of marks){const c=Math.max(m.c,line.length?line.length+1:0);line=line.padEnd(c,' ')+m.n}
     if(marks.length)lastN=marks[marks.length-1].n;else{const c=at(t1-.1);if(c)lastN=c.n}
-    out.push({ch:line,ly:txt});
+    out.push({ch:line,ly:txt,li:i});
     const nx=L[i+1];if(nx){const g0=t1,g1=nx.t+off;if(g1-g0>6)gap(g0,g1,i<L.length/2?'Strumentale':'Assolo / strumentale')}});
   const tl=L[L.length-1],tEnd=((tl.e!=null?tl.e:tl.t+4)+off);if(dur-tEnd>4)gap(tEnd,dur,'Finale');return out}
 function shKeyOf(src,tr){const d=new Map();for(const c of (src.base||[]))if(c[2]>=0){const k=((c[2]+tr)%12+12)%12+'|'+c[3];d.set(k,(d.get(k)||0)+(c[1]-c[0]))}let b=null,v=0;for(const [k,x] of d)if(x>v){v=x;b=k}if(!b)return'';const [r,q]=b.split('|').map(Number);return NOTE_IT[r]+(q?' minore':' maggiore')}
 const shTrTxt=t=>t?(t>0?'+':'')+t:'originale';
-function shText(rows,head){const T=[head.title,head.artist,head.sub,''];for(const r of rows){if(r.sec){T.push('['+r.sec+']  '+r.seq,'')}else{if(r.ch)T.push(r.ch);T.push(r.ly)}}T.push('','Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio');return T.join('\n')}
+function shText(rows,head){const T=[head.title,head.artist,head.sub,''],MK=shMarksFor(rows),N=shMkNames(),used=new Set();for(const r of rows){if(r.sec){T.push('['+r.sec+']  '+r.seq,'')}else{const m=MK.get(r);if(r.ch)T.push(r.ch);let ks=[];if(m){if(m.k)ks.push(m.k);for(const[wi,k]of Object.entries(m.w||{}))ks.push(k+' «'+(r.ly.split(' ')[+wi]||'')+'»')}ks.forEach(k=>used.add(+String(k)[0]));T.push(r.ly+(ks.length?'   ('+ks.join(', ')+')':''));if(m&&m.n)T.push('   » '+m.n)}}
+  if(used.size)T.push('','Segni: '+[...used].sort().map(k=>k+' = '+N[k-1]).join(' · '));T.push('','Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio');return T.join('\n')}
 
 /* PDF scritto direttamente dall'app (niente librerie esterne, funziona anche senza internet):
    caratteri standard Helvetica e Courier, colori, linee e il logo JPEG */
@@ -3785,15 +3806,17 @@ function MiniPDF(){const P=[];let cur=null;const imgs=[];const mm=v=>v*72/25.4;c
       const h=String.fromCharCode(c);o+=(h==='('||h===')'||h==='\\')?'\\'+h:h}return o};
   const col=c=>{if(typeof c==='number')c=[c,c,c];return c.map(v=>(v/255).toFixed(3)).join(' ')};
   this.addPage=()=>{cur={ops:[]};P.push(cur);return this};this.addPage();
-  this.text=(s,x,y,o={})=>{const f={h:'F1',hb:'F2',c:'F3',cb:'F4'}[o.font||'h'];cur.ops.push(`BT /${f} ${o.size||12} Tf ${col(o.color||17)} rg ${mm(x).toFixed(2)} ${(PH-mm(y)).toFixed(2)} Td (${enc(s)}) Tj ET`);return this};
+  this.text=(s,x,y,o={})=>{const f={h:'F1',hb:'F2',c:'F3',cb:'F4',hi:'F5'}[o.font||'h'];cur.ops.push(`BT /${f} ${o.size||12} Tf ${col(o.color||17)} rg ${mm(x).toFixed(2)} ${(PH-mm(y)).toFixed(2)} Td (${enc(s)}) Tj ET`);return this};
   this.line=(x1,y1,x2,y2,w=.5,c=17)=>{cur.ops.push(`${col(c)} RG ${mm(w).toFixed(2)} w ${mm(x1).toFixed(2)} ${(PH-mm(y1)).toFixed(2)} m ${mm(x2).toFixed(2)} ${(PH-mm(y2)).toFixed(2)} l S`);return this};
+  this.rect=(x,y,w,h,c=230)=>{cur.ops.push(`${col(c)} rg ${mm(x).toFixed(2)} ${(PH-mm(y+h)).toFixed(2)} ${mm(w).toFixed(2)} ${mm(h).toFixed(2)} re f`);return this};
+  this.poly=(pts,w,c,fill)=>{let o=(fill?`${col(c)} rg`:`${col(c)} RG ${mm(w).toFixed(2)} w 1 J 1 j`);for(let i=0;i<pts.length;i+=2)o+=` ${mm(pts[i]).toFixed(2)} ${(PH-mm(pts[i+1])).toFixed(2)} ${i?'l':'m'}`;cur.ops.push(o+(fill?' h f':' h S'));return this};
   this.image=(bytes,pw,ph,x,y,w,h)=>{const id=imgs.length;imgs.push({bytes,pw,ph});cur.ops.push(`q ${mm(w).toFixed(2)} 0 0 ${mm(h).toFixed(2)} ${mm(x).toFixed(2)} ${(PH-mm(y+h)).toFixed(2)} cm /Im${id} Do Q`);return this};
   this.pages=()=>P.length;this.setPage=i=>{cur=P[i]};
   this.blob=(title)=>{const parts=[],offs=[];let len=0;
     const add=x=>{if(typeof x==='string'){const b=new Uint8Array(x.length);for(let i=0;i<x.length;i++)b[i]=x.charCodeAt(i)&255;x=b}parts.push(x);len+=x.length};
     const obj=(n,body)=>{offs[n]=len;add(n+' 0 obj\n');if(Array.isArray(body))body.forEach(add);else add(body);add('\nendobj\n')};
-    add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');const nF=4,fBase=3,imBase=fBase+nF,pBase=imBase+imgs.length;
-    const fonts=['Helvetica','Helvetica-Bold','Courier','Courier-Bold'];
+    add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');const nF=5,fBase=3,imBase=fBase+nF,pBase=imBase+imgs.length;
+    const fonts=['Helvetica','Helvetica-Bold','Courier','Courier-Bold','Helvetica-Oblique'];
     obj(1,'<< /Type /Catalog /Pages 2 0 R >>');
     const kids=P.map((_,i)=>(pBase+i*2)+' 0 R').join(' ');obj(2,`<< /Type /Pages /Kids [${kids}] /Count ${P.length} >>`);
     fonts.forEach((f,i)=>obj(fBase+i,`<< /Type /Font /Subtype /Type1 /BaseFont /${f} /Encoding /WinAnsiEncoding >>`));
@@ -3812,47 +3835,84 @@ function shLines(rows){const L=[];for(const r of rows){if(r.sec){L.push(['g','']
    ['t',testo,x,y,font,size,colore] · ['l',x1,y1,x2,y2,spessore,colore] · ['i',x,y,w,h] (logo)
    Leggibile da lontano: carattere grande e in grassetto, una sola colonna, spazio tra le righe;
    le righe lunghe vanno a capo tenendo l'accordo sopra la sua parola; si usano tutte le pagine che servono. */
+/* ---- segni del musicista: 5 segni pronti (nomi modificabili); si segna una riga intera o una parola, con una nota accanto alla riga.
+   Colore chiaro + numero nel pallino: in bianco e nero il colore diventa grigio, il numero resta leggibile. ---- */
+const SHM_COL=[[255,184,184],[255,232,120],[178,236,178],[176,210,255],[255,204,150]];
+const SHM_DEF=['Stop','Cambio','Assolo','Coro','Attenzione'];
+function shMkNames(){try{const a=JSON.parse(prefGet('shMarkNames')||'null');if(Array.isArray(a)&&a.length===5)return a.map((x,i)=>String(x||'').trim()||SHM_DEF[i])}catch(e){}return SHM_DEF.slice()}
+function shMarksGet(){const e=shEntry();const m=e&&e.marks&&e.marks[SH.bass?'b':'g'];return m&&typeof m==='object'?m:{}}
+function shMarksPut(m){const all=shAll(),k=shSK(song),e=all[k];if(!e)return;e.marks=e.marks||{};for(const x of Object.keys(m)){const v=m[x];if(!v.k&&!v.n&&!Object.keys(v.w||{}).length)delete m[x]}e.marks[SH.bass?'b':'g']=m;e.at=Date.now();all[k]=e;shSaveAll(all);SH.marks=m}
+/* segni → righe: per numero di riga, controllando che il testo sia lo stesso (se il testo cambia, il segno segue la riga uguale) */
+function shMarksFor(rows){const M=SH.marks||{},out=new Map(),used=new Set();const R=rows.filter(r=>!r.sec);
+  for(const[li,m]of Object.entries(M)){let r=R.find(x=>x.li===+li);if(!r||(m.t&&r.ly!==m.t)){r=R.find(x=>x.ly===m.t&&!used.has(x))||null}if(r&&!used.has(r)){used.add(r);out.set(r,m)}}return out}
+const shWordStarts=t=>{const a=[];let p=0;for(const w of String(t).split(' ')){a.push([p,w.length]);p+=w.length+1}return a};
 function shLogo(){try{const im=$('#brandLogo');if(im&&im.naturalWidth&&/^data:image\/jpe?g;base64,/.test(im.src))return im}catch(e){}return null}
 /* va a capo una coppia accordi/testo senza spezzare parole né nomi di accordi */
-function shWrapPair(ch,ly,max){const out=[];ch=ch||'';ly=ly||'';
+function shWrapPair(ch,ly,max){const out=[];ch=ch||'';ly=ly||'';let o=0;
   while(Math.max(ch.length,ly.length)>max){let b=-1;for(let k=max;k>=Math.floor(max*.45);k--){const lyOk=k>=ly.length||ly[k]===' ',chOk=k>=ch.length||ch[k]===' ';if(lyOk&&chOk){b=k;break}}
     if(b<0){for(let k=max;k>=Math.floor(max*.45);k--)if(k>=ly.length||ly[k]===' '){b=k;break}}if(b<0)b=max;
-    out.push([ch.slice(0,b).trimEnd(),ly.slice(0,b)]);ch=ch.slice(b+1);ly=ly.slice(b+1);if(!ch.trim())ch=''}
-  out.push([ch,ly]);return out}
+    out.push([ch.slice(0,b).trimEnd(),ly.slice(0,b),o]);o+=b+1;ch=ch.slice(b+1);ly=ly.slice(b+1);if(!ch.trim())ch=''}
+  out.push([ch,ly,o]);return out}
 function shWrapWords(s,max){const w=String(s).split(/\s+/).filter(Boolean),out=[];let l='';for(const x of w){const t=l?l+' '+x:x;if(t.length>max&&l){out.push(l);l=x}else l=t}if(l)out.push(l);return out}
 /* carattere il più grande possibile (da 16 a 13 punti) senza aggiungere pagine inutili */
 function shLayout(rows,head){let best=null;for(let f=16;f>=13;f-=.5){const r=shLayoutFs(rows,head,f);if(!best||r.pages.length<best.pages.length)best=r}return best}
-function shLayoutFs(rows,head,fs,z){z=z||1;const cont=z>1.01,W=210/z;let H=cont?1e7:297/z;const M=Math.max(5,12/z),pt=.3528,cw=fs*.6*pt,maxCh=Math.floor((W-2*M)/cw),lh=fs*pt*1.18,pages=[];let P;
-  const T=(s,x,y,font,size,color)=>P.push(['t',s,x,y,font,size,color]);const im=shLogo();let top,y;
-  const newPage=()=>{P=[];pages.push(P);if(pages.length===1){let logoW=0;if(im){logoW=Math.min(34,(W-2*M)*.32);P.push(['i',W-M-logoW,M-2,logoW,logoW*im.naturalHeight/im.naturalWidth])}
+function shLayoutFs(rows,head,fs,z){z=z||1;const cont=z>1.01,W=210/z;let H=cont?1e7:297/z;const M=Math.max(5,12/z),pt=.3528,cw=fs*.6*pt,lh=fs*pt*1.18,pages=[];let P,HT;
+  const MK=shMarksFor(rows),G=MK.size?6.5:0,X0=M+G,maxCh=Math.floor((W-2*M-G)/cw),NM=shMkNames(),used=new Set();
+  const T=(s,x,y,font,size,color)=>P.push(['t',s,x,y,font,size,color]);const R=(x,y,w,h,c)=>P.push(['r',x,y,w,h,c]);let top,y;
+  const circ=(cx,cy,r)=>{const a=[];for(let i=0;i<20;i++){const t=i/20*Math.PI*2;a.push(cx+r*Math.cos(t),cy+r*Math.sin(t))}return a};
+  const badge=(cx,cy,r,k)=>{P.push(['p',circ(cx,cy,r),0,17,true]);const sz=r*2*2.05,t=String(k);T(t,cx-helvW(t,sz,true)/2,cy+sz*pt*.36,'hb',sz,255)};
+  /* logo a linee nere: si legge anche stampato in bianco e nero */
+  const logo=(x,y0,w)=>{const cx=x+w/2,cy=y0+10.5,a=w*.46,pts=[];for(let i=0;i<72;i++){const t=i/72*Math.PI*2,d=1+Math.sin(t)**2;pts.push(cx+a*Math.cos(t)/d,cy+a*Math.sin(t)*Math.cos(t)/d*1.25)}
+    P.push(['p',pts,1.1,17,false]);const tx='PURE VOLTAGE',sz=Math.min(9,w/helvW('PURE VOLTAGE',1,true)*.98);T(tx,cx-helvW(tx,sz,true)/2,y0+3.2,'hb',sz,17);return 17};
+  const newPage=()=>{P=[];HT=[];pages.push(P);P.hits=HT;if(pages.length===1){const logoW=Math.min(30,(W-2*M)*.28);const lh2=logo(W-M-logoW,M-2,logoW);
       const tw=W-2*M-logoW-4,tl=wrapTo(head.title,24,true,tw);let yy=M+7;tl.forEach((t,i)=>T(t,M,yy+i*9.2,'hb',24,17));yy+=(tl.length-1)*9.2;
-      yy+=7.5;T(head.artist||'',M,yy,'h',15,50);yy+=6;T(head.sub,M,yy,'h',9.5,90);yy=Math.max(yy+3,M+26);P.push(['l',M,yy,W-M,yy,.7,17]);top=yy+7}
+      yy+=7.5;T(head.artist||'',M,yy,'h',15,50);yy+=6;T(head.sub,M,yy,'h',9.5,90);yy=Math.max(yy+3,M+Math.max(26,lh2+2));P.push(['l',M,yy,W-M,yy,.7,17]);top=yy+7}
     else{T(head.title+(head.artist?'  ·  '+head.artist:''),M,M+4,'hb',11,60);P.push(['l',M,M+7,W-M,M+7,.4,150]);top=M+13}
     y=top};
-  /* blocchi da tenere interi: una coppia accordi+testo, oppure una sezione suonata */
+  /* accordi dentro un riquadro grigio chiaro: in bianco e nero non si confondono con il testo */
+  const chordBoxes=(str,x,base)=>{const re=/\S+/g;let m;while((m=re.exec(str))){const t=m[0];if(/^[()]+$/.test(t)||t[0]==='×')continue;R(x+m.index*cw-.7,base-fs*pt*.8,t.length*cw+1.4,fs*pt*1.04,226)}};
   const blocks=[];for(const r of rows){if(r.sec){const lab='['+r.sec+']',seq=shWrapWords(r.seq,maxCh-lab.length-2);blocks.push({sec:true,lines:seq.map((s,i)=>({lab:i?'':lab,ind:lab.length+2,s}))})}
-    else blocks.push({sec:false,lines:shWrapPair(r.ch,r.ly,maxCh).flatMap(([c,l])=>[...(c?[{k:'c',s:c}]:[]),{k:'l',s:l}])})}
+    else{const m=MK.get(r),ws=shWordStarts(r.ly),pcs=shWrapPair(r.ch,r.ly,maxCh);const L=[];
+      pcs.forEach(([c,l,o],pi)=>{if(c)L.push({k:'c',s:c});L.push({k:'l',s:l,o,first:pi===0,last:pi===pcs.length-1,r,m,ws})});
+      if(m&&m.n){const nsz=fs*.72,nx=X0+(L[L.length-1].s.length+2)*cw,txt='» '+m.n;
+        if(nx+helvW(txt,nsz)<=W-M)L[L.length-1].note={s:txt,x:nx,sz:nsz};else wrapTo(txt,nsz,false,W-M-X0-cw).forEach(t=>L.push({k:'n',s:t,sz:nsz}))}
+      blocks.push({sec:false,lines:L})}}
+  if(MK.size){for(const m of MK.values()){if(m.k)used.add(m.k);for(const k of Object.values(m.w||{}))used.add(k)}}
   const bottom=H-M-7;newPage();let prevSec=null;
-  for(const b of blocks){const gapB=y===top?0:(b.sec||prevSec?lh*.9:lh*.45),hB=b.lines.length*lh;
+  for(const b of blocks){const gapB=y===top?0:(b.sec||prevSec?lh*.9:lh*.45),hB=b.lines.reduce((a,l)=>a+(l.k==='n'?lh*.8:lh),0);
     if(y+gapB+hB>bottom&&y>top){newPage()}else y+=gapB;
     for(const l of b.lines){const base=y+fs*pt*.82;
-      if(b.sec){if(l.lab)T(l.lab,M,base,'cb',fs,17);T(l.s,M+l.ind*cw,base,'cb',fs,[180,32,15])}
-      else T(l.s,M,base,'cb',fs,l.k==='c'?[180,32,15]:17);y+=lh}
+      if(b.sec){if(l.lab)T(l.lab,X0,base,'cb',fs,17);chordBoxes(l.s,X0+l.ind*cw,base);T(l.s,X0+l.ind*cw,base,'cb',fs,[160,24,12])}
+      else if(l.k==='c'){chordBoxes(l.s,X0,base);T(l.s,X0,base,'cb',fs,[160,24,12])}
+      else if(l.k==='n'){T(l.s,X0+cw,y+fs*pt*.62,'hi',l.sz,40);y+=lh*.8;continue}
+      else{const m=l.m,y0=base-fs*pt*.86,hh=fs*pt*1.16;
+        if(m&&m.k){R(X0-.9,y0,Math.max(4,l.s.length)*cw+1.8,hh,SHM_COL[m.k-1]);if(l.first)badge(M+2.6,base-fs*pt*.3,2.3,m.k)}
+        const wmarks=[];if(m&&m.w)for(const[wi,k]of Object.entries(m.w)){const st=l.ws[+wi];if(!st)continue;const ix=st[0]-l.o;if(ix<0||ix>=l.s.length)continue;wmarks.push([ix,st[1],k]);R(X0+ix*cw-.5,y0,st[1]*cw+1,hh,SHM_COL[k-1])}
+        T(l.s,X0,base,'cb',fs,17);
+        for(const[ix,len,k]of wmarks){P.push(['l',X0+ix*cw,base+1,X0+(ix+len)*cw,base+1,.55,17]);badge(X0+(ix+len)*cw-.2,y0-.3,1.45,k)}
+        if(l.note)T(l.note.s,l.note.x,base,'hi',l.note.sz,40);
+        HT.push({x:X0,y0:y,y1:y+lh,cw,o:l.o,r:l.r})}
+      y+=lh}
     prevSec=b.sec}
-  /* ingrandito a schermo: un unico foglio lungo, senza salti di pagina */
+  /* legenda dei segni usati, in fondo */
+  if(used.size){const ks=[...used].sort(),items=ks.map(k=>({k,t:NM[k-1]}));const sz=10.5,rowH=6.5,LW=helvW('Segni del musicista:',sz,true)+5;let rowsN=1,xx=0;const avail=W-2*M-LW;for(const it of items){const w=7+helvW(it.t,sz)+6;if(xx+w>avail&&xx>0){rowsN++;xx=0}xx+=w}
+    const hL=4+rowsN*rowH;if(y+lh*.9+hL>bottom&&y>top)newPage();else y+=lh*.9;P.push(['l',M,y,W-M,y,.3,170]);y+=5.5;T('Segni del musicista:',M,y+1,'hb',sz,17);let x=M+LW;let yy=y;
+    for(const it of items){const w=7+helvW(it.t,sz)+6;if(x+w>W-M&&x>M+LW){x=M+LW;yy+=rowH}badge(x+2.4,yy-1,2.3,it.k);T(it.t,x+6,yy+1,'h',sz,17);x+=w}y=yy+rowH}
   if(cont)H=y+M+10;
   const n=pages.length;pages.forEach((pg,i)=>{let s='Pure Voltage · accordi riconosciuti automaticamente: controllali a orecchio'+(n>1?'  ·  pagina '+(i+1)+' di '+n:'');if(helvW(s,7.5)>W-2*M)s='Pure Voltage · accordi automatici: controllali a orecchio';if(helvW(s,7.5)<=W-2*M)pg.push(['t',s,M,H-M+2,'h',7.5,130])});
   return{pages,fs,cols:1,W,H}}
 async function shPDF(){const doc=new MiniPDF(),lay=SH.lay||shLayout(SH.rows,SH.head),im=shLogo();let jpg=null;if(im)try{jpg=Uint8Array.from(atob(im.src.split(',')[1]),c=>c.charCodeAt(0))}catch(e){}
-  lay.pages.forEach((pg,i)=>{if(i)doc.addPage();for(const o of pg){if(o[0]==='t')doc.text(o[1],o[2],o[3],{font:o[4],size:o[5],color:o[6]});else if(o[0]==='l')doc.line(o[1],o[2],o[3],o[4],o[5],o[6]);else if(o[0]==='i'&&jpg)doc.image(jpg,im.naturalWidth,im.naturalHeight,o[1],o[2],o[3],o[4])}});
+  lay.pages.forEach((pg,i)=>{if(i)doc.addPage();for(const o of pg){if(o[0]==='t')doc.text(o[1],o[2],o[3],{font:o[4],size:o[5],color:o[6]});else if(o[0]==='l')doc.line(o[1],o[2],o[3],o[4],o[5],o[6]);else if(o[0]==='r')doc.rect(o[1],o[2],o[3],o[4],o[5]);else if(o[0]==='p')doc.poly(o[1],o[2],o[3],o[4]);else if(o[0]==='i'&&jpg)doc.image(jpg,im.naturalWidth,im.naturalHeight,o[1],o[2],o[3],o[4])}});
   return{blob:doc.blob(SH.head.title+' - '+SH.head.artist),pages:lay.pages.length,fs:lay.fs,cols:lay.cols}}
 async function shPdfFile(){const r=await shPDF();return{file:new File([r.blob],shFile('pdf'),{type:'application/pdf'}),...r}}
 const shDl=f=>{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000)};
 /* disegno di una pagina su un canvas largo wpx */
 function shDraw(cv,pg,wpx,W,H,y0,y1){W=W||210;H=H||297;y0=y0||0;y1=y1==null?H:y1;const dpr=Math.min(3,window.devicePixelRatio||1),k=wpx/W,hpx=Math.round((y1-y0)*k);cv.style.width=wpx+'px';cv.style.height=hpx+'px';
   cv.width=Math.min(5000,Math.round(wpx*dpr));cv.height=Math.round(cv.width*(y1-y0)/W);const g=cv.getContext('2d'),s=cv.width/W;g.setTransform(1,0,0,1,0,0);g.fillStyle='#fff';g.fillRect(0,0,cv.width,cv.height);g.translate(0,-y0*s);
-  const fam={h:'Arial,Helvetica,sans-serif',hb:'Arial,Helvetica,sans-serif',c:'"Courier New",Courier,monospace',cb:'"Courier New",Courier,monospace'},rgb=c=>{if(typeof c==='number')c=[c,c,c];return`rgb(${c.join(',')})`};g.textBaseline='alphabetic';
-  for(const o of pg){if(o[0]==='t'){g.font=(o[4]==='hb'||o[4]==='cb'?'700 ':'')+(o[5]*.3528*s).toFixed(2)+'px '+fam[o[4]];g.fillStyle=rgb(o[6]);g.fillText(o[1],o[2]*s,o[3]*s)}
+  const fam={h:'Arial,Helvetica,sans-serif',hb:'Arial,Helvetica,sans-serif',hi:'Arial,Helvetica,sans-serif',c:'"Courier New",Courier,monospace',cb:'"Courier New",Courier,monospace'},rgb=c=>{if(typeof c==='number')c=[c,c,c];return`rgb(${c.join(',')})`};g.textBaseline='alphabetic';
+  for(const o of pg){if(o[0]==='r'){g.fillStyle=rgb(o[5]);g.fillRect(o[1]*s,o[2]*s,o[3]*s,o[4]*s)}
+    else if(o[0]==='p'){const q=o[1];g.beginPath();for(let i=0;i<q.length;i+=2){if(i)g.lineTo(q[i]*s,q[i+1]*s);else g.moveTo(q[i]*s,q[i+1]*s)}g.closePath();if(o[4]){g.fillStyle=rgb(o[3]);g.fill()}else{g.strokeStyle=rgb(o[3]);g.lineWidth=o[2]*s;g.lineJoin='round';g.stroke()}}
+    else if(o[0]==='t'){g.font=(o[4]==='hi'?'italic ':'')+(o[4]==='hb'||o[4]==='cb'?'700 ':'')+(o[5]*.3528*s).toFixed(2)+'px '+fam[o[4]];g.fillStyle=rgb(o[6]);g.fillText(o[1],o[2]*s,o[3]*s)}
     else if(o[0]==='l'){g.strokeStyle=rgb(o[6]);g.lineWidth=o[5]*s;g.beginPath();g.moveTo(o[1]*s,o[2]*s);g.lineTo(o[3]*s,o[4]*s);g.stroke()}
     else if(o[0]==='i'){const im=shLogo();if(im)try{g.drawImage(im,o[1]*s,o[2]*s,o[3]*s,o[4]*s)}catch(e){}}}}
 
@@ -3884,7 +3944,7 @@ $('#shkGo').onclick=()=>{$('#ovShAsk').hidden=true;shStore(SH.src,null);shView(S
 
 /* ---- vista a tutto schermo: pagine affiancate, si scorre col dito o con le frecce ---- */
 function shView(trv,bass,isNew){const e=shEntry();if(e&&!isNew)SH.src=e.src;if(!SH.src){shAsk();return}
-  SH.tr=Math.max(-11,Math.min(11,trv|0));SH.bass=!!bass;const added=shStore(null,SH.tr,SH.bass);
+  SH.tr=Math.max(-11,Math.min(11,trv|0));SH.bass=!!bass;const added=shStore(null,SH.tr,SH.bass);SH.marks=shMarksGet();
   const k=shKeyOf(SH.src,SH.tr);SH.rows=shBuild(SH.src,SH.tr,SH.bass);
   SH.head={title:song.title||'Brano',artist:artQ(song.artist||''),sub:[SH.bass?'Note del basso':'Accordi per chitarra',k?'tonalità '+k:'',SH.tr?'trasposto '+shTrTxt(SH.tr)+' semitoni':'tonalità originale'].filter(Boolean).join(' · ')};
   SH.txt=shText(SH.rows,SH.head);SH.lay=shLayout(SH.rows,SH.head);
@@ -3911,7 +3971,35 @@ $('#shvDn').onclick=()=>shView(SH.tr<=-6?SH.tr+11:SH.tr-1,SH.bass);$('#shvUp').o
 $$('#shvInst button').forEach(b=>b.onclick=()=>shView(SH.tr,b.dataset.b==='1'));
 const shZ=[1,1.25,1.5,2,2.5,3];$('#shvZin').onclick=()=>shZoomTo(shZ.find(z=>z>SH.zoom+.01)||3);$('#shvZout').onclick=()=>shZoomTo([...shZ].reverse().find(z=>z<SH.zoom-.01)||1);
 $('#shvList').onclick=()=>{shViewClose();shListOpen()};
-function shViewClose(){shFs(false);$('#ovShView').hidden=true;SH.zoom=1}
+/* ---- Segna: tocchi una parola o una riga e scegli il segno ---- */
+const SHM={on:false,r:null,wi:-1,what:'w'};
+function shMarkMode(on){SHM.on=!!on;$('#shvMark').classList.toggle('on',SHM.on);$('#shvMark').setAttribute('aria-pressed',SHM.on?'true':'false');$('#shvHint').hidden=!SHM.on;$('#ovShView .shv').classList.toggle('marking',SHM.on);if(!SHM.on)$('#shmOv').hidden=true}
+$('#shvMark').onclick=()=>shMarkMode(!SHM.on);
+$('#shvPages').addEventListener('click',e=>{if(!SHM.on||!SH.vlay)return;const pg=e.target.closest('.shvpg');if(!pg)return;const i=shPgs().indexOf(pg),col=pg.querySelector('.shvcol');if(i<0||!col)return;
+  const rc=col.getBoundingClientRect(),k=SH.vlay.W/rc.width,x=(e.clientX-rc.left)*k,y=(e.clientY-rc.top)*k,P=SH.vlay.pages[i];const H=(P&&P.hits)||[];
+  let h=H.find(q=>y>=q.y0&&y<q.y1);if(!h){let best=null,bd=1e9;for(const q of H){const d=Math.min(Math.abs(y-q.y0),Math.abs(y-q.y1));if(d<bd){bd=d;best=q}}if(best&&bd<4)h=best}
+  if(!h){toast('Tocca una riga del testo (non gli accordi)');return}
+  const ci=h.o+Math.floor((x-h.x)/h.cw),ws=shWordStarts(h.r.ly);let wi=-1;ws.forEach(([st,len],j)=>{if(ci>=st&&ci<st+len)wi=j});
+  if(wi<0&&ci>=0&&ci<h.r.ly.length){ws.forEach(([st],j)=>{if(st<=ci)wi=j})}shmOpen(h.r,wi)});
+function shmCur(){const M=SH.marks||{},r=SHM.r;let key=String(r.li);const MK=shMarksFor(SH.rows);const ex=MK.get(r);if(ex){for(const[k2,v]of Object.entries(M))if(v===ex)key=k2}return[M,key,ex||{t:r.ly,k:0,w:{},n:''}]}
+function shmOpen(r,wi){SHM.r=r;SHM.wi=wi;SHM.what=wi>=0?'w':'l';$('#shmW').hidden=wi<0;$('#shmNote').value=(shmCur()[2].n)||'';shmDraw();const ov=$('#shmOv');if(ov.parentNode!==$('#ovShView .shv'))$('#ovShView .shv').appendChild(ov);ov.hidden=false}
+function shmDraw(){const r=SHM.r,ws=shWordStarts(r.ly),[,,m]=shmCur(),N=shMkNames();
+  $('#shmLine').innerHTML=r.ly.split(' ').map((w,j)=>j===SHM.wi&&SHM.what==='w'?'<mark>'+esc(w)+'</mark>':esc(w)).join(' ');
+  $('#shmT').textContent=SHM.what==='w'&&SHM.wi>=0?'Segna la parola «'+(r.ly.split(' ')[SHM.wi]||'')+'»':'Segna tutta la riga';
+  $$('#shmWhat button').forEach(b=>b.classList.toggle('on',b.dataset.w===SHM.what));
+  const cur=SHM.what==='w'?(m.w||{})[SHM.wi]:m.k;
+  $('#shmKinds').innerHTML=N.map((n,i)=>`<button class="shmk ${cur===i+1?'on':''}" data-k="${i+1}" style="background:rgb(${SHM_COL[i].join(',')})"><i>${i+1}</i><span>${esc(n)}</span></button>`).join('');
+  $$('#shmKinds .shmk').forEach(b=>b.onclick=()=>shmSet(+b.dataset.k));
+  $('#shmNames').innerHTML=N.map((n,i)=>`<label><i>${i+1}</i><input class="inp" data-nm="${i}" maxlength="18" value="${esc(n)}"></label>`).join('')}
+function shmSave(m,key,M){m.t=SHM.r.ly;M[key]=m;shMarksPut(M);SH.lay=shLayout(SH.rows,SH.head);SH.txt=shText(SH.rows,SH.head);shKeep(()=>shRender())}
+function shmSet(k){const[M,key,m0]=shmCur(),m={...m0,w:{...(m0.w||{})}};if(SHM.what==='w'&&SHM.wi>=0){if(m.w[SHM.wi]===k)delete m.w[SHM.wi];else m.w[SHM.wi]=k}else m.k=m.k===k?0:k;shmSave(m,key,M);shmDraw()}
+$$('#shmWhat button').forEach(b=>b.onclick=()=>{SHM.what=b.dataset.w;shmDraw()});
+function shmNoteSave(){const[M,key,m0]=shmCur(),v=$('#shmNote').value.trim();if((m0.n||'')===v)return;shmSave({...m0,w:{...(m0.w||{})},n:v},key,M)}
+$('#shmOk').onclick=()=>{shmNoteSave();$('#shmOv').hidden=true};$('#shmX').onclick=()=>{shmNoteSave();$('#shmOv').hidden=true};
+$('#shmNote').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('#shmOk').click()}});
+$('#shmClear').onclick=()=>{const[M,key]=shmCur();delete M[key];shMarksPut(M);$('#shmNote').value='';SH.lay=shLayout(SH.rows,SH.head);SH.txt=shText(SH.rows,SH.head);shKeep(()=>shRender());shmDraw()};
+$('#shmNamesOk').onclick=()=>{const a=$$('#shmNames [data-nm]').map(x=>x.value.trim());prefSet('shMarkNames',JSON.stringify(a));toast('Nomi dei segni salvati');SH.lay=shLayout(SH.rows,SH.head);SH.txt=shText(SH.rows,SH.head);shKeep(()=>shRender());shmDraw()};
+function shViewClose(){shFs(false);try{shMarkMode(false)}catch(e){}$('#ovShView').hidden=true;SH.zoom=1}
 $('#shvX').onclick=shViewClose;
 /* schermo intero: spariscono intestazione e pulsanti in basso; resta solo il foglio (si gira col dito) */
 function shFs(on){const v=$('#ovShView .shv');if(!v)return;const was=v.classList.contains('fs');if(on===was)return;v.classList.toggle('fs',on);
