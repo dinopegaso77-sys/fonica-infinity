@@ -2124,10 +2124,15 @@ function noVox(L,R){const n=L.length,oL=new Float32Array(n),oR=new Float32Array(
 
 async function rebuildMix(){if(!order.length)return;if(mixBusy){mixPend=true;return}mixBusy=true;
   try{const src=await sourcesFor(tr);if(!song)return;
-    const n=Math.max(...order.map(k=>src[k].length));const L=new Float32Array(n),R=new Float32Array(n);
+    const n=Math.max(...order.map(k=>src[k].length));let L,R;
+    /* il mix lo fa il motore audio del browser (più veloce, in parallelo); a mano solo per «senza voce» */
+    const noVoxCase=voiceOff&&!stems.vocals&&order.includes('mix');let native=false;
+    if(!noVoxCase){try{const oc=new OfflineAudioContext(2,n,SR);for(const k of order){const g=effGain(k);if(!g)continue;const s=oc.createBufferSource();s.buffer=src[k];const gn=oc.createGain();gn.gain.value=g;s.connect(gn).connect(oc.destination);s.start(0)}
+      const rb=await oc.startRendering();if(!song)return;L=rb.getChannelData(0);R=rb.getChannelData(1);native=true}catch(e){console.warn('mix nativo',e)}}
+    if(!native){L=new Float32Array(n);R=new Float32Array(n);
     for(const k of order){const g=effGain(k);if(!g)continue;const b=src[k];const c0=b.getChannelData(0),c1=b.numberOfChannels>1?b.getChannelData(1):c0;
       if(k==='mix'&&voiceOff&&!stems.vocals&&b.numberOfChannels>1){const [x,y]=noVox(c0,c1);for(let i=0;i<x.length;i++){L[i]+=g*x[i];R[i]+=g*y[i]}}
-      else for(let i=0;i<c0.length;i++){L[i]+=g*c0[i];R[i]+=g*c1[i]}}
+      else for(let i=0;i<c0.length;i++){L[i]+=g*c0[i];R[i]+=g*c1[i]}}}
     let pk=0;for(let i=0;i<n;i+=7){const a=Math.abs(L[i]),b=Math.abs(R[i]);if(a>pk)pk=a;if(b>pk)pk=b}
     if(pk>0.98){const s=0.98/pk;for(let i=0;i<n;i++){L[i]*=s;R[i]*=s}}
     const url=URL.createObjectURL(new Blob([wavFromLR(L,R,SR)],{type:'audio/wav'}));swapSrc(url)}
@@ -2146,7 +2151,12 @@ A.addEventListener('play',()=>{setPlayIco();holdWake(true)});A.addEventListener(
 function setPlayIco(){const p=playing();$$('.playIco').forEach(s=>s.innerHTML=p?'<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>':'<path d="M7 4v16l13-8z"/>');$('#bPlay').setAttribute('aria-label',p?'Pausa':'Riproduci');$('#pPlay').setAttribute('aria-label',p?'Pausa':'Riproduci')}
 
 /* ================= caricamento brano ================= */
-async function decode(ab){return await ctx().decodeAudioData(ab.slice(0))}
+/* decodifica alla frequenza dei file (44,1 kHz): niente ricampionamento a 48 kHz, più veloce e meno memoria */
+const DECX={c:null};function decCtx(){if(!DECX.c){try{DECX.c=new OfflineAudioContext(2,1,44100)}catch(e){DECX.c=null}}return DECX.c}
+async function decode(ab){const c=decCtx();if(c){try{return await c.decodeAudioData(ab.slice(0))}catch(e){}}return await ctx().decodeAudioData(ab.slice(0))}
+/* lavori pesanti in sottofondo (copia dal cloud, conversione MP3): aspettano mentre apri un brano, suoni o registri */
+const BGW={loading:0,fill:false};
+async function bgIdle(){let n=0;while((BGW.loading||playing()||(typeof SA!=='undefined'&&SA.on)||(typeof R!=='undefined'&&R.on))&&n<2400){await new Promise(r=>setTimeout(r,1500));n++}}
 async function resampleTo(b,sr){if(b.sampleRate===sr)return b;const oc=new OfflineAudioContext(b.numberOfChannels,Math.ceil(b.duration*sr),sr);const s=oc.createBufferSource();s.buffer=b;s.connect(oc.destination);s.start();return await oc.startRendering()}
 async function loadSong(s,bufs){
   pause();loopA=loopB=null;updAB();tr=0;trCache={tr:0,bufs:null};voiceOff=false;updTr();
@@ -2165,19 +2175,23 @@ async function loadSong(s,bufs){
   // tablatura
   blocks=[];parseTab();renderTab();
   for(const k of ['bass','guitar']){TB[k].tok++;TB[k].busy=false}
-  CH.tok++;CH.busy=false;CH.base=s.chordsBase||null;setTimeout(()=>bpmEnsure(s),600);TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;
+  CH.tok++;CH.busy=false;CH.base=s.chordsBase||null;BPM=s.bpm||null;TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;
   tabRemap();updTr();setInst(inst);
-  guide=null;analyzeGuide();
+  guide=null;anaToken++;
   updPalSegs();prefSet('last',s.id);setTimeout(()=>{try{sbSongChanged()}catch(e){console.warn(e)}},0);setTimeout(songPickFill,0);
   await rebuildMix();
+  /* le analisi lunghe (melodia, bpm) partono dopo, quando il brano è già pronto da suonare */
+  setTimeout(()=>{if(song===s){bpmEnsure(s);analyzeGuide()}},700);
 }
 async function openStored(id){let s=await dbGet(id);if(!s){toast('Brano non trovato');return}markOpened(id);
   if(s.cloudOnly){if(!r2Ok()){toast('Questo brano è solo nel cloud: collega il cloud per aprirlo');return}
-    toast('☁️ Scarico «'+(s.title||'il brano')+'» dal cloud…');try{const r=await cloudFetch(s,true);s=r.full;if(!r.kept)toast('💽 Spazio pieno: lo ascolti dal cloud senza salvarlo qui')}catch(e){toast('Non riesco a scaricarlo dal cloud: '+(r2Err(e)||e.message));return}}
-  toast('Apro “'+(s.title||'il brano')+'”…');const bufs={};
-  for(const k of Object.keys(s.stems)){try{bufs[k]=await decode(s.stems[k].data)}catch(e){}}
+    /* prima lo ascolti, poi (in sottofondo) si salva sul dispositivo in MP3 */
+    toast('☁️ Scarico «'+(s.title||'il brano')+'» dal cloud…');const rec0=s;try{const r=await cloudFetch(s,false);s=r.full;const st2={...r.full.stems};setTimeout(()=>{cloudKeep(rec0,r.files,st2,true).then(x=>{if(x&&x.kept){try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}else toast('💽 Spazio pieno: questo brano resta solo nel cloud')}).catch(e=>console.warn('cloudKeep',e))},4000)}catch(e){toast('Non riesco a scaricarlo dal cloud: '+(r2Err(e)||e.message));return}}
+  toast('Apro “'+(s.title||'il brano')+'”…');const bufs={};BGW.loading++;
+  try{pause();trCache={tr:0,bufs:null};
+  await Promise.all(Object.keys(s.stems).map(async k=>{try{bufs[k]=await decode(s.stems[k].data)}catch(e){}}));
   if(!Object.keys(bufs).length){toast('Non riesco a leggere l\'audio di questo brano');return}
-  await loadSong({...s,stems:undefined,stored:true},bufs)}
+  await loadSong({...s,stems:undefined,stored:true},bufs)}finally{BGW.loading--}}
 async function saveCur(fields){if(!song||!song.stored)return;const s=await dbGet(song.id);if(!s)return;Object.assign(s,fields);Object.assign(song,fields);await dbPut(s)}
 function saveLyr(){writeLrcSoon();const lyr=K.lines.map(l=>({t:l.t,s:l.s,st:l.st,w:l.w||null,p:l.p||0,pm:l.pm||0,pq:l.pq||0}));if(song){song.lyr=lyr;song.lyrOff=K.off}saveCur({lyr,lyrOff:K.off,lyrics:K.lines.map(l=>ts(l.t)+' '+l.s).join('\n')})}
 
@@ -3939,14 +3953,19 @@ async function cloudRec(x,n){let lyrics='';if(x.lrc){try{lyrics=await (await x.l
     cloudOnly:true,cloudFiles:x.stems.map(([k,f])=>({k,key:f.key,name:f.name,size:f.size||0}))}}
 async function cloudFiles(s){const base=R2P+songDirs(s).join('/')+'/';return(await r2List(base)).filter(o=>AUDIO_RX.test(o.key)).map(o=>{const name=o.key.slice(base.length),k=name.replace(/\.[^.]+$/,'');return{k,key:o.key,name,size:o.size}})}
 /* scarica le tracce di un brano dal cloud; se c'è posto le tiene sul dispositivo */
-async function cloudFetch(s,keep){let files=s.cloudFiles&&s.cloudFiles.length?s.cloudFiles:await cloudFiles(s);if(!files.length)throw new Error('nel cloud non trovo le tracce di questo brano');
-  const stems={};let i=0;for(const f of files){banSync('Scarico dal cloud «'+(s.title||'brano')+'»',i++,files.length);stems[f.k]={name:f.name,data:await (await r2Req('GET',f.key)).arrayBuffer()}}
-  if(keep){const r=await slimStems(stems,p=>banSync('Salvo «'+(s.title||'brano')+'» in MP3, più leggero',Math.round(p*100),100));
+async function cloudFetch(s,keep,bg){let files=s.cloudFiles&&s.cloudFiles.length?s.cloudFiles:await cloudFiles(s);if(!files.length)throw new Error('nel cloud non trovo le tracce di questo brano');
+  /* le tracce si scaricano tutte insieme */
+  const stems={};let i=0;banSync('Scarico dal cloud «'+(s.title||'brano')+'»',0,files.length);await Promise.all(files.map(async f=>{const d=await (await r2Req('GET',f.key)).arrayBuffer();stems[f.k]={name:f.name,data:d};banSync('Scarico dal cloud «'+(s.title||'brano')+'»',++i,files.length)}));
+  if(!keep){banSyncEnd('');return{full:{...s,stems,cloudFiles:files},kept:false,files}}
+  return await cloudKeep(s,files,stems,bg)}
+/* salva sul dispositivo (in MP3) le tracce già scaricate e allinea il cloud */
+async function cloudKeep(s,files,stems,bg){const keep=true;
+  if(keep){const r=await slimStems(stems,p=>banSync('Salvo «'+(s.title||'brano')+'» in MP3, più leggero',Math.round(p*100),100),bg);
     /* il cloud resta uguale al dispositivo: carico gli MP3 e tolgo i FLAC/WAV pesanti */
     if(r.old.length&&r2Ok()){try{const base=R2P+songDirs(s).join('/')+'/';for(const v of Object.values(stems)){if(!LIGHT_RX.test(v.name))continue;const old=files.find(f=>f.k===v.name.replace(/\.[^.]+$/,'')&&f.name!==v.name);if(!old)continue;
         banSync('Aggiorno il cloud: «'+(s.title||'brano')+'» in MP3',0,1);await r2Req('PUT',base+v.name,{body:new Blob([v.data],{type:r2Type(v.name)}),ctype:r2Type(v.name)});await r2Req('DELETE',old.key)}files=await cloudFiles(s)}catch(e){console.warn('cloud mp3',e)}}}
   const full={...s,stems,cloudFiles:files};let kept=false;
-  if(keep){const tot=Object.values(stems).reduce((a,v)=>a+v.data.byteLength,0),e=await spaceEst();if(!e.quota||e.quota-e.usage>tot*1.2+150*1048576){const rec={...full,cloudOnly:false};if(await dbPut(rec)){kept=true;Object.assign(full,rec)}}}
+  if(keep){const tot=Object.values(stems).reduce((a,v)=>a+v.data.byteLength,0),e=await spaceEst();if(!e.quota||e.quota-e.usage>tot*1.2+150*1048576){/* riprendo il record com'è adesso (bpm, testo, accordi salvati nel frattempo) */let cur=null;try{cur=await dbGet(s.id)}catch(x){}const rec={...(cur||full),stems,cloudFiles:files,cloudOnly:false};if(await dbPut(rec)){kept=true;Object.assign(full,rec)}}}
   banSyncEnd('');return{full,kept}}
 /* toglie le tracce dal dispositivo e lascia il brano nel cloud */
 async function toCloudOnly(id){const s=await dbGet(id);if(!s||s.cloudOnly)return 0;if(!r2Ok())throw new Error('il cloud non è collegato');
@@ -3954,8 +3973,8 @@ async function toCloudOnly(id){const s=await dbGet(id);if(!s||s.cloudOnly)return
   const freed=Object.values(s.stems||{}).reduce((a,v)=>a+((v.data&&v.data.byteLength)||0),0);s.stems={};s.cloudOnly=true;s.cloudFiles=files;await dbPut(s);return freed}
 /* dopo la sincronizzazione: scarica sul dispositivo i brani del cloud finché c'è spazio (prima i più usati) */
 async function cloudFill(){if(!r2On()||R.on)return;const op=openedMap(),L=(await libMeta()).filter(s=>s.cloudOnly).sort((a,b)=>(op[b.id]||0)-(op[a.id]||0)||(b.created||0)-(a.created||0));if(!L.length)return;
-  let got=0,full=false;for(const [i,s] of L.entries()){if(R.on||sepBusy)break;const e=await spaceEst(),need=s.mb*1048576*1.2+300*1048576;if(e.quota&&e.quota-e.usage<need){full=true;break}
-    try{const r=await dbGet(s.id);if(!r||!r.cloudOnly)continue;banSync('Copio sul dispositivo i brani del cloud: «'+(s.title||'brano')+'»',i,L.length);const {kept}=await cloudFetch(r,true);if(kept)got++;else{full=true;break}}catch(e){console.warn('cloudFill',e);break}}
+  let got=0,full=false;BGW.fill=true;try{for(const [i,s] of L.entries()){await bgIdle();if(R.on||sepBusy)break;const e=await spaceEst(),need=s.mb*1048576*1.2+300*1048576;if(e.quota&&e.quota-e.usage<need){full=true;break}
+    try{const r=await dbGet(s.id);if(!r||!r.cloudOnly)continue;banSync('Copio sul dispositivo i brani del cloud: «'+(s.title||'brano')+'»',i,L.length);const {kept}=await cloudFetch(r,true,true);if(kept)got++;else{full=true;break}}catch(e){console.warn('cloudFill',e);break}}}finally{BGW.fill=false}
   banSyncEnd(got?'Copiati sul dispositivo '+got+(got===1?' brano':' brani')+'.':'');try{if(!$('#ovLib').hidden)renderLib()}catch(e){}
   if(full){const n=(await libMeta()).filter(s=>s.cloudOnly).length;if(n&&prefGet('spaceTold')!==String(n)){prefSet('spaceTold',String(n));toast('💽 Spazio pieno: '+n+(n===1?' brano resta':' brani restano')+' solo nel cloud. Si aprono lo stesso; in Libreria → «Spazio» scegli quali tenere qui.')}}}
 /* ----- finestra «Spazio»: perché non ci sta tutto e quali brani tenere sul dispositivo ----- */
@@ -4195,8 +4214,8 @@ $('#addR2').onclick=async()=>{$('#addStatus').textContent='Cerco i brani nel clo
 const asFile=async f=>f.getFile?await f.getFile():f;
 /* in Libreria si salva solo MP3: WAV, FLAC e simili diventano MP3 192 kbps (stessa resa all'ascolto, 5-10 volte più leggeri) */
 const LIGHT_RX=/\.(mp3|m4a|aac|ogg|opus)$/i;
-async function slimStems(stems,onp){const ks=Object.keys(stems).filter(k=>stems[k]&&stems[k].data&&!LIGHT_RX.test(stems[k].name||''));let saved=0;const old=[];
-  for(const [i,k] of ks.entries()){const v=stems[k];try{const buf=await decode(v.data.slice(0));const b=await toMp3(buf,192,p=>onp&&onp((i+p)/ks.length,k));const ab=await b.arrayBuffer();
+async function slimStems(stems,onp,bg){const ks=Object.keys(stems).filter(k=>stems[k]&&stems[k].data&&!LIGHT_RX.test(stems[k].name||''));let saved=0;const old=[];
+  for(const [i,k] of ks.entries()){if(bg)await bgIdle();const v=stems[k];try{const buf=await decode(v.data.slice(0));const b=await toMp3(buf,192,p=>onp&&onp((i+p)/ks.length,k));const ab=await b.arrayBuffer();
       if(ab.byteLength<v.data.byteLength){saved+=v.data.byteLength-ab.byteLength;old.push(v.name);stems[k]={name:(v.name||k).replace(/\.[^.]*$/,'')+'.mp3',data:ab}}}catch(e){console.warn('mp3',k,e)}}
   return{saved,old}}
 
