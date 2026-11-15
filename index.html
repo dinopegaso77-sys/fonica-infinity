@@ -910,7 +910,9 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
   .hlogo #brandLogo{height:46px}.hlogo .hshare{min-height:44px;padding:4px 12px}.hlogo #bDonate img{height:38px}
   .hnav{grid-area:nav}.hbtn{min-height:50px;flex-direction:row;gap:8px;font-size:14px}.hbtn .ico{width:22px;height:22px}
   .hsong{grid-area:song}.hdr .transport{grid-area:tr}
-  .hsong .slbar{grid-row:1;grid-column:1/-1}.hsong:has(.slbar:not([hidden])) #songPickBtn,.hsong:has(.slbar:not([hidden])) #bScal{display:none}
+  .hsong .slbar .mini,.hsong .slbar .slnow{min-height:38px}
+  .hsong{grid-template-columns:minmax(0,1fr) auto}.hsong #songPickBtn,.hsong:has(.slbar:not([hidden])) #songPickBtn{grid-column:1;grid-row:1}.hsong #bScal{grid-column:2;grid-row:1}.hsong .slbar{grid-row:2;grid-column:1/-1}
+  .htool{display:flex;flex-direction:column;justify-content:center;text-align:center}.htool .ico{grid-row:auto}
   .htools{grid-area:tools;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px}
   .htool{min-height:50px;padding:4px 3px;gap:2px;flex-direction:column}.htool small{display:none}.htool .ico{width:22px;height:22px}.htool b{font-size:12.5px;line-height:1.1}
   .stage{min-height:340px}
