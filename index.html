@@ -1779,6 +1779,7 @@ themeApply();</script>
     </div>
    </div></details>
    <details class="rsec" id="rsImg"><summary><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5.5-5 3.5 3 2.5-2 4.5 4"/></svg><span class="rst"><b>Immagine</b><small id="rsImgS"></small></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="rsbody">
+    <div class="recrow"><div class="pseg" id="recSrc"><span>Video</span><div class="seg"><button data-v="cam">Fotocamera</button><button data-v="logo">Logo Pure Voltage</button><button data-v="img">La tua foto</button></div></div><button class="chip" id="recSrcPick" hidden>Cambia foto</button><input type="file" id="recSrcIn" accept="image/*" hidden><span class="rechint" id="recSrcInfo"></span></div>
     <div class="recrow">
       <div class="pseg" id="recQ"><span>Qualità</span><div class="seg"><button data-q="leggera">Leggera</button><button data-q="normale">Normale</button><button data-q="alta">Alta</button></div></div><span class="rechint" id="recQInfo"></span>
     </div>
@@ -1833,11 +1834,11 @@ themeApply();</script>
       <input type="file" id="bgPhotoIn" accept="image/*" hidden>
       <span class="rechint" id="stVidNote"></span>
     </div>
-    <div class="stsec stp" data-step="5" hidden><h5>5 · Labbra e video finale</h5>
-      <label class="rechint stai"><input type="checkbox" id="stLips" checked> <span><b>Controlla le labbra secondo per secondo</b>: bocca e voce coincidono per tutto il brano (con RunPod)</span></label>
+    <div class="stsec stp" data-step="5" hidden><h5 id="st5H">5 · Labbra e video finale</h5>
+      <label class="rechint stai" id="stLipsRow"><input type="checkbox" id="stLips" checked> <span><b>Controlla le labbra secondo per secondo</b>: bocca e voce coincidono per tutto il brano (con RunPod)</span></label>
       <span class="rechint" id="stLipsInfo"></span>
-      <div class="lagrow"><span class="lbl">Spostamento a mano (se serve ancora)</span><button class="mini" data-av="-40">−40</button><button class="mini" data-av="-10">−10</button><input type="range" id="stAv" min="-800" max="800" step="10" value="0" aria-label="Sincronia tra labbra e audio in millisecondi"><button class="mini" data-av="10">+10</button><button class="mini" data-av="40">+40</button><b id="stAvV">0 ms</b></div>
-      <span class="rechint">Se nel video finale le labbra si muovono <b>prima</b> della voce, aumenta; se si muovono <b>dopo</b>, diminuisci. Poi ricrea il video.</span>
+      <div class="lagrow" id="stAvRow"><span class="lbl">Spostamento a mano (se serve ancora)</span><button class="mini" data-av="-40">−40</button><button class="mini" data-av="-10">−10</button><input type="range" id="stAv" min="-800" max="800" step="10" value="0" aria-label="Sincronia tra labbra e audio in millisecondi"><button class="mini" data-av="10">+10</button><button class="mini" data-av="40">+40</button><b id="stAvV">0 ms</b></div>
+      <span class="rechint" id="stAvHint">Se nel video finale le labbra si muovono <b>prima</b> della voce, aumenta; se si muovono <b>dopo</b>, diminuisci. Poi ricrea il video.</span>
       <span class="rechint" id="stWhere"></span>
       <div class="row" style="justify-content:center"><button class="chip pri" id="recFix">🎬 Crea il video finale</button><button class="chip" id="recOrig" hidden>Torna all'originale</button></div>
     </div>
@@ -4224,7 +4225,7 @@ let QK=prefGet('recQ')||(weakDev()?'leggera':'normale');if(!QP[QK])QK='leggera';
 function recSize(){const s=Q().s,l=Math.round(s*16/9/2)*2;return[s,l]}
 function recQUI(){$$('#recQ button').forEach(b=>b.classList.toggle('on',b.dataset.q===QK));$('#recQInfo').textContent='circa '+Q().mb+' MB al minuto'+(Q().raw?'':' · senza rifinitura finale dello sfondo')}
 async function recCamera(){if(R.stream)R.stream.getTracks().forEach(t=>t.stop());
-  R.noCam=false;const rcA={echoCancellation:$('#recEcho').checked,noiseSuppression:false,autoGainControl:false};try{R.stream=await audOpen(rcA,{facingMode:R.facing,width:{ideal:Q().s*16/9},height:{ideal:Q().s},frameRate:{ideal:Q().fps,max:30}})}
+  R.noCam=false;R.still=R.src!=='cam';const rcA={echoCancellation:$('#recEcho').checked,noiseSuppression:false,autoGainControl:false};if(R.still){R.stream=await audOpen(rcA);R.noCam=true}else try{R.stream=await audOpen(rcA,{facingMode:R.facing,width:{ideal:Q().s*16/9},height:{ideal:Q().s},frameRate:{ideal:Q().fps,max:30}})}
   catch(e){if(e&&e.name==='NotAllowedError')throw e;R.stream=await audOpen(rcA);R.noCam=true;toast('Nessuna fotocamera: registro la tua voce e lo strumento, con il testo a schermo')}
   {const m=$('#recDev');if(m)m.textContent='🎤 '+audName(R.stream)}
   const v=$('#recCam');v.srcObject=R.stream;try{await v.play()}catch(e){}
@@ -4304,10 +4305,27 @@ $$('#recBgS button').forEach(b=>b.onclick=()=>{FX.bg=b.dataset.v;prefSet('recBg'
 fxSegUI();recQUI();setTimeout(bgThumbs,0);
 let OVL_NOLOGO=false;
 let rdT=0,rdAvg=16,rdSlow=0;
+/* in basso a destra: titolo e, sotto, l'artista */
+function recCredit(g,W,H){const u=Math.min(W,H),x=W-u*.04,yb=H-u*.04,ti=(song&&song.title)||'',ar=song?artQ(song.artist||''):'';g.save();g.globalAlpha=.92;g.textAlign='right';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=6;
+  if(ar){g.font=`500 ${Math.round(u*.026)}px Figtree,sans-serif`;g.fillText(ar,x,yb);g.font=`700 ${Math.round(u*.032)}px Figtree,sans-serif`;g.fillText(ti,x,yb-u*.034)}else{g.font=`700 ${Math.round(u*.032)}px Figtree,sans-serif`;g.fillText(ti,x,yb)}g.restore()}
+/* video senza fotocamera: il logo grande o una foto al posto dell'immagine */
+const STILL={img:null};
+function recStillDraw(g,x,y,w,h){if(R.src==='img'&&STILL.img&&STILL.img.naturalWidth){const im=STILL.img,s=Math.max(w/im.naturalWidth,h/im.naturalHeight),dw=im.naturalWidth*s,dh=im.naturalHeight*s;g.save();g.beginPath();g.rect(x,y,w,h);g.clip();g.drawImage(im,x+(w-dw)/2,y+(h-dh)/2,dw,dh);g.fillStyle='rgba(0,0,0,.22)';g.fillRect(x,y,w,h);g.restore();return}
+  const gr=g.createRadialGradient(x+w/2,y+h*.38,Math.min(w,h)*.05,x+w/2,y+h/2,Math.max(w,h)*.8);gr.addColorStop(0,'#1d2257');gr.addColorStop(.55,'#0b0d24');gr.addColorStop(1,'#04050c');g.fillStyle=gr;g.fillRect(x,y,w,h);
+  if(recLogo.complete&&recLogo.naturalWidth){const r=recLogo.naturalHeight/recLogo.naturalWidth;let lw=w*.62,lh=lw*r;if(lh>h*.42){lh=h*.42;lw=lh/r}g.drawImage(recLogo,x+(w-lw)/2,y+h*.36-lh/2,lw,lh)}}
+function recSrcUI(){$$('#recSrc button').forEach(b=>b.classList.toggle('on',b.dataset.v===R.src));const cam=R.src==='cam';$('#recBeauty').hidden=!cam;$('#recBgS').hidden=!cam;$('#recFlip').hidden=!cam;$('#recSrcPick').hidden=R.src!=='img';
+  $('#recSrcInfo').textContent=cam?'':R.src==='logo'?'Niente fotocamera: nel video c\'è il logo, con il testo, il titolo e l\'artista':'Niente fotocamera: la tua foto con il logo in alto a sinistra, titolo e artista in basso a destra'}
+function recStillLoad(){try{const d=localStorage.getItem('f8_recStill');if(d){const im=new Image();im.src=d;STILL.img=im}}catch(e){}}
+async function recStillPick(f){const im=new Image(),u=URL.createObjectURL(f);try{await new Promise((ok,ko)=>{im.onload=ok;im.onerror=ko;im.src=u})}catch(e){toast('Non riesco ad aprire questa immagine');return false}
+  const s=Math.min(1,1600/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+  const d=c.toDataURL('image/jpeg',.86);const im2=new Image();im2.src=d;await new Promise(ok=>{im2.onload=ok;im2.onerror=ok});STILL.img=im2;try{localStorage.setItem('f8_recStill',d)}catch(e){}return true}
+async function recSrcSet(v){if(R.on)return;if(v==='img'&&!(STILL.img&&STILL.img.naturalWidth)){$('#recSrcIn').value='';$('#recSrcIn').dataset.go='1';$('#recSrcIn').click();return}
+  const was=R.src;R.src=v;prefSet('recSrc',v);recSrcUI();try{rsSum()}catch(e){}if((was==='cam')!==(v==='cam')&&!$('#recOv').hidden){try{await recCamera()}catch(e){toast('Non riesco ad aprire '+(v==='cam'?'la fotocamera':'il microfono'))}}}
 function recDraw(){const _t0=performance.now();OVL_NOLOGO=false;const cv=$('#recCv');const [W,H]=recSize();if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}const g=cv.getContext('2d');const v=$('#recCam');
   g.fillStyle='#000';g.fillRect(0,0,W,H);
   duoSync();DUO_LAY=!!(R.duo&&DUO.el);
-  if(DUO_LAY){const HH=Math.round(H/2);drawCover(g,DUO.el,0,0,W,H-HH);if(v.videoWidth){const hc=fxCanvas('rhalf',W,HH),hg=hc.getContext('2d');hg.fillStyle='#000';hg.fillRect(0,0,W,HH);const s=Math.max(W/v.videoWidth,HH/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;fxDrawCam(hg,v,W,HH,(W-dw)/2,(HH-dh)/2,dw,dh,R.facing==='user');g.drawImage(hc,0,H-HH)}g.fillStyle='rgba(255,255,255,.85)';g.fillRect(0,H-HH-1,W,2)}
+  if(DUO_LAY){const HH=Math.round(H/2);drawCover(g,DUO.el,0,0,W,H-HH);if(R.still){g.save();g.translate(0,H-HH);recStillDraw(g,0,0,W,HH);g.restore();g.fillStyle='rgba(255,255,255,.85)';g.fillRect(0,H-HH-1,W,2)}else if(v.videoWidth){const hc=fxCanvas('rhalf',W,HH),hg=hc.getContext('2d');hg.fillStyle='#000';hg.fillRect(0,0,W,HH);const s=Math.max(W/v.videoWidth,HH/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;fxDrawCam(hg,v,W,HH,(W-dw)/2,(HH-dh)/2,dw,dh,R.facing==='user');g.drawImage(hc,0,H-HH)}g.fillStyle='rgba(255,255,255,.85)';g.fillRect(0,H-HH-1,W,2)}
+  else if(R.still)recStillDraw(g,0,0,W,H);
   else if(v.videoWidth){const s=Math.max(W/v.videoWidth,H/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s;fxDrawCam(g,v,W,H,(W-dw)/2,(H-dh)/2,dw,dh,R.facing==='user')}
   const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);
   if(R.musG&&$('#recLatAuto').checked&&!R.on&&(R._lt=(R._lt||0)+1)%90===0)recLevels();
@@ -4315,8 +4333,7 @@ function recDraw(){const _t0=performance.now();OVL_NOLOGO=false;const cv=$('#rec
   if($('#recTxt').checked){ly.hidden=true;recLyrics(g,W,H,t)}
   else{ly.hidden=!K.lines.length;if(K.lines.length){const tt=t-K.off;let i=-1;for(let j=0;j<K.lines.length;j++){if(K.lines[j].t<=tt)i=j;else break}
     const cur=i>=0&&tt<=K.lines[i].e+1.2?K.lines[i].s:'',nx=(K.lines[i+1]||{}).s||'';if($('#recLy1').textContent!==cur)$('#recLy1').textContent=cur;if($('#recLy2').textContent!==nx)$('#recLy2').textContent=nx;const pcc=l=>l&&l.p===1?'#7fb0ff':l&&l.p===2?'#ff8080':l&&l.p===3?'#ffd23f':'';$('#recLy1').style.color=pcc(i>=0?K.lines[i]:null);$('#recLy2').style.color=pcc(K.lines[i+1])}}
-  const u=Math.min(W,H);drawLogo(g,W,H);g.globalAlpha=.9;
-  g.font=`600 ${Math.round(u*.032)}px Figtree,sans-serif`;g.textAlign='right';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=6;g.fillText((song&&song.title)||'',W-u*.04,H-u*.04);g.shadowBlur=0;g.globalAlpha=1;
+  const u=Math.min(W,H);if(!(R.still&&R.src==='logo'&&!DUO_LAY))drawLogo(g,W,H);recCredit(g,W,H);
   if(R.count>0){g.font=`800 ${Math.round(u*.32)}px "Josefin Sans",sans-serif`;g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=20;g.fillText(String(R.count),W/2,H*.42);g.shadowBlur=0}
   if(R.on)$('#recTime').textContent=fmt((Date.now()-R.t0)/1000);
   {const dt=performance.now()-_t0;rdAvg=rdAvg*.92+dt*.08;if(!R.on&&QK!=='leggera'&&rdAvg>28){if(++rdSlow>90){rdSlow=0;QK='leggera';prefSet('recQ',QK);recQUI();toast('Il dispositivo fatica: passo alla qualità Leggera');recCamera().catch(()=>{})}}else rdSlow=Math.max(0,rdSlow-1)}
@@ -4360,7 +4377,7 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   R.mime=recMime();R.chunks=[];try{R.rec=new MediaRecorder(ms,R.mime?{mimeType:R.mime,videoBitsPerSecond:Q().vbr,audioBitsPerSecond:192e3}:undefined)}catch(e){R.rec=new MediaRecorder(ms);R.mime=R.rec.mimeType}
   R.rec.ondataavailable=e=>{if(e.data&&e.data.size)R.chunks.push(e.data)};R.rec.onstop=recFinish;
   R.vchunks=[];R.vrec=null;try{const at=R.vdest?R.vdest.stream.getAudioTracks():R.stream.getAudioTracks();if(at.length){const vm=['audio/webm;codecs=opus','audio/mp4','audio/webm'].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m));R.vrec=new MediaRecorder(new MediaStream(at),vm?{mimeType:vm,audioBitsPerSecond:256000}:{audioBitsPerSecond:256000});R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
-  R.vDec=R.mBuf=R.vAi=R.lagC=null;R.trRec=tr;R.duoRec=R.duo&&DUO.blob?{blob:DUO.blob,off:DUO.off}:null;R.lagMan=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
+  R.vDec=R.mBuf=R.vAi=R.lagC=null;R.trRec=tr;R.stillRec=!!R.still;R.duoRec=R.duo&&DUO.blob?{blob:DUO.blob,off:DUO.off}:null;R.lagMan=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
   try{const vt2=Q().raw?R.stream.getVideoTracks():[];if(vt2.length){R.rawch=[];R.rawrec=new MediaRecorder(new MediaStream(vt2),{videoBitsPerSecond:Q().vbr*1.4});R.rawrec.ondataavailable=e=>{if(e.data&&e.data.size)R.rawch.push(e.data)};R.rawstop=new Promise(ok=>R.rawrec.onstop=ok)}}catch(e){R.rawrec=null}
   R.startSong=now();if(R.rawrec)R.rawrec.start(1000);if(R.vrec)R.vrec.start(1000);R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').setAttribute('aria-label','Ferma');$('#recGoL').textContent='Stop';$('#recGo').classList.add('stop');A.addEventListener('playing',recGuideStart,{once:true});play()}
 function recStop(){if(!R.on)return;R.on=false;recGuideOff();$('#recOv').classList.remove('recording');pause();try{R.rec.stop()}catch(e){}try{if(R.vrec)R.vrec.stop()}catch(e){}try{if(R.rawrec)R.rawrec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').setAttribute('aria-label','Registra');$('#recGoL').textContent='Registra';$('#recGo').classList.remove('stop')}
@@ -4701,8 +4718,7 @@ function drawLogo(g,W,H){if(!(recLogo.complete&&recLogo.naturalWidth)||OVL_NOLOG
   g.save();g.globalAlpha=1;g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=u*.02;g.fillStyle='#000';const r=pad*1.4;g.beginPath();if(g.roundRect)g.roundRect(x-pad,y-pad,lw+2*pad,lh+2*pad,r);else g.rect(x-pad,y-pad,lw+2*pad,lh+2*pad);g.fill();g.shadowBlur=0;
   g.strokeStyle='rgba(111,227,255,.55)';g.lineWidth=Math.max(1,u*.003);g.stroke();g.imageSmoothingQuality='high';g.drawImage(recLogo,x,y,lw,lh);g.restore()}
 function finalOverlay(g,W,H,t,txt){OVL_NOLOGO=false;const gr=g.createLinearGradient(0,H*.5,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.7)');g.fillStyle=gr;g.fillRect(0,H*.5,W,H*.5);if(txt)recLyrics(g,W,H,t);
-  const u=Math.min(W,H);drawLogo(g,W,H);g.globalAlpha=.9;
-  g.font=`600 ${Math.round(u*.032)}px Figtree,sans-serif`;g.textAlign='right';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=6;g.fillText((song&&song.title)||'',W-u*.04,H-u*.04);g.shadowBlur=0;g.globalAlpha=1;}
+  drawLogo(g,W,H);recCredit(g,W,H);}
 function makeFinalPainter(W,H,seg,face){const F={ema:null,mw:0,mh:0,inv:null,col:[70,90,120],colT:-9,mask:null,lm:null,fk:0,faces:0};
   return function paint(g,v,t){const mirror=R.facingRec==='user';const cam=fxCanvas('fcam',W,H),cg=cam.getContext('2d');cg.save();cg.clearRect(0,0,W,H);
     if(HAS_FILTER)cg.filter='contrast(1.06) saturate(1.1) brightness(1.02)';const s=Math.max(W/v.videoWidth,H/v.videoHeight),dw=v.videoWidth*s,dh=v.videoHeight*s,x=(W-dw)/2,y=(H-dh)/2;
@@ -4746,7 +4762,7 @@ function stGo(n){n=Math.max(1,Math.min(5,n));const was=STEP;STEP=n;
   $$('#stBar button').forEach(b=>{const k=+b.dataset.s;b.classList.toggle('on',k===n);b.classList.toggle('done',k<n);b.disabled=!stCan(k)});
   let back=n-1;while(back>0&&!stCan(back))back--;let next=n+1;while(next<=5&&!stCan(next))next++;
   $('#stBack').hidden=back<1;$('#stNext').hidden=next>5;$('#stNext').textContent=next<=5?'Avanti: '+ST_N[next].split(' ')[0]+' ▶':'';
-  $('#stStepN').textContent='Passo '+n+' di 5';
+  $('#stStepN').textContent='Passo '+n+' di 5';{const st=!!R.stillRec;$('#stLipsRow').hidden=st;$('#stLipsInfo').hidden=st;$('#stAvRow').hidden=st;$('#stAvHint').hidden=st;$('#st5H').textContent=st?'5 · Video finale':'5 · Labbra e video finale';$('#stBar button[data-s="5"]').lastChild.textContent=st?'Video':'Labbra';if(st&&+$('#stAv').value)avSet(0)}
   const frame=n===3||n===4;$('#stFrameBox').hidden=!frame;$('#recPlay').hidden=frame;$('.recdone .stplayer').hidden=n>2;
   $('#stPlTitle').textContent=n===1?'Ascolta senza effetti':'Ascolta con gli effetti';
   if(frame){try{$('#recPlay').pause()}catch(e){}stPrevStop();stFrameDraw()}
@@ -4947,11 +4963,15 @@ $('#recGo').onclick=()=>R.on?recStop():recStart();
 {const secs=[$('#rsAudio'),$('#rsImg')];secs.forEach(d=>d.addEventListener('toggle',()=>{if(d.open)secs.forEach(x=>{if(x!==d)x.open=false})}));
   const on=sel=>{const b=$(sel+' button.on');return b?b.textContent.trim():''};
   window.rsSum=function(){try{const v=on('#recVox');$('#rsAudioS').textContent=['Voce originale: '+(v||'No'),K.duo?'duetto':'una voce',$('#recTrVal').textContent,$('#recBase').checked?'base nel video':'senza base'].join(' · ');
-    const bg=$('#recBgS button.on .bgl');$('#rsImgS').textContent=['Qualità '+(on('#recQ')||'normale').toLowerCase(),'trucco '+(on('#recBeauty')||'No').toLowerCase(),'sfondo '+(bg?bg.textContent.toLowerCase():'vero'),$('#recTxt').checked?'con testo':'senza testo'].join(' · ')}catch(e){}};
+    const bg=$('#recBgS button.on .bgl');$('#rsImgS').textContent=(R.src&&R.src!=='cam'?[R.src==='logo'?'Logo Pure Voltage':'La tua foto','Qualità '+(on('#recQ')||'normale').toLowerCase()]:['Qualità '+(on('#recQ')||'normale').toLowerCase(),'trucco '+(on('#recBeauty')||'No').toLowerCase(),'sfondo '+(bg?bg.textContent.toLowerCase():'vero')]).concat($('#recTxt').checked?'con testo':'senza testo').join(' · ')}catch(e){}};
   $('#recBar').addEventListener('click',()=>setTimeout(rsSum,30));$('#recBar').addEventListener('change',()=>setTimeout(rsSum,30));}
 
 {const rt=n=>{if(R.on){toast('Cambia la tonalità prima di registrare');return}setTr(n);R.guideBuf=null;if(tr)toast('Base in tonalità '+$('#recTrVal').textContent+': il video userà questa')};$('#recTrDown').onclick=()=>rt(tr-1);$('#recTrUp').onclick=()=>rt(tr+1);$('#recTrZero').onclick=()=>rt(0)}
 $('#recX').onclick=recClose;$('#recHome').onclick=recClose;
+R.src=prefGet('recSrc')||'cam';recStillLoad();recSrcUI();
+$$('#recSrc button').forEach(b=>b.onclick=()=>recSrcSet(b.dataset.v));
+$('#recSrcPick').onclick=()=>{if(R.on)return;$('#recSrcIn').value='';$('#recSrcIn').click()};
+$('#recSrcIn').onchange=async e=>{const f=e.target.files&&e.target.files[0];const go=$('#recSrcIn').dataset.go==='1';$('#recSrcIn').dataset.go='';if(!f)return;if(await recStillPick(f)){if(go||R.src!=='img')recSrcSet('img');else toast('Foto cambiata')}};
 $('#recFlip').onclick=async()=>{if(R.on)return;R.facing=R.facing==='user'?'environment':'user';try{await recCamera()}catch(e){toast('Non riesco a cambiare fotocamera')}};
 $('#bRec').onclick=recOpen;$('#pRec').onclick=()=>{palOpen(false);setTimeout(recOpen,200)};
 
