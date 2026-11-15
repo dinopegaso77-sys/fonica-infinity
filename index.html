@@ -4761,7 +4761,7 @@ function stGo(n){n=Math.max(1,Math.min(5,n));const was=STEP;STEP=n;
   $$('#recDone .stp').forEach(x=>x.hidden=+x.dataset.step!==n);
   $$('#stBar button').forEach(b=>{const k=+b.dataset.s;b.classList.toggle('on',k===n);b.classList.toggle('done',k<n);b.disabled=!stCan(k)});
   let back=n-1;while(back>0&&!stCan(back))back--;let next=n+1;while(next<=5&&!stCan(next))next++;
-  $('#stBack').hidden=back<1;$('#stNext').hidden=next>5;$('#stNext').textContent=next<=5?'Avanti: '+ST_N[next].split(' ')[0]+' ▶':'';
+  $('#stBack').hidden=back<1;$('#stNext').hidden=next>5;$('#stNext').textContent='Avanti ▶';
   $('#stStepN').textContent='Passo '+n+' di 5';{const st=!!R.stillRec;$('#stLipsRow').hidden=st;$('#stLipsInfo').hidden=st;$('#stAvRow').hidden=st;$('#stAvHint').hidden=st;$('#st5H').textContent=st?'5 · Video finale':'5 · Labbra e video finale';$('#stBar button[data-s="5"]').lastChild.textContent=st?'Video':'Labbra';if(st&&+$('#stAv').value)avSet(0)}
   const frame=n===3||n===4;$('#stFrameBox').hidden=!frame;$('#recPlay').hidden=frame;$('.recdone .stplayer').hidden=n>2;
   $('#stPlTitle').textContent=n===1?'Ascolta senza effetti':'Ascolta con gli effetti';
