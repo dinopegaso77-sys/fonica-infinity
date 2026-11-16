@@ -1,6 +1,6 @@
-# Fonica Infinity – sito web
+# Pure Voltage – sito web
 
-Questi file pubblicano Fonica Infinity all'indirizzo
+Questi file pubblicano Pure Voltage all'indirizzo
 **https://dinopegaso77-sys.github.io/fonica-infinity/**
 
 ## Pubblicare (una volta sola)
