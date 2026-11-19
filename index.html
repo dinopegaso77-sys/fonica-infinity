@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="18/11 · 21:30"><meta name="pv-notes" content="Sala prove: battiti e batteria più precisi con RunPod (Beat This! e ADTOF), anche per i brani già in Libreria con «✨ Più precisa con RunPod» nella batteria; Sala prove e pedaliera su telefono e tablet si aprono solo con la scheda audio collegata via USB (cavo OTG); su telefono e tablet niente effetti dal vivo in cuffia (troppo ritardo): si registra pulito e poi «Metti gli effetti alla registrazione»; per suonare dal vivo con gli effetti serve il computer; il tablet viene riconosciuto sempre come tablet (anche quelli piccoli, in «versione desktop» o con la penna), e ti dice se la scheda USB arriva con In 1 e In 2 o con un ingresso solo; la scheda USB arriva con In 1 e In 2 quando il tablet lo permette; tablatura di basso e chitarra (anche assoli) con la diteggiatura più comoda: mano ferma in una posizione di 4 tasti (basso) o 5 (chitarra), tutte le corde, spostamenti solo quando servono; «Affina tutti i brani» in Libreria; il testo trovato online non sostituisce mai il tuo: lo confronti e scegli tu (e c'è «Rimetti com'era»); scelta in Impostazioni tra testo prima da LRCLIB o sempre dalla voce; ricerca del brano su internet: artista, foto e tutti gli album dove c'è, con i link a Spotify e YouTube Music; scheda artista con una seconda fonte (TheAudioDB), più foto e «Conosciuto anche come»; Libreria con artisti e album a tendina, filtro qui/cloud in cima e su ogni brano Scarica qui, Togli da qui, Salva nel cloud; tag salvati anche nel cloud; più dispositivi sullo stesso cloud: uno salva, gli altri aspettano e si aggiornano da soli"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="19/11 · 08:00"><meta name="pv-notes" content="RunPod sistema da solo i brani del cloud (testo ascoltato dalla voce, separatore nuovo, battiti e batteria nuovi): te lo propone all'apertura con il costo, poi lavora anche ad app chiusa; testo sempre ascoltato dalla voce (LRCLIB tolto, in Libreria vedi da dove viene il testo); nel Palco l'indicatore del volume generale; Sala prove su telefono e tablet: riconosce scheda audio o cuffie USB, voce in cuffia con gli effetti per la voce, strumenti puliti con «Prova suono», «Prova cuffie» sinistra e destra; pedaliera su telefono e tablet solo con una scaletta salvata (altrimenti solo il volume); battiti e batteria più precisi con RunPod"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -472,7 +472,9 @@ textarea.inp{font-family:var(--f-mono);font-size:13px;min-height:240px;resize:ve
 .si .meta{flex:1 1 180px;min-width:0}
 .si b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .si small{color:var(--dim)}
-.tag.good{border-color:var(--ok);color:var(--ok);font-weight:600}
+.tag.good{border-color:var(--ok);color:var(--ok);font-weight:600}.smobl{margin:6px 0 0;padding-left:18px;display:grid;gap:4px;font-size:13px;line-height:1.4}.smob{border-color:rgba(122,168,255,.45)}.hp.tst{min-width:92px;display:inline-flex;align-items:center;gap:6px}.hp.tst svg{width:16px;height:16px;fill:currentColor}
+.fixlist{display:grid;gap:4px;max-height:40vh;overflow:auto;margin-top:6px}.fixd summary{cursor:pointer;font-weight:600;margin:6px 0}
+.tag.warn{border-color:#f5b642;color:#f5b642;font-weight:600}
 .tag{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:2px 8px;color:var(--steel)}
 .files{display:flex;flex-direction:column;gap:6px}
 .fi{display:grid;grid-template-columns:1fr 160px;gap:8px;align-items:center;background:var(--surface);border-radius:10px;padding:8px 10px}
@@ -663,6 +665,13 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 .lvout{display:flex;align-items:flex-end;gap:8px}.lvout .field{flex:1;min-width:0}.lvout .field span{color:var(--hcfd8e2)}.lvout select{background:var(--h16293d);color:#fff;border:1px solid rgba(255,255,255,.3)}.lvout .mini{min-height:44px;background:var(--h16293d);color:#fff}
 .lvhint{font-size:13.5px;color:var(--hcfd8e2);line-height:1.45}.lvhint b{color:#fff}
 #pMic.live{background:#1f7a46;border-color:#2fae62;color:#fff}
+.pbtn.pvol{display:inline-flex;align-items:center;gap:6px;padding:0 10px;flex:none;min-width:0}.pbtn.pvol svg{width:20px;height:20px;fill:currentColor;flex:none}
+.pvbar{position:relative;width:64px;height:10px;border-radius:6px;background:rgba(255,255,255,.12);overflow:hidden;flex:none}
+.pvbar i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#3ee0c4 0%,#7aa8ff 60%,#ffb347 85%,#ff5c7a 100%);background-size:64px 100%;transition:width .08s linear}
+.pvbar b{position:absolute;top:-2px;bottom:-2px;width:2px;background:#fff;left:100%;margin-left:-2px;box-shadow:0 0 4px rgba(0,0,0,.6)}
+#pVolTxt{font-size:12px;font-weight:700;min-width:34px;text-align:right}
+.pvpop{right:12px;left:auto;top:64px;max-width:360px}.pvrow{display:flex;align-items:center;gap:8px;margin:8px 0}.pvrow input{flex:1;accent-color:#7aa8ff}.pvrow b{min-width:44px;text-align:right}
+@media (max-width:560px){.pvbar{width:40px;background-size:40px 100%}#pVolTxt{display:none}.pbtn.pvol{padding:0 8px}.pvpop{right:8px;left:8px;max-width:none}}
 .pal-top{display:flex;align-items:center;gap:8px;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top,0px));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
 .pal-name{flex:1;min-width:0;display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:1px solid var(--stage-dim);border-radius:10px;background:rgba(255,255,255,.04);color:var(--stage-fg);font-family:var(--f-display);font-size:18px;font-weight:600;text-align:left;cursor:pointer}
 .pal-name .pnm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pal-name .pdd{flex:none;opacity:.8;font-size:14px}
@@ -688,7 +697,8 @@ html.tvmode .pal-name{border:0;background:none;pointer-events:none}html.tvmode #
 .pal-tab{background:var(--paper);color:var(--fg);padding:6px 10px 4px;flex:none}
 .pal-tab canvas{display:block;width:100%;height:min(28vh,210px)}
 .pal-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;padding-bottom:max(10px,env(safe-area-inset-bottom,0px));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));background:var(--stage2);border-top:1px solid var(--stage1)}
-.pal-bar .time{color:var(--stage-dim)}#palco>.pal-top,#palco>.pal-bar,#palco>#slBar{transition:opacity .35s}#palco.uihide>.pal-top,#palco.uihide>.pal-bar,#palco.uihide>#slBar{opacity:0;pointer-events:none}#palco.uihide{cursor:none}.pseekw{flex:1 1 100%;order:-1;display:flex;min-width:0}.pseek{flex:1;min-width:0;width:100%;margin:0;height:26px;accent-color:var(--accent);cursor:pointer;touch-action:none}
+.pal-bar .time{color:var(--stage-dim)}#palco>.pal-top,#palco>.pal-bar,#palco>#slBar{transition:opacity .35s}#palco .pvmini{position:absolute;top:max(10px,env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));z-index:6;display:none;align-items:center;gap:6px;padding:6px 10px;border-radius:12px;border:1px solid var(--line);background:rgba(10,12,18,.7);color:var(--ink,#fff)}#palco .pvmini svg{width:16px;height:16px;fill:currentColor}#palco.uihide .pvmini{display:inline-flex}html.tvmode #palco .pvmini{display:none!important}
+#palco.uihide>.pal-top,#palco.uihide>.pal-bar,#palco.uihide>#slBar{opacity:0;pointer-events:none}#palco.uihide{cursor:none}.pseekw{flex:1 1 100%;order:-1;display:flex;min-width:0}.pseek{flex:1;min-width:0;width:100%;margin:0;height:26px;accent-color:var(--accent);cursor:pointer;touch-action:none}
 /* Palco: griglia, così testo, tablatura e comandi non si sovrappongono mai */
 #palco{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto}
 #palco[hidden]{display:none}
@@ -1030,7 +1040,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione 18/11 · 21:30<br><span class="mnotes">Novità: Sala prove: battiti e batteria più precisi con RunPod (Beat This! e ADTOF), anche per i brani già in Libreria con «✨ Più precisa con RunPod» nella batteria; Sala prove e pedaliera su telefono e tablet si aprono solo con la scheda audio collegata via USB (cavo OTG); su telefono e tablet niente effetti dal vivo in cuffia (troppo ritardo): si registra pulito e poi «Metti gli effetti alla registrazione»; per suonare dal vivo con gli effetti serve il computer; il tablet viene riconosciuto sempre come tablet (anche quelli piccoli, in «versione desktop» o con la penna), e ti dice se la scheda USB arriva con In 1 e In 2 o con un ingresso solo; tablatura di basso e chitarra (anche assoli) con la diteggiatura più comoda: mano ferma in una posizione di 4 tasti (basso) o 5 (chitarra), tutte le corde, spostamenti solo quando servono; «Affina tutti i brani» in Libreria; il testo trovato online non sostituisce mai il tuo: lo confronti e scegli tu (e c'è «Rimetti com'era»); scelta in Impostazioni tra testo prima da LRCLIB o sempre dalla voce; ricerca del brano su internet: artista, foto e tutti gli album dove c'è, con i link a Spotify e YouTube Music; scheda artista con una seconda fonte (TheAudioDB), più foto e «Conosciuto anche come»; Libreria con artisti e album a tendina, filtro qui/cloud in cima e su ogni brano Scarica qui, Togli da qui, Salva nel cloud; tag salvati anche nel cloud; più dispositivi sullo stesso cloud: uno salva, gli altri aspettano e si aggiornano da soli</span></small>
+      <small class="mver pvver">Versione 19/11 · 08:00<br><span class="mnotes">Novità: RunPod sistema da solo i brani del cloud (testo ascoltato dalla voce, separatore nuovo, battiti e batteria nuovi): te lo propone all'apertura con il costo, poi lavora anche ad app chiusa; testo sempre ascoltato dalla voce (LRCLIB tolto, in Libreria vedi da dove viene il testo); nel Palco l'indicatore del volume generale; Sala prove su telefono e tablet: riconosce scheda audio o cuffie USB, voce in cuffia con gli effetti per la voce, strumenti puliti con «Prova suono», «Prova cuffie» sinistra e destra; pedaliera su telefono e tablet solo con una scaletta salvata (altrimenti solo il volume); battiti e batteria più precisi con RunPod</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1071,7 +1081,7 @@ themeApply();</script>
       <div class="phead"><h2>Testo</h2><span class="grow"></span><button class="mini optbtn" data-opt="optLy" aria-expanded="false">Opzioni testo ▾</button></div>
       <div class="optarea" id="optLy" hidden>
         <div class="optrow">
-        <button class="mini" id="bFind">Cerca su LRCLIB</button>
+        
         <button class="mini" id="bAsr">Trascrivi dalla voce</button>
         <button class="mini" id="bEditLy">Modifica</button>
         <button class="mini" id="bAlign">Allinea da solo</button>
@@ -1125,6 +1135,7 @@ themeApply();</script>
     <button class="pbtn pico" id="pX" aria-label="Torna alla pagina principale" title="Pagina principale">🏠</button>
     <button class="pal-name" id="pSong" title="Cambia brano" aria-label="Cambia brano"><span class="pnmw"><span class="pnm" id="palName"></span><small class="psl" id="palSl" hidden></small></span><span class="pdd" aria-hidden="true">▾</span></button>
     <button class="pbtn pico" id="pSm" aria-label="Testo più piccolo" title="Testo più piccolo">A−</button><button class="pbtn pico" id="pLg" aria-label="Testo più grande" title="Testo più grande">A+</button>
+    <button class="pbtn pvol" id="pVol" aria-label="Volume generale" title="Volume generale: tocca per cambiarlo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="pvbar" aria-hidden="true"><i id="pVolLv"></i><b id="pVolSet"></b></span><small id="pVolTxt">100%</small></button>
     <button class="pbtn pico" id="pCast" aria-label="Trasmetti sul TV" title="Trasmetti sul TV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></button>
   </div>
   <div class="palmic" id="palMic" hidden role="dialog" aria-label="Microfono e strumenti">
@@ -1134,6 +1145,12 @@ themeApply();</script>
     <div id="lvRows"></div>
     <div class="pseg" id="lvRev"><span>Eco sulla voce</span><div class="seg"><button data-v="0">No</button><button data-v="0.2">Poco</button><button data-v="0.45">Tanto</button></div></div>
     <div class="lvhint" id="lvInfo"></div>
+  </div>
+  <button class="pvmini" id="pVolMini" aria-label="Volume generale" title="Volume generale"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z"/></svg><span class="pvbar"><i id="pVolLv2"></i><b id="pVolSet2"></b></span></button>
+  <div class="palmic pvpop" id="pVolPop" hidden role="dialog" aria-label="Volume generale">
+    <div class="lvtop"><b>Volume generale</b><button class="pbtn" id="pvX" aria-label="Chiudi">✕</button></div>
+    <div class="pvrow"><button class="pbtn" id="pvDn" aria-label="Più basso">−</button><input type="range" id="pvRange" min="0" max="100" step="1" aria-label="Volume generale"><button class="pbtn" id="pvUp" aria-label="Più alto">+</button><b id="pvVal">100%</b></div>
+    <div class="lvhint">La barra colorata mostra quanto suona adesso il brano; la linea bianca è il volume generale. Vale anche per la Sala prove e per il pedale del volume.</div>
   </div>
   <div class="palmic palmix" id="palMix" hidden role="dialog" aria-label="Volume e accensione delle tracce">
     <div class="lvtop"><b>🎚 Tracce del brano</b><button class="pbtn" id="pmX" aria-label="Chiudi">✕</button></div>
@@ -1223,7 +1240,7 @@ themeApply();</script>
     <label class="field"><span>Album</span><input class="inp" id="tgAlbum" autocomplete="off"></label>
     <label class="field"><span>Anno</span><input class="inp" id="tgYear" autocomplete="off" inputmode="numeric" maxlength="4"></label>
   </div>
-  <div class="row"><button class="chip pri" id="tgFind">🔎 Cerca il brano su internet</button><span class="snote grow">Trova artista, foto, album (anche raccolte e live) e testo su Apple Music, Deezer, MusicBrainz e LRCLIB.</span></div>
+  <div class="row"><button class="chip pri" id="tgFind">🔎 Cerca il brano su internet</button><span class="snote grow">Trova artista, foto e album (anche raccolte e live) su Apple Music, Deezer e MusicBrainz. Il testo resta quello ascoltato dalla voce.</span></div>
   <div id="tgWeb"></div>
   <div id="tgList"></div>
   <label class="field"><span>Testo · i tempi come [00:12.34] all'inizio delle righe tengono il testo a tempo</span><textarea class="inp" id="tgLyr" rows="9" spellcheck="false"></textarea></label>
@@ -1294,6 +1311,13 @@ themeApply();</script>
           <input type="range" id="sPos" min="0" max="1000" value="0" aria-label="Posizione nel brano" style="flex:1 1 220px"><span class="stime" id="sPosT">0:00</span>
         </div>
         <div class="stab"><canvas id="sTab"></canvas></div>
+      </div>
+      <div class="sbox smob" id="sMob" hidden>
+        <div class="row" style="gap:8px 12px"><h4 class="grow">Come ti colleghi</h4>
+          <div class="seg" id="sMobKind" role="radiogroup" aria-label="Cosa hai collegato"><button data-mk="scheda">Scheda audio</button><button data-mk="cuffie">Cuffie USB con microfono</button></div>
+          <button class="chip sic" id="sEarTest"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg><span>Prova cuffie: sinistra e destra</span></button></div>
+        <p class="snote" id="sMobFound"></p>
+        <ul class="smobl" id="sMobTips"></ul>
       </div>
       <div class="sbox">
         <div class="row"><h4 class="grow">Musicisti e ingressi</h4>
@@ -1525,7 +1549,7 @@ themeApply();</script>
         <div class="row"><label class="field"><span>Modello</span><select class="sel" id="rpModel"><option value="htdemucs_6s">6 tracce: voce, basso, batteria, chitarra, piano, altro (consigliato)</option><option value="htdemucs">4 tracce, vecchio separatore (senza chitarra e piano)</option><option value="htdemucs_ft">4 tracce, vecchio separatore più preciso (più lento)</option></select></label>
           <label class="field"><span>Lingua del testo</span><select class="sel" id="rpLang"><option value="">La riconosce da sola</option><option value="it">Italiano</option><option value="en">Inglese</option><option value="es">Spagnolo</option><option value="fr">Francese</option><option value="de">Tedesco</option><option value="pt">Portoghese</option></select></label></div>
         <label class="row" style="gap:8px;font-weight:600"><input type="checkbox" id="rpAsr" checked> Trascrivi anche il testo dalla voce e crea il file .lrc</label>
-        <label class="field"><span>Testo dei brani nuovi</span><select class="sel" id="rpLyrSrc"><option value="lrclib">Prima LRCLIB: se c'è già a tempo, non trascrivo (più veloce)</option><option value="voce">Sempre dalla voce: le parole di LRCLIB messe sui tempi della voce (più preciso)</option></select></label>
+        <select id="rpLyrSrc" hidden><option value="voce">voce</option></select>
         <div class="row"><button class="mini" id="rpSave">Salva e prova il collegamento</button></div>
       </details>
     </div>
@@ -1708,6 +1732,13 @@ themeApply();</script>
   <input type="file" id="cvwFile" accept="image/*" hidden>
   <p class="snote" id="cvwMsg"></p><div class="cvwlist" id="cvwList"></div>
 </div></div>
+<div class="ov" id="ovFix" hidden><div class="sheet">
+  <div class="row"><h3 class="grow">Sistemo i brani del cloud con RunPod</h3><button class="mini" data-close>Chiudi</button></div>
+  <p id="fixTxt"></p>
+  <details class="fixd"><summary>Vedi i brani</summary><div id="fixList" class="fixlist"></div></details>
+  <p class="snote">RunPod lavora da solo: puoi chiudere l'app e spegnere il telefono. Le tracce nuove vanno nel cloud; quando riapri l'app, testo, battiti e batteria nuovi arrivano nei brani. Il testo di prima resta in «Testo di prima» nella scheda Tag.</p>
+  <div class="row"><button class="chip pri" id="fixGo">Avvia</button><button class="chip" id="fixLater">Non ora</button></div>
+</div></div>
 <div class="ov" id="ovPick" hidden><div class="sheet">
   <div class="row"><h3 class="grow">Cerca il testo su LRCLIB</h3><button class="mini" data-close>Chiudi</button></div>
   <p>Controllo titolo, artista e durata del brano. «Sincronizzato, stessa durata» è la scelta migliore: testo e tempi sono già pronti.</p>
@@ -1806,7 +1837,7 @@ themeApply();</script>
     </ul>
     <p>Pubblicare online un video in cui canti su una base protetta può richiedere licenze: molte piattaforme (YouTube, Facebook, TikTok…) le gestiscono con regole proprie, che vanno controllate prima.</p>
     <p><b>Responsabilità.</b> L'autore di Pure Voltage non controlla i file caricati e non è responsabile dell'uso che l'utente fa dell'app o dei contenuti che crea: ogni utente ne risponde personalmente. L'autore si dissocia da qualsiasi utilizzo che violi i diritti d'autore o la legge. L'app è fornita gratuitamente «così com'è», senza garanzie.</p>
-    <p><b>Servizi esterni.</b> I brani inviati a MVSEP o al proprio account RunPod per la separazione, e le ricerche su LRCLIB e iTunes, seguono le condizioni di quei servizi. Il pulsante per creare l'account RunPod è un <b>link di invito</b>: chi si iscrive riceve 5 $ di bonus dopo la prima ricarica e l'autore di Pure Voltage riceve crediti RunPod. I file restano sul tuo dispositivo, salvo quelli che scegli di inviare per la separazione.</p>
+    <p><b>Servizi esterni.</b> I brani inviati a MVSEP o al proprio account RunPod per la separazione, e le ricerche su Apple Music, Deezer e MusicBrainz, seguono le condizioni di quei servizi. Il pulsante per creare l'account RunPod è un <b>link di invito</b>: chi si iscrive riceve 5 $ di bonus dopo la prima ricarica e l'autore di Pure Voltage riceve crediti RunPod. I file restano sul tuo dispositivo, salvo quelli che scegli di inviare per la separazione.</p>
   </div>
   <div class="legacc" id="legalRow"><label class="legchk"><input type="checkbox" id="legalChk"><span><b>Ho letto e accetto</b> le condizioni qui sopra</span></label><button class="chip pri" id="legalOk" disabled>Continua</button></div>
 </div></div>
@@ -2116,7 +2147,7 @@ const dbAll=async()=>(await idb('songs','readonly',s=>s.getAll()))||[];
 /* elenco leggero della Libreria: legge un brano alla volta e tiene solo nome, artista e testo (non le tracce) */
 /* scheda di un brano senza le tracce audio */
 function metaOf(v){v=v||{};const st=v.stems||{},sk=Object.keys(st);let b=0;for(const k of sk)b+=(st[k]&&st[k].data&&st[k].data.byteLength)||0;
-  const m={...v};delete m.stems;delete m.asr;m.sk=sk;m.stems=sk.length>0;m.mb=b/1048576;m.heavyMB=sk.filter(k=>!LIGHT_RX.test((st[k]&&st[k].name)||'')).reduce((a,k)=>a+((st[k].data&&st[k].data.byteLength)||0),0)/1048576;if(v.cloudOnly){const cf=v.cloudFiles||[];m.sk=cf.map(f=>f.k);m.mb=cf.reduce((a,f)=>a+(f.size||0),0)/1048576}return m}
+  const m={...v};m.lsrc=lyrSrcOf(v);delete m.stems;delete m.asr;m.sk=sk;m.stems=sk.length>0;m.mb=b/1048576;m.heavyMB=sk.filter(k=>!LIGHT_RX.test((st[k]&&st[k].name)||'')).reduce((a,k)=>a+((st[k].data&&st[k].data.byteLength)||0),0)/1048576;if(v.cloudOnly){const cf=v.cloudFiles||[];m.sk=cf.map(f=>f.k);m.mb=cf.reduce((a,f)=>a+(f.size||0),0)/1048576}return m}
 /* lettura completa (vecchio metodo, legge anche l'audio): solo di riserva */
 const libMetaScan=()=>new Promise(ok=>{const out=[];db().then(d=>{if(!d){ok(out);return}const rq=d.transaction('songs','readonly').objectStore('songs').openCursor();
   rq.onsuccess=()=>{const c=rq.result;if(!c){ok(out);return}out.push(metaOf(c.value));c.continue()};rq.onerror=()=>ok(out)}).catch(()=>ok(out))});
@@ -2129,7 +2160,7 @@ function mcSave(now){clearTimeout(MC.t);MC.t=setTimeout(async()=>{if(!MC.map)ret
 async function metaLoad(){if(MC.map)return MC.map;if(MC.p)return MC.p;
   MC.p=(async()=>{const keys=(await idb('songs','readonly',x=>x.getAllKeys()))||[];const dirty=mcDirty();let snap=null;
     if(dirty)try{snap=await idb('settings','readonly',x=>x.get('libmeta'))}catch(e){}
-    const m=new Map(),ks=new Set(keys),ds=new Set(dirty||[]);if(Array.isArray(snap))for(const x of snap)if(x&&ks.has(x.id)&&!ds.has(x.id))m.set(x.id,x);
+    const m=new Map(),ks=new Set(keys),ds=new Set(dirty||[]);if(Array.isArray(snap))for(const x of snap)if(x&&ks.has(x.id)&&!ds.has(x.id)&&('lsrc' in x))m.set(x.id,x);
     const miss=keys.filter(k=>!m.has(k));for(const k of miss){const v=await dbGet(k);if(v)m.set(k,metaOf(v))}
     for(const k of MC.pend){const v=await dbGet(k);if(v)m.set(k,metaOf(v));else m.delete(k)}MC.pend.clear();
     MC.map=m;if(miss.length||!Array.isArray(snap)||snap.length!==m.size)mcSave(true);return m})();
@@ -2186,7 +2217,7 @@ const A=(()=>{const EL=new Audio();EL.preload='auto';try{EL.preservesPitch=true;
     get playbackRate(){return P.rate},set playbackRate(v){v=+v||1;const was=P.rate;P.rate=v;if(P.mode==='el'&&P.url)try{EL.playbackRate=v}catch(e){}if(slow(was)!==slow(v))mixSoon()},
     get defaultPlaybackRate(){return P.rate},set defaultPlaybackRate(v){},
     get muted(){return P.muted},set muted(v){P.muted=!!v;if(P.out)P.out.gain.value=P.muted?0:(P.mv==null?1:P.mv)},
-    get master(){return P.mv==null?1:P.mv},set master(v){P.mv=v;if(P.out){const c=P.out.context;try{P.out.gain.setTargetAtTime(P.muted?0:v,c.currentTime,.02)}catch(e){P.out.gain.value=P.muted?0:v}}},
+    get outNode(){return P.out},get master(){return P.mv==null?1:P.mv},set master(v){P.mv=v;if(P.out){const c=P.out.context;try{P.out.gain.setTargetAtTime(P.muted?0:v,c.currentTime,.02)}catch(e){P.out.gain.value=P.muted?0:v}}},
     play(){if(!P.paused)return Promise.resolve();P.paused=false;P.ended=false;if(P.pos>=(P.dur||0)-.05)P.pos=0;emit('play');
       if(P.mode==='wa')waStart();else if(P.url){try{ctx().resume()}catch(e){}try{EL.currentTime=P.pos}catch(e){}EL.playbackRate=P.rate;return EL.play().catch(()=>{})}return Promise.resolve()},
     pause(){if(P.paused)return;P.pos=cur();P.paused=true;if(P.mode==='wa')waStop();else try{EL.pause()}catch(e){}emit('pause')},
@@ -2621,7 +2652,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-partsel] [
   toast(K.mine===1?'Canti tu le righe blu (e le gialle insieme)':K.mine===2?'Canti tu le righe rosse (e le gialle insieme)':'Canti tutto il testo')});
 function kBuild(){singAuto();setTimeout(partUI,0);const L=K.lines;
   const html=L.length?`<div class="kcount" aria-hidden="true"></div><div class="klines">${L.map((l,i)=>`<div class="kl ${l.st&&i?'st':''} ${l.p&&(K.duo||K.duoEdit)?'p'+l.p:''} ${l.pq&&(K.duo||K.duoEdit)?'pq':''} ${l.pm?'pmx':''}" data-kl="${i}">${lyrWords(l).map(w=>`<span class="kw">${esc(w.s)}</span>`).join(' ')}</div>`).join('')}</div>`
-    :`<div class="kempty"><div>Nessun testo per questo brano.<br>Tocca <b>Cerca su LRCLIB</b>, <b>Modifica</b> per incollarlo, oppure <b>Trascrivi dalla voce</b>.</div></div>`;
+    :`<div class="kempty"><div>Nessun testo per questo brano.<br>Tocca <b>Trascrivi dalla voce</b>, oppure <b>Modifica</b> per scriverlo.</div></div>`;
   $$('.kpanel').forEach(P=>{P.innerHTML=html;delete P.dataset.ci});
   $$('.kpanel [data-kl]').forEach(el=>el.onclick=()=>{if(K.duoEdit){const l=K.lines[+el.dataset.kl];if(!l)return;l.p=((l.p||0)+1)%4;l.pm=1;l.pq=0;singRecalc();$$(`.kpanel [data-kl="${el.dataset.kl}"]`).forEach(x=>{x.classList.remove('p1','p2','p3','pq');if(l.p)x.classList.add('p'+l.p);x.classList.add('pmx')});saveLyr();partUI();return}if(K.sync)return;const l=K.lines[+el.dataset.kl];if(l){seek(Math.max(0,l.t+K.off-.6));if(!playing())play()}})}
 $('#bVoices').onclick=voicesRun;
@@ -3116,8 +3147,16 @@ iconize(document.body);
    nell'app installata non serve: è già a tutto schermo e l'avviso non compare mai */
 const appInstalled=()=>matchMedia('(display-mode: fullscreen)').matches||matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 async function fsEnter(){if(appInstalled()||fsEl())return;const el=document.documentElement,f=el.requestFullscreen||el.webkitRequestFullscreen;if(!f)return;try{await f.call(el,{navigationUI:'hide'})}catch(e){}}
-async function palOpen(v){palOn=v;$('#palco').hidden=!v;try{pmShow(false)}catch(e){}if(!v){if(LV.on)lvStop();$('#palMic').hidden=true}document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;palLayout();slPlace();
+async function palOpen(v){palOn=v;$('#palco').hidden=!v;if(v){pvShow();pvLoop()}else{cancelAnimationFrame(PVOL.raf);$('#pVolPop').hidden=true}try{pmShow(false)}catch(e){}if(!v){if(LV.on)lvStop();$('#palMic').hidden=true}document.body.style.overflow=v?'hidden':'';$$('.kpanel').forEach(P=>delete P.dataset.ci);updPalSegs();$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;palLayout();slPlace();
   try{if(v){await fsEnter();try{await screen.orientation.lock('landscape')}catch(e){}}else{try{screen.orientation.unlock()}catch(e){}}}catch(e){}}
+/* indicatore del volume generale nel Palco: linea = volume scelto, barra = quanto suona adesso */
+const PVOL={an:null,node:null,buf:null,raf:0,lv:0};
+function pvShow(){const v=Math.round((MD.vol==null?1:MD.vol)*100);const b=$('#pVolSet');if(b)b.style.left=v+'%';const b2=$('#pVolSet2');if(b2)b2.style.left=v+'%';const t=$('#pVolTxt');if(t)t.textContent=v+'%';const r=$('#pvRange');if(r&&document.activeElement!==r)r.value=v;const w=$('#pvVal');if(w)w.textContent=v+'%'}
+function pvLoop(){cancelAnimationFrame(PVOL.raf);if(!palOn)return;let lv=0;try{const n=A.outNode;if(n&&n!==PVOL.node){PVOL.node=n;PVOL.an=n.context.createAnalyser();PVOL.an.fftSize=1024;PVOL.buf=new Float32Array(1024);n.connect(PVOL.an)}
+  if(PVOL.an&&!A.paused){PVOL.an.getFloatTimeDomainData(PVOL.buf);let q=0;for(let i=0;i<PVOL.buf.length;i++)q+=PVOL.buf[i]*PVOL.buf[i];const db=10*Math.log10(q/PVOL.buf.length+1e-12);lv=Math.max(0,Math.min(1,(db+48)/48))}}catch(e){}
+  PVOL.lv=lv>PVOL.lv?lv:PVOL.lv*.9+lv*.1;const i=$('#pVolLv'),i2=$('#pVolLv2'),wd=Math.round(PVOL.lv*100)+'%';if(i)i.style.width=wd;if(i2)i2.style.width=wd;PVOL.raf=requestAnimationFrame(pvLoop)}
+$('#pVolMini').onclick=()=>{const p=$('#pVolPop');p.hidden=!p.hidden;pvShow()};$('#pVol').onclick=()=>{const p=$('#pVolPop');p.hidden=!p.hidden;pvShow()};$('#pvX').onclick=()=>$('#pVolPop').hidden=true;
+$('#pvRange').oninput=e=>mvSet(+e.target.value/100);$('#pvDn').onclick=()=>mvSet((MD.vol==null?1:MD.vol)-.05);$('#pvUp').onclick=()=>mvSet((MD.vol==null?1:MD.vol)+.05);
 $('#bPalco').onclick=()=>palOpen(true);$('#pSl').onclick=()=>slOpen();$('#pDuo').onclick=()=>lyrDuoSet(!K.duo);$('#pX').onclick=()=>palOpen(false);
 /* palco a schermo intero: tracce (accese/spente e volume) e scelta del brano senza uscire */
 function pmRender(){const box=$('#pmRows');if(!box)return;box.innerHTML=order.map(k=>{const g=gains[k],on=!g.mute;
@@ -3412,7 +3451,7 @@ async function renderLib(noLoad){const all=(await libMeta()).sort((a,b)=>(a.arti
   const row=s=>{const id=s.id,co=!!s.cloudOnly,mixOnly=s.sk.length===1&&s.sk[0]==='mix',refine=!mixOnly&&s.sk.length>1&&s.sepModel!=='mix6'&&s.sepModel!=='bs_roformer_sw'&&!!(rp.key&&rp.ep);
     const w=where(s),busy=SPC.busy?'disabled':'',st=w.local&&w.inCloud?['both','📱☁️ Qui e nel cloud']:w.local&&w.inCloud===false?['here','📱 Solo qui']:w.local?['here','📱 Qui']:['cloud','☁️ Solo nel cloud'];
     const sz=[w.local&&w.x&&w.x.mb>=.1?fmtMB(w.x.mb)+' qui':'',w.inCloud&&w.x&&w.x.cloudMB>=.1?fmtMB(w.x.cloudMB)+' nel cloud':''].filter(Boolean).join(' · ');
-    const tags=`<span class="tag">${s.sk.map(k=>SL[k]||k).join(' · ')||'—'}</span>${(s.lyr&&s.lyr.length)||s.lyrics?'<span class="tag good">con testo</span>':''}${s.alsoOn&&s.alsoOn.length?`<span class="tag" title="Lo stesso brano è anche in: ${esc(s.alsoOn.map(x=>x.al+(x.y?' ('+x.y+')':'')).join(', '))}">anche in ${s.alsoOn.length} ${s.alsoOn.length===1?'altro album':'altri album'}</span>`:''}<span class="tag lwhere spk ${st[0]}" title="${co?'Si scarica quando lo apri (serve internet)':'Le tracce sono su questo dispositivo'}">${st[1]}${sz?' · '+sz:''}</span>`;
+    const tags=`<span class="tag">${s.sk.map(k=>SL[k]||k).join(' · ')||'—'}</span>${(s.lsrc||(s.lrclib?'lrclib':''))==='lrclib'?'<span class="tag warn" title="Il testo viene da LRCLIB: va rifatto ascoltando la voce">testo LRCLIB</span>':s.lsrc==='voce'?'<span class="tag good" title="Testo trascritto ascoltando la voce">testo ascoltato</span>':(s.lyr&&s.lyr.length)||s.lyrics?'<span class="tag good">con testo</span>':''}${s.alsoOn&&s.alsoOn.length?`<span class="tag" title="Lo stesso brano è anche in: ${esc(s.alsoOn.map(x=>x.al+(x.y?' ('+x.y+')':'')).join(', '))}">anche in ${s.alsoOn.length} ${s.alsoOn.length===1?'altro album':'altri album'}</span>`:''}<span class="tag lwhere spk ${st[0]}" title="${co?'Si scarica quando lo apri (serve internet)':'Le tracce sono su questo dispositivo'}">${st[1]}${sz?' · '+sz:''}</span>`;
     const del=delArm===id?`<span class="ldelq">Eliminarlo per sempre, anche dal cloud e dagli altri dispositivi?</span><button class="lbtn del arm" data-delall="${id}">${EI('trash')}<span>Sì, elimina ovunque</span></button><button class="lbtn" data-delno>No</button>`:`<button class="lbtn del" data-del="${id}">${EI('trash')}<span>Elimina ovunque</span></button>`;
     const place=(!w.local&&w.inCloud&&cl?`<button class="lbtn" data-sx="get" data-id="${id}" ${busy} title="Scarica le tracce su questo dispositivo: poi si apre anche senza internet">${EI('down')}<span>Scarica qui</span></button>`:'')+
       (w.local&&w.inCloud&&cl?`<button class="lbtn" data-sx="out" data-id="${id}" ${busy} title="Libera spazio: il brano resta nel cloud e si riscarica quando lo apri">${EI('cloud')}<span>Togli da qui</span></button>`:'')+
@@ -3425,11 +3464,13 @@ async function renderLib(noLoad){const all=(await libMeta()).sort((a,b)=>(a.arti
     return`<details class="ldet" data-ok="${esc(ak)}" ${LIBOPEN[ak]||hasCur?'open':''}><summary class="lart"><i class="lchev"></i>${artBtn(A.name)}<span class="lartn"><b>${esc(A.name)}</b>${aliasOf(A.name).length?`<small class="lalias">conosciuto come ${esc(aliasOf(A.name).join(', '))}</small>`:''}<small>${n} ${n===1?'brano':'brani'} · ${A.albums.filter(x=>x.al).length} album</small></span><button class="mini lstory" data-artinfo="${esc(A.name)}" title="Storia e album dell'artista">Storia</button></summary>`+
       albs.map(({B,rows})=>{const bk='b:'+A.name+'|'+(B.al||''),bc=rows.some(x=>x.id===cur);return`<details class="aldet" data-ok="${esc(bk)}" ${LIBOPEN[bk]||bc||albs.length===1?'open':''}><summary class="lalb"><i class="lchev"></i>${covBtn(A.name,B.al)}<div><b>${esc(B.al||'Senza album')}</b><small>${B.year&&B.al?esc(B.year)+' · ':''}${rows.length} ${rows.length===1?'brano':'brani'}</small></div></summary>${rows.map(row).join('')}</details>`}).join('')+`</details>`}).join('');
   const toRef=all.filter(s=>!s.cloudOnly&&s.sk.length>1&&!s.sk.includes('mix')&&s.sepModel!=='bs_roformer_sw'&&s.id!=='demo'&&!/^esempio-/.test(s.id));
-  const refRow=toRef.length&&rp.key&&rp.ep?(RALL.on?`<div class="si refrow"><div class="meta"><b>Affino tutti i brani: ${RALL.i+1} di ${RALL.n}</b><small>Lo vedi nel riquadro dell'avanzamento; «Annulla» lì ferma tutto.</small></div></div>`:
+  const fixRow=FIX.cand&&FIX.cand.length&&rp.key&&rp.ep&&r2On()?`<div class="si refrow"><div class="meta"><b>Sistema i brani del cloud con RunPod</b><small>${fixSummary(FIX.cand)}</small></div><button class="chip" id="fixOpen">Vedi (${FIX.cand.length})</button></div>`:(FIX.jobs&&Object.keys(FIX.jobs).length?`<div class="si refrow"><div class="meta"><b>RunPod sta sistemando ${Object.keys(FIX.jobs).length} ${Object.keys(FIX.jobs).length===1?'brano':'brani'} del cloud</b><small>Lavora da solo: i brani si aggiornano quando riapri l'app.</small></div></div>`:'');
+  const refRow=fixRow+(toRef.length&&rp.key&&rp.ep?(RALL.on?`<div class="si refrow"><div class="meta"><b>Affino tutti i brani: ${RALL.i+1} di ${RALL.n}</b><small>Lo vedi nel riquadro dell'avanzamento; «Annulla» lì ferma tutto.</small></div></div>`:
     RALL.arm?`<div class="si refrow arm"><div class="meta"><b>Affino ${toRef.length} ${toRef.length===1?'brano':'brani'} uno dopo l'altro?</b><small>Con il separatore nuovo: circa ${Math.max(2,Math.round(toRef.length*2.5))} minuti in tutto e pochi centesimi a brano su RunPod. Testi, tempi e impostazioni dei brani restano come sono.</small></div><button class="chip pri" id="refGo" ${sepBusy?'disabled':''}>Sì, affina tutti</button><button class="chip" id="refNo">No</button></div>`:
-    `<div class="si refrow"><div class="meta"><b>✨ Affina tutti i brani sul dispositivo</b><small>${toRef.length} ${toRef.length===1?'brano è stato separato':'brani sono stati separati'} con il separatore vecchio: rifalli con quello nuovo, più pulito</small></div><button class="chip" id="refAll" ${sepBusy?'disabled':''}>Affina tutti (${toRef.length})</button></div>`):'';
+    `<div class="si refrow"><div class="meta"><b>✨ Affina tutti i brani sul dispositivo</b><small>${toRef.length} ${toRef.length===1?'brano è stato separato':'brani sono stati separati'} con il separatore vecchio: rifalli con quello nuovo, più pulito</small></div><button class="chip" id="refAll" ${sepBusy?'disabled':''}>Affina tutti (${toRef.length})</button></div>`):'');
   el.innerHTML=refRow+`<div class="si addrow"><div class="meta"><b>Carica i brani già separati</b><small>Dalla cartella delle tracce (Artista / Titolo), con il loro testo</small></div><button class="chip pri" id="libAdd">Carica</button></div>`+(all.length?(html||'<p class="status">Nessun brano con questo filtro: scegli «Tutti».</p>'):'<p class="status">La libreria è vuota: premi «Aggiungi brano» in alto per separare il tuo primo brano.</p>');
   $('#spcBox').hidden=!all.length;
+  {const fo=$('#fixOpen');if(fo)fo.onclick=()=>fixOpen()}
   {const a=$('#refAll'),g=$('#refGo'),n=$('#refNo');if(a)a.onclick=()=>{RALL.arm=true;renderLib(true)};if(n)n.onclick=()=>{RALL.arm=false;renderLib(true)};if(g)g.onclick=()=>refineAll(toRef.map(s=>s.id))}
   $('#libAdd').onclick=()=>{closeOv($('#libAdd'));openAdd()};covFill(el);el.querySelectorAll('[data-artinfo]').forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();artOpen(b.dataset.artinfo)});
   el.querySelectorAll('summary button,summary .artimg,summary .alcov').forEach(b=>b.addEventListener('click',e=>e.preventDefault()));
@@ -3511,6 +3552,68 @@ function wakeOff(){WAKE.want=Math.max(0,WAKE.want-1);if(!WAKE.want&&WAKE.lock){t
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')wakeGet();else if(WAKE.want&&BATCH.on)toast('Tieni Pure Voltage in primo piano: se la finestra è nascosta il dispositivo può andare in sospensione')});
 /* ===== album intero: un brano alla volta su RunPod, senza domande sulle tonalità ===== */
 const BATCH={on:false,i:0,n:0,res:null};
+/* ===== RunPod sistema da solo i brani del cloud =====
+   Per ogni brano nel cloud c'è pv-info.json (da dove viene il testo, separatore, ritmo). Se qualcosa è vecchio
+   (testo non ascoltato dalla voce, separatore vecchio, ritmo e batteria vecchi) l'app manda a RunPod un lavoro
+   con indirizzi firmati: RunPod scarica le tracce, rifà quello che serve, carica le tracce nuove e scrive pv-fix.json.
+   Alla prossima apertura l'app lo legge e aggiorna il brano. */
+const PV_SEP='bs_roformer_sw',FIX_EXP=518400,FIX_KEYS=['vocals','drums','bass','guitar','piano','other'];
+const FIX=(()=>{let o={};try{o=JSON.parse(prefGet('cloudFix')||'{}')}catch(e){}return{jobs:o.jobs||{},fails:o.fails||{},later:o.later||0,cand:null}})();
+function fixSave(){prefSet('cloudFix',JSON.stringify({jobs:FIX.jobs,fails:FIX.fails,later:FIX.later}))}
+function infoOf(s){const ls=s.noVoice?'none':(s.lsrc&&!s.asr?s.lsrc:lyrSrcOf(s));return{v:1,lsrc:ls,sep:s.sepModel||'',rhy:(s.beatSrc==='ai'||(s.drumAI&&s.drumAI.length))?1:0,t:Date.now()}}
+function fixNeeds(i){i=i||{};const n={asr:!['voce','none'].includes(i.lsrc),sep:i.sep!==PV_SEP,rhy:!i.rhy};n.any=n.asr||n.sep||n.rhy;return n}
+function fixSummary(L){const a=L.filter(x=>x.need.asr).length,b=L.filter(x=>x.need.sep).length,c=L.filter(x=>x.need.rhy).length,p=[];
+  if(a)p.push(a+' con il testo non ascoltato dalla voce');if(b)p.push(b+' con la separazione vecchia');if(c)p.push(c+' senza battiti e batteria nuovi');return p.join(', ')+'.'}
+function fixCost(L){const sep=L.filter(x=>x.need.sep).length,oth=L.length-sep;const lo=sep*0.02+oth*0.005,hi=sep*0.05+oth*0.015;return'circa '+lo.toFixed(2).replace('.',',')+'–'+hi.toFixed(2).replace('.',',')+' $'}
+async function rpSubmit(input){const r=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/run`,{method:'POST',headers:rpH(),body:JSON.stringify({input})});
+  if(r.status===401||r.status===403)throw new Error('AUTH');if(r.status===404)throw new Error('NOEP');if(!r.ok)throw new Error('RunPod ha risposto '+r.status);return (await r.json()).id}
+/* quali brani del cloud vanno sistemati */
+async function cloudFixCheck(all,ask){if(!rp.key||!rp.ep||!r2Ok()||!all)return;
+  const scan=(await describe(await r2Scan(all))).filter(x=>!x.single&&x.dir&&x.stems.length);const keys=new Set(all.map(o=>o.key));
+  const lib=await libMeta(),LK=new Map(lib.map(s=>[tombK(s),s]));await fixPoll();const out=[];
+  for(const x of scan){const dir=x.dir,base=R2P+dir+'/';if(keys.has(base+'pv-fix.json')||FIX.jobs[dir])continue;if((FIX.fails[dir]||0)>=2)continue;
+    const loc=LK.get(grpK(x.artist||'')+'|'+grpK(x.title||''));let info=null;
+    if(loc&&!loc.cloudOnly)info=infoOf(loc);else if(keys.has(base+'pv-info.json')){try{info=await (await r2Req('GET',base+'pv-info.json')).json()}catch(e){}}
+    if(!info&&loc)info=infoOf(loc);const need=fixNeeds(info||{});if(!need.any)continue;
+    if(!x.stems.some(([k])=>k==='vocals'||k==='drums'||k==='bass'))continue;
+    out.push({dir,title:x.title,artist:x.artist,stems:x.stems.map(([k,f])=>({k,key:f.key||base+f.name,name:f.name})),need})}
+  FIX.cand=out;try{if(!$('#ovLib').hidden)renderLib(true)}catch(e){}
+  if(ask&&out.length&&Date.now()-FIX.later>20*3600e3&&![...document.querySelectorAll('.ov')].some(o=>!o.hidden)&&$('#salaOv').hidden&&!palOn)fixOpen()}
+function fixOpen(){const L=FIX.cand||[];if(!L.length){toast('Nel cloud è tutto aggiornato');return}
+  $('#fixTxt').innerHTML='Nel cloud ci sono <b>'+L.length+(L.length===1?' brano':' brani')+'</b> da sistemare: '+esc(fixSummary(L))+' RunPod li rifà da solo con i programmi nuovi. Costo stimato: <b>'+fixCost(L)+'</b> in tutto, dal tuo credito RunPod.';
+  $('#fixList').innerHTML=L.map(x=>'<div class="si"><div class="meta"><b>'+esc(x.title)+'</b><small>'+esc(x.artist||'')+' · '+[x.need.sep?'separazione':'',x.need.asr?'testo dalla voce':'',x.need.rhy?'battiti e batteria':''].filter(Boolean).join(', ')+'</small></div></div>').join('');
+  $('#fixGo').disabled=false;$('#fixGo').textContent='Avvia ('+L.length+')';openOv('#ovFix')}
+$('#fixLater').onclick=()=>{FIX.later=Date.now();fixSave();closeOv($('#fixLater'));toast('Va bene: te lo richiedo domani. Lo trovi anche in Libreria')};
+$('#fixGo').onclick=async()=>{const L=(FIX.cand||[]).slice();const b=$('#fixGo');b.disabled=true;let ok=0,err='';
+  for(const [i,x] of L.entries()){b.textContent='Mando '+(i+1)+' di '+L.length+'…';const base=R2P+x.dir+'/';
+    try{const get={},put={},del={};for(const f of x.stems)get[f.k]=await r2Presign('GET',f.key,FIX_EXP);
+      if(x.need.sep){for(const k of FIX_KEYS)put[k]=await r2Presign('PUT',base+k+'.m4a',FIX_EXP);for(const f of x.stems)if(FIX_KEYS.includes(f.k)&&!/\.m4a$/i.test(f.name))del[f.k]=await r2Presign('DELETE',f.key,FIX_EXP)}
+      const need={sep:x.need.sep,asr:x.need.asr||x.need.sep,rhy:x.need.rhy||x.need.sep};
+      const id=await rpSubmit({mode:'cloudfix',get,put,del,info_put:await r2Presign('PUT',base+'pv-fix.json',FIX_EXP),todo:need,model:'htdemucs_6s',language:rp.lang||''});
+      FIX.jobs[x.dir]={id,t:Date.now(),title:x.title};ok++}catch(e){err=String(e&&e.message||e);if(/AUTH|NOEP/.test(err))break}}
+  fixSave();FIX.cand=(FIX.cand||[]).filter(x=>!FIX.jobs[x.dir]);closeOv(b);try{renderLib(true)}catch(e){}
+  toast(ok?'Mandati a RunPod '+ok+(ok===1?' brano':' brani')+': lavora da solo, i brani si aggiornano quando riapri l\'app':'Non riesco a mandarli a RunPod: '+({AUTH:'chiave non valida',NOEP:'endpoint non trovato'}[err]||err))};
+/* lavori mandati: se RunPod li ha rifiutati o sono falliti, si potranno rifare (al massimo 2 volte) */
+async function fixPoll(){const J=Object.entries(FIX.jobs);if(!J.length)return;let old=false;
+  for(const [dir,j] of J){if(Date.now()-j.t>6*86400e3){delete FIX.jobs[dir];continue}if(Date.now()-j.t<5*60e3)continue;
+    try{const q=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/status/${j.id}`,{headers:rpH()});if(q.status===404){delete FIX.jobs[dir];continue}const st=await q.json();
+      if(['FAILED','CANCELLED','TIMED_OUT'].includes(st.status)||(st.status==='COMPLETED'&&st.output&&st.output.error)){if(st.output&&/manca il file audio/.test(st.output.error||''))old=true;else FIX.fails[dir]=(FIX.fails[dir]||0)+1;delete FIX.jobs[dir]}}catch(e){}}
+  fixSave();if(old)toast('Per sistemare i brani del cloud il servizio RunPod va aggiornato: pubblica la nuova versione del worker (New Release)')}
+/* risultato di RunPod nel cloud → nel brano */
+async function fixApply(o,full,dir,sum){const info=await (await r2Req('GET',o.key)).json();let reget=false;
+  const L=info.lyrics;if(L&&L.segments&&L.segments.length){const old=songLrcText(full);if(old.trim()&&lyrSrcOf(full)!=='voce')full.lyricsPrev=old;
+    const ln=linesFromAsr(L);full.asr=L;full.lrclib=null;full.noVoice=false;full.lyr=ln.map(l=>({t:l.t,s:l.s,st:!!l.st,w:l.w||null,p:0,pm:0,pq:0}));full.lyrics=ln.map(l=>ts(l.t)+' '+l.s).join('\n');full.lyrOff=0}
+  else if(info.done&&info.done.asr)full.noVoice=true;
+  if(info.rhythm)try{rhyApply(full,info.rhythm)}catch(e){}
+  if(info.singers&&!info.singers.error&&info.singers.k!=null)full.singers=info.singers;
+  if(info.model)full.sepModel=info.model;
+  if(info.stems&&info.stems.length){const had=!full.cloudOnly&&full.stems&&Object.keys(full.stems).length;try{full.cloudFiles=await cloudFiles(full)}catch(e){}if(had){full.stems={};full.cloudOnly=true;reget=true}}
+  await dbPut(full);
+  await cloudDo('brano «'+(full.title||'brano')+'» sistemato da RunPod',async()=>{const base=R2P+dir+'/';const l=songLrc(full);if(l)await r2Req('PUT',base+l[0],{body:l[1],ctype:r2Type(l[0])});
+    await r2Req('PUT',base+'pv-info.json',{body:JSON.stringify(infoOf(full)),ctype:'application/json'});await r2Req('DELETE',o.key)});
+  delete FIX.jobs[dir];fixSave();sum.fix=(sum.fix||0)+1;
+  if(song&&song.id===full.id&&A.paused){try{await loadSong(await dbGet(full.id))}catch(e){}}
+  return reget}
 /* «Affina tutti i brani»: uno dopo l'altro con il separatore nuovo; Annulla ferma tutto */
 const RALL={on:false,i:0,n:0,arm:false};
 async function libKeys(){const set=new Set();try{for(const v of await libMeta())set.add(normKey(v.artist,v.title))}catch(e){}return set}
@@ -3560,7 +3663,7 @@ function sepFail(e){const m=String(e&&e.message||e);if(BATCH.on)BATCH.err=m;sepE
     :/memory|alloc|OOM|Array buffer/i.test(m)?'Memoria insufficiente per questo brano. Chiudi altre schede o prova un brano più corto.':'Qualcosa è andato storto: '+(m.length>260?'… '+m.slice(-260):m));
   spShow(msg,null);$('#spBar').classList.remove('ind');$('#spPct').textContent=''}
 /* controllo LRCLIB prima di separare: se c'è il testo sincronizzato con la stessa durata non serve trascriverlo */
-async function sepLrcCheck(meta,dur){const q=songQuery({title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||''});if(!q.t)return null;
+async function sepLrcCheck(meta,dur){return null;/* testo sempre dalla voce */const q=songQuery({title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||''});if(!q.t)return null;
   try{spShow('Cerco il testo su LRCLIB…',null,'lrc');const {best}=await lrcFind(q,dur);meta.lrcTried=true;if(!best||best.kind==='none')return null;
     if(rp.lyrSrc==='voce'&&rp.asr!==false&&best.kind==='synced')best={...best,kind:'plain',fromSynced:true};
     const x=best.x;let txt=(best.fromSynced?x.plainLyrics||x.syncedLyrics:x.syncedLyrics||x.plainLyrics)||'';if(best.kind==='shift'||best.fromSynced)txt=txt.split('\n').map(l=>l.replace(/\[\d{1,2}:\d{1,2}(?:[.:]\d{1,3})?\]/g,'').trim()).join('\n');
@@ -3756,10 +3859,10 @@ try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persisted(
 setTimeout(()=>{try{if(!rp.key&&!mv.key&&!prefGet('t3key')&&prefGet('bkHint')!=='no'){const el=$('#bkInfo');if(el)el.innerHTML='⚠️ Non trovo nessuna chiave: se le avevi salvate in un file, premi <b>«📂 Ricarica dal file»</b>.';if(prefGet('bkDate')||localStorage.length<3)toast('Chiavi non trovate: puoi ricaricarle dal file in ⚙ Impostazioni')}}catch(e){}},2500);
 async function rpLoad(){try{const v=await setGet('runpod');if(v)rp={...rp,...v}}catch(e){}try{const w=JSON.parse(prefGet('keyRp')||'null');if(w){if(!rp.key&&w.key)rp.key=w.key;if(!rp.ep&&w.ep)rp.ep=w.ep;for(const k in w)if(rp[k]==null)rp[k]=w[k]}}catch(e){}
   if(!rp.m6){rp.model='htdemucs_6s';rp.m6=1;setPut('runpod',rp)}  // da ora la chitarra è separata di serie
-  $('#rpKey').value=rp.key||'';$('#rpEp').value=rp.ep||'';if(rp.model==='mix6')rp.model='htdemucs_6s';$('#rpModel').value=rp.model||'htdemucs';$('#rpAsr').checked=rp.asr!==false;$('#rpLyrSrc').value=rp.lyrSrc||'lrclib';$('#rpLang').value=rp.lang||'';
+  $('#rpKey').value=rp.key||'';$('#rpEp').value=rp.ep||'';if(rp.model==='mix6')rp.model='htdemucs_6s';$('#rpModel').value=rp.model||'htdemucs';$('#rpAsr').checked=rp.asr!==false;$('#rpLyrSrc').value='voce';$('#rpLang').value=rp.lang||'';
   setSepMode(sepMode);rpView()}
 $('#rpModel').onchange=e=>{rp.model=e.target.value;setPut('runpod',rp)};
-$('#rpAsr').onchange=e=>{rp.asr=e.target.checked;setPut('runpod',rp)};$('#rpLyrSrc').onchange=e=>{rp.lyrSrc=e.target.value;setPut('runpod',rp)};try{$('#rpLyrSrc').value=rp.lyrSrc||'lrclib'}catch(e){}$('#rpLang').onchange=e=>{rp.lang=e.target.value;setPut('runpod',rp)};
+$('#rpAsr').onchange=e=>{rp.asr=e.target.checked;setPut('runpod',rp)};$('#rpLyrSrc').onchange=e=>{rp.lyrSrc=e.target.value;setPut('runpod',rp)};$('#rpLang').onchange=e=>{rp.lang=e.target.value;setPut('runpod',rp)};
 $('#rpImg').onchange=e=>{rp.image=e.target.value.trim();setPut('runpod',rp);rpView()};
 $('#rpChange').onclick=()=>{$('#rpOk').hidden=true;$('#rpSteps').hidden=false;$('#rpKey').focus()};
 $('#rpGuideOpen').onclick=()=>{rpView();openOv('#ovRpGuide')};
@@ -3879,11 +3982,11 @@ async function sepRunpod(canFallback){if(!rp.key||!rp.ep){openSet();toast('Inser
     const pL=sepLrcCheck(meta,dur);
     const pU=big?shrinkForRp(ab,sepFileObj.name,p=>spShow('Comprimo il brano per RunPod… '+Math.round(p*100)+'%',p,'send'),dec):Promise.resolve({ab,name:sepFileObj.name});
     const [found,up]=await Promise.all([pL,pU]);dec=null;if(sepAbort)return;
-    const needAsr=rp.asr!==false&&!(found&&(found.kind==='synced'||found.kind==='instr'));
+    const RPk=SEP_REPLACE&&SEP_REPLACE.f===sepFileObj&&SEP_REPLACE.keep;const needAsr=!(RPk&&RPk.asr&&!RPk.lrclib);
     spShow(needAsr?'Invio il brano a RunPod (separo, trascrivo il testo e riconosco le voci)…':'Invio il brano a RunPod (il testo c\'è già: separo e riconosco le voci)…',null,'send');
     const b64=await abToB64(up.ab);if(sepAbort)return;
     const reqM=(SEP_REPLACE&&SEP_REPLACE.f===sepFileObj&&SEP_REPLACE.model)||rp.model;sepInfo.model=reqM;
-    let out;try{out=await rpCall({audio_b64:b64,filename:up.name,model:reqM,bitrate:128,voices:true,rhythm:true,transcribe:needAsr,language:rp.lang||'',prompt:(meta.lyrics||'').slice(0,700)})}
+    let out;try{out=await rpCall({audio_b64:b64,filename:up.name,model:reqM,bitrate:128,voices:true,rhythm:true,transcribe:needAsr,language:rp.lang||'',prompt:''})}
     catch(e){const m=String(e&&e.message||e);if(canFallback&&['NET','AUTH','NOEP'].includes(m))return 'rpdown';throw e}
     if(out&&out.model)sepInfo.model=out.model;
     if(reqM==='mix6'&&out&&out.model&&out.model!=='mix6'&&out.model!=='bs_roformer_sw'){toast('RunPod ha ancora la versione vecchia: per la separazione affinata aggiorna fonica-runpod e fai New Release')}
@@ -3971,19 +4074,17 @@ async function rpCall(input,say){const show=say||spShow;let r;try{r=await fetch(
 const RP_JOBS=new Set();
 async function asrRun(force){if(!song)return;
   if(sepBusy){toast('Aspetta che finisca il lavoro in corso');return}
-  if(force!==true&&song.id!=='demo'){if(song.lrclib&&song.lrclib.kind==='synced'&&rp.lyrSrc!=='voce'){showAsrSkip('Il testo di questo brano viene da LRCLIB, già sincronizzato e con la stessa durata: non serve trascriverlo.');return}
-    toast('Prima controllo su LRCLIB…');if(await findLyrics(true)){showAsrSkip('Ho trovato su LRCLIB il testo già sincronizzato, con la stessa durata: non serve trascriverlo.');return}}
   if(!rp.key||!rp.ep){toast('Per trascrivere serve RunPod: inserisci chiave ed endpoint in Impostazioni');setSepMode('rp');openSet();return}
   const src=stems.vocals||stems.mix||stems.other;if(!src){toast('Questo brano non ha audio da trascrivere');return}
   if(!stems.vocals)toast('Senza la voce separata la trascrizione è meno precisa');
   pause();sepStart([['send','Invio'],['queue','In coda'],['split','Trascrizione'],['save','Testo']],'Trascrivo il testo',song.title||'');sepInfo.ep='runpod';
   try{spShow('Preparo la traccia della voce…',null,'send');let wav=await mono16k(src),wname='vocals.wav';if(wav.byteLength>RP_MAX){const sr=16000,b=await decode(wav);const kb=[64,48,32].find(k=>b.duration*k*125<RP_MAX*.95);if(!kb)throw new Error('LONG');spShow('Comprimo la voce…',0,'send');wav=await (await toMp3(b,kb,p=>spShow('Comprimo la voce… '+Math.round(p*100)+'%',p,'send'),true)).arrayBuffer();wname='vocals.mp3'}
     const b64=await abToB64(wav);if(sepAbort)return;spShow('Invio la voce a RunPod…',null,'send');
-    const out=await rpCall({mode:'transcribe',audio_b64:b64,filename:wname,language:rp.lang||'',prompt:K.lines.map(l=>l.s).join(' ').slice(0,700)});
+    const out=await rpCall({mode:'transcribe',audio_b64:b64,filename:wname,language:rp.lang||'',prompt:song.lrclib?'':K.lines.map(l=>l.s).join(' ').slice(0,700)});
     if(sepAbort||!out)return;if(out.error)throw new Error(out.error);
     const asr=out.lyrics;if(!asr||!asr.segments||!asr.segments.length)throw new Error('Non ho riconosciuto parole in questa traccia');
-    spShow('Metto a tempo il testo…',1,'save');song.asr=asr;await saveCur({asr});
-    let msg;if(K.lines.length&&song.id!=='demo'){const r=applyLyricsText(linesText(),true);msg=r>=.25?`Testo messo a tempo parola per parola (${Math.round(r*100)}% di parole riconosciute).`:null}
+    spShow('Metto a tempo il testo…',1,'save');const wasLrc=!!song.lrclib;song.asr=asr;song.lrclib=null;await saveCur({asr,lrclib:null});
+    let msg;if(K.lines.length&&song.id!=='demo'&&!wasLrc){const r=applyLyricsText(linesText(),true);msg=r>=.25?`Testo messo a tempo parola per parola (${Math.round(r*100)}% di parole riconosciute).`:null}
     if(!msg){K.lines=linesFromAsr(asr);lyrFix();msg='Testo trascritto dalla voce. Controllalo con «Modifica»: i tempi restano.'}
     kBuild();saveLyr();sepEnd();spShow(msg+(/^qwen/.test(asr.engine||'')?' Programma: Qwen3 (nuovo).':asr.engine?' Programma: Whisper.':'')+(out.seconds?' Scheda video: '+fmt(out.seconds)+'.':''),1);$$('#spSteps span').forEach(el=>el.className='ok')}
   catch(e){if(!sepAbort)sepFail(e)}}
@@ -4031,7 +4132,7 @@ function songLrc(s){const t=songLrcText(s);if(!t&&!s.artist&&!s.album)return nul
 function songFiles(s){const files=Object.entries(s.stems||{}).map(([k,v])=>{const ext=(v.name&&v.name.match(/\.[a-z0-9]+$/i)||['.wav'])[0];return [k+ext,new Blob([v.data])]});
   const l=songLrc(s);if(l)files.push(l);return files}
 const r2Type=n=>/\.lrc$/i.test(n)?'text/plain; charset=utf-8':/\.m4a$/i.test(n)?'audio/mp4':/\.mp3$/i.test(n)?'audio/mpeg':/\.wav$/i.test(n)?'audio/wav':/\.flac$/i.test(n)?'audio/flac':'application/octet-stream';
-async function r2SaveSong(s,onp){return cloudDo('brano «'+(s.title||'brano')+'»',async()=>{const base=R2P+songDirs(s).join('/')+'/';const files=songFiles(s);let i=0;
+async function r2SaveSong(s,onp){return cloudDo('brano «'+(s.title||'brano')+'»',async()=>{const base=R2P+songDirs(s).join('/')+'/';const files=songFiles(s);files.push(['pv-info.json',new Blob([JSON.stringify(infoOf(s))])]);let i=0;
   for(const [n,b] of files){if(onp)onp(i,files.length,n);await r2Req('PUT',base+n,{body:b,ctype:r2Type(n)});i++}return files.length})}
 /* sposta la cartella di un brano dentro al cloud (quando cambiano artista o titolo): copia lì dentro, senza scaricare;
    se la copia non va, scarica e ricarica. Se qualcosa va storto toglie le copie nuove e lascia tutto com'era */
@@ -4651,7 +4752,7 @@ async function sepFromLib(id,o={}){
       const kb=[192,160,128,112,96].find(k=>mixd.duration*k*125<RP_MAX*.95)||96;try{f=await toMp3(mixd,kb,p=>spShow('Comprimo il brano in MP3 ('+kb+' kbps)… '+Math.round(p*100)+'%',.55+p*.45,'prep'))}catch(e){f=wavOf(mixd)}f=new File([f],nm+(/wav/.test(f.type)?'.wav':'.mp3'),{type:f.type})}}
   catch(e){if(!sepAbort)sepFail(e);return}
   if(sepAbort)return;
-  const keep={};['title','artist','album','year','lyrics','lyr','lyrOff','tab','created','lrclib','asr','singers'].forEach(k=>{if(s[k]!=null&&s[k]!=='')keep[k]=s[k]});
+  const keep={};const lyrOk=lyrSrcOf(s)==='voce';['title','artist','album','year','lyrics','lyr','lyrOff','tab','created','lrclib','asr','singers','drumBase','drumSrc','drumAI'].forEach(k=>{if(!lyrOk&&['lyrics','lyr','lyrOff','lrclib','asr'].includes(k))return;if(s[k]!=null&&s[k]!=='')keep[k]=s[k]});
   SEP_REPLACE={id,f,keep,oldFiles:songFiles(s).map(x=>x[0]),model:refine?'mix6':rp.model};sepFiles=[f];sepFileObj=f;$('#sepFile').textContent=f.name;
   /* affinare si fa solo con RunPod: se non risponde lo dico, senza passare al servizio gratuito (darebbe di nuovo le tracce vecchie) */
   if(refine||sepMode==='rp')return sepRunpod(false);
@@ -4750,6 +4851,10 @@ async function syncSongs(all,sum){let tomb={};try{tomb=await tombLoad()}catch(e)
   const lib=await libMeta(),LK=new Map(lib.map(s=>[tombK(s),s]));
   /* testi cambiati su un altro dispositivo */
   const dirKey=new Map();for(const [k,L] of CK)dirKey.set(L[0].dir,k);
+  /* brani sistemati da RunPod mentre l'app era chiusa */
+  {const reget=[];for(const o of all){if(!/\/pv-fix\.json$/i.test(o.key))continue;const dir=o.key.slice(R2P.length).replace(/\/pv-fix\.json$/i,'');const s=LK.get(dirKey.get(dir));if(!s)continue;
+    try{syncSay('☁️ Aggiorno «'+(s.title||'brano')+'» sistemato da RunPod…');const full=await dbGet(s.id);if(full&&await fixApply(o,full,dir,sum))reget.push(full.id)}catch(e){console.warn('pv-fix',e)}}
+   if(reget.length)setTimeout(async()=>{for(const id of reget){try{const r=await dbGet(id);if(r)await cloudFetch(r,true,true)}catch(e){console.warn('riscarico',e)}}try{if(!$('#ovLib').hidden)renderLib()}catch(e){}},3000)}
   for(const o of all){if(!/\.lrc$/i.test(o.key))continue;const rel=o.key.slice(R2P.length);if(/^[_.]/.test(rel))continue;if(o.date&&SY.at&&o.date<SY.at-120000)continue;const s=LK.get(dirKey.get(rel.slice(0,rel.lastIndexOf('/'))));if(!s)continue;
     try{const txt=await (await r2Req('GET',o.key)).text(),full=await dbGet(s.id);if(!full||!txt.trim())continue;const mine=songLrcText(full)||'';
       const hd=t=>{const m=txt.match(new RegExp('^\\['+t+':(.*)\\]$','m'));return m?m[1].trim():null},al=hd('al'),yr=hd('year');let ch=false;
@@ -4797,12 +4902,12 @@ async function syncAll(why,light){if(!r2On()){SY.pending=true;syncInfo();return}
   if(r==='busy'){SY.pending=true;syncSay('☁️ In pausa: un altro dispositivo sta salvando. Riprendo da solo.')}}
 async function syncAll0(why,light){SY.busy=true;SY.pending=false;const sum={inn:0,out:0,lyr:0,set:0,drIn:0,drOut:0,drDel:0},t0=Date.now();const b=$('#r2SyncGo');if(b)b.disabled=true;
   try{syncSay('☁️ Sincronizzo con il cloud…');sum.set=await syncSettings();try{const ni=await imgSync();if(ni)try{if(!$('#ovLib').hidden)covFill($('#songlist'))}catch(e){}}catch(e){console.warn('immagini',e)}
-    if(!light){const all=await r2List(R2P);await syncSongs(all,sum);await syncDrafts(all,sum);try{cvCount()}catch(e){}}
+    if(!light){const all=await r2List(R2P);await syncSongs(all,sum);await syncDrafts(all,sum);try{cvCount()}catch(e){}if(syncHeavyOk())setTimeout(()=>cloudFixCheck(all,why==='avvio').catch(e=>console.warn('cloudfix',e)),6000)}
     SY.at=t0;prefSet('syncAt',String(t0));if(!light)setTimeout(()=>libEnrich().catch(e=>console.warn(e)),4000);if(!light&&syncHeavyOk())setTimeout(()=>cloudFill().catch(e=>console.warn(e)),2500);
     const parts=[];if(sum.inn)parts.push(sum.inn===1?'1 brano arrivato':sum.inn+' brani arrivati');if(sum.out)parts.push(sum.out===1?'1 brano salvato nel cloud':sum.out+' brani salvati nel cloud');if(sum.lyr)parts.push(sum.lyr===1?'1 testo aggiornato':sum.lyr+' testi aggiornati');if(sum.del)parts.push(sum.del===1?'1 brano eliminato anche qui':sum.del+' brani eliminati anche qui');if(sum.dup)parts.push(sum.dup===1?'1 doppione unito':sum.dup+' doppioni uniti');
-    if(sum.ren)parts.push(sum.ren===1?'1 brano rinominato':sum.ren+' brani rinominati');if(sum.tag)parts.push(sum.tag===1?'1 album aggiornato':sum.tag+' album aggiornati');if(sum.drIn)parts.push(sum.drIn===1?'1 bozza da un altro dispositivo':sum.drIn+' bozze da un altro dispositivo');if(sum.drOut)parts.push(sum.drOut===1?'1 bozza nel cloud':sum.drOut+' bozze nel cloud');if(sum.set)parts.push('scalette e preset aggiornati');
+    if(sum.ren)parts.push(sum.ren===1?'1 brano rinominato':sum.ren+' brani rinominati');if(sum.fix)parts.push(sum.fix===1?'1 brano sistemato da RunPod':sum.fix+' brani sistemati da RunPod');if(sum.tag)parts.push(sum.tag===1?'1 album aggiornato':sum.tag+' album aggiornati');if(sum.drIn)parts.push(sum.drIn===1?'1 bozza da un altro dispositivo':sum.drIn+' bozze da un altro dispositivo');if(sum.drOut)parts.push(sum.drOut===1?'1 bozza nel cloud':sum.drOut+' bozze nel cloud');if(sum.set)parts.push('scalette e preset aggiornati');
     banSyncEnd(parts.length?'Fatto: '+parts.join(', ')+'.':'');
-    if(parts.length){toast('☁️ Sincronizzato: '+parts.join(', '));if(sum.inn||sum.lyr||sum.del||sum.dup||sum.ren||sum.tag){try{songPickFill()}catch(e){}try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}}
+    if(parts.length){toast('☁️ Sincronizzato: '+parts.join(', '));if(sum.inn||sum.lyr||sum.del||sum.dup||sum.ren||sum.tag||sum.fix){try{songPickFill()}catch(e){}try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}}
     if(!syncHeavyOk()&&!light)toast('☁️ Risparmio dati attivo: brani e bozze si sincronizzano quando lo togli o sei in Wi-Fi');}
   catch(e){console.warn('sync',e);SY.pending=true;banSyncEnd('Sincronizzazione interrotta: riprovo più tardi.');syncSay('☁️ Sincronizzazione non riuscita: '+r2Err(e)+' Riprovo più tardi.')}
   finally{SY.busy=false;if(b)b.disabled=false;if(!SY.msg.startsWith('☁️ Sincronizzazione non riuscita'))syncInfo();if(SY.again){SY.again=false;setTimeout(()=>syncAll('di nuovo'),2000)}}}
@@ -5024,7 +5129,7 @@ async function recOpen(){if(!song){toast('Apri prima un brano');return}setTimeou
   pause();if(stems.vocals&&gains.vocals.vol>.3&&!gains.vocals.mute)preset('karaoke');
   ['Mus','Voc','Lat'].forEach(k=>{const v=prefGet('rec'+k);if(v!=null)$('#recM'.slice(0,4)+k).value=v});
   $('#recOv').hidden=false;$('#recDone').hidden=true;$('#recBar').hidden=false;$('#recTitle').textContent=(song.title||'Registra video')+(song.artist?' · '+song.artist:'');document.body.style.overflow='hidden';
-  try{const c=ctx();await c.resume();recGraph();await recCamera();$('#recHint').textContent=K.lines.length?'Con le cuffie il risultato è migliore. Premi Registra: parte un conto alla rovescia.':'Questo brano non ha il testo: puoi registrare lo stesso, oppure cercalo prima su LRCLIB.'}
+  try{const c=ctx();await c.resume();recGraph();await recCamera();$('#recHint').textContent=K.lines.length?'Con le cuffie il risultato è migliore. Premi Registra: parte un conto alla rovescia.':'Questo brano non ha il testo: puoi registrare lo stesso, oppure trascrivilo prima dalla voce.'}
   catch(e){$('#recHint').textContent=e&&e.name==='NotAllowedError'?'Serve il permesso per fotocamera e microfono: consentilo dal lucchetto vicino all\'indirizzo.':window.self!==window.top?'Qui la fotocamera è bloccata: apri Pure Voltage dal suo indirizzo web.':'Non riesco ad aprire la fotocamera: '+(e.message||e)}
   recVoxUI();recLevels();cancelAnimationFrame(R.raf);R.raf=requestAnimationFrame(recDraw);
   await fsEnter()}
@@ -5730,10 +5835,12 @@ function lrcApply(r,silent){const x=r.x;
   if(song){song.lrclib={id:x.id,kind:r.kind,track:x.trackName,artist:x.artistName,dur:x.duration};saveCur({lrclib:song.lrclib})}
   saveLyr();lySrc();
   if(!silent)toast(r.kind==='synced'?'Testo e tempi presi da LRCLIB':r.kind==='shift'?'Testo preso da LRCLIB (versione di durata diversa): l\'ho rimesso a tempo su questo brano':'Testo preso da LRCLIB e messo a tempo')}
+/* da dove viene il testo: 'voce' = trascritto ascoltando la voce, 'lrclib' = preso da LRCLIB (vecchi brani), 'mano' = scritto a mano, '' = niente */
+function lyrSrcOf(s){if(!s)return '';if(s.lrclib)return 'lrclib';if(s.noVoice)return 'none';if(s.asr&&s.asr.segments&&s.asr.segments.length)return 'voce';return (s.lyrics||'').trim()||(s.lyr&&s.lyr.length)?'mano':''}
 function lySrc(txt){const el=$('#lySrc');if(!el)return;if(txt!=null){el.textContent=txt;return}const l=song&&song.lrclib;
-  el.textContent=l?`LRCLIB n. ${l.id} · ${lrcKindTxt[l.kind]||''}`:(song&&song.asr&&K.lines.length?'Testo dalla voce (Whisper)':'')}
+  el.textContent=l?'Testo preso da LRCLIB: va rifatto dalla voce con «Trascrivi dalla voce»':(song&&song.asr&&K.lines.length?'Testo ascoltato dalla voce'+(/^qwen/.test(song.asr.engine||'')?' (Qwen3)':''):'')}
 /* ricerca automatica: true se ha trovato un testo sincronizzato affidabile */
-async function findLyrics(auto){if(!song||song.id==='demo'&&auto)return false;const q=songQuery(song);
+async function findLyrics(auto){return false;/* testo sempre dalla voce: LRCLIB non si usa più */if(!song||song.id==='demo'&&auto)return false;const q=songQuery(song);
   if(!q.t){if(!auto)openPick();return false}
   try{const {best,list}=await lrcFind(q,DUR);pickList=list;
     if(best&&(auto?best.kind!=='none':true)){if(!auto&&best.kind!=='synced'){openPick(q,list);return false}lrcApply(best,auto&&false);return best.kind==='synced'}
@@ -5758,7 +5865,7 @@ async function pickLink(){const id=lrcId($('#pkLink').value);if(!id){$('#pkList'
 $('#pkGo').onclick=pickSearch;$('#pkLinkGo').onclick=pickLink;
 $('#pkT').onkeydown=$('#pkA').onkeydown=e=>{if(e.key==='Enter')pickSearch()};$('#pkLink').onkeydown=e=>{if(e.key==='Enter')pickLink()};
 $('#pkLink').addEventListener('paste',()=>setTimeout(()=>{if(lrcId($('#pkLink').value))pickLink()},30));
-$('#bFind').onclick=()=>findLyrics(false);
+
 $('#bAsr').onclick=()=>asrRun();
 
 /* ================= editor ================= */
@@ -5966,7 +6073,7 @@ function pedSync(el,P,p){el.classList.toggle('on',!!P.on);const b=el.querySelect
 /* interruttori veloci (sulla striscia, sul palco, nel microfono del karaoke) */
 function pedChips(fx,attr){return`<div class="pdchips">${fxOrder(fx).filter(k=>k!=='amp').map(k=>PED_BY[k]).map(p=>`<button class="pdchip ${fx[p.k].on?'on':''}" ${attr} data-pd="${p.k}" style="--pc:${p.c};--pi:${p.i}" aria-pressed="${!!fx[p.k].on}" title="${p.n}: tocca per accendere o spegnere"><i class="rled"></i><svg viewBox="0 0 24 24" aria-hidden="true">${(RBI&&RBI[p.k])||''}</svg><b>${p.s}</b></button>`).join('')}</div>`}
 function defRig(role){return{gain:1,drive:role==='chitarra'?.25:0,comp:role==='basso'?.5:role==='voce'?.5:0,bass:0,mid:0,treble:0,chorus:0,delay:role==='voce'?.1:0,rev:role==='voce'?.25:role==='chitarra'?.15:0,level:1,live:true,amp:null,ir:null,fx:fxDefaults(role)}}
-let tid=0;function newTrack(role){return{id:'t'+Date.now().toString(36)+(tid++),name:ROLES[role]||'Musicista',role:role||'voce',dev:'',ch:0,mon:.9,hear:!NOLIVE,arm:true,rig:defRig(role||'voce'),node:null}}
+let tid=0;function newTrack(role){return{id:'t'+Date.now().toString(36)+(tid++),name:ROLES[role]||'Musicista',role:role||'voce',dev:'',ch:0,mon:.9,hear:!NOLIVE||(role||'voce')==='voce',arm:true,rig:defRig(role||'voce'),node:null}}
 
 /* ---------- contesto audio a 48 kHz, bassa latenza ---------- */
 function sCtx(){if(!SA.ctx||SA.ctx.state==='closed'){SA.ctx=new AudioContext({sampleRate:48000,latencyHint:latHint()});audResolve(false).then(()=>{if(AE.outId&&SA.ctx.setSinkId)SA.ctx.setSinkId(AE.outId).catch(e=>console.warn(e))});SA.out=SA.ctx.createGain();try{SA.out.gain.value=MD.vol*MD.vol}catch(e){}SA.out.connect(SA.ctx.destination)}return SA.ctx}
@@ -5991,7 +6098,8 @@ async function sOpenDevices(){const c=sCtx();await c.resume();
   if(SA.chans.length&&(NOLIVE||!(c.setSinkId||A.setSinkId))){const usb=SA.devs.find(d=>/usb|umc|behringer|focusrite|scarlett|audio interface/i.test(d.label))||SA.devs[0];
     $('#sDevInfo').textContent+=usb&&usb.n<2?` Il ${DEVN} mi dà la scheda «${usb.label}» come un ingresso solo (${usb.cc||1} canale): su molti telefoni e tablet Android il browser non separa In 1 e In 2. Usa In 1 per uno strumento alla volta, oppure registra a turno con la sovraincisione.`:` La scheda «${usb.label}» arriva con 2 ingressi: In 1 e In 2 (il browser ne legge al massimo 2).`;
     if(!(c.setSinkId||A.setSinkId))$('#sDevInfo').textContent+=' Le uscite non si scelgono: con la scheda collegata, il '+DEVN+' manda il suono alla scheda da solo. Metti le cuffie nella presa Phones della scheda.'}
-  if(NOLIVE&&SA.chans.length)$('#sDevInfo').textContent+=' Sul '+DEVN+' non ti senti dall\'app con gli effetti (troppo ritardo): accendi il Direct Monitor della scheda, registra pulito e metti gli effetti dopo, in «Mix e sincronia». Per suonare dal vivo con gli effetti serve il computer.';
+  if(NOLIVE){SA.mobAuto=mobKindAuto();sMobDraw()}
+  if(NOLIVE&&SA.chans.length)$('#sDevInfo').textContent+=' Sul '+DEVN+' la voce si sente in cuffia dall\'app; gli strumenti con il Direct Monitor della scheda, puliti, e gli effetti si mettono dopo. Per suonare dal vivo con gli effetti serve il computer.';
   try{await audResolve(false);if(AE.outId&&c.setSinkId)await c.setSinkId(AE.outId)}catch(e){}if(SA.chans.length&&!NOLIVE&&(c.setSinkId||A.setSinkId))$('#sDevInfo').textContent+=' Le cuffie suonano da: '+(AE.outLabel?devShort(AE.outLabel):IS_TAB?'la scheda audio collegata al tablet (o le cuffie del tablet)':/Windows/.test(navigator.userAgent)?'uscita del sistema di Windows':'uscita del sistema')+'. Se non ti senti, collega le cuffie lì e accendi la 🎧 accanto al livello.'}
 const chanOf=t=>SA.chans.find(c=>c.key===t.dev);
 /* ---------- NAM (motore in WebAssembly) ---------- */
@@ -6023,13 +6131,13 @@ async function sBuild(t){const c=sCtx();if(t.node){try{t.node.disconnect()}catch
   const fb=await fxBoard(c,fxOf(R2,t.role));x.connect(fb.pre.inp);x=fb.pre.out;
   if((t.role==='chitarra'||t.role==='altro')&&R2.drive>0){const ws=N('WaveShaper');ws.curve=curveDrive(R2.drive);ws.oversample='4x';link(ws)}
   let sp=null;
-  if(R2.amp&&R2.live&&!NOLIVE&&(t.role==='chitarra'||t.role==='basso'||t.role==='altro')){try{const nam=await sNam(),rec=await ampGet(R2.amp.key);if(rec){const model=nam.loadModel(new TextDecoder().decode(new Uint8Array(rec.bytes)));const B=512;model.reset(c.sampleRate,B);try{model.prewarm()}catch(e){}
+  if(R2.amp&&(R2.live&&!NOLIVE||NOLIVE&&t.test)&&(t.role==='chitarra'||t.role==='basso'||t.role==='altro')){try{const nam=await sNam(),rec=await ampGet(R2.amp.key);if(rec){const model=nam.loadModel(new TextDecoder().decode(new Uint8Array(rec.bytes)));const B=512;model.reset(c.sampleRate,B);try{model.prewarm()}catch(e){}
         sp=c.createScriptProcessor(B,1,1);sp.onaudioprocess=ev=>{const i=ev.inputBuffer.getChannelData(0),o=ev.outputBuffer.getChannelData(0);try{const y=model.process(i,B);o.set(y.subarray?y.subarray(0,B):y)}catch(e){o.set(i)}};sp._model=model;link(sp)}}
     catch(e){console.error(e);$('#sMsg').textContent='Amplificatore NAM di '+t.name+' non attivo dal vivo: '+(e.message||e)+'.';toast('NAM: '+(e.message||e))}}
   if(R2.ir){const rec=await ampGet(R2.ir.key);if(rec){try{const b=await c.decodeAudioData(rec.bytes.slice(0));const cv=N('Convolver');cv.normalize=true;cv.buffer=b;link(cv)}catch(e){console.error(e)}}}
   else if(R2.amp&&t.role!=='voce'&&!R2.amp.full){link(N('BiquadFilter',{type:'lowpass',frequency:t.role==='basso'?4500:6000,Q:.7}))}
   link(N('BiquadFilter',{type:'lowshelf',frequency:t.role==='basso'?90:150,gain:R2.bass}));link(N('BiquadFilter',{type:'peaking',frequency:t.role==='basso'?700:900,Q:.8,gain:R2.mid}));link(N('BiquadFilter',{type:'highshelf',frequency:t.role==='basso'?2500:3500,gain:R2.treble}));matchLink(c,link,R2,t.role);
-  const lvl=link(N('Gain',{gain:R2.level}));if(NOLIVE)t.hear=false;const mon=N('Gain',{gain:t.hear===false?0:t.mon});lvl.connect(fb.post.inp);fb.post.out.connect(mon);
+  const lvl=link(N('Gain',{gain:R2.level}));if(NOLIVE&&!mobHearOk(t))t.hear=false;const mon=N('Gain',{gain:t.hear===false?0:t.mon});lvl.connect(fb.post.inp);fb.post.out.connect(mon);
   if(false){const lfo=N('Oscillator',{frequency:.9}),dp=N('Gain',{gain:.0025}),d=N('Delay',{delayTime:.012}),gg=N('Gain',{gain:R2.chorus*.6});lfo.connect(dp);dp.connect(d.delayTime);lfo.start();lvl.connect(d);d.connect(gg);gg.connect(mon)}
   if(false){const bt=BPM?60/BPM*.75:.36,d=N('Delay',{delayTime:Math.min(.9,bt)}),fb=N('Gain',{gain:.2+R2.delay*.4}),lp=N('BiquadFilter',{type:'lowpass',frequency:3500}),sd=N('Gain',{gain:R2.delay*.6});lvl.connect(sd);sd.connect(d);d.connect(lp);lp.connect(fb);fb.connect(d);lp.connect(mon)}
   if(false){const cv=N('Convolver');cv.buffer=stIR(c,1.8);const sd=N('Gain',{gain:R2.rev*.8});lvl.connect(sd);sd.connect(cv);cv.connect(mon)}
@@ -6101,7 +6209,7 @@ let sFr=0;function sFrame(){if($('#salaOv').hidden)return;const t=sNow();if(SA.v
     const d=sDur();if(document.activeElement!==$('#sPos'))$('#sPos').value=Math.round(t/d*1000);$('#sPosT').textContent=fmt(t)}
   sFr=requestAnimationFrame(sFrame)}
 /* ---------- registrazione ---------- */
-async function sRecStart(){if(SA.on){sRecStop();return}if(!song){toast('Apri prima un brano');return}if(!SA.chans.length){toast('Nessun ingresso: collega la scheda audio');return}
+async function sRecStart(){if(SA.on){sRecStop();return}if(NOLIVE)for(const x of SA.tracks)if(x.test){x.test=false;x.hear=false;try{await sBuild(x)}catch(e){}}if(!song){toast('Apri prima un brano');return}if(!SA.chans.length){toast('Nessun ingresso: collega la scheda audio');return}
   const c=sCtx();await c.resume();const over=$('#sOver').checked&&SA.takes[SA.cur];await sTapBuild();if(!SA.tap){toast('Spunta «Registra» su almeno un musicista');return}
   if(SP.on)sListenStop(true);const from=$('#sFromStart').checked?0:SP.from,bpm=BPM||100,cnt=$('#sCount').checked?4:0,beat=60/bpm,startAt=c.currentTime+.25+cnt*beat;
   pause();SA.srcs=[];for(let i=0;i<cnt;i++)sClickAt(c,c.currentTime+.25+i*beat,i===0);
@@ -6192,15 +6300,41 @@ const devShort=l=>String(l||'').replace(/^(Predefinito|Default) - /,'').replace(
 function sDevOpts(t){const cur=chanOf(t);const devs=SA.devs.filter(d=>SA.chans.some(c=>c.dev===d));
   const dv=devs.map(d=>`<option value="${esc(d.id)}" ${cur&&cur.dev===d?'selected':''}>${esc(devShort(d.label))}${isIface(d.label)?' 🎛':''}</option>`).join('')||'<option value="">nessun ingresso</option>';
   const dd=cur?cur.dev:devs[0];const cv=SA.chans.filter(c=>c.dev===dd).map(c=>`<option value="${esc(c.key)}" ${cur===c?'selected':''}>In ${c.i+1}</option>`).join('');return{dv,cv}}
-const hearTxt=t=>NOLIVE?'🎛 Direct Monitor della scheda':t.hear!==false?'🎧 Mi sento dal '+DEVN:'🎛 Monitor della scheda';
+const hearTxt=t=>NOLIVE&&t.role!=='voce'?(t.test?'Prova suono accesa':'Direct Monitor della scheda'):t.hear!==false?'🎧 Mi sento dal '+DEVN:'🎛 Monitor della scheda';
 /* cuffia accanto al livello: accende o spegne l'ascolto di quell'entrata in cuffia */
 const hpTip=on=>on?'Sì: ti senti in cuffia dal '+DEVN+', con gli effetti. Tocca per spegnere e sentirti dal «Direct Monitor» della scheda (senza ritardo)':'No: in cuffia ti senti solo dal «Direct Monitor» della scheda. Tocca per sentirti dal '+DEVN+' con gli effetti';
-const hpBtn=t=>`<button class="hp ${t.hear!==false?'on':''}" data-hp="${t.id}" aria-pressed="${t.hear!==false}" title="${hpTip(t.hear!==false)}"><span>🎧</span><b>${t.hear!==false?'Sì':'No'}</b></button>`;
+const hpBtn=t=>NOLIVE&&t.role!=='voce'?`<button class="hp tst ${t.test?'on':''}" data-tst="${t.id}" aria-pressed="${!!t.test}" title="Senti per poco lo strumento con gli effetti scelti, per capire come suonano i pickup. Non serve per suonare il brano."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z"/></svg><b>${t.test?'Ferma la prova':'Prova suono'}</b></button>`:`<button class="hp ${t.hear!==false?'on':''}" data-hp="${t.id}" aria-pressed="${t.hear!==false}" title="${hpTip(t.hear!==false)}"><span>🎧</span><b>${t.hear!==false?'Sì':'No'}</b></button>`;
+/* telefono e tablet: chi si può sentire in cuffia dall'app */
+function mobHearOk(t){return t.role==='voce'||!!t.test}
+async function sTestSet(t,on){if(on&&SA.on){toast('Durante la registrazione la prova suono non si usa');return}
+  if(on)for(const x of SA.tracks)if(x!==t&&x.test){x.test=false;x.hear=false;await sBuild(x)}
+  t.test=!!on;clearTimeout(t.testT);t.hear=t.test;await sBuild(t);sHearSet(t,t.test);sRender();
+  if(on){toast('Prova suono: senti '+t.name+' con gli effetti scelti, con un po\' di ritardo. Serve per scegliere il pickup e il suono, non per suonare il brano. Si spegne da sola dopo 2 minuti.');t.testT=setTimeout(()=>{if(t.test)sTestSet(t,false)},120000)}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-tst]');if(!b)return;e.preventDefault();e.stopPropagation();const t=SA.tracks.find(x=>x.id===b.dataset.tst);if(t)sTestSet(t,!t.test)},true);
+/* che cosa è collegato: scheda audio o cuffie USB con il microfono */
+const HEADSET_RX=/headset|head ?phone|earphone|earbud|cuffi|auricolar|\bmic\b|microfono|airpods|buds/i;
+const IFACE_RX=/umc|behringer|focusrite|scarlett|steinberg|audient|presonus|m-?audio|motu|zoom|irig|ik multimedia|roland|boss|line ?6|tascam|yamaha|universal audio|volt|audiobox|mackie|arturia|komplete|native instruments|esi|lexicon|alesis|nux|tc helicon|maono|interface|codec/i;
+function mobUsb(){return (SA.devs||[]).find(d=>USB_RX.test(d.label||'')&&!/bluetooth/i.test(d.label||''))}
+function mobKindAuto(){const usb=mobUsb();if(!usb)return 'scheda';if(IFACE_RX.test(usb.label))return 'scheda';if(HEADSET_RX.test(usb.label))return 'cuffie';return (usb.cc||1)>=2?'scheda':'cuffie'}
+function mobKind(){return prefGet('mobKind')||SA.mobAuto||'scheda'}
+function sMobDraw(){const box=$('#sMob');if(!box)return;box.hidden=!NOLIVE;if(!NOLIVE)return;const k=mobKind();
+  $$('#sMobKind button').forEach(b=>b.classList.toggle('on',b.dataset.mk===k));const usb=mobUsb();
+  $('#sMobFound').textContent=(usb?'Collegato: «'+usb.label+'». ':'')+(prefGet('mobKind')?'Hai scelto tu: ':'Ho riconosciuto: ')+(k==='cuffie'?'cuffie USB con microfono.':'scheda audio.')+' Se non è giusto, tocca l\'altra scelta.';
+  const V='<b>Voce:</b> ti senti in cuffia mentre canti, con gli effetti per la voce (eco e riverbero), che non aggiungono altro ritardo.';
+  const L=k==='cuffie'?[V+' Un piccolo ritardo del '+DEVN+' è normale: se ti disturba, togli l\'eco e abbassa il tuo volume in cuffia.','Con le cuffie USB c\'è <b>solo la voce</b>: per registrare chitarra o basso serve una scheda audio.','In cuffia senti il brano e la tua voce, a sinistra e a destra: controllalo con «Prova cuffie».']
+    :[V+' Se preferisci la voce naturale senza nessun ritardo, spegni la cuffia della voce e accendi il <b>Direct Monitor</b> della scheda.','<b>Strumenti:</b> li senti in cuffia con il <b>Direct Monitor</b> della scheda, puliti e senza ritardo. Gli effetti li metti dopo la registrazione, in «Mix e sincronia» → «Metti gli effetti alla registrazione».','<b>Prova suono</b> su ogni strumento: lo senti per poco con gli effetti, per capire come suonano i pickup prima di registrare.','Le cuffie vanno nella presa <b>Phones</b> della scheda: senti il brano, la voce e gli strumenti a sinistra e a destra. Controllalo con «Prova cuffie».'];
+  $('#sMobTips').innerHTML=L.map(x=>'<li>'+x+'</li>').join('');
+  const pa=document.querySelector('[data-prauto="all"]');if(pa)pa.hidden=true}
+$$('#sMobKind button').forEach(b=>b.onclick=()=>{prefSet('mobKind',b.dataset.mk);sMobDraw();if(b.dataset.mk==='cuffie')toast('Cuffie USB: si registra solo la voce')});
+/* prova cuffie: un suono a sinistra, poi a destra, poi in mezzo */
+$('#sEarTest').onclick=async()=>{const c=sCtx();await c.resume();const dst=SA.out||c.destination;const msg=$('#sMobFound');
+  const step=(pan,f,t0,txt)=>{const o=c.createOscillator(),g=c.createGain(),p=c.createStereoPanner?c.createStereoPanner():null;o.frequency.value=f;const st=c.currentTime+t0;g.gain.setValueAtTime(0,st);g.gain.linearRampToValueAtTime(.25,st+.03);g.gain.setValueAtTime(.25,st+.7);g.gain.linearRampToValueAtTime(0,st+.75);o.connect(g);if(p){p.pan.value=pan;g.connect(p);p.connect(dst)}else g.connect(dst);o.start(st);o.stop(st+.8);setTimeout(()=>msg.textContent=txt,t0*1000)};
+  step(-1,523,0,'Ora suona a SINISTRA…');step(1,659,1.1,'Ora suona a DESTRA…');step(0,784,2.2,'Ora in MEZZO, in tutte e due…');setTimeout(()=>{msg.textContent='Hai sentito sinistra, destra e in mezzo? Se un lato manca, controlla il cavo e che le cuffie siano nella presa giusta.';setTimeout(()=>sMobDraw(),9000)},3200)};
 function sHearUI(t){const on=t.hear!==false;document.querySelectorAll(`[data-hp="${t.id}"]`).forEach(b=>{b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.title=hpTip(on);b.querySelector('b').textContent=on?'Sì':'No'});const hb=document.querySelector(`[data-hear="${t.id}"]`);if(hb){hb.classList.toggle('hot',on);hb.textContent=hearTxt(t)}}
 /* acceso/spento: spento = non si sente in cuffia e non registra; riaccendendo torna com'era */
 function sPower(t,on){if(!on){t.offPrev={arm:!!t.arm,hear:t.hear!==false};t.off=true;t.arm=false;sHearSet(t,false)}else{const p=t.offPrev||{arm:true,hear:true};t.off=false;t.arm=p.arm;sHearSet(t,p.hear)}
   SA.baseMono=null;try{sStemApply()}catch(e){}try{sTapBuild()}catch(e){}sSave();sRender();toast(t.name+(on?' acceso':' spento: non si sente e non registra'))}
-function sHearSet(t,on){if(on&&NOLIVE){toast('Sul '+DEVN+' non ti puoi sentire dall\'app: c\'è troppo ritardo. Ascoltati con il Direct Monitor della scheda. Gli effetti li metti dopo, in «Mix e sincronia»');on=false}t.hear=on;try{sCtx().resume()}catch(e){}if(t.node)t.node.mon.gain.value=on?(t.mon||.9):0;if(on&&!t.mon)t.mon=.9;sHearUI(t);sSave();if(on&&!chanOf(t))toast('Questa entrata non ha una scheda audio collegata')}
+function sHearSet(t,on){if(on&&NOLIVE&&!mobHearOk(t)){toast('Sul '+DEVN+' lo strumento non si suona con gli effetti in cuffia: c\'è troppo ritardo. Ascoltalo con il Direct Monitor della scheda. Per sentire il suono dei pickup usa «Prova suono». Gli effetti li metti dopo, in «Mix e sincronia»');on=false}t.hear=on;try{sCtx().resume()}catch(e){}if(t.node)t.node.mon.gain.value=on?(t.mon||.9):0;if(on&&!t.mon)t.mon=.9;sHearUI(t);sSave();if(on&&!chanOf(t))toast('Questa entrata non ha una scheda audio collegata')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-hp]');if(!b)return;e.preventDefault();e.stopPropagation();const t=SA.tracks.find(x=>x.id===b.dataset.hp);if(t)sHearSet(t,t.hear===false)},true);
 /* manopola: trascina su/giù, rotellina, frecce; doppio clic = valore iniziale */
 function knobify(L){const inp=L.querySelector('input'),k=L.querySelector('.knob'),em=L.querySelector('em');if(!inp||!k)return;
@@ -6800,8 +6934,8 @@ async function songWhere(t,a,dur){const nT=alnum(t.replace(/\s*[\(\[].*?[\)\]]\s
   albums.sort((x,y)=>(!!y.first-!!x.first)||(x.y||'9999').localeCompare(y.y||'9999'));
   return{artist:art,pic,albums,found:[...new Set(hits.map(h=>h.src))]}}
 async function tagFind(){const s=await dbGet(TG.id);const q={t:$('#tgTitle').value.trim(),a:$('#tgArtist').value.trim()};const box=$('#tgList'),web=$('#tgWeb');if(!q.t){web.innerHTML='<p class="status">Scrivi almeno una parte del titolo.</p>';return}
-  web.innerHTML='<p class="status">Cerco «'+esc(q.t)+'» su Apple Music, Deezer, MusicBrainz e LRCLIB…</p>';box.innerHTML='';let dur=song&&song.id===TG.id?DUR:0;
-  const [W,LR]=await Promise.all([songWhere(q.t,q.a,dur).catch(()=>null),lrcFind(q,dur).catch(e=>({err:e}))]);
+  web.innerHTML='<p class="status">Cerco «'+esc(q.t)+'» su Apple Music, Deezer e MusicBrainz…</p>';box.innerHTML='';let dur=song&&song.id===TG.id?DUR:0;
+  const W=await songWhere(q.t,q.a,dur).catch(()=>null);
   /* risultato: artista con foto e album */
   if(W&&(W.albums.length||W.found.length)){TG.web=W;const nA=W.albums.length;
     web.innerHTML=`<div class="twhead"><span class="artimg twpic">${W.pic?`<img alt="" src="${esc(W.pic)}">`:EI('user')}</span><div class="grow"><b>${esc(W.artist||'Artista non trovato')}</b><small>Trovato su ${W.found.map(k=>SRC_N[k]).join(', ')} · in ${nA} ${nA===1?'album':'album diversi'}</small></div>${W.artist&&alnum(W.artist)!==alnum(q.a)?`<button class="chip" id="twArt">Usa questo artista</button>`:''}</div>`+
@@ -6812,8 +6946,8 @@ async function tagFind(){const s=await dbGet(TG.id);const q={t:$('#tgTitle').val
     web.querySelectorAll('[data-tw]').forEach(b=>b.onclick=()=>{if(b.classList.contains('on')){b.classList.remove('on');$('#tgAlbum').value=TG.orig.album;$('#tgYear').value=TG.orig.year;$('#tgMsg').textContent='Album e anno tornati come prima.';return}const g=W.albums[+b.dataset.tw];$('#tgAlbum').value=g.al;if(g.y)$('#tgYear').value=g.y;
       web.querySelectorAll('.twalb').forEach(x=>x.classList.toggle('on',x===b));$('#tgMsg').textContent='Album «'+g.al+'»'+(g.y?' ('+g.y+')':'')+' messo nei tag: premi «Salva».'})}
   else web.innerHTML='<p class="status">Su Apple Music, Deezer e MusicBrainz non l\'ho trovato. Se il brano è tuo o inedito, scrivi tu artista e album.</p>'+extLinks((q.a+' '+q.t).trim());
-  /* testo da LRCLIB, come prima */
-  if(LR&&LR.err){box.innerHTML='<p class="status">'+(LR.err.message==='LRC429'?'LRCLIB è occupato: per il testo riprova tra un minuto.':'Non riesco a contattare LRCLIB per il testo.')+'</p>';return}
+  return;/* il testo resta sempre quello ascoltato dalla voce */
+  const LR=null;if(LR&&LR.err){box.innerHTML='<p class="status">'+(LR.err.message==='LRC429'?'LRCLIB è occupato: per il testo riprova tra un minuto.':'Non riesco a contattare LRCLIB per il testo.')+'</p>';return}
   const L=((LR&&LR.list)||[]).filter(r=>r.kind==='synced'||r.kind==='plain').slice(0,6);if(!L.length)return;
   /* il testo non si cambia mai da solo: lo confronti con quello che hai (per esempio quello trascritto dalla voce) e scegli tu */
   box.innerHTML='<p class="status">Testi trovati su LRCLIB. Il tuo testo resta com\'è: tocca «Confronta» per vederli affiancati e decidere tu.</p>'+L.map((r,i)=>{const x=r.x;return`<div class="si"><div class="meta"><b>${esc(x.trackName||'')}</b><small>${esc(x.artistName||'')}${x.albumName?' · '+esc(x.albumName):''}${x.duration?' · '+fmt(x.duration):''}</small></div><span class="tag ${r.kind==='synced'?'good':''}">${r.kind==='synced'?'testo a tempo':'testo'}</span><button class="mini" data-tf="${i}">Confronta</button></div>`}).join('')+'<div id="tgCmp"></div>';
@@ -7009,7 +7143,8 @@ function pdLearnMsg(ty,key,v){const L=MD.learn,slot=PD_SLOTS.find(x=>x.k===L.k);
     P.key=L.key;P.mode=slot.cont?'cont':(ty==='cc'?(L.mom?'mom':'tog'):'tog');MD.learn=null;pdSave();toast(slot.nm+' collegato: '+mdName(P.key));pdDraw()};
   if(ty==='cc'&&!slot.cont)setTimeout(end,1200);else end()}
 /* cosa fa ogni pedale */
-async function pdDo(act){if(!act||act==='none')return;
+function sclSaved(){return !!(SCL.name&&SCL.items.length&&slSaved().some(x=>x.name===SCL.name))}
+async function pdDo(act){if(!act||act==='none')return;if(NOLIVE&&act!=='vol'&&!sclSaved()){toast('Sul '+DEVN+' i pedali funzionano con una scaletta salvata: apri «Scaletta», preparala, salvala e caricala. Senza scaletta funziona solo il pedale del volume.');return}
   if(act[0]==='b'){const i=+act.slice(1);const T=mdTargets();if(!T.length){toast('Per cambiare suono apri la Sala prove con il tuo strumento');return}
     const live=!!(SA.ctx&&SA.ctx.state!=='closed');for(const t of T)bankSel(t,i,T.length>1||!live);
     if(!live){const r=bankResolve(bankRefs(T[0])[i],T[0].role);toast('Banco '+(i+1)+(r?' · '+r.name:'')+': lo senti quando apri la Sala prove')}else if(T.length>1)toast('Banco '+(i+1)+' per tutti');if(!$('#ovMidi').hidden)pdDraw();return}
@@ -7018,7 +7153,7 @@ async function pdDo(act){if(!act||act==='none')return;
     slPlay(i,{noPlay:prefGet('pdAuto')==='0'});return}
   if(act==='play'){if(!$('#salaOv').hidden){if(SA.on){try{$('#sRecGo').click()}catch(e){}}else sListen()}else{A.paused?play():pause()}return}}
 /* volume generale: vale per il lettore e per la Sala prove. Il pedale non si salva: riparte da dove lo metti */
-function mvSet(x){x=Math.max(0,Math.min(1,x));MD.vol=x;const g=x*x;try{A.master=g}catch(e){}
+function mvSet(x){x=Math.max(0,Math.min(1,x));MD.vol=x;const g=x*x;try{A.master=g}catch(e){}pvShow();
   if(SA.out&&SA.ctx){try{SA.out.gain.setTargetAtTime(g,SA.ctx.currentTime,.02)}catch(e){SA.out.gain.value=g}}
   const b=$('#pdVolBar');if(b)b.style.height=Math.round(x*100)+'%';const t=$('#pdVolTxt');if(t)t.textContent=Math.round(x*100)+'%';
   const h=$('#mvHud');if(h){h.hidden=false;h.querySelector('i').style.width=Math.round(x*100)+'%';h.querySelector('b').textContent='Volume '+Math.round(x*100)+'%';clearTimeout(MD.ht);MD.ht=setTimeout(()=>h.hidden=true,1200)}}
@@ -7035,7 +7170,7 @@ function mdLamp(){const l=$('#pdLamp');if(l){l.classList.add('on');clearTimeout(
 function pdFlash(k){const b=$('#pdBoard [data-pk="'+k+'"]');if(!b)return;b.classList.add('hit');clearTimeout(b._t);b._t=setTimeout(()=>b.classList.remove('hit'),260)}
 const pdActName=(a,cont)=>((cont?PD_CACTS:PD_ACTS).find(x=>x[0]===a)||['','Niente'])[1];
 function pdDraw(){sEnsure();const ok=mdOk();$('#pdNo').hidden=ok;$('#pdBody').hidden=!ok;if(!ok)return;$('#pdGo').hidden=!!MD.acc;pdDevs();mdLamp();
-  const T=SA.tracks;$('#pdNoSala').hidden=!!T.length;if(NOLIVE)$('#pdNoSala').hidden=false;{const ns=!SALA_OK||NOLIVE;$('#pdSala').hidden=ns;$('#pdNoSalaT').textContent=ns?'Cambiare suono dal vivo con i piedi si può solo sul computer: su telefono e tablet c\'è troppo ritardo. Cambio brano e volume funzionano anche qui.':'Per cambiare suono serve il tuo strumento nella Sala prove. Cambio brano e volume funzionano già.'}
+  const T=SA.tracks;$('#pdNoSala').hidden=!!T.length;if(NOLIVE)$('#pdNoSala').hidden=false;{const ns=!SALA_OK||NOLIVE;const sv=sclSaved();$('#pdSala').hidden=ns&&!(NOLIVE&&!sv);$('#pdSala').textContent=NOLIVE?'Apri la scaletta':'Apri la Sala prove';$('#pdNoSalaT').innerHTML=NOLIVE?(sv?'Scaletta caricata: <b>'+esc(SCL.name)+'</b> ('+SCL.items.length+' brani). I pedali cambiano brano, avviano e fermano; il pedale del volume regola il volume generale. Cambiare suono con i piedi si può solo sul computer.':'Sul '+DEVN+' i pedali funzionano solo con una <b>scaletta salvata</b>: aprila, preparala, salvala e caricala. Per ora funziona solo il <b>pedale del volume</b>.'):ns?'Cambiare suono dal vivo con i piedi si può solo sul computer: su telefono e tablet c\'è troppo ritardo. Cambio brano e volume funzionano anche qui.':'Per cambiare suono serve il tuo strumento nella Sala prove. Cambio brano e volume funzionano già.'}
   $('#pdTgt').innerHTML='<option value="">Automatico (chitarra o basso)</option>'+T.map(t=>`<option value="${t.id}" ${MD.tgt===t.id?'selected':''}>${esc(t.name)}</option>`).join('')+(T.length>1?`<option value="all" ${MD.tgt==='all'?'selected':''}>Tutti gli strumenti</option>`:'');
   const t=mdTargets()[0];$('#pdSB').innerHTML=t?sbRowHTML(t):'';const refs=t?bankRefs(t):[];
   const lbl=s=>{const P=MD.pads[s.k];if(P.act[0]==='b'){const i=+P.act.slice(1),r=t&&bankResolve(refs[i],t.role);return'Banco '+(i+1)+(r?' · '+r.name:'')}return pdActName(P.act,s.cont)};
@@ -7071,7 +7206,7 @@ async function pdOffline(){const box=$('#pdOffRes');box.innerHTML='<p class="sno
   box.innerHTML=`<p class="pdoffsum ${ok?'ok':'no'}">${ok?'Tutto pronto: puoi suonare anche senza internet.':'Qualcosa manca: sistemalo finché hai internet.'}</p>`+out.map(([k,t])=>`<div class="pdoff ${k}"><span>${k==='ok'?'✓':k==='warn'?'!':'✕'}</span>${esc(t)}</div>`).join('')}
 $('#pdTgt').onchange=e=>{MD.tgt=e.target.value;prefSet('midiTgt',MD.tgt);pdDraw()};
 $('#pdGo').onclick=async()=>{if(await mdStart(true)){toast('Pedaliera pronta: premi un pedale');pdDraw()}};
-$('#pdSala').onclick=()=>{$('#ovMidi').hidden=true;try{$('#bSala').click()}catch(e){}};
+$('#pdSala').onclick=()=>{$('#ovMidi').hidden=true;if(NOLIVE){try{slOpen()}catch(e){}return}try{$('#bSala').click()}catch(e){}};
 $('#pdBanks').onclick=()=>{const t=mdTargets()[0];if(!t){toast('Prima prepara la Sala prove');return}$('#ovMidi').hidden=true;try{rigOpen(t)}catch(e){toast('Apri la Sala prove e tocca «Manopole dei pedali»')}};
 $('#pdBoss').onclick=pdBoss;$('#pdOffGo').onclick=pdOffline;
 $('#pdAuto').onchange=e=>prefSet('pdAuto',e.target.checked?'1':'0');$('#pdB1').onchange=e=>prefSet('pdBank1',e.target.checked?'1':'0');
@@ -7273,7 +7408,7 @@ const TUT_SECTIONS=[
   prep:()=>{tutCloseAll();tutOpt('optLy',true)},done:()=>tutOpt('optLy',false),
   steps:[
    {t:'Opzioni testo',d:'Qui sistemi il testo del brano. Di solito l\'app lo trova da sola, ma se manca o non è preciso lo puoi cercare, trascrivere, correggere e mettere a tempo.'},
-   {s:'#bFind',t:'Cerca su LRCLIB',d:'Cerca il testo già messo a tempo su LRCLIB, un archivio gratuito di testi. Scegli quello con la durata uguale al tuo brano.'},
+   
    {s:'#bAsr',t:'Trascrivi dalla voce',d:'Se il testo non si trova, RunPod ascolta la voce del brano e lo scrive da solo, mettendo ogni parola a tempo. Serve RunPod collegato.'},
    {s:'#bEditLy',t:'Modifica',d:'Apre il testo per correggerlo a mano o per incollarne uno tuo.'},
    {s:'#bAlign',t:'Allinea da solo',d:'Rimette a tempo il testo ascoltando la voce del brano. Usalo dopo aver incollato o corretto un testo.'},
@@ -7505,7 +7640,7 @@ const TUT_SECTIONS=[
    {s:'#tgArtist',t:'Artista',d:'Chi lo canta. Se il brano è tuo, scrivi il tuo nome.'},
    {s:'#tgAlbum',t:'Album',d:'L\'album del brano. Nella Libreria i brani vengono raggruppati per album.'},
    {s:'#tgYear',t:'Anno',d:'L\'anno in cui è uscito.'},
-   {s:'#tgFind',t:'Cerca il brano su internet',d:'Parte dal titolo e guarda dove è pubblicato il brano: Apple Music, Deezer, MusicBrainz e LRCLIB. Ti propone l\'artista con la foto e tutti gli album dove c\'è, dall\'album originale alle raccolte e ai live, ognuno con la sua fonte. Tocchi quello giusto e premi Salva.'},
+   {s:'#tgFind',t:'Cerca il brano su internet',d:'Parte dal titolo e guarda dove è pubblicato il brano: Apple Music, Deezer e MusicBrainz. Ti propone l\'artista con la foto e tutti gli album dove c\'è, dall\'album originale alle raccolte e ai live, ognuno con la sua fonte. Tocchi quello giusto e premi Salva.'},
    {s:'#tgLyr',t:'Il testo',d:'Il testo del brano. I tempi tra parentesi quadre all\'inizio delle righe, come 00:02.40, tengono il testo a tempo con la musica.'},
    {s:'#tgSave',t:'Salva',d:'Salva le modifiche nella Libreria.'},
    {s:'#tgMp3',t:'Scarica l\'MP3',d:'Scarica il brano in MP3 con titolo, artista e testo dentro al file.'},
