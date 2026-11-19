@@ -72,7 +72,7 @@ h2{font-family:var(--f-lux);font-weight:700;font-size:clamp(28px,4.4vw,48px);lin
 .pillar p{margin:0 0 12px;color:var(--dim)}
 .pillar ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
 .pillar li{padding-left:24px;position:relative}
-.pillar li::before{content:"⚡";position:absolute;left:0;top:0;color:var(--gold);font-size:14px}
+.pillar li::before{content:"";position:absolute;left:4px;top:.62em;width:9px;height:9px;border-radius:50%;background:var(--goldgrad)}
 
 .who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:36px}
 .who div{border:1px solid var(--line);border-radius:18px;padding:20px;background:var(--bg2)}
@@ -155,7 +155,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="stage"><img src="pv-hero.jpg" alt="Logo Pure Voltage"><video id="heroV" src="pv-anim.mp4" autoplay muted loop playsinline preload="auto"></video></div>
     <div class="wrap">
       <h1 class="g">La tua sala prove</h1>
-      <p class="lead">Prendi una canzone, togli la voce o uno strumento e mettiti al suo posto. Canta, suona, registra e duetta: tutto nel browser, sul PC, sul tablet e sullo smartphone.</p>
+      <p class="lead">Prendi una canzone, togli la voce o uno strumento e mettiti al suo posto. Canta, registra e duetta nel browser, sul PC, sul tablet e sullo smartphone. Per suonare dal vivo con la scheda audio c'è il computer.</p>
       <div class="cta">
         <a class="btn pri" href="./?app">Prova subito, è gratis</a>
         <a class="btn sec" href="#cosa">Scopri cosa fa</a>
@@ -191,14 +191,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
             <li>Testo che scorre a tempo e melodia della voce</li>
             <li>Tonalità più alta o più bassa, fino a 3 toni</li>
             <li>Misura la tua estensione vocale: il brano si adatta a chi canta</li>
-            <li>Pedaliera con effetti per voce e strumenti, con preset scelti per la canzone</li>
+            <li>Sul computer: pedaliera con effetti per voce e strumenti, con preset scelti per la canzone</li>
             <li>Tablature, accordatore, metronomo e ripetizione dei passaggi</li>
           </ul>
         </article>
         <article class="pillar reveal">
           <div class="n">III</div>
           <h3 class="g">Suona dal vivo</h3>
-          <p>Il palco di casa, o quello vero.</p>
+          <p>Il palco di casa, o quello vero. Microfono e strumenti dal vivo si usano sul computer.</p>
           <ul>
             <li>Microfono e strumenti dalla tua scheda audio</li>
             <li>Ti ascolti in cuffia mentre suona la base</li>
@@ -232,7 +232,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <h2 class="g reveal">Per chiunque abbia una canzone nel cuore</h2>
       <div class="who">
         <div class="reveal"><b class="g">Cantanti</b><span>Basi senza voce, testo a tempo e la tonalità giusta per la tua voce, misurata dall'app.</span></div>
-        <div class="reveal"><b class="g">Musicisti</b><span>Togli il tuo strumento dal brano e suonaci sopra con i tuoi effetti.</span></div>
+        <div class="reveal"><b class="g">Musicisti</b><span>Togli il tuo strumento dal brano e suonaci sopra con i tuoi effetti, al computer.</span></div>
         <div class="reveal"><b class="g">Cover band</b><span>Prove a casa e scaletta pronta per la serata.</span></div>
         <div class="reveal"><b class="g">Chi studia musica</b><span>Rallenta, ripeti i passaggi difficili, segui la tablatura.</span></div>
         <div class="reveal"><b class="g">Serate karaoke</b><span>Testo grande e chiaro, anche sul TV, e duetti con i colori delle voci.</span></div>
@@ -249,7 +249,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <h2 class="g reveal">Tre passi e sei sul palco</h2>
       <div class="steps">
         <div class="step reveal"><h3>Apri l'app</h3><p>Funziona nel browser: Chrome, Edge o Brave, sul PC come sul telefono. Puoi anche aggiungerla alla schermata Home.</p></div>
-        <div class="step reveal"><h3>Carica una canzone</h3><p>Scegli un MP3 o un intero album: Pure Voltage lo separa in voce e strumenti e lo mette in Libreria.</p></div>
+        <div class="step reveal"><h3>Carica una canzone</h3><p>Scegli un MP3 o un intero album: Pure Voltage lo separa in voce e strumenti e lo mette in Libreria. Per separare colleghi una volta sola RunPod, oppure il servizio gratuito più lento.</p></div>
         <div class="step reveal"><h3>Canta e suona</h3><p>Togli la parte che vuoi fare tu, scegli la tonalità e premi Play. Se vuoi, registra il video.</p></div>
       </div>
     </div>
@@ -259,9 +259,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
   <section id="pc">
     <div class="wrap">
-      <p class="kicker reveal">Al computer e sul tablet</p>
-      <h2 class="g reveal">Il PC o il tablet diventano la tua sala prove</h2>
-      <p class="intro-txt reveal">Con una scheda audio USB colleghi microfono, chitarra e basso, ti ascolti in cuffia e mandi la musica alle casse. Pure Voltage riconosce da sola ingressi e uscite.</p>
+      <p class="kicker reveal">Al computer</p>
+      <h2 class="g reveal">Il PC diventa la tua sala prove</h2>
+      <p class="intro-txt reveal">Con una scheda audio USB colleghi microfono, chitarra e basso, ti ascolti in cuffia e mandi la musica alle casse. Pure Voltage riconosce da sola ingressi e uscite. Su telefono e tablet il suono torna in cuffia con troppo ritardo per suonare dal vivo: lì usi il Palco per cantare con la base e il Video per registrarti.</p>
       <div class="pcgrid">
         <div class="pccard reveal">
           <h3>Consigli per partire bene</h3>
@@ -281,7 +281,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <div class="pccard reveal"><span class="pcn">4 ingressi</span><h4>Più musicisti</h4><p>Behringer UMC404HD (quella usata per provare Pure Voltage) · Steinberg UR44C · PreSonus Studio 68c</p></div>
         </div>
       </div>
-      <p class="note reveal">Sono solo esempi: va bene qualunque scheda audio USB che il computer riconosce, senza programmi speciali. Sul tablet (iPad o Android) la scheda deve funzionare senza driver («class compliant») e si collega con il cavo USB-C o l'adattatore per fotocamere; se non si accende, usa un hub USB alimentato. I nomi dei prodotti sono marchi dei rispettivi proprietari; Pure Voltage non è collegata ai produttori e non riceve compensi da loro.</p>
+      <p class="note reveal">Sono solo esempi: va bene qualunque scheda audio USB che il computer riconosce, senza programmi speciali. I nomi dei prodotti sono marchi dei rispettivi proprietari; Pure Voltage non è collegata ai produttori e non riceve compensi da loro.</p>
     </div>
   </section>
 
@@ -294,7 +294,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="faq">
         <details class="reveal"><summary>Quanto costa?</summary><p>L'app è gratuita. Per separare i brani in modo veloce si collega un proprio account RunPod, un servizio a consumo: si paga solo il tempo di calcolo, pochi centesimi a brano. C'è anche un servizio gratuito, più lento.</p></details>
         <details class="reveal"><summary>Devo installare qualcosa?</summary><p>No. Si apre dal browser. Sul telefono e sul PC puoi aggiungerla alla schermata principale e usarla come un'app.</p></details>
-        <details class="reveal"><summary>Posso usare la mia scheda audio?</summary><p>Sì. Sul PC Pure Voltage riconosce gli ingressi della scheda audio, per voce e strumenti, e puoi ascoltarti in cuffia mentre suona la base.</p></details>
+        <details class="reveal"><summary>Posso usare la mia scheda audio?</summary><p>Sì, sul computer: Pure Voltage riconosce gli ingressi della scheda audio, per voce e strumenti, e puoi ascoltarti in cuffia mentre suona la base. Su telefono e tablet no, perché il suono torna in cuffia con troppo ritardo.</p></details>
         <details class="reveal"><summary>Dove finiscono i miei brani?</summary><p>Restano sul tuo dispositivo, nel browser, e se vuoi anche in una cartella del tuo PC. Se preferisci, nel tuo spazio cloud Cloudflare R2, per ritrovarli su tutti i dispositivi. Puoi salvare in un file le tue chiavi e impostazioni, per ritrovarle sempre.</p></details>
         <details class="reveal"><summary>Posso vederlo sul televisore?</summary><p>Sì. Dal Palco tocca l'icona di trasmissione: con un TV con Chromecast o Google TV il testo e la tablatura vanno sul televisore, mentre la musica resta sul telefono o sulle casse. In alternativa puoi trasmettere tutto lo schermo del telefono.</p></details>
         <details class="reveal"><summary>Posso usare qualsiasi canzone?</summary><p>Pure Voltage non contiene e non vende musica: lavora sui file che scegli tu. Usala con brani acquistati regolarmente, tuoi o liberi da diritti, per studio e uso personale.</p></details>
