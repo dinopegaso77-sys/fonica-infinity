@@ -1,5 +1,5 @@
 // Pure Voltage: tiene l'app disponibile anche senza internet (le funzioni online restano online)
-const C='purevoltage-v5',LIB='purevoltage-lib';
+const C='purevoltage-v6',LIB='purevoltage-lib';
 /* motore degli amplificatori e altre librerie prese da internet: si salvano, così la Sala prove suona anche senza connessione */
 const LIBHOST=/(^|\.)(cdn\.jsdelivr\.net|esm\.sh)$/;
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'])));self.skipWaiting()});
@@ -9,4 +9,6 @@ self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.me
     e.respondWith(fetch(e.request).then(r=>{if(r.ok){const cp=r.clone();caches.open(LIB).then(c=>c.put(e.request,cp))}return r}).catch(()=>caches.match(e.request,{cacheName:LIB}).then(r=>r||Response.error())));return}
   /* controllo della versione e ricaricamento dopo un aggiornamento: sempre da internet, senza salvarli */
   if(u.searchParams.has('vc')||u.searchParams.has('r'))return;
-  e.respondWith(fetch(e.request).then(r=>{const cp=r.clone();caches.open(C).then(c=>c.put(e.request,cp));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
+  /* la pagina dell'app si chiede sempre fresca (senza la copia vecchia del browser), così dopo un aggiornamento arriva subito la versione nuova */
+  const page=e.request.mode==='navigate'||/(\/|\.html)$/.test(u.pathname);
+  e.respondWith((page?fetch(u.href,{cache:'no-cache',credentials:'same-origin'}):fetch(e.request)).then(r=>{if(!r.ok){if(page)throw new Error('http '+r.status);return r}const cp=r.clone();caches.open(C).then(c=>c.put(e.request,cp));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
