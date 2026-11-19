@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="19/11 · 22:35"><meta name="pv-notes" content="colori: quattro temi in Impostazioni › Colori dell'app: «Carta», «Nebbia», «Giallo chiaro» (chiari, con il logo chiaro) e «Notte morbida» (scuro); i colori valgono anche per Palco, Video e Sala prove, con scritte scure sul chiaro; le icone della batteria hanno i colori del tema e un riquadro; pulsanti in ordine: nella pagina principale Tutorial, Condividi e Dona sono nel Menu e gli strumenti meno usati in «Altro»; nel Palco restano Tracce, Tablatura, Microfono e Scaletta, e Duetto, Click, Video e Foglio sono in «Altro» (un puntino avvisa se uno è acceso); Foglio A4 e Video seguono il tema (pulsanti leggibili, niente fondo nero); intestazione più pulita: logo grande e una sola riga «In prova · versione»"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="19/11 · 23:00"><meta name="pv-notes" content="colori: quattro temi in Impostazioni › Colori dell'app: «Carta», «Nebbia», «Giallo chiaro» (chiari, con il logo chiaro) e «Notte morbida» (scuro); i colori valgono anche per Palco, Video e Sala prove, con scritte scure sul chiaro; le icone della batteria hanno i colori del tema e un riquadro; pulsanti in ordine: nella pagina principale Tutorial, Condividi e Dona sono nel Menu e gli strumenti meno usati in «Altro»; nel Palco restano Tracce, Tablatura, Microfono e Scaletta, e Duetto, Click, Video e Foglio sono in «Altro» (un puntino avvisa se uno è acceso); Foglio A4 e Video seguono il tema (pulsanti leggibili, niente fondo nero); intestazione più pulita: logo grande e una sola riga «In prova · versione»; nei temi chiari anche il tutorial, gli avvisi e le scritte colorate (cloud, errori, avvisi) sono leggibili"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -1103,6 +1103,48 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 :is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .recov .chip:not(.pri){background:var(--raise);color:var(--fg);border-color:var(--line)}
 :is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .recov .pseg span{color:var(--dim)}
 :is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #recCv{background:var(--bg)}
+
+/* ===== temi chiari: scritte colorate più scure (fatte in automatico) e finestre del tutorial e degli avvisi ===== */
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .slat.mid{color:#935f16}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .slat.hi{color:#93493f}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .pwr.on{color:#3b935e}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .pwr:not(.on){color:#933f39}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .recarm.on{color:#93615a}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .artalb li em{color:#299350}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .ltj.ok{color:#3b935e}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .ltj.mid{color:#936e25}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .ltj.bad{color:#933636}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .rdgrid #drDel .ico{color:#933f39}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .ttb .ico,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .ttb .ei{color:#0f9390}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .cvlist .cvdel .ei{color:#933f39}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .supst.ok{color:#299350}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .supsum li.ok b{color:#299350}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .chip.danger{color:#934942}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .ldelq{color:#934942}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #spcSum.over b{color:#933f39}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .spk.both{color:#299350}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .spk.cloud{color:#388293}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .spk.here{color:#936e0d}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .spca .mini.danger{color:#934942}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .sthint.bad{color:#934036}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .sthint.warn{color:#935f16}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .sdock #sRecX{color:#93615a}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .sdock #sTime{color:#93493f}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .kpanel.duoedit .kl.pq::after{color:#93781d}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .tag.warn{color:#936b20}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .recrec{color:#932d2d}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .lbtn.del .ei{color:#933f39}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #tutLay.dim{background:rgba(30,30,45,.42)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #tutHole{box-shadow:0 0 0 9999px rgba(30,30,45,.42);outline-color:var(--accent)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #tutCard{background:var(--surface);color:var(--fg);border-color:var(--accent);box-shadow:0 14px 40px rgba(40,40,60,.25)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #tutT{color:var(--accent)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #tutCard .mini{color:var(--fg);border-color:var(--line);background:var(--raise)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #tutCard .mini.pri{background:var(--btnbg);color:var(--btnink);border-color:transparent}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #updBan,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #syncBan{background:var(--surface);color:var(--fg);border-color:var(--line);box-shadow:0 10px 30px rgba(40,40,60,.22)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #updBan .mini,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #syncBan .mini{color:var(--fg);border-color:var(--line);background:var(--raise)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #updBan .mini.pri{background:var(--btnbg);color:var(--btnink)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #updBan>.ico{color:var(--accent)}:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #syncBan>.ico{color:var(--accent)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .sdock #sRecX{background:#fbe4e1;color:#a3322b}
 /* ===== layout «essenziale e Altro» ===== */
 .navmenu .nmtop{display:grid;gap:6px;padding-bottom:8px;margin-bottom:4px;border-bottom:1px solid var(--line)}
 .navmenu .nmtop .htut,.navmenu .nmtop .hshare{width:100%;min-height:46px;border-radius:10px;padding:6px 12px;justify-content:flex-start}
@@ -1177,7 +1219,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: colori: quattro temi in Impostazioni › Colori dell'app: «Carta», «Nebbia», «Giallo chiaro» (chiari, con il logo chiaro) e «Notte morbida» (scuro); i colori valgono anche per Palco, Video e Sala prove, con scritte scure sul chiaro; le icone della batteria hanno i colori del tema e un riquadro; pulsanti in ordine: nella pagina principale Tutorial, Condividi e Dona sono nel Menu e gli strumenti meno usati in «Altro»; nel Palco restano Tracce, Tablatura, Microfono e Scaletta, e Duetto, Click, Video e Foglio sono in «Altro» (un puntino avvisa se uno è acceso); Foglio A4 e Video seguono il tema (pulsanti leggibili, niente fondo nero); intestazione più pulita: logo grande e una sola riga «In prova · versione»</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: colori: quattro temi in Impostazioni › Colori dell'app: «Carta», «Nebbia», «Giallo chiaro» (chiari, con il logo chiaro) e «Notte morbida» (scuro); i colori valgono anche per Palco, Video e Sala prove, con scritte scure sul chiaro; le icone della batteria hanno i colori del tema e un riquadro; pulsanti in ordine: nella pagina principale Tutorial, Condividi e Dona sono nel Menu e gli strumenti meno usati in «Altro»; nel Palco restano Tracce, Tablatura, Microfono e Scaletta, e Duetto, Click, Video e Foglio sono in «Altro» (un puntino avvisa se uno è acceso); Foglio A4 e Video seguono il tema (pulsanti leggibili, niente fondo nero); intestazione più pulita: logo grande e una sola riga «In prova · versione»; nei temi chiari anche il tutorial, gli avvisi e le scritte colorate (cloud, errori, avvisi) sono leggibili</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
