@@ -6,6 +6,8 @@
 <title>Pure Voltage</title>
 <meta name="description" content="Pure Voltage: la tua sala prove. Separi qualsiasi brano in voce e strumenti, canti in karaoke, suoni dal vivo con la tua scheda audio e crei video e duetti.">
 <meta name="theme-color" content="#07080d">
+<script>/* colori: lo stesso tema scelto nell'app */try{var _t=localStorage.getItem('f8_theme');document.documentElement.dataset.theme=/^(carta|nebbia|giallo|notte)$/.test(_t)?_t:'notte'}catch(e){document.documentElement.dataset.theme='notte'}</script>
+
 <meta property="og:title" content="Pure Voltage — la tua sala prove">
 <meta property="og:description" content="Separa i brani, canta, suona dal vivo, crea duetti. Tutto nel browser.">
 <meta property="og:image" content="pv-hero.jpg">
@@ -119,6 +121,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .nav .logo span{display:none}
   .hero .cta .btn{width:100%}
 }
+
+/* ===== temi chiari (gli stessi dell'app) ===== */
+[data-theme=carta]{--bg:#f4f1ea;--bg2:#fbf9f4;--card:#fbf9f4;--line:#dcd5c6;--fg:#262a38;--dim:#5f5e57;--ink:#ffffff;--gold:#4a5aa8;--goldgrad:linear-gradient(90deg,#2f8fb8 0%,#4f66c4 50%,#7a55b8 100%);--goldbtn:linear-gradient(90deg,#4a5aa8 0%,#5c55a8 100%)}
+[data-theme=nebbia]{--bg:#edf1f5;--bg2:#f6f8fb;--card:#f6f8fb;--line:#d3dae3;--fg:#243040;--dim:#5a6573;--ink:#ffffff;--gold:#2d7899;--goldgrad:linear-gradient(90deg,#2a8fb5 0%,#4a6fc4 50%,#7056b5 100%);--goldbtn:linear-gradient(90deg,#2d7899 0%,#3f6aa8 100%)}
+[data-theme=giallo]{--bg:#f6f0df;--bg2:#fbf6e8;--card:#fbf6e8;--line:#e1d6b8;--fg:#33291a;--dim:#6f644c;--ink:#2e2104;--gold:#a8710f;--goldgrad:linear-gradient(90deg,#2f8fb8 0%,#6a55b8 55%,#b07a12 100%);--goldbtn:linear-gradient(90deg,#ebbb45 0%,#dc9e22 100%)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .hero{background:radial-gradient(ellipse at 50% 38%,rgba(110,130,255,.10),transparent 60%),var(--bg)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .hero h1{text-shadow:none}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .hero p.lead{color:var(--fg)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .btn{border-color:var(--line)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .btn.pri{box-shadow:0 4px 16px rgba(60,60,90,.18)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .btn.sec{background:var(--bg2);color:var(--fg);border-color:var(--line)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .nav.on{background:rgba(250,249,245,.9)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .pillar{background:var(--bg2)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .note,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) footer{color:var(--dim)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .final img{box-shadow:none}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .divider{background:linear-gradient(90deg,transparent,var(--line),transparent)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) #heroV{display:none}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo]) .hero .stage img{-webkit-mask-image:none;mask-image:none;object-fit:contain}
 </style>
 </head>
 <body>
@@ -313,5 +333,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 </script>
+<script>/* temi chiari: logo chiaro al posto di quello scuro */
+(function(){var t=document.documentElement.dataset.theme;if(!/^(carta|nebbia|giallo)$/.test(t))return;var C={carta:'#f4f1ea',nebbia:'#edf1f5',giallo:'#f6f0df'};var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',C[t]);
+  document.querySelectorAll('img').forEach(function(i){var a=i.getAttribute('src');if(a==='pv-logo.jpg')i.src='pv-logo-chiaro.webp';else if(a==='pv-hero.jpg')i.src='pv-hero-chiaro.webp'});var v=document.getElementById('heroV');if(v){try{v.pause()}catch(e){}v.removeAttribute('autoplay')}})();</script>
 </body>
 </html>
