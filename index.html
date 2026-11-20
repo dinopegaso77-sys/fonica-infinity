@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 20:56"><meta name="pv-notes" content="Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 21:00"><meta name="pv-notes" content="Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni Pedaliera a tutto schermo con la tabella dei banchi più fitta."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -225,6 +225,18 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .rsbtns .pdpre{display:contents}.rsbtns #rigPre>label.field,.rsbtns .prdest{display:none!important}.rsbtns .chip,.rsbtns .mini{min-height:34px;font-size:13px}
 #ovRig #rigBankBox{display:none!important}
 @media (max-width:760px){#ovRig .rigtop2{grid-template-columns:1fr}}
+/* Pedaliera a tutto schermo, tabella dei banchi più fitta */
+#ovRig{padding:0!important;align-items:stretch!important;justify-content:stretch!important}
+#ovRig .sheet.rigsheet{max-width:none!important;width:100vw!important;height:100dvh!important;max-height:none!important;border-radius:0!important;margin:0!important;overflow:auto;padding:8px 14px!important;gap:6px!important}
+#ovRig .sheet.rigsheet>.row h3{font-size:17px;margin:0}
+#ovRig .rigtop2{padding:6px 8px!important;gap:6px 12px}
+.rbtab{gap:3px 5px;grid-template-columns:36px minmax(0,1fr) minmax(0,1fr)}
+.rbtab .rbh{font-size:10.5px}
+.rbtab .rbn{min-height:26px;border-radius:7px}.rbtab .rbn b{font-size:13px}
+.rbtab .sel{min-height:26px;height:26px;font-size:11.5px;padding:0 22px 0 6px;border-radius:7px}
+.rsrow .field>span{font-size:10px}.rsrow .sel{min-height:26px;height:26px;font-size:11.5px;padding:0 22px 0 6px;border-radius:7px}
+.rsbtns .chip,.rsbtns .mini{min-height:28px;font-size:12px;padding:2px 10px}
+#ovRig .rigedit{flex:1}
 #sBaseBox .saddtop{width:100%;justify-content:center;min-height:42px;flex-shrink:0}
 @media (min-width:1000px) and (min-height:600px){
  .salaov .sala-body{padding:8px 12px;gap:8px}
@@ -1361,7 +1373,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni. Pedaliera a tutto schermo con la tabella dei banchi più fitta.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
