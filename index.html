@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 21:00"><meta name="pv-notes" content="Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni Pedaliera a tutto schermo con la tabella dei banchi più fitta."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 21:18"><meta name="pv-notes" content="Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni Pedaliera a tutto schermo con la tabella dei banchi più fitta. Pedaliera: fino a 8 pedali su una riga; oltre, 7 sopra e gli altri sotto con l'equalizzatore in mezzo, ora grafico (trascini Bassi, Medi e Alti sulla curva; doppio tocco = zero); Ampli NAM e cassa IR: una riga sottile sopra l'equalizzatore."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -237,6 +237,25 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .rsrow .field>span{font-size:10px}.rsrow .sel{min-height:26px;height:26px;font-size:11.5px;padding:0 22px 0 6px;border-radius:7px}
 .rsbtns .chip,.rsbtns .mini{min-height:28px;font-size:12px;padding:2px 10px}
 #ovRig .rigedit{flex:1}
+#ovRig .rigone{flex-wrap:wrap;align-content:flex-start;row-gap:10px}
+.ampstrip{flex:1 1 100%;display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:linear-gradient(90deg,#3b2c22,#21170f 55%,#1d1d1d);border:1px solid #6b5137;border-radius:12px;padding:6px 10px;color:#f3e6d0;font-size:12.5px}
+.ampstrip[hidden]{display:none!important}.ampstrip.cur{outline:3px solid var(--fg);outline-offset:2px}
+.ampstrip b{font-size:11.5px;letter-spacing:.08em;color:#e8c99a}.ampstrip .asn{font-weight:700;max-width:30ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ampstrip .asn.off{opacity:.55;font-weight:400}
+.ampstrip .ash{width:34px;height:22px;border-radius:4px;background:repeating-linear-gradient(45deg,#4a3a2c 0 3px,#2a1f16 3px 6px);border:1px solid #000}
+.ampstrip .asc{width:24px;height:24px;border-radius:50%;margin-left:8px;background:radial-gradient(circle,#3a3a3a 0 22%,#151515 24% 60%,#333 62%);border:1px solid #000}
+.ampstrip .mini{min-height:26px;padding:0 10px;font-size:11.5px}
+.ampu{cursor:pointer;justify-content:flex-start;gap:6px!important;min-height:150px;color:#f3e6d0}
+.ampuh{background:linear-gradient(#3b2c22,#21170f)!important;border:2px solid #6b5137}.ampuc{background:linear-gradient(#2c2c2c,#151515)!important;border:2px solid #4a4a4a}
+.ampu .ampgr{height:56px;border-radius:8px;background:repeating-linear-gradient(45deg,#4a3a2c 0 3px,#2a1f16 3px 6px);border:1px solid rgba(0,0,0,.5)}
+.ampuc .ampgr{height:72px;background:radial-gradient(circle at 50% 50%,#3a3a3a 0 18%,#1d1d1d 19% 36%,#303030 37% 40%,#141414 41%)}
+.ampu .ampnm{font-size:11.5px;font-weight:700;text-align:center;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:#f3e6d0}
+.ampu:not(.on) .ampnm{opacity:.6}
+#ovRig .rigone.two .pedal.on,#ovRig .rigone.two .pedal.cur{flex:0 1 calc((100% - 48px)/7);min-width:0;max-width:210px}
+.eqstrip{flex:1 1 100%;display:flex;flex-direction:column;gap:4px;background:linear-gradient(#1a2036,#0c0f1c);border:1px solid var(--line);border-radius:12px;padding:6px 10px 8px;color:#e9eefb;position:relative}
+.eqstrip[hidden]{display:none!important}.eqstrip.cur{outline:3px solid var(--fg);outline-offset:2px}
+.eqhd{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.eqhd b{font-size:12px;letter-spacing:.08em}.eqhd span{font:600 11.5px ui-monospace,monospace;opacity:.8;flex:1}.eqhd .mini{min-height:24px;padding:0 9px;font-size:11px}
+.eqstrip canvas{width:100%;height:72px;display:block;cursor:ns-resize;touch-action:none;border-radius:8px}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .eqstrip{background:linear-gradient(#ffffff,#f1ead8);color:var(--fg)}
 #sBaseBox .saddtop{width:100%;justify-content:center;min-height:42px;flex-shrink:0}
 @media (min-width:1000px) and (min-height:600px){
  .salaov .sala-body{padding:8px 12px;gap:8px}
@@ -1373,7 +1392,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni. Pedaliera a tutto schermo con la tabella dei banchi più fitta.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni. Pedaliera a tutto schermo con la tabella dei banchi più fitta. Pedaliera: fino a 8 pedali su una riga; oltre, 7 sopra e gli altri sotto con l'equalizzatore in mezzo, ora grafico (trascini Bassi, Medi e Alti sulla curva; doppio tocco = zero); Ampli NAM e cassa IR: una riga sottile sopra l'equalizzatore.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -6736,7 +6755,7 @@ function sRender(){try{sStemApply();SA.baseMono=null}catch(e){}
     let tmr=0;el.querySelectorAll('[data-fx]').forEach(inp=>inp.oninput=()=>{t.rig[inp.dataset.fx]=+inp.value;clearTimeout(tmr);tmr=setTimeout(()=>{sBuild(t).then(sTapBuild);sSave()},250)})}}
 /* ---------- finestra «Suono» (rig) ---------- */
 let RIG=null;const RIG_SL={rigGain:'gain',rigDrive:'drive',rigBass:'bass',rigMid:'mid',rigTreble:'treble',rigLevel:'level'};
-function rigOpen(t){RIG=t;$('#rigTitle').textContent='Suono di '+t.name+' ('+ROLES[t.role]+')';for(const[id,k]of Object.entries(RIG_SL))$('#'+id).value=t.rig[k];rkSync();
+function rigOpen(t){RIG=t;try{namUI()}catch(e){}$('#rigTitle').textContent='Suono di '+t.name+' ('+ROLES[t.role]+')';for(const[id,k]of Object.entries(RIG_SL))$('#'+id).value=t.rig[k];rkSync();
   {let k0='eq';try{const F=fxOf(t.rig,t.role);k0=fxOrder(F).find(k=>PED_BY[k]&&F[k].on)||'eq'}catch(e){}RIGSEL=k0}$('#rigDriveF').hidden=!(t.role==='chitarra'||t.role==='altro');$('#rigCopy').hidden=!(t.role==='chitarra'||t.role==='basso');rigBoardDraw(t);Promise.all([toneLoad('chitarra'),toneLoad('basso')]).then(()=>{if(RIG===t&&!$('#ovRig').hidden)rigBoardDraw(t)});$('#rigLive').checked=t.rig.live!==false;rigInfo();openOv('#ovRig')}
 
 /* ===== finestra «Suono» in stile pedaliera digitale: catena di blocchi, manopole del blocco scelto, banchi a pedale ===== */
@@ -6757,7 +6776,7 @@ function rigChainDraw(t){const box=$('#rigChain');if(!box||!t)return;const F=fxO
     RIGSEL=k;rigSelUI(t);rigChainDraw(t)});
   const bi=t.rig.bank,ref=bi!=null?bankRefs(t)[bi]:null,rr=ref!=null?bankResolve(ref,t.role):null;$('#rigNum').textContent=bi!=null?String(bi+1):'–';$('#rigName').textContent=rr?rr.name:'Suono personale';
   rigSelUI(t);const sb=box.querySelector('.rblk.sel');if(sb){const bx=box.parentElement,l=sb.offsetLeft,r=l+sb.offsetWidth;if(l<bx.scrollLeft+20||r>bx.scrollLeft+bx.clientWidth-20)bx.scrollLeft=l-bx.clientWidth/2+sb.offsetWidth/2}}
-function rigSelUI(t){const k=RIGSEL;$$('#rigEdit .redp').forEach(d=>d.hidden=d.dataset.ed!==k);$$('#rigBoard .pedal').forEach(c=>c.classList.toggle('cur',c.dataset.pd===k&&!c.classList.contains('ampcard')));$('#rigBoard').hidden=!PED_BY[k]}
+function rigSelUI(t){const k=RIGSEL;$$('#rigEdit .redp').forEach(d=>d.hidden=d.dataset.ed!==k||k==='eq');$$('#rigBoard .pedal').forEach(c=>c.classList.toggle('cur',c.dataset.pd===k&&!c.classList.contains('ampcard')));$('#rigBoard').hidden=!(PED_BY[k]||k==='eq');try{rigLayout(t||RIG)}catch(e){console.warn(e)}}
 $$('#ovRig .rk').forEach(L=>knobify(L));
 function rigInfo(){if(!RIG.__mix)setTimeout(sRender,50);const r=RIG.rig;{const t=RIG;$('#rigNamRow').hidden=!namOn()||t.role==='voce';for(const[id,k]of[['#rigAmpSel','nam'],['#rigIrSel','ir'],['#rigAmpTop','nam'],['#rigIrTop','ir']]){const sel=$(id);sSndFill(sel,t,k);sel.onchange=()=>sSndPick(t,k,sel.value,sel)}}$('#rigAmpName').textContent=r.amp?r.amp.name:'nessuno';$('#rigIrName').textContent=r.ir?r.ir.name:'nessuna';
   rigChainDraw(RIG);const cr=[r.amp,r.ir].filter(x=>x&&x.creator);$('#rigCredit').innerHTML=cr.map(x=>`<span class="t3c">${x.avatar?`<img src="${esc(x.avatar)}" alt="">`:''}<b>${esc(x.name)}</b> di <a href="${esc(x.url||'https://www.tone3000.com')}" target="_blank" rel="noopener">${esc(x.creator)}</a> · TONE3000</span>`).join('')}
@@ -6901,8 +6920,42 @@ function rigBankTabDraw(t){const box=$('#rigBankTab');if(!box)return;box.hidden=
   box.innerHTML=h;
   box.querySelectorAll('[data-bks]').forEach(sel=>sel.onchange=()=>{const i=+sel.dataset.bks,refs=sbGet(t.role)||sbEnsure(t);refs[i]=sel.value||null;sSave();bankSel(t,i);rigBankTabDraw(t);sRender()});
   box.querySelectorAll('[data-bkg]').forEach(sel=>sel.onchange=()=>{const i=+sel.dataset.bkg,refs=genRefs(t);refs[i]=sel.value||null;sSave();bankSel(t,i);rigBankTabDraw(t);sRender()})}
-function rigBoardDraw(t){const box=$('#rigBoard');if(!box)return;try{rigBankTabDraw(t);rigInstDraw(t)}catch(e){console.warn(e)}$('#rigBankBox').hidden=!!(t.__mix||RIG&&RIG.__mix);if(!$('#rigBankBox').hidden){$('#rigSB').innerHTML=sbRowHTML(t);bankCfgDraw(t);$('#rigFoot').innerHTML=bankBtns(t,'fsw')}const F=fxOf(t.rig,t.role);box.innerHTML=pedHTML(F,{bpm:true,noAmp:t.role==='voce'});pedBind(box,F,(k)=>pedApply(t,k),()=>pedReorder(t));
-  prBar('rigPre',()=>fxOf(t.rig,t.role),()=>pedReorder(t),t.role,t.__mix?null:t);rigChainDraw(t)}
+/* fila dei pedali: fino a 8 su una riga; oltre, 7 sopra e gli altri sotto, con l'EQ in mezzo */
+function eqOnOf(t){const r=t.rig;return t.role==='voce'||!!(r.bass||r.mid||r.treble||(r.match&&r.match.g))}
+function rigLayout(t){const box=$('#rigBoard'),eq=$('#rigEq');if(!box||!eq||!t)return;
+  /* ampli NAM e cassa IR attivi: una riga sola, sottile, come l'equalizzatore */
+  let as=$('#rigAmpS');if(!as){as=document.createElement('div');as.className='ampstrip';as.id='rigAmpS';box.append(as)}const r=t.rig;
+  const showA=namOn()&&t.role!=='voce'&&!!(r.amp||r.ir||RIGSEL==='amp'||RIGSEL==='cab');as.hidden=!showA;
+  if(showA){as.innerHTML=`<span class="ash"></span><b>AMPLI NAM</b><span class="asn ${r.amp?'':'off'}">${esc(r.amp?r.amp.name:'nessuno')}</span><span class="asc"></span><b>CASSA IR</b><span class="asn ${r.ir?'':'off'}">${esc(r.ir?r.ir.name:'nessuna')}</span><span class="grow"></span><button class="mini" data-as="amp">Regola ampli</button><button class="mini" data-as="cab">Cassa</button>`;
+    as.classList.toggle('cur',RIGSEL==='amp'||RIGSEL==='cab');as.querySelectorAll('[data-as]').forEach(b=>b.onclick=()=>{RIGSEL=b.dataset.as;rigSelUI(t);rigChainDraw(t)})}const peds=[...box.querySelectorAll('.pedal:not(.ampcard)')].filter(p=>p.classList.contains('on')||p.classList.contains('cur'));
+  const two=peds.length>8;box.classList.toggle('two',two);eq.hidden=!(eqOnOf(t)||RIGSEL==='eq');eq.classList.toggle('cur',RIGSEL==='eq');
+  if(two)peds[6].after(as,eq);else box.append(as,eq);eqDraw(t)}
+const EQX={lo:20,hi:16000};let EQC=null;
+function eqBands(t){const b=t.role==='basso';return[{k:'bass',id:'rigBass',f:b?90:150,type:'lowshelf',n:'Bassi'},{k:'mid',id:'rigMid',f:b?700:900,type:'peaking',q:.8,n:'Medi'},{k:'treble',id:'rigTreble',f:b?2500:3500,type:'highshelf',n:'Alti'}]}
+function eqDraw(t){const cv=$('#rigEqCv'),eq=$('#rigEq');if(!cv||!eq||eq.hidden)return;const W=cv.clientWidth,H=cv.clientHeight;if(!W||!H)return;const dpr=devicePixelRatio||1;if(cv.width!==Math.round(W*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+  const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,H);const X=f=>Math.log(f/EQX.lo)/Math.log(EQX.hi/EQX.lo)*W,Y=db=>H/2-db/15*(H/2-8);
+  const light=isLight(),fg=light?'rgba(40,30,10,.55)':'rgba(255,255,255,.45)',ln=light?'rgba(40,30,10,.12)':'rgba(255,255,255,.1)';
+  g.lineWidth=1;g.strokeStyle=ln;g.fillStyle=fg;g.font='10px Figtree,system-ui';
+  [30,50,100,200,500,1000,2000,5000,10000].forEach(f=>{const x=X(f);g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke();g.fillText(f>=1000?f/1000+'k':String(f),x+3,H-3)});
+  [-12,-6,0,6,12].forEach(d=>{const y=Y(d);g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();if(d)g.fillText((d>0?'+':'')+d,3,y-2)});
+  if(!EQC)EQC=new OfflineAudioContext(1,128,48000);const N=220,fr=new Float32Array(N);for(let i=0;i<N;i++)fr[i]=EQX.lo*Math.pow(EQX.hi/EQX.lo,i/(N-1));
+  const resp=(type,f,gain,q)=>{const bq=EQC.createBiquadFilter();bq.type=type;bq.frequency.value=f;bq.gain.value=gain;if(q)bq.Q.value=q;const m=new Float32Array(N),p=new Float32Array(N);bq.getFrequencyResponse(fr,m,p);return m};
+  const tot=new Float32Array(N);const B=eqBands(t);B.forEach(b=>{const m=resp(b.type,b.f,+t.rig[b.k]||0,b.q);for(let i=0;i<N;i++)tot[i]+=20*Math.log10(m[i]||1e-9)});
+  const mg=t.rig.match&&t.rig.match.g;if(mg){const mt=new Float32Array(N);MATCH_F.forEach((f,j)=>{if(!mg[j])return;const m=resp('peaking',f,mg[j],1.4);for(let i=0;i<N;i++)mt[i]+=20*Math.log10(m[i]||1e-9)});
+    g.setLineDash([4,4]);g.strokeStyle=light?'rgba(150,90,0,.6)':'rgba(255,200,90,.6)';g.lineWidth=1.5;g.beginPath();for(let i=0;i<N;i++){const x=X(fr[i]),y=Y(Math.max(-15,Math.min(15,mt[i])));i?g.lineTo(x,y):g.moveTo(x,y)}g.stroke();g.setLineDash([])}
+  const ac=cssV('--accent')||'#2fa8d8';g.beginPath();for(let i=0;i<N;i++){const x=X(fr[i]),y=Y(Math.max(-15,Math.min(15,tot[i])));i?g.lineTo(x,y):g.moveTo(x,y)}
+  g.strokeStyle=ac;g.lineWidth=2.5;g.stroke();g.lineTo(W,H/2);g.lineTo(0,H/2);g.closePath();g.globalAlpha=.16;g.fillStyle=ac;g.fill();g.globalAlpha=1;
+  B.forEach(b=>{const x=X(b.f),y=Y(+t.rig[b.k]||0);g.beginPath();g.arc(x,y,9,0,7);g.fillStyle=light?'#fff':'#111';g.fill();g.lineWidth=3;g.strokeStyle=ac;g.stroke();g.fillStyle=light?'#2b2414':'#fff';g.font='700 11px Figtree,system-ui';g.textAlign='center';g.fillText(b.n,x,y>22?y-14:y+24);g.textAlign='left'});
+  $('#rigEqV').textContent=B.map(b=>b.n+' '+((+t.rig[b.k]||0)>0?'+':'')+(Math.round((+t.rig[b.k]||0)*10)/10)+' dB').join(' · ');$('#rigEqMatch').hidden=!mg}
+function eqBind(t){const cv=$('#rigEqCv');if(!cv)return;let drag=null;const W=()=>cv.clientWidth,H=()=>cv.clientHeight,X=f=>Math.log(f/EQX.lo)/Math.log(EQX.hi/EQX.lo)*W(),dbAt=y=>Math.max(-12,Math.min(12,Math.round(((H()/2-y)/(H()/2-8)*15)*2)/2));
+  const pick=e=>{const r=cv.getBoundingClientRect(),x=e.clientX-r.left;let best=null,bd=1e9;eqBands(t).forEach(b=>{const d=Math.abs(X(b.f)-x);if(d<bd){bd=d;best=b}});return best};
+  const set=(b,v)=>{const inp=$('#'+b.id);inp.value=v;inp.dispatchEvent(new Event('input'));rkSync();eqDraw(t)};
+  cv.onpointerdown=e=>{drag=pick(e);cv.setPointerCapture(e.pointerId);const r=cv.getBoundingClientRect();set(drag,dbAt(e.clientY-r.top))};
+  cv.onpointermove=e=>{if(!drag)return;const r=cv.getBoundingClientRect();set(drag,dbAt(e.clientY-r.top))};cv.onpointerup=cv.onpointercancel=()=>{drag=null};
+  cv.ondblclick=e=>set(pick(e),0);$('#rigEq0').onclick=()=>eqBands(t).forEach(b=>set(b,0));$('#rigEqMatch').onclick=()=>cpOpen(t);
+  if(!window.__eqRO){window.__eqRO=new ResizeObserver(()=>{if(RIG)eqDraw(RIG)});}window.__eqRO.observe(cv)}
+function rigBoardDraw(t){const box=$('#rigBoard');if(!box)return;try{rigBankTabDraw(t);rigInstDraw(t)}catch(e){console.warn(e)}$('#rigBankBox').hidden=!!(t.__mix||RIG&&RIG.__mix);if(!$('#rigBankBox').hidden){$('#rigSB').innerHTML=sbRowHTML(t);bankCfgDraw(t);$('#rigFoot').innerHTML=bankBtns(t,'fsw')}const F=fxOf(t.rig,t.role);box.innerHTML=pedHTML(F,{bpm:true,noAmp:t.role==='voce'})+'<div class="eqstrip" id="rigEq"><div class="eqhd"><b>EQUALIZZATORE</b><span id="rigEqV"></span><button class="mini" id="rigEqMatch" hidden>EQ di somiglianza · Regola</button><button class="mini" id="rigEq0">Piatto</button></div><canvas id="rigEqCv"></canvas></div>';pedBind(box,F,(k)=>pedApply(t,k),()=>pedReorder(t));
+  prBar('rigPre',()=>fxOf(t.rig,t.role),()=>pedReorder(t),t.role,t.__mix?null:t);try{eqBind(t)}catch(e){console.warn(e)}rigChainDraw(t)}
 function pedReorder(t){rigBoardDraw(t);if(t.__mix||RIG&&RIG===t&&RIG.__mix){if(WV.play){wvStop();wvPlay()}sAutoSaveSoon&&sAutoSaveSoon();return}sBuild(t).then(sTapBuild);sSave();sRender()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-pdt][data-pd]');if(b){e.preventDefault();const t=SA.tracks.find(x=>x.id===b.dataset.pdt);if(!t)return;const F=fxOf(t.rig,t.role),k=b.dataset.pd;F[k].on=F[k].on?0:1;pedApply(t,k,true);
     const card=document.querySelector(`#rigBoard .pedal[data-pd="${k}"]`);if(card&&RIG===t)pedSync(card,F[k],PED_BY[k]);toast(PED_BY[k].n+' '+(F[k].on?'acceso':'spento')+' · '+t.name);return}
