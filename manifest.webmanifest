@@ -1,18 +1,36 @@
 {
- "name": "rooMusic",
- "short_name": "rooMusic",
- "description": "La tua sala prove: tracce separate, testo sincronizzato, effetti e video.",
- "start_url": "./",
- "scope": "./",
- "display": "fullscreen",
- "display_override": ["fullscreen", "standalone"],
- "orientation": "any",
- "background_color": "#10131c",
- "theme_color": "#10131c",
- "lang": "it",
- "icons": [
-  {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
-  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
-  {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
- ]
+  "name": "rooMusic",
+  "short_name": "rooMusic",
+  "description": "La tua sala prove: tracce separate, testo sincronizzato, effetti e video.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ],
+  "orientation": "any",
+  "background_color": "#f6f0df",
+  "theme_color": "#f6f0df",
+  "lang": "it",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
