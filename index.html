@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 18:05"><meta name="pv-notes" content="Sala prove in una sola schermata: testo e tablatura affiancati in alto, base e mixer in verticale a sinistra, musicisti al centro, in basso solo Palco/Musicisti, Ascolta e Registra; tonalità, click, conteggio e «Dall'inizio del brano» ora sono in «Altro»; pulsante unico Palco/Musicisti; schede dei musicisti più compatte. Pulsanti «Altro» e «Consigli» (con «Non disturbare» di Windows), Pedaliera in una schermata, temi chiari leggibili, cursore del tempo corretto, base e ingressi su due linee, uscite cuffie e casse con volumi separati"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 18:25"><meta name="pv-notes" content="Sala prove in una sola schermata: vista Musicisti con mixer della base (cursori orizzontali) e «Aggiungi musicista» a sinistra, musicisti al centro con la parte alta più bassa, senza «Originale»; testo e tablatura solo nella vista Palco; in basso Palco/Musicisti, Ascolta e Registra; tonalità, click, conteggio in «Altro». Pulsanti «Altro» e «Consigli», Pedaliera in una schermata, temi chiari leggibili, cursore del tempo corretto, base e ingressi su due linee, uscite cuffie e casse con volumi separati"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -197,6 +197,9 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .ousheet{max-width:560px}
 .smoresheet{max-width:560px}.smoreh{margin:6px 0 0;font-size:15px}.smorerec{display:flex;flex-wrap:wrap;gap:8px}.smorerec .rowchk{border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--raise);font-size:14px}.smorerec .sdtr{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--raise);font-size:14px}.smorerec .sdtr .mini{min-height:34px}.smorerec #sOverL[hidden]{display:none}
 .sdmsg:not(:has(#sMsg:not(:empty))){display:none!important}
+.salaov:not(.perf) #salaRec>.sbrano{display:none!important}
+#salaOv .origb{display:none!important}
+#sBaseBox .saddtop{width:100%;justify-content:center;min-height:42px;flex-shrink:0}
 @media (min-width:1000px) and (min-height:600px){
  .salaov .sala-body{padding:8px 12px;gap:8px}
  #salaRec:not([hidden]){flex:1;min-height:0;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;gap:8px}
@@ -206,8 +209,8 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
  #salaRec .stab{grid-column:2;grid-row:2;height:auto!important;min-height:0!important}
  #sBaseBox{grid-column:1;grid-row:2;width:262px;min-height:0;overflow:auto;padding:8px 10px;gap:6px}
  #sMusBox{grid-column:2;grid-row:2;min-height:0;overflow:auto;padding:8px 10px;gap:6px}
- #salaRec>#sMini{grid-column:1/-1}
- #salaRec>.sdock{grid-column:1/-1;position:static;margin:0;box-shadow:none}
+ #salaRec>#sMini{grid-column:1/-1;grid-row:3}
+ #salaRec>.sdock{grid-column:1/-1;grid-row:4;position:static;margin:0;box-shadow:none}
  .salaov.perf #salaRec{grid-template-rows:minmax(0,1fr) auto auto auto}
  .salaov.perf #salaRec>.sbrano{height:auto}
  #sBaseBox>.row{flex-direction:column;align-items:stretch;gap:4px}#sBaseBox>.row h4{margin:0}
@@ -226,7 +229,7 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
  .sfaders .smaster{background:color-mix(in srgb,var(--accent) 16%,var(--raise))}
  #sMusBox>.row h4{margin:0;font-size:14px}#sMusBox>*,#sBaseBox>.row{flex-shrink:0}#sMusBox #sAdd{min-height:34px;padding:2px 12px;font-size:13.5px}
  #sTracks .sthead{gap:4px}#sTracks .sthead .sel{width:86px;flex:0 0 86px;padding-left:6px;padding-right:2px}#sTracks .sthead .tuner{min-width:0;padding:2px 5px}#sTracks .stmon{flex-wrap:nowrap;gap:6px}#sTracks .recarm small{display:none}#sTracks .recarm{transform:none;padding:2px 6px}#sTracks .pwr{padding:2px 5px;font-size:11.5px;gap:2px}#sTracks .recarm{margin:0;order:-1}#sTracks .sthead>.mini:last-child{order:-1}#sTracks .sthead .stname{flex:1 1 calc(100% - 104px)!important;width:0!important;min-width:60px}#sTracks .strack{padding:8px;gap:5px}#sTracks .recarm span{font-size:11px}
- #sTracks .stmon .field{flex:1 1 auto;min-width:0}#sTracks .stmon .field input{flex:1;min-width:40px;width:auto}#sTracks .stmon .origb{flex:none;font-size:12px}
+ #sTracks .stmon .field{flex:1 1 auto;min-width:0}#sTracks .stmon .field input{flex:1;min-width:40px;width:auto}#sTracks .stmon .origb{display:none}
  #sTracks .stvurow .hp{min-height:32px}
  #sTracks .stpeds .gpd{font-size:0!important;gap:0;padding:4px 9px;min-height:38px}#sTracks .stpeds .gpd svg{width:18px;height:18px}
  .sdock #sListen,.sdock #sRecX,.sdock .sviewsw{min-height:48px}.sdock #sRecGo.shutter{width:56px;height:56px}
@@ -239,6 +242,21 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
  #sTracks .banks{grid-column:1;grid-row:1}
  #sTracks .stpeds>*:not(.stpedh):not(.banks){grid-column:1/-1}
  #sTracks .pdchip{height:38px}
+ /* mixer della base in orizzontale */
+ .sfaders{flex-direction:column;min-height:0;gap:4px}
+ .sfaders .smixer{flex-direction:column;gap:4px;flex:none}
+ .sfaders .stem,.sfaders .smixer .stem{flex-direction:row!important;flex:none!important;width:auto!important;align-items:center;gap:6px;padding:4px 6px}
+ .sfaders .stem b,.sfaders .stem>span{flex:0 0 46px;font-size:12px!important;text-align:left}
+ .sfaders .stem input[type=range]{writing-mode:horizontal-tb;direction:ltr;width:auto!important;flex:1 1 auto;min-height:0;height:auto;min-width:60px}
+ .sfaders .smaster input{min-height:0}
+ .sfaders .stem .mini{width:auto;flex:none;padding:0 6px;font-size:11px;min-height:28px}
+ .sfaders .stem .stf{display:inline}.sfaders .stem .sts{display:none!important}
+ /* parte alta della scheda più bassa */
+ #sTracks .sthead .stname{min-height:32px;font-size:14px;padding:3px 8px}
+ #sTracks .sthead .sel,#sTracks .stio .sel{min-height:30px;font-size:12.5px;padding-top:2px;padding-bottom:2px}
+ #sTracks .sthead .mini,#sTracks .sthead .recarm{min-height:30px}
+ #sTracks .stvurow .hp{min-height:28px;padding:0 8px}
+ #sTracks .stmeter{gap:0}
 }.smoregrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.smoregrid .chip{min-height:58px;justify-content:flex-start;font-size:15px;white-space:normal;text-align:left}
 @media (max-width:480px){.smoregrid{grid-template-columns:1fr}}
 .stipsheet{max-width:600px}.stipsheet h4{margin:4px 0 0;font-size:15px}
@@ -1317,7 +1335,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove in una sola schermata: testo e tablatura affiancati in alto, base e mixer in verticale a sinistra, musicisti al centro, in basso solo Palco/Musicisti, Ascolta e Registra; tonalità, click, conteggio e «Dall'inizio del brano» ora sono in «Altro»; pulsante unico Palco/Musicisti; schede dei musicisti più compatte. Pulsanti «Altro» e «Consigli» (con «Non disturbare» di Windows), Pedaliera in una schermata, temi chiari leggibili, cursore del tempo corretto, base e ingressi su due linee, uscite cuffie e casse con volumi separati.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove in una sola schermata: vista Musicisti con mixer della base (cursori orizzontali) e «Aggiungi musicista» a sinistra, musicisti al centro con la parte alta più bassa, senza «Originale»; testo e tablatura solo nella vista Palco; in basso Palco/Musicisti, Ascolta e Registra; tonalità, click, conteggio in «Altro». Pulsanti «Altro» e «Consigli», Pedaliera in una schermata, temi chiari leggibili, cursore del tempo corretto, base e ingressi su due linee, uscite cuffie e casse con volumi separati.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -7126,7 +7144,9 @@ $('#sTuneTop').onclick=()=>{const t=SA.tracks.find(x=>x.role==='chitarra'||x.rol
   pv.onclick=()=>{SA.perfMan=!SA.perfMan;sPerfUI()};
   const rec=$('#salaRec');rec.prepend($('.sbrano'));rec.append($('#sMini'),d);
   /* base in verticale: volume base + strumenti come cursori di un mixer */
-  const fd=document.createElement('div');fd.className='sfaders';const bl=$('#sBaseVol').closest('label');bl.classList.add('stem','smaster');bl.querySelector('span').textContent='Base';fd.append(bl,$('#sStems'));$('#sBaseBox').append(fd)})();
+  const fd=document.createElement('div');fd.className='sfaders';const bl=$('#sBaseVol').closest('label');bl.classList.add('stem','smaster');bl.querySelector('span').textContent='Base';fd.append(bl,$('#sStems'));$('#sBaseBox').append(fd);
+  /* «Aggiungi musicista» in cima alla colonna della base */
+  const ad=$('#sAdd');ad.classList.add('saddtop');$('#sBaseBox').prepend(ad)})();
 /* Altro e Consigli */
 $('#sMoreTop').onclick=()=>openOv('#ovSMore');
 $('#ovSMore').addEventListener('click',e=>{const b=e.target.closest('.smoregrid button');if(b)setTimeout(()=>{$('#ovSMore').hidden=true},0)},true);
