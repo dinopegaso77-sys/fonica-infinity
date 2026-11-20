@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 15:07"><meta name="pv-notes" content="Sala prove su PC: due linee separate (la base non gracchia e non si ferma più; gli ingressi solo dalla scheda audio o solo dal microfono del PC, Bluetooth escluso); nuova finestra «Uscite»: base, voce e strumenti arrivano sia nelle cuffie sia nelle casse, con un volume per le cuffie e uno per le casse; nelle casse la base aspetta gli strumenti così tutto è a tempo; il ritardo della scheda sposta la base e non le tracce Sala prove: spostando il cursore del tempo mentre ascolti, il brano ora riparte dal punto scelto (prima si fermava e tornava all'inizio)."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 17:34"><meta name="pv-notes" content="Sala prove: nuovi pulsanti «Altro» (Suona e riconosco, Banco 1 a tutti, Taratura ritardo, Uscite) e «Consigli» (scheda audio in uso e pulsante per «Non disturbare» di Windows); «Vista palco» accanto ad «Aggiungi musicista», con il volume della base; 4 musicisti affiancati con schede più compatte; Pedaliera in una sola schermata; temi chiari: nomi, pedali e banchi ora leggibili. Spostando il cursore mentre ascolti il brano riparte dal punto scelto. Base e ingressi su due linee separate, uscite cuffie e casse con volumi separati"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -194,7 +194,26 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .strack .vu{min-width:80px}.strack .sline2{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:flex-end;padding-top:4px;border-top:1px dashed var(--line)}.sline2 .sel2{min-width:220px;flex:1 1 220px}.sline2 .fx2{min-width:96px;flex:0 1 110px}.sline2 .fx2 span{font-size:10px}.vu i.clip{background:var(--mute)}
 .tuner{font-family:var(--f-mono);font-size:13px;text-align:center;color:var(--steel);white-space:nowrap;padding:6px 8px}.tuner.ok{color:var(--ok);font-weight:700}
 .tunesheet{max-width:620px}
-.ousheet{max-width:560px}.ousheet .field{flex:none;display:flex;flex-direction:column;gap:6px;min-height:0}.ousheet .field input{width:100%}
+.ousheet{max-width:560px}
+.smoresheet{max-width:520px}.smoregrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.smoregrid .chip{min-height:58px;justify-content:flex-start;font-size:15px;white-space:normal;text-align:left}
+@media (max-width:480px){.smoregrid{grid-template-columns:1fr}}
+.stipsheet{max-width:600px}.stipsheet h4{margin:4px 0 0;font-size:15px}
+#sTipsTop{position:relative}.sdot{position:absolute;top:6px;right:8px;width:9px;height:9px;border-radius:50%;background:#e5484d}
+.salaov:not(.perf) #sPerf,.salaov:not(.perf) .sdbv{display:none!important}.sdock .sdbv{display:inline-flex;align-items:center;gap:8px}.sdock .sdbv input[type=range]{width:150px!important;min-width:110px;height:auto;flex:1 1 150px;appearance:auto;-webkit-appearance:auto}
+@media (max-width:1250px) and (min-width:700px){.sala-top{gap:6px}.sala-top .rbtn{min-width:58px;padding:4px 6px}.sala-top .songpick{flex:0 1 200px;max-width:200px}.sala-top .sala-title{display:none}.sala-top .rbtn{min-width:54px;font-size:11px}}
+/* 4 musicisti affiancati: schede più compatte */
+@media (min-width:1000px){#sTracks.stracks{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}}
+#sTracks .strack{gap:6px;padding:9px}
+#sTracks .sthead .stname{font-size:15px;min-height:36px;padding:4px 8px}
+#sTracks .sthead .sel,#sTracks .stio .sel{min-height:36px;font-size:13.5px;padding-top:4px;padding-bottom:4px}
+#sTracks .mini{min-height:34px;padding:3px 8px;font-size:13px}
+#sTracks .recarm{transform:scale(.9);transform-origin:left center}
+#sTracks .knobs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:2px;justify-items:center}#sTracks .knob{width:30px!important;height:30px!important}#sTracks .kn span{font-size:9.5px}#sTracks .kn em{font-size:9.5px}
+#sTracks .sthint{font-size:11px;margin:0}
+#sTracks .stpedh b{font-size:13.5px}
+#sTracks .banks{gap:4px}#sTracks .bankb{min-height:38px}#sTracks .bankb b{font-size:13px}#sTracks .bankb span{font-size:9.5px}
+#sTracks .pdchips{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}#sTracks .pdchip{width:auto;height:42px;border-radius:9px}#sTracks .pdchip svg{width:17px;height:17px}#sTracks .pdchip b{font-size:9px;letter-spacing:0}#sTracks .pdchip .rled{top:3px;right:3px;width:6px;height:6px}
+.ousheet .field{flex:none;display:flex;flex-direction:column;gap:6px;min-height:0}.ousheet .field input{width:100%}
 .vrwho{align-items:flex-end;gap:8px}.vrsum{margin:8px 0;padding:10px 12px;border-radius:12px;background:var(--raise);border:1px solid var(--line);line-height:1.5}
 .vrtest{margin:8px 0}.vrtest summary{cursor:pointer;font-weight:700;padding:8px 0}.vrstep{font-size:16px;text-align:center;line-height:1.45;max-width:460px}
 .vrkb{position:relative;width:100%;max-width:520px;height:44px;border-radius:10px;background:repeating-linear-gradient(90deg,var(--raise) 0 calc(100%/36 - 1px),var(--line) calc(100%/36 - 1px) calc(100%/36));border:1px solid var(--line);overflow:hidden}
@@ -912,7 +931,13 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 @media (min-width:700px){.lrow{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"meta acts" "tags acts"}.lrow .meta{grid-area:meta}.ltags{grid-area:tags}.lacts{grid-area:acts;display:flex;flex-wrap:wrap;justify-content:flex-end;max-width:470px}.lbtn{min-height:40px}}
 
 /* ===== finestra Suono stile pedaliera digitale ===== */
-#ovRig .sheet.rigsheet{max-width:min(1100px,96vw);width:100%}
+#ovRig .sheet.rigsheet{max-width:min(1240px,98vw);width:100%;padding:12px 16px;gap:8px}
+#ovRig .rigtop{margin:0;padding:6px 10px;gap:8px}#ovRig .rignum{font-size:18px;padding:1px 8px}#ovRig .rigname{font-size:15px}
+#ovRig .pdpre{gap:6px}#ovRig .pdpre .field{min-width:180px}#ovRig .pdpre .chip,#ovRig .pdpre .mini{min-height:34px}#ovRig .prdest{padding-top:4px;gap:6px}#ovRig .prdest .seg button{min-height:32px}
+#ovRig .rigchainbox{padding:8px}#ovRig .rblk{width:58px;height:60px;border-radius:11px;gap:3px}#ovRig .rblk.big{width:70px;height:66px}#ovRig .rblk svg{width:20px;height:20px}#ovRig .rblk b{font-size:9.5px}#ovRig .rled{top:4px;right:4px;width:7px;height:7px}#ovRig .rwire{width:10px}#ovRig .rio{width:32px;height:32px;font-size:10px}
+#ovRig .righint{margin:0 2px;font-size:12px}#ovRig .rigedit{padding:10px;gap:6px}#ovRig .rk .knob{width:48px;height:48px}#ovRig .rknobs{gap:10px 22px}
+#ovRig .rigfoot{margin:4px 0;gap:8px}#ovRig .bankb.fsw{min-height:58px;padding-top:12px}#ovRig .bankb.fsw b{font-size:15px}#ovRig .bankb.fsw span{font-size:11px}
+#ovRig .sheet>p:last-child,#ovRig .t3note{font-size:11px}
 .rigtop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}
 .rignum{font:800 24px ui-monospace,monospace;color:var(--accent);background:#000;border-radius:8px;padding:2px 10px;min-width:40px;text-align:center}.rigname{font-size:20px;letter-spacing:.02em;text-transform:uppercase}
 .rigtop .pdpre{margin:0;flex:1 1 420px;justify-content:flex-end}.prdest{display:flex;flex-wrap:wrap;align-items:center;gap:8px;width:100%;justify-content:flex-end;padding-top:6px;border-top:1px dashed var(--line)}.prdest .lbl{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}.prbk button{min-width:42px;font-weight:800}.prdest .seg button{min-height:40px}
@@ -939,6 +964,19 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 .rigbankcfg>summary{cursor:pointer;font-weight:700;padding:6px 2px;color:var(--accent)}
 @media (max-width:600px){.rblk{width:66px;height:70px}.rblk.big{width:78px;height:76px}.rigfoot{gap:5px}.bankb.fsw{min-height:70px}.rigname{font-size:17px}}
 
+/* temi chiari: campi, pedali e banchi chiari con scritte scure */
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .salaov{--bg:color-mix(in srgb,var(--raise) 65%,var(--surface))}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .salaov .pdchip,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) #ovRig .pdchip{background:#fffdf8;border-color:var(--line);color:var(--dim)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .salaov .pdchip svg,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) #ovRig .pdchip svg{stroke:currentColor}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .salaov .pdchip.on,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) #ovRig .pdchip.on{background:color-mix(in srgb,var(--pc) 22%,#fff);border-color:color-mix(in srgb,var(--pc) 70%,#000);color:var(--fg)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .salaov .pdchip.on svg,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) #ovRig .pdchip.on svg{stroke:color-mix(in srgb,var(--pc) 70%,#000)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .salaov .pdchip .rled,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) #ovRig .pdchip .rled{background:#ddd5c0}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .rblk{background:color-mix(in srgb,var(--c) 18%,#fff);border-color:color-mix(in srgb,var(--c) 70%,#000);color:var(--fg)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .rblk svg{stroke:color-mix(in srgb,var(--c) 70%,#000)}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .rblk.off{--c:#a39c8a!important;background:#f4f0e5;color:var(--dim);opacity:.85}:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .rblk.off .rled{background:#ddd5c0}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .rblk.sel{outline-color:var(--fg)}:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .rio{border-color:var(--line);color:var(--dim)}:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .rwire{background:linear-gradient(90deg,var(--line),var(--accent))}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .bankb.fsw{background:linear-gradient(#ffffff,#efe8d6);border-color:var(--line);color:var(--fg)}:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .bankb.fsw::before{background:#d7cfb9}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .bankb.fsw.on{background:linear-gradient(color-mix(in srgb,var(--accent) 26%,#fff),#efe8d6);border-color:var(--accent)}
 /* pedali nelle schede dei musicisti: blocchi come nella catena */
 .pdchips{display:flex;flex-wrap:wrap;gap:6px}
 .pdchip{--pcl:color-mix(in srgb,var(--pc) 72%,#fff);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:56px;height:54px;min-width:0;min-height:0;padding:0;border-radius:12px;border:2px solid #3a4160;background:#0b0e19;color:var(--dim);font-weight:800;font-size:10.5px;letter-spacing:.05em;cursor:pointer;position:relative;opacity:.8}
@@ -1235,7 +1273,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove su PC: due linee separate (la base non gracchia e non si ferma più; gli ingressi solo dalla scheda audio o solo dal microfono del PC, Bluetooth escluso); nuova finestra «Uscite»: base, voce e strumenti arrivano sia nelle cuffie sia nelle casse, con un volume per le cuffie e uno per le casse; nelle casse la base aspetta gli strumenti così tutto è a tempo; il ritardo della scheda sposta la base e non le tracce. Sala prove: spostando il cursore del tempo mentre ascolti, il brano ora riparte dal punto scelto (prima si fermava e tornava all'inizio).</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove: nuovi pulsanti «Altro» (Suona e riconosco, Banco 1 a tutti, Taratura ritardo, Uscite) e «Consigli» (scheda audio in uso e pulsante per «Non disturbare» di Windows); «Vista palco» accanto ad «Aggiungi musicista», con il volume della base; 4 musicisti affiancati con schede più compatte; Pedaliera in una sola schermata; temi chiari: nomi, pedali e banchi ora leggibili. Spostando il cursore mentre ascolti il brano riparte dal punto scelto. Base e ingressi su due linee separate, uscite cuffie e casse con volumi separati.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1491,7 +1529,7 @@ themeApply();</script>
     <div class="sala-tabs seg" role="tablist"><button data-sv="rec" class="on">Registra</button><button data-sv="mix">Mix e sincronia</button></div>
     <span class="slat" id="sLat" title="Ritardo tra quando suoni e quando ti senti in cuffia">Ritardo – ms</span>
     <span class="grow"></span>
-    <button class="rbtn" id="sSetTop"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="m8 9 1.2 1.2L11.5 8M13 9.3h3.5M8 14l1.2 1.2 2.3-2.2M13 14.3h3.5"/></svg><span>Scaletta</span></button><button class="rbtn" id="sTuneTop"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M12 17l3.6-6.3"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/><path d="M3 20.5h18"/></svg><span>Accordatore</span></button>
+    <button class="rbtn" id="sSetTop"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="m8 9 1.2 1.2L11.5 8M13 9.3h3.5M8 14l1.2 1.2 2.3-2.2M13 14.3h3.5"/></svg><span>Scaletta</span></button><button class="rbtn" id="sMoreTop" aria-haspopup="dialog"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg><span>Altro</span></button><button class="rbtn" id="sTipsTop" aria-haspopup="dialog"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg><span>Consigli</span><i class="sdot" id="sTipsDot" hidden></i></button><button class="rbtn" id="sTuneTop"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><path d="M12 17l3.6-6.3"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/><path d="M3 20.5h18"/></svg><span>Accordatore</span></button>
     <button class="rbtn" id="salaFull"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Schermo intero</span></button><button class="rbtn" id="salaHelp"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9v.5"/><circle cx="12" cy="17" r=".9" fill="currentColor" stroke="none"/></svg><span>Guida</span></button>
   </div>
   <div class="sala-body">
@@ -1510,12 +1548,8 @@ themeApply();</script>
       </div>
       <div class="sbox">
         <div class="row"><h4 class="grow">Musicisti e ingressi</h4>
-          <button class="chip sic" id="sDetect"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/><path d="M2.5 8v4M21.5 8v4M4.5 6v8M19.5 6v8" stroke-width="1.5"/></svg><span>Suona e riconosco</span></button>
-          <button class="chip prauto sic" data-prauto="all" title="Mette a tutti i musicisti il banco 1"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m12 8 1.3 2.7L16 12l-2.7 1.3L12 16l-1.3-2.7L8 12l2.7-1.3z"/></svg><span>Banco 1 a tutti</span></button>
-          <button class="chip sic" id="sCal"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M9.5 2.5h5M12 2.5v3"/></svg><span>Taratura ritardo</span></button>
-          <button class="chip sic" id="sOuts"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5h3.5L11 5.5v13l-4.5-4H3z"/><path d="M14.5 9a4 4 0 0 1 0 6M17.5 6.5a8 8 0 0 1 0 11"/></svg><span>Uscite</span></button>
-          <button class="chip pri sic" id="sAdd"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 20a6.5 6.5 0 0 1 13 0M19 8v6M16 11h6"/></svg><span>Aggiungi musicista</span></button></div>
-        <p class="snote" id="sDevInfo">Collega la scheda audio e premi «Suona e riconosco»: ogni musicista suona qualche nota e l'app trova il suo ingresso.</p>
+          <button class="chip pri sic" id="sAdd"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 20a6.5 6.5 0 0 1 13 0M19 8v6M16 11h6"/></svg><span>Aggiungi musicista</span></button><button class="chip sic" id="sPerfTop"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/></svg><span>Vista palco</span></button></div>
+        
         <div id="sTracks" class="stracks"></div>
       </div>
       <div class="sbox">
@@ -1612,6 +1646,21 @@ themeApply();</script>
 </div></div>
 <!-- informazioni -->
 <!-- accordatore -->
+<div class="ov" id="ovSMore" hidden><div class="sheet tunesheet smoresheet">
+  <div class="row"><h3 class="grow">Altro</h3><button class="mini" data-close>Chiudi</button></div>
+  <div class="smoregrid"><button class="chip sic" id="sDetect"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/><path d="M2.5 8v4M21.5 8v4M4.5 6v8M19.5 6v8" stroke-width="1.5"/></svg><span>Suona e riconosco</span></button>
+          <button class="chip prauto sic" data-prauto="all" title="Mette a tutti i musicisti il banco 1"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m12 8 1.3 2.7L16 12l-2.7 1.3L12 16l-1.3-2.7L8 12l2.7-1.3z"/></svg><span>Banco 1 a tutti</span></button>
+          <button class="chip sic" id="sCal"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M9.5 2.5h5M12 2.5v3"/></svg><span>Taratura ritardo</span></button>
+          <button class="chip sic" id="sOuts"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5h3.5L11 5.5v13l-4.5-4H3z"/><path d="M14.5 9a4 4 0 0 1 0 6M17.5 6.5a8 8 0 0 1 0 11"/></svg><span>Uscite</span></button></div>
+</div></div>
+<div class="ov" id="ovSTips" hidden><div class="sheet tunesheet stipsheet">
+  <div class="row"><h3 class="grow">Consigli</h3><button class="mini" data-close>Chiudi</button></div>
+  <h4>Scheda audio e uscite</h4>
+  <p class="snote" id="sDevInfo">Collega la scheda audio e premi «Suona e riconosco»: ogni musicista suona qualche nota e l'app trova il suo ingresso.</p>
+  <h4>Niente notifiche né chiamate mentre suonate</h4>
+  <p class="snote" id="sDndTxt"></p>
+  <div class="row"><button class="chip pri sic" id="sDndGo" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5h4M4 4l16 16"/></svg><span>Apri «Non disturbare» di Windows</span></button></div>
+</div></div>
 <div class="ov" id="ovOuts" hidden><div class="sheet tunesheet ousheet">
   <div class="row"><h3 class="grow">Uscite: cuffie e casse</h3><button class="mini" data-close>Chiudi</button></div>
   <p class="snote" id="ouInfo"></p>
@@ -7022,15 +7071,29 @@ $('#sTuneTop').onclick=()=>{const t=SA.tracks.find(x=>x.role==='chitarra'||x.rol
 (function sDock(){const d=$('.stransport');d.classList.add('sdock');const r1=document.createElement('div'),r2=document.createElement('div');r1.className='sdrow';r2.className='sdrow';
   const tr=document.createElement('span');tr.className='sdtr';tr.innerHTML='Tonalità ';const tv=$('#sTrVal'),og=tv.parentNode;tv.style.minWidth='70px';tr.append($('#sTrDown'),tv,$('#sTrUp'),$('#sTrZero'));og.remove();
   const pv=document.createElement('button');pv.className='mini sic';pv.id='sPerf';pv.innerHTML='<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/></svg><span>Vista palco</span>';pv.title='Testo e tablatura grandi (si attiva da sola quando registri)';
-  r1.append($('#sListen'),$('#sRecGo'),$('#sRecGoL'),$('#sRecX'),$('#sTime'),$('#sPosT'),$('#sPos'));r2.append(tr,$('#sClick').closest('label'),$('#sCount').closest('label'),$('#sFromStart').closest('label'),pv,$('#sOverL'),$('#sMsg'));
+  r1.append($('#sListen'),$('#sRecGo'),$('#sRecGoL'),$('#sRecX'),$('#sTime'),$('#sPosT'),$('#sPos'));const bv=document.createElement('label');bv.className='rowchk sdbv';bv.innerHTML='<span>Volume base</span><input type="range" id="sBaseVolP" min="0" max="1.5" step="0.05">';
+  r2.append(tr,$('#sClick').closest('label'),$('#sCount').closest('label'),$('#sFromStart').closest('label'),bv,pv,$('#sOverL'),$('#sMsg'));
   d.prepend(r1,r2);d.append($('#sTakes'));$('#sListen').classList.remove('pri');
   pv.onclick=()=>{SA.perfMan=!SA.perfMan;sPerfUI()};
   const rec=$('#salaRec');rec.append($('.sbrano'),$('#sMini'),d)})();
-function sPerfUI(){const on=!!(SA.on||SA.perfMan);$('#salaOv').classList.toggle('perf',on);$('#sPerf').classList.toggle('hot',on);$('#sPerf span').textContent=on?'Vista preparazione':'Vista palco'}
+/* Altro e Consigli */
+$('#sMoreTop').onclick=()=>openOv('#ovSMore');
+$('#ovSMore').addEventListener('click',e=>{const b=e.target.closest('.smoregrid button');if(b)setTimeout(()=>{$('#ovSMore').hidden=true},0)},true);
+function dndInfo(){const ua=navigator.userAgent,win=/Windows/.test(ua),mac=/Macintosh|Mac OS X/.test(ua)&&!/Mobile/.test(ua);$('#sDndGo').hidden=!win;
+  $('#sDndTxt').textContent=win?'Con «Non disturbare» Windows non fa suonare notifiche e chiamate sopra la musica. Premi il pulsante e accendi «Non disturbare» in alto.'
+    :mac?'Su Mac: apri il Centro di controllo (le due levette in alto a destra), tocca «Full immersion» e scegli «Non disturbare».'
+    :'Prima di suonare spegni notifiche e chiamate dal dispositivo.'}
+$('#sTipsTop').onclick=()=>{dndInfo();openOv('#ovSTips')};
+$('#sDndGo').onclick=async()=>{let u='ms-settings:quiethours';try{const h=await navigator.userAgentData.getHighEntropyValues(['platformVersion']);if(parseInt(h.platformVersion)>=13)u='ms-settings:notifications'}catch(e){}location.href=u};
+new MutationObserver(()=>{$('#sTipsDot').hidden=!/Nessun/.test($('#sDevInfo').textContent)}).observe($('#sDevInfo'),{childList:true,characterData:true,subtree:true});
+$('#sPerfTop').onclick=()=>{SA.perfMan=!SA.perfMan;sPerfUI()};
+function sPerfUI(){const on=!!(SA.on||SA.perfMan);$('#salaOv').classList.toggle('perf',on);$('#sPerf').classList.toggle('hot',on);$('#sPerf span').textContent=on?'Vista preparazione':'Vista palco';const t=$('#sPerfTop');if(t)t.classList.toggle('hot',on)}
 setInterval(()=>{if(!$('#salaOv').hidden){const on=!!(SA.on||SA.perfMan);if($('#salaOv').classList.contains('perf')!==on)sPerfUI()}},250);
 $('#sRecGo').onclick=sRecStart;$('#songPick').onchange=e=>songPickGo(e.target.value);$('#sSongPick').onchange=e=>songPickGo(e.target.value);
 const sTr=async n=>{if(SA.on){toast('Cambia la tonalità prima di registrare');return}const was=SP.on;if(was)sListenStop(true);setTr(n);SA.baseMono=null;$('#sMsg').textContent=tr?'Preparo la base nella nuova tonalità…':'';try{await sourcesFor(tr)}catch(e){}$('#sMsg').textContent=tr?'Base in tonalità '+$('#sTrVal').textContent+': anche la registrazione userà questa.':'';if(was)sListen()};
 $('#sTrDown').onclick=()=>sTr(tr-1);$('#sTrUp').onclick=()=>sTr(tr+1);$('#sTrZero').onclick=()=>sTr(0);$('#sRecX').onclick=sRecCancel;document.addEventListener('keydown',e=>{if(e.key==='Escape'&&SA.on&&!$('#salaOv').hidden){e.preventDefault();sRecCancel()}},true);
+{const a=$('#sBaseVol'),b=$('#sBaseVolP');const sync=()=>{b.value=a.value};sync();a.addEventListener('input',sync);a.addEventListener('change',sync);new MutationObserver(sync).observe(a,{attributes:true});setInterval(()=>{if(document.activeElement!==b&&b.value!==a.value)sync()},700);
+  b.oninput=()=>{a.value=b.value;sStemApply()};b.onchange=()=>{a.value=b.value;SA.baseMono=null;sStemApply();sSave()}}
 ['#sBaseVol','#sAutoMute','#sGuide','#sClick','#sCount'].forEach(s=>{$(s).onchange=()=>{SA.baseMono=null;sStemApply();sSave()};if(s==='#sBaseVol')$(s).oninput=()=>sStemApply()});
 $('#sPlay').onclick=()=>WV.play?wvStop():wvPlay();$$('[data-nud]').forEach(b=>b.onclick=()=>{const tk=SA.takes[SA.cur];const t=tk&&tk.tracks[WV.sel];if(!t){toast('Tocca prima una traccia sul grafico');return}t.off+= +b.dataset.nud;t.offHow='regolato a mano';wvSelInfo();wvDraw();if(WV.play){wvStop();wvPlay()}});
 $('#sZoomIn').onclick=()=>{WV.span=Math.max(.02,WV.span*.5);WV.t0=Math.max(-2,WV.pos-WV.span/2);wvDraw()};$('#sZoomOut').onclick=()=>{WV.span=Math.min(600,WV.span*2);WV.t0=Math.max(-2,WV.pos-WV.span/2);wvDraw()};
@@ -7896,8 +7959,8 @@ const TUT_SECTIONS=[
    {v:'rec',s:'#sMode',t:'Note o Accordi',d:'Note mostra una nota alla volta, Accordi mostra gli accordi.'},
    {v:'rec',s:'#sListen',t:'Ascolta e prova',d:'Fa partire il brano senza registrare, per provare i suoni.'},
    {v:'rec',s:'#sDetect',t:'Suona e riconosco',d:'Collega la scheda e premi qui: ognuno suona qualche nota e l\'app capisce da sola chi è collegato a quale ingresso.'},
-   {v:'rec',s:'#sCal',t:'Taratura ritardo',d:'Misura il ritardo della scheda con un bip, così le registrazioni vengono a tempo.'},
-   {v:'rec',s:'#sOuts',t:'Uscite',d:'Volume delle cuffie e volume delle casse, separati. In tutte e due arrivano base, voce e strumenti.'},
+   {v:'rec',s:'#sMoreTop',t:'Altro',d:'Qui trovi «Suona e riconosco», «Banco 1 a tutti», «Taratura ritardo» e «Uscite» (volume cuffie e volume casse).'},
+   {v:'rec',s:'#sTipsTop',t:'Consigli',d:'Quale scheda audio uso, dove suonano cuffie e casse, e un pulsante per accendere «Non disturbare».'},
    {v:'rec',s:'#sAdd',t:'Aggiungi musicista',d:'Aggiunge un musicista a mano.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .sthead'),t:'Il musicista',d:'Ogni musicista ha il suo riquadro. Per esempio questo è Luca, alla chitarra.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stname'),t:'Nome e strumento',d:'Scrivi il nome e scegli lo strumento: voce, chitarra, basso o altro.'},
