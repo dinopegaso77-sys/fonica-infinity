@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 09:30"><meta name="pv-notes" content="nuovo nome: Pure Voltage diventa rooMusic, con il nuovo logo (plettro con le cuffie) nei colori di ogni tema, nuova icona dell'app, nuova intro chiara o scura secondo il tema, nuovo logo sui video e sul foglio A4; i brani, le chiavi e il cloud restano come prima"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 14:23"><meta name="pv-notes" content="Sala prove su PC: due linee separate (la base non gracchia e non si ferma più; gli ingressi solo dalla scheda audio o solo dal microfono del PC, Bluetooth escluso); nuova finestra «Uscite»: base, voce e strumenti arrivano sia nelle cuffie sia nelle casse, con un volume per le cuffie e uno per le casse; nelle casse la base aspetta gli strumenti così tutto è a tempo; il ritardo della scheda sposta la base e non le tracce"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -194,6 +194,7 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .strack .vu{min-width:80px}.strack .sline2{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:flex-end;padding-top:4px;border-top:1px dashed var(--line)}.sline2 .sel2{min-width:220px;flex:1 1 220px}.sline2 .fx2{min-width:96px;flex:0 1 110px}.sline2 .fx2 span{font-size:10px}.vu i.clip{background:var(--mute)}
 .tuner{font-family:var(--f-mono);font-size:13px;text-align:center;color:var(--steel);white-space:nowrap;padding:6px 8px}.tuner.ok{color:var(--ok);font-weight:700}
 .tunesheet{max-width:620px}
+.ousheet{max-width:560px}.ousheet .field{flex:none;display:flex;flex-direction:column;gap:6px;min-height:0}.ousheet .field input{width:100%}
 .vrwho{align-items:flex-end;gap:8px}.vrsum{margin:8px 0;padding:10px 12px;border-radius:12px;background:var(--raise);border:1px solid var(--line);line-height:1.5}
 .vrtest{margin:8px 0}.vrtest summary{cursor:pointer;font-weight:700;padding:8px 0}.vrstep{font-size:16px;text-align:center;line-height:1.45;max-width:460px}
 .vrkb{position:relative;width:100%;max-width:520px;height:44px;border-radius:10px;background:repeating-linear-gradient(90deg,var(--raise) 0 calc(100%/36 - 1px),var(--line) calc(100%/36 - 1px) calc(100%/36));border:1px solid var(--line);overflow:hidden}
@@ -1234,7 +1235,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: nuovo nome: Pure Voltage diventa rooMusic, con il nuovo logo (plettro con le cuffie) nei colori di ogni tema, nuova icona dell'app, nuova intro chiara o scura secondo il tema, nuovo logo sui video e sul foglio A4; i brani, le chiavi e il cloud restano come prima</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove su PC: due linee separate (la base non gracchia e non si ferma più; gli ingressi solo dalla scheda audio o solo dal microfono del PC, Bluetooth escluso); nuova finestra «Uscite»: base, voce e strumenti arrivano sia nelle cuffie sia nelle casse, con un volume per le cuffie e uno per le casse; nelle casse la base aspetta gli strumenti così tutto è a tempo; il ritardo della scheda sposta la base e non le tracce.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1512,6 +1513,7 @@ themeApply();</script>
           <button class="chip sic" id="sDetect"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/><path d="M2.5 8v4M21.5 8v4M4.5 6v8M19.5 6v8" stroke-width="1.5"/></svg><span>Suona e riconosco</span></button>
           <button class="chip prauto sic" data-prauto="all" title="Mette a tutti i musicisti il banco 1"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m12 8 1.3 2.7L16 12l-2.7 1.3L12 16l-1.3-2.7L8 12l2.7-1.3z"/></svg><span>Banco 1 a tutti</span></button>
           <button class="chip sic" id="sCal"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M9.5 2.5h5M12 2.5v3"/></svg><span>Taratura ritardo</span></button>
+          <button class="chip sic" id="sOuts"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5h3.5L11 5.5v13l-4.5-4H3z"/><path d="M14.5 9a4 4 0 0 1 0 6M17.5 6.5a8 8 0 0 1 0 11"/></svg><span>Uscite</span></button>
           <button class="chip pri sic" id="sAdd"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 20a6.5 6.5 0 0 1 13 0M19 8v6M16 11h6"/></svg><span>Aggiungi musicista</span></button></div>
         <p class="snote" id="sDevInfo">Collega la scheda audio e premi «Suona e riconosco»: ogni musicista suona qualche nota e l'app trova il suo ingresso.</p>
         <div id="sTracks" class="stracks"></div>
@@ -1610,6 +1612,13 @@ themeApply();</script>
 </div></div>
 <!-- informazioni -->
 <!-- accordatore -->
+<div class="ov" id="ovOuts" hidden><div class="sheet tunesheet ousheet">
+  <div class="row"><h3 class="grow">Uscite: cuffie e casse</h3><button class="mini" data-close>Chiudi</button></div>
+  <p class="snote" id="ouInfo"></p>
+  <label class="field"><span>Volume cuffie: <b id="ouCufV">100</b>%</span><input type="range" id="ouCuf" min="0" max="100" step="1" value="100"></label>
+  <label class="field" id="ouCasF"><span>Volume casse: <b id="ouCasV">70</b>%</span><input type="range" id="ouCas" min="0" max="100" step="1" value="70"></label>
+  <div class="row" id="ouSwapR"><button class="chip" id="ouSwap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"/></svg><span>Scambia cuffie e casse</span></button></div>
+</div></div>
 <div class="ov" id="ovTune" hidden><div class="sheet tunesheet">
   <div class="row"><h3 class="grow" id="tuT">🎵 Accordatore</h3><button class="mini" data-close id="tuX">Chiudi</button></div>
   <div class="row" style="gap:8px 14px">
@@ -6244,12 +6253,68 @@ function defRig(role){return{gain:1,drive:role==='chitarra'?.25:0,comp:role==='b
 let tid=0;function newTrack(role){return{id:'t'+Date.now().toString(36)+(tid++),name:ROLES[role]||'Musicista',role:role||'voce',dev:'',ch:0,mon:.9,hear:true,arm:true,rig:defRig(role||'voce'),node:null}}
 
 /* ---------- contesto audio a 48 kHz, bassa latenza ---------- */
-function sCtx(){if(!SA.ctx||SA.ctx.state==='closed'){SA.ctx=new AudioContext({sampleRate:48000,latencyHint:latHint()});audResolve(false).then(()=>{if(AE.outId&&SA.ctx.setSinkId)SA.ctx.setSinkId(AE.outId).catch(e=>console.warn(e))});SA.out=SA.ctx.createGain();try{SA.out.gain.value=MD.vol*MD.vol}catch(e){}SA.out.connect(SA.ctx.destination)}return SA.ctx}
+/* due linee separate:
+   - linea ingressi (SA.ctx): voce e strumenti dal vivo, ritardo minimo;
+   - linea base (SBL.ctx): base, click, conteggio, riprese e ascolto del mix, con un margine di sicurezza:
+     se la linea ingressi ha un momento di affanno la base non si sporca e non si ferma */
+const SBL={ctx:null,out:null};
+/* ogni linea: tutto si somma in L.out; L.vol = volume cuffie; L.msd = copia per le casse */
+function lineMake(L,hint){L.ctx=new AudioContext({sampleRate:48000,latencyHint:hint});L.out=L.ctx.createGain();L.vol=L.ctx.createGain();L.vol.gain.value=volCuf();L.out.connect(L.vol);outWire(L.ctx,L.vol,null);
+  try{L.msd=L.ctx.createMediaStreamDestination();L.out.connect(L.msd)}catch(e){L.msd=null}outApply(L)}
+function sCtx(){if(!SA.ctx||SA.ctx.state==='closed')lineMake(SA,latHint());return SA.ctx}
+function bCtx(){if(!SBL.ctx||SBL.ctx.state==='closed')lineMake(SBL,'playback');return SBL.ctx}
+/* uscite: cuffie e casse ricevono tutte e due le linee, ognuna col suo volume.
+   Scheda a 4 uscite: casse su OUT 1-2 e cuffie su OUT 3-4 (si possono scambiare in «Uscite») */
+const OUTS={cuf:null,cas:null,mode:'one'},SK={ctx:null,p:null};
+const PAIR12=/\b1\s*[-–\/+&]\s*2\b/,PAIR34=/\b3\s*[-–\/+&]\s*4\b/;
+const volPct=(k,d)=>{const v=parseFloat(prefGet(k));return isFinite(v)?v:d};
+const volCuf=()=>{const v=volPct('salaVolCuf',100)/100;return MD.vol*MD.vol*v*v},volCas=()=>{const v=volPct('salaVolCas',70)/100;return MD.vol*MD.vol*v*v};
+async function salaOuts(){await audResolve(false);const id0=await salaSink();OUTS.cuf={id:id0,pair:null,lbl:SA.sinkLbl||''};OUTS.cas=null;OUTS.mode='one';if(!AE.iface)return OUTS;
+  let outs=[];try{outs=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='audiooutput'&&d.deviceId!=='default'&&d.deviceId!=='communications')}catch(e){}
+  const mine=outs.filter(o=>(AE.group&&o.groupId===AE.group)||isIface(o.label)),sw=prefGet('salaSwap')==='1';
+  const p12=mine.find(o=>PAIR12.test(o.label)),p34=mine.find(o=>o!==p12&&PAIR34.test(o.label));
+  if(p12&&p34){OUTS.mode='pairs';const cas=sw?p34:p12,cuf=sw?p12:p34;OUTS.cuf={id:cuf.deviceId,pair:null,lbl:cuf.label};OUTS.cas={id:cas.deviceId,pair:null,lbl:cas.label};return OUTS}
+  /* la scheda si presenta come una sola uscita: se ha 4 canali li divido io (1-2 e 3-4) */
+  let n=2;try{const t=new AudioContext();if(id0&&t.setSinkId)await t.setSinkId(id0);n=t.destination.maxChannelCount;t.close()}catch(e){}
+  if(n>=4){OUTS.mode='quad';OUTS.cuf={id:id0,pair:sw?0:1,lbl:OUTS.cuf.lbl};OUTS.cas={id:id0,pair:sw?1:0,lbl:OUTS.cuf.lbl}}return OUTS}
+function outWire(c,node,t){try{node.disconnect()}catch(e){}const d=c.destination;
+  if(t&&t.pair!=null&&d.maxChannelCount>=4){try{d.channelCount=4;d.channelCountMode='explicit';d.channelInterpretation='discrete'}catch(e){}const sp=c.createChannelSplitter(2),m=c.createChannelMerger(4);node.connect(sp);sp.connect(m,0,t.pair*2);sp.connect(m,1,t.pair*2+1);m.connect(d)}
+  else{try{d.channelCount=2;d.channelInterpretation='speakers'}catch(e){}node.connect(d)}}
+async function outApply(L){if(!L.ctx||L.ctx.state==='closed')return;const O=await salaOuts();try{if(L.ctx.setSinkId)await L.ctx.setSinkId(O.cuf.id||'')}catch(e){console.warn('uscita',e)}outWire(L.ctx,L.vol,O.cuf);skLink()}
+function skClose(){if(SK.ctx)try{SK.ctx.close()}catch(e){}SK.ctx=null;SK.key=SK.bFor=SK.iFor=null}
+function skLink(){SK.p=(SK.p||Promise.resolve()).then(skLink0).catch(e=>console.warn('casse',e));return SK.p}
+async function skLink0(){const O=OUTS;if(!O.cas||!(SA.msd||SBL.msd)){skClose();return}const key=O.cas.id+'|'+O.cas.pair;if(SK.ctx&&SK.key!==key)skClose();
+  if(!SK.ctx){const c=SK.ctx=new AudioContext({sampleRate:48000,latencyHint:'playback'});SK.key=key;SK.out=c.createGain();SK.out.gain.value=volCas();SK.dl=c.createDelay(1);SK.dl.connect(SK.out);try{if(c.setSinkId)await c.setSinkId(O.cas.id||'')}catch(e){console.warn('casse',e)}outWire(c,SK.out,O.cas)}
+  if(SBL.msd&&SK.bFor!==SBL.msd){try{SK.bSrc&&SK.bSrc.disconnect()}catch(e){}SK.bSrc=SK.ctx.createMediaStreamSource(SBL.msd.stream);SK.bSrc.connect(SK.dl);SK.bFor=SBL.msd}
+  if(SA.msd&&SK.iFor!==SA.msd){try{SK.iSrc&&SK.iSrc.disconnect()}catch(e){}SK.iSrc=SK.ctx.createMediaStreamSource(SA.msd.stream);SK.iSrc.connect(SK.out);SK.iFor=SA.msd}
+  skDelay();try{await SK.ctx.resume()}catch(e){}}
+/* nelle casse la base aspetta gli strumenti: ritardo = taratura, se c'è; altrimenti stima (uscita della base + ingresso della scheda) */
+function skDelay(){if(!SK.dl)return;const dv=SA.devs&&SA.devs[0],cal=dv&&SA.cal&&SA.cal[dv.label];
+  const d=cal!=null?cal/1000:(SBL.ctx?(SBL.ctx.baseLatency||0)+(SBL.ctx.outputLatency||0):0)+(dv&&dv.lat||0);try{SK.dl.delayTime.setTargetAtTime(Math.max(0,Math.min(.9,d)),SK.ctx.currentTime,.05)}catch(e){}SK.d=Math.round(d*1000)}
+function volApply(){for(const L of [SA,SBL])if(L.vol&&L.ctx){try{L.vol.gain.setTargetAtTime(volCuf(),L.ctx.currentTime,.02)}catch(e){}}if(SK.out&&SK.ctx){try{SK.out.gain.setTargetAtTime(volCas(),SK.ctx.currentTime,.02)}catch(e){}}}
+function outsTxt(){const O=OUTS;if(O.mode==='pairs')return ` Casse: ${devShort(O.cas.lbl)} · Cuffie: ${devShort(O.cuf.lbl)}.`;if(O.mode==='quad')return ` Casse su OUT ${O.cas.pair?'3-4':'1-2'}, cuffie su OUT ${O.cuf.pair?'3-4':'1-2'}.`;return O.cuf&&O.cuf.lbl?' Cuffie: '+devShort(O.cuf.lbl)+'.':''}
+/* uscita della Sala: quella della scheda audio; senza scheda le cuffie o le casse del PC, mai il Bluetooth né il dispositivo «per le chiamate» */
+async function salaSink(){await audResolve(false);if(AE.iface&&AE.outId){SA.sinkLbl=AE.outLabel;return AE.outId}
+  let outs=[];try{outs=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='audiooutput')}catch(e){}
+  if(AE.outId&&!NOTIF2.test(AE.outLabel||'')){SA.sinkLbl=AE.outLabel;return AE.outId}
+  const def=outs.find(o=>o.deviceId==='default');if(!def||!NOTIF2.test(def.label||'')){SA.sinkLbl=def?def.label.replace(/^[^-–]*[-–]\s*/,''):'';return''}
+  const o=outs.find(x=>x.deviceId!=='default'&&x.deviceId!=='communications'&&!NOTIF2.test(x.label||''));SA.sinkLbl=o?o.label:'';return o?o.deviceId:''}
+async function salaSinkApply(c){try{const id=await salaSink();if(c.setSinkId&&c.state!=='closed')await c.setSinkId(id)}catch(e){console.warn('uscita',e)}}
+/* stessi istanti sulle due linee: uso il momento in cui ciascuna fa davvero uscire il suono */
+async function tsReady(c){for(let i=0;i<20;i++){try{const t=c.getOutputTimestamp();if(t&&t.performanceTime>0)return true}catch(e){return false}await new Promise(r=>setTimeout(r,25))}return false}
+function mapCtx(a,T,b){try{const x=a.getOutputTimestamp(),y=b.getOutputTimestamp();if(x.performanceTime>0&&y.performanceTime>0){const P=x.performanceTime+(T-x.contextTime)*1000;return y.contextTime+(P-y.performanceTime)/1000}}catch(e){}
+  return b.currentTime+(T-a.currentTime)+(((a.outputLatency||0)+(a.baseLatency||0))-((b.outputLatency||0)+(b.baseLatency||0)))}
 /* ---------- dispositivi e canali ---------- */
 async function sOpenDevices(){const c=sCtx();await c.resume();
   try{const s=await navigator.mediaDevices.getUserMedia({audio:true});s.getTracks().forEach(t=>t.stop())}catch(e){throw new Error(e&&e.name==='NotAllowedError'?'Serve il permesso per il microfono: consentilo dal lucchetto vicino all\'indirizzo.':'Nessun ingresso audio trovato.')}
   const ds=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='audioinput'&&d.deviceId!=='default'&&d.deviceId!=='communications');
-  const seen=new Set(),list=[];for(const d of ds){const k=d.groupId+'|'+d.label;if(seen.has(k))continue;seen.add(k);list.push(d)}
+  const seen=new Set(),all=[];for(const d of ds){const k=d.groupId+'|'+d.label;if(seen.has(k))continue;seen.add(k);all.push(d)}
+  /* apro solo quello che serve: con la scheda audio solo i suoi ingressi; senza scheda solo il microfono del PC.
+     Bluetooth, webcam e dispositivi «per le chiamate» restano chiusi: così Windows non passa in modalità chiamata e non abbassa la musica */
+  await audResolve(false);const NOPC=/webcam|camera|\bcam\b|hdmi|display|virtual|stereo mix|missaggio|cable output|voicemeeter/i;let list;
+  if(AE.iface&&AE.id){SA.mode='card';list=all.filter(d=>d.deviceId===AE.id||(AE.group&&d.groupId===AE.group&&isIface(d.label)))}
+  else{SA.mode='pc';const ok=all.filter(d=>!NOTIF2.test(d.label||'')&&!NOPC.test(d.label||''));const chosen=AE.id&&ok.find(d=>d.deviceId===AE.id);
+    list=chosen?[chosen]:ok.filter(d=>/microfono|microphone|mic\b|array|interno|integrat|internal|built-?in/i.test(d.label||'')).slice(0,1);if(!list.length)list=ok.slice(0,1)}
   if(!list.length)list.push({deviceId:'',label:'Ingresso del sistema',groupId:''});
   for(const d of SA.devs)try{d.stream.getTracks().forEach(t=>t.stop())}catch(e){}
   SA.devs=[];SA.chans=[];
@@ -6261,9 +6326,11 @@ async function sOpenDevices(){const c=sCtx();await c.resume();
       const src=c.createMediaStreamSource(stream),sp=c.createChannelSplitter(2);src.connect(sp);const dev={id:d.deviceId,label:d.label||('Ingresso '+(SA.devs.length+1)),stream,n,lat:st.latency||0,cc:st.channelCount||0,sr:st.sampleRate||0};SA.devs.push(dev);
       for(let i=0;i<n;i++){const g=c.createGain();sp.connect(g,i);const an=c.createAnalyser();an.fftSize=2048;g.connect(an);SA.chans.push({dev,i,node:g,an,key:dev.label+'#'+i,name:(n>1?dev.label+' – In '+(i+1):dev.label)})}}
     catch(e){console.warn('dispositivo non apribile',d.label,e)}}
-  $('#sDevInfo').textContent=SA.chans.length?`Ho trovato ${SA.chans.length} ingress${SA.chans.length>1?'i':'o'} su ${SA.devs.length} dispositiv${SA.devs.length>1?'i':'o'}. I browser leggono al massimo 2 canali per dispositivo: se vi servono più ingressi collegate un altro dispositivo o usate la sovraincisione.`:'Nessun ingresso trovato: collega la scheda audio e riapri la Sala prove.';
+  $('#sDevInfo').textContent=!SA.chans.length?'Nessun ingresso trovato: collega la scheda audio (o usa il microfono del PC) e riapri la Sala prove. Le cuffie Bluetooth non si usano: hanno troppo ritardo.'
+    :SA.mode==='card'?`Uso solo la scheda audio «${devShort(SA.devs[0].label)}» (${SA.chans.length} ingress${SA.chans.length>1?'i':'o'}). Microfono del PC, webcam e Bluetooth esclusi: Windows non abbassa la musica. Consiglio: attiva «Non disturbare» di Windows.`
+    :'Nessuna scheda audio: uso il microfono e le cuffie del PC. Bluetooth escluso (troppo ritardo). Con una scheda audio USB il suono è molto migliore.';
   for(const t of SA.tracks)if(!SA.chans.some(ch=>ch.key===t.dev))t.dev=(SA.chans[0]||{}).key||'';sBuildAll();sRender();
-  try{await audResolve(false);if(AE.outId&&c.setSinkId)await c.setSinkId(AE.outId)}catch(e){}if(SA.chans.length)$('#sDevInfo').textContent+=' Le cuffie suonano da: '+(AE.outLabel?devShort(AE.outLabel):/Windows/.test(navigator.userAgent)?'uscita del sistema di Windows':'uscita del sistema')+'. Se non ti senti, collega le cuffie lì e accendi la 🎧 accanto al livello.'}
+  await outApply(SA);if(SBL.ctx)await outApply(SBL);if(SA.chans.length)$('#sDevInfo').textContent+=outsTxt()}
 const chanOf=t=>SA.chans.find(c=>c.key===t.dev);
 /* ---------- NAM (motore in WebAssembly) ---------- */
 async function sNam(){if(SA.nam)return SA.nam;if(!SA.namLoading)SA.namLoading=(async()=>{let last=null;
@@ -6287,7 +6354,8 @@ async function modScan(){if(modScan.done)return;modScan.done=true;const ks=new S
   const L=[...ks];if(L.length!==modKeys().length)prefSet('modKeys',JSON.stringify(L))}
 /* ---------- catena dal vivo di un musicista ---------- */
 function curveDrive(k){const n=2048,c=new Float32Array(n),d=1+k*40;for(let i=0;i<n;i++){const x=i/(n-1)*2-1;c[i]=Math.tanh(x*d)/Math.tanh(d)}return c}
-async function sBuild(t){const c=sCtx();if(t.node){try{t.node.disconnect()}catch(e){}try{t.node.mon.disconnect()}catch(e){}if(t.node.sp)try{t.node.sp.disconnect();t.node.sp.onaudioprocess=null}catch(e){}}
+function sUnbuild(t){if(!t.node)return;try{t.node.inG.disconnect()}catch(e){}try{t.node.mon.disconnect()}catch(e){}if(t.node.sp)try{t.node.sp.disconnect();t.node.sp.onaudioprocess=null}catch(e){}try{if(t.node.ch)t.node.ch.node.disconnect(t.node.inG)}catch(e){}t.node=null}
+async function sBuild(t){const c=sCtx();sUnbuild(t);if(t.off)return null;
   const ch=chanOf(t);const R2=t.rig;const N=(k,o={})=>{const n=c['create'+k]();for(const[a,v]of Object.entries(o)){if(n[a]instanceof AudioParam)n[a].value=v;else n[a]=v}return n};
   const inG=N('Gain',{gain:R2.gain});if(ch)ch.node.connect(inG);const an=N('Analyser',{fftSize:4096});inG.connect(an);let x=inG;const link=n=>{x.connect(n);x=n;return n};
   link(N('BiquadFilter',{type:'highpass',frequency:t.role==='basso'?28:t.role==='voce'?85:60}));
@@ -6304,7 +6372,7 @@ async function sBuild(t){const c=sCtx();if(t.node){try{t.node.disconnect()}catch
   if(false){const lfo=N('Oscillator',{frequency:.9}),dp=N('Gain',{gain:.0025}),d=N('Delay',{delayTime:.012}),gg=N('Gain',{gain:R2.chorus*.6});lfo.connect(dp);dp.connect(d.delayTime);lfo.start();lvl.connect(d);d.connect(gg);gg.connect(mon)}
   if(false){const bt=BPM?60/BPM*.75:.36,d=N('Delay',{delayTime:Math.min(.9,bt)}),fb=N('Gain',{gain:.2+R2.delay*.4}),lp=N('BiquadFilter',{type:'lowpass',frequency:3500}),sd=N('Gain',{gain:R2.delay*.6});lvl.connect(sd);sd.connect(d);d.connect(lp);lp.connect(fb);fb.connect(d);lp.connect(mon)}
   if(false){const cv=N('Convolver');cv.buffer=stIR(c,1.8);const sd=N('Gain',{gain:R2.rev*.8});lvl.connect(sd);sd.connect(cv);cv.connect(mon)}
-  mon.connect(SA.out);t.node={inG,an,mon,sp,out:lvl,fxb:fb};return t.node}
+  mon.connect(SA.out);t.node={inG,an,mon,sp,out:lvl,fxb:fb,ch};return t.node}
 async function sBuildAll(){for(const t of SA.tracks)await sBuild(t);sTapBuild()}
 /* ---------- registratore preciso (AudioWorklet): tutte le tracce allineate al campione ---------- */
 const TAP_SRC=`class Tap extends AudioWorkletProcessor{constructor(o){super();this.n=o.processorOptions.n;this.on=false;this.at=0;this.buf=[];this.k=0;
@@ -6338,20 +6406,20 @@ $('#sGuide').addEventListener('change',e=>{for(const t of SA.tracks)if(t.role===
 async function sBaseBufs(){const src=await sourcesFor(tr);const out=[];
   for(const k of order){if(!src[k])continue;let g=effGain(k);if(stemMuted(k))g=0;
     const guide=k==='vocals'&&vocGuide()&&stemMuted('vocals');out.push({k,buf:src[k],g,guide})}return out}
-function sClickAt(c,when,acc){const o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();o.type='square';o.frequency.value=acc?2000:1300;f.type='bandpass';f.frequency.value=o.frequency.value;g.gain.setValueAtTime(0,when);g.gain.linearRampToValueAtTime(acc?.4:.26,when+.002);g.gain.exponentialRampToValueAtTime(.001,when+.05);o.connect(f);f.connect(g);g.connect(SA.out);o.start(when);o.stop(when+.06)}
+function sClickAt(c,when,acc){const o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();o.type='square';o.frequency.value=acc?2000:1300;f.type='bandpass';f.frequency.value=o.frequency.value;g.gain.setValueAtTime(0,when);g.gain.linearRampToValueAtTime(acc?.4:.26,when+.002);g.gain.exponentialRampToValueAtTime(.001,when+.05);o.connect(f);f.connect(g);g.connect(c===SBL.ctx?SBL.out:SA.out);o.start(when);o.stop(when+.06)}
 /* ---------- base con i volumi del mixer (si aggiornano anche mentre suona) ---------- */
 const STEM_N={vocals:'Voce',drums:'Batteria',bass:'Basso',guitar:'Chitarra',piano:'Piano',other:'Altro'};
 function vocGuide(){return SA.tracks.some(t=>t.role==='voce'&&origEff(t)==='guide')}
 function stemVol(k,b){let g=effGain(k);if(k==='vocals'&&vocGuide()&&!SA.tracks.some(t=>t.role==='voce'&&origEff(t)===false))g=g*.35;else if(stemMuted(k))g=0;return g*+$('#sBaseVol').value}
-async function sBaseStart(c,at,from){const src=await sourcesFor(tr);SA.stemG={};const srcs=[];for(const k of order){if(!src[k])continue;const s=c.createBufferSource();s.buffer=src[k];const g=c.createGain();g.gain.value=stemVol(k);s.connect(g);g.connect(SA.out);s.start(at,Math.min(from,src[k].duration-.01));SA.stemG[k]=g;srcs.push(s)}return srcs}
-function sStemApply(){try{origUI()}catch(e){}const c=SA.ctx;for(const[k,g]of Object.entries(SA.stemG||{})){const v=stemVol(k);try{g.gain.setTargetAtTime(v,c.currentTime,.03)}catch(e){g.gain.value=v}}}
+async function sBaseStart(c,at,from){const src=await sourcesFor(tr);SA.stemG={};const srcs=[];for(const k of order){if(!src[k])continue;const s=c.createBufferSource();s.buffer=src[k];const g=c.createGain();g.gain.value=stemVol(k);s.connect(g);g.connect(c===SBL.ctx?SBL.out:SA.out);s.start(at,Math.min(from,src[k].duration-.01));SA.stemG[k]=g;srcs.push(s)}return srcs}
+function sStemApply(){try{origUI()}catch(e){}const c=SBL.ctx||SA.ctx;for(const[k,g]of Object.entries(SA.stemG||{})){const v=stemVol(k);try{g.gain.setTargetAtTime(v,c.currentTime,.03)}catch(e){g.gain.value=v}}}
 function sStemsUI(){$('#sStems').innerHTML=order.filter(k=>stems[k]).map(k=>{const g=gains[k];return `<div class="stem ${g.mute?'off':''}" data-st="${k}"><b>${STEM_N[k]||k}</b><input type="range" min="0" max="1.5" step="0.05" value="${g.vol}" aria-label="Volume ${STEM_N[k]||k}"><button class="mini" data-mute>${g.mute?'Accendi':'Spegni'}</button></div>`}).join('');
   $$('#sStems [data-st]').forEach(el=>{const k=el.dataset.st;el.querySelector('input').oninput=e=>{gains[k].vol=+e.target.value;sStemApply();try{syncChanUI()}catch(x){}};el.querySelector('[data-mute]').onclick=()=>{gains[k].mute=!gains[k].mute;sStemsUI();sStemApply();try{syncChanUI()}catch(x){}}})}
 /* orologio della Sala: ascolto, conteggio e registrazione */
 const SP={on:false,at:0,from:0,srcs:[]};
-function sNow(){const c=SA.ctx;if(!c)return SP.from;if(SA.on)return Math.max(0,SA.recFrom+(c.currentTime-SA.t0)-(c.outputLatency||0));if(SP.on)return Math.max(0,SP.from+(c.currentTime-SP.at)-(c.outputLatency||0));return SP.from}
+function sNow(){const c=SBL.ctx;if(!c)return SP.from;if(SA.on)return Math.max(0,SA.recFrom+(c.currentTime-SA.t0)-(c.outputLatency||0));if(SP.on)return Math.max(0,SP.from+(c.currentTime-SP.at)-(c.outputLatency||0));return SP.from}
 const sDur=()=>Math.max(1,...Object.values(stems).filter(Boolean).map(b=>b.duration||0));
-async function sListen(){if(SA.on)return;if(SP.on){sListenStop();return}const c=sCtx();await c.resume();const at=c.currentTime+.08;SP.srcs=await sBaseStart(c,at,SP.from);
+async function sListen(){if(SA.on)return;if(SP.on){sListenStop();return}const c=bCtx();await c.resume();skLink();const at=c.currentTime+.08;SP.srcs=await sBaseStart(c,at,SP.from);
   if($('#sClick').checked&&CLK2.beats){const m=CLK2.meter;CLK2.beats.forEach((b,i)=>{if(b>=SP.from&&b<SP.from+900)sClickAt(c,at+(b-SP.from),m>0&&((i-CLK2.down)%m+m)%m===0)})}
   SP.at=at;SP.on=true;$('#sListen span').textContent='Ferma';$('#sListen').classList.add('on');SP.srcs[0]&&(SP.srcs[0].onended=()=>{if(SP.on)sListenStop()})}
 function sListenStop(keep){if(!SP.on)return;SP.from=keep?sNow():0;SP.srcs.forEach(s=>{try{s.stop()}catch(e){}});SP.srcs=[];SP.on=false;$('#sListen span').textContent='Ascolta e prova';$('#sListen').classList.remove('on')}
@@ -6365,38 +6433,39 @@ let sFr=0;function sFrame(){if($('#salaOv').hidden)return;const t=sNow();if(SA.v
   sFr=requestAnimationFrame(sFrame)}
 /* ---------- registrazione ---------- */
 async function sRecStart(){if(SA.on){sRecStop();return}if(!song){toast('Apri prima un brano');return}if(!SA.chans.length){toast('Nessun ingresso: collega la scheda audio');return}
-  const c=sCtx();await c.resume();const over=$('#sOver').checked&&SA.takes[SA.cur];await sTapBuild();if(!SA.tap){toast('Spunta «Registra» su almeno un musicista');return}
-  if(SP.on)sListenStop(true);const from=$('#sFromStart').checked?0:SP.from,bpm=BPM||100,cnt=$('#sCount').checked?4:0,beat=60/bpm,startAt=c.currentTime+.25+cnt*beat;
-  pause();SA.srcs=[];for(let i=0;i<cnt;i++)sClickAt(c,c.currentTime+.25+i*beat,i===0);
-  const base=await sBaseBufs();SA.srcs.push(...await sBaseStart(c,startAt,from));SA.recFrom=from;
-  if($('#sClick').checked&&CLK2.beats){const m=CLK2.meter;CLK2.beats.forEach((b,i)=>{if(b>=from)sClickAt(c,startAt+(b-from),m>0&&((i-CLK2.down)%m+m)%m===0)})}
-  else if($('#sClick').checked){for(let t2=0;t2<600;t2+=beat)sClickAt(c,startAt+t2,Math.round(t2/beat)%4===0)}
-  if(over){for(const tk of over.tracks){if(tk.mute)continue;const s=c.createBufferSource();s.buffer=tk.proc||tk.buf;const g=c.createGain();g.gain.value=tk.vol;s.connect(g);g.connect(SA.out);const off=from+tk.off/1000;if(off>=0)s.start(startAt,off);else s.start(startAt-off,0);SA.srcs.push(s)}}
-  const chunks=SA.tapTracks.map(()=>[]);SA.recInfo={tracks:SA.tapTracks.slice(),chunks,from,over:over?SA.cur:-1,startAt};
+  const c=sCtx(),bc=bCtx();await c.resume();await bc.resume();await tsReady(c);await tsReady(bc);skLink();const over=$('#sOver').checked&&SA.takes[SA.cur];await sTapBuild();if(!SA.tap){toast('Spunta «Registra» su almeno un musicista');return}
+  if(SP.on)sListenStop(true);const from=$('#sFromStart').checked?0:SP.from,bpm=BPM||100,cnt=$('#sCount').checked?4:0,beat=60/bpm,startB=bc.currentTime+.35+cnt*beat;
+  pause();SA.srcs=[];for(let i=0;i<cnt;i++)sClickAt(bc,startB-(cnt-i)*beat,i===0);
+  const base=await sBaseBufs();SA.srcs.push(...await sBaseStart(bc,startB,from));SA.recFrom=from;
+  if($('#sClick').checked&&CLK2.beats){const m=CLK2.meter;CLK2.beats.forEach((b,i)=>{if(b>=from)sClickAt(bc,startB+(b-from),m>0&&((i-CLK2.down)%m+m)%m===0)})}
+  else if($('#sClick').checked){for(let t2=0;t2<600;t2+=beat)sClickAt(bc,startB+t2,Math.round(t2/beat)%4===0)}
+  if(over){for(const tk of over.tracks){if(tk.mute)continue;const s=bc.createBufferSource();s.buffer=tk.proc||tk.buf;const g=bc.createGain();g.gain.value=tk.vol;s.connect(g);g.connect(SBL.out);const off=from+((over.lat||0)+tk.off)/1000;if(off>=0)s.start(startB,off);else s.start(startB-off,0);SA.srcs.push(s)}}
+  const chunks=SA.tapTracks.map(()=>[]);const startAt=mapCtx(bc,startB,c);SA.recInfo={tracks:SA.tapTracks.slice(),chunks,from,over:over?SA.cur:-1,startAt};
   SA.tap.port.onmessage=e=>{const d=e.data;if(d.chunks)for(const q of d.chunks)q.forEach((a,i)=>chunks[i].push(a));if(d.end){if(I0.cancel){SA.recInfo=null;return}sRecFinish()}};const I0=SA.recInfo;
   SA.tap.port.postMessage({cmd:'start',at:startAt});SA.on=true;$('#sRecGoL').textContent='Stop e tieni';$('#sRecGo').setAttribute('aria-label','Ferma e tieni');$('#sRecGo').classList.add('stop');$('#sRecX').hidden=false;$('#salaOv').classList.add('recording');
-  const dur=Math.max(...base.map(b=>b.buf.duration),1)-from;SA.t0=startAt;clearInterval(SA.timer);SA.timer=setInterval(()=>{const el=c.currentTime-SA.t0;$('#sTime').textContent=el<0?'…'+Math.ceil(-el/beat):fmt(el);if(el>dur+1.5)sRecStop()},200);
+  const dur=Math.max(...base.map(b=>b.buf.duration),1)-from;SA.t0=startB;clearInterval(SA.timer);SA.timer=setInterval(()=>{const el=bc.currentTime-SA.t0;$('#sTime').textContent=el<0?'…'+Math.ceil(-el/beat):fmt(el);if(el>dur+1.5)sRecStop()},200);
   $('#sMsg').textContent=cnt?'Conteggio… poi suonate!':'Registrazione in corso'}
 function sRecStop(){if(!SA.on)return;SA.on=false;clearInterval(SA.timer);SA.srcs.forEach(s=>{try{s.stop()}catch(e){}});SA.tap.port.postMessage({cmd:'stop'});$('#sRecGoL').textContent='Registra';$('#sRecGo').setAttribute('aria-label','Registra');$('#sRecGo').classList.remove('stop');$('#sRecX').hidden=true;$('#salaOv').classList.remove('recording');$('#sMsg').textContent=SA.recInfo&&SA.recInfo.cancel?'Registrazione annullata: premi «Registra» per riprovare.':'Preparo la ripresa…';if(SA.recInfo&&SA.recInfo.cancel)$('#sTime').textContent='0:00'}
 function sRecCancel(){if(!SA.on)return;if(SA.recInfo)SA.recInfo.cancel=true;sRecStop();toast('Registrazione annullata')}
 function joinF(arr){let n=0;for(const a of arr)n+=a.length;const o=new Float32Array(n);let p=0;for(const a of arr){o.set(a,p);p+=a.length}return o}
-async function sRecFinish(){const I=SA.recInfo,c=sCtx(),sr=c.sampleRate;const prev=I.over>=0?SA.takes[I.over]:null;
+async function sRecFinish(){const I=SA.recInfo,c=sCtx(),sr=c.sampleRate;const prev=I.over>=0?SA.takes[I.over]:null;let lat=null,how='stimato';
   const tracks=prev?prev.tracks.map(t=>Object.assign({},t)):[];
   I.tracks.forEach((t,i)=>{const x=joinF(I.chunks[i]);const b=new AudioBuffer({length:Math.max(1,x.length),sampleRate:sr,numberOfChannels:1});b.copyToChannel(x,0);const ch=chanOf(t);const cal=ch&&SA.cal[ch.dev.label];
-    tracks.push({id:t.id+'_'+Date.now().toString(36),src:t.id,name:t.name,role:t.role,rig:JSON.parse(JSON.stringify(t.rig)),buf:b,proc:null,off:cal!=null?cal:Math.round(((c.outputLatency||0)+(c.baseLatency||0)+(ch?ch.dev.lat:0))*1000),offHow:cal!=null?'taratura':'stimato',vol:1,pan:t.role==='chitarra'?-.25:t.role==='altro'?.25:0,mute:false,solo:false})});
-  const tk={n:SA.takes.length+1,date:new Date(),from:I.from,tracks,song:song&&song.id};SA.takes.push(tk);SA.cur=SA.takes.length-1;sTakesUI();$('#sMsg').textContent='Ripresa '+tk.n+' pronta: aprila in «Mix e sincronia».';$('#sOverL').hidden=false;
+    const L=cal!=null?cal:Math.round(((c.outputLatency||0)+(c.baseLatency||0)+(ch?ch.dev.lat:0))*1000);if(lat==null){lat=prev?(prev.lat||0):L;how=cal!=null?'taratura':'stimato'}
+    tracks.push({id:t.id+'_'+Date.now().toString(36),src:t.id,name:t.name,role:t.role,rig:JSON.parse(JSON.stringify(t.rig)),buf:b,proc:null,off:L-lat,offHow:cal!=null?'taratura':'stimato',vol:1,pan:t.role==='chitarra'?-.25:t.role==='altro'?.25:0,mute:false,solo:false})});
+  const tk={n:SA.takes.length+1,date:new Date(),from:I.from,tracks,song:song&&song.id,lat:lat||0,latHow:how};SA.takes.push(tk);SA.cur=SA.takes.length-1;sTakesUI();$('#sMsg').textContent='Ripresa '+tk.n+' pronta: aprila in «Mix e sincronia».';$('#sOverL').hidden=false;
   sAutoSave(tk);sView('mix')}
 function sTakesUI(){$('#sTakes').innerHTML=SA.takes.map((t,i)=>`<button class="mini ${i===SA.cur?'hot':''}" data-tk="${i}">Ripresa ${t.n} · ${t.tracks.length} tracce</button>`).join('');$$('#sTakes [data-tk]').forEach(b=>b.onclick=()=>{SA.cur=+b.dataset.tk;sTakesUI();sView('mix')})}
 /* ---------- taratura del ritardo: bip in uscita, ascolto in ingresso ---------- */
-async function sCalibrate(){const c=sCtx();await c.resume();if(!SA.chans.length){toast('Nessun ingresso');return}
+async function sCalibrate(){const c=sCtx(),bc=bCtx();await c.resume();await bc.resume();await tsReady(c);await tsReady(bc);if(!SA.chans.length){toast('Nessun ingresso');return}
   $('#sMsg').textContent='Taratura: avvicina un microfono alle casse (o collega un cavo dall\'uscita a un ingresso). Tra 2 secondi suona un bip…';await new Promise(r=>setTimeout(r,2000));
   if(!tapReady)tapReady=c.audioWorklet.addModule(URL.createObjectURL(new Blob([TAP_SRC],{type:'text/javascript'})));await tapReady;
   const n=SA.chans.length,tp=new AudioWorkletNode(c,'fonica-tap',{numberOfInputs:n,numberOfOutputs:1,channelCount:1,channelCountMode:'explicit',processorOptions:{n}});SA.chans.forEach((ch,i)=>ch.node.connect(tp,0,i));const z=c.createGain();z.gain.value=0;tp.connect(z);z.connect(c.destination);
   const chunks=SA.chans.map(()=>[]);const done=new Promise(ok=>{tp.port.onmessage=e=>{const d=e.data;if(d.chunks)for(const q of d.chunks)q.forEach((a,i)=>chunks[i].push(a));if(d.end)ok()}});
-  const st=c.currentTime+.15,bt=st+.25;tp.port.postMessage({cmd:'start',at:st});
-  const o=c.createOscillator(),g=c.createGain();o.frequency.value=1800;g.gain.setValueAtTime(0,bt);g.gain.linearRampToValueAtTime(.9,bt+.001);g.gain.setValueAtTime(.9,bt+.012);g.gain.linearRampToValueAtTime(0,bt+.015);o.connect(g);g.connect(c.destination);o.start(bt);o.stop(bt+.05);
+  const st=c.currentTime+.15,bt=mapCtx(c,st,bc)+.25;tp.port.postMessage({cmd:'start',at:st});
+  const o=bc.createOscillator(),g=bc.createGain();o.frequency.value=1800;g.gain.setValueAtTime(0,bt);g.gain.linearRampToValueAtTime(.9,bt+.001);g.gain.setValueAtTime(.9,bt+.012);g.gain.linearRampToValueAtTime(0,bt+.015);o.connect(g);g.connect(SBL.vol);o.start(bt);o.stop(bt+.05);
   await new Promise(r=>setTimeout(r,1800));tp.port.postMessage({cmd:'stop'});await done;SA.chans.forEach(ch=>{try{ch.node.disconnect(tp)}catch(e){}});try{tp.disconnect()}catch(e){}
-  const found={},sr=c.sampleRate,b0=Math.round((bt-st)*sr);
+  const found={},sr=c.sampleRate,b0=Math.round(.25*sr);
   SA.chans.forEach((ch,k)=>{const x=joinF(chunks[k]);let noise=0;for(let i=0;i<Math.min(b0,x.length);i++)noise=Math.max(noise,Math.abs(x[i]));let mx=0,mi=-1;for(let i=b0;i<x.length;i++){const a=Math.abs(x[i]);if(a>mx){mx=a;mi=i}}
     if(mi<0||mx<.02||mx<noise*4)return;let on=mi;while(on>b0&&Math.abs(x[on])>Math.max(noise*2,mx*.2))on--;const ms=Math.round((on-b0)/sr*1000);if(ms>=0&&ms<1500)found[ch.dev.label]=Math.min(found[ch.dev.label]??1e9,ms)});
   const keys=Object.keys(found);if(!keys.length){$('#sMsg').textContent='Non ho sentito il bip. Alza il volume, avvicina un microfono alle casse e riprova.';return}
@@ -6462,7 +6531,7 @@ const hpBtn=t=>`<button class="hp ${t.hear!==false?'on':''}" data-hp="${t.id}" a
 function sHearUI(t){const on=t.hear!==false;document.querySelectorAll(`[data-hp="${t.id}"]`).forEach(b=>{b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.title=hpTip(on);b.querySelector('b').textContent=on?'Sì':'No'});const hb=document.querySelector(`[data-hear="${t.id}"]`);if(hb){hb.classList.toggle('hot',on);hb.textContent=hearTxt(t)}}
 /* acceso/spento: spento = non si sente in cuffia e non registra; riaccendendo torna com'era */
 function sPower(t,on){if(!on){t.offPrev={arm:!!t.arm,hear:t.hear!==false};t.off=true;t.arm=false;sHearSet(t,false)}else{const p=t.offPrev||{arm:true,hear:true};t.off=false;t.arm=p.arm;sHearSet(t,p.hear)}
-  SA.baseMono=null;try{sStemApply()}catch(e){}try{sTapBuild()}catch(e){}sSave();sRender();toast(t.name+(on?' acceso':' spento: non si sente e non registra'))}
+  SA.baseMono=null;try{sStemApply()}catch(e){}(async()=>{try{await sBuild(t)}catch(e){console.warn(e)}try{await sTapBuild()}catch(e){}})();sSave();sRender();toast(t.name+(on?' acceso':' spento: non si sente e non registra'))}
 function sHearSet(t,on){t.hear=on;try{sCtx().resume()}catch(e){}if(t.node)t.node.mon.gain.value=on?(t.mon||.9):0;if(on&&!t.mon)t.mon=.9;sHearUI(t);sSave();if(on&&!chanOf(t))toast('Questa entrata non ha una scheda audio collegata')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-hp]');if(!b)return;e.preventDefault();e.stopPropagation();const t=SA.tracks.find(x=>x.id===b.dataset.hp);if(t)sHearSet(t,t.hear===false)},true);
 /* manopola: trascina su/giù, rotellina, frecce; doppio clic = valore iniziale */
@@ -6804,7 +6873,7 @@ async function reampTrack(t,say){const r=t.rig;const sr=t.buf.sampleRate;let x=t
 /* ---------- grafico delle tracce (forme d'onda da far combaciare) ---------- */
 const WV={t0:0,span:30,sel:-1,drag:null,play:null,pos:0,env:new Map()};
 function envOfBuf(b){if(WV.env.has(b))return WV.env.get(b);const x=b.getChannelData(0),sr=b.sampleRate,H=Math.max(1,Math.round(sr/1000)),n=Math.ceil(x.length/H),e=new Float32Array(n);for(let i=0;i<n;i++){let m=0;const a=i*H,z=Math.min(x.length,a+H);for(let j=a;j<z;j++){const v=Math.abs(x[j]);if(v>m)m=v}e[i]=m}WV.env.set(b,e);return e}
-function wvTracks(){const tk=SA.takes[SA.cur];if(!tk)return[];const L=[];if(SA.baseMono)L.push({name:'Base',col:TC('#8fa3b8','#8f9bc4'),buf:SA.baseMono,off:0,base:true});tk.tracks.forEach((t,i)=>L.push({name:t.name,col:ROLE_COL[t.role],buf:t.proc&&!t.procDry?t.proc:t.buf,off:t.off,t,i}));return L}
+function wvTracks(){const tk=SA.takes[SA.cur];if(!tk)return[];const L=[],lat=tk.lat||0;if(SA.baseMono)L.push({name:'Base'+(lat?' · spostata di '+lat+' ms (ritardo della scheda, '+(tk.latHow||'stimato')+')':''),col:TC('#8fa3b8','#8f9bc4'),buf:SA.baseMono,off:0,base:true});tk.tracks.forEach((t,i)=>L.push({name:t.name,col:ROLE_COL[t.role],buf:t.proc&&!t.procDry?t.proc:t.buf,off:lat+t.off,own:t.off,t,i}));return L}
 function wvDraw(){const cv=$('#sWave');if(!cv||cv.offsetParent===null)return;const dpr=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
   const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);const LT=isLight(),CVV=k=>getComputedStyle(document.documentElement).getPropertyValue(k).trim();g.fillStyle=LT?CVV('--paper'):TC('#0d1520','#090b14');g.fillRect(0,0,w,h);const L=wvTracks();if(!L.length)return;const lh=(h-18)/L.length,pps=w/WV.span;
   /* righe dei secondi e battiti */g.font='11px Figtree,system-ui';g.fillStyle=LT?CVV('--dim'):TC('#8fa3b8','#8f9bc4');const step=WV.span>60?10:WV.span>20?5:WV.span>4?1:WV.span>1?.1:.01;
@@ -6812,15 +6881,15 @@ function wvDraw(){const cv=$('#sWave');if(!cv||cv.offsetParent===null)return;con
   if(CLK2.beats&&WV.span<40){g.fillStyle=TC('rgba(232,200,166,.12)','rgba(111,216,255,.12)');const fr=(SA.takes[SA.cur]||{}).from||0;for(const b of CLK2.beats){const x=(b-fr-WV.t0)*pps;if(x>=0&&x<=w)g.fillRect(x,14,1,h)}}
   L.forEach((tr2,k)=>{const y0=16+k*lh,mid=y0+lh/2,e=envOfBuf(tr2.buf),sr=tr2.buf.sampleRate;g.fillStyle=k===WV.sel+1&&!tr2.base?(LT?'rgba(30,40,70,.09)':'rgba(255,255,255,.07)'):(LT?'rgba(30,40,70,.03)':'rgba(255,255,255,.02)');g.fillRect(0,y0,w,lh-2);
     g.fillStyle=tr2.col;const msPerPx=WV.span*1000/w,x1=tr2.buf.getChannelData(0);for(let px=0;px<w;px++){const tt=WV.t0+px/pps+tr2.off/1000;let a;if(msPerPx<1){const i=Math.round(tt*sr);a=i>=0&&i<x1.length?Math.abs(x1[i]):0}else{const i0=Math.floor(tt*1000),i1=Math.max(i0+1,Math.floor((tt+1/pps)*1000));a=0;for(let i=Math.max(0,i0);i<Math.min(e.length,i1);i++)if(e[i]>a)a=e[i]}const hh=Math.min(1,Math.sqrt(a)*1.1)*(lh/2-3);g.fillRect(px,mid-hh,1,hh*2||1)}
-    {const lab=tr2.name+(tr2.base?'':' · '+(tr2.off>0?'+':'')+tr2.off+' ms');g.font='600 12px Figtree,system-ui';const tw=g.measureText(lab).width;g.fillStyle=TC('rgba(8,14,22,.8)','rgba(6,7,14,.8)');g.fillRect(4,y0+2,tw+10,17);g.fillStyle='#fff';g.fillText(lab,9,y0+14)}});
+    {const lab=tr2.name+(tr2.base?'':' · '+(tr2.own>0?'+':'')+tr2.own+' ms');g.font='600 12px Figtree,system-ui';const tw=g.measureText(lab).width;g.fillStyle=TC('rgba(8,14,22,.8)','rgba(6,7,14,.8)');g.fillRect(4,y0+2,tw+10,17);g.fillStyle='#fff';g.fillText(lab,9,y0+14)}});
   const px=(WV.pos-WV.t0)*pps;g.fillStyle='#d0715a';g.fillRect(px-1,14,2,h)}
 function wvBind(){const cv=$('#sWave');let down=null;
   const tAt=x=>WV.t0+x/(cv.clientWidth/WV.span),rowAt=y=>{const L=wvTracks();const lh=(cv.clientHeight-18)/L.length;return Math.floor((y-16)/lh)};
   cv.onpointerdown=e=>{const r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,k=rowAt(y),L=wvTracks();cv.setPointerCapture(e.pointerId);
-    if(L[k]&&!L[k].base){WV.sel=L[k].i;down={x,off:L[k].t.off,moved:false,k}}else down={x,seek:true};wvSelInfo();wvDraw()};
+    if(L[k]&&!L[k].base){WV.sel=L[k].i;down={x,off:L[k].off,moved:false,k}}else down={x,seek:true};wvSelInfo();wvDraw()};
   cv.onpointermove=e=>{if(!down)return;const r=cv.getBoundingClientRect(),x=e.clientX-r.left,dx=x-down.x;if(down.seek)return;if(Math.abs(dx)>3)down.moved=true;if(!down.moved)return;
     const L=wvTracks(),t=L[down.k].t;let off=Math.round(down.off-dx*(WV.span*1000/cv.clientWidth));
-    /* aggancio al picco della base più vicino */if(e.shiftKey!==true&&SA.baseMono&&WV.span<8){const sn=snapOff(t,off);if(sn!=null)off=sn}t.off=off;wvSelInfo();wvDraw()};
+    /* aggancio al picco della base più vicino */if(e.shiftKey!==true&&SA.baseMono&&WV.span<8){const sn=snapOff(t,off);if(sn!=null)off=sn}t.off=off-((SA.takes[SA.cur]||{}).lat||0);wvSelInfo();wvDraw()};
   cv.onpointerup=e=>{const r=cv.getBoundingClientRect(),x=e.clientX-r.left;if(down&&(!down.moved)){WV.pos=Math.max(0,tAt(x));if(WV.play){wvStop();wvPlay()}}down=null;wvDraw();sAutoSaveSoon()};
   cv.onwheel=e=>{e.preventDefault();const r=cv.getBoundingClientRect(),x=e.clientX-r.left,t=tAt(x),f=e.deltaY>0?1.25:.8;WV.span=Math.max(.02,Math.min(600,WV.span*f));WV.t0=Math.max(-2,t-x/(cv.clientWidth/WV.span));wvDraw()};
   let pinch=null;cv.addEventListener('touchmove',e=>{if(e.touches.length!==2)return;e.preventDefault();const d=Math.abs(e.touches[0].clientX-e.touches[1].clientX);if(pinch){WV.span=Math.max(.02,Math.min(600,WV.span*pinch/d));wvDraw()}pinch=d},{passive:false});cv.addEventListener('touchend',()=>pinch=null)}
@@ -6828,14 +6897,14 @@ function snapOff(t,off){const e=envOfBuf(t.proc&&!t.procDry?t.proc:t.buf),be=env
   let ti=-1,tv=0;for(let i=Math.max(0,c+off-400);i<Math.min(e.length,c+off+400);i++)if(e[i]>tv){tv=e[i];ti=i}if(bi<0||ti<0)return null;const want=ti-bi;return Math.abs(want-off)<8?want:null}
 function wvSelInfo(){const tk=SA.takes[SA.cur];const t=tk&&tk.tracks[WV.sel];$('#sSel').textContent=t?`Selezionata: ${t.name} (${t.off>0?'+':''}${t.off} ms)`:'Tocca una traccia per selezionarla'}
 /* ---------- ascolto del mix ---------- */
-async function mixGraph(c,tk,live){const base=await sBaseBufs();const master=c.createDynamicsCompressor();master.threshold.value=-6;master.ratio.value=2.5;master.knee.value=8;master.connect(live?SA.out:c.destination);const srcs=[];const anySolo=tk.tracks.some(t=>t.solo);
+async function mixGraph(c,tk,live){const base=await sBaseBufs();const master=c.createDynamicsCompressor();master.threshold.value=-6;master.ratio.value=2.5;master.knee.value=8;master.connect(live?(c===SBL.ctx?SBL.out:SA.out):c.destination);const srcs=[];const anySolo=tk.tracks.some(t=>t.solo);
   for(const b of base){if(!b.g||b.guide)continue;const s=c.createBufferSource();s.buffer=b.buf;const g=c.createGain();g.gain.value=b.g*+$('#sBaseVol').value;s.connect(g);g.connect(master);srcs.push({s,off:tk.from})}
   for(const t of tk.tracks){if(t.mute||(anySolo&&!t.solo))continue;const s=c.createBufferSource();s.buffer=t.proc||t.buf;let nd=s;
     {const F=fxOf(t.rig,t.role);const bd=await fxBoard(c,F);const usePre=!(t.proc&&!t.procDry);if(usePre){nd.connect(bd.pre.inp);bd.pre.out.connect(bd.post.inp)}else nd.connect(bd.post.inp);nd=bd.post.out}
-    if(t.role==='voce'){const ch=stChain(c,Object.assign({},ST,{mus:0,voc:t.vol}));nd.connect(ch.vin);srcs.push({s,off:tk.from+t.off/1000,voice:true});continue}
-    const g=c.createGain();g.gain.value=t.vol;const p=c.createStereoPanner();p.pan.value=t.pan;nd.connect(g);g.connect(p);p.connect(master);srcs.push({s,off:tk.from+t.off/1000,rel:t.off/1000})}
+    if(t.role==='voce'){const ch=stChain(c,Object.assign({},ST,{mus:0,voc:t.vol}));nd.connect(ch.vin);srcs.push({s,off:tk.from+((tk.lat||0)+t.off)/1000,voice:true});continue}
+    const g=c.createGain();g.gain.value=t.vol;const p=c.createStereoPanner();p.pan.value=t.pan;nd.connect(g);g.connect(p);p.connect(master);srcs.push({s,off:tk.from+((tk.lat||0)+t.off)/1000,rel:((tk.lat||0)+t.off)/1000})}
   return srcs}
-async function wvPlay(){const tk=SA.takes[SA.cur];if(!tk)return;const c=sCtx();await c.resume();const srcs=await mixGraph(c,tk,true);const at=c.currentTime+.08;
+async function wvPlay(){const tk=SA.takes[SA.cur];if(!tk)return;const c=bCtx();await c.resume();const srcs=await mixGraph(c,tk,true);const at=c.currentTime+.08;
   for(const q of srcs){const o=q.off+WV.pos;if(o>=0)q.s.start(at,o);else q.s.start(at-o,0)}WV.play={srcs,at,pos0:WV.pos};$('#sPlay').textContent='■ Ferma';
   const tick=()=>{if(!WV.play)return;WV.pos=WV.play.pos0+(c.currentTime-WV.play.at);const pps=$('#sWave').clientWidth/WV.span;if((WV.pos-WV.t0)*pps>$('#sWave').clientWidth*.9)WV.t0=WV.pos-WV.span*.1;wvDraw();requestAnimationFrame(tick)};tick()}
 function wvStop(){if(!WV.play)return;WV.play.srcs.forEach(q=>{try{q.s.stop()}catch(e){}});WV.play=null;$('#sPlay').textContent='▶ Ascolta'}
@@ -6899,7 +6968,7 @@ async function salaOpen(){if(!SALA_OK){salaInfo(true);return}if(!song){toast('Ap
   sEnsure();SA.baseMono=null;sRender();sTakesUI();$('#sOverL').hidden=!SA.takes.length;
   try{await sOpenDevices()}catch(e){$('#sDevInfo').textContent=e.message||String(e)}
   cancelAnimationFrame(sRaf);sRaf=requestAnimationFrame(sMeters);SP.from=0;sStemsUI();sTabUI();cancelAnimationFrame(sFr);sFr=requestAnimationFrame(sFrame);if(prefGet('salaIntro')!=='1')salaInfo(false)}
-function salaClose(){if(SA.on)sRecStop();sListenStop();cancelAnimationFrame(sFr);wvStop();$('#salaOv').hidden=true;document.body.style.overflow='';cancelAnimationFrame(sRaf);for(const d of SA.devs)try{d.stream.getTracks().forEach(t=>t.stop())}catch(e){}SA.devs=[];SA.chans=[];for(const t of SA.tracks)if(t.node){try{t.node.mon.disconnect()}catch(e){}t.node=null}}
+function salaClose(){if(SA.on)sRecStop();sListenStop();cancelAnimationFrame(sFr);wvStop();$('#salaOv').hidden=true;document.body.style.overflow='';cancelAnimationFrame(sRaf);for(const d of SA.devs)try{d.stream.getTracks().forEach(t=>t.stop())}catch(e){}SA.devs=[];SA.chans=[];for(const t of SA.tracks)sUnbuild(t);skClose()}
 function salaInfo(mobile){if(mobile&&[...document.querySelectorAll('.ov')].some(o=>!o.hidden&&o.id!=='ovSalaInfo')||mobile&&document.getElementById('splash')&&!document.getElementById('splash').hidden&&document.getElementById('splash').isConnected&&getComputedStyle(document.getElementById('splash')).display!=='none'){clearTimeout(salaInfo.w);salaInfo.w=setTimeout(()=>salaInfo(mobile),800);return}$('#salaInfoT').textContent=mobile?'Sala prove: solo sul computer':'Benvenuto nella Sala prove';
   $('#salaInfoB').innerHTML=mobile?'<p>La <b>Sala prove</b> serve per registrare la band con la scheda audio: più ingressi (voce, chitarra, basso), amplificatori <b>NAM</b> e suoni di <b>TONE3000</b>, tracce separate e mix finale.</p><p>⚠️ <b>Si usa solo sul computer</b> (Windows, Mac o Linux) con la scheda audio collegata via USB. Su telefono e tablet il suono che entra dalla scheda torna in cuffia con troppo ritardo, anche per la voce: provarla lì non ha senso.</p><p>Su telefono e tablet usa <b>«Palco»</b> per cantare con la base e i testi, <b>«Video»</b>, la <b>Libreria</b>, e le <b>tablature</b>. Anche la pedaliera MIDI si usa solo sul computer.</p>':'<ol class="steps"><li><b>Usate le cuffie</b>: con le casse il suono rientra nei microfoni.</li><li><b>«Suona e riconosco»</b>: ogni musicista suona qualche nota e l\'app trova il suo ingresso.</li><li><b>«Taratura ritardo»</b> una volta per scheda audio: avvicina un microfono alle casse, parte un bip e l\'app misura il ritardo al millisecondo.</li><li><b>🎛 Suono</b>: amplificatore NAM e cassa per chitarra e basso (da TONE3000 o da file). Se senti ritardo o gracchi, togli «dal vivo»: l\'effetto si mette dopo, con «Metti gli effetti alla registrazione».</li><li>All\'inizio della ripresa <b>battete una volta le mani</b>: con «Allinea sul colpo» le tracce combaciano.</li><li>In <b>«Mix e sincronia»</b> trascini le tracce sul grafico, regoli volumi e esporti mix e tracce.</li></ol><p class="snote">Il browser legge al massimo 2 canali per dispositivo audio: per più strumenti collega un altro dispositivo o usa la sovraincisione.</p>';
   openOv('#ovSalaInfo');$('#salaInfoOk').onclick=()=>{closeOv($('#salaInfoOk'));if(!mobile)prefSet('salaIntro','1');else prefSet('salaInfo1','1')}}
@@ -6908,7 +6977,15 @@ function salaFullUI(){const b=$('#salaFull');b.querySelector('span').textContent
 $('#salaFull').onclick=()=>salaFull();document.addEventListener('fullscreenchange',()=>{if(!$('#salaOv').hidden)salaFullUI()});
 $('#salaX').onclick=()=>salaClose();$('#salaHelp').onclick=()=>salaInfo(false);$$('.sala-tabs button').forEach(b=>b.onclick=()=>sView(b.dataset.sv));
 $('#sAdd').onclick=async()=>{const t=newTrack(SA.tracks.some(x=>x.role==='voce')?(SA.tracks.some(x=>x.role==='chitarra')?(SA.tracks.some(x=>x.role==='basso')?'altro':'basso'):'chitarra'):'voce');const free=SA.chans.find(ch=>!SA.tracks.some(x=>x.dev===ch.key));t.dev=(free||SA.chans[0]||{}).key||'';SA.tracks.push(t);await sBuild(t);sTapBuild();sRender();sSave()};
-$('#sDetect').onclick=sDetect;$('#sCal').onclick=sCalibrate;
+$('#sDetect').onclick=sDetect;function ouUI(){const O=OUTS,two=!!O.cas;$('#ouCasF').hidden=!two;$('#ouSwapR').hidden=!two;$('#ouCuf').value=volPct('salaVolCuf',100);$('#ouCufV').textContent=$('#ouCuf').value;$('#ouCas').value=volPct('salaVolCas',70);$('#ouCasV').textContent=$('#ouCas').value;
+  $('#ouInfo').textContent=O.mode==='pairs'?`Casse: «${devShort(O.cas.lbl)}». Cuffie: «${devShort(O.cuf.lbl)}». In tutte e due arrivano base, voce e strumenti; nelle casse la base aspetta gli strumenti${SK.d?' ('+SK.d+' ms)':''}, così chi ascolta sente tutto a tempo. Attenzione al fischio se il microfono è vicino alle casse.`
+    :O.mode==='quad'?`Scheda «${devShort(O.cuf.lbl)}»: casse su OUT ${O.cas.pair?'3-4':'1-2'}, cuffie su OUT ${O.cuf.pair?'3-4':'1-2'}. In tutte e due arrivano base, voce e strumenti; nelle casse la base aspetta gli strumenti${SK.d?' ('+SK.d+' ms)':''}. Attenzione al fischio se il microfono è vicino alle casse.`
+    :AE.iface?'La scheda audio ha una sola uscita: cuffie e casse suonano insieme. Il volume delle cuffie si regola con la manopola PHONES della scheda.':'Nessuna scheda audio: suono dalle cuffie o dalle casse del PC.'}
+$('#sOuts').onclick=async()=>{await salaOuts();await skLink();ouUI();openOv('#ovOuts')};
+$('#ouCuf').oninput=e=>{prefSet('salaVolCuf',e.target.value);$('#ouCufV').textContent=e.target.value;volApply()};
+$('#ouCas').oninput=e=>{prefSet('salaVolCas',e.target.value);$('#ouCasV').textContent=e.target.value;volApply()};
+$('#ouSwap').onclick=async()=>{prefSet('salaSwap',prefGet('salaSwap')==='1'?'0':'1');if(SA.ctx)await outApply(SA);if(SBL.ctx)await outApply(SBL);await skLink();ouUI();toast('Cuffie e casse scambiate')};
+$('#sCal').onclick=sCalibrate;
 /* ===== accordatore: dal microfono/scheda audio, o dall'ingresso di un musicista in Sala prove ===== */
 const TUNE={on:false,raf:0,an:null,stream:null,ctx:null,hist:[],done:new Set()};
 const TUN_SETS={gtr:[40,45,50,55,59,64],bass4:[28,33,38,43],bass5:[23,28,33,38,43],uke:[67,60,64,69],chrom:[]};
@@ -7242,7 +7319,7 @@ async function pdDo(act){if(!act||act==='none')return;
   if(act==='play'){if(!$('#salaOv').hidden){if(SA.on){try{$('#sRecGo').click()}catch(e){}}else sListen()}else{A.paused?play():pause()}return}}
 /* volume generale: vale per il lettore e per la Sala prove. Il pedale non si salva: riparte da dove lo metti */
 function mvSet(x){x=Math.max(0,Math.min(1,x));MD.vol=x;const g=x*x;try{A.master=g}catch(e){}pvShow();
-  if(SA.out&&SA.ctx){try{SA.out.gain.setTargetAtTime(g,SA.ctx.currentTime,.02)}catch(e){SA.out.gain.value=g}}
+  volApply();
   if(LV.bus){try{LV.bus.gain.setTargetAtTime(g,LV.bus.context.currentTime,.02)}catch(e){LV.bus.gain.value=g}}
   const b=$('#pdVolBar');if(b)b.style.height=Math.round(x*100)+'%';const t=$('#pdVolTxt');if(t)t.textContent=Math.round(x*100)+'%';
   const h=$('#mvHud');if(h){h.hidden=false;h.querySelector('i').style.width=Math.round(x*100)+'%';h.querySelector('b').textContent='Volume '+Math.round(x*100)+'%';clearTimeout(MD.ht);MD.ht=setTimeout(()=>h.hidden=true,1200)}}
@@ -7818,6 +7895,7 @@ const TUT_SECTIONS=[
    {v:'rec',s:'#sListen',t:'Ascolta e prova',d:'Fa partire il brano senza registrare, per provare i suoni.'},
    {v:'rec',s:'#sDetect',t:'Suona e riconosco',d:'Collega la scheda e premi qui: ognuno suona qualche nota e l\'app capisce da sola chi è collegato a quale ingresso.'},
    {v:'rec',s:'#sCal',t:'Taratura ritardo',d:'Misura il ritardo della scheda con un bip, così le registrazioni vengono a tempo.'},
+   {v:'rec',s:'#sOuts',t:'Uscite',d:'Volume delle cuffie e volume delle casse, separati. In tutte e due arrivano base, voce e strumenti.'},
    {v:'rec',s:'#sAdd',t:'Aggiungi musicista',d:'Aggiunge un musicista a mano.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .sthead'),t:'Il musicista',d:'Ogni musicista ha il suo riquadro. Per esempio questo è Luca, alla chitarra.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stname'),t:'Nome e strumento',d:'Scrivi il nome e scegli lo strumento: voce, chitarra, basso o altro.'},
