@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Pure Voltage</title>
-<meta name="description" content="Pure Voltage: la tua sala prove. Separi qualsiasi brano in voce e strumenti, canti in karaoke, suoni dal vivo con la tua scheda audio e crei video e duetti.">
+<title>rooMusic</title>
+<meta name="description" content="rooMusic: la tua sala prove. Separi qualsiasi brano in voce e strumenti, canti in karaoke, suoni dal vivo con la tua scheda audio e crei video e duetti.">
 <meta name="theme-color" content="#07080d">
 <script>/* colori: lo stesso tema scelto nell'app */try{var _t=localStorage.getItem('f8_theme');document.documentElement.dataset.theme=/^(carta|nebbia|giallo|celeste|notte)$/.test(_t)?_t:'notte'}catch(e){document.documentElement.dataset.theme='notte'}</script>
 
-<meta property="og:title" content="Pure Voltage — la tua sala prove">
+<meta property="og:title" content="rooMusic — la tua sala prove">
 <meta property="og:description" content="Separa i brani, canta, suona dal vivo, crea duetti. Tutto nel browser.">
-<meta property="og:image" content="pv-hero.jpg">
+<meta property="og:image" content="rm-og.png">
 <link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Josefin+Sans:wght@400;600;700&family=Figtree:wght@400;500;600&display=swap">
@@ -43,7 +43,7 @@ a{color:inherit}
 .nav.on{background:rgba(8,8,10,.86);backdrop-filter:blur(10px);border-color:var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
 .nav .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-lux);font-weight:700;letter-spacing:.14em;font-size:18px}
-.nav .logo img{height:46px;width:auto;border-radius:6px}
+.nav .logo img{height:42px;width:auto}
 .nav .btn{min-height:42px;padding:0 18px;font-size:15px}
 
 /* apertura */
@@ -100,7 +100,7 @@ h2{font-family:var(--f-lux);font-weight:700;font-size:clamp(28px,4.4vw,48px);lin
 .faq p{margin:0 0 18px;color:var(--dim)}
 
 .final{text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(110,130,255,.16),transparent 60%)}
-.final img{width:min(260px,60vw);margin:0 auto 22px;border-radius:14px;box-shadow:0 0 50px rgba(110,130,255,.18)}
+.final img{width:min(260px,60vw);margin:0 auto 22px}
 .final .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
 .skip{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:var(--dim);font-size:16px;cursor:pointer}.skip input{width:22px;height:22px;accent-color:#6f7dff}
 .note{font-size:14px;color:#7d88ad;max-width:760px;margin:26px auto 0}
@@ -138,22 +138,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 :is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .note,:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) footer{color:var(--dim)}
 :is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .final img{box-shadow:none}
 :is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .divider{background:linear-gradient(90deg,transparent,var(--line),transparent)}
-:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) #heroV{display:none}
+:is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) #heroV{display:block}
 :is([data-theme=carta],[data-theme=nebbia],[data-theme=giallo],[data-theme=celeste]) .hero .stage img{-webkit-mask-image:none;mask-image:none;object-fit:contain}
+
+/* rooMusic: l'immagine di riserva compare solo se il video non parte */
+.hero .stage img{display:none}
+.hero .stage.novid img{display:block}
 </style>
 </head>
 <body>
 
 <header class="nav" id="nav">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Pure Voltage"><img src="pv-logo.jpg" alt="Pure Voltage"></a>
+    <a class="logo" href="#top" aria-label="rooMusic"><img src="rm-logo.svg" alt="rooMusic"></a>
     <a class="btn pri" href="./?app">Apri l'app</a>
   </div>
 </header>
 
 <main id="top">
   <section class="hero" style="padding:0">
-    <div class="stage"><img src="pv-hero.jpg" alt="Logo Pure Voltage"><video id="heroV" src="pv-anim.mp4" autoplay muted loop playsinline preload="auto"></video></div>
+    <div class="stage"><img src="rm-logo-verticale.svg" alt="Logo rooMusic"><video id="heroV" src="intro-roomusic-scuro.mp4" autoplay muted playsinline preload="auto" onerror="this.parentNode.classList.add('novid');this.style.display='none'"></video></div>
     <div class="wrap">
       <h1 class="g">La tua sala prove</h1>
       <p class="lead">Prendi una canzone, togli la voce o uno strumento e mettiti al suo posto. Canta, registra e duetta nel browser, sul PC, sul tablet e sullo smartphone. Per suonare dal vivo con la scheda audio c'è il computer.</p>
@@ -170,7 +174,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="wrap">
       <p class="kicker reveal">Cosa fa</p>
       <h2 class="g reveal">Quattro strumenti in uno, a tutta energia</h2>
-      <p class="intro-txt reveal">Pure Voltage è pensata per chi ama la musica, a qualsiasi età: pulsanti grandi, scritte chiare e nessun programma da installare.</p>
+      <p class="intro-txt reveal">rooMusic è pensata per chi ama la musica, a qualsiasi età: pulsanti grandi, scritte chiare e nessun programma da installare.</p>
       <div class="pillars">
         <article class="pillar reveal">
           <div class="n">I</div>
@@ -250,7 +254,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <h2 class="g reveal">Tre passi e sei sul palco</h2>
       <div class="steps">
         <div class="step reveal"><h3>Apri l'app</h3><p>Funziona nel browser: Chrome, Edge o Brave, sul PC come sul telefono. Puoi anche aggiungerla alla schermata Home.</p></div>
-        <div class="step reveal"><h3>Carica una canzone</h3><p>Scegli un MP3 o un intero album: Pure Voltage lo separa in voce e strumenti e lo mette in Libreria. Per separare colleghi una volta sola RunPod, oppure il servizio gratuito più lento.</p></div>
+        <div class="step reveal"><h3>Carica una canzone</h3><p>Scegli un MP3 o un intero album: rooMusic lo separa in voce e strumenti e lo mette in Libreria. Per separare colleghi una volta sola RunPod, oppure il servizio gratuito più lento.</p></div>
         <div class="step reveal"><h3>Canta e suona</h3><p>Togli la parte che vuoi fare tu, scegli la tonalità e premi Play. Se vuoi, registra il video.</p></div>
       </div>
     </div>
@@ -262,7 +266,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="wrap">
       <p class="kicker reveal">Al computer</p>
       <h2 class="g reveal">Il PC diventa la tua sala prove</h2>
-      <p class="intro-txt reveal">Con una scheda audio USB colleghi microfono, chitarra e basso, ti ascolti in cuffia e mandi la musica alle casse. Pure Voltage riconosce da sola ingressi e uscite. Su telefono e tablet il suono torna in cuffia con troppo ritardo per suonare dal vivo: lì usi il Palco per cantare con la base e il Video per registrarti.</p>
+      <p class="intro-txt reveal">Con una scheda audio USB colleghi microfono, chitarra e basso, ti ascolti in cuffia e mandi la musica alle casse. rooMusic riconosce da sola ingressi e uscite. Su telefono e tablet il suono torna in cuffia con troppo ritardo per suonare dal vivo: lì usi il Palco per cantare con la base e il Video per registrarti.</p>
       <div class="pcgrid">
         <div class="pccard reveal">
           <h3>Consigli per partire bene</h3>
@@ -279,10 +283,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <div class="pcside">
           <div class="pccard reveal"><span class="pcn">1 ingresso</span><h4>Una voce o uno strumento</h4><p>Behringer UMC22 · Focusrite Scarlett Solo · M-Audio M-Track Solo</p></div>
           <div class="pccard reveal"><span class="pcn">2 ingressi</span><h4>Voce e strumento insieme</h4><p>Behringer UMC202HD o UMC204HD · Focusrite Scarlett 2i2 · PreSonus AudioBox USB 96 · Steinberg UR22C</p></div>
-          <div class="pccard reveal"><span class="pcn">4 ingressi</span><h4>Più musicisti</h4><p>Behringer UMC404HD (quella usata per provare Pure Voltage) · Steinberg UR44C · PreSonus Studio 68c</p></div>
+          <div class="pccard reveal"><span class="pcn">4 ingressi</span><h4>Più musicisti</h4><p>Behringer UMC404HD (quella usata per provare rooMusic) · Steinberg UR44C · PreSonus Studio 68c</p></div>
         </div>
       </div>
-      <p class="note reveal">Sono solo esempi: va bene qualunque scheda audio USB che il computer riconosce, senza programmi speciali. I nomi dei prodotti sono marchi dei rispettivi proprietari; Pure Voltage non è collegata ai produttori e non riceve compensi da loro.</p>
+      <p class="note reveal">Sono solo esempi: va bene qualunque scheda audio USB che il computer riconosce, senza programmi speciali. I nomi dei prodotti sono marchi dei rispettivi proprietari; rooMusic non è collegata ai produttori e non riceve compensi da loro.</p>
     </div>
   </section>
 
@@ -295,31 +299,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="faq">
         <details class="reveal"><summary>Quanto costa?</summary><p>L'app è gratuita. Per separare i brani in modo veloce si collega un proprio account RunPod, un servizio a consumo: si paga solo il tempo di calcolo, pochi centesimi a brano. C'è anche un servizio gratuito, più lento.</p></details>
         <details class="reveal"><summary>Devo installare qualcosa?</summary><p>No. Si apre dal browser. Sul telefono e sul PC puoi aggiungerla alla schermata principale e usarla come un'app.</p></details>
-        <details class="reveal"><summary>Posso usare la mia scheda audio?</summary><p>Sì, sul computer: Pure Voltage riconosce gli ingressi della scheda audio, per voce e strumenti, e puoi ascoltarti in cuffia mentre suona la base. Su telefono e tablet no, perché il suono torna in cuffia con troppo ritardo.</p></details>
+        <details class="reveal"><summary>Posso usare la mia scheda audio?</summary><p>Sì, sul computer: rooMusic riconosce gli ingressi della scheda audio, per voce e strumenti, e puoi ascoltarti in cuffia mentre suona la base. Su telefono e tablet no, perché il suono torna in cuffia con troppo ritardo.</p></details>
         <details class="reveal"><summary>Dove finiscono i miei brani?</summary><p>Restano sul tuo dispositivo, nel browser, e se vuoi anche in una cartella del tuo PC. Se preferisci, nel tuo spazio cloud Cloudflare R2, per ritrovarli su tutti i dispositivi. Puoi salvare in un file le tue chiavi e impostazioni, per ritrovarle sempre.</p></details>
         <details class="reveal"><summary>Posso vederlo sul televisore?</summary><p>Sì. Dal Palco tocca l'icona di trasmissione: con un TV con Chromecast o Google TV il testo e la tablatura vanno sul televisore, mentre la musica resta sul telefono o sulle casse. In alternativa puoi trasmettere tutto lo schermo del telefono.</p></details>
-        <details class="reveal"><summary>Posso usare qualsiasi canzone?</summary><p>Pure Voltage non contiene e non vende musica: lavora sui file che scegli tu. Usala con brani acquistati regolarmente, tuoi o liberi da diritti, per studio e uso personale.</p></details>
+        <details class="reveal"><summary>Posso usare qualsiasi canzone?</summary><p>rooMusic non contiene e non vende musica: lavora sui file che scegli tu. Usala con brani acquistati regolarmente, tuoi o liberi da diritti, per studio e uso personale.</p></details>
       </div>
     </div>
   </section>
 
   <section class="final">
     <div class="wrap">
-      <img src="pv-logo.jpg" alt="Logo Pure Voltage" class="reveal">
+      <img src="rm-logo-verticale.svg" alt="Logo rooMusic" class="reveal">
       <h2 class="g reveal">Accendi la tua musica</h2>
-      <p class="intro-txt reveal" style="margin:0 auto">Apri Pure Voltage e prova con la tua canzone preferita.</p>
+      <p class="intro-txt reveal" style="margin:0 auto">Apri rooMusic e prova con la tua canzone preferita.</p>
       <div class="cta reveal">
         <a class="btn pri" href="./?app">Apri l'app</a>
         <a class="btn sec" href="https://www.paypal.me/fonicainfinity" target="_blank" rel="noopener">Sostieni il progetto</a>
       </div>
       <label class="skip reveal"><input type="checkbox" id="skipPres"> La prossima volta apri direttamente l'app, senza questa presentazione</label>
-      <p class="note">Pure Voltage è uno strumento per lo studio e l'uso personale della musica. Non contiene, non vende e non distribuisce brani: chi la usa si impegna a rispettare il diritto d'autore.</p>
+      <p class="note">rooMusic è uno strumento per lo studio e l'uso personale della musica. Non contiene, non vende e non distribuisce brani: chi la usa si impegna a rispettare il diritto d'autore.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap"><span>© Pure Voltage</span><a href="./?app">Apri l'app</a></div>
+  <div class="wrap"><span>© rooMusic</span><a href="./?app">Apri l'app</a></div>
 </footer>
 
 <script>
@@ -336,6 +340,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </script>
 <script>/* temi chiari: logo chiaro al posto di quello scuro */
 (function(){var t=document.documentElement.dataset.theme;if(!/^(carta|nebbia|giallo|celeste)$/.test(t))return;var C={carta:'#f4f1ea',nebbia:'#edf1f5',giallo:'#f6f0df',celeste:'#f6f0df'};var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',C[t]);
-  document.querySelectorAll('img').forEach(function(i){var a=i.getAttribute('src');if(a==='pv-logo.jpg')i.src='pv-logo-chiaro.webp';else if(a==='pv-hero.jpg')i.src='pv-hero-chiaro.webp'});var v=document.getElementById('heroV');if(v){try{v.pause()}catch(e){}v.removeAttribute('autoplay')}})();</script>
+  document.querySelectorAll('img').forEach(function(i){var a=i.getAttribute('src');if(a==='rm-logo.svg')i.src='rm-logo-chiaro.svg';else if(a==='rm-logo-verticale.svg')i.src='rm-logo-verticale-chiaro.svg'});var v=document.getElementById('heroV');if(v){v.src='intro-roomusic-chiaro.mp4';try{v.play()}catch(e){}}})();</script>
 </body>
 </html>

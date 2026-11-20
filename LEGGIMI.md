@@ -1,6 +1,6 @@
-# Pure Voltage – sito web
+# rooMusic – sito web
 
-Questi file pubblicano Pure Voltage all'indirizzo
+Questi file pubblicano rooMusic all'indirizzo
 **https://dinopegaso77-sys.github.io/fonica-infinity/**
 
 ## Pubblicare (una volta sola)
@@ -12,7 +12,7 @@ Questi file pubblicano Pure Voltage all'indirizzo
 
 ## Sul telefono o sul tablet
 Apri l'indirizzo con Chrome → menu **⋮** → **Aggiungi a schermata Home** (o **Installa app**).
-Compare l'icona Fonica come una vera app.
+Compare l'icona di rooMusic (il plettro con le cuffie) come una vera app.
 
 ## Aggiornare
 Quando ricevi un nuovo `index.html`, caricalo nello stesso repository (sostituisce il vecchio).

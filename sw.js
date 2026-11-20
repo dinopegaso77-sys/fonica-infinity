@@ -1,8 +1,8 @@
-// Pure Voltage: tiene l'app disponibile anche senza internet (le funzioni online restano online)
-const C='purevoltage-v6',LIB='purevoltage-lib';
+// rooMusic: tiene l'app disponibile anche senza internet (le funzioni online restano online)
+const C='roomusic-v1',LIB='purevoltage-lib'; /* LIB tiene il vecchio nome: così le librerie già scaricate restano */
 /* motore degli amplificatori e altre librerie prese da internet: si salvano, così la Sala prove suona anche senza connessione */
 const LIBHOST=/(^|\.)(cdn\.jsdelivr\.net|esm\.sh)$/;
-self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'])));self.skipWaiting()});
+self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png'])));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C&&x!==LIB).map(x=>caches.delete(x)))));self.clients.claim()});
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET')return;
   if(u.origin!==location.origin){if(!LIBHOST.test(u.hostname))return;
