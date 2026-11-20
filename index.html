@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 19:42"><meta name="pv-notes" content="Sala prove: tasti indietro, play e avanti come nel Palco (5 secondi alla volta); Pedaliera: si vedono tutti gli effetti accesi nell'ordine della catena (più quello che stai regolando), con il plettro rooMusic su ogni pedale. Schermata unica: vista Musicisti con mixer della base e «Aggiungi musicista» a sinistra, testo e tablatura nella vista Palco"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="20/11 · 20:56"><meta name="pv-notes" content="Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -207,6 +207,24 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .stbtn .srl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 :is([data-theme=notte]) .stbtn:not(.main){background:var(--raise)}
 @media (max-width:600px){.stbtn{width:46px;height:46px}.stbtn.main{width:58px;height:58px}}
+/* Impostazioni sotto la Base */
+.ssetbox{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:8px;margin-top:4px;flex-shrink:0}.ssetbox h4{margin:0;font-size:14px}
+.t3tile{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);background:var(--raise);color:var(--dim);border-radius:12px;padding:8px 10px;cursor:pointer}.t3tile .ico{width:22px;height:22px;flex:none}
+.t3tile b{display:block;font-size:14px;color:var(--fg)}.t3tile small{display:block;font-size:11.5px}
+.t3tile.on{background:color-mix(in srgb,var(--accent) 22%,var(--raise));border-color:var(--accent);color:var(--fg)}.t3tile.on .ico{color:var(--accent)}
+.nonam .stsnd,#ovRig.nonam #rigNamRow,#ovRig.nonam .redp[data-ed=amp],#ovRig.nonam .redp[data-ed=cab]{display:none!important}
+/* Pedaliera: tabella dei banchi (1-5 · questo brano · generali) e colonna a destra */
+#ovRig .rigtop2{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:10px 16px;align-items:start}
+.rbtab{display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1fr);gap:4px 6px;align-items:center}
+.rbtab .rbh{font-size:11.5px;font-weight:700;color:var(--dim);display:flex;align-items:center;gap:6px;min-width:0;white-space:nowrap;overflow:hidden}.rbtab .rbh .mini{min-height:24px;padding:0 8px;font-size:11px}
+.rbtab .rbn{min-height:34px;padding:0;border-radius:10px}.rbtab .rbn b{font-size:16px}
+.rbtab .sel{min-height:32px;font-size:12.5px;padding-top:2px;padding-bottom:2px;width:100%;min-width:0}
+.rbtab .snote{font-size:11px;margin:0}
+.rside{display:flex;flex-direction:column;gap:6px;min-width:0}.rsrow{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end}.rsrow[hidden]{display:none!important}
+.rsrow .field{flex:1 1 140px;min-width:0}.rsrow .field>span{font-size:11px}.rsrow .sel{min-height:32px;font-size:12.5px;width:100%}
+.rsbtns .pdpre{display:contents}.rsbtns #rigPre>label.field,.rsbtns .prdest{display:none!important}.rsbtns .chip,.rsbtns .mini{min-height:34px;font-size:13px}
+#ovRig #rigBankBox{display:none!important}
+@media (max-width:760px){#ovRig .rigtop2{grid-template-columns:1fr}}
 #sBaseBox .saddtop{width:100%;justify-content:center;min-height:42px;flex-shrink:0}
 @media (min-width:1000px) and (min-height:600px){
  .salaov .sala-body{padding:8px 12px;gap:8px}
@@ -1343,7 +1361,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove: tasti indietro, play e avanti come nel Palco (5 secondi alla volta); Pedaliera: si vedono tutti gli effetti accesi nell'ordine della catena (più quello che stai regolando), con il plettro rooMusic su ogni pedale. Schermata unica: vista Musicisti con mixer della base e «Aggiungi musicista» a sinistra, testo e tablatura nella vista Palco.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Sala prove: nuovo riquadro «Impostazioni» sotto la Base (TONE3000 colorato quando è collegato; «Usa amplificatori NAM e casse IR»: spento li nasconde ovunque ma restano salvati); dopo il collegamento a TONE3000 si torna dritti alla Sala prove. Pedaliera riordinata: banchi 1-5 in verticale con le colonne «Questo brano» (vuoto = come il generale) e «Banchi generali»; «Suono del brano» riempie tutti e 5 i banchi con l'analisi e i suoni più simili; menu «Strumento» per salvare e richiamare il tuo strumento (Squier, Yamaha…); ampli NAM e cassa IR in alto a destra; tolti i doppioni.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1687,9 +1705,15 @@ themeApply();</script>
 <!-- rig di un musicista -->
 <div class="ov" id="ovRig" hidden><div class="sheet rigsheet">
   <div class="row"><h3 class="grow" id="rigTitle">Suono</h3><button class="mini" data-close>Chiudi</button></div>
-  <div class="rigtop"><span class="rignum" id="rigNum">–</span><b class="rigname" id="rigName">Suono</b><button class="chip pri rigcopy" id="rigCopy" hidden title="Analizza il brano e prepara il suono della chitarra o del basso originale"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3.5l6 6-2 1-1.5-1.5-5.6 5.6a3.4 3.4 0 0 1-1 3.9 3 3 0 0 1-4.3-.2l-1.7-1.7a3 3 0 0 1-.2-4.3 3.4 3.4 0 0 1 3.9-1l5.6-5.6L12.5 4z"/><circle cx="8.2" cy="15.8" r="1.2"/></svg><span>Suono del brano</span></button><span class="grow"></span><div class="pdpre" id="rigPre"><label class="field"><span>Preset (si sente subito)</span><select class="sel" data-prsel aria-label="Preset dei pedali"></select></label><button class="chip" data-prsave>Salva come preset</button><button class="mini" data-prdel hidden>Elimina</button><button class="mini" data-prord title="Rimette i pedali nell'ordine classico">↺ Ordine classico</button>
+  <div class="rigtop rigtop2"><span class="rignum" id="rigNum" hidden>–</span><b class="rigname" id="rigName" hidden>Suono</b>
+    <div class="rbtab" id="rigBankTab"></div>
+    <div class="rside">
+      <div class="rsrow" id="rigInstRow" hidden><label class="field"><span>Strumento</span><select class="sel" id="rigInst" aria-label="Il tuo strumento"></select></label></div>
+      <div class="rsrow" id="rigNamRow"><label class="field"><span>Ampli NAM</span><select class="sel" id="rigAmpTop" aria-label="Ampli NAM"></select></label><label class="field"><span>Cassa IR</span><select class="sel" id="rigIrTop" aria-label="Cassa IR"></select></label></div>
+      <div class="rsrow rsbtns"><button class="chip pri rigcopy" id="rigCopy" hidden title="Analizza il brano e prepara il suono della chitarra o del basso originale"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3.5l6 6-2 1-1.5-1.5-5.6 5.6a3.4 3.4 0 0 1-1 3.9 3 3 0 0 1-4.3-.2l-1.7-1.7a3 3 0 0 1-.2-4.3 3.4 3.4 0 0 1 3.9-1l5.6-5.6L12.5 4z"/><circle cx="8.2" cy="15.8" r="1.2"/></svg><span>Suono del brano</span></button><div class="pdpre" id="rigPre"><label class="field"><span>Preset (si sente subito)</span><select class="sel" data-prsel aria-label="Preset dei pedali"></select></label><button class="chip" data-prsave>Salva come preset</button><button class="mini" data-prdel hidden>Elimina</button><button class="mini" data-prord title="Rimette i pedali nell'ordine classico">↺ Ordine classico</button>
     <div class="prdest" data-prdest><span class="lbl">Metti nel banco</span><span class="seg prbk" data-prbk><button data-b="0">1</button><button data-b="1">2</button><button data-b="2">3</button><button data-b="3">4</button><button data-b="4">5</button></span>
       <span class="seg prsc" data-prsc><button data-s="song">Solo questo brano</button><button data-s="all">Tutti i brani</button></span><button class="chip pri" data-prload>Carica nel banco</button></div></div></div>
+    </div></div>
   <div class="rigchainbox"><div class="rigchain" id="rigChain"></div></div>
   <p class="righint">Tocca un blocco per regolarlo · toccalo due volte per accenderlo o spegnerlo</p>
   <div class="rigedit" id="rigEdit">
@@ -6477,7 +6501,7 @@ async function modScan(){if(modScan.done)return;modScan.done=true;const ks=new S
 function curveDrive(k){const n=2048,c=new Float32Array(n),d=1+k*40;for(let i=0;i<n;i++){const x=i/(n-1)*2-1;c[i]=Math.tanh(x*d)/Math.tanh(d)}return c}
 function sUnbuild(t){if(!t.node)return;try{t.node.inG.disconnect()}catch(e){}try{t.node.mon.disconnect()}catch(e){}if(t.node.sp)try{t.node.sp.disconnect();t.node.sp.onaudioprocess=null}catch(e){}try{if(t.node.ch)t.node.ch.node.disconnect(t.node.inG)}catch(e){}t.node=null}
 async function sBuild(t){const c=sCtx();sUnbuild(t);if(t.off)return null;
-  const ch=chanOf(t);const R2=t.rig;const N=(k,o={})=>{const n=c['create'+k]();for(const[a,v]of Object.entries(o)){if(n[a]instanceof AudioParam)n[a].value=v;else n[a]=v}return n};
+  const ch=chanOf(t);const R2=namOn()?t.rig:Object.assign({},t.rig,{amp:null,ir:null});const N=(k,o={})=>{const n=c['create'+k]();for(const[a,v]of Object.entries(o)){if(n[a]instanceof AudioParam)n[a].value=v;else n[a]=v}return n};
   const inG=N('Gain',{gain:R2.gain});if(ch)ch.node.connect(inG);const an=N('Analyser',{fftSize:4096});inG.connect(an);let x=inG;const link=n=>{x.connect(n);x=n;return n};
   link(N('BiquadFilter',{type:'highpass',frequency:t.role==='basso'?28:t.role==='voce'?85:60}));
   const fb=await fxBoard(c,fxOf(R2,t.role));x.connect(fb.pre.inp);x=fb.pre.out;
@@ -6617,7 +6641,7 @@ let sRaf=0;function sMeters(){const b=new Float32Array(1024),now=performance.now
   if(SA._mf%30===0)sLatUI();
   if(!$('#salaOv').hidden)sRaf=requestAnimationFrame(sMeters)}
 function sLatUI(){const c=SA.ctx,el=$('#sLat');if(!c||!el)return;const out=(c.outputLatency||0)+(c.baseLatency||0);let inp=0,nam=0;
-  for(const t of SA.tracks){const ch=chanOf(t);if(ch&&ch.dev.lat)inp=Math.max(inp,ch.dev.lat);if(t.rig&&t.rig.amp&&t.rig.live!==false&&t.role!=='voce')nam=Math.max(nam,512/c.sampleRate)}
+  for(const t of SA.tracks){const ch=chanOf(t);if(ch&&ch.dev.lat)inp=Math.max(inp,ch.dev.lat);if(t.rig&&t.rig.amp&&namOn()&&t.rig.live!==false&&t.role!=='voce')nam=Math.max(nam,512/c.sampleRate)}
   const ms=Math.round((out+inp+nam)*1000);if(!ms){el.textContent='Ritardo – ms';return}el.textContent='Ritardo '+ms+' ms '+(ms<20?'●':ms<35?'●':'●');el.className='slat '+(ms<20?'':ms<35?'mid':'hi');
   el.title='Ritardo stimato tra quando suoni e quando ti senti in cuffia: uscita '+Math.round(out*1000)+' ms, ingresso '+Math.round(inp*1000)+' ms'+(nam?', amplificatore NAM '+Math.round(nam*1000)+' ms':'')+'.\nSotto 20 ms non si sente. Se è alto: chiudi altri programmi, usa il driver della scheda audio, oppure spegni «Mi sento dal PC» e usa il Direct Monitor della scheda.'}
 
@@ -6701,7 +6725,7 @@ function sRender(){try{sStemApply();SA.baseMono=null}catch(e){}
 /* ---------- finestra «Suono» (rig) ---------- */
 let RIG=null;const RIG_SL={rigGain:'gain',rigDrive:'drive',rigBass:'bass',rigMid:'mid',rigTreble:'treble',rigLevel:'level'};
 function rigOpen(t){RIG=t;$('#rigTitle').textContent='Suono di '+t.name+' ('+ROLES[t.role]+')';for(const[id,k]of Object.entries(RIG_SL))$('#'+id).value=t.rig[k];rkSync();
-  RIGSEL=t.role==='voce'?'eq':'amp';$('#rigDriveF').hidden=!(t.role==='chitarra'||t.role==='altro');$('#rigCopy').hidden=!(t.role==='chitarra'||t.role==='basso');rigBoardDraw(t);Promise.all([toneLoad('chitarra'),toneLoad('basso')]).then(()=>{if(RIG===t&&!$('#ovRig').hidden)rigBoardDraw(t)});$('#rigLive').checked=t.rig.live!==false;rigInfo();openOv('#ovRig')}
+  {let k0='eq';try{const F=fxOf(t.rig,t.role);k0=fxOrder(F).find(k=>PED_BY[k]&&F[k].on)||'eq'}catch(e){}RIGSEL=k0}$('#rigDriveF').hidden=!(t.role==='chitarra'||t.role==='altro');$('#rigCopy').hidden=!(t.role==='chitarra'||t.role==='basso');rigBoardDraw(t);Promise.all([toneLoad('chitarra'),toneLoad('basso')]).then(()=>{if(RIG===t&&!$('#ovRig').hidden)rigBoardDraw(t)});$('#rigLive').checked=t.rig.live!==false;rigInfo();openOv('#ovRig')}
 
 /* ===== finestra «Suono» in stile pedaliera digitale: catena di blocchi, manopole del blocco scelto, banchi a pedale ===== */
 let RIGSEL='amp',RIGLAST=0;
@@ -6713,7 +6737,7 @@ function rkSync(){$$('#ovRig .rk').forEach(L=>{const inp=L.querySelector('input'
 function rigChainDraw(t){const box=$('#rigChain');if(!box||!t)return;const F=fxOf(t.rig,t.role),r=t.rig,voice=t.role==='voce';
   const blk=(k,name,col,on,big)=>`<button class="rblk ${on?'':'off'} ${RIGSEL===k?'sel':''} ${big?'big':''}" data-rb="${k}" style="--c:${col}" aria-pressed="${RIGSEL===k}" title="${esc(name)}${on?' · acceso':' · spento'}"><i class="rled"></i><svg viewBox="0 0 24 24" aria-hidden="true">${RBI[k]||RBI.eq}</svg><b>${esc(name)}</b></button>`;
   const eqOn=!!(r.bass||r.mid||r.treble||(r.match&&r.match.g)),parts=['<span class="rio">IN</span>'];{const mr=$('#rigMatchRow');if(mr)mr.hidden=!(r.match&&r.match.g)}
-  for(const k of fxOrder(F)){if(k==='amp'){if(!voice){parts.push(blk('amp',r.amp?'Ampli NAM':'Ampli','#ff5f57',!!(r.amp||r.drive>0),1),blk('cab','Cassa IR','#ffd23f',!!r.ir,1))}parts.push(blk('eq','EQ','#7fd6a5',eqOn||voice));continue}
+  for(const k of fxOrder(F)){if(k==='amp'){if(!voice&&namOn()){parts.push(blk('amp',r.amp?'Ampli NAM':'Ampli','#ff5f57',!!(r.amp||r.drive>0),1),blk('cab','Cassa IR','#ffd23f',!!r.ir,1))}parts.push(blk('eq','EQ','#7fd6a5',eqOn||voice));continue}
     const p=PED_BY[k];parts.push(blk(k,p.s,`color-mix(in srgb,${p.c} 75%,#fff)`,!!F[k].on))}
   parts.push('<span class="rio">OUT</span>');box.innerHTML=parts.join('<span class="rwire"></span>');
   box.querySelectorAll('[data-rb]').forEach(b=>b.onclick=()=>{const k=b.dataset.rb,now=Date.now(),dbl=RIGSEL===k&&now-RIGLAST<450;RIGLAST=now;
@@ -6723,7 +6747,7 @@ function rigChainDraw(t){const box=$('#rigChain');if(!box||!t)return;const F=fxO
   rigSelUI(t);const sb=box.querySelector('.rblk.sel');if(sb){const bx=box.parentElement,l=sb.offsetLeft,r=l+sb.offsetWidth;if(l<bx.scrollLeft+20||r>bx.scrollLeft+bx.clientWidth-20)bx.scrollLeft=l-bx.clientWidth/2+sb.offsetWidth/2}}
 function rigSelUI(t){const k=RIGSEL;$$('#rigEdit .redp').forEach(d=>d.hidden=d.dataset.ed!==k);$$('#rigBoard .pedal').forEach(c=>c.classList.toggle('cur',c.dataset.pd===k&&!c.classList.contains('ampcard')));$('#rigBoard').hidden=!PED_BY[k]}
 $$('#ovRig .rk').forEach(L=>knobify(L));
-function rigInfo(){if(!RIG.__mix)setTimeout(sRender,50);const r=RIG.rig;{const t=RIG;for(const[id,k]of[['#rigAmpSel','nam'],['#rigIrSel','ir']]){const sel=$(id);sSndFill(sel,t,k);sel.onchange=()=>sSndPick(t,k,sel.value,sel)}}$('#rigAmpName').textContent=r.amp?r.amp.name:'nessuno';$('#rigIrName').textContent=r.ir?r.ir.name:'nessuna';
+function rigInfo(){if(!RIG.__mix)setTimeout(sRender,50);const r=RIG.rig;{const t=RIG;$('#rigNamRow').hidden=!namOn()||t.role==='voce';for(const[id,k]of[['#rigAmpSel','nam'],['#rigIrSel','ir'],['#rigAmpTop','nam'],['#rigIrTop','ir']]){const sel=$(id);sSndFill(sel,t,k);sel.onchange=()=>sSndPick(t,k,sel.value,sel)}}$('#rigAmpName').textContent=r.amp?r.amp.name:'nessuno';$('#rigIrName').textContent=r.ir?r.ir.name:'nessuna';
   rigChainDraw(RIG);const cr=[r.amp,r.ir].filter(x=>x&&x.creator);$('#rigCredit').innerHTML=cr.map(x=>`<span class="t3c">${x.avatar?`<img src="${esc(x.avatar)}" alt="">`:''}<b>${esc(x.name)}</b> di <a href="${esc(x.url||'https://www.tone3000.com')}" target="_blank" rel="noopener">${esc(x.creator)}</a> · TONE3000</span>`).join('')}
 
 function pedApply(t,k,full){const F=fxOf(t.rig,t.role);if(t.node&&t.node.fxb)t.node.fxb.set(F);if(RIG===t&&!$('#ovRig').hidden)rigChainDraw(t);
@@ -6805,7 +6829,10 @@ const BANK_DEF={chitarra:['Pulito','Distorto rock','Distorto metal','Acustica'],
 /* i banchi di partenza di prima diventano quelli nuovi (senza doppioni) */
 const BANK_OLD={chitarra:"auto|F:Pulito (tutto spento)|F:Rock|F:Assolo|F:Anni '80",basso:'auto|F:Basso morbido|F:Basso rock|F:Basso funk|F:Basso con ottava',altro:"auto|F:Pulito (tutto spento)|F:Rock|F:Anni '80|F:Spazio",tastiere:"auto|F:Pulito (tutto spento)|F:Anni '80|F:Spazio|F:Rock"};
 function bankMig(a,role){if(Array.isArray(a)&&a.length===5&&BANK_OLD[role]&&a.join('|')===BANK_OLD[role]){const n=['auto',...(BANK_DEF[role]||BANK_DEF.chitarra).map(x=>'F:'+x)];for(let i=0;i<5;i++)a[i]=n[i]}return a}
-function bankRefs(t){{const o=sbGet(t.role);if(o)return bankMig(o,t.role)}const r=t.rig;bankMig(r.banks,t.role);if(!Array.isArray(r.banks)||r.banks.length!==5)r.banks=['auto',...(BANK_DEF[t.role]||BANK_DEF.chitarra).map(n=>'F:'+n)];return r.banks}
+function genRefs(t){const r=t.rig;bankMig(r.banks,t.role);if(!Array.isArray(r.banks)||r.banks.length!==5)r.banks=['auto',...(BANK_DEF[t.role]||BANK_DEF.chitarra).map(n=>'F:'+n)];return r.banks}
+function bankRefs(t){const g=genRefs(t),o=sbGet(t.role);if(!o)return g;bankMig(o,t.role);return o.map((x,i)=>x||g[i])}
+/* banchi del brano: si creano vuoti (= come i generali) e si riempiono riga per riga */
+function sbEnsure(t){const k=sbKey();if(!k)return null;const all=sbAll(),e=all[k]||(all[k]={r:{},title:song.title||'',artist:song.artist||''});if(!Array.isArray(e.r[t.role])||e.r[t.role].length!==5)e.r[t.role]=[null,null,null,null,null];e.at=Date.now();SB.seen[k]=JSON.stringify(e.r);sbWrite();return e.r[t.role]}
 function bankResolve(ref,role){if(ref==='auto'&&(role==='chitarra'||role==='basso')){const tn=toneNow(role),s0=tn&&tn.sounds&&tn.sounds[0];if(s0)return{name:'Suono del brano · '+s0.name,fx:s0.fx,auto:true,why:'copiato dal brano'}}if(ref==='auto'){const a=prAutoPick(role);const nm=a?a.name:(role==='basso'?'Basso pulito':role==='voce'?'Voce pop':role==='chitarra'?'Pulito':'Pulito (tutto spento)');const f=PRESET_F.find(x=>x[0]===nm);return f?{name:'Suono del brano · '+nm,fx:f[1],auto:!!a,why:a&&a.why}:null}
   if(!ref)return null;if(ref.startsWith('F:')){const nm=prName(ref.slice(2)),f=PRESET_F.find(x=>x[0]===nm);return f?{name:f[0],fx:f[1]}:null}if(ref.startsWith('U:')){const m=prList().find(x=>x.name===ref.slice(2)&&(!x.role||x.role===role));return m?{name:m.name,fx:m.fx}:null}return null}
 const bankShort=n=>(n||'—').replace(/^Suono del brano · /,'Brano · ').replace(/^Voce |^Basso /,'').replace(' (tutto spento)','').replace(' (slapback)','').replace(' (ottava)','').replace('con ottava','ottava').replace('con coro','coro');
@@ -6836,14 +6863,33 @@ function prBar(id,getFx,apply,role,t){const bar=$('#'+id);if(!bar)return;const s
   const tryNow=()=>{const v=sel.value,pr=prGet(v);if(!pr)return;prCopy(getFx(),pr.fx);getFx()._pr=v;apply();toast('Stai sentendo «'+pr.name+'»')};
   sel.onchange=()=>{del.hidden=!sel.value.startsWith('u');if(sel.value)tryNow()};
   bar.querySelector('[data-prload]').onclick=()=>{const v=sel.value,ref=prRef(v),pr=prGet(v);if(!ref){toast('Scegli prima un preset');return}if(!t){prCopy(getFx(),pr.fx);apply();return}
-    let refs;if(D.s==='song'){if(!sbGet(t.role))sbMake(t);refs=sbGet(t.role)}else{const r=t.rig;if(!Array.isArray(r.banks)||r.banks.length!==5){bankRefs(t)}refs=Array.isArray(r.banks)&&r.banks.length===5?r.banks:bankRefs(t)}
+    let refs;if(D.s==='song'){refs=sbGet(t.role)||sbEnsure(t)}else{refs=genRefs(t)}
     refs[D.b]=ref;sSave();bankSel(t,D.b,true);bankUI(t);toast('«'+pr.name+'» nel banco '+(D.b+1)+(D.s==='song'?' di «'+((song&&song.title)||'questo brano')+'»':' per tutti i brani'))};
   bar.querySelector('[data-prsave]').onclick=()=>{const name=(prompt('Nome del preset (es. «Rock di Dino»):','')||'').trim();if(!name)return;const L=prList(),i=L.findIndex(x=>x.name.toLowerCase()===name.toLowerCase()&&(x.role||null)===(role||null));
     if(i>=0&&!confirm('Esiste già un preset «'+L[i].name+'». Lo sostituisco?'))return;const rec={name,fx:prSnap(getFx()),role:role||null,date:Date.now()};if(i>=0)L[i]=rec;else L.push(rec);L.sort((a,b)=>a.name.localeCompare(b.name,'it',{sensitivity:'base'}));prPut(L);fill('u'+L.findIndex(x=>x.name===name));toast('Preset «'+name+'» salvato: ora puoi metterlo in un banco')};
   bar.querySelector('[data-prord]').onclick=()=>{getFx()._order=ORDER0.slice();apply(true);toast('Pedali nell\'ordine classico')};
   del.onclick=()=>{const v=sel.value;if(!v.startsWith('u'))return;const L=prList(),m=L[+v.slice(1)];if(!m||!confirm('Elimino il preset «'+m.name+'»?'))return;L.splice(+v.slice(1),1);prPut(L);fill('');toast('Preset eliminato')};
   fill(keep);destUI()}
-function rigBoardDraw(t){const box=$('#rigBoard');if(!box)return;$('#rigBankBox').hidden=!!(t.__mix||RIG&&RIG.__mix);if(!$('#rigBankBox').hidden){$('#rigSB').innerHTML=sbRowHTML(t);bankCfgDraw(t);$('#rigFoot').innerHTML=bankBtns(t,'fsw')}const F=fxOf(t.rig,t.role);box.innerHTML=pedHTML(F,{bpm:true,noAmp:t.role==='voce'});pedBind(box,F,(k)=>pedApply(t,k),()=>pedReorder(t));
+const instList=()=>{try{return JSON.parse(prefGet('instrs')||'[]')}catch(e){return[]}};
+function rigInstDraw(t){const row=$('#rigInstRow'),sel=$('#rigInst');const ok=(t.role==='chitarra'||t.role==='basso')&&!t.__mix;row.hidden=!ok;if(!ok)return;const L=instList().filter(x=>x.role===t.role),cur=t.rig.inst||'';
+  sel.innerHTML='<option value="">'+(t.rig.match&&t.rig.match.g&&!cur?'Strumento di adesso (non salvato)':'— nessuna correzione —')+'</option>'+L.map(x=>`<option value="n:${esc(x.name)}" ${cur===x.name?'selected':''}>${esc(x.name)}</option>`).join('')+(t.rig.match&&t.rig.match.g?'<option value="save">＋ Salva lo strumento di adesso…</option>':'')+'<option value="an">Analizza il mio strumento…</option>'+(cur?'<option value="del">Elimina «'+esc(cur)+'»</option>':'');
+  sel.value=cur?'n:'+cur:'';sel.onchange=async()=>{const v=sel.value;if(v==='an'){rigInstDraw(t);cpOpen(t);return}
+    if(v==='save'){const name=(prompt('Nome dello strumento (es. «Squier Precision»):','')||'').trim();if(!name){rigInstDraw(t);return}const A=instList().filter(x=>!(x.name===name&&x.role===t.role));A.push({name,role:t.role,g:t.rig.match.g.slice(),date:Date.now()});prefSet('instrs',JSON.stringify(A));t.rig.inst=name;sSave();rigInstDraw(t);toast('Strumento «'+name+'» salvato');return}
+    if(v==='del'){const A=instList().filter(x=>!(x.name===t.rig.inst&&x.role===t.role));prefSet('instrs',JSON.stringify(A));t.rig.inst=null;rigInstDraw(t);toast('Strumento eliminato');return}
+    if(!v){t.rig.inst=null;t.rig.match=null}else{const x=instList().find(y=>'n:'+y.name===v&&y.role===t.role);if(x){t.rig.inst=x.name;t.rig.match={g:x.g.slice(),inst:x.name,date:Date.now()}}}
+    await sBuild(t);sTapBuild();sSave();rigChainDraw(t);rigInstDraw(t);toast(v?'Strumento «'+t.rig.inst+'»':'Correzione dello strumento tolta')}}
+function bankOptsHTML(t,cur,first){const mine=prList().filter(x=>!x.role||x.role===t.role),f=PRESET_F.filter(x=>prRoleOk(x[2],t.role)&&!PR_HIDE.has(x[0]));cur=cur&&cur.startsWith('F:')?'F:'+prName(cur.slice(2)):cur;
+  return first+(t.role==='chitarra'||t.role==='basso'?'<option value="auto" '+(cur==='auto'?'selected':'')+'>✨ Suono del brano</option>':'')+'<optgroup label="I tuoi">'+(mine.length?mine.map(x=>`<option value="U:${esc(x.name)}" ${cur==='U:'+x.name?'selected':''}>${esc(x.name)}</option>`).join(''):'<option disabled>nessuno salvato</option>')+'</optgroup><optgroup label="⭐ Già pronti">'+f.map(x=>`<option value="F:${esc(x[0])}" ${cur==='F:'+x[0]?'selected':''}>${esc(x[0])}</option>`).join('')+'</optgroup>'}
+function rigBankTabDraw(t){const box=$('#rigBankTab');if(!box)return;box.hidden=!!t.__mix;if(t.__mix)return;const g=genRefs(t),o=sbGet(t.role),k=sbKey(),cur=t.rig.bank,ttl=song&&song.title?song.title:'questo brano';
+  let h=`<span></span><span class="rbh">${k?'«'+esc(ttl.slice(0,26))+'»'+(o?` <button class="mini" data-sbdrop="${t.id}" title="Svuota: torna ai banchi generali">Svuota</button>`:''):'Questo brano'}</span><span class="rbh">Banchi generali</span>`;
+  for(let i=0;i<5;i++){const sv=o?o[i]:null,gr=bankResolve(g[i],t.role);
+    h+=`<button class="bankb rbn ${cur===i?'on':''}" data-bank="${t.id}:${i}" aria-pressed="${cur===i}" title="Usa il banco ${i+1}"><b>${i+1}</b></button>`+
+      (k?`<select class="sel" data-bks="${i}" aria-label="Banco ${i+1} di questo brano">${bankOptsHTML(t,sv,'<option value="">↳ come il generale</option>')}</select>`:`<span class="snote">apri un brano</span>`)+
+      `<select class="sel" data-bkg="${i}" aria-label="Banco generale ${i+1}">${bankOptsHTML(t,g[i],'<option value="">— vuoto —</option>')}</select>`}
+  box.innerHTML=h;
+  box.querySelectorAll('[data-bks]').forEach(sel=>sel.onchange=()=>{const i=+sel.dataset.bks,refs=sbGet(t.role)||sbEnsure(t);refs[i]=sel.value||null;sSave();bankSel(t,i);rigBankTabDraw(t);sRender()});
+  box.querySelectorAll('[data-bkg]').forEach(sel=>sel.onchange=()=>{const i=+sel.dataset.bkg,refs=genRefs(t);refs[i]=sel.value||null;sSave();bankSel(t,i);rigBankTabDraw(t);sRender()})}
+function rigBoardDraw(t){const box=$('#rigBoard');if(!box)return;try{rigBankTabDraw(t);rigInstDraw(t)}catch(e){console.warn(e)}$('#rigBankBox').hidden=!!(t.__mix||RIG&&RIG.__mix);if(!$('#rigBankBox').hidden){$('#rigSB').innerHTML=sbRowHTML(t);bankCfgDraw(t);$('#rigFoot').innerHTML=bankBtns(t,'fsw')}const F=fxOf(t.rig,t.role);box.innerHTML=pedHTML(F,{bpm:true,noAmp:t.role==='voce'});pedBind(box,F,(k)=>pedApply(t,k),()=>pedReorder(t));
   prBar('rigPre',()=>fxOf(t.rig,t.role),()=>pedReorder(t),t.role,t.__mix?null:t);rigChainDraw(t)}
 function pedReorder(t){rigBoardDraw(t);if(t.__mix||RIG&&RIG===t&&RIG.__mix){if(WV.play){wvStop();wvPlay()}sAutoSaveSoon&&sAutoSaveSoon();return}sBuild(t).then(sTapBuild);sSave();sRender()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-pdt][data-pd]');if(b){e.preventDefault();const t=SA.tracks.find(x=>x.id===b.dataset.pdt);if(!t)return;const F=fxOf(t.rig,t.role),k=b.dataset.pd;F[k].on=F[k].on?0:1;pedApply(t,k,true);
@@ -6899,13 +6945,20 @@ async function cpAnalyze(){if(!CP)return;const say=m=>$('#cpMsg').textContent=m,
     if(!out)throw new Error('STOP');if(out.error)throw new Error(/mode|audio_b64|manca il file/.test(out.error)?'RunPod non conosce ancora questa funzione (aggiorna fonica-runpod e fai New Release)':out.error);
     if(!out.sounds||!out.sounds.length)throw new Error('nessun suono trovato');
     out.date=Date.now();CP.res=out;TONE_MEM.set(toneKey(CP.role),out);try{await setPut('tone:'+toneKey(CP.role),out)}catch(e){}
-    cpRender();cpApply(0,true);toast('Suono del brano pronto: «'+out.sounds[0].name+'» acceso');if(RIG===CP.t&&!$('#ovRig').hidden)rigBoardDraw(CP.t)}
+    cpRender();cpApply(0,true);songBankFill(CP.t,out,true);toast('Suono del brano pronto: «'+out.sounds[0].name+'» nel banco 1, e i banchi 2-5 con suoni simili');if(RIG===CP.t&&!$('#ovRig').hidden)rigBoardDraw(CP.t)}
   catch(e){console.error(e);say(e.message==='STOP'?'Analisi fermata.':'Non sono riuscito ad analizzarlo: '+(r2Err(e)||e.message||e))}
   finally{b.disabled=false;if(up)r2Req('DELETE',key).catch(()=>{})}}
 $('#cpGo').onclick=cpAnalyze;
 /* banchi: 1 = suono principale (automatico), 2 e 3 = gli altri suoni del brano, salvati come preset */
-$('#cpBanks').onclick=()=>{const t=CP.t,r=CP.res;if(!r)return;if(!sbGet(t.role))sbMake(t);const refs=bankRefs(t),L=prList(),nm=(song.title||'Brano').slice(0,40);
-  const extra=r.sounds.slice(1,4);if(extra.length&&!confirm('Metto '+(extra.length===1?'l\'altro suono nel banco 2':'gli altri suoni nei banchi 2'+(extra.length>2?'-4':' e 3'))+' al posto di quello che c\'è adesso?'))return;
+/* somiglianza tra due suoni: stessi pedali accesi e distorsione simile */
+function fxSim(a,b){let v=0;for(const p of PEDALS){const x=a&&a[p.k],y=b&&b[p.k],xo=!!(x&&x.on),yo=!!(y&&y.on);if(xo===yo)v+=xo?2:1;else v-=2;if(xo&&yo&&(p.k==='od'||p.k==='ds')){const kk=p.k==='od'?'drive':'dist';v+=2-Math.abs((+x[kk]||0)-(+y[kk]||0))*4}}return v}
+function songBankFill(t,r,quiet){if(!r||!r.sounds||!r.sounds.length||!sbKey())return;const refs=sbEnsure(t),L=prList(),nm=(song.title||'Brano').slice(0,40),used=new Set(['auto']);refs[0]='auto';
+  const extra=r.sounds.slice(1,5);extra.forEach((s,k)=>{const name=nm+' · '+s.name,rec={name,fx:prSnap(Object.assign(fxDefaults(t.role),JSON.parse(JSON.stringify(s.fx)),{_order:fxOrder(fxOf(t.rig,t.role))})),role:t.role,date:Date.now()};
+    for(const p of PEDALS){if(!s.fx[p.k])rec.fx[p.k].on=0}const j=L.findIndex(x=>x.name===name&&x.role===t.role);if(j>=0)L[j]=rec;else L.push(rec);refs[k+1]='U:'+name;used.add('U:'+name)});prPut(L);
+  const base=r.sounds[0].fx,cand=[...prList().filter(x=>x.role===t.role&&!x.name.startsWith(nm+' · ')).map(x=>['U:'+x.name,x.fx]),...PRESET_F.filter(x=>prRoleOk(x[2],t.role)&&!PR_HIDE.has(x[0])).map(x=>['F:'+x[0],x[1]])].filter(c=>!used.has(c[0])).sort((a,b)=>fxSim(base,b[1])-fxSim(base,a[1]));
+  for(let i=1+extra.length,c=0;i<5&&c<cand.length;i++,c++)refs[i]=cand[c][0];
+  sSave();bankSel(t,0,true);sRender();if(RIG===t&&!$('#ovRig').hidden)rigBoardDraw(t);if(!quiet)toast('Banchi di «'+(song.title||'questo brano')+'» pronti: 1 è il suono del brano, gli altri sono i più simili')}
+$('#cpBanks').onclick=()=>{const t=CP.t,r=CP.res;if(!r)return;songBankFill(t,r);return;const refs=bankRefs(t),L=prList(),nm=(song.title||'Brano').slice(0,40);const extra=[];
   extra.forEach((s,k)=>{const name=nm+' · '+s.name,rec={name,fx:prSnap(Object.assign(fxDefaults(t.role),JSON.parse(JSON.stringify(s.fx)),{_order:fxOrder(fxOf(t.rig,t.role))})),role:t.role,date:Date.now()};
     for(const p of PEDALS){if(!s.fx[p.k])rec.fx[p.k].on=0}const j=L.findIndex(x=>x.name===name&&x.role===t.role);if(j>=0)L[j]=rec;else L.push(rec);refs[k+1]='U:'+name});
   prPut(L);sSave();bankSel(t,0);sRender();if(RIG===t&&!$('#ovRig').hidden)rigBoardDraw(t);toast('Banchi pronti: 1 '+r.sounds[0].name+(extra.length?', poi '+extra.map(s=>s.name).join(', '):''))};
@@ -6931,7 +6984,7 @@ async function cpMeasure(){if(!CP||!CP.res){$('#cpRes').textContent='Prima anali
   const err=d=>{let s=0,k=0;freqs.forEach((f,i)=>{if(f>=80&&f<=(CP.role==='basso'?4000:6000)){s+=Math.abs(d[i]);k++}});return k?s/k:0};const before=err(tg.map((v,i)=>v-me[i]));
   const old=(t.rig.match&&t.rig.match.g)||MATCH_F.map(()=>0),top=CP.role==='basso'?5000:8000;
   const g=MATCH_F.map((fc,j)=>{let s=0,k=0;freqs.forEach((f,i)=>{if(f>=fc/Math.SQRT2&&f<fc*Math.SQRT2){s+=diff[i];k++}});let v=k?s/k:0;if(fc>top||fc<(CP.role==='basso'?40:70))v=0;if(fc>=6500)v=Math.max(-4,Math.min(4,v));v=Math.max(-9,Math.min(9,v));return Math.round(Math.max(-12,Math.min(12,old[j]+.8*v))*10)/10});
-  t.rig.match={g,song:song.id,date:Date.now()};await sBuild(t);sTapBuild();sSave();rigChainDraw(t);$('#cpMatchX').hidden=false;cpDraw(freqs,tg,me);
+  t.rig.match={g,song:song.id,date:Date.now()};t.rig.inst=null;setTimeout(()=>toast('Per ritrovarlo: Pedaliera › Strumento › «Salva lo strumento di adesso»'),2500);await sBuild(t);sTapBuild();sSave();rigChainDraw(t);$('#cpMatchX').hidden=false;cpDraw(freqs,tg,me);
   const sim=v=>Math.max(0,Math.min(100,Math.round(100-v*5)));$('#cpRes').textContent='Somiglianza delle frequenze: '+sim(before)+'% prima della correzione. EQ di somiglianza aggiornato: suona di nuovo per sentirlo, e ripeti la misura per affinarlo ancora.';toast('EQ di somiglianza aggiornato')}
 $('#cpMeas').onclick=cpMeasure;
 $('#cpMatchX').onclick=async()=>{const t=CP&&CP.t;if(!t)return;t.rig.match=null;await sBuild(t);sTapBuild();sSave();rigChainDraw(t);$('#cpMatchX').hidden=true;$('#cpCurve').hidden=true;$('#cpRes').textContent='Correzione tolta.';toast('EQ di somiglianza tolto')};
@@ -6968,20 +7021,23 @@ const T3L={};async function t3List(kind,role){const k=kind+'/'+role;if(T3L[k])re
   const sortR=a=>role==='basso'?a.sort((x,y)=>isBass(y)-isBass(x)):role==='chitarra'?a.sort((x,y)=>isBass(x)-isBass(y)):a;
   const [fav,dl,...tr]=await Promise.all([get('/tones/favorited?page_size=100'),get('/tones/downloaded?page_size=100'),...gears.map(g=>get('/tones/trending?gear='+g))]);
   const r={fav:sortR(uniq(fav).filter(okFmt)),dl:sortR(uniq(dl).filter(okFmt)),trend:sortR(uniq(tr.flat()).filter(okFmt))};if(r.fav.length||r.dl.length||r.trend.length)T3L[k]=r;return r}
+async function t3Back(st,tid){for(let i=0;i<120;i++){if(song&&typeof SALA_OK!=='undefined'&&SALA_OK)break;await new Promise(r=>setTimeout(r,200))}
+  try{if(st&&st.song&&song&&song.id!==st.song){await openStored(st.song)}}catch(e){console.warn(e)}
+  if(song&&SALA_OK){await salaOpen();try{namUI()}catch(e){}const t=tid&&SA.tracks.find(x=>x.id===tid);if(t)rigOpen(t)}}
 async function t3Return(){const u=new URL(location.href);const err=u.searchParams.get('error');
   if(err){history.replaceState(null,'',T3.redirect);const d=u.searchParams.get('error_description')||'';const msg='TONE3000 ha risposto: '+err+(d?' – '+d:'');console.warn(msg,location.href);
     setTimeout(()=>{toast(msg);if(SALA_OK&&song)salaOpen().then(()=>{$('#sMsg').textContent=msg+'. Controlla in Impostazioni la chiave pubblica e che su TONE3000 l\'indirizzo di ritorno sia esattamente '+T3.redirect})},1200);return}
   const code=u.searchParams.get('code'),state=u.searchParams.get('state');if(!code||!state)return;let st=null;try{st=JSON.parse(sessionStorage.getItem('t3')||'null')}catch(e){}
   history.replaceState(null,'',T3.redirect);if(!st||st.state!==state){toast('Accesso a TONE3000 non valido: riprova');return}sessionStorage.removeItem('t3');
   try{toast('Scarico il suono da TONE3000…');const r=await t3Token({grant_type:'authorization_code',code,code_verifier:st.ver,redirect_uri:T3.redirect,client_id:T3.key});t3Keep(r);
-    const toneId=u.searchParams.get('tone_id');if(!toneId){toast('Accesso a TONE3000 fatto: ora nella riga del musicista trovi i suoni.');if(SALA_OK&&song)salaOpen();return}
+    const toneId=u.searchParams.get('tone_id');if(!toneId){toast('TONE3000 collegato: ora nella scheda del musicista trovi i suoni.');if(prefGet('namOn')!=='0')prefSet('namOn','1');t3Back(st,st.track);return}
     const meta=await t3Download(toneId,st.kind);
     const key=meta.key;sLoad();const t=SA.tracks.find(x=>x.id===st.track);if(t){t.rig[st.kind==='ir'?'ir':'amp']={key,name:meta.name,creator:meta.creator,avatar:meta.avatar,url:meta.url,full:meta.full};sSave()}
-    toast('Suono «'+meta.name+'» pronto'+(t?' per '+t.name:''));if(SALA_OK){await salaOpen();if(t)rigOpen(SA.tracks.find(x=>x.id===st.track))}}
+    toast('Suono «'+meta.name+'» pronto'+(t?' per '+t.name:''));await t3Back(st,t&&t.id)}
   catch(e){console.error(e);toast('TONE3000: '+(e.message||e))}}
 $('#rigT3').onclick=()=>t3Start('nam');$('#rigT3ir').onclick=()=>t3Start('ir');
 /* ---------- re-amp: l'amplificatore NAM applicato dopo, alla qualità massima ---------- */
-async function reampTrack(t,say){const r=t.rig;const sr=t.buf.sampleRate;let x=t.buf.getChannelData(0).slice();
+async function reampTrack(t,say){const r=namOn()?t.rig:Object.assign({},t.rig,{amp:null,ir:null});const sr=t.buf.sampleRate;let x=t.buf.getChannelData(0).slice();
   for(let i=0;i<x.length;i++)x[i]*=r.gain;
   {const F=fxOf(r,t.role);if(PEDALS.some(p=>p.pre&&F[p.k].on)){const oc0=new OfflineAudioContext(1,x.length,sr),b0=oc0.createBuffer(1,x.length,sr);b0.copyToChannel(x,0);const s0=oc0.createBufferSource();s0.buffer=b0;const bd=await fxBoard(oc0,F);s0.connect(bd.pre.inp);bd.pre.out.connect(oc0.destination);s0.start();x=(await oc0.startRendering()).getChannelData(0).slice()}}
   if((t.role==='chitarra'||t.role==='altro')&&r.drive>0){const cv=curveDrive(r.drive),n=cv.length;for(let i=0;i<x.length;i++){const v=Math.max(-1,Math.min(1,x[i]));x[i]=cv[Math.round((v+1)/2*(n-1))]}}
@@ -7086,7 +7142,7 @@ function sAutoSaveSoon(){}
 async function sView(v){SA.view=v;$$('.sala-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.sv===v));$('#salaRec').hidden=v!=='rec';$('#salaMix').hidden=v!=='mix';
   if(v==='mix'){wvStop();const tk=SA.takes[SA.cur];if(tk&&!SA.baseMono){try{const base=await sBaseBufs(),len=Math.max(...tk.tracks.map(t=>t.buf.duration),1);const oc=new OfflineAudioContext(1,Math.ceil(len*48000),48000);for(const b of base){if(!b.g||b.guide)continue;const s=oc.createBufferSource();s.buffer=b.buf;const g=oc.createGain();g.gain.value=b.g;s.connect(g);g.connect(oc.destination);s.start(0,Math.min(tk.from,b.buf.duration-.01))}SA.baseMono=await oc.startRendering()}catch(e){console.error(e)}}
     WV.pos=0;WV.t0=0;{const tk2=SA.takes[SA.cur];WV.span=tk2?Math.min(30,Math.max(4,Math.max(...tk2.tracks.map(t=>t.buf.duration))+1)):30}sMixRows();wvSelInfo();requestAnimationFrame(wvDraw)}}
-async function salaOpen(){if(!SALA_OK){salaInfo(true);return}if(!song){toast('Apri prima un brano');return}Promise.all([toneLoad('chitarra'),toneLoad('basso')]).then(()=>{try{sRender()}catch(e){}});pause();fsEnter().then(salaFullUI);
+async function salaOpen(){if(!SALA_OK){salaInfo(true);return}if(!song){toast('Apri prima un brano');return}try{namUI()}catch(e){}Promise.all([toneLoad('chitarra'),toneLoad('basso')]).then(()=>{try{sRender()}catch(e){}});pause();fsEnter().then(salaFullUI);
   $('#salaOv').hidden=false;document.body.style.overflow='hidden';$('#salaTitle').textContent='Sala prove';
   sEnsure();SA.baseMono=null;sRender();sTakesUI();$('#sOverL').hidden=!SA.takes.length;
   try{await sOpenDevices()}catch(e){$('#sDevInfo').textContent=e.message||String(e)}
@@ -7157,7 +7213,11 @@ $('#sTuneTop').onclick=()=>{const t=SA.tracks.find(x=>x.role==='chitarra'||x.rol
   /* base in verticale: volume base + strumenti come cursori di un mixer */
   const fd=document.createElement('div');fd.className='sfaders';const bl=$('#sBaseVol').closest('label');bl.classList.add('stem','smaster');bl.querySelector('span').textContent='Base';fd.append(bl,$('#sStems'));$('#sBaseBox').append(fd);
   /* «Aggiungi musicista» in cima alla colonna della base */
-  const ad=$('#sAdd');ad.classList.add('saddtop');$('#sBaseBox').prepend(ad)})();
+  const ad=$('#sAdd');ad.classList.add('saddtop');$('#sBaseBox').prepend(ad);
+  const st=document.createElement('div');st.className='ssetbox';st.innerHTML='<h4>Impostazioni</h4><button class="t3tile" id="sT3Tile"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7V3M15 7V3M7 7h10v4a5 5 0 0 1-10 0zM12 16v5"/></svg><span><b>TONE3000</b><small id="sT3Sub"></small></span></button><label class="rowchk"><input type="checkbox" id="sNamOn"> Usa amplificatori NAM e casse IR</label>';$('#sBaseBox').append(st);
+  $('#sT3Tile').onclick=()=>{if(t3Logged())window.open('https://www.tone3000.com/search','_blank','noopener');else{RIG=null;t3Start('login')}};
+  $('#sNamOn').onchange=async e=>{prefSet('namOn',e.target.checked?'1':'0');namUI();for(const t of SA.tracks){try{await sBuild(t)}catch(_){}}try{sTapBuild()}catch(_){}sRender();if(RIG&&!$('#ovRig').hidden){rigInfo();rigBoardDraw(RIG)}toast(e.target.checked?'Amplificatori NAM e casse IR accesi':'Amplificatori NAM e casse IR spenti (le scelte restano salvate)')};
+  setTimeout(namUI,0)})();
 /* Altro e Consigli */
 $('#sMoreTop').onclick=()=>openOv('#ovSMore');
 $('#ovSMore').addEventListener('click',e=>{const b=e.target.closest('.smoregrid button');if(b)setTimeout(()=>{$('#ovSMore').hidden=true},0)},true);
@@ -7399,11 +7459,14 @@ const SB={all:null,seen:{}};
 function sbAll(){const raw=prefGet('songBanks')||'{}';if(!SB.all||raw!==SB.raw){SB.raw=raw;SB.seen={};try{SB.all=JSON.parse(raw)||{}}catch(e){SB.all={}}for(const k in SB.all)SB.seen[k]=JSON.stringify(SB.all[k].r||{})}return SB.all}
 function sbWrite(){SB.raw=JSON.stringify(SB.all);prefSet('songBanks',SB.raw)}
 const sbKey=()=>song&&song.id!=='demo'?shSK(song):null;
+function namOn(){const v=prefGet('namOn');if(v==='1')return true;if(v==='0')return false;try{return t3Logged()||SA.tracks.some(t=>t.rig&&(t.rig.amp||t.rig.ir))}catch(e){return false}}
+function namUI(){const on=namOn();$('#salaOv').classList.toggle('nonam',!on);$('#ovRig').classList.toggle('nonam',!on);const c=$('#sNamOn');if(c)c.checked=on;const T=$('#sT3Tile');if(T){const ok=t3Logged();T.classList.toggle('on',ok);$('#sT3Sub').textContent=ok?'Collegato · tocca per aprire il sito':'Non collegato · tocca per collegarlo'}
+  if(!on&&RIG&&(RIGSEL==='amp'||RIGSEL==='cab'))RIGSEL='eq'}
 function sbGet(role){const k=sbKey();if(!k)return null;const e=sbAll()[k];const r=e&&e.r&&e.r[role];if(Array.isArray(r)&&r.length===5)return r;return null}
 /* salva le modifiche fatte ai banchi del brano (chiamata insieme al salvataggio della Sala) */
 function sbPersist(){const all=sbAll();let ch=false;for(const k in all){const s=JSON.stringify(all[k].r||{});if(SB.seen[k]!==s){SB.seen[k]=s;all[k].at=Date.now();ch=true}}if(ch)sbWrite()}
 function sbMake(t){const k=sbKey();if(!k)return false;const all=sbAll(),e=all[k]||(all[k]={r:{},title:song.title||'',artist:song.artist||''});const r=t.rig;
-  if(!Array.isArray(r.banks)||r.banks.length!==5)bankRefs(t);e.r[t.role]=(sbGet(t.role)||r.banks).slice();e.at=Date.now();SB.seen[k]=JSON.stringify(e.r);sbWrite();return true}
+  genRefs(t);e.r[t.role]=(sbGet(t.role)||[null,null,null,null,null]).slice();e.at=Date.now();SB.seen[k]=JSON.stringify(e.r);sbWrite();return true}
 function sbDrop(role){const k=sbKey(),all=sbAll(),e=k&&all[k];if(!e||!e.r)return;delete e.r[role];e.at=Date.now();SB.seen[k]=JSON.stringify(e.r);sbWrite()}
 /* riga «banchi generali / di questo brano» nella finestra dei pedali e nella pedaliera */
 function sbRowHTML(t){const own=!!sbGet(t.role),k=sbKey();if(!k)return'<span class="snote">Apri un brano per dargli banchi suoi.</span>';
