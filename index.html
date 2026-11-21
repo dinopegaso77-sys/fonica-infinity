@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="21/11 · 08:36"><meta name="pv-notes" content="Video: nuova sezione «Apertura e chiusura». All'inizio la foto di chi canta (scattata o caricata, migliorata qui sul dispositivo: primo piano sul viso, luce, pelle più morbida, sfondo sfocato), poi la presentazione «Sipario» o «Onda» con artista, titolo e nome; alla fine il logo rooMusic. I colori seguono il tema. Pulsante «Anteprima» per vederla prima di registrare"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="21/11 · 10:20"><meta name="pv-notes" content="Video: finché il video finale non è pronto, i tasti per salvarlo e condividerlo restano spenti. Nuovi tasti Instagram, YouTube, Facebook e WhatsApp oltre a TikTok. Apertura: artista, titolo e chi canta sempre su tre righe separate (i titoli lunghi si rimpiccioliscono, non si sovrappongono più) e, se c'è, il quadratino con la foto dell'artista."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -264,6 +264,8 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 #sTracks .smidi{padding:2px 5px;font-size:11px;gap:2px}#sTracks .smidi .ico{width:14px;height:14px}#sTracks .sthead:has(.smidi) .pwr span{display:none}
 .oprow{align-items:flex-start;gap:12px}.opph{display:flex;flex-direction:column;align-items:center;gap:4px}#opThumb{width:72px;height:128px;border-radius:10px;border:1px solid var(--line);background:#222}
 .opbtns{display:flex;flex-wrap:wrap;gap:6px;align-items:center;flex:1}.opname{flex:1 1 200px;min-width:0}.opname .inp{width:100%}
+.rdbusy .rdsave .rdgrid>button{opacity:.35;pointer-events:none}.rdbusy .rdsave h5::after{content:' · aspetta che il video sia pronto';text-transform:none;letter-spacing:0;font-weight:600;color:var(--dim)}
+.socIG .ico{color:#d62976}.socYT .ico{color:#e62117}.socFB .ico{color:#1877f2}.socWA .ico{color:#25a244}
 #sBaseBox .saddtop{width:100%;justify-content:center;min-height:42px;flex-shrink:0}
 @media (min-width:1000px) and (min-height:600px){
  .salaov .sala-body{padding:8px 12px;gap:8px}
@@ -1400,7 +1402,7 @@ themeApply();</script>
       <button class="chip" id="bHelp">Aiuto</button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Video: nuova sezione «Apertura e chiusura». All'inizio la foto di chi canta (scattata o caricata, migliorata qui sul dispositivo: primo piano sul viso, luce, pelle più morbida, sfondo sfocato), poi la presentazione «Sipario» o «Onda» con artista, titolo e nome; alla fine il logo rooMusic. I colori seguono il tema. Pulsante «Anteprima» per vederla prima di registrare.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Video: finché il video finale non è pronto, i tasti per salvarlo e condividerlo restano spenti. Nuovi tasti Instagram, YouTube, Facebook e WhatsApp oltre a TikTok. Apertura: artista, titolo e chi canta sempre su tre righe separate (i titoli lunghi si rimpiccioliscono, non si sovrappongono più) e, se c'è, il quadratino con la foto dell'artista.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -2385,7 +2387,7 @@ themeApply();</script>
       <div class="rdgrid">
         <button class="chip pri rdwide" id="recSave"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/></svg><span>Salva sul telefono</span></button>
         <button class="chip" id="recShare" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/></svg><span>Condividi</span></button>
-        <button class="chip ttb" id="recTT" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 3c.6 2.6 2.4 4.3 5 4.6"/></svg><span>TikTok</span></button>
+        <button class="chip ttb" id="recTT" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 3c.6 2.6 2.4 4.3 5 4.6"/></svg><span>TikTok</span></button><button class="chip socb socIG" id="recSIG" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17" cy="7" r=".9" fill="currentColor"/></svg><span>Instagram</span></button><button class="chip socb socYT" id="recSYT" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12.5" rx="3.5"/><path d="M10.3 9.4v6l5-3z" fill="currentColor"/></svg><span>YouTube</span></button><button class="chip socb socFB" id="recSFB" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 21v-7.5h2.6l.4-3H14V8.7c0-.9.3-1.5 1.6-1.5H17V4.5a19 19 0 0 0-2.3-.1C12.4 4.4 11 5.8 11 8.3v2.2H8.5v3H11V21"/></svg><span>Facebook</span></button><button class="chip socb socWA" id="recSWA" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-4.1A8 8 0 1 1 8.4 19z"/><path d="M9 8.6c.3 2.7 2.7 5.2 5.6 5.8l1-1.2-1.6-.9-.8.7c-1-.4-2-1.4-2.4-2.4l.7-.8-.9-1.6z" fill="currentColor"/></svg><span>WhatsApp</span></button>
         <button class="chip" id="recFolder" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.2h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 11v5M9.5 13.5h5"/></svg><span>Salva nella cartella</span></button>
         <button class="chip" id="recCloudUp"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9a4.75 4.75 0 0 1-.5 9.5z"/><path d="M12 16v-5.5M9.6 12.6 12 10.2l2.4 2.4"/></svg><span>Salva nel cloud</span></button>
       </div>
@@ -5580,7 +5582,7 @@ async function recStart(){if(!R.stream){toast('La fotocamera non è attiva');ret
   R.vchunks=[];R.vrec=null;try{const at=R.vdest?R.vdest.stream.getAudioTracks():R.stream.getAudioTracks();if(at.length){const vm=['audio/webm;codecs=opus','audio/mp4','audio/webm'].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m));R.vrec=new MediaRecorder(new MediaStream(at),vm?{mimeType:vm,audioBitsPerSecond:256000}:{audioBitsPerSecond:256000});R.vrec.ondataavailable=e=>{if(e.data&&e.data.size)R.vchunks.push(e.data)};R.vstop=new Promise(ok=>R.vrec.onstop=ok)}}catch(e){R.vrec=null}
   R.vDec=R.mBuf=R.vAi=R.lagC=null;R.trRec=tr;R.stillRec=!!R.still;R.duoRec=R.duo&&DUO.blob?{blob:DUO.blob,off:DUO.off}:null;R.lagMan=null;R.raw=null;R.rawrec=null;R.facingRec=R.facing;R.txtRec=$('#recTxt').checked;R.bgRec=FX.bg;R.beautyRec=FX.beauty;
   try{const vt2=Q().raw?R.stream.getVideoTracks():[];if(vt2.length){R.rawch=[];R.rawrec=new MediaRecorder(new MediaStream(vt2),{videoBitsPerSecond:Q().vbr*1.4});R.rawrec.ondataavailable=e=>{if(e.data&&e.data.size)R.rawch.push(e.data)};R.rawstop=new Promise(ok=>R.rawrec.onstop=ok)}}catch(e){R.rawrec=null}
-  R.introRec=null;if(opOn()){const o=await opAssets(opData());R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;await opRunLive('open',o);R.introRec={len:opLen(o,'open'),o:{th:o.th,st:o.st,title:o.title,artist:o.artist,name:o.name,phSrc:o.phSrc}}}
+  R.introRec=null;if(opOn()){OP.apSrc=await opArtPic(song&&song.artist);const o=await opAssets(opData());R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;await opRunLive('open',o);R.introRec={len:opLen(o,'open'),o:{th:o.th,st:o.st,title:o.title,artist:o.artist,name:o.name,phSrc:o.phSrc,apSrc:o.apSrc}}}
   R.startSong=now();if(R.rawrec)R.rawrec.start(1000);if(R.vrec)R.vrec.start(1000);if(!R.introRec)R.rec.start(1000);R.on=true;$('#recOv').classList.add('recording');R.t0=Date.now();$('#recDot').hidden=false;$('#recGo').disabled=false;$('#recGo').setAttribute('aria-label','Ferma');$('#recGoL').textContent='Stop';$('#recGo').classList.add('stop');A.addEventListener('playing',recGuideStart,{once:true});play()}
 function recStop(){if(!R.on||R.closing)return;if(R.introRec){R.closing=true;recGuideOff();pause();try{if(R.vrec)R.vrec.stop()}catch(e){}try{if(R.rawrec)R.rawrec.stop()}catch(e){}$('#recGo').disabled=true;$('#recGoL').textContent='Chiusura…';
     (async()=>{try{const o=await opAssets(R.introRec.o);await opRunLive('close',o)}catch(e){console.warn(e)}R.closing=false;R.on=false;$('#recOv').classList.remove('recording');try{R.rec.stop()}catch(e){}$('#recDot').hidden=true;$('#recGo').disabled=false;$('#recGo').setAttribute('aria-label','Registra');$('#recGoL').textContent='Registra';$('#recGo').classList.remove('stop')})();return}
@@ -5589,7 +5591,7 @@ A.addEventListener('ended',()=>{if(R.on)recStop()});
 function recName(){const ext=((R.blob&&R.blob.type)||R.mime||'').includes('mp4')?'mp4':'webm';const d=new Date();const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'.'+String(d.getMinutes()).padStart(2,'0');return safeName((song.artist?song.artist+' - ':'')+(song.title||'Brano'))+' - rooMusic '+ds+'.'+ext}
 async function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm').split(';')[0]});R.orig=R.blob;R.voiceBlob=null;if(R.rawrec){await R.rawstop;R.raw=new Blob(R.rawch,{type:R.rawrec.mimeType||'video/webm'})}stOnFinish();if(R.vrec){await R.vstop;R.voiceBlob=new Blob(R.vchunks,{type:R.vrec.mimeType||'audio/webm'})}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;const u=URL.createObjectURL(R.blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;
   $('#recDone').hidden=false;$('#recMsg').textContent='Video pronto ('+(R.blob.size/1048576).toFixed(1)+' MB). Guardalo, poi salvalo o condividilo.';
-  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recTT').hidden=false;cvUpUI();$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored);
+  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recTT').hidden=false;$$('.socb').forEach(b=>b.hidden=false);cvUpUI();$('#recFolder').hidden=!(window.showDirectoryPicker&&dirHandle&&song.stored);
   DR_CUR=null;setTimeout(()=>drSave(true).then(()=>{if(DR_CUR)$('#recMsg').textContent+=' Salvato anche nelle 📂 Bozze.'}),600)}
 $('#recSave').onclick=()=>{if(!R.blob)return;if(window.self!==window.top){$('#recMsg').textContent='Qui non si possono salvare file: apri rooMusic dal suo indirizzo web.';return}
   const a=document.createElement('a');a.href=URL.createObjectURL(R.blob);a.download=recName();document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);$('#recMsg').textContent='Salvato nella cartella Download del telefono.'};
@@ -5602,6 +5604,13 @@ const IS_ANDROID=/Android/i.test(navigator.userAgent)||(navigator.maxTouchPoints
 /* apre direttamente l'app TikTok (se non c'è, la pagina di TikTok su Google Play) */
 const TT_APP='intent://www.tiktok.com/#Intent;scheme=https;package=com.zhiliaoapp.musically;S.browser_fallback_url='+encodeURIComponent('https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically')+';end';const TT_UP='https://www.tiktok.com/tiktokstudio/upload';
 const ttCap=t=>(t?t+' · ':'')+'#rooMusic #cover #musica';
+/* altri social: stesso metodo di TikTok (Android: salva e apre l'app; telefono: menu Condividi; PC: scarica e apre la pagina per caricare) */
+const SOC={IG:{n:'Instagram',pk:'com.instagram.android',app:'https://www.instagram.com/',up:'https://www.instagram.com/'},YT:{n:'YouTube',pk:'com.google.android.youtube',app:'https://www.youtube.com/',up:'https://www.youtube.com/upload'},
+  FB:{n:'Facebook',pk:'com.facebook.katana',app:'https://www.facebook.com/',up:'https://www.facebook.com/'},WA:{n:'WhatsApp',pk:'com.whatsapp',app:'https://wa.me/',up:'https://web.whatsapp.com/'}};
+async function socShare(k,getBlob,name,title){const C=SOC[k],cap=ttCap(title);try{navigator.clipboard.writeText(cap).catch(()=>{})}catch(e){}const mp4=!/\.webm$/i.test(name);let b;try{b=await getBlob()}catch(e){toast('Non riesco a preparare il video');return}const f=new File([b],name,{type:mp4?'video/mp4':'video/webm'});
+  if(isMobile&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],text:cap});return}catch(e){if(e&&e.name==='AbortError')return}}
+  if(IS_ANDROID){shDl(f);toast('Video salvato. In '+C.n+' scegli il primo video della galleria; la descrizione è copiata');const u=new URL(C.app);setTimeout(()=>{location.href='intent://'+u.host+u.pathname+'#Intent;scheme=https;package='+C.pk+';S.browser_fallback_url='+encodeURIComponent('https://play.google.com/store/apps/details?id='+C.pk)+';end'},900);return}
+  shDl(f);try{window.open(C.up,'_blank','noopener')}catch(e){}toast('Video scaricato. Su '+C.n+' scegli «'+name+'» dalla cartella Download; la descrizione è già copiata')}
 async function ttShare(getBlob,name,title){const cap=ttCap(title);try{navigator.clipboard.writeText(cap).catch(()=>{})}catch(e){}
   const mp4=!/\.webm$/i.test(name),type=mp4?'video/mp4':'video/webm';let b=TT.cache&&TT.cache.name===name?TT.cache.blob:null;
   if(!b){try{b=await getBlob()}catch(e){toast('Non riesco a preparare il video: '+((e&&e.message)||e));return}TT.cache={name,blob:b}}
@@ -5616,6 +5625,7 @@ async function ttShare(getBlob,name,title){const cap=ttCap(title);try{navigator.
     return}
   shDl(f);TT.cache=null;try{window.open(TT_UP,'_blank','noopener')}catch(e){}
   toast('Video scaricato. Su TikTok scegli «'+name+'» dalla cartella Download; la descrizione è già copiata: incollala')}
+Object.keys(SOC).forEach(k=>{$('#recS'+k).onclick=()=>{if(fixBusy)return;const t=song?(song.title||'')+(song.artist?' - '+song.artist:''):'';socShare(k,async()=>R.blob,recName(),t)}});
 $('#recTT').onclick=()=>{const t=song?(song.title||'')+(song.artist?' - '+song.artist:''):'';ttShare(async()=>R.blob,recName(),t);if(isMobile&&!IS_ANDROID)toast('Nel menu che si apre scegli TikTok · la descrizione è copiata, incollala lì')};
 $('#recFolder').onclick=async()=>{try{if(!await dirReady(true))return;const d=await (await songDirHandle(song)).getDirectoryHandle('Video',{create:true});const fh=await d.getFileHandle(recName(),{create:true});const w=await fh.createWritable();await w.write(R.blob);await w.close();$('#recMsg').textContent='Salvato in «'+[dirHandle.name,...songDirs(song),'Video'].join(' / ')+'».'}catch(e){$('#recMsg').textContent='Non riesco a salvare nella cartella: '+(e.message||e)}};
 /* ---------- dopo la registrazione: voce a tempo e autotune ---------- */
@@ -6036,7 +6046,7 @@ async function recServer({mixed,voice,vsr,lag,dur,useRaw,say}){if(sepBusy)throw 
     say('Scarico il video finito…');const blob=await (await r2Req('GET',base+'finale.mp4')).blob();
     R.lips=out.lips||null;return{blob:new Blob([blob],{type:'video/mp4'}),secs:out.seconds}}
   finally{for(const k of put)r2Req('DELETE',k).catch(()=>{})}}
-async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=true;stPrevStop();const btn=$('#recFix');btn.disabled=true;$('#stAuto').disabled=true;const say=t=>$('#recMsg').textContent=t;
+async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=true;$('#recDone').classList.add('rdbusy');stPrevStop();const btn=$('#recFix');btn.disabled=true;$('#stAuto').disabled=true;const say=t=>$('#recMsg').textContent=t;
   const tune=+($$('#recTune button.on')[0]||{dataset:{v:0}}).dataset.v;
   try{const{V,lag,how}=await stVoice(say);let voice=V.x;const vsr=V.sr;
     if(tune>0){voice=await stTuned(V,lag,tune,say)}
@@ -6073,7 +6083,7 @@ async function recImprove(){if(fixBusy||!R.voiceBlob||!R.orig)return;fixBusy=tru
     R.blob=new Blob(chs,{type:(R.mime||'video/webm').split(';')[0]});recSetUrl(R.blob);$('#recOrig').hidden=false;try{lrnRecord()}catch(e){console.error(e)}
     say('Fatto. '+('Voce spostata di '+Math.round(lag*1000)+' ms ('+how+'). ')+(tune>0?'Autotune applicato. ':'')+(ST.ai?'Voce da studio. ':'')+(paint?'Video rifinito. ':'')+(face?'Trucco sul viso riconosciuto. ':'')+(duo?'Duetto montato. ':'')+'Ora puoi salvarlo o condividerlo.')}
   catch(e){console.error(e);say('Non sono riuscito a creare il video finale: '+(e.message||e))}
-  finally{fixBusy=false;btn.disabled=false;$('#stAuto').disabled=false}}
+  finally{fixBusy=false;btn.disabled=false;$('#stAuto').disabled=false;$('#recDone').classList.remove('rdbusy')}}
 $$('#recTune button').forEach(b=>b.onclick=()=>{$$('#recTune button').forEach(x=>x.classList.toggle('on',x===b));prefSet('recTune',b.dataset.v);if(PV.on){const p=PV.pos+ctx().currentTime-PV.t0;stPrevStop();stPrevStart(p)}});
 {const v=prefGet('recTune')||'0';$$('#recTune button').forEach(x=>x.classList.toggle('on',x.dataset.v===v))}
 $('#recFix').onclick=recImprove;
@@ -6096,16 +6106,18 @@ function opImg(src){return new Promise(ok=>{const i=new Image();i.onload=()=>ok(
 async function opAssets(o){const T=o.th,k=T.g1+T.g2+T.ink;if(!OP.img[k]){const sym='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><defs><linearGradient id="gs" gradientUnits="userSpaceOnUse" x1="96" y1="96" x2="416" y2="416"><stop offset="0" stop-color="${T.g1}"/><stop offset="1" stop-color="${T.g2}"/></linearGradient></defs>${OP_SYM}</svg>`);
     const wd=c=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${OP_WW} 110" width="${Math.round(OP_WW*2)}" height="220"><path d="${OP_WD}" fill="${c}"/></svg>`);
     OP.img[k]={sym:await opImg(sym),wd:await opImg(wd(T.ink)),wdw:await opImg(wd('#ffffff'))}}
-  o.im=OP.img[k];o.ph=o.phSrc?await opImg(o.phSrc):null;
+  o.im=OP.img[k];o.ph=o.phSrc?await opImg(o.phSrc):null;o.ap=null;if(o.apSrc){o.ap=await new Promise(ok=>{const i=new Image();if(!/^data:/.test(o.apSrc))i.crossOrigin='anonymous';i.onload=()=>ok(i);i.onerror=()=>ok(null);i.src=o.apSrc})}
   try{await Promise.all(['700 80px Outfit','400 30px Outfit','italic 80px "Instrument Serif"'].map(f=>document.fonts.load(f)))}catch(e){}return o}
-function opData(){const ph=OP.fix&&OP.ph1?OP.ph1:OP.ph0;return{th:opTheme(),st:prefGet('opSt')==='C'?'C':'A',title:(song&&song.title)||'',artist:(song&&song.artist)||'',name:($('#opName').value||'').trim(),phSrc:ph||null}}
+async function opArtPic(a){try{const v=a&&await imgGet('art',a);return v?(v.data||v.url||null):null}catch(e){return null}}
+function opData(){const ph=OP.fix&&OP.ph1?OP.ph1:OP.ph0;return{apSrc:OP.apSrc||null,th:opTheme(),st:prefGet('opSt')==='C'?'C':'A',title:(song&&song.title)||'',artist:(song&&song.artist)||'',name:($('#opName').value||'').trim(),phSrc:ph||null}}
 function opLen(o,kind){return kind==='close'?4.5:(o.phSrc?3:0)+4.5}
 /* testo che entra nello spazio: una riga, o due se serve, rimpicciolendo */
 function opFit(g,txt,font,size,maxw){g.font=font.replace('#',size);if(g.measureText(txt).width<=maxw)return{size,lines:[txt]};const ws=txt.split(' ');
   if(ws.length>1){let best=null;for(let k=1;k<ws.length;k++){const a=ws.slice(0,k).join(' '),b=ws.slice(k).join(' '),m=Math.max(g.measureText(a).width,g.measureText(b).width);if(!best||m<best[0])best=[m,a,b]}const s2=size*Math.min(1,maxw/best[0]);return{size:s2,lines:[best[1],best[2]]}}
   return{size:size*maxw/g.measureText(txt).width,lines:[txt]}}
-function opText(g,txt,font,size,x,y,maxw,col,al,center,sp){if(!txt)return;const f=opFit(g,txt,font,size,maxw);g.font=font.replace('#',f.size);g.fillStyle=col;g.globalAlpha=al;g.textAlign=center?'center':'left';g.textBaseline='alphabetic';try{g.letterSpacing=(sp||0)+'px'}catch(e){}
+function opText(g,txt,font,size,x,y,maxw,col,al,center,sp){if(!txt)return;g.font=font.replace('#',size);try{g.letterSpacing=(sp||0)+'px'}catch(e){}const mw=g.measureText(txt).width;const f={size:mw>maxw?size*maxw/mw:size,lines:[txt]};g.font=font.replace('#',f.size);g.fillStyle=col;g.globalAlpha=al;g.textAlign=center?'center':'left';g.textBaseline='alphabetic';try{g.letterSpacing=(sp||0)+'px'}catch(e){}
   f.lines.forEach((l,i)=>g.fillText(l,x,y+(f.lines.length>1?(i-0.5)*f.size*1.1:0)));try{g.letterSpacing='0px'}catch(e){}g.globalAlpha=1}
+function opSq(g,o,x,y,sz,al){if(!o.ap)return;const T=o.th,im=o.ap,s=Math.max(sz/im.width,sz/im.height);g.save();g.globalAlpha=al;g.beginPath();if(g.roundRect)g.roundRect(x,y,sz,sz,16);else g.rect(x,y,sz,sz);g.save();g.clip();g.drawImage(im,x+(sz-im.width*s)/2,y+(sz-im.height*s)/2,im.width*s,im.height*s);g.restore();g.lineWidth=4;g.strokeStyle=opGrad(g,x,y,x+sz,y+sz,T);g.stroke();g.restore()}
 function opPick(g,o,cx,cy,S,al){if(!o.im.sym||S<=1)return;const d=S*512/470;g.globalAlpha=al;g.drawImage(o.im.sym,cx-d/2,cy-d/2,d,d);g.globalAlpha=1}
 function opWord(g,o,cx,base,size,al,white,left){const im=white?o.im.wdw:o.im.wd;if(!im)return;const w=OP_WW*size/100,h=size*1.1;g.globalAlpha=al;g.drawImage(im,left?cx:cx-w/2,base-size,w,h);g.globalAlpha=1}
 function opRings(g,T,cx,cy,S,t){for(const t0 of [0.8,1.1,1.4]){const u=(t-t0)/1.3;if(u>0&&u<1){g.beginPath();g.arc(cx,cy,S*0.55+S*1.1*eoF(u),0,7);g.strokeStyle=T.g2;g.lineWidth=5*(1-u)+1;g.globalAlpha=(1-u)*0.6;g.stroke();g.globalAlpha=1}}}
@@ -6127,12 +6139,12 @@ function opPaint(g,W,H,t,o,kind){const T=o.th;g.save();g.fillStyle=T.bg;g.fillRe
       for(let i=0;i<nb;i++){const a=(0.25+0.75*Math.abs(Math.sin(i*0.55+t*4.6)*Math.sin(i*0.21+t*1.7)))*eoF(t/0.8),h=60+520*a;g.beginPath();if(g.roundRect)g.roundRect(i*bw+bw*0.18,720-h/2,bw*0.64,h,bw*0.32);else g.rect(i*bw+bw*0.18,720-h/2,bw*0.64,h);g.fill()}g.globalAlpha=1;
     const pul=1+0.04*Math.sin(t*9.5)*clF((t-0.6)/0.3);opPick(g,o,360,600,210*ebF((t-0.3)/0.6)*pul,1);
     const fy=1280-380*eoF((t-1.5)/0.6);g.globalAlpha=.96;g.fillStyle=T.bg2;g.fillRect(0,fy,720,380);g.globalAlpha=1;g.fillStyle=opGrad(g,0,0,720,0,T);g.fillRect(0,fy,720*eoF((t-1.7)/0.7),6);
-    const to=clF((t-1.9)/0.4),so=clF((t-2.3)/0.4);opText(g,(o.artist||'').toUpperCase(),'400 #px Outfit',26,56,fy+62,600,T.sub,to,false,4);opText(g,o.title,'700 #px Outfit',76,56,fy+135,600,T.ink,to,false);
-    opText(g,o.name,'italic #px "Instrument Serif"',64,56,fy+225,600,T.sub,so,false);opWord(g,o,720-56-OP_WW*34/100,fy+300,34,so*.8,false,true)}
+    const to=clF((t-1.9)/0.4),so=clF((t-2.3)/0.4),mw=608;opSq(g,o,720-56-150,fy-175,150,to);opText(g,(o.artist||'').toUpperCase(),'400 #px Outfit',26,56,fy+62,mw,T.sub,to,false,4);opText(g,o.title,'700 #px Outfit',76,56,fy+140,mw,T.ink,to,false);
+    opText(g,o.name,'italic #px "Instrument Serif"',64,56,fy+228,mw,T.sub,so,false);opWord(g,o,720-56-OP_WW*34/100,fy+300,34,so*.8,false,true)}
   else{opGlow(g,T,eoF(t));const up=eoF((t-1.7)/0.7),cy=560-250*up,S=(300-120*up)*(0.55+0.45*ebF((t-0.2)/0.7));opRings(g,T,360,cy,S,t);opPick(g,o,360,cy,S,clF((t-0.2)/0.25));
     opWord(g,o,360,cy+S*0.52+100,92,clF((t-0.9)/0.4)*(1-clF((t-1.7)/0.4)));const dy=30*(1-eoF((t-2.1)/0.6));
-    g.save();g.translate(0,dy);opText(g,(o.artist||'').toUpperCase(),'400 #px Outfit',30,360,620,620,T.sub,clF((t-2.35)/0.5),true,5);opText(g,o.title,'700 #px Outfit',92,360,720,620,T.ink,clF((t-2.1)/0.5),true);g.restore();
-    const lw=380*eoF((t-2.5)/0.6);g.fillStyle=opGrad(g,170,0,550,0,T);g.fillRect(360-lw/2,800,lw,3);opText(g,o.name,'italic #px "Instrument Serif"',84,360,900,620,T.ink,clF((t-2.7)/0.5),true)}
+    const ay=o.ap?636:620;opSq(g,o,290,440,140,clF((t-2.0)/0.5));g.save();g.translate(0,dy);opText(g,(o.artist||'').toUpperCase(),'400 #px Outfit',30,360,ay,620,T.sub,clF((t-2.35)/0.5),true,5);opText(g,o.title,'700 #px Outfit',92,360,ay+100,620,T.ink,clF((t-2.1)/0.5),true);g.restore();
+    const ly=o.ap?820:800,lw=380*eoF((t-2.5)/0.6);g.fillStyle=opGrad(g,170,0,550,0,T);g.fillRect(360-lw/2,ly,lw,3);opText(g,o.name,'italic #px "Instrument Serif"',84,360,ly+100,620,T.ink,clF((t-2.7)/0.5),true)}
   g.restore()}
 async function opSound(dest,toSpk){try{const c=ctx();if(!OP.snd){const b=await (await fetch(OP_SND)).arrayBuffer();OP.snd=await c.decodeAudioData(b)}const s=c.createBufferSource();s.buffer=OP.snd;const g=c.createGain();g.gain.value=.8;s.connect(g);if(dest)g.connect(dest);if(toSpk)g.connect(c.destination);s.start();return s}catch(e){console.warn('suono apertura',e);return null}}
 /* durante la registrazione dal vivo: il disegno lo fa recDraw leggendo R.op */
@@ -6164,7 +6176,7 @@ async function opEnhance(src){const sw=src.videoWidth||src.naturalWidth||src.wid
   const vg=g.createRadialGradient(OW/2,OH*.42,OH*.3,OW/2,OH*.45,OH*.8);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,.28)');g.fillStyle=vg;g.fillRect(0,0,OW,OH);
   return{fixed:out.toDataURL('image/jpeg',.86),orig:(()=>{const c=document.createElement('canvas');c.width=OW;c.height=OH;const s2=Math.max(OW/big.width,OH/big.height);c.getContext('2d').drawImage(big,(OW-big.width*s2)/2,(OH-big.height*s2)/2,big.width*s2,big.height*s2);return c.toDataURL('image/jpeg',.86)})()}}
 async function opSetPhoto(src){if(OP.busy)return;OP.busy=true;$('#opPhInfo').textContent='Miglioro la foto…';try{const r=await opEnhance(src);OP.ph0=r.orig;OP.ph1=r.fixed;try{await setPut('opPhoto',{o:r.orig,f:r.fixed})}catch(e){}opUI();toast('Foto pronta: guarda «Migliorata» e «Originale»')}catch(e){console.error(e);toast('Non riesco a usare questa foto')}finally{OP.busy=false;opUI()}}
-async function opUI(){$('#opOn').checked=opOn();const st=prefGet('opSt')==='C'?'C':'A';$$('#opSt button').forEach(b=>b.classList.toggle('on',b.dataset.v===st));
+async function opUI(){$('#opOn').checked=opOn();opArtPic(song&&song.artist).then(u=>{OP.apSrc=u});const st=prefGet('opSt')==='C'?'C':'A';$$('#opSt button').forEach(b=>b.classList.toggle('on',b.dataset.v===st));
   const has=!!OP.ph0;$('#opFix').hidden=$('#opDel').hidden=!has;$$('#opFix button').forEach(b=>b.classList.toggle('on',(b.dataset.v==='1')===OP.fix));
   if(!OP.busy)$('#opPhInfo').textContent=has?(OP.fix?'Migliorata':'Originale'):'Nessuna foto';
   const c=$('#opThumb'),g=c.getContext('2d');g.fillStyle='#222';g.fillRect(0,0,c.width,c.height);const src=OP.fix&&OP.ph1?OP.ph1:OP.ph0;if(src){const im=await opImg(src);if(im)g.drawImage(im,0,0,c.width,c.height)}
@@ -6177,7 +6189,7 @@ $('#opShot').onclick=()=>{const v=$('#recCam');if(!v||!v.videoWidth){toast('Acce
 $('#opLoad').onclick=()=>$('#opIn').click();
 $('#opIn').onchange=async e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;const u=URL.createObjectURL(f);const im=await opImg(u);URL.revokeObjectURL(u);if(im)opSetPhoto(im);else toast('Questa immagine non si apre')};
 $('#opDel').onclick=async()=>{OP.ph0=OP.ph1=null;try{await setPut('opPhoto',null)}catch(e){}opUI()};
-$('#opPrev').onclick=async()=>{if(R.on||R.op)return;const o=await opAssets(opData());R.op={t0:performance.now(),o,kind:'open'};opSound(null,true);if(o.phSrc)setTimeout(()=>opSound(null,true),3000);setTimeout(()=>{if(R.op&&R.op.o===o){R.op={t0:performance.now(),o,kind:'close'};opSound(null,true);setTimeout(()=>{if(R.op&&R.op.o===o)R.op=null},4500)}},opLen(o,'open')*1000)};
+$('#opPrev').onclick=async()=>{if(R.on||R.op)return;OP.apSrc=await opArtPic(song&&song.artist);const o=await opAssets(opData());R.op={t0:performance.now(),o,kind:'open'};opSound(null,true);if(o.phSrc)setTimeout(()=>opSound(null,true),3000);setTimeout(()=>{if(R.op&&R.op.o===o){R.op={t0:performance.now(),o,kind:'close'};opSound(null,true);setTimeout(()=>{if(R.op&&R.op.o===o)R.op=null},4500)}},opLen(o,'open')*1000)};
 (async()=>{try{const p=await setGet('opPhoto');if(p&&p.o){OP.ph0=p.o;OP.ph1=p.f}}catch(e){}try{opUI()}catch(e){}})();
 
 $('#recAgain').onclick=()=>{$('#recDone').hidden=true;$('#recPlay').pause();DR_CUR=null;drUI()};
@@ -6213,7 +6225,7 @@ async function drOpen(id){let d=await setGet('draft:'+id);
   stOnFinish();if(d.lagMan!=null){R.lagMan=d.lagMan;lagUI(d.lagMan)}$('#recOrig').hidden=true;$('#recFix').disabled=!R.voiceBlob;
   const u=URL.createObjectURL(R.blob),pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u;$('#recDone').hidden=false;
   $('#recMsg').textContent='Bozza riaperta ('+(R.blob.size/1048576).toFixed(1)+' MB): cambia quello che vuoi e premi «Crea il video finale».';
-  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recTT').hidden=false;cvUpUI();DR_CUR=id;drUI();stUI()}
+  const f=new File([R.blob],recName(),{type:R.blob.type});$('#recShare').hidden=!(navigator.canShare&&navigator.canShare({files:[f]}));$('#recTT').hidden=false;$$('.socb').forEach(b=>b.hidden=false);cvUpUI();DR_CUR=id;drUI();stUI()}
 $('#recDrafts').onclick=()=>{if(R.on)return;drList();openOv('#ovDrafts')};
 $('#drSave').onclick=()=>drSave(false);
 /* ===================== VIDEO NEL CLOUD: video finiti salvati su R2, da riprendere, ricondividere o cancellare ===================== */
