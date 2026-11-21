@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="21/11 · 10:20"><meta name="pv-notes" content="Video: finché il video finale non è pronto, i tasti per salvarlo e condividerlo restano spenti. Nuovi tasti Instagram, YouTube, Facebook e WhatsApp oltre a TikTok. Apertura: artista, titolo e chi canta sempre su tre righe separate (i titoli lunghi si rimpiccioliscono, non si sovrappongono più) e, se c'è, il quadratino con la foto dell'artista."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="21/11 · 21:30"><meta name="pv-notes" content="Auto e cuffie Bluetooth: i tasti al volante (brano successivo e precedente, play e pausa) ora comandano l'app; sul display dell'auto compaiono titolo, artista e copertina. Con la scaletta accesa si segue la scaletta, altrimenti l'elenco dei brani. Home: tolti i tasti avanti/indietro accanto al titolo della scaletta. Video: salva/condividi solo a video pronto, più social, apertura su tre righe."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -266,6 +266,12 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .opbtns{display:flex;flex-wrap:wrap;gap:6px;align-items:center;flex:1}.opname{flex:1 1 200px;min-width:0}.opname .inp{width:100%}
 .rdbusy .rdsave .rdgrid>button{opacity:.35;pointer-events:none}.rdbusy .rdsave h5::after{content:' · aspetta che il video sia pronto';text-transform:none;letter-spacing:0;font-weight:600;color:var(--dim)}
 .socIG .ico{color:#d62976}.socYT .ico{color:#e62117}.socFB .ico{color:#1877f2}.socWA .ico{color:#25a244}
+.fbsheet{max-width:560px}.fbsheet .field{flex:none}.fbstars{display:flex;gap:6px}.fbst{background:none;border:0;padding:4px;cursor:pointer;min-width:48px;min-height:48px}.fbst svg{width:40px;height:40px;fill:none;stroke:var(--dim);stroke-width:1.6;stroke-linejoin:round}.fbst.on svg{fill:#f2b84b;stroke:#c98a12}
+.fbkinds{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}#fbMsg{width:100%;font:inherit;font-size:17px;padding:10px;border-radius:12px;border:1px solid var(--line,#ccc);background:var(--card,#fff);color:inherit;box-sizing:border-box;resize:vertical}
+.fbhp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.fbres{margin:8px 0 0;font-weight:700;color:#b3261e}.fbres.ok{color:#1f7a3a}.fbchk{display:flex;align-items:center;gap:6px;font-size:14px}
+.fbadm{max-width:720px}.fbadm>div{flex:none}#fbList{min-height:120px}.fbbar{flex-wrap:wrap;gap:8px;margin-bottom:8px}.fbbar #fbSum{flex-basis:100%;font-weight:700}#fbList{display:flex;flex-direction:column;gap:10px;max-height:62vh;overflow:auto}.fbitem{border:1px solid var(--line,#ccc);border-left:5px solid #4bb8e6;border-radius:12px;padding:10px 12px;background:var(--card,#fff)}
+.fbitem.k-problema{border-left-color:#d9534f}.fbitem.k-bello{border-left-color:#3aa55d}.fbitem.k-idea{border-left-color:#f2b84b}.fbitem.read{opacity:.6}.fbih{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}.fbih small{margin-left:auto;color:var(--dim)}.fbis{color:#d99a1e;letter-spacing:1px}.fbit{font-size:12px;padding:1px 8px;border-radius:9px;background:rgba(0,0,0,.07)}.fbitem p{margin:6px 0;white-space:pre-wrap;font-size:16px}.fbinf{color:var(--dim)}
+#slBar #slPrev,#slBar #slNext{display:none}#slBar .slnow{flex:1;max-width:none;justify-content:center;text-align:center}
 #sBaseBox .saddtop{width:100%;justify-content:center;min-height:42px;flex-shrink:0}
 @media (min-width:1000px) and (min-height:600px){
  .salaov .sala-body{padding:8px 12px;gap:8px}
@@ -1400,9 +1406,10 @@ themeApply();</script>
       <button class="chip" id="bSet">Impostazioni</button>
       <a class="chip rptop" id="bRpTop" href="https://console.runpod.io/user/billing" target="_blank" rel="noopener" title="Apri RunPod per ricaricare il credito"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg>Ricarica RunPod</a>
       <button class="chip" id="bHelp">Aiuto</button>
+      <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Video: finché il video finale non è pronto, i tasti per salvarlo e condividerlo restano spenti. Nuovi tasti Instagram, YouTube, Facebook e WhatsApp oltre a TikTok. Apertura: artista, titolo e chi canta sempre su tre righe separate (i titoli lunghi si rimpiccioliscono, non si sovrappongono più) e, se c'è, il quadratino con la foto dell'artista.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Auto e cuffie Bluetooth: i tasti al volante (brano successivo e precedente, play e pausa) ora comandano l'app; sul display dell'auto compaiono titolo, artista e copertina. Con la scaletta accesa si segue la scaletta, altrimenti l'elenco dei brani. Home: tolti i tasti avanti/indietro accanto al titolo della scaletta. Video: salva/condividi solo a video pronto, più social, apertura su tre righe.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1799,6 +1806,27 @@ themeApply();</script>
   <h4>Niente notifiche né chiamate mentre suonate</h4>
   <p class="snote" id="sDndTxt"></p>
   <div class="row"><button class="chip pri sic" id="sDndGo" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5h4M4 4l16 16"/></svg><span>Apri «Non disturbare» di Windows</span></button></div>
+</div></div>
+<div class="ov" id="ovFb" hidden><div class="sheet fbsheet">
+  <div class="row"><h3 class="grow">Dimmi la tua</h3><button class="mini" data-close>Chiudi</button></div>
+  <p class="snote">Il messaggio arriva solo a chi ha creato rooMusic e non viene pubblicato. Serve a migliorare l'app: dimmi cosa ti piace, cosa non va o cosa vorresti.</p>
+  <label class="field"><span>Il tuo nome (se vuoi)</span><input id="fbName" maxlength="60" autocomplete="name"></label>
+  <div class="field"><span>Quanto ti piace rooMusic?</span><div class="fbstars" id="fbStars"><button class="fbst" data-s="1" aria-label="1 stella"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></button><button class="fbst" data-s="2" aria-label="2 stelle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></button><button class="fbst" data-s="3" aria-label="3 stelle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></button><button class="fbst" data-s="4" aria-label="4 stelle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></button><button class="fbst" data-s="5" aria-label="5 stelle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></button></div></div>
+  <div class="fbkinds" id="fbKinds"><button class="chip fbk" data-k="bello"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11v9H4.5a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1zM7 11l4-7.5c1.4 0 2.3 1.2 2 2.6L12.4 9.5h6a2 2 0 0 1 2 2.3l-1.2 6.5a2 2 0 0 1-2 1.7H7"/></svg><span>Mi piace</span></button><button class="chip fbk" data-k="problema"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4.5M12 17.3v.01"/></svg><span>Qualcosa non va</span></button><button class="chip fbk" data-k="idea"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5h6M10 20.5h4"/><path d="M8.5 14.5A6 6 0 1 1 15.5 14.5c-.6.6-1 1.3-1 2.2v.8h-5v-.8c0-.9-.4-1.6-1-2.2z"/></svg><span>Ho un'idea</span></button></div>
+  <label class="field"><span>Il tuo messaggio</span><textarea id="fbMsg" rows="5" maxlength="1500" placeholder="Scrivi qui…"></textarea></label>
+  <input id="fbHp" tabindex="-1" autocomplete="off" aria-hidden="true" class="fbhp">
+  <p class="snote">Insieme al messaggio mando solo la versione dell'app e il tipo di dispositivo (per esempio «PC · Windows · Chrome»), per capire meglio i problemi.</p>
+  <div class="row"><button class="chip pri grow" id="fbSend"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 20.5 4l-5 16.5-3.8-6.7z"/><path d="m11.7 13.8 8.8-9.8"/></svg><span>Invia</span></button></div>
+  <p class="fbres" id="fbRes" hidden></p>
+</div></div>
+<div class="ov" id="ovFbAdm" hidden><div class="sheet fbsheet fbadm">
+  <div class="row"><h3 class="grow">Messaggi ricevuti</h3><button class="mini" data-close>Chiudi</button></div>
+  <div id="fbLog"><label class="field"><span>Password</span><input id="fbPass" type="password" autocomplete="current-password"></label>
+    <label class="fbchk"><input type="checkbox" id="fbRem"> Ricorda su questo dispositivo</label>
+    <div class="row"><button class="chip pri" id="fbIn"><span>Apri</span></button></div></div>
+  <div id="fbaBox" hidden><div class="row fbbar"><span class="grow" id="fbSum"></span><label class="fbchk"><input type="checkbox" id="fbNew"> Solo da leggere</label><button class="mini" id="fbReload">Aggiorna</button><button class="mini" id="fbOut">Esci</button></div>
+    <div id="fbList"></div></div>
+  <p class="fbres" id="fbAres" hidden></p>
 </div></div>
 <div class="ov" id="ovOuts" hidden><div class="sheet tunesheet ousheet">
   <div class="row"><h3 class="grow">Uscite: cuffie e casse</h3><button class="mini" data-close>Chiudi</button></div>
@@ -2940,6 +2968,37 @@ $('#bA').onclick=()=>{loopA=now();if(loopB!=null&&loopB<=loopA)loopB=null;updAB(
 $('#bB').onclick=()=>{const t=now();if(loopA==null||t<=loopA){toast('Prima segna l\'inizio con A, poi premi B più avanti');return}loopB=t;seek(loopA);updAB()};
 $('#bLoop').onclick=()=>{loopA=loopB=null;updAB()};
 $('#bPlay').onclick=$('#pPlay').onclick=()=>playing()?pause():play();
+/* ===== TASTI DELL'AUTO, DELLE CUFFIE E DEL BLOCCO SCHERMO (Media Session) =====
+   Avanti/indietro al volante, play/pausa, tempo sul display dell'auto.
+   Quando le tracce suonano con Web Audio il telefono non «vede» nessun lettore: un audio muto in loop lo tiene acceso. */
+const MSS={el:null,own:false,id:null};
+function msSilent(){const sr=8000,n=sr*10,b=new ArrayBuffer(44+n),v=new DataView(b),w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
+  w(0,'RIFF');v.setUint32(4,36+n,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr,true);v.setUint16(32,1,true);v.setUint16(34,8,true);w(36,'data');v.setUint32(40,n,true);
+  new Uint8Array(b,44).fill(128);return URL.createObjectURL(new Blob([b],{type:'audio/wav'}))}
+function msEl(){if(!MSS.el){const e=new Audio(msSilent());e.loop=true;e.preload='auto';
+    /* se il telefono ferma l'audio (auto spenta, telefonata, cuffie staccate) si ferma anche il brano */
+    e.addEventListener('pause',()=>{if(MSS.own){MSS.own=false;return}if(playing())pause()});MSS.el=e}return MSS.el}
+function msPos(){try{const d=DUR||A.duration||0;if('setPositionState' in navigator.mediaSession&&d>0&&isFinite(d))navigator.mediaSession.setPositionState({duration:d,playbackRate:rate||1,position:Math.max(0,Math.min(d,now()))})}catch(e){}}
+async function msMeta(){if(!('mediaSession' in navigator)||!song)return;const id=song.id;if(MSS.id===id)return;MSS.id=id;
+  const ic=new URL('icon-512.png',location.href).href;let art=[{src:ic,sizes:'512x512',type:'image/png'}];
+  try{const v=await imgGet('cover',song.artist,song.album);const u=v&&(v.data||v.url);if(u)art=[{src:u,sizes:'400x400'},...art]}catch(e){}
+  if(!song||song.id!==id)return;
+  try{navigator.mediaSession.metadata=new MediaMetadata({title:song.title||'Senza titolo',artist:song.artist||'',album:(slActive()&&SCL.name?'Scaletta · '+SCL.name:(song.album||'rooMusic')),artwork:art})}catch(e){}}
+async function msStep(d){
+  if(slActive()&&SCL.items.length){const j=SCL.i+d;if(j<0||j>=SCL.items.length){toast(d>0?'È l\'ultimo brano della scaletta':'È il primo brano della scaletta');return}slPlay(j);return}
+  /* senza scaletta: il brano prima o dopo nell'elenco dei brani (per artista e titolo) */
+  const ids=[...$('#songPick').options].map(o=>o.value).filter(v=>v&&!v.startsWith('__')&&v!=='demo');if(!ids.length)return;
+  const k=song?ids.indexOf(song.id):-1,j=k<0?0:(k+d+ids.length)%ids.length,id=ids[j];if(song&&song.id===id){seek(0);play();return}
+  await songPickGo(id);slGo(id)}
+if('mediaSession' in navigator){const H=(k,f)=>{try{navigator.mediaSession.setActionHandler(k,f)}catch(e){}};
+  H('play',()=>{if(!playing())play()});H('pause',()=>{if(playing())pause()});H('stop',()=>pause());
+  H('nexttrack',()=>msStep(1));H('previoustrack',()=>{if(now()>4){seek(0);msPos()}else msStep(-1)});
+  H('seekbackward',e=>{seek(now()-((e&&e.seekOffset)||10));msPos()});H('seekforward',e=>{seek(now()+((e&&e.seekOffset)||10));msPos()});
+  H('seekto',e=>{if(e&&e.seekTime!=null){seek(e.seekTime);msPos()}});
+  A.addEventListener('play',()=>{msMeta();const e=msEl();MSS.own=false;e.play().catch(()=>{});try{navigator.mediaSession.playbackState='playing'}catch(x){}msPos()});
+  A.addEventListener('pause',()=>{if(MSS.el&&!MSS.el.paused){MSS.own=true;MSS.el.pause()}try{navigator.mediaSession.playbackState='paused'}catch(x){}msPos()});
+  A.addEventListener('ended',()=>{try{navigator.mediaSession.playbackState='paused'}catch(x){}})}
+
 $('#bBack').onclick=$('#pBack').onclick=()=>seek(now()-5);
 $('#bFwd').onclick=$('#pFwd').onclick=()=>seek(now()+5);
 const sk=$('#seek');let seeking=false;{const ps=$('#pSeek');ps.addEventListener('pointerdown',()=>seeking=true);ps.addEventListener('input',()=>{seeking=true;$('#tTime2').textContent=fmt(ps.value/1000*DUR)+' / '+fmt(DUR)});ps.addEventListener('change',()=>{seeking=false;seek(ps.value/1000*DUR)})}sk.addEventListener('pointerdown',()=>seeking=true);sk.addEventListener('input',()=>{seeking=true;$('#tTime').textContent=fmt(sk.value/1000*DUR)+' / '+fmt(DUR)});sk.addEventListener('change',()=>{seeking=false;seek(sk.value/1000*DUR)});
@@ -3689,6 +3748,57 @@ $('#legalOk').onclick=()=>{if(!$('#legalChk').checked)return;prefSet('legal1','1
 /* primo accesso: dopo le note legali porta a collegare RunPod */
 [$('#bLegal'),...$$('.legalLink')].forEach(a=>a.onclick=e=>{e.preventDefault();legalOpen()});
 if(prefGet('legal1')!=='1'&&!TVMODE)setTimeout(legalOpen,300);
+
+/* ===== DIMMI LA TUA: messaggi privati a chi ha creato l'app (arrivano solo nel suo R2) ===== */
+const FB_URL='';/* indirizzo del programma su Cloudflare, es. https://roomusic-pareri.NOME.workers.dev */
+const FB={s:0,k:'',taps:0,tt:0,items:[]};
+function fbDev(){const u=navigator.userAgent,os=/Android/i.test(u)?'Android':/iPhone|iPad|iPod/.test(u)||(/Mac/.test(u)&&navigator.maxTouchPoints>1)?'iPhone/iPad':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':/Linux/.test(u)?'Linux':'altro',
+  br=/Edg\//.test(u)?'Edge':/OPR\//.test(u)?'Opera':/SamsungBrowser/.test(u)?'Samsung Internet':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':'altro';
+  return (isMobile?(Math.min(screen.width,screen.height)>=600?'Tablet':'Telefono'):'PC')+' · '+os+' · '+br+' · '+screen.width+'×'+screen.height+(matchMedia('(display-mode: standalone)').matches?' · app installata':'')}
+function fbVer(){const m=document.querySelector('meta[name="pv-version"]');return m?m.content:''}
+function fbDraw(){$$('#fbStars .fbst').forEach(b=>b.classList.toggle('on',+b.dataset.s<=FB.s));$$('#fbKinds .fbk').forEach(b=>b.classList.toggle('pri',b.dataset.k===FB.k))}
+function fbRes(id,t,ok){const e=$(id);e.hidden=!t;e.textContent=t||'';e.classList.toggle('ok',!!ok)}
+function fbOpen(){$('#fbName').value=prefGet('fbName')||'';$('#fbMsg').value=prefGet('fbDraft')||'';FB.s=0;FB.k='';fbDraw();fbRes('#fbRes','');$('#navMenu').hidden=true;openOv('#ovFb')}
+$('#bFb').onclick=fbOpen;$('#bFb').hidden=!FB_URL;
+$$('#fbStars .fbst').forEach(b=>b.onclick=()=>{FB.s=+b.dataset.s===FB.s?0:+b.dataset.s;fbDraw()});
+$$('#fbKinds .fbk').forEach(b=>b.onclick=()=>{FB.k=FB.k===b.dataset.k?'':b.dataset.k;fbDraw()});
+$('#fbMsg').oninput=e=>prefSet('fbDraft',e.target.value);
+$('#fbSend').onclick=async()=>{const msg=$('#fbMsg').value.trim(),name=$('#fbName').value.trim();
+  if(!msg&&!FB.s){fbRes('#fbRes','Scegli le stelline o scrivi un messaggio');return}
+  if(!FB_URL){fbRes('#fbRes','Questa funzione non è ancora attiva');return}
+  if(!navigator.onLine){fbRes('#fbRes','Non c\'è internet: il messaggio resta qui, riprova più tardi');return}
+  const b=$('#fbSend');b.disabled=true;fbRes('#fbRes','Invio…');
+  try{const r=await fetch(FB_URL+'/invia',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,stars:FB.s,kind:FB.k,msg,hp:$('#fbHp').value,ver:fbVer(),dev:fbDev()})});
+    if(r.status===429){fbRes('#fbRes','Hai già mandato tanti messaggi: riprova tra un\'ora');return}
+    if(!r.ok)throw 0;prefSet('fbName',name);prefSet('fbDraft','');$('#fbMsg').value='';FB.s=0;FB.k='';fbDraw();fbRes('#fbRes','Grazie! Il messaggio è arrivato.',true)}
+  catch(e){fbRes('#fbRes','Invio non riuscito: il messaggio resta qui, riprova più tardi')}
+  finally{b.disabled=false}};
+/* pagina riservata: 5 tocchi veloci sulla versione nel menu */
+$$('.mver').forEach(v=>v.addEventListener('click',()=>{const n=Date.now();FB.taps=n-FB.tt<700?FB.taps+1:1;FB.tt=n;if(FB.taps>=5){FB.taps=0;fbAdmOpen()}}));
+function fbPass(){return sessionStorage.getItem('f8_fbPass')||prefGet('fbPass')||''}
+async function fbCall(path,d){const r=await fetch(FB_URL+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,pass:fbPass()})});if(r.status===401)throw new Error('pw');if(!r.ok)throw new Error('net');return r.json()}
+function fbAdmOpen(){$('#navMenu').hidden=true;openOv('#ovFbAdm');fbRes('#fbAres','');if(!FB_URL){fbRes('#fbAres','Manca l\'indirizzo del programma su Cloudflare');return}if(fbPass())fbLoad();else{$('#fbLog').hidden=false;$('#fbaBox').hidden=true}}
+$('#fbIn').onclick=()=>{const p=$('#fbPass').value;if(!p)return;sessionStorage.setItem('f8_fbPass',p);if($('#fbRem').checked)prefSet('fbPass',p);$('#fbPass').value='';fbLoad()};
+$('#fbOut').onclick=()=>{sessionStorage.removeItem('f8_fbPass');prefSet('fbPass','');$('#fbLog').hidden=false;$('#fbaBox').hidden=true};
+$('#fbReload').onclick=()=>fbLoad();$('#fbNew').onchange=()=>fbList();
+async function fbLoad(){fbRes('#fbAres','Carico…');try{const d=await fbCall('/elenco',{});FB.items=d.items||[];$('#fbLog').hidden=true;$('#fbaBox').hidden=false;fbRes('#fbAres','');fbList()}
+  catch(e){if(e.message==='pw'){sessionStorage.removeItem('f8_fbPass');prefSet('fbPass','');$('#fbLog').hidden=false;$('#fbaBox').hidden=true;fbRes('#fbAres','Password sbagliata')}else fbRes('#fbAres','Non riesco a collegarmi, riprova')}}
+const FBK={bello:'Mi piace',problema:'Qualcosa non va',idea:'Idea'};
+function fbList(){const all=FB.items,nl=all.filter(x=>!x.letto).length,st=all.filter(x=>x.stelle),avg=st.length?(st.reduce((a,x)=>a+x.stelle,0)/st.length).toFixed(1).replace('.',','):'';
+  $('#fbSum').textContent=all.length+' messaggi · '+nl+' da leggere'+(avg?' · media '+avg+' stelle':'');
+  const L=$('#fbList');L.innerHTML='';const v=$('#fbNew').checked?all.filter(x=>!x.letto):all;
+  if(!v.length){L.innerHTML='<p class="snote">Nessun messaggio.</p>';return}
+  v.forEach(x=>{const c=document.createElement('div');c.className='fbitem'+(x.letto?' read':'')+(x.tipo?' k-'+x.tipo:'');const d=new Date(x.quando);
+    const h=document.createElement('div');h.className='fbih';const n=document.createElement('b');n.textContent=x.nome||'Senza nome';h.append(n);
+    if(x.stelle){const s=document.createElement('span');s.className='fbis';s.textContent='★'.repeat(x.stelle)+'☆'.repeat(5-x.stelle);s.setAttribute('aria-label',x.stelle+' stelle');h.append(s)}
+    if(x.tipo){const t=document.createElement('span');t.className='fbit';t.textContent=FBK[x.tipo]||x.tipo;h.append(t)}
+    const w=document.createElement('small');w.textContent=d.toLocaleDateString('it-IT')+' '+d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});h.append(w);
+    const m=document.createElement('p');m.textContent=x.messaggio||'';const inf=document.createElement('small');inf.className='fbinf';inf.textContent='Versione '+(x.versione||'?')+' · '+(x.dispositivo||'');
+    const r=document.createElement('div');r.className='row';const bl=document.createElement('button');bl.className='mini';bl.textContent=x.letto?'Segna da leggere':'Segna letto';
+    bl.onclick=async()=>{try{await fbCall('/letto',{k:x.k,v:!x.letto});x.letto=!x.letto;fbList()}catch(e){toast('Non riuscito')}};
+    const bd=document.createElement('button');bd.className='mini';bd.textContent='Elimina';bd.onclick=async()=>{if(!confirm('Eliminare questo messaggio? Non si può recuperare.'))return;try{await fbCall('/elimina',{k:x.k});FB.items=FB.items.filter(y=>y!==x);fbList()}catch(e){toast('Non riuscito')}};
+    r.append(bl,bd);c.append(h,m,inf,r);L.append(c)})}
+
 $('#bHelp').onclick=()=>openOv('#ovHelp');$('#hTut').onclick=()=>{$('#ovHelp').hidden=true;tutOpen()};
 $('#bLib').onclick=()=>{renderLib();openOv('#ovLib')};
 function openSet(){$$('.ov').forEach(o=>{if(o.id!=='ovSet')o.hidden=true});openOv('#ovSet');try{linkUI()}catch(e){}try{themeUI()}catch(e){}try{renderDir()}catch(e){console.error(e)}try{audList()}catch(e){console.error(e)}try{spaceInfo()}catch(e){}}
