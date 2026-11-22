@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="22/11 · 21:10"><meta name="pv-notes" content="Tutorial aggiornato con tutte le novità: Sala prove (Palco/Musicisti, tasti play e avanti/indietro, Altro, Consigli, Uscite, Impostazioni con TONE3000, NAM e pedaliera MIDI), pedaliera con banchi e pedali accesi in ordine, apertura e chiusura del video, social, lingua del testo, tasti dell'auto, Dimmi la tua, colori. La lingua scelta nelle Impostazioni vale per tutti i brani."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="22/11 · 21:30"><meta name="pv-notes" content="Attivo «Dimmi la tua» nel menu: stelline, tipo di parere e messaggio che arrivano solo a chi ha creato l'app (li legge con 5 tocchi sulla versione nel menu e la sua password). Tutorial aggiornato con tutte le novità."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -1410,7 +1410,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Tutorial aggiornato con tutte le novità: Sala prove (Palco/Musicisti, tasti play e avanti/indietro, Altro, Consigli, Uscite, Impostazioni con TONE3000, NAM e pedaliera MIDI), pedaliera con banchi e pedali accesi in ordine, apertura e chiusura del video, social, lingua del testo, tasti dell'auto, Dimmi la tua, colori. La lingua scelta nelle Impostazioni vale per tutti i brani.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Attivo «Dimmi la tua» nel menu: stelline, tipo di parere e messaggio che arrivano solo a chi ha creato l'app (li legge con 5 tocchi sulla versione nel menu e la sua password). Tutorial aggiornato con tutte le novità.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -3752,7 +3752,7 @@ $('#legalOk').onclick=()=>{if(!$('#legalChk').checked)return;prefSet('legal1','1
 if(prefGet('legal1')!=='1'&&!TVMODE)setTimeout(legalOpen,300);
 
 /* ===== DIMMI LA TUA: messaggi privati a chi ha creato l'app (arrivano solo nel suo R2) ===== */
-const FB_URL='';/* indirizzo del programma su Cloudflare, es. https://roomusic-pareri.NOME.workers.dev */
+const FB_URL='https://roomusic-pareri.dino-pegaso77.workers.dev';/* indirizzo del programma su Cloudflare, es. https://roomusic-pareri.NOME.workers.dev */
 const FB={s:0,k:'',taps:0,tt:0,items:[]};
 function fbDev(){const u=navigator.userAgent,os=/Android/i.test(u)?'Android':/iPhone|iPad|iPod/.test(u)||(/Mac/.test(u)&&navigator.maxTouchPoints>1)?'iPhone/iPad':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':/Linux/.test(u)?'Linux':'altro',
   br=/Edg\//.test(u)?'Edge':/OPR\//.test(u)?'Opera':/SamsungBrowser/.test(u)?'Samsung Internet':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':'altro';
@@ -3772,7 +3772,7 @@ $('#fbSend').onclick=async()=>{const msg=$('#fbMsg').value.trim(),name=$('#fbNam
   const b=$('#fbSend');b.disabled=true;fbRes('#fbRes','Invio…');
   try{const r=await fetch(FB_URL+'/invia',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,stars:FB.s,kind:FB.k,msg,hp:$('#fbHp').value,ver:fbVer(),dev:fbDev()})});
     if(r.status===429){fbRes('#fbRes','Hai già mandato tanti messaggi: riprova tra un\'ora');return}
-    if(!r.ok)throw 0;prefSet('fbName',name);prefSet('fbDraft','');$('#fbMsg').value='';FB.s=0;FB.k='';fbDraw();fbRes('#fbRes','Grazie! Il messaggio è arrivato.',true)}
+    if(!r.ok)throw 0;const j=await r.json().catch(()=>null);if(!j||j.ok!==true)throw 0;prefSet('fbName',name);prefSet('fbDraft','');$('#fbMsg').value='';FB.s=0;FB.k='';fbDraw();fbRes('#fbRes','Grazie! Il messaggio è arrivato.',true)}
   catch(e){fbRes('#fbRes','Invio non riuscito: il messaggio resta qui, riprova più tardi')}
   finally{b.disabled=false}};
 /* pagina riservata: 5 tocchi veloci sulla versione nel menu */
