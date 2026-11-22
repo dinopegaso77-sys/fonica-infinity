@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="22/11 · 20:30"><meta name="pv-notes" content="Testi con Qwen3: prima si stabilisce la lingua del brano. Se l'artista ha già brani in una lingua si usa quella, altrimenti RunPod la riconosce da solo e la tiene per tutto il brano. In Opzioni testo › Lingua si può scegliere a mano per un brano. Auto Bluetooth: tasti al volante collegati."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="22/11 · 21:10"><meta name="pv-notes" content="Tutorial aggiornato con tutte le novità: Sala prove (Palco/Musicisti, tasti play e avanti/indietro, Altro, Consigli, Uscite, Impostazioni con TONE3000, NAM e pedaliera MIDI), pedaliera con banchi e pedali accesi in ordine, apertura e chiusura del video, social, lingua del testo, tasti dell'auto, Dimmi la tua, colori. La lingua scelta nelle Impostazioni vale per tutti i brani."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -1410,7 +1410,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Testi con Qwen3: prima si stabilisce la lingua del brano. Se l'artista ha già brani in una lingua si usa quella, altrimenti RunPod la riconosce da solo e la tiene per tutto il brano. In Opzioni testo › Lingua si può scegliere a mano per un brano. Auto Bluetooth: tasti al volante collegati.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Tutorial aggiornato con tutte le novità: Sala prove (Palco/Musicisti, tasti play e avanti/indietro, Altro, Consigli, Uscite, Impostazioni con TONE3000, NAM e pedaliera MIDI), pedaliera con banchi e pedali accesi in ordine, apertura e chiusura del video, social, lingua del testo, tasti dell'auto, Dimmi la tua, colori. La lingua scelta nelle Impostazioni vale per tutti i brani.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -6479,7 +6479,7 @@ function lyrRestore(){if(!song||!asrHasWords(song.asr))return;const prev=K.lines
 const LGOK=['it','en','es','fr','de','pt','ru','ja','ko','zh','yue'];
 function lgMap(k){try{return JSON.parse(prefGet(k)||'{}')||{}}catch(e){return{}}}
 const lgArt=a=>String(a||'').trim().toLowerCase();
-function lyrLang(artist,id){const f=id&&lgMap('lyrLang')[id];if(f&&LGOK.includes(f))return f;
+function lyrLang(artist,id){const f=id&&lgMap('lyrLang')[id];if(f&&LGOK.includes(f))return f;if(rp.lang&&LGOK.includes(rp.lang))return rp.lang;
   const c=lgMap('artLang')[lgArt(artist)];if(!c)return'';let best='',n=0,tot=0;for(const k in c){tot+=c[k];if(c[k]>n){n=c[k];best=k}}
   return n>=2&&n>=tot*.8&&LGOK.includes(best)?best:''}
 function langLearn(artist,lyr){const a=lgArt(artist),l=lyr&&lyr.language;if(!a||!l||!LGOK.includes(l)||!lyr.segments||!lyr.segments.length)return;
@@ -8103,16 +8103,19 @@ const TUT_SECTIONS=[
    {s:'#bShare',t:'Condividi su WhatsApp',d:'Sta nel Menu. Manda rooMusic ai tuoi amici: si apre WhatsApp con il messaggio già pronto e il collegamento all\'app.'},
    {s:'#bTut',t:'Tutorial',d:'Lo trovi in cima al Menu: è il pulsante che hai appena usato. Lo puoi riaprire quando vuoi e scegliere la schermata che ti interessa.'},
    {s:'#bDonate',t:'Donazione con PayPal',d:'Anche questa sta nel Menu. Se l\'app ti piace puoi fare una piccola donazione. È facoltativa: rooMusic resta gratuita.'},
-   {s:'#bMenu',t:'Menu',d:'Il Menu raccoglie Tutorial, Condividi, Dona e le funzioni che si usano meno spesso: Cerca brani, Aggiungi brano, Libreria, Impostazioni, Ricarica RunPod, Aiuto, Schermo intero e Presentazione. In fondo c\'è la versione dell\'app con le novità.'},
+   {s:'#bFb',t:'Dimmi la tua',d:'Sta nel Menu. Scrivi a chi ha creato rooMusic: le stelline, se ti piace, se qualcosa non va o se hai un\'idea. Il messaggio arriva solo a lui e non viene pubblicato.'},
+   {s:'#bMenu',t:'Menu',d:'Il Menu raccoglie Tutorial, Condividi, Dona e le funzioni che si usano meno spesso: Cerca brani, Aggiungi brano, Libreria, Impostazioni, Ricarica RunPod, Aiuto, Dimmi la tua, Schermo intero e Presentazione. In fondo c\'è la versione dell\'app con le novità.'},
    {s:'#bPalco',t:'Palco',d:'Apre lo schermo intero per esibirti: il testo grande che si colora parola per parola e, accanto o sotto, la tablatura del tuo strumento.'},
    {s:'#bRec',t:'Video',d:'Registra la tua esibizione con la fotocamera, con il testo che scorre e la base. Alla fine crei il video da salvare o da mandare agli amici.'},
    {s:'#bSala',t:'Sala prove',d:'Solo sul computer. Registra la band con la scheda audio: ogni musicista su una traccia, con amplificatori e pedali dal vivo in cuffia. Su telefono e tablet non c\'è, perché lì il suono torna in cuffia con troppo ritardo.'},
    {s:'#songPickBtn',t:'Il brano',d:'Qui vedi il brano aperto. Toccalo per sceglierne un altro dalla tua libreria. Quando segui una scaletta, qui compare il nome della scaletta: toccandolo scegli la scaletta o uno dei suoi brani.'},
    {s:'#bScal',t:'Singolo o Scaletta',d:'Con Singolo scegli i brani uno alla volta. Toccalo e diventa Scaletta: l\'app segue solo i brani della scaletta, uno dopo l\'altro. Toccalo di nuovo per tornare a Singolo.'},
-   {s:'#slBar',t:'La barra della scaletta',d:'Compare solo con la scaletta accesa. Ti dice a che brano sei, per esempio 3 di 8, e qual è il prossimo. Le frecce vanno al brano prima o dopo; toccando il titolo scegli un altro brano della scaletta.'},
+   {s:'#slBar',t:'La barra della scaletta',d:'Compare solo con la scaletta accesa. Ti dice a che brano sei, per esempio 3 di 8. Toccando il titolo scegli un altro brano della scaletta. Per andare al brano prima o dopo usi i tasti del lettore, qui sotto.'},
+   {s:'#hSPrev',t:'Brano precedente',d:'Compare con la scaletta accesa: torna al brano prima della scaletta.'},
    {s:'#bBack',t:'Indietro',d:'Torna indietro di 5 secondi.'},
-   {s:'#bPlay',t:'Play e pausa',d:'Fa partire o ferma il brano. Sul computer puoi usare anche la barra spaziatrice.'},
+   {s:'#bPlay',t:'Play e pausa',d:'Fa partire o ferma il brano. Sul computer puoi usare anche la barra spaziatrice. In auto con il Bluetooth, o con le cuffie, funzionano anche i loro tasti: play, pausa, brano dopo e brano prima. Sul display dell\'auto vedi titolo, artista e copertina.'},
    {s:'#bFwd',t:'Avanti',d:'Va avanti di 5 secondi.'},
+   {s:'#hSNext',t:'Brano successivo',d:'Compare con la scaletta accesa: passa al brano dopo della scaletta.'},
    {s:'#seek',t:'La linea del brano',d:'Trascina il pallino per andare in qualsiasi punto del brano. Accanto vedi il tempo passato e la durata totale.'},
    {s:'#tlMix',t:'Mixer',d:'Il volume di ogni strumento del brano: voce, basso, batteria, chitarra e gli altri. Ci sono anche i mix già pronti, come il Karaoke senza voce.'},
    {s:'#tlTempo',t:'Velocità e click',d:'Rallenta o accelera il brano senza cambiare l\'intonazione, accende il metronomo e ripete un passaggio. Sotto vedi i battiti al minuto del brano.'},
@@ -8134,7 +8137,8 @@ const TUT_SECTIONS=[
   steps:[
    {t:'Opzioni testo',d:'Qui sistemi il testo del brano. Di solito l\'app lo trova da sola, ma se manca o non è preciso lo puoi cercare, trascrivere, correggere e mettere a tempo.'},
    
-   {s:'#lyEng',t:'Testo da',d:'Scegli come si fa il testo: Qwen3 ascolta la voce (consigliato), Whisper è il programma vecchio, «LRCLIB + voce» prende le parole da LRCLIB e le mette a tempo ascoltando la voce. Vale anche per «Affina» e per i brani nuovi.'},{s:'#bAsr',t:'Trascrivi dalla voce',d:'RunPod ascolta la voce del brano e scrive il testo con il programma scelto in «Testo da», mettendo ogni parola a tempo. Serve RunPod collegato.'},
+   {s:'#lyEng',t:'Testo da',d:'Scegli come si fa il testo. Il consigliato prende le parole giuste da LRCLIB o, se lì non ci sono, le fa ascoltare a Qwen3; poi Whisper mette a tempo ogni parola. Le altre scelte usano solo LRCLIB, solo Qwen3 o solo Whisper. Vale anche per «Affina» e per i brani nuovi.'},{s:'#bAsr',t:'Trascrivi dalla voce',d:'RunPod ascolta la voce del brano e scrive il testo con il programma scelto in «Testo da», mettendo ogni parola a tempo. Serve RunPod collegato.'},
+   {s:'#lyLang',t:'Lingua',d:'La lingua in cui si canta il brano. Di solito lasciala su Automatica: se l\'artista ha già altri brani, l\'app usa la loro lingua, altrimenti RunPod la riconosce da solo prima di scrivere il testo. Cambiala solo se il testo è venuto in una lingua sbagliata, poi premi Trascrivi dalla voce.'},
    {s:'#bEditLy',t:'Modifica',d:'Apre il testo per correggerlo a mano o per incollarne uno tuo.'},
    {s:'#bAlign',t:'Allinea da solo',d:'Rimette a tempo il testo ascoltando la voce del brano. Usalo dopo aver incollato o corretto un testo.'},
    {s:'#bSyncLy',t:'Sincronizza a mano',d:'Fa partire il brano e tu tocchi un pulsante all\'inizio di ogni riga: così metti a tempo il testo da solo.'},
@@ -8378,7 +8382,7 @@ const TUT_SECTIONS=[
     const n=+v.slice(2);$('#recBar').hidden=true;$('#recDone').hidden=false;$('#stFrameBox').hidden=true;$('#fbBox').hidden=true;
     $$('#recDone .stp').forEach(x=>x.hidden=+x.dataset.step!==n);$$('#stBar button').forEach(b=>{const k=+b.dataset.s;b.classList.toggle('on',k===n);b.classList.toggle('done',k<n);b.disabled=false});
     $('#stStepN').textContent='Passo '+n+' di 5';$('#stBack').hidden=n<2;$('#stNext').hidden=n>4;$('#recMsg').textContent='Esempio del tutorial: qui comparirebbe il video che hai registrato.'},
-  done:()=>{$('#recOv').hidden=true;$('#recDone').hidden=true;$('#recBar').hidden=false;$('#recMsg').textContent='';$$('#recOv details.rsec').forEach(d=>d.open=false);document.body.style.overflow=''},
+  done:()=>{if(!R.blob){['#recShare','#recTT'].forEach(q=>{const e=$(q);if(e)e.hidden=true});$$('.socb').forEach(b=>b.hidden=true)}$('#recOv').hidden=true;$('#recDone').hidden=true;$('#recBar').hidden=false;$('#recMsg').textContent='';$$('#recOv details.rsec').forEach(d=>d.open=false);document.body.style.overflow=''},
   steps:[
    {v:'cam',t:'Il Video',d:'Qui ti registri mentre canti sul brano, con il testo che scorre, e poi crei un video bello da mandare agli amici. Si apre con il pulsante Video. Per esempio uso «Luci sul porto». In questa prova la fotocamera resta spenta.'},
    {v:'cam',s:'#recTitle',t:'Il brano',d:'In alto vedi il brano che stai cantando.'},
@@ -8402,7 +8406,13 @@ const TUT_SECTIONS=[
    {v:'cam',s:'#recBeauty',t:'Trucco',d:'Rende la pelle più liscia e luminosa. Con Più bello anche un po\' di colore su guance e labbra.'},
    {v:'cam',s:'#recBgS',t:'Sfondo',d:'Cambia quello che c\'è dietro di te: sfocato, studio, palco con le luci, tramonto sul mare, città di notte e altri.'},
    {v:'cam',s:'#recTxt',t:'Testo nel video',d:'Se è spuntato, il testo della canzone compare anche nel video.'},
-   {v:'cam',s:'#recGo',run:()=>{$('#rsImg').open=false},t:'Registra',d:'Il pulsante rosso. Parte un conto alla rovescia, poi il brano e la registrazione. Premilo di nuovo per fermare. Con le cuffie il risultato è migliore.'},
+   {v:'cam',s:'#rsOp>summary',run:()=>{$('#rsImg').open=false;$('#rsOp').open=true},t:'Apertura e chiusura',d:'Qui prepari l\'inizio e la fine del video: una tua foto con artista, titolo e il tuo nome, e il logo di rooMusic alla fine.'},
+   {v:'cam',s:'#opOn',run:()=>{$('#rsImg').open=false;$('#rsOp').open=true},t:'Accendi apertura e chiusura',d:'Se è spuntato, il video comincia con la presentazione e finisce con il logo.'},
+   {v:'cam',s:()=>$('#opShot').closest('.oprow'),run:()=>{$('#rsImg').open=false;$('#rsOp').open=true},t:'La tua foto',d:'Scatta una foto o caricane una: l\'app la sistema da sola, con un bel primo piano, la luce giusta e lo sfondo sfocato. Puoi scegliere tra Migliorata e Originale.'},
+   {v:'cam',s:'#opName',run:()=>{$('#rsImg').open=false;$('#rsOp').open=true},t:'Nome di chi canta',d:'Il nome che compare sotto il titolo, per esempio Dino Addis.'},
+   {v:'cam',s:'#opSt',run:()=>{$('#rsImg').open=false;$('#rsOp').open=true},t:'Sipario o Onda',d:'Due modi di presentare il brano. Artista, titolo e nome stanno sempre su tre righe separate: un titolo lungo diventa più piccolo e non copre le altre scritte. Se l\'app ha la foto dell\'artista, compare in un quadratino.'},
+   {v:'cam',s:'#opPrev',run:()=>{$('#rsImg').open=false;$('#rsOp').open=true},t:'Anteprima',d:'Guarda subito come viene l\'apertura, prima di registrare.'},
+   {v:'cam',s:'#recGo',run:()=>{$('#rsImg').open=false;$('#rsOp').open=false},t:'Registra',d:'Il pulsante rosso. Parte un conto alla rovescia, poi il brano e la registrazione. Premilo di nuovo per fermare. Con le cuffie il risultato è migliore.'},
    {v:'st1',s:'#stBar',t:'Il video finale in 5 passi',d:'Dopo la registrazione prepari il video finale in 5 passi: Voce, Effetti, Trucco, Sfondo e Labbra. Te li faccio vedere uno alla volta.'},
    {v:'st1',s:'#stPrev',t:'Ascolta',d:'Ascolta come è venuta, con tutte le modifiche che fai. Ferma interrompe l\'ascolto.'},
    {v:'st1',s:()=>$('#stLag').closest('.lagrow')||$('#stLag'),t:'Passo 1: sincronia',d:'Se la tua voce arriva dopo la base, aumenta i millisecondi. Se arriva prima, diminuiscili. Di solito ci pensa l\'app da sola.'},
@@ -8418,7 +8428,8 @@ const TUT_SECTIONS=[
    {v:'st5',s:'#stLips',t:'Passo 5: labbra',d:'RunPod controlla secondo per secondo che la bocca si muova insieme alla voce.'},
    {v:'st5',s:'#stAvRow',t:'Spostamento a mano',d:'Se nel video le labbra si muovono prima della voce, aumenta. Se si muovono dopo, diminuisci. Poi ricrea il video.'},
    {v:'st5',s:'#recFix',t:'Crea il video finale',d:'Mette insieme tutto quello che hai scelto e crea il video.'},
-   {v:'st5',s:'#recSave',t:'Salva sul telefono',d:'Salva il video finito sul dispositivo.'},
+   {v:'st5',s:'#recSave',t:'Salva sul telefono',d:'Salva il video finito sul dispositivo. Mentre l\'app prepara il video finale, questo e gli altri tasti per salvare e condividere restano spenti: si accendono quando il video è pronto.'},
+   {v:'st5',s:()=>$('#recTT').parentElement,run:()=>{if(!R.blob){['#recShare','#recTT'].forEach(q=>{const e=$(q);if(e)e.hidden=false});$$('.socb').forEach(b=>b.hidden=false)}},t:'Condividi sui social',d:'Manda il video su TikTok, Instagram, YouTube, Facebook o WhatsApp. Sul telefono si apre il menu per condividere; sul computer il video si scarica e si apre la pagina per caricarlo. La descrizione con gli hashtag è già copiata: ti basta incollarla.'},
    {v:'st5',s:'#recCloudUp',t:'Salva nel cloud',d:'Salva il video nel tuo cloud, per ritrovarlo su tutti i dispositivi.'},
    {v:'st5',s:'#drSave',t:'Salva bozza',d:'Tiene la registrazione nelle Bozze, per finirla un\'altra volta.'},
    {v:'st5',s:'#recAgain',t:'Rifai',d:'Ricomincia la registrazione da capo.'},
@@ -8441,38 +8452,43 @@ const TUT_SECTIONS=[
    {when:()=>!SALA_OK,t:'Su telefono e tablet',d:'Qui il pulsante Sala prove ti spiega solo cosa serve: per usare la Sala prove apri rooMusic sul computer, con la scheda audio collegata via USB.'},
    {when:()=>SALA_OK,v:'rec',t:'I musicisti di esempio',d:'Per farti vedere com\'è ho messo tre musicisti inventati: Marco alla voce, Luca alla chitarra e Gianni al basso. In questa prova il microfono e la scheda audio restano spenti. Alla fine ti rimetto i tuoi musicisti.'},
    {v:'rec',s:'#salaX',t:'Home',d:'Torna alla schermata principale.'},
-   {v:'rec',s:'#sSongPickBtn',t:'Scegli un brano',d:'Il brano su cui suonate. Toccalo per cambiarlo.'},
+   {v:'rec',s:'#sSongPickBtn',t:'Scegli un brano',d:'Il brano su cui suonate. Toccalo per cambiarlo. Con la scaletta accesa scegli tra i brani della scaletta.'},
+   {v:'rec',s:'#sScal',t:'Singolo o Scaletta',d:'Come nella schermata principale: con Scaletta l\'app segue i brani della serata, uno dopo l\'altro.'},
    {v:'rec',s:'.sala-tabs',t:'Registra e Mix',d:'Registra è dove suonate. Mix e sincronia è dove sistemate le registrazioni dopo.'},
    {v:'rec',s:'#sLat',t:'Ritardo',d:'Il ritardo tra quando suoni e quando ti senti in cuffia. Più è basso, meglio è.'},
-   {v:'rec',s:'#sSetTop',t:'Scaletta',d:'Apre la scaletta, per passare al brano dopo senza uscire.'},
+   {v:'rec',s:'#sMoreTop',t:'Altro',d:'Apre una finestra con: Suona e riconosco (ognuno suona qualche nota e l\'app capisce chi è collegato a quale ingresso), Banco 1 a tutti, Taratura ritardo, Uscite (volume delle cuffie e volume delle casse) e le scelte della registrazione: tonalità, click, conteggio 1-2-3-4 e partenza dall\'inizio del brano.'},
+   {v:'rec',s:'#sTipsTop',t:'Consigli',d:'Quale scheda audio sta usando l\'app, dove suonano cuffie e casse, e un pulsante per accendere «Non disturbare», così nessuna notifica disturba mentre suonate.'},
    {v:'rec',s:'#sTuneTop',t:'Accordatore',d:'Accordi gli strumenti direttamente dalla scheda audio.'},
-   {v:'rec',s:'#salaHelp',t:'Guida',d:'Spiega come collegare la scheda audio, il tablet e le cuffie.'},
-   {v:'rec',s:'#kpSala',t:'Testo e note',d:'Qui scorrono il testo e le note da suonare, come nella schermata principale.'},
-   {v:'rec',s:'#sInst',t:'Basso o Chitarra',d:'Scegli di quale strumento vedere le note.'},
-   {v:'rec',s:'#sMode',t:'Note o Accordi',d:'Note mostra una nota alla volta, Accordi mostra gli accordi.'},
-   {v:'rec',s:'#sListen',t:'Ascolta e prova',d:'Fa partire il brano senza registrare, per provare i suoni.'},
-   {v:'rec',s:'#sDetect',t:'Suona e riconosco',d:'Collega la scheda e premi qui: ognuno suona qualche nota e l\'app capisce da sola chi è collegato a quale ingresso.'},
-   {v:'rec',s:'#sMoreTop',t:'Altro',d:'Qui trovi «Suona e riconosco», «Banco 1 a tutti», «Taratura ritardo» e «Uscite» (volume cuffie e volume casse).'},
-   {v:'rec',s:'#sTipsTop',t:'Consigli',d:'Quale scheda audio uso, dove suonano cuffie e casse, e un pulsante per accendere «Non disturbare».'},
-   {v:'rec',s:'#sAdd',t:'Aggiungi musicista',d:'Aggiunge un musicista a mano.'},
+   {v:'rec',s:'#salaFull',t:'Schermo intero',d:'Usa tutto lo schermo del computer: tutto sta in una schermata, senza dover scorrere con il mouse mentre suoni.'},
+   {v:'rec',s:'#salaHelp',t:'Guida',d:'Spiega come collegare la scheda audio e le cuffie.'},
+   {v:'rec',s:'#sAdd',t:'Aggiungi musicista',d:'Aggiunge un musicista. Ce ne stanno quattro nella stessa schermata.'},
+   {v:'rec',s:'#sAutoMute',t:'Togli dalla base',d:'Se è spuntato, dalla base spariscono gli strumenti che state suonando voi.'},
+   {v:'rec',s:'#sGuide',t:'Voce guida',d:'La voce originale si sente solo in cuffia e non finisce nella registrazione.'},
+   {v:'rec',s:'#sBaseVol',t:'Volume base',d:'Il volume di tutto il brano su cui suonate.'},
+   {v:'rec',s:'#sStems',t:'Gli strumenti della base',d:'Il volume di ogni strumento del brano, con il pulsante per spegnerlo.'},
+   {v:'rec',s:'#sT3Tile',t:'TONE3000',d:'Collega il tuo account TONE3000 per usare i suoi amplificatori. Toccalo per collegarlo; finito, torni da solo nella Sala prove.'},
+   {v:'rec',s:'#sNamOn',t:'Amplificatori NAM e casse IR',d:'Se è spuntato, ogni chitarra e basso ha anche l\'amplificatore e la cassa che suonano come quelli veri.'},
+   {v:'rec',s:'#sMidiOn',t:'Pedaliera MIDI',d:'Spuntalo se usi una pedaliera MIDI. Poi scegli quale musicista comanda: i pedali cambiano solo i suoi suoni. Con Pedali imposti cosa fa ogni pedale.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .sthead'),t:'Il musicista',d:'Ogni musicista ha il suo riquadro. Per esempio questo è Luca, alla chitarra.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stname'),t:'Nome e strumento',d:'Scrivi il nome e scegli lo strumento: voce, chitarra, basso o altro.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] [data-tune]'),t:'Accordatore del musicista',d:'Apre l\'accordatore che ascolta solo il suo strumento.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] [data-pwr]'),t:'Acceso o spento',d:'Spegne l\'ingresso: non si sente e non registra.'},
+   {v:'rec',s:()=>$('#sTracks .smidi'),t:'MIDI',d:'Compare accanto ad Acceso solo nel musicista comandato dalla pedaliera MIDI: i pedali cambiano i suoi banchi.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .recarm'),t:'REC',d:'Se è acceso, questo musicista viene registrato sulla sua traccia.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stio'),t:'Scheda e ingresso',d:'In quale scheda audio e in quale ingresso è collegato.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stmeter'),t:'Livello e cuffia',d:'La barra mostra quanto forte arriva il suono: suona qualche nota per vederla. La cuffia dice se ti senti in cuffia con gli effetti.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stmon'),t:'Volume cuffia e originale',d:'Quanto ti senti in cuffia. L\'altro pulsante accende o spegne la chitarra originale del brano.'},
-   {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stsnd'),t:'Amplificatore e cassa',d:'Scegli l\'amplificatore e la cassa. Sono modelli NAM e TONE3000 che suonano come quelli veri.'},
+   {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stsnd'),t:'Amplificatore e cassa',d:'Compare se nelle Impostazioni hai acceso gli amplificatori NAM: scegli l\'amplificatore e la cassa, modelli che suonano come quelli veri.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .knobs'),t:'Le manopole',d:'Trascina una manopola su o giù per regolarla. Tocca due volte per rimetterla com\'era.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .banks'),t:'I banchi',d:'Cinque suoni pronti da cambiare con un tocco, o con la pedaliera, mentre suoni.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] [data-rig]'),t:'Gestisci pedaliera',d:'Apre la finestra del suono, con pedali, amplificatore e banchi. Te la faccio vedere tra poco.'},
-   {v:'rec',s:'#sBaseVol',t:'Volume base',d:'Il volume del brano su cui suonate.'},
-   {v:'rec',s:'#sAutoMute',t:'Togli dalla base',d:'Se è spuntato, dal brano spariscono gli strumenti che state suonando voi.'},
-   {v:'rec',s:'#sGuide',t:'Voce guida',d:'La voce originale si sente solo in cuffia e non finisce nella registrazione.'},
-   {v:'rec',s:'#sClick',t:'Click e conteggio',d:'Il metronomo, e il conteggio uno due tre quattro prima di partire.'},
-   {v:'rec',s:()=>$('#sTrUp').parentElement,t:'Tonalità',d:'Alza o abbassa il brano di mezzo tono.'},
-   {v:'rec',s:'#sStems',t:'Gli strumenti del brano',d:'Il volume di ogni strumento del brano, con il pulsante per spegnerlo.'},
+   {v:'rec',s:'#sViewSw',t:'Palco o Musicisti',d:'Passa dalla vista Musicisti, con pedaliere e volumi, alla vista Palco, con testo e tablatura grandi da leggere mentre suonate. Nel Palco scegli anche basso o chitarra e note o accordi. Lo stesso pulsante ti riporta ai Musicisti.'},
+   {v:'rec',s:'#sSPrev',t:'Brano precedente',d:'Con la scaletta accesa torna al brano prima.'},
+   {v:'rec',s:'#sBack',t:'Indietro',d:'Torna indietro di 5 secondi.'},
+   {v:'rec',s:'#sListen',t:'Play e pausa',d:'Fa partire il brano senza registrare, per provare i suoni. Premilo di nuovo per fermarlo.'},
+   {v:'rec',s:'#sFwd',t:'Avanti',d:'Va avanti di 5 secondi.'},
+   {v:'rec',s:'#sSNext',t:'Brano successivo',d:'Con la scaletta accesa passa al brano dopo.'},
+   {v:'rec',s:'#sPos',t:'La linea del brano',d:'Trascina il pallino per andare in un punto del brano: il brano continua da lì.'},
    {v:'rec',s:'#sRecGo',t:'Registra',d:'Fa partire il brano e registra tutti i musicisti con REC acceso, ognuno sulla sua traccia. Premilo di nuovo per fermare.'},
    {v:'rec',s:'#sTakes',t:'Le riprese',d:'Ogni registrazione è una ripresa. Toccala per ascoltarla e sistemarla nel Mix.'},
    {v:'mix',s:'#sMixTitle',t:'Mix e sincronia',d:'Qui sistemi una ripresa: metti a tempo le tracce e prepari il file finale.'},
@@ -8485,13 +8501,14 @@ const TUT_SECTIONS=[
    {v:'mix',s:'#sExpMix',t:'Mix finale',d:'Salva tutto il brano suonato in un file WAV e MP3.'},
    {v:'mix',s:'#sExpTr',t:'Tracce separate',d:'Salva ogni musicista in un file a parte, per lavorarci con un altro programma.'},
    {v:'rig',s:'#rigTitle',t:'Il suono di Luca',d:'Questa è la pedaliera di Luca: si apre con Gestisci pedaliera.'},
-   {v:'rig',s:'#rigPre',t:'Preset',d:'Suoni già pronti, solo quelli del suo strumento: Pulito, Distorto rock, Distorto metal, Basso slap e altri. Scegline uno e si sente subito. Mezzo tono su o giù alza o abbassa solo il tuo strumento.'},
+   {v:'rig',s:'#rigBankTab',t:'I cinque banchi',d:'Per ogni banco, da 1 a 5, scegli il suono: a sinistra quello solo per questo brano, a destra quello generale, che vale per tutti i brani. «Come il generale» usa quello di destra. Con «Suono del brano» l\'app riempie i banchi del brano ascoltando il disco e cercando suoni simili.'},
+   {v:'rig',s:'#rigInst',t:'Il tuo strumento',d:'Scegli il tuo strumento salvato: l\'app corregge il suono perché ogni chitarra suona diversa.'},
    {v:'rig',s:'#rigPre [data-prsave]',t:'Salva come preset',d:'Salva i pedali come sono adesso con un nome tuo, per ritrovarli in tutti i brani.'},
-   {v:'rig',s:'#ovRig [data-prload]',t:'Carica nel banco',d:'Mette il preset scelto in uno dei cinque banchi, solo per il brano aperto o per tutti i brani.'},
    {v:'rig',s:'#ovRig [data-prord]',t:'L\'ordine dei pedali',d:'Trascina un pedale tenendolo per il nome sopra un altro, oppure usa le frecce sotto ogni pedale. Ordine classico rimette l\'ordine di partenza.'},
-   {v:'rig',s:'#rigChain',t:'La catena',d:'I pedali e l\'amplificatore, in ordine. Tocca un blocco per regolarlo, toccalo due volte per accenderlo o spegnerlo.'},
-   {v:'rig',s:'#rigAmpBox',t:'Amplificatore',d:'Scegli l\'amplificatore e regola ingresso, drive e volume.'},
-   {v:'rig',s:'#rigFoot',t:'I banchi',d:'I cinque banchi: tocca un numero per cambiare suono. Sotto, in «Scegli cosa c\'è in ogni banco», decidi cosa mettere in ognuno.'},
+   {v:'rig',s:'#rigChain',t:'La catena',d:'Tutti i pedali, in ordine. Tocca un blocco per regolarlo, toccalo due volte per accenderlo o spegnerlo.'},
+   {v:'rig',s:'#rigBoard',t:'I pedali accesi',d:'Qui vedi solo i pedali accesi, nell\'ordine in cui suonano, grandi e con le manopole. Il segno del plettro ricorda che sono effetti per lo strumento. Se sono più di otto vanno su due righe.'},
+   {v:'rig',s:'#rigEq',t:'Equalizzatore',d:'Se l\'equalizzatore è acceso, compare lungo e sottile: trascina i punti su o giù per alzare o abbassare ogni frequenza.'},
+   {v:'rig',s:'#rigAmpS',t:'Amplificatore e cassa',d:'Con gli amplificatori NAM accesi, amplificatore e cassa stanno su una riga sola, come l\'equalizzatore.'},
    {v:'rig',s:'#rigCopy',t:'Copia il suono del brano',d:'Fa ascoltare a RunPod la chitarra del brano e prepara un suono simile. Ora te lo faccio vedere.'},
    {v:'copy',s:'#cpGo',t:'Analizza il suono',d:'RunPod ascolta la chitarra separata e capisce com\'è il suono: distorsione, delay, riverbero. Ci vuole circa un minuto.'},
    {v:'copy',s:'#cpList',t:'I suoni trovati',d:'Qui compaiono i suoni diversi del brano, con i punti dove si sentono. Toccane uno per provarlo.'},
@@ -8505,7 +8522,7 @@ const TUT_SECTIONS=[
     pdDraw();openOv('#ovMidi')},
   done:()=>{$('#ovMidi').hidden=true;$('#pdGuide').open=false;$('#pdOff').open=false;if(TUT.ped){SA.tracks=TUT.ped.tracks;MD.pads=TUT.ped.pads;MD.tgt=TUT.ped.tgt;MD.learn=null;TUT.ped=null;window.__salaEx=false}},
   steps:[
-   {t:'La mia pedaliera',d:'Funziona come una pedaliera Boss: con i pedali 1, 2, 3 e 4 cambi suono, con CTL 1 e CTL 2 passi al brano prima o dopo della scaletta, con il pedale del volume regoli il volume di tutta l\'app. Si apre con «La mia pedaliera». Per l\'esempio ho collegato una Boss GT-10B finta: alla fine rimetto tutto com\'era.'},
+   {t:'La mia pedaliera',d:'Funziona come una pedaliera Boss: con i pedali 1, 2, 3 e 4 cambi suono, con CTL 1 e CTL 2 passi al brano prima o dopo della scaletta, con il pedale del volume regoli il volume di tutta l\'app. Si apre dalla Sala prove, in Impostazioni › Pedaliera MIDI › Pedali. Per l\'esempio ho collegato una Boss GT-10B finta: alla fine rimetto tutto com\'era.'},
    {when:()=>!SALA_OK,t:'Su telefono e tablet',d:'Qui la pedaliera non c\'è: si usa solo sul computer, insieme alla Sala prove, con la pedaliera collegata alla scheda audio.'},
    {when:()=>SALA_OK&&!mdOk(),t:'Questo browser',d:'Questo browser non legge il MIDI. Usa Chrome o Edge sul computer.'},
    {when:()=>SALA_OK,s:'#pdGo',t:'Collega la pedaliera',d:'Collega il MIDI OUT della pedaliera al MIDI IN della scheda audio e premi qui. La prima volta il browser chiede il permesso.'},
@@ -8514,7 +8531,7 @@ const TUT_SECTIONS=[
    {when:()=>SALA_OK,s:'#pdBoard',t:'Il disegno della pedaliera',d:'Sotto ci sono i pedali 1, 2, 3 e 4, sopra CTL 1, CTL 2 e il pedale del volume. Quando premi un pedale vero, qui si accende la sua lucina. Puoi anche toccarli sullo schermo per provarli.'},
    {when:()=>SALA_OK,s:'#pdBoard .bbrow',t:'I pedali 1, 2, 3 e 4',d:'Richiamano i banchi 1, 2, 3 e 4, cioè quattro suoni pronti, per esempio pulito, crunch, distorto e assolo. Se il brano ha i suoi banchi, i suoni sono quelli del brano.'},
    {when:()=>SALA_OK,s:'#pdBoard .bbtop',t:'CTL e volume',d:'CTL 1 torna al brano prima e CTL 2 passa al brano dopo, nella scaletta. Il pedale del volume alza e abbassa il volume di tutta l\'app.'},
-   {when:()=>SALA_OK,s:'#pdTgt',t:'Strumento dei banchi',d:'Quale strumento cambia suono con i pedali 1-4. Per esempio Luca, alla chitarra. Con Tutti gli strumenti cambiano chitarra e basso insieme.'},
+   {when:()=>SALA_OK,s:'#pdTgt',t:'Strumento dei banchi',d:'Quale musicista cambia suono con i pedali 1-4, per esempio Luca alla chitarra. I pedali comandano solo lui: se ci sono due chitarre, l\'altra non cambia. Accanto al suo Acceso compare il segno MIDI.'},
    {when:()=>SALA_OK,s:'#pdSB',t:'Banchi del brano',d:'Puoi preparare banchi diversi per ogni brano della scaletta: quando cambi brano con CTL, i pedali richiamano i suoni di quel brano.'},
    {when:()=>SALA_OK,s:'#pdRows',t:'Cosa fa ogni pedale',d:'Ogni riga è un pedale: a sinistra a quale pedale vero è collegato, poi cosa fa. Puoi cambiarlo, per esempio fare del pedale 4 il pulsante per avviare e fermare il brano.'},
    {when:()=>SALA_OK,s:'#pdRows [data-pdlearn="p1"]',t:'Collega',d:'Per collegare un pedale: tocca Collega e premi il pedale vero. Funziona con qualsiasi pedaliera MIDI, non solo Boss.'},
@@ -8542,6 +8559,7 @@ const TUT_SECTIONS=[
   prep:()=>{tutCloseAll();openSet()},done:()=>{$('#ovSet details.advset').open=false;const a=$('#rpBox details.adv');if(a)a.open=false;$('#ovSet').hidden=true},
   steps:[
    {t:'Le impostazioni',d:'Si aprono dal Menu, con Impostazioni. Qui colleghi i servizi, salvi le chiavi e le impostazioni in un file, scegli dove tenere i brani e quale scheda audio usare.'},
+   {s:'#thSeg',t:'Colori dell\'app',d:'Scegli i colori che ti stancano meno gli occhi. Celeste è quello principale, con cui parte l\'app.'},
    {s:'#linkList',t:'I collegamenti',d:'I servizi che fanno funzionare l\'app: Cloud R2 per l\'archivio, RunPod per separare i brani, TONE3000 per gli amplificatori, MVSEP come riserva gratuita. Il pallino dice se sono collegati; con Collega li colleghi uno per uno.'},
    {s:'#linkWiz',t:'Configurazione guidata',d:'Ti accompagna a collegare tutto, un passo alla volta e nell\'ordine giusto. C\'è una scheda del tutorial solo per questa.'},
    {s:'#bkSave',t:'Salva le chiavi in un file',d:'Salva in un file solo le chiavi dei servizi. Tienilo per te e non mandarlo a nessuno: serve se il browser le cancella o se usi l\'app su un altro dispositivo.'},
@@ -8567,7 +8585,7 @@ const TUT_SECTIONS=[
    {s:'#rpChange',t:'Cambia chiave o ID',d:'Se RunPod è già collegato, qui cambi la chiave o il servizio.'},
    {s:'#rpHelp',t:'Chiedi aiuto',d:'Prepara un messaggio WhatsApp con lo stato del collegamento, da mandare a chi ti aiuta. La chiave non c\'è mai.'},
    {s:'#rpModel',run:()=>{const a=$('#rpBox details.adv');if(a)a.open=true},t:'Modello',d:'In Impostazioni avanzate scegli in quante tracce dividere i brani: 6 tracce con chitarra e piano, oppure 4.'},
-   {s:'#rpLang',t:'Lingua del testo',d:'La lingua in cui trascrivere il testo dalla voce. Di solito la riconosce da sola.'},
+   {s:'#rpLang',t:'Lingua del testo',d:'Vale per tutti i brani. Lasciala su «La riconosce da sola»: l\'app usa la lingua già vista per quell\'artista, altrimenti RunPod la riconosce prima di scrivere il testo. Per un brano solo c\'è Lingua in Opzioni testo.'},
    {s:'#t3Key',run:()=>{const a=$('#rpBox details.adv');if(a)a.open=false},t:'TONE3000',d:'La chiave pubblica di TONE3000, per scegliere amplificatori e casse. Inizia con t3k_pub. Mai la chiave segreta.'},
    {s:'#bPickDir',t:'Cartella delle tracce',d:'Sul computer puoi scegliere una cartella dove salvare anche le tracce separate, divise per artista e titolo.'},
    {s:'#spaceTest',t:'Prova il salvataggio',d:'Controlla che il browser riesca a salvare i brani.'},
