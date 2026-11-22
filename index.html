@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="21/11 · 21:30"><meta name="pv-notes" content="Auto e cuffie Bluetooth: i tasti al volante (brano successivo e precedente, play e pausa) ora comandano l'app; sul display dell'auto compaiono titolo, artista e copertina. Con la scaletta accesa si segue la scaletta, altrimenti l'elenco dei brani. Home: tolti i tasti avanti/indietro accanto al titolo della scaletta. Video: salva/condividi solo a video pronto, più social, apertura su tre righe."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="22/11 · 20:30"><meta name="pv-notes" content="Testi con Qwen3: prima si stabilisce la lingua del brano. Se l'artista ha già brani in una lingua si usa quella, altrimenti RunPod la riconosce da solo e la tiene per tutto il brano. In Opzioni testo › Lingua si può scegliere a mano per un brano. Auto Bluetooth: tasti al volante collegati."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -272,6 +272,7 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .fbadm{max-width:720px}.fbadm>div{flex:none}#fbList{min-height:120px}.fbbar{flex-wrap:wrap;gap:8px;margin-bottom:8px}.fbbar #fbSum{flex-basis:100%;font-weight:700}#fbList{display:flex;flex-direction:column;gap:10px;max-height:62vh;overflow:auto}.fbitem{border:1px solid var(--line,#ccc);border-left:5px solid #4bb8e6;border-radius:12px;padding:10px 12px;background:var(--card,#fff)}
 .fbitem.k-problema{border-left-color:#d9534f}.fbitem.k-bello{border-left-color:#3aa55d}.fbitem.k-idea{border-left-color:#f2b84b}.fbitem.read{opacity:.6}.fbih{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}.fbih small{margin-left:auto;color:var(--dim)}.fbis{color:#d99a1e;letter-spacing:1px}.fbit{font-size:12px;padding:1px 8px;border-radius:9px;background:rgba(0,0,0,.07)}.fbitem p{margin:6px 0;white-space:pre-wrap;font-size:16px}.fbinf{color:var(--dim)}
 #slBar #slPrev,#slBar #slNext{display:none}#slBar .slnow{flex:1;max-width:none;justify-content:center;text-align:center}
+.lgpair{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 #sBaseBox .saddtop{width:100%;justify-content:center;min-height:42px;flex-shrink:0}
 @media (min-width:1000px) and (min-height:600px){
  .salaov .sala-body{padding:8px 12px;gap:8px}
@@ -1409,7 +1410,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Auto e cuffie Bluetooth: i tasti al volante (brano successivo e precedente, play e pausa) ora comandano l'app; sul display dell'auto compaiono titolo, artista e copertina. Con la scaletta accesa si segue la scaletta, altrimenti l'elenco dei brani. Home: tolti i tasti avanti/indietro accanto al titolo della scaletta. Video: salva/condividi solo a video pronto, più social, apertura su tre righe.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Testi con Qwen3: prima si stabilisce la lingua del brano. Se l'artista ha già brani in una lingua si usa quella, altrimenti RunPod la riconosce da solo e la tiene per tutto il brano. In Opzioni testo › Lingua si può scegliere a mano per un brano. Auto Bluetooth: tasti al volante collegati.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1457,6 +1458,7 @@ themeApply();</script>
         <div class="optrow">
         
         <label class="lbl" for="lyEng">Testo da</label><select class="sel" id="lyEng" aria-label="Come si fa il testo dei brani"><option value="mix">Parole giuste + tempi di Whisper (consigliato)</option><option value="lrclib">LRCLIB + tempi di Whisper</option><option value="qwen">Solo Qwen3</option><option value="whisper">Solo Whisper</option></select><button class="mini" id="bAsr">Trascrivi dalla voce</button>
+        <span class="lgpair"><label class="lbl" for="lyLang">Lingua</label><select class="sel" id="lyLang" aria-label="Lingua del testo di questo brano"><option value="">Automatica</option><option value="it">Italiano</option><option value="en">Inglese</option><option value="es">Spagnolo</option><option value="fr">Francese</option><option value="de">Tedesco</option><option value="pt">Portoghese</option><option value="ru">Russo</option><option value="ja">Giapponese</option><option value="ko">Coreano</option><option value="zh">Cinese</option><option value="yue">Cantonese</option></select></span>
         <button class="mini" id="bEditLy">Modifica</button>
         <button class="mini" id="bAlign">Allinea da solo</button>
         <button class="mini" id="bSyncLy">Sincronizza a mano</button>
@@ -4473,7 +4475,7 @@ async function sepRunpod(canFallback){if(!rp.key||!rp.ep){openSet();toast('Inser
     spShow(needAsr?'Invio il brano a RunPod (separo, trascrivo il testo e riconosco le voci)…':'Invio il brano a RunPod (il testo c\'è già: separo e riconosco le voci)…',null,'send');
     const b64=await abToB64(up.ab);if(sepAbort)return;
     const reqM=(SEP_REPLACE&&SEP_REPLACE.f===sepFileObj&&SEP_REPLACE.model)||rp.model;sepInfo.model=reqM;
-    let out;try{out=await rpCall({audio_b64:b64,filename:up.name,model:reqM,bitrate:128,voices:true,rhythm:RP_RITMO,transcribe:needAsr,asr:asrEng(),language:rp.lang||'',prompt:''})}
+    let out;try{out=await rpCall({audio_b64:b64,filename:up.name,model:reqM,bitrate:128,voices:true,rhythm:RP_RITMO,transcribe:needAsr,asr:asrEng(),language:lyrLang(meta&&meta.artist,SEP_REPLACE&&SEP_REPLACE.f===sepFileObj&&SEP_REPLACE.id),prompt:''})}
     catch(e){const m=String(e&&e.message||e);if(canFallback&&['NET','AUTH','NOEP'].includes(m))return 'rpdown';throw e}
     if(out&&out.model)sepInfo.model=out.model;
     if(reqM==='mix6'&&out&&out.model&&out.model!=='mix6'&&out.model!=='bs_roformer_sw'){toast('RunPod ha ancora la versione vecchia: per la separazione affinata aggiorna fonica-runpod e fai New Release')}
@@ -4484,7 +4486,7 @@ async function sepRunpod(canFallback){if(!rp.key||!rp.ep){openSet();toast('Inser
     for(const k of ks){const ab2=b64ToAb(out.stems[k]);stemsRec[k]={name:k+'.m4a',data:ab2};if(!BATCH.on)bufs[k]=await decode(ab2);i++;spShow('Ricevo le tracce…',i/ks.length,'down')}
     if(!ks.length)throw new Error('RunPod non ha restituito le tracce');
     spShow('Salvo le tracce…',1,'save');
-    await sepFinish(meta,stemsRec,bufs,(out.note&&/processore/.test(out.note)?'la scheda video non andava: fatto sul processore, ':'')+(out.model==='bs_roformer_sw'?'separatore nuovo, ':'')+(out.rhythm&&!out.rhythm.error&&out.rhythm.engines?'battiti e batteria precisi, ':'')+(out.seconds?'lavoro su RunPod: '+fmt(out.seconds):''),out.lyrics,out.singers,out.rhythm)}
+    await sepFinish(meta,stemsRec,bufs,(out.note&&/processore/.test(out.note)?'la scheda video non andava: fatto sul processore, ':'')+(out.model==='bs_roformer_sw'?'separatore nuovo, ':'')+(out.rhythm&&!out.rhythm.error&&out.rhythm.engines?'battiti e batteria precisi, ':'')+(out.seconds?'lavoro su RunPod: '+fmt(out.seconds):''),out.lyrics,out.singers,out.rhythm);try{langLearn(meta&&meta.artist,out.lyrics)}catch(e){}}
   catch(e){if(!sepAbort)sepFail(e)}}
 
 /* ================= testo dalla voce (Whisper su RunPod) ================= */
@@ -4575,11 +4577,11 @@ async function asrRun(force){if(!song)return;
   if(!stems.vocals)toast('Senza la voce separata la trascrizione è meno precisa');
   pause();sepStart([['send','Invio'],['queue','In coda'],['split','Trascrizione'],['save','Testo']],'Trascrivo il testo',song.title||'');sepInfo.ep='runpod';
   try{spShow('Preparo la traccia della voce…',null,'send');const {b64,wname}=await vocB64(src,m=>spShow(m,null,'send'));if(sepAbort)return;spShow('Invio la voce a RunPod…',null,'send');
-    const out=await rpCall({mode:'transcribe',audio_b64:b64,filename:wname,asr:asrEng(),language:rp.lang||'',prompt:song.lrclib?'':K.lines.map(l=>l.s).join(' ').slice(0,700)});
+    const out=await rpCall({mode:'transcribe',audio_b64:b64,filename:wname,asr:asrEng(),language:lyrLang(song.artist,song.id),prompt:song.lrclib?'':K.lines.map(l=>l.s).join(' ').slice(0,700)});
     if(sepAbort||!out)return;if(out.error)throw new Error(out.error);
-    const asr=out.lyrics;if(!asr||!asr.segments||!asr.segments.length)throw new Error('Non ho riconosciuto parole in questa traccia');
+    const asr=out.lyrics;try{langLearn(song.artist,asr)}catch(e){}if(!asr||!asr.segments||!asr.segments.length)throw new Error('Non ho riconosciuto parole in questa traccia');
     let Q=null,L0;if((lyrEng()==='mix'||lyrEng()==='lrclib')&&song.id!=='demo'){spShow('Cerco le parole su LRCLIB…',null,'split');L0=await lrcOnVoice(song,asr,DUR);if(sepAbort)return}
-    if(lyrEng()==='mix'&&song.id!=='demo'&&!(L0&&L0.ratio)){spShow('Su LRCLIB non c\'è: ascolto le parole con Qwen3…',null,'split');try{const o2=await rpCall({mode:'transcribe',audio_b64:b64,filename:wname,asr:'qwen',language:rp.lang||''});if(sepAbort)return;Q=o2&&!o2.error&&o2.lyrics&&/^qwen/.test(o2.lyrics.engine||'')?o2.lyrics:null}catch(e){console.warn('qwen',e)}}
+    if(lyrEng()==='mix'&&song.id!=='demo'&&!(L0&&L0.ratio)){spShow('Su LRCLIB non c\'è: ascolto le parole con Qwen3…',null,'split');try{const o2=await rpCall({mode:'transcribe',audio_b64:b64,filename:wname,asr:'qwen',language:lyrLang(song.artist,song.id)});if(sepAbort)return;Q=o2&&!o2.error&&o2.lyrics&&/^qwen/.test(o2.lyrics.engine||'')?o2.lyrics:null}catch(e){console.warn('qwen',e)}}
     spShow('Metto a tempo il testo…',1,'save');const wasLrc=!!song.lrclib;const prev=wasLrc&&K.lines.length?linesText():'';song.asr=asr;song.lrclib=null;await saveCur(prev?{asr,lrclib:null,lyricsPrev:prev}:{asr,lrclib:null});
     let msg,how=/^qwen/.test(asr.engine||'')?'qwen':'whisper';
     if((lyrEng()==='mix'||lyrEng()==='lrclib')&&song.id!=='demo'){spShow('Metto le parole giuste sui tempi di Whisper…',1,'save');const X=await wordsOnWhisper(song,asr,Q,DUR,L0);
@@ -6470,7 +6472,23 @@ function lyrRepair(s){K.canRestore=false;if(!s||!asrHasWords(s.asr)||s.lrclib)re
   const heard=linesFromAsr(s.asr);if(!heard.length)return;const now=K.lines.map(l=>l.s).join(' '),hv=heard.map(l=>l.s).join(' ');
   if(!K.lines.length||lyrSim(now,hv)>=.85){K.lines=heard;lyrFix();setTimeout(saveLyr,0)}else K.canRestore=true}
 function lyrRestore(){if(!song||!asrHasWords(song.asr))return;const prev=K.lines.map(l=>ts(l.t)+' '+l.s).join('\n');K.lines=linesFromAsr(song.asr);lyrFix();kBuild();saveLyr();if(prev.trim())saveCur({lyricsPrev:prev});K.canRestore=false;lySrc();toast('Rimesso il testo ascoltato dalla voce, con le parole a tempo. Quello di prima è in «Testo di prima» nella scheda Tag')}
-function lySrc(txt){const el=$('#lySrc');if(!el)return;if(txt!=null){el.textContent=txt;return}const l=song&&song.lrclib;
+
+/* ===== LINGUA DEL TESTO: a Qwen3 si dice prima in che lingua si canta =====
+   1) scelta a mano per il brano (Opzioni testo › Lingua)  2) memoria per artista: almeno 2 brani e quasi tutti nella stessa lingua
+   3) altrimenti vuota: RunPod la riconosce da solo su 3 punti della voce e la usa per tutto il brano */
+const LGOK=['it','en','es','fr','de','pt','ru','ja','ko','zh','yue'];
+function lgMap(k){try{return JSON.parse(prefGet(k)||'{}')||{}}catch(e){return{}}}
+const lgArt=a=>String(a||'').trim().toLowerCase();
+function lyrLang(artist,id){const f=id&&lgMap('lyrLang')[id];if(f&&LGOK.includes(f))return f;
+  const c=lgMap('artLang')[lgArt(artist)];if(!c)return'';let best='',n=0,tot=0;for(const k in c){tot+=c[k];if(c[k]>n){n=c[k];best=k}}
+  return n>=2&&n>=tot*.8&&LGOK.includes(best)?best:''}
+function langLearn(artist,lyr){const a=lgArt(artist),l=lyr&&lyr.language;if(!a||!l||!LGOK.includes(l)||!lyr.segments||!lyr.segments.length)return;
+  const M=lgMap('artLang'),c=M[a]||(M[a]={});c[l]=(c[l]||0)+1;prefSet('artLang',JSON.stringify(M))}
+function lyLangUI(){const e=$('#lyLang');if(!e)return;e.value=(song&&lgMap('lyrLang')[song.id])||'';e.disabled=!song||song.id==='demo'}
+$('#lyLang').onchange=e=>{if(!song)return;const M=lgMap('lyrLang');if(e.target.value)M[song.id]=e.target.value;else delete M[song.id];prefSet('lyrLang',JSON.stringify(M));
+  toast(e.target.value?'Lingua scelta per questo brano. Per rifare il testo usa «Trascrivi dalla voce»':'Lingua automatica per questo brano')};
+
+function lySrc(txt){try{lyLangUI()}catch(e){}const el=$('#lySrc');if(!el)return;if(txt!=null){el.textContent=txt;return}const l=song&&song.lrclib;
   el.textContent=l?'Testo preso da LRCLIB: va rifatto dalla voce con «Trascrivi dalla voce»':(song&&song.asr&&K.lines.length?(K.canRestore?'Il testo non è più quello ascoltato dalla voce e ha perso le parole a tempo. ':'Testo ascoltato dalla voce'+(/^qwen/.test(song.asr.engine||'')?' (Qwen3)':/^whisper/.test(song.asr.engine||'')?' (Whisper, meno preciso: puoi rifarlo con «Trascrivi dalla voce»)':'')):'');
   if(K.canRestore&&!l){const b=document.createElement('button');b.className='mini';b.textContent='↩ Rimetti il testo ascoltato';b.onclick=lyrRestore;el.append(' ',b)}}
 
