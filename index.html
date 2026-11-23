@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="23/11 · 15:10"><meta name="pv-notes" content="Messaggi ricevuti: si aprono di nuovo toccando 5 volte la versione in fondo al Menu (prima il Menu si chiudeva al primo tocco). Sul dispositivo dove la password è ricordata compare anche il pulsante «Messaggi ricevuti» nel Menu."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="23/11 · 18:45"><meta name="pv-notes" content="Tolto «Chiedi aiuto su WhatsApp»: al suo posto «Cosa non va?», che controlla da solo internet, chiave RunPod, servizio, credito e schede video e spiega cosa fare. Avviso «Prima di pubblicare» prima di condividere un video sui social. Scritte più grandi e più scure, pulsanti spenti leggibili."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -280,6 +280,16 @@ input[data-secret]{-webkit-text-security:disc;text-security:disc}input[data-secr
 .opstep{margin:10px 0;border:1px solid var(--line,#ddd);border-radius:14px}.opprev{display:flex;justify-content:center;margin:8px 0}#opPrevCv{width:180px;height:320px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.18)}
 .sloff{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line,#ddd);background:rgba(0,0,0,.03);margin:6px 0 8px}.sloff[hidden]{display:none}.sloff .ico{width:26px;height:26px;flex:none}.sloff b{display:block;font-size:16px}.sloff small{display:block;font-size:14px;color:var(--dim);line-height:1.35}
 .sloff.ok{border-color:#3aa55d;background:rgba(58,165,93,.08)}.sloff.ok .ico{color:#2e8b4f}.sloff.no{border-color:#d9534f;background:rgba(217,83,79,.08)}
+.pubsheet{max-width:520px}.pubsheet p{font-size:16px;line-height:1.45;margin:8px 0}.pubico{width:30px;height:30px;color:#c0392b;flex:none}.pubchk{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:600;padding:12px;border:1px solid var(--line,#ccc);border-radius:12px;margin:10px 0}.pubchk input{width:24px;height:24px}.pubrow .chip{min-height:46px}
+[data-theme=celeste],[data-theme=giallo]{--dim:#62583f}[data-theme=carta]{--dim:#55544d}
+.hver{opacity:1}.mver{opacity:.9;font-size:13px}
+button:disabled,.chip:disabled,.mini:disabled,#tutCard .mini:disabled{opacity:.62!important;filter:saturate(.35)}
+#tlMixS,#tlTempoS,#tlToneS,.tool small,b+small{font-size:max(12.5px,1em)!important}.pitchlbl{font-size:12px!important;color:var(--dim)!important}#ovRig .legalnote,#ovRig .legalnote a,#ovShView small,.supnav span,.supnav i{font-size:12.5px!important}#hVer{opacity:1!important;color:var(--dim)!important}#ovTune span{font-size:max(12px,1em)}
+.fbsheet input:not([type=checkbox]){min-height:46px;font-size:17px;padding:8px 12px;border-radius:12px;border:1px solid var(--line,#ccc);background:var(--card,#fff);color:inherit;width:100%;box-sizing:border-box}
+a.setLink,a.legalLink,#bLegal,#ovRig .legalnote a{display:inline-block;padding:10px 2px;min-height:24px}
+[data-theme=giallo] .ov a{color:#1e5a85!important}
+.diag{list-style:none;margin:6px 0;padding:0;display:flex;flex-direction:column;gap:6px}.diag li{padding:8px 10px 8px 34px;border-radius:10px;position:relative;font-size:15px;line-height:1.35;background:rgba(0,0,0,.035)}
+.diag li::before{position:absolute;left:10px;top:8px;font-weight:800}.diag .dg-ok::before{content:'✓';color:#2e8b4f}.diag .dg-no::before{content:'!';color:#c0392b}.diag .dg-info::before{content:'i';color:#2a7ab0;font-style:italic}.diag .dg-no{background:rgba(217,83,79,.08)}
 #sBaseBox .saddtop{width:100%;justify-content:center;min-height:42px;flex-shrink:0}
 @media (min-width:1000px) and (min-height:600px){
  .salaov .sala-body{padding:8px 12px;gap:8px}
@@ -1419,7 +1429,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Messaggi ricevuti: si aprono di nuovo toccando 5 volte la versione in fondo al Menu (prima il Menu si chiudeva al primo tocco). Sul dispositivo dove la password è ricordata compare anche il pulsante «Messaggi ricevuti» nel Menu.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Tolto «Chiedi aiuto su WhatsApp»: al suo posto «Cosa non va?», che controlla da solo internet, chiave RunPod, servizio, credito e schede video e spiega cosa fare. Avviso «Prima di pubblicare» prima di condividere un video sui social. Scritte più grandi e più scure, pulsanti spenti leggibili.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1818,6 +1828,13 @@ themeApply();</script>
   <p class="snote" id="sDndTxt"></p>
   <div class="row"><button class="chip pri sic" id="sDndGo" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5h4M4 4l16 16"/></svg><span>Apri «Non disturbare» di Windows</span></button></div>
 </div></div>
+<div class="ov" id="ovPub" hidden><div class="sheet pubsheet">
+  <div class="row"><svg class="ico pubico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4.5M12 17.3v.01"/></svg><h3 class="grow">Prima di pubblicare</h3></div>
+  <p>Questo video contiene musica che può essere protetta da <b>diritto d'autore</b>. Pubblicarlo può richiedere il permesso di chi ha i diritti del brano: la piattaforma potrebbe bloccarlo, togliere l'audio o segnalarlo.</p>
+  <p><b>La responsabilità di ciò che pubblichi è solo tua.</b> rooMusic e il suo autore non rispondono dell'uso che fai dei video e dei contenuti che pubblichi.</p>
+  <label class="pubchk"><input type="checkbox" id="pubChk"> Ho capito: la responsabilità è mia</label>
+  <div class="row pubrow"><button class="chip" id="pubNo"><span>Annulla</span></button><span class="grow"></span><button class="chip pri" id="pubYes" disabled><span>Continua</span></button></div>
+</div></div>
 <div class="ov" id="ovFb" hidden><div class="sheet fbsheet">
   <div class="row"><h3 class="grow">Dimmi la tua</h3><button class="mini" data-close>Chiudi</button></div>
   <p class="snote">Il messaggio arriva solo a chi ha creato rooMusic e non viene pubblicato. Serve a migliorare l'app: dimmi cosa ti piace, cosa non va o cosa vorresti.</p>
@@ -1971,7 +1988,7 @@ themeApply();</script>
           <div class="row" style="margin-top:8px"><input class="inp grow" id="rpEpManual" autocomplete="off" spellcheck="false" placeholder="ID dell'endpoint (solo se lo hai creato a mano)" aria-label="ID dell'endpoint"><button class="chip" id="rpSaveManual">Salva</button></div></div></li>
       </ol>
       <div class="rpmsg" id="rpStatus" role="status" aria-live="polite"></div>
-      <div class="row"><span class="grow"></span><button class="mini" id="rpHelp">Chiedi aiuto su WhatsApp</button></div>
+      <div class="row"><span class="grow"></span><button class="mini" id="rpHelp">Cosa non va?</button></div>
       <details class="adv"><summary>Impostazioni avanzate</summary>
         <div class="row"><label class="field"><span>ID endpoint</span><input class="inp" id="rpEp" autocomplete="off" spellcheck="false"></label>
           <label class="field"><span>Programma (immagine)</span><input class="inp" id="rpImg" autocomplete="off" spellcheck="false"></label></div>
@@ -2024,7 +2041,7 @@ themeApply();</script>
     <div class="row"><button class="chip pri" id="supRpAuto">Collega da solo</button></div>
     <p class="snote">Basta la chiave: l'app cerca il servizio sul tuo account e, se non c'è, lo crea con le impostazioni giuste. Se non ci riesce, crealo con la guida passo passo e incolla anche l'ID qui sotto.</p>
     <label class="field"><span>ID dell'endpoint (solo se lo hai creato a mano: la sigla sotto il nome, in Serverless)</span><input class="inp" id="supRpEp" autocomplete="off" spellcheck="false" placeholder="es. abc123xyz"></label>
-    <div class="row"><button class="chip" id="supRpGo">Salva e prova</button><span class="grow"></span><button class="mini" id="supRpHelp">Chiedi aiuto su WhatsApp</button></div>
+    <div class="row"><button class="chip" id="supRpGo">Salva e prova</button><span class="grow"></span><button class="mini" id="supRpHelp">Cosa non va?</button></div>
     <div class="rpmsg" id="supRpMsg" role="status" aria-live="polite"></div>
   </section>
   <section class="supstep" data-s="2" hidden>
@@ -2295,7 +2312,7 @@ themeApply();</script>
   <h4>Problemi frequenti</h4>
   <div class="faq">
     <details><summary>Il primo brano su RunPod resta «in coda» a lungo</summary><p>È la <b>prima installazione</b>: RunPod installa il programma di rooMusic sul tuo account. Succede una volta sola e richiede 10–20 minuti. Lascia l'app aperta: poi ogni brano parte in pochi minuti.</p></details>
-    <details><summary>Non riesco a collegare RunPod</summary><p>In <b>Impostazioni</b> incolla la chiave e premi <b>«Collega da solo»</b>: il servizio lo crea l'app. Se non ci riesce, apri <b>«Apri la guida»</b> e crealo a mano. Se ti blocchi, premi <b>«Chiedi aiuto su WhatsApp»</b>: il messaggio non contiene la chiave.</p></details>
+    <details><summary>Non riesco a collegare RunPod</summary><p>In <b>Impostazioni</b> incolla la chiave e premi <b>«Collega da solo»</b>: il servizio lo crea l'app. Se non ci riesce, apri <b>«Apri la guida»</b> e crealo a mano. Se ti blocchi, premi <b>«Cosa non va?»</b>: l'app controlla da sola internet, chiave, servizio, credito e schede video, e ti dice cosa fare.</p></details>
     <details><summary>RunPod non accetta la chiave</summary><p>Copiala tutta: inizia con <code>rpa_</code>. Quando la crei scegli il permesso <b>Read/Write</b>. RunPod la mostra una volta sola: se non l'hai salvata, creane una nuova in Settings → API Keys.</p></details>
     <details><summary>La separazione si ferma per il credito</summary><p>Il credito RunPod è finito: nel <b>Menu</b> premi <b>«Ricarica RunPod»</b>. Di solito un brano costa pochi centesimi.</p></details>
     <details><summary>Il suono gracchia o va a scatti</summary><p>Apri <b>Latenza</b> e scegli la modalità <b>Normale</b> o <b>Sicura</b>, poi <b>«Applica»</b>. Chiudi le altre app, tieni il tablet in carica e, se serve, spegni gli amplificatori più pesanti.</p></details>
@@ -4449,9 +4466,9 @@ $('#rpGuideOpen').onclick=()=>{rpView();openOv('#ovRpGuide')};
 $('#rpCopyImg2').onclick=()=>$('#rpCopyImg').click();
 $('#rpCopyImg').onclick=()=>{const t=rpImage();navigator.clipboard.writeText(t).then(()=>toast('Nome copiato')).catch(()=>{const r=document.createRange();r.selectNodeContents($('#rpImgShow'));const s=getSelection();s.removeAllRanges();s.addRange(r);toast('Selezionato: premi Ctrl+C per copiarlo')})};
 $('#rpAuto').onclick=async()=>{await rpAuto($('#rpKey').value,rpSay,$('#rpAuto'))};
-$('#rpHelp').onclick=()=>rpHelpMsg($('#rpStatus').textContent.trim());
+$('#rpHelp').onclick=()=>rpDiag(rpSay,$('#rpKey'),$('#rpEpManual').value?$('#rpEpManual'):$('#rpEp'));
 $('#supRpAuto').onclick=async()=>{const m=$('#supRpMsg');const say=(h,k)=>{m.className='rpmsg'+(k?' '+k:'');m.innerHTML=h};const ok=await rpAuto($('#supRpKey').value,say,$('#supRpAuto'));if(ok)try{supUI()}catch(e){}};
-$('#supRpHelp').onclick=()=>rpHelpMsg($('#supRpMsg').textContent.trim());
+$('#supRpHelp').onclick=()=>{const m=$('#supRpMsg');rpDiag((h,k)=>{m.className='rpmsg'+(k?' '+k:'');m.innerHTML=h},$('#supRpKey'),$('#supRpEp'))};
 $('#rpSaveManual').onclick=async()=>{const [k,v]=rpClean($('#rpKey').value,$('#rpEpManual').value);$('#rpKey').value=k;$('#rpEpManual').value=v;if(!k){rpSay('Incolla prima la chiave RunPod.','err');$('#rpKey').focus();return}if(!v){rpSay('Incolla l\'ID dell\'endpoint.','err');$('#rpEpManual').focus();return}rp.key=k;rp.ep=v;$('#rpEp').value=v;await setPut('runpod',rp);await rpHealth(true)};
 /* chiave e ID incollati: tolgo spazi, prendo la sigla dall'indirizzo intero, rimetto a posto se sono scambiati */
 function rpClean(k,v){k=String(k||'').replace(/\s+/g,'');v=String(v||'').replace(/\s+/g,'');
@@ -4490,12 +4507,49 @@ async function rpAuto(raw,say,btn){const [key]=rpClean(raw,'');if(!key){say('Pri
     say(blocked?'Da qui non riesco a creare il servizio da solo. Nessun problema: crealo a mano con la guida passo passo, poi incolla qui la chiave e l\'ID e premi «Salva».'
       :'RunPod ha risposto con un errore: '+esc(e.message||String(e))+'. Puoi crearlo a mano con la guida passo passo, poi incolla chiave e ID e premi «Salva».','err');return false}
   finally{if(btn)btn.disabled=false}}
-/* «Chiedi aiuto»: un messaggio WhatsApp con lo stato del collegamento. La chiave non c'è mai, solo se è presente */
-function rpHelpMsg(last){const ua=navigator.userAgent;const dev=/Android/i.test(ua)?'Android':/iPad|iPhone/i.test(ua)?'iPad/iPhone':/Windows/i.test(ua)?'Windows':/Mac/i.test(ua)?'Mac':'altro';
-  const ver=(document.querySelector('meta[name="pv-version"]')||{}).content||'';
-  const t=['Ciao, mi aiuti a collegare RunPod su rooMusic?','Versione app: '+ver,'Dispositivo: '+dev+(/Chrome/i.test(ua)?' · Chrome':/Safari/i.test(ua)?' · Safari':''),
-    'Chiave RunPod: '+(rp.key?'inserita (inizia con '+(rp.key.slice(0,4))+')':'non inserita'),'ID del servizio: '+(rp.ep||'non inserito'),'Ultimo messaggio: '+(last||'nessuno')].join('\n');
-  window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank','noopener')}
+/* gli ultimi errori dell'app, ripuliti da chiavi e indirizzi firmati, per «Chiedi aiuto» */
+const ERRLOG=[];function errClean(m){return String(m||'').replace(/https?:\/\/\S+/g,u=>u.split('?')[0]).replace(/\b(rpa_|t3k_\w*_|hf_|sk-)[\w-]+/g,'[chiave]').replace(/[A-Za-z0-9+\/_-]{32,}/g,'[…]').slice(0,160)}
+function errAdd(m){const t=new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});ERRLOG.push(t+' '+errClean(m));if(ERRLOG.length>6)ERRLOG.shift()}
+addEventListener('error',e=>{if(e&&e.message)errAdd(e.message)});addEventListener('unhandledrejection',e=>{const r=e&&e.reason;errAdd(r&&(r.message||r.name)||r)});
+/* ===== «COSA NON VA?»: controllo automatico del collegamento RunPod, con la risposta in parole semplici =====
+   Controlla in ordine: internet, chiave, servizio, credito, schede video, ultimo errore. Non manda niente a nessuno. */
+const ERRHELP=[[/failed to fetch|networkerror|load failed|network/i,'La connessione si è interrotta: controlla il Wi-Fi o i dati e riprova.'],
+  [/insufficient|balance|credit|fund/i,'Il credito RunPod è finito: ricarica dal Menu › Ricarica RunPod.'],
+  [/throttl|no workers|unavailable|capacity/i,'In questo momento RunPod non ha schede video libere: riprova tra qualche minuto.'],
+  [/timeout|timed out|tempo/i,'RunPod ci ha messo troppo: la prima volta può servire fino a 20 minuti, poi è molto più veloce.'],
+  [/401|403|unauthori|forbidden/i,'RunPod non accetta la chiave: ricopiala tutta da RunPod (tipo «Read/Write»).'],
+  [/404|not found/i,'RunPod non trova il servizio: premi «Collega da solo» per ricrearlo.'],
+  [/quota|spazio|storage/i,'La memoria del dispositivo è piena: libera spazio dalla Libreria.']];
+const errHelp=m=>{for(const [re,t] of ERRHELP)if(re.test(m))return t;return''};
+async function rpDiag(show,keyEl,epEl){const L=[],add=(ok,t,fix)=>{L.push(`<li class="${ok===true?'dg-ok':ok===false?'dg-no':'dg-info'}"><b>${t}</b>${fix?'<br>'+fix:''}</li>`);show(`<ul class="diag">${L.join('')}</ul>`,ok===false?'err':'')};
+  show('Controllo…');let stop=false;
+  if(!navigator.onLine){add(false,'Non c\'è internet','Collega il Wi-Fi o i dati del telefono e riprova.');return}
+  add(true,'Internet c\'è');
+  if(window.self!==window.top){add(false,'L\'app è aperta dentro un\'altra pagina','Apri rooMusic dal suo indirizzo web: così RunPod risponde.');return}
+  const [key,ep]=rpClean((keyEl&&keyEl.value)||rp.key,(epEl&&epEl.value)||rp.ep);
+  if(!key){add(false,'Manca la chiave RunPod','Su RunPod apri Settings › API Keys, crea una chiave «Read/Write», copiala e incollala qui.');return}
+  if(!/^rpa_/i.test(key))add(null,'La chiave non inizia con rpa_','Forse non l\'hai copiata tutta: ricopiala da RunPod.');
+  const H={'Content-Type':'application/json',Authorization:'Bearer '+key};
+  try{const r=await fetch('https://api.runpod.io/v2/serverless',{headers:H});
+    if(r.status===401||r.status===403){add(false,'RunPod non accetta la chiave','Ricopiala tutta da RunPod › Settings › API Keys. Deve essere di tipo «Read/Write», non «Read only».');return}
+    add(true,'La chiave è giusta')}
+  catch(e){add(false,'Non riesco a contattare RunPod','Può essere la rete (Wi-Fi aziendale o della scuola blocca a volte) oppure RunPod è fermo. Riprova tra poco o con un\'altra connessione.');return}
+  try{const g=await fetch('https://api.runpod.io/graphql',{method:'POST',headers:H,body:JSON.stringify({query:'query{myself{clientBalance}}'})});
+    const j=await g.json();const b=j&&j.data&&j.data.myself&&j.data.myself.clientBalance;
+    if(typeof b==='number'){if(b<0.5)add(false,'Il credito è quasi finito ('+b.toFixed(2).replace('.',',')+' $)','Ricarica dal Menu › Ricarica RunPod: bastano 10 $ per molti brani.');else add(true,'Credito: '+b.toFixed(2).replace('.',',')+' $')}}catch(e){}
+  if(!ep){add(false,'Manca il servizio (ID dell\'endpoint)','Premi «Collega da solo»: l\'app lo crea per te.');return}
+  try{const r=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(ep)}/health`,{headers:H});
+    if(r.status===404){add(false,'RunPod non trova il servizio','Forse è stato cancellato. Premi «Collega da solo» per ricrearlo.');return}
+    if(!r.ok){add(false,'Il servizio risponde con un errore ('+r.status+')','Di solito passa da solo: riprova tra qualche minuto.');return}
+    const j=await r.json(),w=j.workers||{},q=(j.jobs||{}).inQueue||0,on=(w.idle||0)+(w.ready||0)+(w.running||0);
+    if(w.throttled&&!on)add(false,'Le schede video sono tutte occupate','Succede nelle ore di punta: riprova tra qualche minuto. Il brano parte appena se ne libera una.');
+    else if(w.initializing&&!on)add(null,'RunPod sta preparando la scheda video','La prima volta ci vogliono 10-20 minuti; dopo è molto più veloce.');
+    else add(true,'Il servizio è pronto',on?'La scheda video è accesa.':'La scheda si accende da sola quando lavori un brano.');
+    if(q)add(null,q===1?'C\'è 1 lavoro in coda':'Ci sono '+q+' lavori in coda','Partono da soli, uno dopo l\'altro.')}
+  catch(e){add(false,'Non riesco a controllare il servizio','Riprova tra poco.');return}
+  const last=ERRLOG.length?ERRLOG[ERRLOG.length-1]:'';const h=last&&errHelp(last);
+  if(h)add(null,'L\'ultimo problema dell\'app',h);
+  if(!L.some(x=>x.includes('dg-no')))add(true,'Tutto a posto','Se un brano non parte, riprova: RunPod a volte ha bisogno di un secondo tentativo.')}
 /* prima installazione: il servizio non ha mai lavorato e RunPod sta ancora preparando la scheda video */
 async function rpFirstInstall(tQ){if(rp.okEp===rp.ep||Date.now()-tQ<30000)return false;const now=Date.now();if(rpFirstInstall.at&&now-rpFirstInstall.at<15000)return rpFirstInstall.v;rpFirstInstall.at=now;
   try{const r=await fetch(`https://api.runpod.ai/v2/${encodeURIComponent(rp.ep)}/health`,{headers:rpH()});const w=(await r.json()).workers||{};
@@ -5770,7 +5824,13 @@ async function recFinish(){R.blob=new Blob(R.chunks,{type:(R.mime||'video/webm')
   DR_CUR=null;setTimeout(()=>drSave(true).then(()=>{if(DR_CUR)$('#recMsg').textContent+=' Salvato anche nelle 📂 Bozze.'}),600)}
 $('#recSave').onclick=()=>{if(!R.blob)return;if(window.self!==window.top){$('#recMsg').textContent='Qui non si possono salvare file: apri rooMusic dal suo indirizzo web.';return}
   const a=document.createElement('a');a.href=URL.createObjectURL(R.blob);a.download=recName();document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);$('#recMsg').textContent='Salvato nella cartella Download del telefono.'};
-$('#recShare').onclick=async()=>{try{await navigator.share({files:[new File([R.blob],recName(),{type:R.blob.type})],title:(song&&song.title)||'rooMusic'})}catch(e){if(e&&e.name!=='AbortError')$('#recMsg').textContent='Condivisione non riuscita: prova «Salva sul telefono».'}};
+
+/* ===== PRIMA DI PUBBLICARE: avviso sui diritti, una volta per ogni video ===== */
+const PUB={ok:new WeakSet(),keys:new Set()};
+function pubAsk(id){if(id&&(typeof id==='object'?PUB.ok.has(id):PUB.keys.has(id)))return Promise.resolve(true);
+  return new Promise(res=>{const ov=$('#ovPub'),chk=$('#pubChk'),y=$('#pubYes');chk.checked=false;y.disabled=true;chk.onchange=()=>{y.disabled=!chk.checked};
+    const end=v=>{ov.hidden=true;if(v&&id){typeof id==='object'?PUB.ok.add(id):PUB.keys.add(id)}res(v)};y.onclick=()=>end(true);$('#pubNo').onclick=()=>end(false);ov.hidden=false})}
+$('#recShare').onclick=async()=>{if(!(await pubAsk(R.blob)))return;try{await navigator.share({files:[new File([R.blob],recName(),{type:R.blob.type})],title:(song&&song.title)||'rooMusic'})}catch(e){if(e&&e.name!=='AbortError')$('#recMsg').textContent='Condivisione non riuscita: prova «Salva sul telefono».'}};
 /* ===== TikTok =====
    Su telefono e tablet il video va all'app TikTok dal menu «Condividi» (TikTok non si può aprire direttamente da una pagina web).
    Dal PC il video si scarica e si apre la pagina di caricamento di TikTok. La descrizione con gli hashtag viene copiata, pronta da incollare. */
@@ -5800,8 +5860,8 @@ async function ttShare(getBlob,name,title){const cap=ttCap(title);try{navigator.
     return}
   shDl(f);TT.cache=null;try{window.open(TT_UP,'_blank','noopener')}catch(e){}
   toast('Video scaricato. Su TikTok scegli «'+name+'» dalla cartella Download; la descrizione è già copiata: incollala')}
-Object.keys(SOC).forEach(k=>{$('#recS'+k).onclick=()=>{if(fixBusy)return;const t=song?(song.title||'')+(song.artist?' - '+song.artist:''):'';socShare(k,async()=>R.blob,recName(),t)}});
-$('#recTT').onclick=()=>{const t=song?(song.title||'')+(song.artist?' - '+song.artist:''):'';ttShare(async()=>R.blob,recName(),t);if(isMobile&&!IS_ANDROID)toast('Nel menu che si apre scegli TikTok · la descrizione è copiata, incollala lì')};
+Object.keys(SOC).forEach(k=>{$('#recS'+k).onclick=async()=>{if(fixBusy)return;if(!(await pubAsk(R.blob)))return;const t=song?(song.title||'')+(song.artist?' - '+song.artist:''):'';socShare(k,async()=>R.blob,recName(),t)}});
+$('#recTT').onclick=async()=>{if(!(await pubAsk(R.blob)))return;const t=song?(song.title||'')+(song.artist?' - '+song.artist:''):'';ttShare(async()=>R.blob,recName(),t);if(isMobile&&!IS_ANDROID)toast('Nel menu che si apre scegli TikTok · la descrizione è copiata, incollala lì')};
 $('#recFolder').onclick=async()=>{try{if(!await dirReady(true))return;const d=await (await songDirHandle(song)).getDirectoryHandle('Video',{create:true});const fh=await d.getFileHandle(recName(),{create:true});const w=await fh.createWritable();await w.write(R.blob);await w.close();$('#recMsg').textContent='Salvato in «'+[dirHandle.name,...songDirs(song),'Video'].join(' / ')+'».'}catch(e){$('#recMsg').textContent='Non riesco a salvare nella cartella: '+(e.message||e)}};
 /* ---------- dopo la registrazione: voce a tempo e autotune ---------- */
 function recSetUrl(blob){setTimeout(cvUpUI,0);const u=URL.createObjectURL(blob);const pv=$('#recPlay');if(pv.dataset.u)URL.revokeObjectURL(pv.dataset.u);pv.dataset.u=u;pv.src=u}
@@ -6444,14 +6504,14 @@ async function cvList(){const ol=$('#cvList');$('#cvSpace').textContent='';
     const img=li.querySelector('img');if(img){img.onload=()=>li.querySelector('.cvth').remove();img.onerror=()=>img.remove();r2Presign('GET',o.key.replace(CV_RX,'.jpg'),3600).then(u=>img.src=u).catch(()=>{});}
     li.querySelector('[data-cvp]').onclick=async()=>{const v=$('#cvVid');v.src=await r2Presign('GET',o.key,7200);$('#cvPlay').hidden=false;$('#cvPlay').scrollIntoView({block:'nearest'});v.play().catch(()=>{})};
     li.querySelector('[data-cvs]').onclick=async e=>{const btn=e.currentTarget;
-      if(share){btn.disabled=true;try{toast('Scarico il video per condividerlo…');const b=await (await r2Req('GET',o.key)).blob();
+      if(share){if(!(await pubAsk(o.key)))return;btn.disabled=true;try{toast('Scarico il video per condividerlo…');const b=await (await r2Req('GET',o.key)).blob();
           await navigator.share({files:[new File([b],nm,{type:/webm$/i.test(nm)?'video/webm':'video/mp4'})],title:'rooMusic'})}
         catch(err){if(err&&err.name!=='AbortError')toast('Condivisione non riuscita: '+r2Err(err))}finally{btn.disabled=false}return}
       try{const u=await r2Presign('GET',o.key,604800);await navigator.clipboard.writeText(u);toast('🔗 Link copiato: incollalo in un messaggio o in una mail. Funziona per 7 giorni.')}catch(err){toast('Non riesco a copiare il link: '+r2Err(err))}};
     li.querySelector('[data-cvd]').onclick=async e=>{const btn=e.currentTarget;btn.disabled=true;try{toast('Scarico il video…');const b=await (await r2Req('GET',o.key)).blob();
         const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=nm;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);toast('Video scaricato nella cartella Download')}
       catch(err){toast('Download non riuscito: '+r2Err(err))}finally{btn.disabled=false}};
-    li.querySelector('[data-cvt]').onclick=async e=>{const btn=e.currentTarget;btn.disabled=true;if(!(TT.cache&&TT.cache.name===nm))toast('Scarico il video per TikTok…');try{await ttShare(async()=>await (await r2Req('GET',o.key)).blob(),nm,cvName(o.key).replace(/ - rooMusic .*$/,''))}finally{btn.disabled=false}};
+    li.querySelector('[data-cvt]').onclick=async e=>{const btn=e.currentTarget;if(!(await pubAsk(o.key)))return;btn.disabled=true;if(!(TT.cache&&TT.cache.name===nm))toast('Scarico il video per TikTok…');try{await ttShare(async()=>await (await r2Req('GET',o.key)).blob(),nm,cvName(o.key).replace(/ - rooMusic .*$/,''))}finally{btn.disabled=false}};
     li.querySelector('[data-cvx]').onclick=async()=>{if(!confirm('Cancello questo video dal cloud? Non si potrà recuperare.'))return;
       try{await r2Req('DELETE',o.key);await r2Req('DELETE',o.key.replace(CV_RX,'.jpg')).catch(()=>{});toast('Video cancellato dal cloud');const v=$('#cvVid');if(v.src&&v.src.includes(encodeURIComponent(nm).slice(0,20))){v.pause();$('#cvPlay').hidden=true}cvList()}catch(err){toast('Non riesco a cancellarlo: '+r2Err(err))}}});
   const tot=CV.reduce((a,o)=>a+o.size,0);$('#cvSpace').textContent=CV.length+(CV.length===1?' video':' video')+', '+(tot/1048576).toFixed(0)+' MB in tutto nel cloud.'}
@@ -8657,7 +8717,7 @@ const TUT_SECTIONS=[
    {s:'#rpBox>p',t:'RunPod',d:'La separazione veloce, con il tuo account e il tuo credito: di solito pochi centesimi a brano.'},
    {s:'#rpAuto',t:'Collega da solo',d:'Incolli la chiave RunPod e premi qui: l\'app cerca il servizio sul tuo account e, se non c\'è, lo crea. Se non ci riesce, c\'è la guida passo passo per farlo a mano.'},
    {s:'#rpChange',t:'Cambia chiave o ID',d:'Se RunPod è già collegato, qui cambi la chiave o il servizio.'},
-   {s:'#rpHelp',t:'Chiedi aiuto',d:'Prepara un messaggio WhatsApp con lo stato del collegamento, da mandare a chi ti aiuta. La chiave non c\'è mai.'},
+   {s:'#rpHelp',t:'Cosa non va?',d:'Se qualcosa non funziona, premilo: l\'app controlla da sola internet, la chiave, il servizio, il credito e le schede video, e ti dice in parole semplici cosa fare. Non manda niente a nessuno.'},
    {s:'#rpModel',run:()=>{const a=$('#rpBox details.adv');if(a)a.open=true},t:'Modello',d:'In Impostazioni avanzate scegli in quante tracce dividere i brani: 6 tracce con chitarra e piano, oppure 4.'},
    {s:'#rpLang',t:'Lingua del testo',d:'Vale per tutti i brani. Lasciala su «La riconosce da sola»: l\'app usa la lingua già vista per quell\'artista, altrimenti RunPod la riconosce prima di scrivere il testo. Per un brano solo c\'è Lingua in Opzioni testo.'},
    {s:'#t3Key',run:()=>{const a=$('#rpBox details.adv');if(a)a.open=false},t:'TONE3000',d:'La chiave pubblica di TONE3000, per scegliere amplificatori e casse. Inizia con t3k_pub. Mai la chiave segreta.'},
