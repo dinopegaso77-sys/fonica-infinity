@@ -12,8 +12,8 @@
 <meta property="og:description" content="Separa i brani, canta, suona dal vivo, crea duetti. Tutto nel browser.">
 <meta property="og:image" content="rm-og.png">
 <link rel="icon" href="icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Josefin+Sans:wght@400;600;700&family=Figtree:wght@400;500;600&display=swap">
+
+
 <style>
 :root{
   --bg:#07080d;--bg2:#0d1020;--card:#12152a;--line:#2a3150;
@@ -21,9 +21,9 @@
   --gold:#6fd8ff;
   --goldgrad:linear-gradient(90deg,#5ee0ff 0%,#7f9bff 50%,#c06bff 100%);
   --goldbtn:linear-gradient(90deg,#1d8fe0 0%,#5a5cf0 55%,#8a3df0 100%);
-  --f-lux:"Exo 2","Josefin Sans",system-ui,sans-serif;
-  --f-display:"Josefin Sans","Avenir Next",system-ui,sans-serif;
-  --f-body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --f-lux:"rooText",system-ui,sans-serif;
+  --f-display:"rooText",system-ui,sans-serif;
+  --f-body:"rooText",system-ui,"Segoe UI",sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -145,6 +145,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hero .stage img{display:none}
 .hero .stage.novid img{display:block}
 </style>
+<style>/* caratteri dentro l'app (Inter, licenza SIL OFL 1.1): niente richieste a Google */
+@font-face{font-family:"rooText";src:url("rm-text.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"rooText";src:url("rm-text-italic.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
+body{font-variant-numeric:tabular-nums;font-optical-sizing:auto}</style>
 </head>
 <body>
 
