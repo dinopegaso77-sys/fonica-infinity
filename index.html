@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="23/11 · 15:00"><meta name="pv-notes" content="Apertura e chiusura del video ora sono l'ultimo passo prima di creare il video (funzionano anche con RunPod e il controllo delle labbra). Tolta la foto dell'artista. Scaletta: l'app si segna cosa funziona senza internet e con «Prepara» salva tutto sul dispositivo. Nuove condizioni con la privacy spiegata. Nuovo carattere dentro l'app (Inter): niente più richieste a Google."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="23/11 · 15:10"><meta name="pv-notes" content="Messaggi ricevuti: si aprono di nuovo toccando 5 volte la versione in fondo al Menu (prima il Menu si chiudeva al primo tocco). Sul dispositivo dove la password è ricordata compare anche il pulsante «Messaggi ricevuti» nel Menu."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -1415,10 +1415,11 @@ themeApply();</script>
       <button class="chip" id="bSet">Impostazioni</button>
       <a class="chip rptop" id="bRpTop" href="https://console.runpod.io/user/billing" target="_blank" rel="noopener" title="Apri RunPod per ricaricare il credito"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg>Ricarica RunPod</a>
       <button class="chip" id="bHelp">Aiuto</button>
+      <button class="chip" id="bFbAdm" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span>Messaggi ricevuti</span></button>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Apertura e chiusura del video ora sono l'ultimo passo prima di creare il video (funzionano anche con RunPod e il controllo delle labbra). Tolta la foto dell'artista. Scaletta: l'app si segna cosa funziona senza internet e con «Prepara» salva tutto sul dispositivo. Nuove condizioni con la privacy spiegata. Nuovo carattere dentro l'app (Inter): niente più richieste a Google.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Messaggi ricevuti: si aprono di nuovo toccando 5 volte la versione in fondo al Menu (prima il Menu si chiudeva al primo tocco). Sul dispositivo dove la password è ricordata compare anche il pulsante «Messaggi ricevuti» nel Menu.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -3790,6 +3791,8 @@ function fbDraw(){$$('#fbStars .fbst').forEach(b=>b.classList.toggle('on',+b.dat
 function fbRes(id,t,ok){const e=$(id);e.hidden=!t;e.textContent=t||'';e.classList.toggle('ok',!!ok)}
 function fbOpen(){$('#fbName').value=prefGet('fbName')||'';$('#fbMsg').value=prefGet('fbDraft')||'';FB.s=0;FB.k='';fbDraw();fbRes('#fbRes','');$('#navMenu').hidden=true;openOv('#ovFb')}
 $('#bFb').onclick=fbOpen;$('#bFb').hidden=!FB_URL;
+const fbAdmBtn=()=>{$('#bFbAdm').hidden=!FB_URL||!prefGet('fbPass')};$('#bFbAdm').onclick=()=>fbAdmOpen();setTimeout(fbAdmBtn,0);
+if(/[?&]pareri\b/.test(location.search))setTimeout(()=>fbAdmOpen(),1200);
 $$('#fbStars .fbst').forEach(b=>b.onclick=()=>{FB.s=+b.dataset.s===FB.s?0:+b.dataset.s;fbDraw()});
 $$('#fbKinds .fbk').forEach(b=>b.onclick=()=>{FB.k=FB.k===b.dataset.k?'':b.dataset.k;fbDraw()});
 $('#fbMsg').oninput=e=>prefSet('fbDraft',e.target.value);
@@ -3808,11 +3811,11 @@ $$('.mver').forEach(v=>v.addEventListener('click',()=>{const n=Date.now();FB.tap
 function fbPass(){return sessionStorage.getItem('f8_fbPass')||prefGet('fbPass')||''}
 async function fbCall(path,d){const r=await fetch(FB_URL+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,pass:fbPass()})});if(r.status===401)throw new Error('pw');if(!r.ok)throw new Error('net');return r.json()}
 function fbAdmOpen(){$('#navMenu').hidden=true;openOv('#ovFbAdm');fbRes('#fbAres','');if(!FB_URL){fbRes('#fbAres','Manca l\'indirizzo del programma su Cloudflare');return}if(fbPass())fbLoad();else{$('#fbLog').hidden=false;$('#fbaBox').hidden=true}}
-$('#fbIn').onclick=()=>{const p=$('#fbPass').value;if(!p)return;sessionStorage.setItem('f8_fbPass',p);if($('#fbRem').checked)prefSet('fbPass',p);$('#fbPass').value='';fbLoad()};
-$('#fbOut').onclick=()=>{sessionStorage.removeItem('f8_fbPass');prefSet('fbPass','');$('#fbLog').hidden=false;$('#fbaBox').hidden=true};
+$('#fbIn').onclick=()=>{const p=$('#fbPass').value;if(!p)return;sessionStorage.setItem('f8_fbPass',p);if($('#fbRem').checked)prefSet('fbPass',p);fbAdmBtn();$('#fbPass').value='';fbLoad()};
+$('#fbOut').onclick=()=>{sessionStorage.removeItem('f8_fbPass');prefSet('fbPass','');fbAdmBtn();$('#fbLog').hidden=false;$('#fbaBox').hidden=true};
 $('#fbReload').onclick=()=>fbLoad();$('#fbNew').onchange=()=>fbList();
 async function fbLoad(){fbRes('#fbAres','Carico…');try{const d=await fbCall('/elenco',{});FB.items=d.items||[];$('#fbLog').hidden=true;$('#fbaBox').hidden=false;fbRes('#fbAres','');fbList()}
-  catch(e){if(e.message==='pw'){sessionStorage.removeItem('f8_fbPass');prefSet('fbPass','');$('#fbLog').hidden=false;$('#fbaBox').hidden=true;fbRes('#fbAres','Password sbagliata')}else fbRes('#fbAres','Non riesco a collegarmi, riprova')}}
+  catch(e){if(e.message==='pw'){sessionStorage.removeItem('f8_fbPass');prefSet('fbPass','');fbAdmBtn();$('#fbLog').hidden=false;$('#fbaBox').hidden=true;fbRes('#fbAres','Password sbagliata')}else fbRes('#fbAres','Non riesco a collegarmi, riprova')}}
 const FBK={bello:'Mi piace',problema:'Qualcosa non va',idea:'Idea'};
 function fbList(){const all=FB.items,nl=all.filter(x=>!x.letto).length,st=all.filter(x=>x.stelle),avg=st.length?(st.reduce((a,x)=>a+x.stelle,0)/st.length).toFixed(1).replace('.',','):'';
   $('#fbSum').textContent=all.length+' messaggi · '+nl+' da leggere'+(avg?' · media '+avg+' stelle':'');
@@ -8031,7 +8034,7 @@ $('#tlLat').onclick=()=>{latDraw();openOv('#ovLat');clearInterval(LAT.iv);LAT.iv
 /* ===== menu ⚙ e barra rapida ===== */
 (function(){const b=$('#bMenu'),m=$('#navMenu');const close=()=>{m.hidden=true;b.setAttribute('aria-expanded','false')};
   b.onclick=e=>{e.stopPropagation();try{moreOpen(false)}catch(x){}m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden))};
-  m.addEventListener('click',()=>setTimeout(close,0));document.addEventListener('click',e=>{if(!m.hidden&&!m.contains(e.target)&&e.target!==b)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  m.addEventListener('click',e=>{if(e.target.closest('.mver'))return;setTimeout(close,0)});document.addEventListener('click',e=>{if(!m.hidden&&!m.contains(e.target)&&e.target!==b)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   {const tv=$('#trVal');tv.title='Tocca per tornare alla tonalità originale';tv.onclick=()=>$('#trZero').click()}})();
 /* ===== pagina principale: sezioni in alto e strumenti in finestre ===== */
 /* sul tablet l'app resta sempre in orizzontale (app installata o schermo intero: è lì che il browser lo permette) */
