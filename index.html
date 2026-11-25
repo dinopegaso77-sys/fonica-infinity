@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="25/11 · 19:40"><meta name="pv-notes" content="Nuova pagina «Programmi usati e licenze» (in Aiuto): l'elenco dei programmi open source usati da rooMusic e da RunPod, con autori e licenze."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="25/11 · 19:55"><meta name="pv-notes" content="In Cerca brani c'è il nuovo pulsante «Canzoni consigliate»: quattro liste (Italiane, Da suonare cult, Rock femminili, Più ascoltate ora) con i link per comprare su Amazon, iTunes e Qobuz."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -846,6 +846,16 @@ a.chip{text-decoration:none;color:inherit;display:inline-flex;align-items:center
 .shop .buy{grid-column:2;display:flex;gap:6px;flex-wrap:wrap}
 .shop .buy a,.shop .buy button{font-size:13px;padding:6px 10px;min-height:34px;text-decoration:none;color:var(--fg)}
 .shop .buy a.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.constabs{display:grid;grid-template-columns:repeat(4,1fr);width:100%;margin-top:4px}.constabs button{white-space:normal;line-height:1.2}
+@media(max-width:560px){.constabs{grid-template-columns:repeat(2,1fr)}}
+.conslist{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.cons{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:4px 10px;align-items:center;background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.cons .n{color:var(--dim);font-variant-numeric:tabular-nums;text-align:right;font-size:13px}
+.cons .meta{min-width:0}.cons .meta b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cons .meta small{display:block;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cons .buy{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.cons .buy a{font-size:13px;padding:6px 10px;min-height:34px;text-decoration:none;color:var(--fg);display:inline-flex;align-items:center}
+.cons .buy a.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:560px){.cons{grid-template-columns:22px minmax(0,1fr)}.cons .buy{grid-column:2;justify-content:flex-start}}
 .shop .price{font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent)}
 .pkbtn{display:block;text-align:left;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--raise);color:var(--fg);border:1px solid var(--line)}
 .pkov{position:fixed;inset:0;z-index:105;background:rgb(var(--r51220) / .6);display:flex;align-items:center;justify-content:center;padding:max(10px,env(safe-area-inset-top,0px)) 10px max(10px,env(safe-area-inset-bottom,0px))}.pkov[hidden]{display:none}
@@ -1431,7 +1441,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Nuova pagina «Programmi usati e licenze» (in Aiuto): l'elenco dei programmi open source usati da rooMusic e da RunPod, con autori e licenze.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: In Cerca brani c'è il nuovo pulsante «Canzoni consigliate»: quattro liste (Italiane, Da suonare cult, Rock femminili, Più ascoltate ora) con i link per comprare su Amazon, iTunes e Qobuz.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -2253,9 +2263,18 @@ themeApply();</script>
     <input class="inp grow" id="shopQ" placeholder="Per esempio: Mina" spellcheck="false" aria-label="Cosa cercare">
     <button class="chip pri" id="shopGo">Cerca</button>
   </div>
+  <div class="row"><button class="chip" id="shopCons"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="vertical-align:-3px;margin-right:6px"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Canzoni consigliate</button></div>
   <div class="status" id="shopStatus"></div>
   <div class="shoplist" id="shopList"></div>
   <p class="status">Consigliato: <b>Amazon Music</b> (MP3 senza protezioni, pronti per l'app). Elenco, anteprime e prezzi indicativi vengono da iTunes: su Amazon il prezzo può essere diverso.</p>
+</div></div>
+<div class="ov" id="ovCons" hidden><div class="sheet">
+  <div class="row"><h3 class="grow">Canzoni consigliate</h3><button class="mini" data-close>Chiudi</button></div>
+  <p>Le canzoni da avere per karaoke e serate con la band. Tocca un negozio per cercare il brano e comprarlo: scegli la versione originale, non live, non cover e non karaoke.</p>
+  <div class="seg constabs" id="consTabs" role="group" aria-label="Quale lista"><button data-k="ita" class="on">Italiane</button><button data-k="cult">Da suonare cult</button><button data-k="fem">Rock femminili</button><button data-k="top" id="consTop" hidden>Più ascoltate ora</button></div>
+  <div class="status" id="consStatus"></div>
+  <div class="conslist" id="consList"></div>
+  <p class="status">Le prime tre liste sono scelte da rooMusic, non sono classifiche ufficiali. «Più ascoltate ora» è la classifica di Apple Music Italia e si aggiorna da sola. Usa solo brani comprati regolarmente.</p>
 </div></div>
 <div class="ov" id="ovEdit" hidden><div class="sheet">
   <div class="row"><h3 class="grow" id="edTitle">Testo</h3><button class="mini" data-close>Chiudi</button></div>
@@ -6597,6 +6616,25 @@ $('#shopGo').onclick=shopSearch;$('#shopQ').onkeydown=e=>{if(e.key==='Enter')sho
 $('#bShop').onclick=()=>{openOv('#ovShop');setTimeout(()=>$('#shopQ').focus(),50)};
 $('#ovShop').addEventListener('click',e=>{if(e.target.closest('[data-close]')||e.target.id==='ovShop'){if(shopAudio)shopAudio.pause()}});
 
+/* ===== canzoni consigliate: tre liste scelte da rooMusic + classifica Apple Music Italia (si aggiorna da sola) ===== */
+const CONS={ita:[["Nel blu dipinto di blu (Volare)", "Domenico Modugno"], ["Io vagabondo", "Nomadi"], ["L'italiano", "Toto Cutugno"], ["Con te partirò", "Andrea Bocelli"], ["Azzurro", "Adriano Celentano"], ["Sarà perché ti amo", "Ricchi e Poveri"], ["Felicità", "Al Bano e Romina Power"], ["Ti amo", "Umberto Tozzi"], ["Gloria", "Umberto Tozzi"], ["Cuore matto", "Little Tony"], ["Emozioni", "Lucio Battisti"], ["La canzone del sole", "Lucio Battisti"], ["Il mio canto libero", "Lucio Battisti"], ["Questo piccolo grande amore", "Claudio Baglioni"], ["Notte prima degli esami", "Antonello Venditti"], ["Albachiara", "Vasco Rossi"], ["Vita spericolata", "Vasco Rossi"], ["Certe notti", "Ligabue"], ["Gli anni", "883"], ["Hanno ucciso l'Uomo Ragno", "883"], ["Nord sud ovest est", "883"], ["50 Special", "Lùnapop"], ["Acqua e sale", "Mina e Celentano"], ["Maracaibo", "Lu Colombo"], ["Mare mare", "Luca Carboni"], ["Gente di mare", "Umberto Tozzi e Raf"], ["Un'emozione per sempre", "Eros Ramazzotti"], ["Una storia importante", "Eros Ramazzotti"], ["La solitudine", "Laura Pausini"], ["Strani amori", "Laura Pausini"], ["Vivo per lei", "Andrea Bocelli e Giorgia"], ["Sere nere", "Tiziano Ferro"], ["Occidentali's Karma", "Francesco Gabbani"], ["Tango", "Tananai"], ["Balorda nostalgia", "Olly"], ["Siamo solo noi", "Vasco Rossi"], ["C'è chi dice no", "Vasco Rossi"], ["Balliamo sul mondo", "Ligabue"], ["Urlando contro il cielo", "Ligabue"], ["El diablo", "Litfiba"], ["Spirito", "Litfiba"], ["Il mio nome è mai più", "Ligabue, Jovanotti e Pelù"], ["Zitti e buoni", "Måneskin"], ["Amandoti", "CCCP"], ["Impressioni di settembre", "PFM"], ["Piangi con me", "The Rokes"], ["Sono un ribelle mamma", "Nomadi / I Corvi"], ["Generale", "Francesco De Gregori"], ["Il pescatore", "Fabrizio De André"], ["Una donna per amico", "Lucio Battisti"]],cult:[["Smoke on the Water", "Deep Purple"], ["Highway to Hell", "AC/DC"], ["Back in Black", "AC/DC"], ["Sweet Child O' Mine", "Guns N' Roses"], ["Knockin' on Heaven's Door", "Bob Dylan / Guns N' Roses"], ["Johnny B. Goode", "Chuck Berry"], ["(I Can't Get No) Satisfaction", "The Rolling Stones"], ["Born to Be Wild", "Steppenwolf"], ["Paranoid", "Black Sabbath"], ["Whole Lotta Love", "Led Zeppelin"], ["Hotel California", "Eagles"], ["Another Brick in the Wall (Part 2)", "Pink Floyd"], ["Smells Like Teen Spirit", "Nirvana"], ["Seven Nation Army", "The White Stripes"], ["Should I Stay or Should I Go", "The Clash"], ["Livin' on a Prayer", "Bon Jovi"], ["Rockin' in the Free World", "Neil Young"], ["Enter Sandman", "Metallica"], ["Nothing Else Matters", "Metallica"], ["Sunshine of Your Love", "Cream"], ["Purple Haze", "Jimi Hendrix"], ["Bohemian Rhapsody", "Queen"], ["Twist and Shout", "The Beatles"], ["Wonderwall", "Oasis"], ["Song 2", "Blur"], ["Beggin'", "Måneskin (cover dei Four Seasons)"]],fem:[["Zombie", "The Cranberries"], ["Linger", "The Cranberries"], ["Heart of Glass", "Blondie"], ["Call Me", "Blondie"], ["One Way or Another", "Blondie"], ["I Love Rock 'n' Roll", "Joan Jett & the Blackhearts"], ["Bad Reputation", "Joan Jett"], ["Cherry Bomb", "The Runaways"], ["Barracuda", "Heart"], ["Alone", "Heart"], ["Piece of My Heart", "Janis Joplin (Big Brother and the Holding Company)"], ["Me and Bobby McGee", "Janis Joplin"], ["White Rabbit", "Jefferson Airplane"], ["Somebody to Love", "Jefferson Airplane"], ["Edge of Seventeen", "Stevie Nicks"], ["Dreams", "Fleetwood Mac"], ["Because the Night", "Patti Smith Group"], ["Hit Me with Your Best Shot", "Pat Benatar"], ["Heartbreaker", "Pat Benatar"], ["Love Is a Battlefield", "Pat Benatar"], ["The Best", "Tina Turner"], ["Proud Mary", "Ike & Tina Turner"], ["Total Eclipse of the Heart", "Bonnie Tyler"], ["Holding Out for a Hero", "Bonnie Tyler"], ["What's Up?", "4 Non Blondes"], ["Just a Girl", "No Doubt"], ["Don't Speak", "No Doubt"], ["You Oughta Know", "Alanis Morissette"], ["Ironic", "Alanis Morissette"], ["Stupid Girl", "Garbage"], ["Celebrity Skin", "Hole"], ["Bring Me to Life", "Evanescence"], ["Misery Business", "Paramore"], ["Complicated", "Avril Lavigne"], ["Sk8er Boi", "Avril Lavigne"], ["America", "Gianna Nannini"], ["Fotoromanza", "Gianna Nannini"], ["Bello e impossibile", "Gianna Nannini"], ["I maschi", "Gianna Nannini"], ["Meravigliosa creatura", "Gianna Nannini"], ["Sei bellissima", "Loredana Bertè"], ["Non sono una signora", "Loredana Bertè"], ["Il mare d'inverno", "Loredana Bertè"], ["In alto mare", "Loredana Bertè"], ["Dedicato", "Loredana Bertè"], ["Confusa e felice", "Carmen Consoli"], ["Amore di plastica", "Carmen Consoli"], ["L'ultimo bacio", "Carmen Consoli"], ["Kobra", "Donatella Rettore"], ["Splendido splendente", "Donatella Rettore"], ["Amore disperato", "Nada"], ["Bruci la città", "Irene Grandi"], ["La tua ragazza sempre", "Irene Grandi"]]};
+let consK='ita';
+const consQ=(t,a)=>encodeURIComponent(t.replace(/\s*\([^)]*\)\s*/g,' ').trim()+' '+a.split(/[(\/]/)[0].trim());
+function consRow(i,t,a,it){const q=consQ(t,a);const L=[['Amazon','https://www.amazon.it/s?k='+q+'&i=digital-music',1],['iTunes',it||'https://music.apple.com/it/search?term='+q],['Qobuz','https://www.qobuz.com/it-it/search?q='+q]];
+  return `<div class="cons"><span class="n">${i}</span><div class="meta"><b>${esc(t)}</b><small>${esc(a)}</small></div><div class="buy">${L.map(([n,u,p])=>`<a class="mini${p?' pri':''}" href="${esc(u)}" target="_blank" rel="noopener" aria-label="${esc(n+': '+t+', '+a)}">${n}</a>`).join('')}</div></div>`}
+function consTopGet(){try{const c=JSON.parse(prefGet('consTop')||'null');return c&&Array.isArray(c.r)?c:null}catch(e){return null}}
+function consDraw(){$$('#consTabs button').forEach(b=>b.classList.toggle('on',b.dataset.k===consK));const st=$('#consStatus');let L;
+  if(consK==='top'){const c=consTopGet();L=c?c.r:[];st.textContent=L.length?'Le '+L.length+' canzoni più ascoltate in Italia su Apple Music, aggiornate il '+new Date(c.t).toLocaleDateString('it-IT')+'.':'Classifica non disponibile adesso.'}
+  else{L=CONS[consK]||[];st.textContent=L.length+' brani.'}
+  $('#consList').innerHTML=L.map((x,i)=>consRow(i+1,x[0],x[1],x[2])).join('')}
+async function consTopLoad(){const b=$('#consTop'),c=consTopGet();b.hidden=!(c&&c.r.length);if(c&&Date.now()-c.t<6*3600e3)return;
+  try{const r=await fetch('https://rss.applemarketingtools.com/api/v2/it/music/most-played/50/songs.json');const d=await r.json();
+    const R=(d&&d.feed&&d.feed.results||[]).filter(x=>x&&x.name&&x.artistName).map(x=>[String(x.name),String(x.artistName),/^https:\/\/music\.apple\.com\//.test(x.url||'')?x.url:'']);
+    if(R.length){prefSet('consTop',JSON.stringify({t:Date.now(),r:R}));b.hidden=false;if(consK==='top')consDraw()}}
+  catch(e){console.warn('classifica',e)}}
+$$('#consTabs button').forEach(b=>b.onclick=()=>{consK=b.dataset.k;consDraw()});
+$('#shopCons').onclick=()=>{if(shopAudio)shopAudio.pause();openOv('#ovCons');consDraw();consTopLoad()};
+
 /* ================= testo da LRCLIB (prima di tutto) ================= */
 const normT=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
   .replace(/\((?:official|video|audio|lyrics?|testo|remaster(?:ed)?|live|hd|hq)[^)]*\)|\[(?:official|video|audio|lyrics?|remaster(?:ed)?|hd|hq)[^\]]*\]/g,'')
@@ -8423,6 +8461,7 @@ const TUT_SECTIONS=[
    {s:'#ovShop [data-m="song"]',t:'Canzone',d:'Cerca per titolo della canzone.'},
    {s:'#shopQ',run:()=>{$('#shopQ').value='Mina'},t:'Cosa cercare',d:'Scrivi qui quello che cerchi. Per esempio ho scritto Mina.'},
    {s:'#shopGo',t:'Cerca',d:'Fa la ricerca e mostra i risultati con l\'anteprima da ascoltare e il prezzo indicativo. Il prezzo vero lo vedi sulla piattaforma dove compri.'},
+   {s:'#shopCons',t:'Canzoni consigliate',d:'Apre le liste delle canzoni da avere: Italiane, Da suonare cult, Rock femminili e, quando internet c\'è, Più ascoltate ora (la classifica di Apple Music Italia). Accanto a ogni canzone tocchi Amazon, iTunes o Qobuz per cercarla e comprarla.'},
   ]},
  {id:'scaletta',name:'Scaletta',ico:'#bScal',sub:'preparare l\'ordine dei brani della serata',ex:0,
   prep:async()=>{TUT.scl={name:SCL.name,items:SCL.items.slice(),i:SCL.i};SCL.name='Serata di esempio';SCL.items=EX_SONGS.map(p=>({id:p.id,title:p.title,artist:p.artist}));SCL.i=-1;tutCloseAll();await slOpen();const m=$('#slMore');if(m)m.open=true},
