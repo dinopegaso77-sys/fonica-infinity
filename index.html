@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="25/11 · 23:00"><meta name="pv-notes" content="Canzoni consigliate: nuove liste «Sanremo: le vincitrici» (dal 1951 al 2026) e «Sanremo: le più famose»; puoi ascoltare ogni brano prima di comprarlo con «Anteprima» e «YouTube». Nuovo anche il pulsante «Lezioni» di chitarra e basso."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="26/11 · 17:00"><meta name="pv-notes" content="Nelle Lezioni arriva la batteria: rudimenti, ritmi (rock, pop, funk, shuffle, reggae, bossa), fill e «Crea il tuo ritmo», con la griglia a quadretti. Nuove anche le liste di Sanremo nelle Canzoni consigliate."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -1404,7 +1404,7 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 .lezsheet{width:min(1240px,100%);height:100%;max-height:100%;gap:12px}
 @media (max-width:599px){.ov.lezov{padding:0}.lezsheet{border-radius:0;border:0;padding:12px 12px 24px}}
 .lezhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:-18px;z-index:3;background:var(--surface);padding:6px 0;margin-top:-6px}
-@media (max-width:599px){.lezhead{top:-12px}.lezhead h3{font-size:19px;flex-basis:100%;order:-1}.lezhead .seg{flex:1}.lezhead .seg button{flex:1}}
+@media (max-width:599px){.lezhead{top:-12px}.lezhead h3{font-size:19px;flex:1;min-width:0;order:1}.lezhead .lzback{order:0}.lezhead [data-close]{order:2}.lezhead .seg{order:3;flex-basis:100%}.lezhead .seg button{flex:1}}
 .lzback{display:inline-flex;align-items:center;gap:4px}.lzback .ico{width:18px;height:18px}
 .lzday{background:var(--raise);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
 .lzdayh{display:flex;gap:12px;align-items:center}.lzdayh .ico{width:34px;height:34px;color:var(--accent);flex:none}.lzdayh b{display:block;font-size:18px}.lzdayh small{color:var(--dim);font-size:14px}
@@ -1437,7 +1437,25 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 .fb .dot.faint circle{fill:#eef7fc;opacity:.22;stroke:none}
 .fb .dot.on circle{fill:#ffe14d;stroke:#fff;stroke-width:4}.fb .dot.on text{fill:#000}
 .fb .dot.good circle{fill:#5fd36f;stroke:#fff;stroke-width:3}.fb .dot.bad circle{fill:#ff6b5b;stroke:#fff;stroke-width:3}
-.lzcount{position:absolute;inset:0;display:grid;place-items:center;font:800 64px rooText,system-ui;color:#ffe14d;text-shadow:0 2px 12px #000;pointer-events:none}
+.lzcount{position:fixed;inset:0;z-index:50;display:grid;place-items:center;font:800 64px rooText,system-ui;color:#ffe14d;text-shadow:0 2px 12px #000;pointer-events:none}
+/* griglia della batteria */
+.dgwrap{display:flex;flex-direction:column;gap:10px;background:#15191d;border-radius:12px;padding:10px 8px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.dgblk{display:grid;gap:3px;align-items:center}
+.dgl{color:#cfd8df;font:700 13px/1.15 rooText,system-ui;padding-right:6px}
+.dgh{text-align:center;color:#8c98a3;font:700 12px rooText,system-ui;padding-bottom:2px;border-radius:4px}.dgh.beat{color:#e9f2f8;font-size:14px}
+.dgc{appearance:none;border:0;margin:0;padding:0;aspect-ratio:1;min-height:20px;max-height:44px;width:100%;border-radius:5px;background:#2a3138;color:#10202b;font:800 13px rooText,system-ui;cursor:pointer;display:grid;place-items:center}
+.dgc.beat{background:#343d45}
+@media (min-width:600px){.dgc{aspect-ratio:auto;height:34px}}.dgc.barend{margin-right:4px}
+.dgc.v-x,.dgc.v-X,.dgc.v-f,.dgc.v-o{background:#7fcaf2}
+.dgc.r-cr.v-x,.dgc.r-rd.v-x,.dgc.r-hh.v-x,.dgc.r-hh.v-X,.dgc.r-hf.v-x,.dgc.r-rd.v-X{background:#e9c46a}
+.dgc.r-hh.v-o{background:transparent;box-shadow:inset 0 0 0 3px #e9c46a;color:#e9c46a}
+.dgc.r-bd.v-x,.dgc.r-bd.v-X{background:#f2a13a}
+.dgc.r-t1.v-x,.dgc.r-t2.v-x,.dgc.r-ft.v-x,.dgc.r-t1.v-X,.dgc.r-t2.v-X,.dgc.r-ft.v-X{background:#97d99f}
+.dgc.r-rs.v-x,.dgc.r-rs.v-X{background:#d7b4f5}
+.dgc.v-X{box-shadow:inset 0 0 0 3px #fff}
+.dgc.v-g{background:transparent;box-shadow:inset 0 0 0 2px #7fcaf2;transform:scale(.62)}
+.dgc.r-st{background:transparent;color:#e9f2f8;font-size:14px}
+.dgc.on{outline:3px solid #ffe14d;outline-offset:1px}.dgc.on:not(.v-n):not(.r-st){background:#ffe14d;color:#000}.dgh.on{background:#ffe14d;color:#000}
 .lzinfo{font-size:15px;color:var(--fg);line-height:1.8}.lzinfo small{color:var(--dim);font-size:13.5px}
 .lzpill{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid var(--line);background:var(--raise);margin:2px 2px;font-size:14px}
 .lzpill.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
@@ -1494,7 +1512,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Canzoni consigliate: nuove liste «Sanremo: le vincitrici» (dal 1951 al 2026) e «Sanremo: le più famose»; puoi ascoltare ogni brano prima di comprarlo con «Anteprima» e «YouTube». Nuovo anche il pulsante «Lezioni» di chitarra e basso.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Nelle Lezioni arriva la batteria: rudimenti, ritmi (rock, pop, funk, shuffle, reggae, bossa), fill e «Crea il tuo ritmo», con la griglia a quadretti. Nuove anche le liste di Sanremo nelle Canzoni consigliate.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -2334,7 +2352,7 @@ themeApply();</script>
   <div class="lezhead">
     <button class="mini lzback" id="lezBack" hidden aria-label="Torna alle lezioni"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Lezioni</span></button>
     <h3 class="grow" id="lezTitle">Lezioni</h3>
-    <div class="seg" id="lezInst" role="group" aria-label="Strumento"><button data-i="guitar" class="on">Chitarra</button><button data-i="bass">Basso</button></div>
+    <div class="seg" id="lezInst" role="group" aria-label="Strumento"><button data-i="guitar" class="on">Chitarra</button><button data-i="bass">Basso</button><button data-i="drums">Batteria</button></div>
     <button class="mini" data-close>Chiudi</button>
   </div>
   <div id="lezHome"></div>
@@ -2344,7 +2362,7 @@ themeApply();</script>
     <pre class="lztab" id="lzTab" hidden></pre>
     <div class="lzctl" id="lzCtl"></div>
     <div class="lzsay" id="lzSay" aria-live="polite"></div>
-    <div class="fbwrap" id="fbWrap"><svg class="fb" id="fb" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Manico dello strumento: tocca una nota per sentirla"></svg><div class="lzcount" id="lzCount" hidden></div></div>
+    <div class="fbwrap" id="fbWrap"><svg class="fb" id="fb" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Manico dello strumento: tocca una nota per sentirla"></svg></div><div class="dgwrap" id="dgWrap" hidden></div><div class="lzcount" id="lzCount" hidden></div>
     <div class="lzinfo" id="lzInfo" hidden></div>
     <div class="lzplay" id="lzPlay">
       <button class="chip pri lzgo" id="lzPlayBtn"></button>
@@ -2352,7 +2370,8 @@ themeApply();</script>
     </div>
     <div class="lzopts" id="lzOpts">
       <div class="lzf" id="lzSubBox"><span>Note per battito</span><div class="seg" id="lzSub"><button data-s="1">1</button><button data-s="2">2</button><button data-s="3">3</button><button data-s="4">4</button></div></div>
-      <label class="lzck"><input type="checkbox" id="lzNotes"><span>Suona anche le note</span></label>
+      <label class="lzck"><input type="checkbox" id="lzNotes"><span id="lzNotesTx">Suona anche le note</span></label>
+      <label class="lzck"><input type="checkbox" id="lzClick" checked><span>Metronomo</span></label>
       <label class="lzck" id="lzAutoBox"><input type="checkbox" id="lzAuto"><span>Sali di velocità da solo</span></label>
       <div class="lzrec" id="lzRecBox"><span id="lzRec"></span><button class="chip" id="lzSaveRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg><span>Salva velocità</span></button></div>
     </div>
@@ -2435,7 +2454,7 @@ themeApply();</script>
     <details><summary>Ho cambiato dispositivo o il browser ha cancellato tutto</summary><p>In <b>Impostazioni</b>: <b>«Ricarica dal file»</b> per le chiavi e <b>«Ricarica le impostazioni»</b> per scalette, suoni e pedaliera. I brani tornano dal cloud R2, se l'avevi collegato.</p></details>
     <details><summary>Manca una novità o l'app sembra vecchia</summary><p>La versione e le novità sono scritte in fondo al <b>Menu</b>. Con internet l'app si aggiorna da sola; se non succede, chiudila e riaprila.</p></details>
     <details><summary>Microfono o fotocamera non funzionano</summary><p>Consenti i permessi dal lucchetto vicino all'indirizzo della pagina, poi riprova.</p></details>
-    <details><summary>Voglio imparare a suonare chitarra o basso</summary><p>Premi <b>«Lezioni»</b> in alto. Le lezioni vanno dalla più facile alla più difficile: parti dalla 1. Ogni giorno c'è anche l'<b>Allenamento del giorno</b> (8, 12 o 20 minuti). Funzionano anche senza internet.</p></details>
+    <details><summary>Voglio imparare a suonare chitarra, basso o batteria</summary><p>Premi <b>«Lezioni»</b> in alto e scegli <b>Chitarra, Basso o Batteria</b>. Le lezioni vanno dalla più facile alla più difficile: parti dalla 1. Ogni giorno c'è anche l'<b>Allenamento del giorno</b> (8, 12 o 20 minuti). Funzionano anche senza internet.</p></details>
     <details><summary>Nelle Lezioni non sento le note</summary><p>Alza il volume del telefono o del PC e controlla che non sia in silenzioso (su iPhone c'è il tasto sul lato). Se stavi ascoltando un brano, le Lezioni lo mettono in pausa da sole. Togli la spunta da «Suona anche le note» solo se vuoi sentire il metronomo e basta.</p></details>
     <details><summary>Quali canzoni mi conviene comprare?</summary><p>Nel <b>Menu</b> apri <b>«Cerca brani»</b> e premi <b>«Canzoni consigliate»</b>: trovi le canzoni italiane, quelle da suonare con la band, il rock al femminile e le più ascoltate del momento, con i link per comprarle.</p></details>
     <details><summary>Scorciatoie da tastiera</summary><p><code>Spazio</code> avvia o mette in pausa il brano; <code>Esc</code> chiude il Palco e il tutorial.</p></details>
@@ -6843,20 +6862,20 @@ function lzLab(s,f,deg,fing){return LZ.lab==='deg'&&deg!=null?deg:LZ.lab==='fing
 
 /* ---------- metronomo ed esecuzione ---------- */
 const PL={on:false,bpm:70,sub:2,notes:true,auto:false,loop:0,i:0,steps:[],t:0,beat:0,vis:[],tm:0,raf:0,srcs:[]};
-function plStop(){PL.on=false;clearInterval(PL.tm);cancelAnimationFrame(PL.raf);PL.vis=[];PL.srcs.forEach(s=>{try{s.stop()}catch(e){}});PL.srcs=[];lzHl([]);const b=$('#lzPlayBtn');if(b)b.innerHTML=LZI.play+'<span>Suona</span>'}
+function plStop(){PL.on=false;clearInterval(PL.tm);cancelAnimationFrame(PL.raf);PL.vis=[];PL.srcs.forEach(s=>{try{s.stop()}catch(e){}});PL.srcs=[];lzHl([]);try{dgHl(-1)}catch(e){}const b=$('#lzPlayBtn');if(b)b.innerHTML=LZI.play+'<span>Suona</span>'}
 function plStart(){const L=LZ.cur;if(!L||!L.gen)return;try{pause()}catch(e){}const c=ctx();try{c.resume()}catch(e){}PL.on=true;PL.loop=0;PL.i=0;PL.steps=L.gen(0);PL.beat=0;PL.vis=[];
-  const spb=60/PL.bpm;PL.t=c.currentTime+.12;for(let k=0;k<4;k++){lzClick(PL.t+k*spb,k===0);PL.vis.push({t:PL.t+k*spb,cnt:4-k})}PL.t+=4*spb;
+  const spb=60/PL.bpm;PL.t=c.currentTime+.12;const ci=(PL.bar||4)>=3?(PL.bar||4):4;for(let k=0;k<ci;k++){lzClick(PL.t+k*spb,k%(PL.bar||4)===0);PL.vis.push({t:PL.t+k*spb,cnt:ci-k})}PL.t+=ci*spb;
   clearInterval(PL.tm);PL.tm=setInterval(plTick,25);plTick();cancelAnimationFrame(PL.raf);PL.raf=requestAnimationFrame(plVis);$('#lzPlayBtn').innerHTML=LZI.stop+'<span>Ferma</span>'}
 function plTick(){if(!PL.on)return;const c=ctx();let guard=0;
   while(PL.on&&PL.t<c.currentTime+.18&&guard++<64){const st=PL.steps[PL.i];if(!st){plStop();return}const spb=60/PL.bpm,dur=st.dur!=null?st.dur:1/PL.sub;
-    const b0=PL.beat;for(let k=Math.ceil(b0-1e-6);k<b0+dur-1e-6;k++)lzClick(PL.t+(k-b0)*spb,k%4===0);
-    if(PL.notes&&st.n)st.n.forEach((x,j)=>lzPluck(x[0],x[1],PL.t+(st.strum?j*.022:0),st.g));
+    const b0=PL.beat;if(PL.click!==false)for(let k=Math.ceil(b0-1e-6);k<b0+dur-1e-6;k++)lzClick(PL.t+(k-b0)*spb,k%(PL.bar||4)===0);
+    if(PL.notes&&st.n)st.n.forEach((x,j)=>lzPluck(x[0],x[1],PL.t+(st.strum?j*.022:0),st.g));if(PL.notes&&st.d)st.d.forEach(([k,ch])=>drPlay(k,ch,PL.t));
     PL.vis.push({t:PL.t,st});PL.beat+=dur;PL.t+=dur*spb;PL.i++;
     if(PL.i>=PL.steps.length){PL.i=0;PL.loop++;if(PL.auto&&PL.loop%2===0&&PL.bpm<240){PL.bpm=Math.min(240,PL.bpm+4);lzPlayUI()}
       PL.steps=LZ.cur.gen(PL.loop);if(LZ.cur.redraw)PL.vis.push({t:PL.t-.01,redraw:PL.loop})}}}
 function plVis(){if(!PL.on)return;const c=ctx(),now=c.currentTime;while(PL.vis.length&&PL.vis[0].t<=now){const v=PL.vis.shift();
     if(v.cnt){$('#lzCount').textContent=v.cnt;$('#lzCount').hidden=false;continue}$('#lzCount').hidden=true;
-    if(v.redraw!=null){LZ.cur.redraw(v.redraw);continue}const st=v.st;if(st.show)st.show();lzHl((st.n||[]).map(x=>x[0]+'-'+x[1]));if(st.say!=null)$('#lzSay').textContent=st.say}
+    if(v.redraw!=null){LZ.cur.redraw(v.redraw);continue}const st=v.st;if(st.show)st.show();if(st.col!=null)dgHl(st.col);else lzHl((st.n||[]).map(x=>x[0]+'-'+x[1]));if(st.say!=null)$('#lzSay').textContent=st.say}
   PL.raf=requestAnimationFrame(plVis)}
 
 /* ---------- icone disegnate ---------- */
@@ -6990,7 +7009,7 @@ const LZ_L=[
   'I modi sono la scala maggiore che parte da un\'altra nota. <b>Dorico</b>: minore con la 6 maggiore, funky. <b>Frigio</b>: spagnoleggiante. <b>Lidio</b>: sognante. <b>Misolidio</b>: rock e blues. <b>Locrio</b>: molto teso. Ascoltali sulla stessa nota per sentire la differenza.'},
  {id:'walk',lv:5,b:1,t:'Walking bass sul blues',sub:'una nota per battito',type:'prog',walk:1,bpm:90,txt:()=>
   'Il <b>walking bass</b> «cammina»: una nota per battito, radice, 3, 5, 6, poi b7, 6, 5, 3. Qui lo suoni sul <b>blues a 12 battute</b>. Quando è facile, prova a inventare tu la strada da un accordo all\'altro.'}];
-const lzList=()=>LZ_L.filter(l=>!(l.g&&lzBass())&&!(l.b&&!lzBass()));
+const lzList=()=>LZ_L.filter(l=>lzDrums()?l.d:!l.d&&!(l.g&&lzBass())&&!(l.b&&!lzBass()));
 const lzVal=v=>typeof v==='function'?v():v;
 
 /* ---------- apertura e lista ---------- */
@@ -6998,15 +7017,15 @@ function lezOpen(){try{const p=lzProg();if(p.inst)LZ.inst=p.inst;if(p.names)LZ.n
 function lzInstUI(){$$('#lezInst button').forEach(b=>b.classList.toggle('on',b.dataset.i===LZ.inst))}
 function lzStreak(p){const set=new Set(p.days);let n=0;const d=new Date();if(!set.has(lzToday()))d.setDate(d.getDate()-1);
   for(;;){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');if(!set.has(k))break;n++;d.setDate(d.getDate()-1)}return n}
-function lzHome(){plStop();LZ.id=null;LZ.cur=null;if(LZ.rt)lzRtEnd(false);$('#lezView').hidden=true;$('#lezHome').hidden=false;$('#lezBack').hidden=true;$('#lezTitle').textContent='Lezioni di '+(lzBass()?'basso':'chitarra');
+function lzHome(){plStop();LZ.id=null;LZ.cur=null;if(LZ.rt)lzRtEnd(false);$('#lezView').hidden=true;$('#lezHome').hidden=false;$('#lezBack').hidden=true;$('#lezTitle').textContent='Lezioni di '+(lzDrums()?'batteria':lzBass()?'basso':'chitarra');
   const p=lzProg(),done=new Set(p.days),st=lzStreak(p),M=LZ.min||3;let dots='';const d=new Date();d.setDate(d.getDate()-13);
   for(let i=0;i<14;i++){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');dots+=`<i class="${done.has(k)?'on':''}${i===13?' oggi':''}" title="${k}"></i>`;d.setDate(d.getDate()+1)}
   const todayDone=done.has(lzToday());
-  let h=`<div class="lzday" id="lzDay"><div class="lzdayh">${LZI.flame}<div class="grow"><b>Allenamento del giorno</b><small>4 parti: riscaldamento, scala, accordi, dita. Cambia ogni giorno.</small></div></div>
+  let h=`<div class="lzday" id="lzDay"><div class="lzdayh">${LZI.flame}<div class="grow"><b>Allenamento del giorno</b><small>${lzDrums()?'4 parti: riscaldamento, rudimento, ritmo, fill. Cambia ogni giorno.':'4 parti: riscaldamento, scala, accordi, dita. Cambia ogni giorno.'}</small></div></div>
    <div class="lzdots" aria-label="Ultimi 14 giorni">${dots}</div><div class="lzdayf"><span class="lzstreak">${st?`<b>${st}</b> ${st===1?'giorno':'giorni'} di fila`:'Inizia oggi la tua serie'}</span>
    <div class="seg" id="lzMin" role="group" aria-label="Minuti per parte">${[2,3,5].map(m=>`<button data-m="${m}" class="${m===M?'on':''}">${m*4} min</button>`).join('')}</div>
    <button class="chip pri" id="lzDayGo">${LZI.play}<span>${todayDone?'Rifallo':'Inizia'}</span></button></div></div>`;
-  const L=lzList();LZ_LV.forEach((nm,lv)=>{const ls=L.filter(l=>l.lv===lv);if(!ls.length)return;h+=`<h4 class="lzlvh">Livello ${lv+1} · ${nm}</h4><div class="lzgrid">`;
+  const L=lzList();(lzDrums()?['Primi passi','Rudimenti: le mani','Primi ritmi','Gli stili','Fill e coordinazione','Crea'] :LZ_LV).forEach((nm,lv)=>{const ls=L.filter(l=>l.lv===lv);if(!ls.length)return;h+=`<h4 class="lzlvh">Livello ${lv+1} · ${nm}</h4><div class="lzgrid">`;
     ls.forEach(l=>{const k=LZ.inst+':'+l.id,ok=p.done[k],rc=p.rec[k];const no=L.indexOf(l)+1;
       h+=`<button class="lzcard${ok?' ok':''}" data-l="${l.id}"><span class="no">${ok?LZI.ok:no}</span><span class="tx"><b>${esc(lzVal(l.t))}</b><small>${esc(lzVal(l.sub))}${rc?' · record '+rc.bpm+' bpm':''}</small></span></button>`});h+='</div>'});
   h+=`<div class="lzset">${''}<div class="lzf"><span>Nomi delle note</span><div class="seg" id="lzNames"><button data-n="it" class="${LZ.names==='it'?'on':''}">Do Re Mi</button><button data-n="en" class="${LZ.names==='en'?'on':''}">C D E</button></div></div></div>`;
@@ -7019,14 +7038,14 @@ function lzHome(){plStop();LZ.id=null;LZ.cur=null;if(LZ.rt)lzRtEnd(false);$('#le
 /* ---------- una lezione ---------- */
 function lzGo(id,preset){plStop();const l=LZ_L.find(x=>x.id===id);if(!l)return;LZ.id=id;const k=LZ.inst+':'+id;LZ.st[k]=Object.assign(LZ.st[k]||{},preset||{});const S=LZ.st[k];
   $('#lezHome').hidden=true;$('#lezView').hidden=false;$('#lezBack').hidden=false;$('#lezTitle').textContent=lzVal(l.t);$('#lzTxt').innerHTML=lzVal(l.txt);
-  $('#lzCtl').innerHTML='';lzInfo('');$('#lzSay').textContent='';$('#lzCount').hidden=true;$('#lzTab').hidden=true;$('#fbWrap').hidden=false;$('#lzPlay').hidden=false;
+  $('#lzCtl').innerHTML='';lzInfo('');$('#lzSay').textContent='';$('#lzCount').hidden=true;$('#lzTab').hidden=true;const isD=l.type==='dpat'||l.type==='dmake';$('#fbWrap').hidden=isD;$('#dgWrap').hidden=!isD;$('#lzPlay').hidden=false;PL.bar=4;
   PL.bpm=S.bpm||l.bpm||70;PL.sub=S.sub||l.sub2||(l.type==='ex'?2:1);PL.notes=S.notes!=null?S.notes:true;PL.auto=!!S.auto;
   LZ.lab=S.lab||({ex:'fing',chords:'fing',barre:'fing',prog:'fing'}[l.type])||'note';const Lt=LZT[l.type];LZ.cur=Lt(l,S);LZ.cur.draw&&LZ.cur.draw();lzPlayUI();
   const p=lzProg();$('#lzDone').innerHTML=p.done[k]?LZI.ok+'<span>Lezione fatta</span>':'<span>Segna come fatta</span>';$('#lzDone').classList.toggle('on',!!p.done[k]);
   $('#ovLez .lezsheet').scrollTop=0}
 function lzPlayUI(){const L=LZ.cur;const k=LZ.inst+':'+LZ.id;const box=$('#lzPlay');$('#lzOpts').hidden=!L||!L.gen;if(!L||!L.gen){box.hidden=true;return}box.hidden=false;
   $('#lzBpm').textContent=PL.bpm;$('#lzNotes').checked=PL.notes;$('#lzAuto').checked=PL.auto;
-  const ex=L.ex;$('#lzSubBox').hidden=!ex;$('#lzAutoBox').hidden=!ex;$('#lzRecBox').hidden=!ex;
+  const ex=L.ex,rc0=ex||L.rec;$('#lzSubBox').hidden=!ex;$('#lzAutoBox').hidden=!rc0;$('#lzRecBox').hidden=!rc0;$('#lzNotesTx').textContent=lzDrums()?'Suona la batteria':'Suona anche le note';$('#lzClick').checked=PL.click!==false;
   $$('#lzSub button').forEach(b=>b.classList.toggle('on',+b.dataset.s===PL.sub));
   const rc=lzProg().rec[k];$('#lzRec').textContent=rc?'Record: '+rc.bpm+' bpm, '+rc.sub+' '+(rc.sub===1?'nota':'note')+' per battito':'Nessun record ancora';
   const S=LZ.st[k]||(LZ.st[k]={});S.bpm=PL.bpm;S.sub=PL.sub;S.notes=PL.notes;S.auto=PL.auto}
@@ -7037,7 +7056,7 @@ const LZT={
  tune(l){const ref=document.createElement('div');ref.className='lzrow';lzTun().forEach((m,s)=>{const b=lzBtn(`${LZ_STRNAME[LZ.inst][s]} · ${nn(m%12)}`,()=>{const c=ctx();c.resume();lzPluck(s,0,c.currentTime,1);lzHl([s+'-0']);setTimeout(()=>lzHl([]),1500)});ref.append(b)});
    lzCtl(lzBtn('<span>Apri l\'accordatore</span>',()=>{plStop();try{tuneOpen(null)}catch(e){toast('Accordatore non disponibile')}},'pri'),ref);
    return{draw(){lzDraw(lzTun().map((m,s)=>({s,f:0,lab:nn(m%12),cls:'r'})).concat(lzTun().slice(0,-1).map((m,s)=>({s,f:(lzTun()[s+1]-m),lab:nn(lzTun()[s+1]%12),cls:'d3'}))))},gen:()=>lzTun().map((m,s)=>({n:[[s,0]],dur:2}))}},
- read(l){$('#fbWrap').hidden=true;$('#lzPlay').hidden=true;$('#lzOpts').hidden=true;return{}},
+ read(l){$('#fbWrap').hidden=true;$('#dgWrap').hidden=true;$('#lzPlay').hidden=true;$('#lzOpts').hidden=true;return{}},
  tab(l){const t=lzTun(),seq=lzBass()?[[1,3],[2,0],[2,2],[2,3],[3,0],[3,2],[3,4],[3,5]]:[[1,3],[2,0],[2,2],[2,3],[3,0],[3,2],[4,0],[4,1]];
    const n=t.length,rows=[...Array(n).keys()].reverse().map(s=>nn(t[s]%12).padEnd(3)+'|');seq.forEach(([s,f])=>{for(let r=0;r<n;r++){const ss=n-1-r;rows[r]+=(ss===s?String(f):'-').padEnd(2,'-')+'-'}});
    $('#lzTab').hidden=false;$('#lzTab').textContent=rows.map(r=>r+'|').join('\n');
@@ -7152,7 +7171,7 @@ function lzWire(){
   $('#lzPlayBtn').onclick=()=>PL.on?plStop():plStart();
   $('#lzMinus').onclick=()=>{PL.bpm=Math.max(30,PL.bpm-4);lzPlayUI()};$('#lzPlus').onclick=()=>{PL.bpm=Math.min(240,PL.bpm+4);lzPlayUI()};
   $$('#lzSub button').forEach(b=>b.onclick=()=>{PL.sub=+b.dataset.s;lzPlayUI();if(PL.on){plStop();plStart()}});
-  $('#lzNotes').onchange=e=>{PL.notes=e.target.checked;lzPlayUI()};$('#lzAuto').onchange=e=>{PL.auto=e.target.checked;lzPlayUI()};
+  $('#lzNotes').onchange=e=>{PL.notes=e.target.checked;lzPlayUI()};$('#lzClick').onchange=e=>{PL.click=e.target.checked};$('#lzAuto').onchange=e=>{PL.auto=e.target.checked;lzPlayUI()};
   $('#lzSaveRec').onclick=()=>{const p=lzProg(),k=LZ.inst+':'+LZ.id,o=p.rec[k];if(o&&o.bpm*o.sub>=PL.bpm*PL.sub){toast('Il tuo record è già '+o.bpm+' bpm: continua così!');return}p.rec[k]={bpm:PL.bpm,sub:PL.sub,d:lzToday()};p.done[k]=1;lzSave(p);lzPlayUI();toast('Nuovo record: '+PL.bpm+' bpm');$('#lzDone').innerHTML=LZI.ok+'<span>Lezione fatta</span>';$('#lzDone').classList.add('on')};
   $('#lzDone').onclick=()=>{const p=lzProg(),k=LZ.inst+':'+LZ.id;if(p.done[k])delete p.done[k];else p.done[k]=1;lzSave(p);$('#lzDone').innerHTML=p.done[k]?LZI.ok+'<span>Lezione fatta</span>':'<span>Segna come fatta</span>';$('#lzDone').classList.toggle('on',!!p.done[k])};
   $('#lzRtNext').onclick=()=>lzRtNext();$('#lzRtStop').onclick=()=>{lzRtEnd(false);lzHome()};
@@ -7160,7 +7179,7 @@ function lzWire(){
   let rz=0;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(!$('#ovLez').hidden&&LZ.cur&&LZ.cur.draw&&!PL.on)LZ.cur.draw()},200)})}
 
 /* ---------- allenamento del giorno ---------- */
-function lzRtPlan(){const d=lzDayN(),B=lzBass(),p=lzProg();const rec=id=>p.rec[LZ.inst+':'+id];
+function lzRtPlan(){if(lzDrums())return lzRtPlanDrums();const d=lzDayN(),B=lzBass(),p=lzProg();const rec=id=>p.rec[LZ.inst+':'+id];
   const roots=[9,4,7,0,2,5,11];const scs=['pmin','pmag','maj','min','blues'];const sc=scs[d%scs.length];const scl={pmin:'pmin',pmag:'pmag',maj:'maj',min:'min',blues:'blues'}[sc];
   const hands=['spider','perm','leg','str','skip','alt'];const hid=hands[d%hands.length];const r0=rec('crom');
   const nPos=sc==='maj'||sc==='min'?7:5;
@@ -7177,6 +7196,137 @@ function lzRtNext(){const R=LZ.rt;if(!R)return;plStop();if(R.i<R.plan.length-1){
 function lzRtEnd(done){const R=LZ.rt;if(!R)return;clearInterval(R.tm);LZ.rt=null;$('#lzRt').hidden=true;plStop();
   if(done){const p=lzProg(),t=lzToday();if(!p.days.includes(t))p.days.push(t);p.days=p.days.slice(-400);lzSave(p);const st=lzStreak(p);toast('Allenamento finito! '+st+' '+(st===1?'giorno':'giorni')+' di fila');lzHome()}}
 lzWire();
+/* ================= LEZIONI di BATTERIA =================
+   Griglia a quadretti (una riga per pezzo, un quadretto = un colpo), suoni di batteria creati dall'app, rudimenti, ritmi, fill, «Crea il tuo ritmo». */
+const DR_ROWS=[['cr','Piatto crash','Crash'],['rd','Ride','Ride'],['hh','Charleston','Charl.'],['t1','Tom alto','Tom 1'],['t2','Tom medio','Tom 2'],['sn','Rullante','Rull.'],['rs','Bordo rullante','Bordo'],['ft','Timpano','Timp.'],['bd','Cassa','Cassa'],['hf','Charleston col piede','Piede'],['st','Mani','Mani']];
+const DR_NAME=k=>(DR_ROWS.find(r=>r[0]===k)||[k,k])[1];
+const lzDrums=()=>LZ.inst==='drums';
+/* ---------- suoni ---------- */
+let DRN=null;
+function drNoise(){const c=ctx();if(DRN&&DRN.sampleRate===c.sampleRate)return DRN;const n=c.sampleRate*2,b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;DRN=b;return b}
+function drEnv(g,t,a,dec){g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(a,t+.002);g.gain.exponentialRampToValueAtTime(.0008,t+dec)}
+function drNz(t,v,f,type,q,dec,a){const c=ctx(),s=c.createBufferSource(),fl=c.createBiquadFilter(),g=c.createGain();s.buffer=drNoise();fl.type=type;fl.frequency.value=f;fl.Q.value=q||.7;s.connect(fl);fl.connect(g);g.connect(lzOutN());drEnv(g,t,a*v,dec);s.start(t,Math.random()*1.5);s.stop(t+dec+.05);PL.srcs.push(s)}
+function drTone(t,v,f0,f1,dec,a,type){const c=ctx(),o=c.createOscillator(),g=c.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+dec*.6);o.connect(g);g.connect(lzOutN());drEnv(g,t,a*v,dec);o.start(t);o.stop(t+dec+.05);PL.srcs.push(o)}
+function drHit(k,t,v){try{const c=ctx();t=Math.max(t||0,c.currentTime);v=v==null?1:v;
+  if(k==='bd'){drTone(t,v,150,46,.42,1.1);drNz(t,v,2500,'lowpass',.7,.02,.25)}
+  else if(k==='sn'){drTone(t,v,200,170,.12,.45,'triangle');drNz(t,v,1900,'bandpass',.8,.2,.75);drNz(t,v,6000,'highpass',.7,.12,.25)}
+  else if(k==='rs'){drTone(t,v,1700,1500,.04,.35,'square');drNz(t,v,3000,'bandpass',2,.04,.35)}
+  else if(k==='hh'){drNz(t,v,8000,'highpass',.7,.05,.42)}
+  else if(k==='ho'){drNz(t,v,7500,'highpass',.7,.36,.36)}
+  else if(k==='hf'){drNz(t,v,6500,'highpass',.7,.035,.28)}
+  else if(k==='rd'){drNz(t,v,5200,'highpass',.7,.7,.2);drTone(t,v,620,600,.5,.06,'square')}
+  else if(k==='cr'){drNz(t,v,4200,'highpass',.6,1.5,.45)}
+  else if(k==='t1'){drTone(t,v,240,175,.3,.9);drNz(t,v,1200,'lowpass',.7,.05,.15)}
+  else if(k==='t2'){drTone(t,v,180,128,.36,.9);drNz(t,v,1000,'lowpass',.7,.05,.15)}
+  else if(k==='ft'){drTone(t,v,120,82,.48,1);drNz(t,v,800,'lowpass',.7,.06,.15)}
+  if(PL.srcs.length>160)PL.srcs.splice(0,60)}catch(e){}}
+function drPlay(k,ch,t){const v=ch==='X'?1.35:ch==='g'?.32:1;if(k==='st')return;if(k==='hh'&&ch==='o'){drHit('ho',t,1);return}
+  if(ch==='f'){drHit(k,t-.03,.4);drHit(k,t,1);return}drHit(k,t,v)}
+
+/* ---------- ritmi: una stringa per pezzo, un carattere per quadretto: x colpo, X accento, g colpo leggero, o charleston aperto, f flam, - pausa ---------- */
+const DP=(len,bp,bar,rows,st)=>({len,bp,bar,rows,st});
+const R8={hh:'x-x-x-x-x-x-x-x-',sn:'----x-------x---',bd:'x-------x-------'};
+const D_PATS={
+ kit:[{n:'Tutti i pezzi',p:DP(10,1,4,{cr:'x---------',rd:'-x--------',hh:'--x-------',t1:'---x------',t2:'----x-----',sn:'-----x----',rs:'------x---',ft:'-------x--',bd:'--------x-',hf:'---------x'})}],
+ grid:[{n:'Solo charleston',p:DP(16,4,4,{hh:'x---x---x---x---'})},{n:'Charleston e cassa',p:DP(16,4,4,{hh:'x---x---x---x---',bd:'x-------x-------'})},{n:'Tutto insieme',p:DP(16,4,4,{hh:'x---x---x---x---',sn:'----x-------x---',bd:'x-------x-------'})}],
+ tempo:[{n:'Quarti',p:DP(16,4,4,{sn:'x---x---x---x---'})},{n:'Ottavi',p:DP(16,4,4,{sn:'x-x-x-x-x-x-x-x-'})},{n:'Terzine',p:DP(12,3,4,{sn:'xxxxxxxxxxxx'})},{n:'Sedicesimi',p:DP(16,4,4,{sn:'xxxxxxxxxxxxxxxx'})}],
+ single:[{n:'Colpo singolo',p:DP(16,4,4,{sn:'xxxxxxxxxxxxxxxx'},'DSDSDSDSDSDSDSDS')},{n:'Parti con la sinistra',p:DP(16,4,4,{sn:'xxxxxxxxxxxxxxxx'},'SDSDSDSDSDSDSDSD')}],
+ double:[{n:'Colpo doppio',p:DP(16,4,4,{sn:'xxxxxxxxxxxxxxxx'},'DDSSDDSSDDSSDDSS')},{n:'Parti con la sinistra',p:DP(16,4,4,{sn:'xxxxxxxxxxxxxxxx'},'SSDDSSDDSSDDSSDD')}],
+ para:[{n:'Paradiddle',p:DP(16,4,4,{sn:'XxxxXxxxXxxxXxxx'},'DSDDSDSSDSDDSDSS')},{n:'Paradiddle tra charleston e rullante',p:DP(16,4,4,{hh:'X-xxX-xxX-xxX-xx'.replace(/./g,(ch,i)=>'DSDDSDSSDSDDSDSS'[i]==='D'?(i%4===0?'X':'x'):'-'),sn:'xxxxxxxxxxxxxxxx'.replace(/./g,(ch,i)=>'DSDDSDSSDSDDSDSS'[i]==='S'?'x':'-'),bd:'x-------x-------'},'DSDDSDSSDSDDSDSS')}],
+ acc:[{n:'Accento sul battito',p:DP(16,4,4,{sn:'XxxxXxxxXxxxXxxx'},'DSDSDSDSDSDSDSDS')},{n:'Accento sulla seconda',p:DP(16,4,4,{sn:'xXxxxXxxxXxxxXxx'},'DSDSDSDSDSDSDSDS')},{n:'Accento sulla terza',p:DP(16,4,4,{sn:'xxXxxxXxxxXxxxXx'},'DSDSDSDSDSDSDSDS')},{n:'Accento sulla quarta',p:DP(16,4,4,{sn:'xxxXxxxXxxxXxxxX'},'DSDSDSDSDSDSDSDS')}],
+ flam:[{n:'Flam sui quarti',p:DP(16,4,4,{sn:'f---f---f---f---'},'D---S---D---S---')},{n:'Flam sugli ottavi',p:DP(16,4,4,{sn:'f-f-f-f-f-f-f-f-'},'D-S-D-S-D-S-D-S-')},{n:'Flam tap',p:DP(16,4,4,{sn:'fxfxfxfxfxfxfxfx'},'DDSSDDSSDDSSDDSS')}],
+ roll:[{n:'Rullo a colpi doppi',p:DP(16,4,4,{sn:'xxxxxxxxxxxxxxxx'},'DDSSDDSSDDSSDDSS')},{n:'Rullo a 5 colpi',p:DP(16,4,4,{sn:'xxxxX---xxxxX---'},'DDSSD---SSDDS---')}],
+ rock8:[{n:'Base',p:DP(16,4,4,R8)},{n:'Cassa sul «3 e»',p:DP(16,4,4,{...R8,bd:'x-------x-x-----'})},{n:'Cassa doppia',p:DP(16,4,4,{...R8,bd:'x-x-----x-x-----'})},{n:'Charleston aperto sul «4 e»',p:DP(16,4,4,{...R8,hh:'x-x-x-x-x-x-x-o-'})},{n:'Sul ride',p:DP(16,4,4,{rd:'x-x-x-x-x-x-x-x-',sn:R8.sn,bd:R8.bd})}],
+ rock16:[{n:'Base',p:DP(16,4,4,{hh:'xxxxxxxxxxxxxxxx',sn:'----x-------x---',bd:'x-------x-------'})},{n:'Cassa in sedicesimi',p:DP(16,4,4,{hh:'xxxxxxxxxxxxxxxx',sn:'----x-------x---',bd:'x-----x-x-x-----'})},{n:'Charleston con accenti',p:DP(16,4,4,{hh:'XxxxXxxxXxxxXxxx',sn:'----x-------x---',bd:'x------xx-------'})}],
+ half:[{n:'Half-time',p:DP(16,4,4,{hh:'x-x-x-x-x-x-x-x-',sn:'--------x-------',bd:'x-----x---------'})},{n:'Half-time con il ride',p:DP(16,4,4,{rd:'x-x-x-x-x-x-x-x-',sn:'--------x-------',bd:'x--x--x-------x-'})}],
+ pop:[{n:'Strofa (bordo del rullante)',p:DP(16,4,4,{hh:'x-x-x-x-x-x-x-x-',rs:'----x-------x---',bd:'x------xx-------'})},{n:'Ritornello',p:DP(32,4,4,{cr:'x---------------'+'----------------',hh:'--x-x-x-x-x-x-x-'+'x-x-x-x-x-x-x-x-',sn:'----x-------x---'+'----x-------x---',bd:'x------xx-------'+'x------xx-------'})}],
+ disco:[{n:'Disco',p:DP(16,4,4,{hh:'x-o-x-o-x-o-x-o-',sn:'----x-------x---',bd:'x---x---x---x---'})},{n:'Disco in sedicesimi',p:DP(16,4,4,{hh:'xxoxxxoxxxoxxxox',sn:'----x-------x---',bd:'x---x---x---x---'})}],
+ funk:[{n:'Funk con note leggere',p:DP(16,4,4,{hh:'x-x-x-x-x-x-x-x-',sn:'----X--g-g--X--g',bd:'x-x-------x--x--'})},{n:'Funk in sedicesimi',p:DP(16,4,4,{hh:'xxxxxxxxxxxxxxxx',sn:'----X--g-g-gX---',bd:'x--x--x---x-----'})}],
+ shuffle:[{n:'Shuffle',p:DP(12,3,4,{hh:'x-xx-xx-xx-x',sn:'---x-----x--',bd:'x-----x-----'})},{n:'Blues lento',p:DP(12,3,4,{hh:'xxxxxxxxxxxx',sn:'---x-----x--',bd:'x-----x-----'})},{n:'Shuffle sul ride',p:DP(12,3,4,{rd:'x-xx-xx-xx-x',sn:'---x-----x--',bd:'x--x--x--x--',hf:'---x-----x--'})}],
+ reggae:[{n:'One drop',p:DP(16,4,4,{hh:'x-x-x-x-x-x-x-x-',rs:'--------x-------',bd:'--------x-------'})},{n:'Steppers',p:DP(16,4,4,{hh:'x-x-x-x-x-x-x-x-',rs:'--------x-------',bd:'x---x---x---x---'})}],
+ bossa:[{n:'Bossa nova',p:DP(32,4,4,{hh:'x-x-x-x-x-x-x-x-'+'x-x-x-x-x-x-x-x-',rs:'x--x--x---x--x--'+'--x--x--x--x----',bd:'x--xx--xx--xx--x'+'x--xx--xx--xx--x'})}],
+ sei8:[{n:'6/8 lento',p:DP(6,3,2,{hh:'xxxxxx',sn:'---x--',bd:'x-----'})},{n:'6/8 con la cassa',p:DP(6,3,2,{hh:'xxxxxx',sn:'---x--',bd:'x-x---'})}],
+ fill1:[{n:'Mezza battuta',p:DP(32,4,4,{cr:'x---------------'+'----------------',hh:'x-x-x-x-x-x-x-x-'+'x-x-x-x---------',sn:'----x-------x---'+'----x---xxxxxxxx',bd:'x-------x-------'+'x-------x-------'})},{n:'Ottavi forti',p:DP(32,4,4,{cr:'x---------------'+'----------------',hh:'x-x-x-x-x-x-x-x-'+'x-x-x-x---------',sn:'----x-------x---'+'----x---X-X-X-X-',bd:'x-------x-------'+'x-------x-------'})},{n:'Battuta intera',p:DP(32,4,4,{cr:'x---------------'+'----------------',hh:'x-x-x-x-x-x-x-x-'+'----------------',sn:'----x-------x---'+'XxxxXxxxXxxxXxxx',bd:'x-------x-------'+'x---------------'})}],
+ fill2:[{n:'Discesa sui tom',p:DP(32,4,4,{cr:'x---------------'+'----------------',hh:'x-x-x-x-x-x-x-x-'+'x-x-x-x---------',sn:'----x-------x---'+'----x---xx------',t1:'----------------'+'----------xx----',t2:'----------------'+'------------xx--',ft:'----------------'+'--------------xx',bd:'x-------x-------'+'x-------x-------'})},
+   {n:'Tom alto e timpano',p:DP(32,4,4,{cr:'x---------------'+'----------------',hh:'x-x-x-x-x-x-x-x-'+'x-x-x-x---------',sn:'----x-------x---'+'----x-----------',t1:'----------------'+'--------xxxx----',ft:'----------------'+'------------xxxx',bd:'x-------x-------'+'x-------x-------'})},
+   {n:'Battuta intera sui tom',p:DP(32,4,4,{cr:'x---------------'+'----------------',hh:'x-x-x-x-x-x-x-x-'+'----------------',sn:'----x-------x---'+'xxxx------------',t1:'----------------'+'----xxxx--------',t2:'----------------'+'--------xxxx----',ft:'----------------'+'------------xxxx',bd:'x-------x-------'+'x---------------'})}],
+ crash:[{n:'Crash sull\'uno',p:DP(16,4,4,{cr:'x---------------',hh:'--x-x-x-x-x-x-x-',sn:'----x-------x---',bd:'x-------x-------'})},{n:'Anticipo sul «4 e»',p:DP(32,4,4,{cr:'x---------------'+'--------------x-',hh:'--x-x-x-x-x-x-x-'+'x-x-x-x-x-x-x---',sn:'----x-------x---'+'----x-------x---',bd:'x-------x-------'+'x-------x-----x-'})},{n:'Stop sul crash',p:DP(32,4,4,{cr:'x---------------'+'x-------x-------',hh:'--x-x-x-x-x-x-x-'+'----------------',sn:'----x-------x---'+'----------------',bd:'x-------x-------'+'x-------x-------'})}],
+ indep:[{n:'Cassa sui quarti',p:DP(16,4,4,{rd:'x-x-x-x-x-x-x-x-',sn:'----x-------x---',bd:'x---x---x---x---',hf:'----x-------x---'})},{n:'Cassa sugli ottavi',p:DP(16,4,4,{rd:'x-x-x-x-x-x-x-x-',sn:'----x-------x---',bd:'x-x-x-x-x-x-x-x-'})},{n:'Cassa spostata',p:DP(16,4,4,{rd:'x-x-x-x-x-x-x-x-',sn:'----x-------x---',bd:'x--x--x---x--x--'})},{n:'Cassa in levare',p:DP(16,4,4,{rd:'x-x-x-x-x-x-x-x-',sn:'----x-------x---',bd:'--x---x---x---x-'})}],
+ dyn:[{n:'Accenti sul charleston',p:DP(16,4,4,{hh:'X-x-X-x-X-x-X-x-',sn:'----x-------x---',bd:'x-------x-------'})},{n:'Note leggere sul rullante',p:DP(16,4,4,{hh:'x-x-x-x-x-x-x-x-',sn:'--g-X-g---g-X-g-',bd:'x-------x-------'})},{n:'Piano e forte',p:DP(16,4,4,{sn:'ggggggggXxxxXxxx'},'DSDSDSDSDSDSDSDS')}]};
+/* ---------- griglia ---------- */
+function dgCount(bp,i){const b=Math.floor(i/bp),r=i%bp;if(r===0)return String(b%16+1);if(bp===4)return r===2?'e':'·';if(bp===2)return 'e';return '·'}
+function dgDraw(P,opt){opt=opt||{};LZ.dp=P;const wr=$('#dgWrap'),W=wr.clientWidth||700,phone=W<600;const rows=DR_ROWS.filter(r=>opt.all?r[0]!=='st'||P.st:(P.rows[r[0]]!=null||(r[0]==='st'&&P.st)));
+  const per=P.bp*P.bar,chunk=phone?Math.max(P.bp,Math.min(per,P.bp*2)):per;let h='';
+  for(let a=0;a<P.len;a+=chunk){const n=Math.min(chunk,P.len-a);h+=`<div class="dgblk" style="grid-template-columns:${phone?'64px':'128px'} repeat(${n},1fr)"><span class="dgl"></span>`;
+    for(let i=a;i<a+n;i++){const bi=Math.floor((i%per)/P.bp);h+=`<span class="dgh${i%P.bp===0?' beat':''}" data-c="${i}">${dgCount(P.bp,i%per)}</span>`}
+    rows.forEach(([k,full,short])=>{h+=`<span class="dgl">${esc(phone?short:full)}</span>`;
+      for(let i=a;i<a+n;i++){const ch=k==='st'?(P.st[i]||'-'):((P.rows[k]||'')[i]||'-');const lab=k==='st'?(ch==='-'?'':ch):ch==='X'?'>':ch==='o'?'o':ch==='f'?'f':'';
+        h+=`<button class="dgc r-${k} v-${ch==='-'?'n':ch}${i%P.bp===0?' beat':''}${(i+1)%per===0?' barend':''}" data-c="${i}" data-r="${k}" aria-label="${esc(full)}, quadretto ${i+1}${ch!=='-'&&k!=='st'?', colpo':''}">${lab}</button>`}});
+    h+='</div>'}
+  wr.innerHTML=h}
+function dgHl(c){$$('#dgWrap .on').forEach(e=>e.classList.remove('on'));if(c==null||c<0)return;$$('#dgWrap [data-c="'+c+'"]').forEach(e=>e.classList.add('on'))}
+function dgSteps(P){const S=[];for(let i=0;i<P.len;i++){const d=[];Object.keys(P.rows).forEach(k=>{const ch=P.rows[k][i];if(ch&&ch!=='-')d.push([k,ch])});S.push({d,dur:1/P.bp,col:i,say:P.st&&P.st[i]&&P.st[i]!=='-'?(P.st[i]==='D'?'Destra':'Sinistra'):null})}return S}
+
+/* ---------- lezioni ---------- */
+const LZ_DL=[
+ {id:'d_kit',lv:0,t:'La batteria',sub:'i pezzi e il loro suono',type:'dpat',set:'kit',txt:()=>'La batteria ha i <b>tamburi</b> (cassa, rullante, tom e timpano) e i <b>piatti</b> (charleston, ride e crash). La <b>cassa</b> si suona col piede destro, il <b>charleston</b> si apre e si chiude col piede sinistro.<br>Nella griglia ogni riga è un pezzo: tocca un quadretto per sentirne il suono, oppure premi <b>Suona</b> per sentirli tutti in fila.'},
+ {id:'d_post',lv:0,t:'Postura e bacchette',sub:'come sedersi e impugnare',type:'read',txt:()=>'<ul><li>Siediti con le cosce quasi orizzontali, la schiena dritta, i piedi appoggiati sui pedali.</li><li>Il <b>rullante</b> tra le ginocchia, all\'altezza della pancia; charleston a sinistra, timpano a destra.</li><li>Tieni la bacchetta a un terzo dalla fine, tra <b>pollice e indice</b>; le altre dita la accompagnano senza stringere.</li><li>La bacchetta deve <b>rimbalzare</b>: colpisci e lasciala tornare su da sola. Il movimento parte dal polso.</li><li>Nella griglia: <b>D</b> = mano destra, <b>S</b> = mano sinistra (al contrario se sei mancino).</li><li>Usa sempre i tappi per le orecchie quando suoni la batteria vera.</li></ul>'},
+ {id:'d_grid',lv:0,t:'Leggere la griglia',sub:'quadretti, battiti e conteggio',type:'dpat',set:'grid',txt:()=>'Ogni riga è un pezzo della batteria, ogni colonna è un momento. Un <b>quadretto pieno</b> = un colpo. In alto c\'è il conteggio: <b>1 · e · 2 · e ·</b> … i numeri sono i battiti del metronomo.<br>Prova le tre varianti: prima solo il charleston, poi aggiungi la cassa, poi il rullante sul 2 e sul 4. Ecco il tuo primo ritmo!'},
+ {id:'d_tempo',lv:0,t:'Il tempo',sub:'quarti, ottavi, terzine, sedicesimi',type:'dpat',set:'tempo',bpm:60,txt:()=>'Sul rullante suoni 1, 2, 3 o 4 colpi per ogni battito del metronomo: <b>quarti</b>, <b>ottavi</b>, <b>terzine</b> e <b>sedicesimi</b>. Conta ad alta voce e alterna le mani (destra, sinistra). Parti lento e resta sempre insieme al metronomo.'},
+ {id:'d_single',lv:1,t:'Colpo singolo',sub:'D S D S',type:'dpat',set:'single',bpm:70,txt:()=>'Il primo rudimento: le mani si alternano, <b>destra, sinistra, destra, sinistra</b>. I colpi devono suonare tutti uguali, forti uguale e ben distanziati. Si può fare anche su un cuscino o un pad di gomma.'},
+ {id:'d_double',lv:1,t:'Colpo doppio',sub:'D D S S',type:'dpat',set:'double',bpm:60,txt:()=>'Due colpi per mano: <b>destra destra, sinistra sinistra</b>. Il secondo colpo deve essere forte come il primo: aiutati con il rimbalzo della bacchetta e con le dita. È la base del rullo.'},
+ {id:'d_para',lv:1,t:'Paradiddle',sub:'D S D D · S D S S',type:'dpat',set:'para',bpm:60,txt:()=>'Il rudimento più usato: <b>D S D D, S D S S</b>. L\'accento (>) è sul primo colpo di ogni gruppo. Nella seconda variante la destra va sul charleston e la sinistra sul rullante: diventa un ritmo vero.'},
+ {id:'d_acc',lv:1,t:'Gli accenti',sub:'colpi forti e colpi piano',type:'dpat',set:'acc',bpm:60,txt:()=>'Il quadretto con <b>></b> è un <b>accento</b>: colpisci forte, alzando di più la bacchetta. Gli altri colpi sono piano, con la bacchetta bassa. Sposta l\'accento sulla prima, seconda, terza e quarta nota.'},
+ {id:'d_flam',lv:1,t:'Il flam',sub:'due bacchette quasi insieme',type:'dpat',set:'flam',bpm:60,txt:()=>'Nel <b>flam</b> (f) le due bacchette cadono quasi insieme: una piano e bassa un attimo prima, l\'altra forte. Suona come «flam», un solo colpo più grosso. Alterna la mano forte.'},
+ {id:'d_roll',lv:1,t:'Il rullo',sub:'colpi doppi sempre più veloci',type:'dpat',set:'roll',bpm:60,txt:()=>'Il <b>rullo</b> è il colpo doppio suonato sempre più veloce, finché diventa un suono continuo. Usa «Sali di velocità da solo» e non forzare: la velocità arriva con i giorni. Il <b>rullo a 5 colpi</b> finisce con un accento.'},
+ {id:'d_rock8',lv:2,t:'Rock in ottavi',sub:'il ritmo di base di tutto',type:'dpat',set:'rock8',bpm:80,txt:()=>'Il ritmo più suonato al mondo: <b>charleston</b> in ottavi con la destra, <b>rullante</b> sul 2 e sul 4 con la sinistra, <b>cassa</b> sull\'1 e sul 3. Prima mani e piedi separati, poi tutto insieme, lento. Poi prova le varianti.'},
+ {id:'d_rock16',lv:2,t:'Rock in sedicesimi',sub:'più movimento sul charleston',type:'dpat',set:'rock16',bpm:70,txt:()=>'Il charleston fa i sedicesimi: con una mano sola a tempo lento, oppure alternando le mani (allora il rullante lo suona la destra). La cassa può entrare anche tra un battito e l\'altro.'},
+ {id:'d_half',lv:2,t:'Half-time',sub:'il ritmo «a metà»',type:'dpat',set:'half',bpm:80,txt:()=>'Il rullante cade solo sul <b>3</b>: la canzone sembra andare a metà velocità, anche se il tempo è lo stesso. Si usa per i ritornelli potenti e per le parti lente.'},
+ {id:'d_pop',lv:2,t:'Pop italiano',sub:'strofa e ritornello',type:'dpat',set:'pop',bpm:76,txt:()=>'Nelle strofe si suona spesso il <b>bordo del rullante</b> (la bacchetta appoggiata sul cerchio): suono leggero, lascia spazio alla voce. Nel ritornello si passa al rullante pieno con il <b>crash</b> all\'inizio.'},
+ {id:'d_disco',lv:3,t:'Disco',sub:'cassa su ogni battito',type:'dpat',set:'disco',bpm:110,txt:()=>'Cassa su <b>tutti i 4 battiti</b> («four on the floor») e charleston <b>aperto</b> (o) tra un battito e l\'altro: aprilo con il piede e richiudilo subito sul battito dopo.'},
+ {id:'d_funk',lv:3,t:'Funk',sub:'note leggere sul rullante',type:'dpat',set:'funk',bpm:84,txt:()=>'Il funk vive delle <b>note leggere</b> (ghost notes, quadretti piccoli): colpi piano piano sul rullante tra gli accenti forti del 2 e del 4. La cassa è spostata. Tieni le note leggere davvero piano.'},
+ {id:'d_shuffle',lv:3,t:'Shuffle e blues',sub:'il ritmo a terzine',type:'dpat',set:'shuffle',bpm:90,txt:()=>'Qui ogni battito è diviso in <b>3</b> (terzine). Nello <b>shuffle</b> suoni la prima e la terza: «tà-ta, tà-ta», il passo zoppo del blues e del rock\'n\'roll.'},
+ {id:'d_reggae',lv:3,t:'Reggae',sub:'one drop',type:'dpat',set:'reggae',bpm:75,txt:()=>'Nel <b>one drop</b> la cassa e il bordo del rullante cadono insieme solo sul <b>3</b>: l\'1 resta vuoto. Il charleston tiene il tempo, rilassato.'},
+ {id:'d_bossa',lv:3,t:'Bossa nova',sub:'morbida, con il bordo',type:'dpat',set:'bossa',bpm:120,txt:()=>'Due battute: la <b>cassa</b> fa un passo regolare, il <b>bordo del rullante</b> suona la clave brasiliana, il charleston gli ottavi. Suona tutto morbido e piano.'},
+ {id:'d_68',lv:3,t:'6/8 lento',sub:'le ballate',type:'dpat',set:'sei8',bpm:60,txt:()=>'In <b>6/8</b> conti 6 ottavi, in due gruppi da 3: <b>1</b> 2 3 <b>4</b> 5 6. Rullante sul 4. È il ritmo di molte ballate lente.'},
+ {id:'d_fill1',lv:4,t:'Fill sul rullante',sub:'chiudere la frase',type:'dpat',set:'fill1',bpm:80,txt:()=>'Il <b>fill</b> è il «giro» che chiude una frase e porta alla successiva. Una battuta di ritmo, poi il fill sul rullante, poi si riparte con <b>crash e cassa</b> insieme sull\'1. Il segreto: non rallentare durante il fill.'},
+ {id:'d_fill2',lv:4,t:'Fill sui tom',sub:'scendere sui tamburi',type:'dpat',set:'fill2',bpm:76,txt:()=>'Lo stesso fill, ma girando sui tamburi: <b>rullante, tom alto, tom medio, timpano</b>, dal suono più alto al più basso. Muovi le braccia senza irrigidire le spalle.'},
+ {id:'d_crash',lv:4,t:'Crash e accenti',sub:'segnare i momenti importanti',type:'dpat',set:'crash',bpm:84,txt:()=>'Il <b>crash</b> si suona insieme alla cassa, di solito sull\'1 dopo un fill. Nell\'<b>anticipo</b> crash e cassa arrivano mezzo battito prima («4 e»). Nello <b>stop</b> la band si ferma sui colpi di crash.'},
+ {id:'d_indep',lv:4,t:'Indipendenza',sub:'mani ferme, piedi che si muovono',type:'dpat',set:'indep',bpm:70,txt:()=>'Le mani suonano sempre lo stesso (ride e rullante), la <b>cassa cambia</b>. È difficile all\'inizio: parti lentissimo, anche 50. Quando una variante va da sola, passa alla prossima.'},
+ {id:'d_dyn',lv:4,t:'Dinamica',sub:'suonare piano e forte',type:'dpat',set:'dyn',bpm:70,txt:()=>'Un bravo batterista sa suonare <b>piano</b>. Accenti (>) forti, note leggere (quadretti piccoli) appena sfiorate. Nell\'ultima variante la prima metà è piano piano, la seconda forte.'},
+ {id:'d_make',lv:5,t:'Crea il tuo ritmo',sub:'inventa e salva',type:'dmake',bpm:90,txt:()=>'Tocca i quadretti per mettere e togliere i colpi. Sul <b>charleston</b> un altro tocco lo apre (o); sul <b>rullante</b> un altro tocco fa l\'accento (>) e poi il colpo leggero. Puoi partire da un ritmo delle lezioni. Hai <b>3 ritmi</b> da salvare: si salvano da soli.'}];
+LZ_DL.forEach(l=>l.d=1);LZ_L.push(...LZ_DL);
+
+/* tipi di lezione della batteria */
+LZT.dpat=(l,S)=>{const pats=D_PATS[l.set];let vi=Math.min(S.v||0,pats.length-1);
+  if(pats.length>1)lzCtl(lzSel('Variante',pats.map((p,i)=>[i,p.n]),vi,v=>{vi=+v;S.v=vi;R.draw();if(PL.on){plStop();plStart()}}));
+  const R={rec:1,draw(){const P=pats[vi].p;PL.bar=P.bar;dgDraw(P);lzInfo(P.st?'<b>D</b> = mano destra · <b>S</b> = mano sinistra · <b>></b> = accento · <b>f</b> = flam':Object.keys(P.rows).some(k=>/[Xgo]/.test(P.rows[k]))?'<b>></b> = accento (forte) · quadretto piccolo = colpo leggero · <b>o</b> = charleston aperto':'')},
+    gen:()=>{const P=pats[vi].p;PL.bar=P.bar;return dgSteps(P)},tapCell(k,c){const ch=k==='st'?'-':(pats[vi].p.rows[k]||'')[c];drPlay(k,ch&&ch!=='-'?ch:'x',ctx().currentTime)}};return R};
+LZT.dmake=(l,S)=>{const p=lzProg();p.beats=p.beats||[];let slot=S.slot||0,bars=1;
+  const blank=()=>({len:16,bp:4,bar:4,rows:{cr:'-'.repeat(16),hh:'x-x-x-x-x-x-x-x-',t1:'-'.repeat(16),t2:'-'.repeat(16),sn:'----x-------x---',ft:'-'.repeat(16),bd:'x-------x-------'}});
+  const cur=()=>{const p=lzProg();p.beats=p.beats||[];let b=p.beats[slot];if(!b||!b.rows){b=blank();p.beats[slot]=b;lzSave(p)}return b};
+  const save=b=>{const p=lzProg();p.beats=p.beats||[];p.beats[slot]=b;lzSave(p)};
+  const presets=[];Object.keys(D_PATS).forEach(k=>D_PATS[k].forEach((v,i)=>{if(v.p.len%16===0&&v.p.bp===4&&k!=='kit'&&!v.p.st)presets.push([k+':'+i,(LZ_DL.find(x=>x.set===k)||{t:k}).t+' · '+v.n])}));
+  const ctl=()=>lzCtl(lzSeg('Ritmo',[[0,'Ritmo 1'],[1,'Ritmo 2'],[2,'Ritmo 3']],slot,v=>{slot=+v;S.slot=slot;ctl();R.draw();if(PL.on){plStop();plStart()}}),
+    lzSel('Lunghezza',[[16,'1 battuta'],[32,'2 battute']],cur().len,v=>{const b=cur(),n=+v;Object.keys(b.rows).forEach(k=>{b.rows[k]=n>b.len?b.rows[k]+b.rows[k]:b.rows[k].slice(0,n)});b.len=n;save(b);R.draw()}),
+    lzSel('Parti da',[['','Scegli un ritmo…']].concat(presets),'',v=>{if(!v)return;const[k,i]=v.split(':');const P=D_PATS[k][+i].p;const b={len:P.len,bp:4,bar:4,rows:{}};['cr','rd','hh','t1','t2','sn','rs','ft','bd','hf'].forEach(r=>{b.rows[r]=(P.rows[r]||'-'.repeat(P.len))});
+      Object.keys(blank().rows).forEach(r=>{if(!b.rows[r])b.rows[r]='-'.repeat(P.len)});save(b);ctl();R.draw();toast('Fatto: ora cambialo come vuoi')}),
+    lzBtn('<span>Svuota</span>',()=>{const b=cur();Object.keys(b.rows).forEach(k=>b.rows[k]='-'.repeat(b.len));save(b);R.draw()}));
+  const R={rec:0,draw(){const b=cur();['cr','rd','hh','t1','t2','sn','rs','ft','bd','hf'].forEach(k=>{if(b.rows[k]==null)b.rows[k]='-'.repeat(b.len)});PL.bar=4;dgDraw(b,{all:1});lzInfo('Tocca un quadretto per mettere o togliere un colpo. Charleston: colpo, aperto (o), vuoto. Rullante: colpo, accento (>), leggero, vuoto.')},
+    gen:()=>{PL.bar=4;return dgSteps(cur())},
+    tapCell(k,c){const b=cur(),row=b.rows[k];if(row==null)return;const cyc=k==='hh'?'-xo':k==='sn'?'-xXg':'-x';const ch=row[c]||'-';const nx=cyc[(cyc.indexOf(ch)+1)%cyc.length]||'-';b.rows[k]=row.slice(0,c)+nx+row.slice(c+1);save(b);
+      const e=$(`#dgWrap .dgc[data-r="${k}"][data-c="${c}"]`);if(e){e.className=e.className.replace(/v-\S+/,'v-'+(nx==='-'?'n':nx));e.textContent=nx==='X'?'>':nx==='o'?'o':''}if(nx!=='-')drPlay(k,nx,ctx().currentTime)}};ctl();return R};
+
+/* tocco sulla griglia */
+$('#dgWrap').addEventListener('pointerdown',e=>{const b=e.target.closest('.dgc');if(!b)return;e.preventDefault();try{ctx().resume()}catch(x){}const k=b.dataset.r,c=+b.dataset.c;if(LZ.cur&&LZ.cur.tapCell)LZ.cur.tapCell(k,c)});
+
+/* allenamento del giorno della batteria */
+function lzRtPlanDrums(){const d=lzDayN(),p=lzProg(),rec=id=>p.rec[LZ.inst+':'+id];const r0=rec('d_single');
+  const rud=['d_double','d_para','d_acc','d_flam','d_roll'],sty=['d_rock8','d_rock16','d_half','d_pop','d_disco','d_funk','d_shuffle','d_reggae','d_bossa','d_68'],fil=['d_fill1','d_fill2','d_crash','d_indep','d_dyn'];
+  const pick=(a,k)=>a[(d+k)%a.length],vOf=id=>{const l=LZ_DL.find(x=>x.id===id);return (Math.floor(d/3))%D_PATS[l.set].length};
+  const b=(n,id,extra)=>({n,id,pre:Object.assign({v:vOf(id),bpm:rec(id)?Math.max(50,rec(id).bpm-10):(LZ_DL.find(x=>x.id===id).bpm||70)},extra||{})});
+  return[{n:'Riscaldamento: colpo singolo',id:'d_single',pre:{v:0,bpm:r0?Math.max(50,r0.bpm-12):60}},b('Rudimento del giorno',pick(rud,0)),b('Ritmo del giorno',pick(sty,1)),b('Fill e coordinazione',pick(fil,2))]}
+
 
 /* ================= testo da LRCLIB (prima di tutto) ================= */
 const normT=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
@@ -8832,7 +8982,7 @@ const TUT_SECTIONS=[
    {s:'#bPalco',t:'Palco',d:'Apre lo schermo intero per esibirti: il testo grande che si colora parola per parola e, accanto o sotto, la tablatura del tuo strumento.'},
    {s:'#bRec',t:'Video',d:'Registra la tua esibizione con la fotocamera, con il testo che scorre e la base. Alla fine crei il video da salvare o da mandare agli amici.'},
    {s:'#bSala',t:'Sala prove',d:'Solo sul computer. Registra la band con la scheda audio: ogni musicista su una traccia, con amplificatori e pedali dal vivo in cuffia. Su telefono e tablet non c\'è, perché lì il suono torna in cuffia con troppo ritardo.'},
-   {s:'#bLez',t:'Lezioni',d:'Lezioni di chitarra e basso, dalle basi all\'avanzato: note, scale, triadi, accordi ed esercizi per le dita, con il manico che suona, il metronomo e l\'allenamento del giorno. Funzionano anche senza internet.'},
+   {s:'#bLez',t:'Lezioni',d:'Lezioni di chitarra, basso e batteria, dalle basi all\'avanzato: note, scale, accordi, ritmi, fill ed esercizi per le mani, con il manico che suona, il metronomo e l\'allenamento del giorno. Funzionano anche senza internet.'},
    {s:'#songPickBtn',t:'Il brano',d:'Qui vedi il brano aperto. Toccalo per sceglierne un altro dalla tua libreria. Quando segui una scaletta, qui compare il nome della scaletta: toccandolo scegli la scaletta o uno dei suoi brani.'},
    {s:'#bScal',t:'Singolo o Scaletta',d:'Con Singolo scegli i brani uno alla volta. Toccalo e diventa Scaletta: l\'app segue solo i brani della scaletta, uno dopo l\'altro. Toccalo di nuovo per tornare a Singolo.'},
    {s:'#slBar',t:'La barra della scaletta',d:'Compare solo con la scaletta accesa. Ti dice a che brano sei, per esempio 3 di 8. Toccando il titolo scegli un altro brano della scaletta. Per andare al brano prima o dopo usi i tasti del lettore, qui sotto.'},
@@ -9007,16 +9157,18 @@ const TUT_SECTIONS=[
    {s:'#shopGo',t:'Cerca',d:'Fa la ricerca e mostra i risultati con l\'anteprima da ascoltare e il prezzo indicativo. Il prezzo vero lo vedi sulla piattaforma dove compri.'},
    {s:'#shopCons',t:'Canzoni consigliate',d:'Apre le liste delle canzoni da avere: Italiane, Da suonare cult, Rock femminili, il meglio di Sanremo (tutte le vincitrici e le più famose) e, quando internet c\'è, Più ascoltate ora (la classifica di Apple Music Italia). Accanto a ogni canzone: Anteprima fa sentire 30 secondi, YouTube la apre per ascoltarla tutta, e con Amazon, iTunes o Qobuz la cerchi e la compri.'},
   ]},
- {id:'lezioni',name:'Lezioni',ico:'#bLez',sub:'imparare chitarra e basso e allenare le mani',
+ {id:'lezioni',name:'Lezioni',ico:'#bLez',sub:'imparare chitarra, basso e batteria e allenare le mani',
   prep:()=>{tutCloseAll();lezOpen()},done:()=>{plStop();if(LZ.rt)lzRtEnd(false);$('#ovLez').hidden=true},
   steps:[
    {t:'Lezioni',d:'Si aprono con il pulsante Lezioni in alto. Sono ordinate dalla più facile alla più difficile, in 6 livelli: parti dalla prima e vai avanti con calma.'},
-   {s:'#lezInst',t:'Chitarra o basso',d:'Scegli lo strumento: le lezioni e il manico cambiano di conseguenza.'},
+   {s:'#lezInst',t:'Chitarra, basso o batteria',d:'Scegli lo strumento: le lezioni, l\'allenamento del giorno e i progressi sono separati per ognuno.'},
    {s:'#lzDay',t:'Allenamento del giorno',d:'Quattro parti: riscaldamento, scala, accordi e dita. Cambia ogni giorno da solo. Scegli quanto dura (8, 12 o 20 minuti) e premi Inizia. I pallini sono gli ultimi 14 giorni: quelli pieni sono i giorni in cui ti sei allenato.'},
    {s:'#lezHome .lzcard',t:'Una lezione',d:'Tocca una lezione per aprirla. Quando l\'hai imparata compare il segno di spunta; negli esercizi vedi anche il tuo record di velocità.'},
-   {s:'#fbWrap',run:()=>lzGo('pmin'),t:'Il manico',d:'Tocca un pallino per sentire la nota. Arancione è la nota principale. Sul telefono il manico è in verticale: scorri per vederlo tutto.'},
+   {s:'#fbWrap',run:()=>{if(LZ.inst==='drums'){LZ.inst='guitar';lzInstUI()}lzGo('pmin')},t:'Il manico',d:'Tocca un pallino per sentire la nota. Arancione è la nota principale. Sul telefono il manico è in verticale: scorri per vederlo tutto.'},
    {s:'#lzCtl',t:'Le scelte',d:'Qui scegli la nota, la posizione, l\'accordo o il dito di partenza. Con «Scritte» decidi cosa vedere nei pallini: le note, i gradi o le dita.'},
-   {s:'#lzPlay',t:'Suona e metronomo',d:'Premi Suona: l\'app conta 4 battiti e poi suona, accendendo le note una alla volta. Con − e + cambi la velocità. Togli «Suona anche le note» per sentire solo il metronomo e suonare tu.'},
+   {s:'#lzPlay',t:'Suona e metronomo',d:'Premi Suona: l\'app conta 4 battiti e poi suona, accendendo le note una alla volta. Con − e + cambi la velocità. Togli «Suona anche le note» per sentire solo il metronomo e suonare tu; togli «Metronomo» se non ti serve.'},
+   {s:'#dgWrap',run:()=>{LZ.inst='drums';lzInstUI();lzGo('d_rock8')},t:'La batteria',d:'Per la batteria al posto del manico c\'è una griglia: una riga per pezzo (charleston, rullante, cassa, tom, piatti) e un quadretto per ogni momento. Quadretto pieno = colpo. Durante Suona si accende la colonna di adesso. Tocca un quadretto per sentire il suono.'},
+   {s:'#lzCtl',run:()=>{LZ.inst='drums';lzInstUI();lzGo('d_make')},t:'Crea il tuo ritmo',d:'Nell\'ultima lezione della batteria inventi il tuo ritmo: tocca i quadretti per mettere e togliere i colpi. Hai 3 ritmi, che si salvano da soli; puoi anche partire da un ritmo delle lezioni.'},
   ]},
  {id:'scaletta',name:'Scaletta',ico:'#bScal',sub:'preparare l\'ordine dei brani della serata',ex:0,
   prep:async()=>{TUT.scl={name:SCL.name,items:SCL.items.slice(),i:SCL.i};SCL.name='Serata di esempio';SCL.items=EX_SONGS.map(p=>({id:p.id,title:p.title,artist:p.artist}));SCL.i=-1;tutCloseAll();await slOpen();const m=$('#slMore');if(m)m.open=true},
