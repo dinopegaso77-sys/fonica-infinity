@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="26/11 · 21:15"><meta name="pv-notes" content="Salvataggio dopo la separazione: ora dice cosa sta facendo (testo LRCLIB, Libreria) e non resta più fermo all'infinito. Corretto il piano scartato dalla separazione: «Affina» rifà i brani a cui manca."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="27/11 · 00:45"><meta name="pv-notes" content="Con il cloud R2 collegato, RunPod salva le 6 tracce direttamente nel cloud: il salvataggio dura pochi secondi e il telefono non si riempie. I brani si scaricano solo quando li suoni; «Scarica qui» li tiene sul telefono."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -1535,7 +1535,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Salvataggio dopo la separazione: ora dice cosa sta facendo (testo LRCLIB, Libreria) e non resta più fermo all'infinito. Corretto il piano scartato dalla separazione: «Affina» rifà i brani a cui manca.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Con il cloud R2 collegato, RunPod salva le 6 tracce direttamente nel cloud: il salvataggio dura pochi secondi e il telefono non si riempie. I brani si scaricano solo quando li suoni; «Scarica qui» li tiene sul telefono.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -2046,7 +2046,7 @@ themeApply();</script>
   </div>
   <div class="box">
     <h4>☁️ Dove salvo i brani</h4>
-    <p>I brani stanno sempre su questo dispositivo. Se colleghi il tuo spazio <b>Cloudflare R2</b> li salvo anche nel cloud, così li ritrovi sul telefono, sul tablet o su un altro PC.</p>
+    <p>Senza cloud i brani stanno su questo dispositivo. Se colleghi il tuo spazio <b>Cloudflare R2</b>, i brani separati con RunPod vanno <b>direttamente nel cloud</b>: il telefono non si riempie e li ritrovi sul telefono, sul tablet o su un altro PC. Quando apri un brano lo scarico solo per suonarlo; con «Scarica qui» lo tieni anche senza internet.</p>
     <div class="row" role="group" aria-label="Dove salvo i brani"><button class="chip" id="stLocal">📱 Solo su questo dispositivo</button><button class="chip" id="stR2">☁️ Anche nel cloud R2</button></div>
     <p class="snote" id="r2Info"></p>
     <div class="row" id="r2Acts" hidden><button class="chip" id="r2Edit">🔑 Collegamento R2</button><button class="chip" id="r2All">☁️ Salva tutta la Libreria nel cloud</button><button class="chip" id="r2SyncGo">🔄 Sincronizza adesso</button></div>
@@ -3057,8 +3057,8 @@ const LQ={tok:0,p:Promise.resolve()};
 async function openStored(id){const tok=++LQ.tok,prev=LQ.p;let rel;LQ.p=new Promise(r=>rel=r);try{await prev;if(tok!==LQ.tok)return;await openStored0(id,tok)}finally{rel()}}
 async function openStored0(id,tok){let s=await dbGet(id);if(tok!==LQ.tok)return;if(!s){toast('Brano non trovato');return}markOpened(id);
   if(s.cloudOnly){if(!navigator.onLine){toast('Questo brano è solo nel cloud: senza internet non si apre');return}if(!r2Ok()){toast('Questo brano è solo nel cloud: collega il cloud per aprirlo');return}
-    /* prima lo ascolti, poi (in sottofondo) si salva sul dispositivo in MP3 */
-    toast('☁️ Scarico «'+(s.title||'il brano')+'» dal cloud…');const rec0=s;try{const r=await cloudFetch(s,false);if(tok!==LQ.tok)return;s=r.full;const st2={...r.full.stems};setTimeout(()=>{cloudKeep(rec0,r.files,st2,true).then(x=>{if(x&&x.kept){try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}else toast('💽 Spazio pieno: questo brano resta solo nel cloud')}).catch(e=>console.warn('cloudKeep',e))},4000)}catch(e){toast('Non riesco a scaricarlo dal cloud: '+(r2Err(e)||e.message));return}}
+    /* si scarica per suonarlo e basta (non occupa spazio): per tenerlo usa «Scarica qui» in Libreria */
+    toast('☁️ Scarico «'+(s.title||'il brano')+'» dal cloud…');const rec0=s;try{const r=await cloudFetch(s,false);if(tok!==LQ.tok)return;s=r.full;const st2={...r.full.stems};if(prefGet('cloudKeepOpen')==='1')setTimeout(()=>{cloudKeep(rec0,r.files,st2,true).then(x=>{if(x&&x.kept){try{if(!$('#ovLib').hidden)renderLib()}catch(e){}}else toast('💽 Spazio pieno: questo brano resta solo nel cloud')}).catch(e=>console.warn('cloudKeep',e))},4000)}catch(e){toast('Non riesco a scaricarlo dal cloud: '+(r2Err(e)||e.message));return}}
   if(tok!==LQ.tok)return;toast('Apro “'+(s.title||'il brano')+'”…');const bufs={};BGW.loading++;
   try{pause();trCache={tr:0,bufs:null};
   /* libera subito le tracce del brano di prima: così in memoria non ci sono due brani insieme */
@@ -4528,13 +4528,17 @@ function sepFail(e){const m=String(e&&e.message||e);if(BATCH.on)BATCH.err=m;sepE
 const sepTO=(p,ms,lab)=>Promise.race([p,new Promise((_,no)=>setTimeout(()=>no(new Error('TIMEOUT:'+lab)),ms))]);
 async function sepFinish(meta,stemsRec,bufs,note,asr,sing,rhy){
   const RP0=SEP_REPLACE&&SEP_REPLACE.f===sepFileObj?SEP_REPLACE:null;SEP_REPLACE=null;
-  const id=RP0?RP0.id:'s'+Date.now().toString(36);const rec={id,title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',album:meta.album||'',year:meta.year||'',created:Date.now(),lyrics:meta.lyrics||'',tab:'',stems:stemsRec};if(meta.lrc)rec.lrclib=meta.lrc;if(asr&&asr.segments&&asr.segments.length)rec.asr=asr;if(sing&&!sing.error&&sing.k!=null)rec.singers=sing;if(RP0)Object.assign(rec,RP0.keep,{stems:stemsRec});if(sepInfo.ep==='runpod'&&sepInfo.model)rec.sepModel=sepInfo.model;if(sepInfo.ep==='runpod'&&sepInfo.dropped){rec.dropChk=1;rec.dropped=sepInfo.dropped}try{rhyApply(rec,rhy)}catch(e){console.warn('ritmo',e)}
-  if(rec.asr&&!(RP0&&RP0.keep&&RP0.keep.lyr)){rec.lyrHow=/^qwen/.test(rec.asr.engine||'')?'qwen':'whisper';if(lyrEng()==='lrclib'||lyrEng()==='mix'){const dur=Math.max(0,...Object.values(bufs||{}).map(b=>b&&b.duration||0));spShow('Metto a tempo il testo di LRCLIB…',null,'save');let L=null;try{L=await sepTO(lrcOnVoice(rec,rec.asr,dur),40000,'testo')}catch(e){errAdd('Testo LRCLIB: nessuna risposta in 40 secondi, tengo il testo ascoltato dalla voce');console.warn(e)}if(L&&L.ratio){rec.lyr=lyrStore(L.lines);rec.lyrics=L.lines.map(l=>ts(l.t)+' '+l.s).join('\n');rec.lrclib=L.lrclib;rec.lyrHow='lrclib-w'}}}
-  if(Object.values(stemsRec).some(v=>!LIGHT_RX.test(v.name||'')))await slimStems(stemsRec,p=>spShow('Salvo le tracce in MP3, più leggere… '+Math.round(p*100)+'%',p,'save'));
+  const id=RP0?RP0.id:'s'+Date.now().toString(36);const rec={id,title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',album:meta.album||'',year:meta.year||'',created:Date.now(),lyrics:meta.lyrics||'',tab:'',stems:stemsRec};if(meta.lrc)rec.lrclib=meta.lrc;if(asr&&asr.segments&&asr.segments.length)rec.asr=asr;if(sing&&!sing.error&&sing.k!=null)rec.singers=sing;if(RP0)Object.assign(rec,RP0.keep,{stems:stemsRec});if(sepInfo.ep==='runpod'&&sepInfo.model)rec.sepModel=sepInfo.model;if(sepInfo.ep==='runpod'&&sepInfo.dropped){rec.dropChk=1;rec.dropped=sepInfo.dropped}const CLOUD=sepInfo.ep==='runpod'&&sepInfo.cloudFiles&&sepInfo.cloudFiles.length?sepInfo.cloudFiles:null;sepInfo.cloudFiles=null;if(CLOUD){rec.stems={};rec.cloudOnly=true;rec.cloudFiles=CLOUD}try{rhyApply(rec,rhy)}catch(e){console.warn('ritmo',e)}
+  if(rec.asr&&!(RP0&&RP0.keep&&RP0.keep.lyr)){rec.lyrHow=/^qwen/.test(rec.asr.engine||'')?'qwen':'whisper';if(lyrEng()==='lrclib'||lyrEng()==='mix'){const dur=Math.max(sepInfo.dur||0,...Object.values(bufs||{}).map(b=>b&&b.duration||0));spShow('Metto a tempo il testo di LRCLIB…',null,'save');let L=null;try{L=await sepTO(lrcOnVoice(rec,rec.asr,dur),40000,'testo')}catch(e){errAdd('Testo LRCLIB: nessuna risposta in 40 secondi, tengo il testo ascoltato dalla voce');console.warn(e)}if(L&&L.ratio){rec.lyr=lyrStore(L.lines);rec.lyrics=L.lines.map(l=>ts(l.t)+' '+l.s).join('\n');rec.lrclib=L.lrclib;rec.lyrHow='lrclib-w'}}}
+  if(!CLOUD&&Object.values(stemsRec).some(v=>!LIGHT_RX.test(v.name||'')))await slimStems(stemsRec,p=>spShow('Salvo le tracce in MP3, più leggere… '+Math.round(p*100)+'%',p,'save'));
   spShow('Salvo il brano nella Libreria…',null,'save');let ok=null;try{ok=await sepTO(dbPut(rec),90000,'archivio')}catch(e){errAdd('Salvataggio nella Libreria bloccato per più di 90 secondi');IDBERR='BLOCCATO'}
   if(!ok&&IDBERR==='BLOCCATO'){sepFail(new Error('il salvataggio nella Libreria non risponde. Chiudi le altre schede o finestre di rooMusic (e l\'app installata, se è aperta), poi riprova: la separazione va rifatta.'));return}
-  if(ok)tombClear(rec);let saved=false;if(window.showDirectoryPicker&&dirHandle)saved=await exportSong(rec,false);
-  if(BATCH.on){if(!ok){sepFail(new Error('non riesco a salvare: '+await saveFailMsg()));return}if(r2On()){spShow('☁️ Salvo «'+rec.title+'» anche nel cloud…',null,'save');await r2Auto(rec)}BATCH.res='ok';sepEnd();spShow(`«${rec.title}» pronto in Libreria`,1);return}
+  if(ok)tombClear(rec);let saved=false;if(!CLOUD&&window.showDirectoryPicker&&dirHandle)saved=await exportSong(rec,false);
+  if(BATCH.on){if(!ok){sepFail(new Error('non riesco a salvare: '+await saveFailMsg()));return}if(r2On()){spShow('☁️ Salvo «'+rec.title+'» anche nel cloud…',null,'save');await r2Auto(rec);if(CLOUD&&RP0&&RP0.oldFiles){const kp=new Set(CLOUD.map(f=>f.name).concat(songFiles(rec).map(x=>x[0]),['pv-info.json']));const base=R2P+songDirs(rec).join('/')+'/';for(const n of RP0.oldFiles.filter(n=>!kp.has(n)))await r2Req('DELETE',base+n).catch(()=>{})}}BATCH.res='ok';sepEnd();spShow(`«${rec.title}» pronto in Libreria`,1);return}
+  if(CLOUD){spShow('Salvo testo e informazioni nel cloud…',null,'save');try{await sepTO(r2SaveSong(rec),60000,'cloud')}catch(e){errAdd('Testo del brano non salvato nel cloud: '+(r2Err(e)||e.message))}
+    if(RP0&&RP0.oldFiles){const kp=new Set(CLOUD.map(f=>f.name).concat(songFiles(rec).map(x=>x[0]),['pv-info.json']));const base=R2P+songDirs(rec).join('/')+'/';for(const n of RP0.oldFiles.filter(n=>!kp.has(n)))await r2Req('DELETE',base+n).catch(()=>{})}
+    sepEnd();const took=fmt((Date.now()-sepT0)/1000);spShow(`Fatto in ${took}${note?' ('+note+')':''}. Il brano è nel cloud: toccalo in Libreria per suonarlo (lo scarico solo quando lo usi). Per averlo anche senza internet usa «Scarica qui».`,1);$$('#spSteps span').forEach(el=>el.className='ok');
+    try{if(!$('#ovLib').hidden)renderLib()}catch(e){}if(song&&song.id===rec.id){song.cloudOnly=true;song.cloudFiles=CLOUD}return}
   sepEnd();const took=fmt((Date.now()-sepT0)/1000);
   spShow(`Fatto in ${took}${note?' ('+note+')':''}. ${saved?'Tracce salvate anche nella cartella «'+dirHandle.name+'».':'Il brano è in Libreria.'}`,1);$$('#spSteps span').forEach(el=>el.className='ok');
   await loadSong({...rec,stems:undefined,stored:!!ok},bufs);
@@ -4862,16 +4866,23 @@ async function sepRunpod(canFallback){if(!rp.key||!rp.ep){openSet();toast('Inser
     spShow(needAsr?'Invio il brano a RunPod (separo, trascrivo il testo e riconosco le voci)…':'Invio il brano a RunPod (il testo c\'è già: separo e riconosco le voci)…',null,'send');
     const b64=await abToB64(up.ab);if(sepAbort)return;
     const reqM=(SEP_REPLACE&&SEP_REPLACE.f===sepFileObj&&SEP_REPLACE.model)||rp.model;sepInfo.model=reqM;
-    let out;try{out=await rpCall({audio_b64:b64,filename:up.name,model:reqM,bitrate:128,voices:true,rhythm:RP_RITMO,transcribe:needAsr,asr:asrEng(),language:lyrLang(meta&&meta.artist,SEP_REPLACE&&SEP_REPLACE.f===sepFileObj&&SEP_REPLACE.id),prompt:''})}
+    /* con il cloud collegato RunPod salva le tracce direttamente su R2: al telefono torna solo un elenco */
+    let put=null;sepInfo.r2Base=null;sepInfo.dur=dur;if(r2On()&&navigator.onLine){try{const pre={title:meta.title||cleanName(sepFileObj.name),artist:meta.artist||'',album:meta.album||'',year:meta.year||''};if(RPk)Object.assign(pre,RPk);
+      const base=R2P+songDirs(pre).join('/')+'/';put={};for(const k of ['vocals','bass','drums','other','guitar','piano'])put[k]=await r2Presign('PUT',base+k+'.m4a',6*3600);sepInfo.r2Base=base}catch(e){console.warn('presign',e);put=null;sepInfo.r2Base=null}}
+    let out;try{out=await rpCall({audio_b64:b64,filename:up.name,model:reqM,bitrate:put?192:128,put:put||undefined,voices:true,rhythm:RP_RITMO,transcribe:needAsr,asr:asrEng(),language:lyrLang(meta&&meta.artist,SEP_REPLACE&&SEP_REPLACE.f===sepFileObj&&SEP_REPLACE.id),prompt:''})}
     catch(e){const m=String(e&&e.message||e);if(canFallback&&['NET','AUTH','NOEP'].includes(m))return 'rpdown';throw e}
     if(out&&out.model)sepInfo.model=out.model;sepInfo.dropped=out&&Array.isArray(out.dropped)?out.dropped:null;
     if(reqM==='mix6'&&out&&out.model&&out.model!=='mix6'&&out.model!=='bs_roformer_sw'){toast('RunPod ha ancora la versione vecchia: per la separazione affinata aggiorna fonica-runpod e fai New Release')}
     if(sepAbort||!out)return;
     if(out.error)throw new Error(out.error);
     sepInfo.extra='';spShow('Ricevo le tracce…',null,'down');
-    const stemsRec={},bufs={};const ks=Object.keys(out.stems||{});let i=0;
-    for(const k of ks){const ab2=b64ToAb(out.stems[k]);stemsRec[k]={name:k+'.m4a',data:ab2};if(!BATCH.on)bufs[k]=await decode(ab2);i++;spShow('Ricevo le tracce…',i/ks.length,'down')}
-    if(!ks.length)throw new Error('RunPod non ha restituito le tracce');
+    const stemsRec={},bufs={};const ks=Object.keys(out.stems||{});let i=0;sepInfo.cloudFiles=null;
+    if(out.r2&&sepInfo.r2Base&&Object.keys(out.r2).length){const base=sepInfo.r2Base,cf=Object.entries(out.r2).map(([k,v])=>({k,key:base+v.name,name:v.name,size:v.size||0}));
+      /* le tracce che il cloud non ha preso (raro) le carico io */
+      for(const k of ks){spShow('Metto nel cloud la traccia «'+k+'»…',null,'down');const ab2=b64ToAb(out.stems[k]);await r2Req('PUT',base+k+'.m4a',{body:new Blob([ab2]),ctype:'audio/mp4'});cf.push({k,key:base+k+'.m4a',name:k+'.m4a',size:ab2.byteLength})}
+      sepInfo.cloudFiles=cf;spShow('Le tracce sono nel cloud',1,'down')}
+    else{for(const k of ks){const ab2=b64ToAb(out.stems[k]);stemsRec[k]={name:k+'.m4a',data:ab2};if(!BATCH.on)bufs[k]=await decode(ab2);i++;spShow('Ricevo le tracce…',i/ks.length,'down')}
+    if(!ks.length)throw new Error('RunPod non ha restituito le tracce')}
     spShow('Salvo le tracce…',1,'save');
     await sepFinish(meta,stemsRec,bufs,(out.note&&/processore/.test(out.note)?'la scheda video non andava: fatto sul processore, ':'')+(out.model==='bs_roformer_sw'?'separatore nuovo, ':'')+(out.rhythm&&!out.rhythm.error&&out.rhythm.engines?'battiti e batteria precisi, ':'')+(out.seconds?'lavoro su RunPod: '+fmt(out.seconds):''),out.lyrics,out.singers,out.rhythm);try{langLearn(meta&&meta.artist,out.lyrics)}catch(e){}}
   catch(e){if(!sepAbort)sepFail(e)}}
