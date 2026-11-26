@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="26/11 · 17:00"><meta name="pv-notes" content="Nelle Lezioni arriva la batteria: rudimenti, ritmi (rock, pop, funk, shuffle, reggae, bossa), fill e «Crea il tuo ritmo», con la griglia a quadretti. Nuove anche le liste di Sanremo nelle Canzoni consigliate."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="26/11 · 19:30"><meta name="pv-notes" content="Novità: lezioni di pianoforte (tastiera, spartito, scale, accordi, accompagnamenti, tastiera MIDI); piano e tastiere in Sala prove e Palco con i loro preset; nel Palco casse e cuffie separate con la scheda a 4 uscite; menu a tendina di nuovo leggibili."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -920,6 +920,7 @@ mark.pkm{background:#f0c96a;color:#111;border-radius:3px;padding:0 1px}
 .lvvu{position:relative;height:18px;border-radius:9px;border:1px solid rgba(var(--wash),.2);background:linear-gradient(90deg,#2fae62 0 70%,#f0a030 70% 88%,#ff4d3d 88%);overflow:hidden}.lvvu i{position:absolute;right:0;top:0;bottom:0;width:100%;background:var(--h06101a);transition:width .06s linear}
 .lvvol{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--hcfd8e2)}.lvvol input{flex:1;accent-color:var(--he8c8a6)}.lvvol em{font-style:normal;min-width:42px;text-align:right;color:#fff}
 .lvpeds{grid-column:1/-1;display:flex;flex-direction:column;gap:6px}.lvpeds .pdchip{color:#fff}
+.lvcas{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:12px;background:rgba(var(--wash),.08);border:1px solid rgba(var(--wash),.2)}.lvcasinfo{font-size:14px;line-height:1.45;color:var(--hcfd8e2)}.lvcas .lzck{color:var(--heef0f2)}.lvcas .lvvol{color:var(--heef0f2)}
 .lvout{display:flex;align-items:flex-end;gap:8px}.lvout .field{flex:1;min-width:0}.lvout .field span{color:var(--hcfd8e2)}.lvout select{background:var(--h16293d);color:#fff;border:1px solid rgba(var(--wash),.3)}.lvout .mini{min-height:44px;background:var(--h16293d);color:#fff}
 .lvhint{font-size:13.5px;color:var(--hcfd8e2);line-height:1.45}.lvhint b{color:#fff}
 #pMic.live{background:#1f7a46;border-color:#2fae62;color:#fff}
@@ -1456,6 +1457,23 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 .dgc.v-g{background:transparent;box-shadow:inset 0 0 0 2px #7fcaf2;transform:scale(.62)}
 .dgc.r-st{background:transparent;color:#e9f2f8;font-size:14px}
 .dgc.on{outline:3px solid #ffe14d;outline-offset:1px}.dgc.on:not(.v-n):not(.r-st){background:#ffe14d;color:#000}.dgh.on{background:#ffe14d;color:#000}
+/* tastiera e spartito del piano */
+.kbwrap{overflow-x:auto;background:#15191d;border-radius:12px;padding:8px 6px 6px;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.kb{display:block;margin:0 auto}
+.kb .kbk{cursor:pointer}.kb .kbk.w rect{fill:#f7f5ef;stroke:#3a3f44;stroke-width:1}.kb .kbk.b rect{fill:#1d2126;stroke:#000}
+.kb .kbk.w.mc rect{fill:#fff3df}
+.kb .kbn{fill:#6a737c;font:700 11px rooText,system-ui;pointer-events:none}.kb .kbn.c{fill:#b86a10}
+.kb .kbm circle{fill:#7fcaf2;stroke:#1d6f99;stroke-width:1.5}.kb .kbm text{fill:#10202b;font:800 11px rooText,system-ui;pointer-events:none}
+.kb .kbm.lh circle{fill:#97d99f;stroke:#2f7a3a}.kb .kbm.r circle{fill:#f2a13a;stroke:#9a5a07}.kb .kbm.d3 circle{fill:#7fcaf2}.kb .kbm.d5 circle{fill:#97d99f}.kb .kbm.d7 circle{fill:#d7b4f5;stroke:#7a46a6}
+.kb .kbm{pointer-events:none}
+.kb .kbk.on.w rect{fill:#ffe14d}.kb .kbk.on.b rect{fill:#e0b400}.kb .kbk.pr.w rect{fill:#bfe6ff}.kb .kbk.pr.b rect{fill:#2a8fc1}
+.kb .kbk.good rect{fill:#5fd36f!important}.kb .kbk.bad rect{fill:#ff6b5b!important}
+.stwrap{overflow-x:auto;background:#fffdf7;border-radius:12px;padding:4px 6px;border:1px solid var(--line)}
+.stf{display:block}.stf .stl{stroke:#3a3f44;stroke-width:1}.stf .stll{stroke:#3a3f44;stroke-width:1.2}.stf .stbar{stroke:#3a3f44;stroke-width:1.2}
+.stf .stclef{fill:#1d2126;font-family:"Noto Music","Bravura","Segoe UI Symbol","Apple Symbols","Noto Sans Symbols 2",serif}
+.stf .stn ellipse{fill:#1d2126}.stf .stst{stroke:#1d2126;stroke-width:1.4}.stf .stacc{fill:#1d2126;font:700 15px serif}.stf .stfi{fill:#1d6f99;font:800 11px rooText,system-ui}
+.stf .stcol{fill:transparent}.stf .stcol.on{fill:#ffe14d;opacity:.55}.stf .stn.on ellipse{fill:#b86a10}
+.pnbox{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}.pnmidi{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--dim);font-size:14px}
 .lzinfo{font-size:15px;color:var(--fg);line-height:1.8}.lzinfo small{color:var(--dim);font-size:13.5px}
 .lzpill{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid var(--line);background:var(--raise);margin:2px 2px;font-size:14px}
 .lzpill.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
@@ -1468,6 +1486,11 @@ button .ei,summary .ei,a .ei{color:inherit}h3 .ei,h4 .ei,h5 .ei{color:var(--acce
 .lzfoot #lzDone{display:inline-flex;align-items:center;gap:6px}.lzfoot #lzDone .ico{width:18px;height:18px}.lzfoot #lzDone.on{border-color:var(--accent);color:var(--accent)}
 .lzrt{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--btnbg);color:var(--btnink);border-radius:14px;padding:10px 14px}.lzrt .lzrtt{font-size:22px;font-variant-numeric:tabular-nums}
 .lzrt .chip,.lzrt .mini{min-height:40px}
+
+/* le liste dei menu a tendina: sempre testo scuro su fondo chiaro (su Windows la lista non segue i colori del pannello) */
+select option,select optgroup{color:#16202a;background:#fff}
+#palMic select{color:var(--heef0f2)!important;background:var(--h16293d)!important}
+#palMic .lvvol em{color:var(--heef0f2)}select option:disabled{color:#7a828a}
 </style>
 
 <div class="ov" id="ovTut" hidden><div class="sheet tutsheet"><div class="row"><h3 class="grow">🎓 Tutorial</h3><button class="mini" data-close>Chiudi</button></div>
@@ -1512,7 +1535,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Nelle Lezioni arriva la batteria: rudimenti, ritmi (rock, pop, funk, shuffle, reggae, bossa), fill e «Crea il tuo ritmo», con la griglia a quadretti. Nuove anche le liste di Sanremo nelle Canzoni consigliate.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Novità: lezioni di pianoforte (tastiera, spartito, scale, accordi, accompagnamenti, tastiera MIDI); piano e tastiere in Sala prove e Palco con i loro preset; nel Palco casse e cuffie separate con la scheda a 4 uscite; menu a tendina di nuovo leggibili.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1621,6 +1644,12 @@ themeApply();</script>
     <div class="lvtop"><b>🎤 <span id="lvTitle">Microfono e strumenti</span></b><button class="pbtn" id="lvX" aria-label="Chiudi">✕</button></div>
     <button id="lvGo">🎤 Accendi</button>
     <div class="lvout" id="lvOutRow"><label class="field"><span>🎧 Le cuffie suonano da</span><select class="sel" id="lvOut" aria-label="Uscita delle cuffie"></select></label><button class="mini" id="lvTest" title="Fa un breve suono per controllare dove escono le cuffie">🔊 Prova</button></div>
+    <div class="lvcas" id="lvCasRow" hidden>
+      <label class="lzck"><input type="checkbox" id="lvSplit"><span>Casse e cuffie separate</span></label>
+      <div class="lvcasinfo" id="lvCasInfo"></div>
+      <label class="lvvol">Casse<input type="range" id="lvCasVol" min="0" max="150" step="5" value="70"><em id="lvCasVolV">70%</em></label>
+      <button class="mini" id="lvSwap" title="Scambia le uscite: casse e cuffie">Scambia casse e cuffie</button>
+    </div>
     <div id="lvRows"></div>
     <div class="pseg" id="lvRev"><span>Eco sulla voce</span><div class="seg"><button data-v="0">No</button><button data-v="0.2">Poco</button><button data-v="0.45">Tanto</button></div></div>
     <div class="lvhint" id="lvInfo"></div>
@@ -2352,7 +2381,7 @@ themeApply();</script>
   <div class="lezhead">
     <button class="mini lzback" id="lezBack" hidden aria-label="Torna alle lezioni"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Lezioni</span></button>
     <h3 class="grow" id="lezTitle">Lezioni</h3>
-    <div class="seg" id="lezInst" role="group" aria-label="Strumento"><button data-i="guitar" class="on">Chitarra</button><button data-i="bass">Basso</button><button data-i="drums">Batteria</button></div>
+    <div class="seg" id="lezInst" role="group" aria-label="Strumento"><button data-i="guitar" class="on">Chitarra</button><button data-i="bass">Basso</button><button data-i="drums">Batteria</button><button data-i="piano">Piano</button></div>
     <button class="mini" data-close>Chiudi</button>
   </div>
   <div id="lezHome"></div>
@@ -2362,7 +2391,8 @@ themeApply();</script>
     <pre class="lztab" id="lzTab" hidden></pre>
     <div class="lzctl" id="lzCtl"></div>
     <div class="lzsay" id="lzSay" aria-live="polite"></div>
-    <div class="fbwrap" id="fbWrap"><svg class="fb" id="fb" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Manico dello strumento: tocca una nota per sentirla"></svg></div><div class="dgwrap" id="dgWrap" hidden></div><div class="lzcount" id="lzCount" hidden></div>
+    <div class="fbwrap" id="fbWrap"><svg class="fb" id="fb" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Manico dello strumento: tocca una nota per sentirla"></svg></div><div class="dgwrap" id="dgWrap" hidden></div><div class="stwrap" id="stWrap" hidden><svg class="stf" id="stf" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spartito"></svg></div><div class="kbwrap" id="kbWrap" hidden><svg class="kb" id="kb" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tastiera del pianoforte: tocca un tasto per sentirlo"></svg></div>
+    <div class="pnbox" id="pnBox" hidden><label class="lzck"><input type="checkbox" id="pnFollow"><span>Aspettami (vado avanti quando suoni la nota giusta)</span></label><span class="pnmidi"><span id="pnMidiTx"></span><button class="chip" id="pnMidi">Collega la tastiera MIDI</button></span></div><div class="lzcount" id="lzCount" hidden></div>
     <div class="lzinfo" id="lzInfo" hidden></div>
     <div class="lzplay" id="lzPlay">
       <button class="chip pri lzgo" id="lzPlayBtn"></button>
@@ -2454,9 +2484,10 @@ themeApply();</script>
     <details><summary>Ho cambiato dispositivo o il browser ha cancellato tutto</summary><p>In <b>Impostazioni</b>: <b>«Ricarica dal file»</b> per le chiavi e <b>«Ricarica le impostazioni»</b> per scalette, suoni e pedaliera. I brani tornano dal cloud R2, se l'avevi collegato.</p></details>
     <details><summary>Manca una novità o l'app sembra vecchia</summary><p>La versione e le novità sono scritte in fondo al <b>Menu</b>. Con internet l'app si aggiorna da sola; se non succede, chiudila e riaprila.</p></details>
     <details><summary>Microfono o fotocamera non funzionano</summary><p>Consenti i permessi dal lucchetto vicino all'indirizzo della pagina, poi riprova.</p></details>
-    <details><summary>Voglio imparare a suonare chitarra, basso o batteria</summary><p>Premi <b>«Lezioni»</b> in alto e scegli <b>Chitarra, Basso o Batteria</b>. Le lezioni vanno dalla più facile alla più difficile: parti dalla 1. Ogni giorno c'è anche l'<b>Allenamento del giorno</b> (8, 12 o 20 minuti). Funzionano anche senza internet.</p></details>
+    <details><summary>Voglio imparare a suonare chitarra, basso, batteria o piano</summary><p>Premi <b>«Lezioni»</b> in alto e scegli <b>Chitarra, Basso, Batteria o Piano</b>. Le lezioni vanno dalla più facile alla più difficile: parti dalla 1. Ogni giorno c'è anche l'<b>Allenamento del giorno</b> (8, 12 o 20 minuti). Funzionano anche senza internet.</p></details>
     <details><summary>Nelle Lezioni non sento le note</summary><p>Alza il volume del telefono o del PC e controlla che non sia in silenzioso (su iPhone c'è il tasto sul lato). Se stavi ascoltando un brano, le Lezioni lo mettono in pausa da sole. Togli la spunta da «Suona anche le note» solo se vuoi sentire il metronomo e basta.</p></details>
     <details><summary>Quali canzoni mi conviene comprare?</summary><p>Nel <b>Menu</b> apri <b>«Cerca brani»</b> e premi <b>«Canzoni consigliate»</b>: trovi le canzoni italiane, quelle da suonare con la band, il rock al femminile e le più ascoltate del momento, con i link per comprarle.</p></details>
+    <details><summary>Nel Palco voglio la base alle casse e il mio ascolto in cuffia</summary><p>Con una scheda audio a 4 uscite (es. Behringer UMC404HD) accendi il microfono nel Palco: la spunta <b>«Casse e cuffie separate»</b> manda alle casse base, voce e strumenti, e alle cuffie il tuo ascolto con il click. Se sono al contrario premi <b>«Scambia casse e cuffie»</b>. Togli la spunta per usare una sola uscita.</p></details>
     <details><summary>Scorciatoie da tastiera</summary><p><code>Spazio</code> avvia o mette in pausa il brano; <code>Esc</code> chiude il Palco e il tutorial.</p></details>
   </div>
   <p class="snote">Brani, testi e impostazioni restano su questo dispositivo, nel browser.</p>
@@ -3811,10 +3842,10 @@ $('#pmAll').onclick=()=>{order.forEach(k=>{gains[k].mute=false;gains[k].solo=fal
 $('#pSong').onclick=()=>{if(slActive()){slqOpen('palco');return}const ov=$('#bpOv');if(ov.parentNode!==$('#palco'))$('#palco').appendChild(ov);pkOpen('palco')};
 /* ===== PALCO: microfono e strumenti dal vivo in cuffia (PC: scheda audio; telefono e tablet: solo microfono) ===== */
 const LV={on:false,rows:[],streams:[],nodes:[],rev:+(prefGet('lvRev')||0.2),cfg:(()=>{try{return JSON.parse(prefGet('lvCfg')||'{}')}catch(e){return{}}})()};
-const LV_ROLE={voce:'🎤 Voce',chitarra:'🎸 Chitarra',basso:'🎸 Basso',tastiere:'🎹 Tastiere',altro:'🎶 Strumento'};
+const LV_ROLE={voce:'🎤 Voce',chitarra:'🎸 Chitarra',basso:'🎸 Basso',tastiere:'🎹 Piano e tastiere',altro:'🎶 Strumento'};
 function lvSave(){for(const r of LV.rows)LV.cfg[r.key]={role:r.role,hear:r.hear,vol:r.vol,fx:r.fx};try{prefSet('lvCfg',JSON.stringify(LV.cfg));prefSet('lvRev',String(LV.rev))}catch(e){}}
 function lvApply(r){const c=ctx(),t=c.currentTime;r.mon.gain.setTargetAtTime(r.hear?r.vol:0,t,.02);r.send.gain.setTargetAtTime(r.hear&&r.role==='voce'?r.vol:0,t,.02)}
-function lvStop(){for(const n of LV.nodes)try{n.disconnect()}catch(e){}for(const s of LV.streams)try{s.getTracks().forEach(t=>t.stop())}catch(e){}LV.nodes=[];LV.streams=[];LV.rows=[];LV.on=false;lvRender()}
+function lvStop(){try{pcsOff()}catch(e){}for(const n of LV.nodes)try{n.disconnect()}catch(e){}for(const s of LV.streams)try{s.getTracks().forEach(t=>t.stop())}catch(e){}LV.nodes=[];LV.streams=[];LV.rows=[];LV.on=false;lvRender()}
 async function lvOpenDev(id){return navigator.mediaDevices.getUserMedia({audio:Object.assign({channelCount:{ideal:2},echoCancellation:false,noiseSuppression:false,autoGainControl:false,latency:0},id?{deviceId:{exact:id}}:{})})}
 async function lvStart(){const c=ctx();try{await c.resume()}catch(e){}lvStop();if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast('Questo browser non può usare il microfono');return}
   $('#lvGo').disabled=true;$('#lvGo').textContent='Accendo…';const ins=[];
@@ -3835,14 +3866,14 @@ async function lvStart(){const c=ctx();try{await c.resume()}catch(e){}lvStop();i
   const srcs=new Map();ins.forEach((x,i)=>{let sp=srcs.get(x.st);if(!sp){const src=c.createMediaStreamSource(x.st);sp=c.createChannelSplitter(2);src.connect(sp);srcs.set(x.st,sp);LV.nodes.push(src,sp)}
     const g=c.createGain(),an=c.createAnalyser(),hp=c.createBiquadFilter(),mon=c.createGain(),send=c.createGain();an.fftSize=1024;sp.connect(g,x.ch);g.connect(an);hp.type='highpass';g.connect(hp);LV.nodes.push(g,an,hp,mon,send);
     const cf=LV.cfg[x.key]||{};const role0=cf.role||(i===0?'voce':'altro');const fx=cf.fx||fxDefaults(role0==='voce'?'voce':null);if(role0==='voce'){fx.rev.on=0;fx.delay.on=0}fxOf({fx});
-    const fb=boards[i];hp.connect(fb.pre.inp);fb.pre.out.connect(fb.post.inp);fb.post.out.connect(mon);fb.post.out.connect(send);mon.connect(bus);send.connect(rv);fb.set(fx);
-    const r={key:x.key,name:x.name,lat:x.lat||0,an,hp,mon,send,fb,fx,role:role0,hear:cf.hear!=null?cf.hear:!isMobile,vol:cf.vol!=null?cf.vol:1};
-    hp.frequency.value=r.role==='basso'?25:r.role==='voce'?85:50;lvApply(r);LV.rows.push(r)});
+    const fb=boards[i];hp.connect(fb.pre.inp);fb.pre.out.connect(fb.post.inp);const cas=c.createGain();cas.gain.value=1;fb.post.out.connect(mon);fb.post.out.connect(send);fb.post.out.connect(cas);mon.connect(bus);send.connect(rv);fb.set(fx);LV.nodes.push(cas);
+    const r={key:x.key,name:x.name,lat:x.lat||0,an,hp,mon,send,cas,fb,fx,role:role0,hear:cf.hear!=null?cf.hear:!isMobile,vol:cf.vol!=null?cf.vol:1};
+    hp.frequency.value=r.role==='basso'?25:r.role==='tastiere'?30:r.role==='voce'?85:50;lvApply(r);LV.rows.push(r)});
   try{audSink.cur=null;await audSink();
     /* se gli ingressi sono della scheda audio ma l'uscita è ancora quella del sistema, porta le cuffie sulla scheda */
     if(!AE.outId&&(!AUD.outId||AUD.outId==='')&&ins.some(x=>isIface(x.key||''))){const o=outMain((await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='audiooutput'&&d.deviceId!=='default'&&d.deviceId!=='communications'&&isIface(d.label)));
       if(o){AE.outId=o.deviceId;AE.outLabel=o.label;try{if(A.setSinkId)await A.setSinkId(o.deviceId)}catch(e){}try{if(c.setSinkId)await c.setSinkId(o.deviceId)}catch(e){}audSink.cur=o.deviceId;toast('🎧 Cuffie sulla scheda: '+o.label.replace(/^(Predefinito|Default) - /,''))}}}catch(e){console.error(e)}lvOutFill();
-  LV.on=true;$('#lvGo').disabled=false;lvRender();lvMeter();if(isMobile&&!LV.rows[0].hear)toast('Microfono acceso. Metti le cuffie e tocca 🎧 per sentirti')}
+  LV.on=true;$('#lvGo').disabled=false;lvRender();lvMeter();pcsRoute();if(isMobile&&!LV.rows[0].hear)toast('Microfono acceso. Metti le cuffie e tocca 🎧 per sentirti')}
 function lvRender(){const box=$('#lvRows');if(!box)return;const g=$('#lvGo');g.classList.toggle('on',LV.on);if(!g.disabled)g.textContent=LV.on?'■ Spegni il microfono':'🎤 Accendi '+(isMobile?'il microfono':'microfono e strumenti');
   $('#lvTitle').textContent=isMobile?'Microfono':'Microfono e strumenti';$('#pMic').classList.toggle('live',LV.on);$('#pMic span').textContent=LV.on?'Acceso':'Microfono';$('#lvRev').hidden=!LV.rows.some(r=>r.role==='voce');
   $$('#lvRev button').forEach(b=>b.classList.toggle('on',Math.abs(+b.dataset.v-LV.rev)<.01));
@@ -3852,7 +3883,7 @@ function lvRender(){const box=$('#lvRows');if(!box)return;const g=$('#lvGo');g.c
     <div class="lvpeds"><select class="sel stpre" data-lvpre="${i}" data-role="${r.role}" aria-label="Preset dei pedali di ${esc(r.name)}">${prOpts(r.fx._pr,r.role)}</select><button class="mini prauto" data-prauto="l:${i}">✨ Preset adatto al brano</button>${pedChips(r.fx,`data-lvpd="${i}"`)}<button class="mini" data-lvboard="${i}">🎛 Manopole dei pedali</button></div></div>`).join('');
   $$('#lvRows [data-lv]').forEach(el=>{const r=LV.rows[+el.dataset.lv];el.querySelector('[data-lvhp]').onclick=()=>{r.hear=!r.hear;lvApply(r);lvSave();lvRender()};
     const vs=el.querySelector('[data-lvvol]');vs.oninput=()=>{r.vol=+vs.value;if(r.vol>0&&!r.hear){r.hear=true;lvRender()}else el.querySelector('em').textContent=Math.round(r.vol*100)+'%';lvApply(r);lvSave()};
-    const rs=el.querySelector('[data-lvrole]');if(rs)rs.onchange=()=>{r.role=rs.value;r.hp.frequency.value=r.role==='basso'?25:r.role==='voce'?85:50;lvApply(r);lvSave();lvRender()}});
+    const rs=el.querySelector('[data-lvrole]');if(rs)rs.onchange=()=>{r.role=rs.value;r.hp.frequency.value=r.role==='basso'?25:r.role==='tastiere'?30:r.role==='voce'?85:50;lvApply(r);lvSave();lvRender()}});
   lvInfo()}
 function lvInfo(){const el=$('#lvInfo');if(!el)return;const c=actx;let t='';
   if(LV.on&&c){const ms=Math.round(((c.outputLatency||0)+(c.baseLatency||0)+Math.max(0,...LV.rows.map(r=>r.lat||0)))*1000);if(ms)t+='Ritardo in cuffia circa <b>'+ms+' ms</b>'+(ms>35?' (alto: chiudi altri programmi o spegni la 🎧 e usa il Direct Monitor della scheda).':'.')+' '}
@@ -3865,7 +3896,7 @@ function lvMeter(){if(!LV.on)return;const b=new Float32Array(1024);LV.rows.forEa
 /* uscita delle cuffie nel microfono del Palco: si sceglie qui e vale per tutta l'app */
 async function lvOutFill(){const row=$('#lvOutRow'),sel=$('#lvOut');const c=ctx();if(!(c.setSinkId||A.setSinkId)||!navigator.mediaDevices||!navigator.mediaDevices.enumerateDevices){row.hidden=true;return}
   try{await audResolve(false)}catch(e){}const ds=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='audiooutput'&&d.deviceId!=='communications'&&d.deviceId!=='default');
-  if(!ds.length){row.hidden=true;return}row.hidden=false;const cur=AUD.outId&&AUD.outId!=='sys'?AUD.outId:AE.outId||'sys';
+  if(!ds.length){row.hidden=true;row.dataset.none='1';return}row.dataset.none='';row.hidden=!!PCS.on;const cur=AUD.outId&&AUD.outId!=='sys'?AUD.outId:AE.outId||'sys';
   sel.innerHTML='<option value="sys">Uscita del sistema (Windows)</option>'+ds.map((d,i)=>`<option value="${esc(d.deviceId)}">${esc((d.label||'Uscita '+(i+1)).replace(/^(Predefinito|Default) - /,''))}${isIface(d.label)?' 🎛':''}</option>`).join('');
   sel.value=ds.some(d=>d.deviceId===cur)?cur:'sys';lvInfo()}
 $('#lvOut').onchange=async e=>{const v=e.target.value,o=e.target.selectedOptions[0];AUD.outId=v;AUD.outLabel=v==='sys'?'':o.textContent.replace(' 🎛','');try{audSave()}catch(x){}audSink.cur=null;
@@ -3876,7 +3907,42 @@ $('#lvTest').onclick=async()=>{const c=ctx();try{await c.resume()}catch(e){}cons
   toast('Senti due «bip»? Se non li senti in cuffia, scegli qui sopra la scheda audio (🎛)')};
 $('#pMic').onclick=()=>{const p=$('#palMic');if(p.hidden)pmShow(false);p.hidden=!p.hidden;$('#pMic').setAttribute('aria-expanded',!p.hidden);if(!p.hidden){lvRender();lvOutFill()}};$('#lvX').onclick=()=>{$('#palMic').hidden=true;$('#pMic').setAttribute('aria-expanded','false')};
 $('#lvGo').onclick=()=>LV.on?lvStop():lvStart();
-async function lvRewire(r){const c=ctx();const nb=await fxBoard(c,r.fx);try{r.hp.disconnect()}catch(e){}try{r.fb.post.out.disconnect()}catch(e){}r.hp.connect(r.an.context?nb.pre.inp:nb.pre.inp);nb.pre.out.connect(nb.post.inp);nb.post.out.connect(r.mon);nb.post.out.connect(r.send);nb.set(r.fx);r.fb=nb}
+async function lvRewire(r){const c=ctx();const nb=await fxBoard(c,r.fx);try{r.hp.disconnect()}catch(e){}try{r.fb.post.out.disconnect()}catch(e){}r.hp.connect(r.an.context?nb.pre.inp:nb.pre.inp);nb.pre.out.connect(nb.post.inp);nb.post.out.connect(r.mon);nb.post.out.connect(r.send);if(r.cas)nb.post.out.connect(r.cas);nb.set(r.fx);r.fb=nb}
+
+/* ===== PALCO: casse e cuffie separate, come in Sala prove =====
+   Con una scheda a 4 uscite (es. Behringer UMC404HD): alle CASSE vanno base, voce e strumenti (per il pubblico),
+   alle CUFFIE il tuo ascolto (base + quello che hai scelto di sentire, più il click). Si scambiano con un tocco. */
+const PCS={ctx:null,key:'',dest:null,bg:null,lg:null,out:null,src:null,cuf:null,on:false,busy:null,O:null};
+const pcsWant=()=>prefGet('palSplit')!=='0';
+function pcsOff(){const c=actx;if(PCS.on&&c){const base=A._node();try{base.disconnect(PCS.cuf)}catch(e){}try{base.disconnect(PCS.bg)}catch(e){}try{base.connect(c.destination)}catch(e){}
+    if(LV.bus){try{LV.bus.disconnect(PCS.cuf)}catch(e){}try{LV.bus.connect(c.destination)}catch(e){}}if(LV.rg)try{LV.rg.disconnect(PCS.lg)}catch(e){}
+    for(const r of LV.rows)try{r.cas.disconnect()}catch(e){}try{PCS.cuf.disconnect()}catch(e){}try{c.destination.channelCount=2;c.destination.channelInterpretation='speakers'}catch(e){}
+    PCS.on=false;audSink.cur=null;audSink().catch(()=>{});try{lvOutFill()}catch(e){}}
+  if(PCS.ctx)try{PCS.ctx.close()}catch(e){}PCS.ctx=null;PCS.key='';PCS.O=null;pcsUI()}
+function pcsRoute(){PCS.busy=(PCS.busy||Promise.resolve()).then(pcsRoute0).catch(e=>{console.warn('casse del palco',e)});return PCS.busy}
+async function pcsRoute0(){const c=ctx();if(!LV.on||isMobile||!pcsWant()){pcsOff();return}
+  let O=null;try{O=await salaOuts()}catch(e){}
+  if(!O||!O.cas){pcsOff();pcsUI(O);return}
+  O={mode:O.mode,cuf:Object.assign({},O.cuf),cas:Object.assign({},O.cas)};PCS.O=O;
+  try{if(c.setSinkId)await c.setSinkId(O.cuf.id||'')}catch(e){console.warn('cuffie',e)}try{if(A.setSinkId)await A.setSinkId(O.cuf.id||'')}catch(e){}audSink.cur=O.cuf.id||'';
+  if(!PCS.cuf||PCS.cuf.context!==c){PCS.cuf=c.createGain();PCS.dest=c.createMediaStreamDestination();PCS.bg=c.createGain();PCS.lg=c.createGain();PCS.bg.connect(PCS.dest);PCS.lg.connect(PCS.dest)}
+  outWire(c,PCS.cuf,O.cuf);
+  const base=A._node();try{base.disconnect(c.destination)}catch(e){}try{base.disconnect(PCS.cuf)}catch(e){}try{base.disconnect(PCS.bg)}catch(e){}base.connect(PCS.cuf);base.connect(PCS.bg);
+  if(LV.bus){try{LV.bus.disconnect(c.destination)}catch(e){}try{LV.bus.disconnect(PCS.cuf)}catch(e){}LV.bus.connect(PCS.cuf)}
+  if(LV.rg){try{LV.rg.disconnect(PCS.lg)}catch(e){}LV.rg.connect(PCS.lg)}
+  for(const r of LV.rows){try{r.cas.disconnect()}catch(e){}r.cas.connect(PCS.lg)}
+  const key=O.cas.id+'|'+O.cas.pair;if(PCS.ctx&&PCS.key!==key){try{PCS.ctx.close()}catch(e){}PCS.ctx=null}
+  if(!PCS.ctx){const k=PCS.ctx=new AudioContext({sampleRate:c.sampleRate,latencyHint:'playback'});PCS.key=key;PCS.out=k.createGain();try{if(k.setSinkId)await k.setSinkId(O.cas.id||'')}catch(e){console.warn('casse',e)}
+    PCS.src=k.createMediaStreamSource(PCS.dest.stream);PCS.src.connect(PCS.out);outWire(k,PCS.out,O.cas)}
+  PCS.out.gain.value=volCas();try{await PCS.ctx.resume()}catch(e){}PCS.on=true;pcsUI(O)}
+function pcsUI(O){const row=$('#lvCasRow');if(!row)return;O=O||PCS.O;const has=!isMobile&&LV.on&&(PCS.on||(O&&O.cas)||(!pcsWant()&&AE.iface));row.hidden=!has;$('#lvSplit').checked=pcsWant();
+  $('#lvOutRow').hidden=!!PCS.on||$('#lvOutRow').dataset.none==='1';$('#lvSwap').hidden=!PCS.on;$('#lvCasVol').parentNode.hidden=!PCS.on;
+  const v=volPct('salaVolCas',70);$('#lvCasVol').value=v;$('#lvCasVolV').textContent=Math.round(v)+'%';
+  $('#lvCasInfo').innerHTML=PCS.on?('Casse (pubblico): <b>'+esc(PCS.O.mode==='quad'?'OUT '+(PCS.O.cas.pair?'3-4':'1-2'):devShort(PCS.O.cas.lbl))+'</b> · base, voce e strumenti.<br>Cuffie (tu): <b>'+esc(PCS.O.mode==='quad'?'OUT '+(PCS.O.cuf.pair?'3-4':'1-2'):devShort(PCS.O.cuf.lbl))+'</b> · base, quello che senti in cuffia e il click.'):pcsWant()?'':'Tutto esce da una sola uscita, quella scelta qui sotto.';
+  try{lvInfo()}catch(e){}}
+$('#lvSplit').onchange=e=>{prefSet('palSplit',e.target.checked?'1':'0');pcsRoute().then(()=>pcsUI())};
+$('#lvSwap').onclick=()=>{prefSet('salaSwap',prefGet('salaSwap')==='1'?'0':'1');pcsRoute().then(()=>toast('Scambiate: '+($('#lvCasInfo').textContent.split('·')[0]||'').trim()))};
+$('#lvCasVol').oninput=e=>{prefSet('salaVolCas',e.target.value);$('#lvCasVolV').textContent=e.target.value+'%';if(PCS.out&&PCS.ctx)try{PCS.out.gain.setTargetAtTime(volCas(),PCS.ctx.currentTime,.02)}catch(x){}try{volApply()}catch(x){}};
 function lvPedSet(r,k){r.fb.set(r.fx);lvSave();$$(`[data-lvpd="${LV.rows.indexOf(r)}"][data-pd="${k}"]`).forEach(b=>{b.classList.toggle('on',!!r.fx[k].on);b.setAttribute('aria-pressed',!!r.fx[k].on)})}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-lvpd][data-pd]');if(b){e.preventDefault();const r=LV.rows[+b.dataset.lvpd];if(!r)return;const k=b.dataset.pd;r.fx[k].on=r.fx[k].on?0:1;lvPedSet(r,k);const card=document.querySelector(`#pedBoard .pedal[data-pd="${k}"]`);if(card&&PEDB===r)pedSync(card,r.fx[k],PED_BY[k]);toast(PED_BY[k].n+' '+(r.fx[k].on?'acceso':'spento'));return}
   const bb=e.target.closest('[data-lvboard]');if(bb){const r=LV.rows[+bb.dataset.lvboard];if(!r)return;PEDB=r;$('#pedTitle').textContent='🎛 Pedali · '+r.name;const re=async()=>{draw();await lvRewire(r);lvSave();lvRender()};const draw=()=>{const box=$('#pedBoard');box.innerHTML=pedHTML(r.fx,{bpm:true,noAmp:true});pedBind(box,r.fx,k=>lvPedSet(r,k),re)};draw();prBar('pedPre',()=>r.fx,re,r.role);openOv('#ovPed')}});
@@ -6862,20 +6928,20 @@ function lzLab(s,f,deg,fing){return LZ.lab==='deg'&&deg!=null?deg:LZ.lab==='fing
 
 /* ---------- metronomo ed esecuzione ---------- */
 const PL={on:false,bpm:70,sub:2,notes:true,auto:false,loop:0,i:0,steps:[],t:0,beat:0,vis:[],tm:0,raf:0,srcs:[]};
-function plStop(){PL.on=false;clearInterval(PL.tm);cancelAnimationFrame(PL.raf);PL.vis=[];PL.srcs.forEach(s=>{try{s.stop()}catch(e){}});PL.srcs=[];lzHl([]);try{dgHl(-1)}catch(e){}const b=$('#lzPlayBtn');if(b)b.innerHTML=LZI.play+'<span>Suona</span>'}
+function plStop(){PL.on=false;clearInterval(PL.tm);cancelAnimationFrame(PL.raf);PL.vis=[];PL.srcs.forEach(s=>{try{s.stop()}catch(e){}});PL.srcs=[];lzHl([]);try{dgHl(-1);kbHl([]);stHl(-1)}catch(e){}const b=$('#lzPlayBtn');if(b)b.innerHTML=LZI.play+'<span>Suona</span>'}
 function plStart(){const L=LZ.cur;if(!L||!L.gen)return;try{pause()}catch(e){}const c=ctx();try{c.resume()}catch(e){}PL.on=true;PL.loop=0;PL.i=0;PL.steps=L.gen(0);PL.beat=0;PL.vis=[];
   const spb=60/PL.bpm;PL.t=c.currentTime+.12;const ci=(PL.bar||4)>=3?(PL.bar||4):4;for(let k=0;k<ci;k++){lzClick(PL.t+k*spb,k%(PL.bar||4)===0);PL.vis.push({t:PL.t+k*spb,cnt:ci-k})}PL.t+=ci*spb;
   clearInterval(PL.tm);PL.tm=setInterval(plTick,25);plTick();cancelAnimationFrame(PL.raf);PL.raf=requestAnimationFrame(plVis);$('#lzPlayBtn').innerHTML=LZI.stop+'<span>Ferma</span>'}
 function plTick(){if(!PL.on)return;const c=ctx();let guard=0;
   while(PL.on&&PL.t<c.currentTime+.18&&guard++<64){const st=PL.steps[PL.i];if(!st){plStop();return}const spb=60/PL.bpm,dur=st.dur!=null?st.dur:1/PL.sub;
     const b0=PL.beat;if(PL.click!==false)for(let k=Math.ceil(b0-1e-6);k<b0+dur-1e-6;k++)lzClick(PL.t+(k-b0)*spb,k%(PL.bar||4)===0);
-    if(PL.notes&&st.n)st.n.forEach((x,j)=>lzPluck(x[0],x[1],PL.t+(st.strum?j*.022:0),st.g));if(PL.notes&&st.d)st.d.forEach(([k,ch])=>drPlay(k,ch,PL.t));
+    if(PL.notes&&st.n)st.n.forEach((x,j)=>lzPluck(x[0],x[1],PL.t+(st.strum?j*.022:0),st.g));if(PL.notes&&st.d)st.d.forEach(([k,ch])=>drPlay(k,ch,PL.t));if(PL.notes&&st.k)st.k.forEach((m,j)=>pnoPlay(m,PL.t+(st.strum?j*.015:0),st.g));
     PL.vis.push({t:PL.t,st});PL.beat+=dur;PL.t+=dur*spb;PL.i++;
     if(PL.i>=PL.steps.length){PL.i=0;PL.loop++;if(PL.auto&&PL.loop%2===0&&PL.bpm<240){PL.bpm=Math.min(240,PL.bpm+4);lzPlayUI()}
       PL.steps=LZ.cur.gen(PL.loop);if(LZ.cur.redraw)PL.vis.push({t:PL.t-.01,redraw:PL.loop})}}}
 function plVis(){if(!PL.on)return;const c=ctx(),now=c.currentTime;while(PL.vis.length&&PL.vis[0].t<=now){const v=PL.vis.shift();
     if(v.cnt){$('#lzCount').textContent=v.cnt;$('#lzCount').hidden=false;continue}$('#lzCount').hidden=true;
-    if(v.redraw!=null){LZ.cur.redraw(v.redraw);continue}const st=v.st;if(st.show)st.show();if(st.col!=null)dgHl(st.col);else lzHl((st.n||[]).map(x=>x[0]+'-'+x[1]));if(st.say!=null)$('#lzSay').textContent=st.say}
+    if(v.redraw!=null){LZ.cur.redraw(v.redraw);continue}const st=v.st;if(st.show)st.show();if(st.kb){kbHl(st.k||[]);if(st.col!=null&&st.col>=0)stHl(st.col)}else if(st.col!=null)dgHl(st.col);else lzHl((st.n||[]).map(x=>x[0]+'-'+x[1]));if(st.say!=null)$('#lzSay').textContent=st.say}
   PL.raf=requestAnimationFrame(plVis)}
 
 /* ---------- icone disegnate ---------- */
@@ -7009,7 +7075,7 @@ const LZ_L=[
   'I modi sono la scala maggiore che parte da un\'altra nota. <b>Dorico</b>: minore con la 6 maggiore, funky. <b>Frigio</b>: spagnoleggiante. <b>Lidio</b>: sognante. <b>Misolidio</b>: rock e blues. <b>Locrio</b>: molto teso. Ascoltali sulla stessa nota per sentire la differenza.'},
  {id:'walk',lv:5,b:1,t:'Walking bass sul blues',sub:'una nota per battito',type:'prog',walk:1,bpm:90,txt:()=>
   'Il <b>walking bass</b> «cammina»: una nota per battito, radice, 3, 5, 6, poi b7, 6, 5, 3. Qui lo suoni sul <b>blues a 12 battute</b>. Quando è facile, prova a inventare tu la strada da un accordo all\'altro.'}];
-const lzList=()=>LZ_L.filter(l=>lzDrums()?l.d:!l.d&&!(l.g&&lzBass())&&!(l.b&&!lzBass()));
+const lzList=()=>LZ_L.filter(l=>lzDrums()?l.d:lzPiano()?l.p:!l.d&&!l.p&&!(l.g&&lzBass())&&!(l.b&&!lzBass()));
 const lzVal=v=>typeof v==='function'?v():v;
 
 /* ---------- apertura e lista ---------- */
@@ -7017,15 +7083,15 @@ function lezOpen(){try{const p=lzProg();if(p.inst)LZ.inst=p.inst;if(p.names)LZ.n
 function lzInstUI(){$$('#lezInst button').forEach(b=>b.classList.toggle('on',b.dataset.i===LZ.inst))}
 function lzStreak(p){const set=new Set(p.days);let n=0;const d=new Date();if(!set.has(lzToday()))d.setDate(d.getDate()-1);
   for(;;){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');if(!set.has(k))break;n++;d.setDate(d.getDate()-1)}return n}
-function lzHome(){plStop();LZ.id=null;LZ.cur=null;if(LZ.rt)lzRtEnd(false);$('#lezView').hidden=true;$('#lezHome').hidden=false;$('#lezBack').hidden=true;$('#lezTitle').textContent='Lezioni di '+(lzDrums()?'batteria':lzBass()?'basso':'chitarra');
+function lzHome(){plStop();LZ.id=null;LZ.cur=null;if(LZ.rt)lzRtEnd(false);$('#lezView').hidden=true;$('#lezHome').hidden=false;$('#lezBack').hidden=true;$('#lezTitle').textContent='Lezioni di '+(lzPiano()?'pianoforte':lzDrums()?'batteria':lzBass()?'basso':'chitarra');
   const p=lzProg(),done=new Set(p.days),st=lzStreak(p),M=LZ.min||3;let dots='';const d=new Date();d.setDate(d.getDate()-13);
   for(let i=0;i<14;i++){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');dots+=`<i class="${done.has(k)?'on':''}${i===13?' oggi':''}" title="${k}"></i>`;d.setDate(d.getDate()+1)}
   const todayDone=done.has(lzToday());
-  let h=`<div class="lzday" id="lzDay"><div class="lzdayh">${LZI.flame}<div class="grow"><b>Allenamento del giorno</b><small>${lzDrums()?'4 parti: riscaldamento, rudimento, ritmo, fill. Cambia ogni giorno.':'4 parti: riscaldamento, scala, accordi, dita. Cambia ogni giorno.'}</small></div></div>
+  let h=`<div class="lzday" id="lzDay"><div class="lzdayh">${LZI.flame}<div class="grow"><b>Allenamento del giorno</b><small>${lzPiano()?'4 parti: cinque dita, scala, accompagnamento, dita. Cambia ogni giorno.':lzDrums()?'4 parti: riscaldamento, rudimento, ritmo, fill. Cambia ogni giorno.':'4 parti: riscaldamento, scala, accordi, dita. Cambia ogni giorno.'}</small></div></div>
    <div class="lzdots" aria-label="Ultimi 14 giorni">${dots}</div><div class="lzdayf"><span class="lzstreak">${st?`<b>${st}</b> ${st===1?'giorno':'giorni'} di fila`:'Inizia oggi la tua serie'}</span>
    <div class="seg" id="lzMin" role="group" aria-label="Minuti per parte">${[2,3,5].map(m=>`<button data-m="${m}" class="${m===M?'on':''}">${m*4} min</button>`).join('')}</div>
    <button class="chip pri" id="lzDayGo">${LZI.play}<span>${todayDone?'Rifallo':'Inizia'}</span></button></div></div>`;
-  const L=lzList();(lzDrums()?['Primi passi','Rudimenti: le mani','Primi ritmi','Gli stili','Fill e coordinazione','Crea'] :LZ_LV).forEach((nm,lv)=>{const ls=L.filter(l=>l.lv===lv);if(!ls.length)return;h+=`<h4 class="lzlvh">Livello ${lv+1} · ${nm}</h4><div class="lzgrid">`;
+  const L=lzList();(lzPiano()?['Primi passi','Leggere e suonare','Le scale','Accordi','Accompagnare','Esercizi per le dita']:lzDrums()?['Primi passi','Rudimenti: le mani','Primi ritmi','Gli stili','Fill e coordinazione','Crea'] :LZ_LV).forEach((nm,lv)=>{const ls=L.filter(l=>l.lv===lv);if(!ls.length)return;h+=`<h4 class="lzlvh">Livello ${lv+1} · ${nm}</h4><div class="lzgrid">`;
     ls.forEach(l=>{const k=LZ.inst+':'+l.id,ok=p.done[k],rc=p.rec[k];const no=L.indexOf(l)+1;
       h+=`<button class="lzcard${ok?' ok':''}" data-l="${l.id}"><span class="no">${ok?LZI.ok:no}</span><span class="tx"><b>${esc(lzVal(l.t))}</b><small>${esc(lzVal(l.sub))}${rc?' · record '+rc.bpm+' bpm':''}</small></span></button>`});h+='</div>'});
   h+=`<div class="lzset">${''}<div class="lzf"><span>Nomi delle note</span><div class="seg" id="lzNames"><button data-n="it" class="${LZ.names==='it'?'on':''}">Do Re Mi</button><button data-n="en" class="${LZ.names==='en'?'on':''}">C D E</button></div></div></div>`;
@@ -7038,9 +7104,9 @@ function lzHome(){plStop();LZ.id=null;LZ.cur=null;if(LZ.rt)lzRtEnd(false);$('#le
 /* ---------- una lezione ---------- */
 function lzGo(id,preset){plStop();const l=LZ_L.find(x=>x.id===id);if(!l)return;LZ.id=id;const k=LZ.inst+':'+id;LZ.st[k]=Object.assign(LZ.st[k]||{},preset||{});const S=LZ.st[k];
   $('#lezHome').hidden=true;$('#lezView').hidden=false;$('#lezBack').hidden=false;$('#lezTitle').textContent=lzVal(l.t);$('#lzTxt').innerHTML=lzVal(l.txt);
-  $('#lzCtl').innerHTML='';lzInfo('');$('#lzSay').textContent='';$('#lzCount').hidden=true;$('#lzTab').hidden=true;const isD=l.type==='dpat'||l.type==='dmake';$('#fbWrap').hidden=isD;$('#dgWrap').hidden=!isD;$('#lzPlay').hidden=false;PL.bar=4;
+  $('#lzCtl').innerHTML='';lzInfo('');$('#lzSay').textContent='';$('#lzCount').hidden=true;$('#lzTab').hidden=true;const isD=l.type==='dpat'||l.type==='dmake',isP=!!l.p&&l.type!=='read';$('#fbWrap').hidden=isD||isP;$('#dgWrap').hidden=!isD;$('#kbWrap').hidden=!isP;$('#stWrap').hidden=!isP;$('#pnBox').hidden=!isP;PN.follow=false;$('#pnFollow').checked=false;try{pnMidiUI()}catch(e){}$('#lzPlay').hidden=false;PL.bar=4;
   PL.bpm=S.bpm||l.bpm||70;PL.sub=S.sub||l.sub2||(l.type==='ex'?2:1);PL.notes=S.notes!=null?S.notes:true;PL.auto=!!S.auto;
-  LZ.lab=S.lab||({ex:'fing',chords:'fing',barre:'fing',prog:'fing'}[l.type])||'note';const Lt=LZT[l.type];LZ.cur=Lt(l,S);LZ.cur.draw&&LZ.cur.draw();lzPlayUI();
+  LZ.lab=S.lab||({ex:'fing',chords:'fing',barre:'fing',prog:'fing',kbex:'fing',kbscale:'fing',kbmel:'fing',kbchord:'note'}[l.type])||'note';const Lt=LZT[l.type];LZ.cur=Lt(l,S);LZ.cur.draw&&LZ.cur.draw();lzPlayUI();
   const p=lzProg();$('#lzDone').innerHTML=p.done[k]?LZI.ok+'<span>Lezione fatta</span>':'<span>Segna come fatta</span>';$('#lzDone').classList.toggle('on',!!p.done[k]);
   $('#ovLez .lezsheet').scrollTop=0}
 function lzPlayUI(){const L=LZ.cur;const k=LZ.inst+':'+LZ.id;const box=$('#lzPlay');$('#lzOpts').hidden=!L||!L.gen;if(!L||!L.gen){box.hidden=true;return}box.hidden=false;
@@ -7056,7 +7122,7 @@ const LZT={
  tune(l){const ref=document.createElement('div');ref.className='lzrow';lzTun().forEach((m,s)=>{const b=lzBtn(`${LZ_STRNAME[LZ.inst][s]} · ${nn(m%12)}`,()=>{const c=ctx();c.resume();lzPluck(s,0,c.currentTime,1);lzHl([s+'-0']);setTimeout(()=>lzHl([]),1500)});ref.append(b)});
    lzCtl(lzBtn('<span>Apri l\'accordatore</span>',()=>{plStop();try{tuneOpen(null)}catch(e){toast('Accordatore non disponibile')}},'pri'),ref);
    return{draw(){lzDraw(lzTun().map((m,s)=>({s,f:0,lab:nn(m%12),cls:'r'})).concat(lzTun().slice(0,-1).map((m,s)=>({s,f:(lzTun()[s+1]-m),lab:nn(lzTun()[s+1]%12),cls:'d3'}))))},gen:()=>lzTun().map((m,s)=>({n:[[s,0]],dur:2}))}},
- read(l){$('#fbWrap').hidden=true;$('#dgWrap').hidden=true;$('#lzPlay').hidden=true;$('#lzOpts').hidden=true;return{}},
+ read(l){$('#fbWrap').hidden=true;$('#dgWrap').hidden=true;$('#kbWrap').hidden=true;$('#stWrap').hidden=true;$('#lzPlay').hidden=true;$('#lzOpts').hidden=true;return{}},
  tab(l){const t=lzTun(),seq=lzBass()?[[1,3],[2,0],[2,2],[2,3],[3,0],[3,2],[3,4],[3,5]]:[[1,3],[2,0],[2,2],[2,3],[3,0],[3,2],[4,0],[4,1]];
    const n=t.length,rows=[...Array(n).keys()].reverse().map(s=>nn(t[s]%12).padEnd(3)+'|');seq.forEach(([s,f])=>{for(let r=0;r<n;r++){const ss=n-1-r;rows[r]+=(ss===s?String(f):'-').padEnd(2,'-')+'-'}});
    $('#lzTab').hidden=false;$('#lzTab').textContent=rows.map(r=>r+'|').join('\n');
@@ -7179,7 +7245,7 @@ function lzWire(){
   let rz=0;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(!$('#ovLez').hidden&&LZ.cur&&LZ.cur.draw&&!PL.on)LZ.cur.draw()},200)})}
 
 /* ---------- allenamento del giorno ---------- */
-function lzRtPlan(){if(lzDrums())return lzRtPlanDrums();const d=lzDayN(),B=lzBass(),p=lzProg();const rec=id=>p.rec[LZ.inst+':'+id];
+function lzRtPlan(){if(lzPiano())return lzRtPlanPiano();if(lzDrums())return lzRtPlanDrums();const d=lzDayN(),B=lzBass(),p=lzProg();const rec=id=>p.rec[LZ.inst+':'+id];
   const roots=[9,4,7,0,2,5,11];const scs=['pmin','pmag','maj','min','blues'];const sc=scs[d%scs.length];const scl={pmin:'pmin',pmag:'pmag',maj:'maj',min:'min',blues:'blues'}[sc];
   const hands=['spider','perm','leg','str','skip','alt'];const hid=hands[d%hands.length];const r0=rec('crom');
   const nPos=sc==='maj'||sc==='min'?7:5;
@@ -7326,6 +7392,203 @@ function lzRtPlanDrums(){const d=lzDayN(),p=lzProg(),rec=id=>p.rec[LZ.inst+':'+i
   const pick=(a,k)=>a[(d+k)%a.length],vOf=id=>{const l=LZ_DL.find(x=>x.id===id);return (Math.floor(d/3))%D_PATS[l.set].length};
   const b=(n,id,extra)=>({n,id,pre:Object.assign({v:vOf(id),bpm:rec(id)?Math.max(50,rec(id).bpm-10):(LZ_DL.find(x=>x.id===id).bpm||70)},extra||{})});
   return[{n:'Riscaldamento: colpo singolo',id:'d_single',pre:{v:0,bpm:r0?Math.max(50,r0.bpm-12):60}},b('Rudimento del giorno',pick(rud,0)),b('Ritmo del giorno',pick(sty,1)),b('Fill e coordinazione',pick(fil,2))]}
+/* ================= LEZIONI di PIANO =================
+   Tastiera disegnata che suona, spartito (pentagramma) che segue l'esercizio, dita numerate 1-5,
+   ascolto di una tastiera MIDI collegata (i tasti premuti si accendono e nei giochi l'app controlla le note). */
+const lzPiano=()=>LZ.inst==='piano';
+const PN={flat:false,press:new Set(),follow:false,fi:0,ok:0,ko:0,midiName:''};
+/* ---------- suono del pianoforte (creato dall'app) ---------- */
+const PNK=new Map();
+function pnoBuf(m){if(PNK.has(m))return PNK.get(m);const c=ctx(),sr=c.sampleRate,f=440*2**((m-69)/12),len=Math.floor(sr*Math.max(1.2,3.2-(m-40)*.03)),B=c.createBuffer(1,len,sr),d=B.getChannelData(0);
+  const P=[];for(let k=1;k<=10;k++){const fk=f*k*Math.sqrt(1+.0004*k*k);if(fk>sr/2.2)break;P.push([2*Math.PI*fk/sr,(1/Math.pow(k,1.25))*(k===1?1:.7),1/(sr*(1.6/(1+k*.55)*Math.max(.35,1.4-(m-48)*.012))),Math.random()*6])}
+  let pk=0;for(let i=0;i<len;i++){let v=0;for(const[w,a,dk,ph]of P)v+=a*Math.exp(-i*dk)*Math.sin(w*i+ph);const at=Math.min(1,i/(sr*.004));v*=at;if(i<sr*.012)v+=(Math.random()*2-1)*.08*(1-i/(sr*.012));d[i]=v;const av=v<0?-v:v;if(av>pk)pk=av}
+  const nr=.5/(pk||1),fd=Math.floor(sr*.08);for(let i=0;i<len;i++){d[i]*=nr;if(i>len-fd)d[i]*=(len-i)/fd}if(PNK.size>90)PNK.clear();PNK.set(m,B);return B}
+function pnoPlay(m,t,v){try{const c=ctx(),s=c.createBufferSource(),g=c.createGain();s.buffer=pnoBuf(m);g.gain.value=(v==null?1:v)*.75;s.connect(g);g.connect(lzOutN());s.start(Math.max(t||0,c.currentTime));PL.srcs.push(s);if(PL.srcs.length>120)PL.srcs.splice(0,40)}catch(e){}}
+/* ---------- nomi e spartito ---------- */
+const PN_SH=[[0,0],[0,1],[1,0],[1,1],[2,0],[3,0],[3,1],[4,0],[4,1],[5,0],[5,1],[6,0]],PN_FL=[[0,0],[1,-1],[1,0],[2,-1],[2,0],[3,0],[4,-1],[4,0],[5,-1],[5,0],[6,-1],[6,0]];
+const pnLet=m=>(PN.flat?PN_FL:PN_SH)[((m%12)+12)%12];
+const pnDia=m=>{const[l]=pnLet(m);return(Math.floor(m/12)-1)*7+l};
+const pnName=m=>{const pc=((m%12)+12)%12;if(!PN.flat)return nn(pc);const it=['Do','Reb','Re','Mib','Mi','Fa','Solb','Sol','Lab','La','Sib','Si'],en=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];return(LZ.names==='en'?en:it)[pc]};
+const pnBlack=m=>[1,3,6,8,10].includes(((m%12)+12)%12);
+/* ---------- tastiera ---------- */
+function kbDraw(o){o=o||{};const lo=o.lo||48,hi=o.hi||72,wr=$('#kbWrap'),W=Math.max(300,Math.min(wr.clientWidth||700,1400));LZ.kb=o;
+  const whites=[];for(let m=lo;m<=hi;m++)if(!pnBlack(m))whites.push(m);const phone=W<600,kw=Math.max(phone?30:26,Math.min(60,(W-4)/whites.length)),kh=Math.min(phone?160:200,Math.max(120,kw*4.6)),bw=kw*.62,bh=kh*.62;
+  const X=new Map();whites.forEach((m,i)=>X.set(m,i*kw));const mk=new Map((o.marks||[]).map(x=>[x.m,x]));const sv=[];
+  const lab=(m,x,y,bl)=>{const k=mk.get(m);if(!k)return o.names&&!bl?`<text class="kbn${m%12===0?' c':''}" x="${x}" y="${y}" text-anchor="middle">${esc(pnName(m))}</text>`:'';
+    return `<g class="kbm ${k.cls||''}"><circle cx="${x}" cy="${y-5}" r="${Math.min(13,kw*.38)}"/><text x="${x}" y="${y-1}" text-anchor="middle">${esc(k.lab==null?pnName(m):k.lab)}</text></g>`};
+  whites.forEach((m,i)=>{const x=i*kw;sv.push(`<g class="kbk w${m===60?' mc':''}" data-m="${m}"><rect x="${x+.5}" y="0" width="${kw-1}" height="${kh}" rx="4"/>${lab(m,x+kw/2,kh-12,0)}</g>`)});
+  for(let m=lo;m<=hi;m++)if(pnBlack(m)&&X.has(m-1)){const x=X.get(m-1)+kw-bw/2;sv.push(`<g class="kbk b" data-m="${m}"><rect x="${x}" y="0" width="${bw}" height="${bh}" rx="3"/>${lab(m,x+bw/2,bh-8,1)}</g>`)}
+  const W2=whites.length*kw;const svg=$('#kb');svg.setAttribute('viewBox',`0 0 ${W2} ${kh+2}`);svg.setAttribute('width',W2);svg.setAttribute('height',kh+2);svg.innerHTML=sv.join('');
+  kbPressUI();if(o.focus!=null){const x=X.get(o.focus)||X.get(o.focus-1)||0;if(W2>W)wr.scrollLeft=Math.max(0,x-W/3)}}
+function kbHl(ms){$$('#kb .kbk.on').forEach(e=>e.classList.remove('on'));(ms||[]).forEach(m=>{const e=$('#kb .kbk[data-m="'+m+'"]');if(e)e.classList.add('on')})}
+function kbPressUI(){$$('#kb .kbk').forEach(e=>e.classList.toggle('pr',PN.press.has(+e.dataset.m)))}
+function kbFlash(m,ok){const e=$('#kb .kbk[data-m="'+m+'"]');if(!e)return;e.classList.add(ok?'good':'bad');setTimeout(()=>e.classList.remove('good','bad'),500)}
+/* ---------- spartito: una colonna per passo, mano destra in chiave di violino, sinistra in chiave di basso ---------- */
+function stDraw(steps,o){o=o||{};const wr=$('#stWrap');if(!steps||!steps.length){wr.hidden=true;return}wr.hidden=false;
+  const ks=[].concat(...steps.map(s=>s.k||[]));const hasT=ks.some(m=>m>=60)||o.treble,hasB=ks.some(m=>m<60)||o.bass,g=10,cw=Math.max(26,Math.min(40,((wr.clientWidth||600)-70)/steps.length));
+  let y=34;const T=hasT?y:null;if(hasT)y+=40+64;const Bt=hasB?y:null;if(hasB)y+=40+34;const H=y-10,W=70+steps.length*cw+10;const sv=[];
+  const yT=d=>T+40-(d-30)*g/2,yB=d=>Bt+40-(d-18)*g/2;
+  steps.forEach((s,i)=>{if(s.bar)sv.push(`<line class="stbar" x1="${66+i*cw}" y1="${T!=null?T:Bt}" x2="${66+i*cw}" y2="${(Bt!=null?Bt:T)+40}"/>`)});
+  for(const[top,cl]of[[T,'𝄞'],[Bt,'𝄢']]){if(top==null)continue;for(let i=0;i<5;i++)sv.push(`<line class="stl" x1="4" y1="${top+i*g}" x2="${W-4}" y2="${top+i*g}"/>`);
+    sv.push(cl==='𝄞'?`<text class="stclef" x="10" y="${top+33}" font-size="44">${cl}</text>`:`<text class="stclef" x="10" y="${top+27}" font-size="31">${cl}</text>`)}
+  if(T!=null&&Bt!=null)sv.push(`<line class="stl" x1="4" y1="${T}" x2="4" y2="${Bt+40}"/>`);
+  steps.forEach((s,i)=>{const x=70+i*cw+cw/2;sv.push(`<rect class="stcol" data-c="${i}" x="${x-cw/2+1}" y="2" width="${cw-2}" height="${H-4}" rx="4"/>`);
+    (s.k||[]).forEach((m,j)=>{const tre=T!=null&&(m>=60||Bt==null),d=pnDia(m),yy=tre?yT(d):yB(d),[,acc]=pnLet(m),lo0=tre?30:18,hi0=tre?38:26;
+      for(let L=lo0-2;L>=d;L-=2)sv.push(`<line class="stll" x1="${x-9}" y1="${tre?yT(L):yB(L)}" x2="${x+9}" y2="${tre?yT(L):yB(L)}"/>`);
+      for(let L=hi0+2;L<=d;L+=2)sv.push(`<line class="stll" x1="${x-9}" y1="${tre?yT(L):yB(L)}" x2="${x+9}" y2="${tre?yT(L):yB(L)}"/>`);
+      const up=d<(tre?34:22);const fin=s.f&&s.f[j]!=null?s.f[j]:null;
+      sv.push(`<g class="stn" data-c="${i}"><ellipse cx="${x}" cy="${yy}" rx="5.6" ry="4.1" transform="rotate(-20 ${x} ${yy})"/>${(s.k.length===1||j===0)&&!o.noStem?`<line class="stst" x1="${up?x+5:x-5}" y1="${yy}" x2="${up?x+5:x-5}" y2="${up?yy-30:yy+30}"/>`:''}${acc?`<text class="stacc" x="${x-13}" y="${yy+4}" text-anchor="middle">${acc>0?'#':'♭'}</text>`:''}${fin!=null&&o.fing?`<text class="stfi" x="${x}" y="${up?yy+16:yy-10}" text-anchor="middle">${fin}</text>`:''}</g>`)})});
+  const svg=$('#stf');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);svg.setAttribute('height',H);svg.innerHTML=sv.join('');LZ.stN=steps.length}
+function stHl(c){$$('#stf .on').forEach(e=>e.classList.remove('on'));if(c==null||c<0)return;$$('#stf [data-c="'+c+'"]').forEach(e=>e.classList.add('on'));const r=$('#stf rect[data-c="'+c+'"]'),wr=$('#stWrap');
+  if(r&&wr.scrollWidth>wr.clientWidth){const x=+r.getAttribute('x');if(x<wr.scrollLeft+40||x>wr.scrollLeft+wr.clientWidth-80)wr.scrollLeft=Math.max(0,x-60)}}
+
+/* ---------- teoria ---------- */
+const PN_ROOTS=[[0,'Do'],[7,'Sol'],[2,'Re'],[9,'La'],[4,'Mi'],[11,'Si'],[5,'Fa'],[10,'Sib'],[3,'Mib'],[8,'Lab'],[1,'Reb'],[6,'Fa#']];
+const pnFlatKey=(r,minor)=>minor?[2,7,0,5,10,3].includes(r):[5,10,3,8,1].includes(r);
+/* diteggiature classiche delle scale maggiori (un'ottava, salendo): mano destra e sinistra */
+const PN_FING={0:['12312345','54321321'],7:['12312345','54321321'],2:['12312345','54321321'],9:['12312345','54321321'],4:['12312345','54321321'],11:['12312345','43214321'],
+ 5:['12341234','54321321'],10:['21231234','32143213'],3:['31234123','32143213'],8:['34123123','32143213'],1:['23123412','32143213'],6:['23412312','43213214']};
+const PN_SC={maj:[0,2,4,5,7,9,11],min:[0,2,3,5,7,8,10],harm:[0,2,3,5,7,8,11],pmin:[0,3,5,7,10],pmag:[0,2,4,7,9],blues:[0,3,5,6,7,10]};
+const PN_SCN={maj:'Maggiore',min:'Minore naturale',harm:'Minore armonica',pmin:'Pentatonica minore',pmag:'Pentatonica maggiore',blues:'Blues'};
+const pnBase=(r,lh)=>(lh?48:60)+r-(r>=7&&!lh?12:0)-(r>=7&&lh?12:0);
+function pnScale(r,ty,lh){const iv=PN_SC[ty],b=pnBase(r,lh);const up=iv.map(x=>b+x).concat([b+12]);let f=null;
+  if(ty==='maj'||ty==='min'||ty==='harm'){const F=PN_FING[r]||PN_FING[0];f=(lh?F[1]:F[0]).split('').map(Number)}
+  else if(iv.length===5)f=lh?[5,4,3,2,1,1]:[1,2,3,1,2,4];else if(iv.length===6)f=lh?[5,4,3,2,1,3,1]:[1,2,3,4,1,3,4];return{up,f}}
+function pnTriad(r,q,inv,base){const iv=LZ_CH[q].iv;let ns=iv.map(x=>base+r+x);for(let i=0;i<inv;i++){const a=ns.shift();ns.push(a+12)}return ns}
+/* voci vicine: tra un accordo e l'altro la mano destra si muove il meno possibile */
+function pnVoice(r,q,prev){const iv=LZ_CH[q].iv;let best=null,bd=1e9;for(let inv=0;inv<iv.length;inv++)for(const base of[48,60]){const ns=pnTriad(r,q,inv,base).map(x=>x);if(ns[0]<55||ns[ns.length-1]>79)continue;
+    const d=prev?ns.reduce((s,x,i)=>s+Math.abs(x-(prev[Math.min(i,prev.length-1)])),0):Math.abs(ns[0]-62);if(d<bd){bd=d;best=ns}}return best||pnTriad(r,q,0,60)}
+const pnRootL=r=>{let m=36+r;if(m<40)m+=12;return m};
+/* ---------- passi degli esercizi ---------- */
+function pnSeq(ks,fs,dur,lh){return ks.map((m,i)=>({k:[m],f:[fs?fs[i]:null],h:lh?'l':'r',dur:dur||null}))}
+function pnBoth(R,L){return R.map((s,i)=>({k:[L[i].k[0],s.k[0]],f:[L[i].f[0],s.f[0]],h:'b',dur:s.dur}))}
+function pnUpDown(ks,fs){const k2=ks.concat(ks.slice(0,-1).reverse()),f2=fs?fs.concat(fs.slice(0,-1).reverse()):null;return[k2,f2]}
+const PN_EX={
+ five:(o)=>{const r=o.root||0,R=[0,2,4,5,7].map(x=>60+r+x),[k,f]=pnUpDown(R,[1,2,3,4,5]),L=[0,2,4,5,7].map(x=>48+r+x),[k2,f2]=pnUpDown(L,[5,4,3,2,1]);return o.hand==='l'?pnSeq(k2,f2,null,1):o.hand==='b'?pnBoth(pnSeq(k,f),pnSeq(k2,f2,null,1)):pnSeq(k,f)},
+ hanon:(o)=>{const pat=[0,2,3,4,5,4,3,2],sc=[0,2,4,5,7,9,11,12,14,16,17];const R=[],F=[];for(let st=0;st<7;st++){pat.forEach((p,i)=>{const deg=st+[0,2,3,4,5,4,3,2][i];R.push(60+[0,2,4,5,7,9,11,12,14,16,17,19,21][deg]);F.push([1,2,3,4,5,4,3,2][i])})}
+   R.push(72);F.push(1);const L=R.map(m=>m-12),FL=[5,4,3,2,1,2,3,4];const sL=pnSeq(L,L.map((_,i)=>FL[i%8]||1),null,1);return o.hand==='l'?sL:o.hand==='b'?pnBoth(pnSeq(R,F),sL):pnSeq(R,F)},
+ thumb:(o)=>{const r=o.root||0,R=[0,2,4,5,7,9,11,12].map(x=>60+r+x),f=[1,2,3,1,2,3,4,5];const[k,f2]=pnUpDown(R,f);return pnSeq(k,f2)},
+ trill:(o)=>{const r=60+(o.root||0),S=[];[[0,2,1,2],[2,4,2,3],[4,5,3,4],[5,7,4,5]].forEach(([a,b,fa,fb])=>{for(let i=0;i<4;i++){S.push({k:[r+a],f:[fa],h:'r'});S.push({k:[r+b],f:[fb],h:'r'})}});return S},
+ indep:(o)=>{const r=o.root||0,S=[];const mel=[0,2,4,5,7,5,4,2],bass=[0,7,0,7];for(let b=0;b<4;b++){for(let i=0;i<2;i++){const st={k:[60+r+mel[(b*2+i)%8]],f:[[1,2,3,4,5,4,3,2][(b*2+i)%8]],h:'r',dur:.5};if(i===0){st.k=[36+r+bass[b],st.k[0]];st.f=[b%2?1:5,st.f[0]];st.h='b'}S.push(st)}}return S.concat(S)},
+ arp:(o)=>{const r=o.root||0,q=o.q||'M',iv=LZ_CH[q].iv.slice(0,3),R=[];for(let oc=0;oc<2;oc++)iv.forEach(x=>R.push(60+r+x+12*oc-(r>=7?12:0)));R.push(60+r+24-(r>=7?12:0));const f=[1,2,3,1,2,3,5];const[k,f2]=pnUpDown(R,f);return pnSeq(k,f2)}};
+/* melodie popolari libere da diritti */
+const PN_MEL={
+ gioia:{n:'Inno alla gioia (Beethoven)',m:[64,64,65,67,67,65,64,62,60,60,62,64,64,62,62,0,64,64,65,67,67,65,64,62,60,60,62,64,62,60,60,0],f:[3,3,4,5,5,4,3,2,1,1,2,3,3,2,2,0,3,3,4,5,5,4,3,2,1,1,2,3,2,1,1,0]},
+ martino:{n:'Fra Martino',m:[60,62,64,60,60,62,64,60,64,65,67,0,64,65,67,0],f:[1,2,3,1,1,2,3,1,3,4,5,0,3,4,5,0]},
+ stella:{n:'Brilla brilla la stellina',m:[60,60,67,67,69,69,67,0,65,65,64,64,62,62,60,0],f:[1,1,4,4,5,5,4,0,3,3,2,2,1,1,1,0]},
+ auguri:{n:'Tanti auguri',m:[60,60,62,60,65,64,0,0,60,60,62,60,67,65,0,0],f:[1,1,2,1,4,3,0,0,1,1,2,1,5,4,0,0]}};
+
+/* ---------- lezioni ---------- */
+const LZ_PL=[
+ {id:'p_keys',lv:0,t:'La tastiera',sub:'tasti bianchi, neri e il Do',type:'kbinfo',txt:()=>'I tasti neri sono in gruppi da <b>2</b> e da <b>3</b>. Il <b>Do</b> è sempre il tasto bianco subito a sinistra del gruppo da 2. Poi vengono Re, Mi, Fa, Sol, La, Si, e di nuovo Do: un\'<b>ottava</b>.<br>Il <b>Do centrale</b> (arancione) sta in mezzo alla tastiera, di solito sotto il nome della marca. Tocca i tasti per sentirli.'},
+ {id:'p_post',lv:0,t:'Postura e dita',sub:'i numeri da 1 a 5',type:'read',txt:()=>'<ul><li>Siediti al centro della tastiera, all\'altezza del Do centrale, con gli avambracci in linea con i tasti.</li><li>Le mani sono «a cupola», come se tenessero una palla; le dita curve, si suona con la punta.</li><li>Le dita hanno un numero, uguale per tutte e due le mani: <b>1 pollice, 2 indice, 3 medio, 4 anulare, 5 mignolo</b>.</li><li>Il polso resta morbido, né troppo alto né appoggiato.</li><li>Il pedale di destra tiene le note: all\'inizio non usarlo.</li><li>Meglio 10 minuti ogni giorno che un\'ora una volta a settimana.</li></ul>'},
+ {id:'p_find',lv:0,t:'Trova le note',sub:'gioco sulla tastiera',type:'kbquiz',txt:()=>'L\'app ti dice una nota e tu la trovi sulla tastiera: tocca il disegno, oppure suonala sulla tua tastiera MIDI collegata. Ogni Do è uguale agli altri, va bene qualsiasi ottava.'},
+ {id:'p_five',lv:0,t:'Cinque dita',sub:'Do Re Mi Fa Sol',type:'kbex',ex:'five',bpm:60,txt:()=>'Il pollice (1) sul Do, poi ogni dito sul suo tasto: 2 su Re, 3 su Mi, 4 su Fa, 5 su Sol. Sali e scendi suonando piano e tutte le note uguali. Prima la mano destra, poi la sinistra (mignolo sul Do), poi tutte e due insieme.'},
+ {id:'p_staff',lv:1,t:'Leggere lo spartito',sub:'le note sul pentagramma',type:'staffquiz',txt:()=>'Lo spartito ha 5 linee (pentagramma). In <b>chiave di violino</b> (mano destra) le linee dal basso sono <b>Mi Sol Si Re Fa</b>, gli spazi <b>Fa La Do Mi</b>. In <b>chiave di basso</b> (mano sinistra) le linee sono <b>Sol Si Re Fa La</b>. Il Do centrale sta su una lineetta in più, tra le due chiavi.<br>Gioca: l\'app mostra una nota, tu la suoni.'},
+ {id:'p_mel',lv:1,t:'Prime melodie',sub:'leggi e suona',type:'kbmel',bpm:80,txt:()=>'Melodie famose e semplici, con lo spartito e i numeri delle dita. Segui le note che si accendono. Con <b>Aspettami</b> l\'app va avanti solo quando suoni la nota giusta: così impari al tuo ritmo.'},
+ {id:'p_thumb',lv:1,t:'Passaggio del pollice',sub:'per suonare più di 5 note',type:'kbex',ex:'thumb',bpm:60,txt:()=>'Per salire oltre il Mi il pollice passa <b>sotto</b> la mano e va sul Fa: 1 2 3, pollice sotto, 1 2 3 4 5. Scendendo, il dito 3 scavalca il pollice. Il movimento deve essere morbido, senza alzare il gomito.'},
+ {id:'p_scmaj',lv:2,t:'Scale maggiori',sub:'con la diteggiatura giusta',type:'kbscale',sc:['maj'],txt:()=>'Ogni scala maggiore ha la sua <b>diteggiatura</b> (i numeri sui tasti). Do, Sol, Re, La e Mi usano la stessa: 1 2 3, pollice sotto, 1 2 3 4 5. Quelle con i tasti neri cambiano: segui i numeri. Mano per mano, lente, poi insieme.'},
+ {id:'p_scmin',lv:2,t:'Scale minori',sub:'naturale e armonica',type:'kbscale',sc:['min','harm'],root:9,txt:()=>'La scala minore ha un colore malinconico. La <b>naturale</b> ha le stesse note della maggiore che parte 3 tasti più su (La minore = Do maggiore). L\'<b>armonica</b> alza la settima nota: è quella della musica classica e dei brani drammatici.'},
+ {id:'p_penta',lv:2,t:'Pentatonica e blues',sub:'per improvvisare',type:'kbscale',sc:['pmin','pmag','blues'],root:9,txt:()=>'5 note che stanno bene quasi su tutto: con la <b>pentatonica</b> puoi improvvisare senza sbagliare. La <b>blues</b> aggiunge una nota in più (la «blue note»). Prova La minore pentatonica solo sui tasti bianchi.'},
+ {id:'p_tri',lv:3,t:'Triadi e rivolti',sub:'gli accordi da 3 note',type:'kbchord',txt:()=>'Un accordo di 3 note: <b>radice</b>, <b>terza</b> e <b>quinta</b>. Mano destra con le dita 1-3-5, sinistra 5-3-1. I <b>rivolti</b> sono le stesse note in ordine diverso: servono per passare da un accordo all\'altro muovendo poco la mano.'},
+ {id:'p_sev',lv:3,t:'Accordi di settima',sub:'più colore',type:'kbchord',sev:1,txt:()=>'Si aggiunge una quarta nota, la <b>settima</b>. Il <b>7</b> suona blues, il <b>maj7</b> sognante, il <b>m7</b> morbido e jazz. Dita della mano destra: 1-2-3-5.'},
+ {id:'p_arp',lv:3,t:'Arpeggi',sub:'le note dell\'accordo una per volta',type:'kbex',ex:'arp',bpm:70,txt:()=>'L\'accordo suonato nota per nota, su due ottave: 1 2 3, pollice sotto, 1 2 3 5. È il movimento più usato negli accompagnamenti delle ballate.'},
+ {id:'p_prog',lv:3,t:'Progressioni famose',sub:'gli accordi delle canzoni',type:'kbprog',bpm:70,txt:()=>'La mano sinistra suona la radice, la destra l\'accordo, sempre nel rivolto più vicino: la mano si sposta pochissimo. <b>I-V-vi-IV</b> è la sequenza di tantissime canzoni pop; il <b>blues</b> ha 12 battute.'},
+ {id:'p_acc',lv:4,t:'Accompagnare una canzone',sub:'ballad, pop, valzer, rock, blues',type:'kbacc',bpm:76,txt:()=>'Lo stesso giro di accordi, suonato in modi diversi. <b>Ballad</b>: sinistra lunga, destra sui battiti. <b>Pop</b>: ritmo regolare. <b>Valzer</b>: «um-pa-pa» in 3. <b>Rock</b>: ottavi pieni. <b>Blues</b>: la sinistra cammina. <b>Arpeggiato</b>: le note una alla volta. Prima mani separate, poi insieme.'},
+ {id:'p_indep',lv:4,t:'Indipendenza delle mani',sub:'due mani, due ritmi',type:'kbex',ex:'indep',bpm:60,txt:()=>'La mano sinistra suona lento (una nota ogni battito), la destra il doppio più veloce. All\'inizio sembra impossibile: vai lentissimo e conta ad alta voce.'},
+ {id:'p_hanon',lv:5,t:'Hanon n. 1',sub:'l\'esercizio dei pianisti',type:'kbex',ex:'hanon',bpm:60,txt:()=>'Il primo esercizio del metodo di Hanon (libero da diritti): lo stesso disegno di 8 note che sale un tasto alla volta. Rende le dita forti e uguali. Lento e regolare; poi «Sali di velocità da solo».'},
+ {id:'p_trill',lv:5,t:'Trilli',sub:'dita veloci e uguali',type:'kbex',ex:'trill',bpm:60,txt:()=>'Due dita vicine che si alternano veloci: 1-2, 2-3, 3-4, 4-5. Il 4 e il 5 sono le dita più deboli: insisti su quelle, ma senza irrigidire la mano.'}];
+LZ_PL.forEach(l=>l.p=1);LZ_L.push(...LZ_PL);
+
+/* ---------- tipi di lezione ---------- */
+const pnHandSeg=(S,cb)=>lzSeg('Mano',[['r','Destra'],['l','Sinistra'],['b','Tutte e due']],S.hand||'r',v=>{S.hand=v;cb()});
+const pnRootSel=(S,cb,list)=>lzSel('Tonalità',(list||PN_ROOTS).map(([v,n])=>[v,LZ.names==='en'?nn(v).replace('Do','C'):(PN.flat||[5,10,3,8,1].includes(v)?n:nn(v))]),S.root!=null?S.root:0,v=>{S.root=+v;cb()});
+function pnMarks(steps){const mk=new Map();steps.forEach(s=>(s.k||[]).forEach((m,i)=>{if(!mk.has(m))mk.set(m,{m,lab:LZ.lab==='fing'&&s.f&&s.f[i]!=null?(s.f[i]||''):pnName(m),cls:(s.h==='l'||(s.h==='b'&&i===0))?'lh':'rh'})}));return[...mk.values()]}
+function pnRange(steps,extra){const ks=[].concat(...steps.map(s=>s.k||[])).concat(extra||[]);let lo=Math.min(...ks,60),hi=Math.max(...ks,71);lo=lo-((lo%12)+12)%12;hi=hi+(11-((hi%12)+12)%12);if(hi-lo<23)hi=lo+23;return{lo,hi}}
+function pnShow(steps,o){o=o||{};const rg=pnRange(steps,o.extra);kbDraw({lo:rg.lo,hi:rg.hi,marks:o.marks||pnMarks(steps),focus:Math.min(...[].concat(...steps.map(s=>s.k||[60])))});
+  stDraw(o.noStaff?null:steps.map((s,i)=>Object.assign({},s,{bar:o.bars&&i%o.bars===0&&i>0})),{fing:LZ.lab==='fing'})}
+function pnGenOf(steps){return steps.map((s,i)=>({k:s.k,f:s.f,dur:s.dur,col:i,kb:1}))}
+const pnFollowable=L=>L&&L.gen&&L.follow!==false;
+
+LZT.kbinfo=(l,S)=>{const R={draw(){kbDraw({lo:48,hi:83,names:1,marks:[{m:60,lab:pnName(60),cls:'r'}],focus:55});$('#stWrap').hidden=true;lzInfo('Tocca un tasto: senti la nota e vedi il suo nome. Il <b>Do centrale</b> è quello arancione.')},
+  gen:()=>[60,62,64,65,67,69,71,72].map((m,i)=>({k:[m],dur:1,col:-1,kb:1})),follow:false,tap(m){lzSay(pnName(m)+(m===60?' (Do centrale)':''))}};return R};
+LZT.kbquiz=(l,S)=>{let q=null,wh=S.wh!=null?S.wh:true,score=[0,0];const ask=()=>{const L=wh?[0,2,4,5,7,9,11]:[...Array(12).keys()];q=L[Math.floor(Math.random()*L.length)];lzSay(`Trova: <b>${esc(pnName(q+60))}</b>`)};
+  lzCtl(lzSeg('Note',[[1,'Solo tasti bianchi'],[0,'Anche i neri']],wh?1:0,v=>{wh=!!+v;S.wh=wh;ask()}),lzBtn(LZI.ear+'<span>Nuova nota</span>',()=>ask(),'pri'));
+  return{draw(){kbDraw({lo:48,hi:83,focus:55});$('#stWrap').hidden=true;ask();lzInfo('')},follow:false,
+    tap(m){if(q==null)return;const ok=((m%12)+12)%12===q;score[1]++;if(ok)score[0]++;kbFlash(m,ok);lzInfo(`Giuste: <b>${score[0]}</b> su ${score[1]}`);if(ok){lzSay('Giusto! Era <b>'+esc(pnName(m))+'</b>');setTimeout(ask,900)}else lzSay('Quella è <b>'+esc(pnName(m))+'</b>. Cerca ancora <b>'+esc(pnName(q+60))+'</b>')}}};
+LZT.staffquiz=(l,S)=>{let cl=S.cl||'t',q=null,score=[0,0];const T=[60,62,64,65,67,69,71,72,74,76,77,79,81],B=[40,41,43,45,47,48,50,52,53,55,57,59,60];
+  const ask=()=>{const L=cl==='t'?T:cl==='b'?B:T.concat(B);q=L[Math.floor(Math.random()*L.length)];stDraw([{k:[q]}],{noStem:1,treble:cl!=='b'||q>=60,bass:cl!=='t'&&q<60});lzSay('Che nota è? Suonala.')};
+  lzCtl(lzSeg('Chiave',[['t','Violino'],['b','Basso'],['e','Tutte e due']],cl,v=>{cl=v;S.cl=v;ask()}),lzBtn(LZI.ear+'<span>Nuova nota</span>',()=>ask(),'pri'));
+  return{draw(){kbDraw({lo:36,hi:83,focus:q||55});ask();lzInfo('')},follow:false,
+    tap(m){if(q==null)return;const ok=m===q||(((m-q)%12)===0&&Math.abs(m-q)<=12&&false);const okPc=((m-q)%12+12)%12===0;score[1]++;if(ok)score[0]++;kbFlash(m,ok);lzInfo(`Giuste: <b>${score[0]}</b> su ${score[1]}`);
+      if(ok){lzSay('Giusto! È <b>'+esc(pnName(q))+'</b>');setTimeout(ask,1000)}else if(okPc)lzSay('Nota giusta (<b>'+esc(pnName(q))+'</b>) ma all\'ottava sbagliata: guarda dove sta il Do centrale.');else lzSay('Quella è <b>'+esc(pnName(m))+'</b>: riprova.')}}};
+LZT.kbex=(l,S)=>{if(S.hand==null)S.hand='r';let steps=[];const can2=['five','hanon'].includes(l.ex),canRoot=['five','thumb','trill','indep','arp'].includes(l.ex);
+  const ctl=()=>lzCtl(can2?pnHandSeg(S,()=>{R.draw();ctl()}):null,canRoot?pnRootSel(S,()=>R.draw(),PN_ROOTS.slice(0,7)):null,l.ex==='arp'?lzSel('Accordo',['M','m'].map(x=>[x,LZ_CH[x].n]),S.q||'M',v=>{S.q=v;R.draw()}):null,lzLabSeg([['fing','Dita'],['note','Note']]));
+  const R={rec:1,draw(){PN.flat=pnFlatKey(S.root||0,false);steps=PN_EX[l.ex](S);pnShow(steps,{bars:l.ex==='hanon'?8:0})},gen:()=>pnGenOf(steps)};ctl();return R};
+LZT.kbmel=(l,S)=>{let mi=S.mel||'gioia',steps=[];
+  lzCtl(lzSel('Melodia',Object.keys(PN_MEL).map(k=>[k,PN_MEL[k].n]),mi,v=>{mi=v;S.mel=v;R.draw()}),lzLabSeg([['fing','Dita'],['note','Note']]));
+  const R={rec:1,draw(){PN.flat=false;const M=PN_MEL[mi];steps=[];M.m.forEach((m,i)=>{if(m)steps.push({k:[m],f:[M.f[i]],h:'r',dur:1});else if(steps.length)steps[steps.length-1].dur=(steps[steps.length-1].dur||1)+1});pnShow(steps)},gen:()=>pnGenOf(steps)};return R};
+LZT.kbscale=(l,S)=>{if(S.hand==null)S.hand='r';let ty=S.ty&&l.sc.includes(S.ty)?S.ty:l.sc[0],steps=[];if(S.root==null)S.root=l.root!=null?l.root:0;
+  const roots=ty==='maj'?PN_ROOTS:PN_ROOTS.slice(0,6).concat([[5,'Fa'],[10,'Sib']]);
+  const ctl=()=>lzCtl(pnRootSel(S,()=>R.draw(),roots),l.sc.length>1?lzSel('Scala',l.sc.map(k=>[k,PN_SCN[k]]),ty,v=>{ty=v;S.ty=v;ctl();R.draw()}):null,pnHandSeg(S,()=>R.draw()),lzLabSeg([['fing','Dita'],['note','Note']]));
+  const R={rec:1,draw(){const r=S.root,minor=ty!=='maj'&&ty!=='pmag';PN.flat=pnFlatKey(r,minor);const A=pnScale(r,ty,false),B=pnScale(r,ty,true);
+      const [kR,fR]=pnUpDown(A.up,A.f),[kL,fL]=pnUpDown(B.up,B.f);const sR=pnSeq(kR,fR),sL=pnSeq(kL,fL,null,1);steps=S.hand==='l'?sL:S.hand==='b'?pnBoth(sR,sL):sR;pnShow(steps);
+      lzInfo('Note: '+PN_SC[ty].map(x=>'<b>'+esc(pnName(r+x+60))+'</b>').join(' · ')+(A.f?'':'<br><small>Per questa scala usa le dita che ti vengono più comode.</small>'))},gen:()=>pnGenOf(steps)};ctl();return R};
+LZT.kbchord=(l,S)=>{const types=l.sev?['7','maj7','m7','m7b5']:['M','m','dim','aug'];let q=types.includes(S.q)?S.q:types[0],inv=S.inv||0,r=S.root!=null?S.root:0,ns=[];
+  const ctl=()=>lzCtl(pnRootSel(S,()=>{r=S.root;R.draw()}),lzSel('Tipo',types.map(x=>[x,{M:'Maggiore',m:'Minore',dim:'Diminuita',aug:'Aumentata'}[x]||LZ_CH[x].s+' ('+LZ_CH[x].n+')']),q,v=>{q=v;S.q=v;inv=Math.min(inv,LZ_CH[q].iv.length-1);ctl();R.draw()}),
+    lzSeg('Rivolto',[...Array(LZ_CH[q].iv.length).keys()].map(i=>[i,i===0?'Fondamentale':i+'°']),inv,v=>{inv=+v;S.inv=inv;R.draw();R.strum()}),lzBtn('<span>Suona l\'accordo</span>',()=>R.strum()),lzLabSeg([['fing','Dita'],['note','Note'],['deg','Gradi']]));
+  const R={draw(){PN.flat=pnFlatKey(r,q!=='M'&&q!=='7'&&q!=='maj7');ns=pnTriad(r,q,inv,60-(r>=6?12:0));const F=ns.length===3?[1,3,5]:[1,2,3,5];const L=pnRootL(r);
+      const marks=ns.map((m,i)=>{const d=((m-r)%12+12)%12;return{m,lab:LZ.lab==='fing'?F[i]:LZ.lab==='deg'?lzChLab(d):pnName(m),cls:lzChCls(d)}}).concat([{m:L,lab:LZ.lab==='fing'?5:LZ.lab==='deg'?'R':pnName(L),cls:'lh'}]);
+      const rg=pnRange([{k:ns.concat([L])}]);kbDraw({lo:rg.lo,hi:rg.hi,marks,focus:L});stDraw([{k:[L]},{k:ns}],{});
+      const low=((ns[0]-r)%12+12)%12;lzInfo(`<b>${esc(lzChName(r,q))}</b> · `+LZ_CH[q].iv.map(x=>`<span class="lzpill ${lzChCls(x)}">${lzChLab(x)} = ${esc(pnName(r+x+60))}</span>`).join(' ')+`<br><small>${inv===0?'Posizione fondamentale: la radice è la nota più bassa.':'Rivolto: la nota più bassa è '+lzChLab(low)+'.'}</small>`)},
+    strum(){const c=ctx();c.resume();const t=c.currentTime+.03;pnoPlay(pnRootL(r),t,.8);ns.forEach((m,i)=>pnoPlay(m,t+.01*i,.8))},
+    gen:()=>{const L=pnRootL(r),up=ns.map((m,i)=>({k:[m],dur:1,col:1,kb:1}));return[{k:[L],dur:1,col:0,kb:1}].concat(up,[{k:[L].concat(ns),dur:2,col:1,kb:1}])},follow:false};ctl();return R};
+/* giro di accordi: sinistra radice, destra accordo nel rivolto più vicino */
+function pnChords(key,pg){let prev=null;return LZ_PROGS[pg].c.map(([d,q])=>{const r=(key+d)%12,rh=pnVoice(r,q,prev);prev=rh;return{r,q,rh,lh:pnRootL(r)}})}
+const PN_ACC={ballad:{n:'Ballad',bar:4,p:(c)=>[{k:[c.lh].concat(c.rh),dur:2},{k:c.rh,dur:2}]},
+ pop:{n:'Pop',bar:4,p:(c)=>[{k:[c.lh].concat(c.rh),dur:1},{k:c.rh,dur:1},{k:[c.lh+12].concat(c.rh),dur:1},{k:c.rh,dur:1}]},
+ valzer:{n:'Valzer (in 3)',bar:3,p:(c)=>[{k:[c.lh],dur:1},{k:c.rh,dur:1},{k:c.rh,dur:1}]},
+ rock:{n:'Rock (ottavi)',bar:4,p:(c)=>[...Array(8)].map((_,i)=>({k:[i%2?c.lh+12:c.lh].concat(c.rh),dur:.5,g:i%2?.7:1}))},
+ blues:{n:'Blues (la sinistra cammina)',bar:4,p:(c)=>[0,4,7,9,10,9,7,4].map((x,i)=>({k:[c.lh+x].concat(i%2===0?c.rh:[]),dur:.5,g:i%2?.7:1}))},
+ arp:{n:'Arpeggiato',bar:4,p:(c)=>[c.lh,c.lh+7,c.lh+12,c.rh[0],c.rh[1],c.rh[2],c.lh+12,c.lh+7].map((m,i)=>({k:[m],dur:.5}))}};
+LZT.kbprog=(l,S)=>{let key=S.key!=null?S.key:0,pg=S.pg||'pop',ch=[],steps=[];
+  lzCtl(pnRootSel(S,()=>{key=S.root;R.draw()},PN_ROOTS.slice(0,7)),lzSel('Sequenza',Object.keys(LZ_PROGS).map(k=>[k,LZ_PROGS[k].n]),pg,v=>{pg=v;S.pg=v;R.draw()}));if(S.root==null)S.root=key;
+  const R={rec:1,show(i){const c=ch[i],nx=ch[(i+1)%ch.length];const marks=c.rh.map(m=>({m,lab:pnName(m),cls:lzChCls(((m-c.r)%12+12)%12)})).concat([{m:c.lh,lab:pnName(c.lh),cls:'lh'}]);kbDraw({lo:36,hi:83,marks,focus:c.lh});
+      lzSay(`<span class="lzbig">${esc(lzChName(c.r,c.q))}</span> <span class="lznext">poi ${esc(lzChName(nx.r,nx.q))}</span>`);$$('#lzInfo .lzpill').forEach((e,j)=>e.classList.toggle('on',j===i));stHl(i)},
+    draw(){key=S.root;PN.flat=pnFlatKey(key,false);ch=pnChords(key,pg);stDraw(ch.map(c=>({k:[c.lh].concat(c.rh),bar:0})),{});lzInfo(ch.map(c=>`<span class="lzpill">${esc(lzChName(c.r,c.q))}</span>`).join(' '));R.show(0)},
+    gen:()=>{const out=[];ch.forEach((c,i)=>{for(let b=0;b<4;b++)out.push({k:b===0?[c.lh].concat(c.rh):c.rh,dur:1,g:b?.7:1,show:b?null:()=>R.show(i),kb:1,col:-1})});return out},follow:false};return R};
+LZT.kbacc=(l,S)=>{let key=S.root!=null?S.root:7,pg=S.pg||'pop',pt=S.pt||'ballad',ch=[];if(S.root==null)S.root=key;
+  lzCtl(pnRootSel(S,()=>R.draw(),PN_ROOTS.slice(0,7)),lzSel('Sequenza',Object.keys(LZ_PROGS).map(k=>[k,LZ_PROGS[k].n]),pg,v=>{pg=v;S.pg=v;R.draw()}),lzSel('Stile',Object.keys(PN_ACC).map(k=>[k,PN_ACC[k].n]),pt,v=>{pt=v;S.pt=v;R.draw();if(PL.on){plStop();plStart()}}),
+    lzSeg('Mani',[['b','Tutte e due'],['l','Solo sinistra'],['r','Solo destra']],S.hands||'b',v=>{S.hands=v}));
+  const R={rec:1,show(i){const c=ch[i],nx=ch[(i+1)%ch.length];const marks=c.rh.map(m=>({m,lab:pnName(m),cls:lzChCls(((m-c.r)%12+12)%12)})).concat([{m:c.lh,lab:pnName(c.lh),cls:'lh'}]);kbDraw({lo:36,hi:83,marks,focus:c.lh});
+      stDraw(PN_ACC[pt].p(c).map((s,j)=>Object.assign({},s,{bar:0})),{});lzSay(`<span class="lzbig">${esc(lzChName(c.r,c.q))}</span> <span class="lznext">poi ${esc(lzChName(nx.r,nx.q))}</span>`);$$('#lzInfo .lzpill').forEach((e,j)=>e.classList.toggle('on',j===i))},
+    draw(){key=S.root;PN.flat=pnFlatKey(key,false);ch=pnChords(key,pg);PL.bar=PN_ACC[pt].bar;lzInfo(ch.map(c=>`<span class="lzpill">${esc(lzChName(c.r,c.q))}</span>`).join(' '));R.show(0)},
+    gen:()=>{PL.bar=PN_ACC[pt].bar;const out=[],hs=S.hands||'b';ch.forEach((c,i)=>{const P=PN_ACC[pt].p(c);let beats=P.reduce((s,x)=>s+x.dur,0);const reps=Math.max(1,Math.round(PN_ACC[pt].bar/beats));for(let r0=0;r0<reps;r0++)P.forEach((s,j)=>{let k=s.k;if(hs==='l')k=k.filter(m=>m<c.rh[0]);if(hs==='r')k=k.filter(m=>m>=c.rh[0]);out.push({k,dur:s.dur,g:s.g,col:j,kb:1,show:r0===0&&j===0?()=>R.show(i):null})})});return out},follow:false};return R};
+
+/* ---------- tocchi, MIDI e «Aspettami» ---------- */
+const lzSay=h=>{$('#lzSay').innerHTML=h};
+function pnInput(m,fromMidi){if(!fromMidi){try{ctx().resume()}catch(e){}pnoPlay(m,ctx().currentTime,.9)}const L=LZ.cur;if(L&&L.tap)return L.tap(m);
+  if(PN.follow&&pnFollowable(L)&&!PL.on){const st=PN.steps[PN.fi];if(!st)return;const need=st.k;if(need.includes(m)){PN.got.add(m);kbFlash(m,true);if(need.every(x=>PN.got.has(x))){PN.ok++;PN.fi++;PN.got=new Set();pnFollowShow()}}else{PN.ko++;kbFlash(m,false);pnFollowShow()}}
+  else{kbHl([m]);setTimeout(()=>{if(!PL.on)kbHl([])},350)}}
+function pnFollowStart(){const L=LZ.cur;if(!pnFollowable(L)){PN.follow=false;return}PN.steps=L.gen(0);PN.fi=0;PN.ok=0;PN.ko=0;PN.got=new Set();pnFollowShow()}
+function pnFollowShow(){if(!PN.follow)return;if(PN.fi>=PN.steps.length){lzSay(`Finito! Note giuste: <b>${PN.ok}</b>, errori: <b>${PN.ko}</b>. Tocca «Aspettami» per ricominciare.`);kbHl([]);stHl(-1);PN.follow=false;$('#pnFollow').checked=false;return}
+  const st=PN.steps[PN.fi];kbHl(st.k);if(st.col!=null&&st.col>=0)stHl(st.col);lzSay(`Suona: <b>${st.k.map(m=>esc(pnName(m))).join(' + ')}</b> · giuste ${PN.ok} · errori ${PN.ko}`)}
+$('#kbWrap').addEventListener('pointerdown',e=>{const k=e.target.closest('.kbk');if(!k)return;e.preventDefault();pnInput(+k.dataset.m,false)});
+/* tastiera MIDI: le note vanno alle lezioni di piano quando sono aperte (e non comandano la pedaliera) */
+function lzMidi(d){if(!d||d.length<3||$('#ovLez').hidden||!lzPiano())return false;const st=d[0]&0xF0,n=d[1],v=d[2];
+  if(st===0x90&&v>0){PN.press.add(n);kbPressUI();pnInput(n,true);return true}if(st===0x80||(st===0x90&&v===0)){PN.press.delete(n);kbPressUI();return true}return false}
+function pnMidiUI(){const b=$('#pnMidi');if(!b)return;let names=[];try{if(MD.acc)MD.acc.inputs.forEach(i=>names.push(i.name))}catch(e){}
+  $('#pnMidiTx').textContent=names.length?'Tastiera MIDI: '+names.join(', '):mdOk()?'Nessuna tastiera MIDI collegata':'Questo browser non legge il MIDI (usa Chrome o Edge)';b.hidden=!mdOk()||!!names.length}
+
+/* allenamento del giorno del piano */
+function lzRtPlanPiano(){const d=lzDayN(),p=lzProg(),rec=id=>p.rec[LZ.inst+':'+id];const roots=[0,7,2,9,4,5,10];const R=roots[d%roots.length];
+  const b=(n,id,pre)=>({n,id,pre:Object.assign({bpm:rec(id)?Math.max(50,rec(id).bpm-10):(LZ_PL.find(x=>x.id===id).bpm||66)},pre||{})});
+  const fin=['p_hanon','p_trill','p_thumb','p_indep','p_arp'][d%5];
+  return[b('Riscaldamento: cinque dita','p_five',{hand:'b',root:R}),b('Scala del giorno',d%3===2?'p_scmin':'p_scmaj',{root:d%3===2?[9,4,2,7,0][d%5]:R,hand:['r','l','b'][d%3]}),
+    b('Accompagnamento',d%2?'p_acc':'p_prog',{root:roots[(d+2)%7],pg:['pop','i4v','c50','vi4'][d%4],pt:Object.keys(PN_ACC)[d%6]}),b('Dita',fin,{root:R,hand:'b',q:d%2?'m':'M'})]}
+
+$('#pnFollow').onchange=e=>{PN.follow=e.target.checked;if(PN.follow){plStop();pnFollowStart()}else{kbHl([]);stHl(-1);lzSay('')}};
+$('#pnMidi').onclick=async()=>{if(await mdStart(true)){toast('Tastiera MIDI pronta: suona una nota');}pnMidiUI()};
 
 
 /* ================= testo da LRCLIB (prima di tutto) ================= */
@@ -7453,8 +7716,8 @@ $('#donBanX').onclick=donBanHide;$('#donBanGo').addEventListener('click',()=>set
 /* Sala prove: computer e tablet (iPad, tablet Android); sui telefoni no, lo schermo è troppo piccolo */
 /* tablet: lato corto da 600 in su (come Android); i telefoni arrivano al massimo a ~450 */const IS_TAB=isMobile&&Math.max(Math.min(screen.width,screen.height),Math.min(innerWidth,innerHeight))>=600;
 /* Sala prove solo sul computer: provata su telefono e tablet con la scheda audio, il ritardo la rende inutilizzabile (anche per la voce) */const SALA_OK=!isMobile;
-const ROLES={voce:'Voce',chitarra:'Chitarra',basso:'Basso',altro:'Altro'};
-const ROLE_COL={voce:TC('#e8c8a6','#6fd8ff'),chitarra:'#7fb4e0',basso:'#9ad08f',altro:'#d39ad6'};
+const ROLES={voce:'Voce',chitarra:'Chitarra',basso:'Basso',tastiere:'Piano e tastiere',altro:'Altro'};
+const ROLE_COL={voce:TC('#e8c8a6','#6fd8ff'),chitarra:'#7fb4e0',basso:'#9ad08f',tastiere:'#f0b86e',altro:'#d39ad6'};
 const SA={ctx:null,devs:[],chans:[],tracks:[],takes:[],cur:-1,rec:null,on:false,base:null,t0:0,timer:0,cal:{},mods:{},nam:null,namLoading:null,view:'rec'};
 const sSave=()=>{if(window.__salaEx)return;sbPersist();prefSet('sala',JSON.stringify({tracks:SA.tracks.map(t=>({orig:t.orig===true?true:t.orig==='guide'?'guide':false,origSet:!!t.origSet,id:t.id,name:t.name,role:t.role,dev:t.dev,ch:t.ch,mon:t.mon,hear:t.hear!==false,arm:t.arm,off:!!t.off,offPrev:t.offPrev||null,rig:t.rig})),cal:SA.cal,
   base:{vol:+$('#sBaseVol').value,auto:$('#sAutoMute').checked,guide:$('#sGuide').checked,click:$('#sClick').checked,count:$('#sCount').checked}}))};
@@ -7486,7 +7749,7 @@ const PED_BY=Object.fromEntries(PEDALS.map(p=>[p.k,p]));
 const ORDER0=['gate','comp','wah','oct','pitch','od','ds','amp','phaser','flanger','chorus','vibrato','trem','delay','rev'];
 function fxOrder(fx){const o=[];for(const k of(Array.isArray(fx._order)?fx._order:[]))if((k==='amp'||PED_BY[k])&&!o.includes(k))o.push(k);for(const k of ORDER0)if(!o.includes(k)){const i=ORDER0.indexOf(k);let at=o.length;for(let j=i+1;j<ORDER0.length;j++){const q=o.indexOf(ORDER0[j]);if(q>=0){at=q;break}}o.splice(at,0,k)}return o}
 function fxDefaults(role){const f={};for(const p of PEDALS){f[p.k]={on:0};for(const[k,,, ,d]of p.kn)f[p.k][k]=d}
-  if(role==='voce'){f.rev.on=1;f.rev.level=.25;f.delay.on=1;f.delay.level=.12;f.comp.on=1}else if(role==='chitarra'){f.rev.on=1;f.rev.level=.15}else if(role==='basso'){f.comp.on=1}return f}
+  if(role==='voce'){f.rev.on=1;f.rev.level=.25;f.delay.on=1;f.delay.level=.12;f.comp.on=1}else if(role==='chitarra'){f.rev.on=1;f.rev.level=.15}else if(role==='basso'){f.comp.on=1}else if(role==='tastiere'){f.comp.on=1;f.comp.sus=.35;f.rev.on=1;f.rev.level=.2}return f}
 function fxMigrate(r,role){const f=fxDefaults(null);if(r.comp>0&&role!=='chitarra'&&role!=='altro'){f.comp.on=1;f.comp.sus=Math.min(1,r.comp)}if(r.chorus>0){f.chorus.on=1;f.chorus.mix=Math.min(1,r.chorus)}if(r.delay>0){f.delay.on=1;f.delay.level=Math.min(1,r.delay)}if(r.rev>0){f.rev.on=1;f.rev.level=Math.min(1,r.rev)}return f}
 function fxOf(r,role){if(!r.fx)r.fx=fxMigrate(r,role);if(!r.fx.comp){const c={on:0,sus:.5,att:.3,level:.5};if(r.comp>0&&role!=='chitarra'&&role!=='altro'){c.on=1;c.sus=Math.min(1,r.comp)}r.fx.comp=c}for(const p of PEDALS){if(!r.fx[p.k]){r.fx[p.k]={on:0};for(const[k,,, ,d]of p.kn)r.fx[p.k][k]=d}}return r.fx}
 const pRate=v=>.08*Math.pow(75,v);
@@ -7709,7 +7972,7 @@ let tapReady=null;async function sTapBuild(){const c=sCtx();if(!tapReady)tapRead
   const z=c.createGain();z.gain.value=0;SA.tap.connect(z);z.connect(c.destination)}
 /* ---------- base: tracce del brano senza gli strumenti suonati ---------- */
 /* lo strumento originale del brano si spegne solo se c'è un musicista attivo di quello strumento che non ha chiesto «Originale» */
-const ROLE_STEM={chitarra:'guitar',basso:'bass',voce:'vocals'};
+const ROLE_STEM={chitarra:'guitar',basso:'bass',voce:'vocals',tastiere:'piano'};
 /* stato reale dello strumento originale per quel musicista: la scelta fatta col pulsante vale sempre; se non l'ha mai toccato decide «Togli dalla base gli strumenti che suonate» */
 function origEff(t){if(t.origSet)return t.orig===true?true:t.orig==='guide'&&t.role==='voce'?'guide':false;return $('#sAutoMute').checked&&t.arm?false:true}
 function stemMuted(k){return SA.tracks.some(t=>ROLE_STEM[t.role]===k&&origEff(t)===false)}
@@ -7882,7 +8145,7 @@ function sRender(){try{sStemApply();SA.baseMono=null}catch(e){}
     <div class="stmeter"><div class="stvurow"><div class="vu"><i></i><em>–∞ dB</em></div>${hpBtn(t)}</div><div class="sthint">Suona qualche nota per vedere il livello</div></div>
     <div class="stmon"><label class="field"><span>Volume cuffia</span><input type="range" data-f="mon" min="0" max="1.5" step="0.05" value="${t.mon}"></label>
       ${origBtn(t)}</div>
-    ${t.role!=='voce'?`<div class="stsnd"><label class="field"><span>🎸 Tono NAM</span><select class="sel" data-snd="amp"></select></label><label class="field"><span>🔈 Cassa IR</span><select class="sel" data-snd="ir"></select></label></div>`:''}
+    ${t.role!=='voce'&&t.role!=='tastiere'?`<div class="stsnd"><label class="field"><span>🎸 Tono NAM</span><select class="sel" data-snd="amp"></select></label><label class="field"><span>🔈 Cassa IR</span><select class="sel" data-snd="ir"></select></label></div>`:''}
     <div class="knobs">${FXS[t.role].map(([k,l,mn,mx,st])=>`<label class="kn"><input type="range" data-fx="${k}" min="${mn}" max="${mx}" step="${st}" value="${t.rig[k]}" data-def="${defRig(t.role)[k]}"><span class="knob" tabindex="0" role="slider" aria-label="${l}" title="${l}: trascina su o giù · doppio clic per tornare all'inizio"><b></b></span><span>${({Ingresso:'Gain',Compressore:'Comp',Riverbero:'Riverb',Overdrive:'Drive',Volume:'Vol'})[l]||l}</span><em></em></label>`).join('')}</div>
     <div class="stpeds"><div class="stpedh"><b>Banchi dei pedali</b><button class="mini gpd" data-rig="${t.id}" title="Catena dei pedali, amplificatore, cassa e banchi"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v18M12 3v18M18 3v18"/><rect x="4" y="13" width="4" height="3" rx="1" fill="currentColor"/><rect x="10" y="6" width="4" height="3" rx="1" fill="currentColor"/><rect x="16" y="10" width="4" height="3" rx="1" fill="currentColor"/></svg> Gestisci pedaliera</button></div><div class="banks">${bankBtns(t)}</div>${pedChips(fxOf(t.rig,t.role),`data-pdt="${t.id}"`)}</div></div>`).join(''):'<p class="snote">Nessun musicista: premi «+ Aggiungi musicista» o «Suona e riconosco».</p>';
   $('#sMini').innerHTML=SA.tracks.filter(t=>t.arm).map(t=>`<div data-mm="${t.id}"><div class="mmtop"><span class="mmname">${ROLE_IC[t.role]||''} ${esc(t.name)}</span><span class="vu"><i></i></span>${hpBtn(t)}${origBtn(t)}<button class="mini" data-board="${t.id}" aria-label="Manopole dei pedali di ${esc(t.name)}"><svg class="ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v18M12 3v18M18 3v18"/><rect x="4" y="13" width="4" height="3" rx="1" fill="currentColor"/><rect x="10" y="6" width="4" height="3" rx="1" fill="currentColor"/><rect x="16" y="10" width="4" height="3" rx="1" fill="currentColor"/></svg></button></div><div class="banks mm">${bankBtns(t,'sm')}</div></div>`).join('');
@@ -7944,6 +8207,13 @@ const PRESET_F=[
  ['Funk',{comp:{on:1,sus:.55,att:.15,level:.5},_order:['gate','wah','phaser','oct','pitch','od','ds','amp','flanger','chorus','vibrato','trem','delay','rev'],wah:{on:1,sens:.7,freq:.3,q:.65},phaser:{on:1,rate:.22,depth:.5,res:.3}},['chitarra','altro']],
  ['Spazio',{_order:['gate','oct','pitch','wah','od','ds','amp','chorus','vibrato','trem','phaser','delay','rev','flanger'],flanger:{on:1,rate:.15,depth:.7,res:.6},delay:{on:1,time:.55,fb:.5,level:.35},rev:{on:1,time:.9,tone:.5,level:.5}},['chitarra','altro','tastiere']],
  ['Basso distorto leggero',{comp:{on:1,sus:.6,att:.25,level:.5},_order:['gate','od','ds','wah','oct','pitch','amp','phaser','flanger','chorus','vibrato','trem','delay','rev'],od:{on:1,drive:.3,tone:.45,level:.55},rev:{on:1,time:.2,level:.1}},['basso']],
+ ['Piano pulito',{comp:{on:1,sus:.35,att:.4,level:.5},rev:{on:1,time:.4,tone:.65,level:.2}},['tastiere']],
+ ['Piano brillante (pop)',{comp:{on:1,sus:.55,att:.3,level:.55},chorus:{on:1,rate:.2,depth:.15,mix:.12},rev:{on:1,time:.35,tone:.8,level:.18}},['tastiere']],
+ ['Rhodes con tremolo',{comp:{on:1,sus:.4,att:.35,level:.5},trem:{on:1,rate:.42,depth:.45,wave:0},chorus:{on:1,rate:.25,depth:.3,mix:.25},rev:{on:1,time:.35,tone:.55,level:.2}},['tastiere']],
+ ['Organo con vibrato',{vibrato:{on:1,rate:.55,depth:.3},chorus:{on:1,rate:.5,depth:.35,mix:.35},rev:{on:1,time:.3,tone:.6,level:.15}},['tastiere']],
+ ['Organo rock',{od:{on:1,drive:.35,tone:.5,level:.55},vibrato:{on:1,rate:.6,depth:.25},rev:{on:1,time:.25,tone:.6,level:.12}},['tastiere']],
+ ['Pad sognante',{chorus:{on:1,rate:.2,depth:.6,mix:.5},delay:{on:1,time:.55,fb:.45,level:.3},rev:{on:1,time:.85,tone:.55,level:.45}},['tastiere']],
+ ['Synth anni \'80',{chorus:{on:1,rate:.35,depth:.55,mix:.5},delay:{on:1,time:.35,fb:.3,level:.25},rev:{on:1,time:.45,tone:.65,level:.25}},['tastiere']],
  ['Basso slap',{comp:{on:1,sus:.7,att:.08,level:.55},rev:{on:1,time:.15,tone:.6,level:.05}},['basso']],
  ['Basso funk',{comp:{on:1,sus:.55,att:.15,level:.5},_order:['gate','wah','oct','pitch','od','ds','amp','phaser','flanger','chorus','vibrato','trem','delay','rev'],wah:{on:1,sens:.65,freq:.2,q:.55},chorus:{on:1,rate:.3,depth:.35,mix:.3}},['basso']],
  ['Basso pulito',{_order:['gate','comp','wah','oct','pitch','od','ds','amp','phaser','flanger','chorus','vibrato','trem','delay','rev'],comp:{on:1,sus:.45,att:.35,level:.5},rev:{on:1,time:.2,level:.06}},['basso']],
@@ -7988,6 +8258,7 @@ function prAutoPick(role){if(!song||!stems||!Object.keys(stems).length)return nu
   if(!f||f.active<.08){name='Pulito (tutto spento)';why.push('quasi non si sente in questo brano')}
   else if(role==='basso'){if(dist(f)){name='Basso distorto leggero';why.push('basso distorto')}else if(bpm>=95&&f.onsets>3){name='Basso slap';why.push('tanti attacchi veloci, '+bpm+' bpm')}else{name='Basso pulito';why.push(bpm?bpm+' bpm, basso pulito':'basso pulito')}}
   else if(role==='voce'){const rock=dist(g),slow=bpm&&bpm<88;if(rock&&!slow){name='Voce rock (slapback)';why.push('chitarre distorte')}else if(slow||f.crest>5){name='Voce ballata';why.push(slow?'brano lento, '+bpm+' bpm':'voce morbida')}else{name='Voce pop';why.push(bpm?bpm+' bpm':'voce piena')}}
+  else if(role==='tastiere'){if(dist(f)){name='Organo rock';why.push('suono distorto')}else if(f.onsets<1.5&&f.dens>.45){name='Pad sognante';why.push('suono lungo e morbido')}else if(f.cent<1300){name='Rhodes con tremolo';why.push('suono caldo')}else if(bpm>=100){name='Piano brillante (pop)';why.push(bpm+' bpm')}else{name='Piano pulito';why.push('piano pulito')}}
   else{if(dist(f)){if(f.cent>2300&&f.onsets<2.5){name=role==='chitarra'?'Assolo':'Distorto rock';why.push('suono distorto e lungo')}else{name=f.dens>.55?'Distorto metal':'Distorto rock';why.push('suono distorto')}}
     else if(role!=='tastiere'&&bpm>=95&&f.onsets>3.5){name='Funk';why.push('suono pulito e ritmato, '+bpm+' bpm')}
     else if(bpm&&bpm<80&&f.onsets<2){name='Spazio';why.push('brano lento e arioso')}
@@ -8071,7 +8342,7 @@ function eqOnOf(t){const r=t.rig;return t.role==='voce'||!!(r.bass||r.mid||r.tre
 function rigLayout(t){const box=$('#rigBoard'),eq=$('#rigEq');if(!box||!eq||!t)return;
   /* ampli NAM e cassa IR attivi: una riga sola, sottile, come l'equalizzatore */
   let as=$('#rigAmpS');if(!as){as=document.createElement('div');as.className='ampstrip';as.id='rigAmpS';box.append(as)}const r=t.rig;
-  const showA=namOn()&&t.role!=='voce'&&!!(r.amp||r.ir||RIGSEL==='amp'||RIGSEL==='cab');as.hidden=!showA;
+  const showA=namOn()&&t.role!=='voce'&&t.role!=='tastiere'&&!!(r.amp||r.ir||RIGSEL==='amp'||RIGSEL==='cab');as.hidden=!showA;
   if(showA){as.innerHTML=`<span class="ash"></span><b>AMPLI NAM</b><span class="asn ${r.amp?'':'off'}">${esc(r.amp?r.amp.name:'nessuno')}</span><span class="asc"></span><b>CASSA IR</b><span class="asn ${r.ir?'':'off'}">${esc(r.ir?r.ir.name:'nessuna')}</span><span class="grow"></span><button class="mini" data-as="amp">Regola ampli</button><button class="mini" data-as="cab">Cassa</button>`;
     as.classList.toggle('cur',RIGSEL==='amp'||RIGSEL==='cab');as.querySelectorAll('[data-as]').forEach(b=>b.onclick=()=>{RIGSEL=b.dataset.as;rigSelUI(t);rigChainDraw(t)})}const peds=[...box.querySelectorAll('.pedal:not(.ampcard)')].filter(p=>p.classList.contains('on')||p.classList.contains('cur'));
   const two=peds.length>8;box.classList.toggle('two',two);eq.hidden=!(eqOnOf(t)||RIGSEL==='eq');eq.classList.toggle('cur',RIGSEL==='eq');
@@ -8724,7 +8995,7 @@ function mdTargets(){sEnsure();const T=SA.tracks;if(midiUse()){const id=midiOwne
 /* quale pedale ha mandato questo messaggio. Programmi: i pedali 1-4 valgono in qualsiasi banco della pedaliera (1, 5, 9… = pedale 1) */
 function pdFind(ty,ch,n){for(const s of PD_SLOTS){const k=MD.pads[s.k].key;if(!k)continue;const [t2,c2,n2]=k.split(':');if(t2!==ty||(c2!=='*'&&+c2!==ch))continue;
     if(+n2===n)return s;if(ty==='pc'&&/^p[1-4]$/.test(s.k)&&+n2<4&&n%4===+n2)return s}return null}
-function mdMsg(e){const d=e.data;if(!d||d.length<2)return;if(!midiUse()&&!MD.learn)return;const st=d[0]&0xF0,ch=d[0]&15;let ty=null,n=d[1],v=d.length>2?d[2]:127;
+function mdMsg(e){const d=e.data;if(!d||d.length<2)return;try{if(typeof lzMidi==='function'&&lzMidi(d))return}catch(x){}if(!midiUse()&&!MD.learn)return;const st=d[0]&0xF0,ch=d[0]&15;let ty=null,n=d[1],v=d.length>2?d[2]:127;
   if(st===0xC0)ty='pc';else if(st===0xB0)ty='cc';else if(st===0x90&&v>0)ty='nt';if(!ty)return;const key=ty+':'+ch+':'+n;
   MD.last=key;MD.lastAt=Date.now();mdLamp();
   if(MD.learn){pdLearnMsg(ty,key,v);return}
@@ -8982,7 +9253,7 @@ const TUT_SECTIONS=[
    {s:'#bPalco',t:'Palco',d:'Apre lo schermo intero per esibirti: il testo grande che si colora parola per parola e, accanto o sotto, la tablatura del tuo strumento.'},
    {s:'#bRec',t:'Video',d:'Registra la tua esibizione con la fotocamera, con il testo che scorre e la base. Alla fine crei il video da salvare o da mandare agli amici.'},
    {s:'#bSala',t:'Sala prove',d:'Solo sul computer. Registra la band con la scheda audio: ogni musicista su una traccia, con amplificatori e pedali dal vivo in cuffia. Su telefono e tablet non c\'è, perché lì il suono torna in cuffia con troppo ritardo.'},
-   {s:'#bLez',t:'Lezioni',d:'Lezioni di chitarra, basso e batteria, dalle basi all\'avanzato: note, scale, accordi, ritmi, fill ed esercizi per le mani, con il manico che suona, il metronomo e l\'allenamento del giorno. Funzionano anche senza internet.'},
+   {s:'#bLez',t:'Lezioni',d:'Lezioni di chitarra, basso, batteria e pianoforte, dalle basi all\'avanzato: note, scale, accordi, ritmi, spartiti ed esercizi per le mani, con il manico che suona, il metronomo e l\'allenamento del giorno. Funzionano anche senza internet.'},
    {s:'#songPickBtn',t:'Il brano',d:'Qui vedi il brano aperto. Toccalo per sceglierne un altro dalla tua libreria. Quando segui una scaletta, qui compare il nome della scaletta: toccandolo scegli la scaletta o uno dei suoi brani.'},
    {s:'#bScal',t:'Singolo o Scaletta',d:'Con Singolo scegli i brani uno alla volta. Toccalo e diventa Scaletta: l\'app segue solo i brani della scaletta, uno dopo l\'altro. Toccalo di nuovo per tornare a Singolo.'},
    {s:'#slBar',t:'La barra della scaletta',d:'Compare solo con la scaletta accesa. Ti dice a che brano sei, per esempio 3 di 8. Toccando il titolo scegli un altro brano della scaletta. Per andare al brano prima o dopo usi i tasti del lettore, qui sotto.'},
@@ -9104,7 +9375,7 @@ const TUT_SECTIONS=[
    {s:'#pSNext',t:'Brano successivo',d:'Con la scaletta accesa, va al brano dopo.'},
    {s:'#pMixB',t:'Tracce',d:'Apre un piccolo mixer: alzi, abbassi o togli voce, chitarra, basso e gli altri strumenti senza uscire dal Palco.'},
    {s:'#pTab',t:'Tablatura',d:'Mostra o nasconde la tablatura, per avere tutto lo schermo per il testo.'},
-   {s:'#pMic',t:'Microfono',d:'Accende il microfono e, con una scheda audio, anche gli strumenti. Per ognuno scegli se sentirlo in cuffia, il volume e l\'eco sulla voce.'},
+   {s:'#pMic',t:'Microfono',d:'Accende il microfono e, con una scheda audio, anche gli strumenti (voce, chitarra, basso, piano e tastiere). Per ognuno scegli se sentirlo in cuffia, il volume e l\'eco sulla voce. Con una scheda a 4 uscite, come la Behringer UMC404HD, le casse e le cuffie sono separate: alle casse vanno base, voce e strumenti per il pubblico, alle cuffie il tuo ascolto. Lo scambi con «Scambia casse e cuffie».'},
    {s:'#pSl',t:'Scaletta',d:'Apre la scaletta della serata, per preparare o cambiare l\'ordine dei brani.'},
    {s:'#pMoreB',t:'Altro',d:'Apre Duetto, Click, Video e Foglio. Se uno di questi è acceso, sul pulsante compare un puntino.'},
    {s:'#pDuo',t:'Duetto',d:'Accende i colori del duetto: blu per il primo cantante, rosso per il secondo, giallo quando cantate insieme.'},
@@ -9157,16 +9428,18 @@ const TUT_SECTIONS=[
    {s:'#shopGo',t:'Cerca',d:'Fa la ricerca e mostra i risultati con l\'anteprima da ascoltare e il prezzo indicativo. Il prezzo vero lo vedi sulla piattaforma dove compri.'},
    {s:'#shopCons',t:'Canzoni consigliate',d:'Apre le liste delle canzoni da avere: Italiane, Da suonare cult, Rock femminili, il meglio di Sanremo (tutte le vincitrici e le più famose) e, quando internet c\'è, Più ascoltate ora (la classifica di Apple Music Italia). Accanto a ogni canzone: Anteprima fa sentire 30 secondi, YouTube la apre per ascoltarla tutta, e con Amazon, iTunes o Qobuz la cerchi e la compri.'},
   ]},
- {id:'lezioni',name:'Lezioni',ico:'#bLez',sub:'imparare chitarra, basso e batteria e allenare le mani',
+ {id:'lezioni',name:'Lezioni',ico:'#bLez',sub:'imparare chitarra, basso, batteria e piano e allenare le mani',
   prep:()=>{tutCloseAll();lezOpen()},done:()=>{plStop();if(LZ.rt)lzRtEnd(false);$('#ovLez').hidden=true},
   steps:[
    {t:'Lezioni',d:'Si aprono con il pulsante Lezioni in alto. Sono ordinate dalla più facile alla più difficile, in 6 livelli: parti dalla prima e vai avanti con calma.'},
-   {s:'#lezInst',t:'Chitarra, basso o batteria',d:'Scegli lo strumento: le lezioni, l\'allenamento del giorno e i progressi sono separati per ognuno.'},
+   {s:'#lezInst',t:'Chitarra, basso, batteria o piano',d:'Scegli lo strumento: le lezioni, l\'allenamento del giorno e i progressi sono separati per ognuno.'},
    {s:'#lzDay',t:'Allenamento del giorno',d:'Quattro parti: riscaldamento, scala, accordi e dita. Cambia ogni giorno da solo. Scegli quanto dura (8, 12 o 20 minuti) e premi Inizia. I pallini sono gli ultimi 14 giorni: quelli pieni sono i giorni in cui ti sei allenato.'},
    {s:'#lezHome .lzcard',t:'Una lezione',d:'Tocca una lezione per aprirla. Quando l\'hai imparata compare il segno di spunta; negli esercizi vedi anche il tuo record di velocità.'},
    {s:'#fbWrap',run:()=>{if(LZ.inst==='drums'){LZ.inst='guitar';lzInstUI()}lzGo('pmin')},t:'Il manico',d:'Tocca un pallino per sentire la nota. Arancione è la nota principale. Sul telefono il manico è in verticale: scorri per vederlo tutto.'},
    {s:'#lzCtl',t:'Le scelte',d:'Qui scegli la nota, la posizione, l\'accordo o il dito di partenza. Con «Scritte» decidi cosa vedere nei pallini: le note, i gradi o le dita.'},
    {s:'#lzPlay',t:'Suona e metronomo',d:'Premi Suona: l\'app conta 4 battiti e poi suona, accendendo le note una alla volta. Con − e + cambi la velocità. Togli «Suona anche le note» per sentire solo il metronomo e suonare tu; togli «Metronomo» se non ti serve.'},
+   {s:'#kbWrap',run:()=>{LZ.inst='piano';lzInstUI();lzGo('p_scmaj')},t:'Il piano',d:'Per il piano c\'è la tastiera: tocca un tasto per sentirlo. I numeri nei pallini sono le dita (1 pollice, 5 mignolo), celesti per la mano destra e verdi per la sinistra. Sopra c\'è lo spartito, che si accende nota per nota mentre suona.'},
+   {s:'#pnBox',run:()=>{LZ.inst='piano';lzInstUI();lzGo('p_scmaj')},t:'Aspettami e tastiera MIDI',d:'Con «Aspettami» l\'app va avanti solo quando suoni la nota giusta, sul disegno o sulla tua tastiera. Se colleghi una tastiera MIDI con il cavo USB, i tasti che premi si accendono e l\'app controlla se sono giusti.'},
    {s:'#dgWrap',run:()=>{LZ.inst='drums';lzInstUI();lzGo('d_rock8')},t:'La batteria',d:'Per la batteria al posto del manico c\'è una griglia: una riga per pezzo (charleston, rullante, cassa, tom, piatti) e un quadretto per ogni momento. Quadretto pieno = colpo. Durante Suona si accende la colonna di adesso. Tocca un quadretto per sentire il suono.'},
    {s:'#lzCtl',run:()=>{LZ.inst='drums';lzInstUI();lzGo('d_make')},t:'Crea il tuo ritmo',d:'Nell\'ultima lezione della batteria inventi il tuo ritmo: tocca i quadretti per mettere e togliere i colpi. Hai 3 ritmi, che si salvano da soli; puoi anche partire da un ritmo delle lezioni.'},
   ]},
@@ -9359,7 +9632,7 @@ const TUT_SECTIONS=[
    {v:'rec',s:'#sNamOn',t:'Amplificatori NAM e casse IR',d:'Se è spuntato, ogni chitarra e basso ha anche l\'amplificatore e la cassa che suonano come quelli veri.'},
    {v:'rec',s:'#sMidiOn',t:'Pedaliera MIDI',d:'Spuntalo se usi una pedaliera MIDI. Poi scegli quale musicista comanda: i pedali cambiano solo i suoi suoni. Con Pedali imposti cosa fa ogni pedale.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .sthead'),t:'Il musicista',d:'Ogni musicista ha il suo riquadro. Per esempio questo è Luca, alla chitarra.'},
-   {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stname'),t:'Nome e strumento',d:'Scrivi il nome e scegli lo strumento: voce, chitarra, basso o altro.'},
+   {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] .stname'),t:'Nome e strumento',d:'Scrivi il nome e scegli lo strumento: voce, chitarra, basso, piano e tastiere, o altro. Per il piano ci sono preset adatti: piano pulito, Rhodes con tremolo, organo, pad.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] [data-tune]'),t:'Accordatore del musicista',d:'Apre l\'accordatore che ascolta solo il suo strumento.'},
    {v:'rec',s:()=>$('#sTracks [data-tr="ex-g"] [data-pwr]'),t:'Acceso o spento',d:'Spegne l\'ingresso: non si sente e non registra.'},
    {v:'rec',s:()=>$('#sTracks .smidi'),t:'MIDI',d:'Compare accanto ad Acceso solo nel musicista comandato dalla pedaliera MIDI: i pedali cambiano i suoi banchi.'},
