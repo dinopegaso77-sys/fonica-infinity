@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="26/11 · 19:30"><meta name="pv-notes" content="Novità: lezioni di pianoforte (tastiera, spartito, scale, accordi, accompagnamenti, tastiera MIDI); piano e tastiere in Sala prove e Palco con i loro preset; nel Palco casse e cuffie separate con la scheda a 4 uscite; menu a tendina di nuovo leggibili."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="pv-version" content="26/11 · 20:30"><meta name="pv-notes" content="Tablatura del piano in Palco e Sala prove: le note scendono verso una tastiera, con il nome dell'accordo; con RunPod le note precise. Poi: lezioni di pianoforte, piano e tastiere in Sala e Palco, casse e cuffie separate nel Palco."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}.emo{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 h1 .emo,h2 .emo,h3 .emo,h4 .emo,h5 .emo{stroke:var(--accent,#6fd8ff);margin-right:.25em}
 .bboard{margin:10px 0;padding:12px;border-radius:16px;background:linear-gradient(#20242f,#11141c);border:1px solid var(--line);display:grid;gap:10px}
 .bbtop{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px}.bbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -1535,7 +1535,7 @@ themeApply();</script>
       <button class="chip" id="bFb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Dimmi la tua</span></button>
       <button class="chip" id="bFull">⛶ Schermo intero</button>
       <a class="chip" id="bPres" href="presentazione.html">✨ Presentazione</a>
-      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Novità: lezioni di pianoforte (tastiera, spartito, scale, accordi, accompagnamenti, tastiera MIDI); piano e tastiere in Sala prove e Palco con i loro preset; nel Palco casse e cuffie separate con la scheda a 4 uscite; menu a tendina di nuovo leggibili.</span></small>
+      <small class="mver pvver">Versione<br><span class="mnotes">Novità: Tablatura del piano in Palco e Sala prove: le note scendono verso una tastiera, con il nome dell'accordo; con RunPod le note precise. Poi: lezioni di pianoforte, piano e tastiere in Sala e Palco, casse e cuffie separate nel Palco.</span></small>
       </div></div>
       <button class="hbtn pri" id="bPalco"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M10.2 6.2 5 17M13.8 6.2 19 17"/><path d="M2.5 17.5h19M4 17.5V20M20 17.5V20"/><path d="M9 14.5c.9-.9 2-1.3 3-1.3s2.1.4 3 1.3" opacity=".6"/></svg><span>Palco</span></button>
       <button class="hbtn pri" id="bRec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.2 6-3.4v10.4l-6-3.4z"/><circle cx="7" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg><span>Video</span></button>
@@ -1609,7 +1609,7 @@ themeApply();</script>
       <div class="phead"><h2 id="tabTitle">Basso</h2><span class="now"><span class="nowLbl">Nota</span>: <b id="noteNow">–</b></span><span class="grow"></span><button class="mini optbtn" data-opt="optTab" aria-expanded="false">Opzioni strumento ▾</button></div>
       <div class="optarea" id="optTab" hidden>
         <div class="optrow">
-        <div class="seg" role="group" aria-label="Strumento della tablatura" id="instSeg"><button data-i="bass" class="on">Basso</button><button data-i="guitar">Chitarra</button><button data-i="drums">Batteria</button></div>
+        <div class="seg" role="group" aria-label="Strumento della tablatura" id="instSeg"><button data-i="bass" class="on">Basso</button><button data-i="guitar">Chitarra</button><button data-i="drums">Batteria</button><button data-i="piano">Piano</button></div>
         <div class="seg" role="group" aria-label="Note o accordi" id="modeSeg"><button data-m="notes" class="on">Note</button><button data-m="chords">Accordi</button></div>
         <div class="seg" role="group" aria-label="Tipo di tablatura"><button id="tvAuto" class="on">Automatica</button><button id="tvWritten">Scritta</button></div>
         </div>
@@ -1617,7 +1617,7 @@ themeApply();</script>
         <label class="lbl" for="tabZoom">Zoom</label><select class="sel" id="tabZoom"><option value="0.6">lontano</option><option value="1" selected>normale</option><option value="1.5">vicino</option><option value="2.2">molto vicino</option></select>
         <label class="lbl" id="fiveL" data-notes><input type="checkbox" id="five"> 5 corde</label>
         <select class="sel" id="sens" aria-label="Quante note" data-notes><option value="ai" data-n="RunPod (precisa)" data-d="RunPod (precisa)" hidden>RunPod (precisa)</option><option value="0.5" data-n="pochissime note" data-d="pochissimi colpi">pochissime note</option><option value="0.7" selected data-n="meno note" data-d="meno colpi">meno note</option><option value="1" data-n="note normali" data-d="colpi normali">note normali</option><option value="1.5" data-n="più note" data-d="più colpi">più note</option></select>
-        <button class="mini" id="bRedo">Rifai</button><button class="mini sic" id="bRhy" hidden title="Battiti e batteria più precisi, calcolati su RunPod"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L21 10l-7.2 1.8L12 19l-1.8-7.2L3 10l7.2-1.8z"/></svg><span>Più precisa con RunPod</span></button>
+        <button class="mini" id="bRedo">Rifai</button><button class="mini sic" id="bPnAI" hidden title="Tutte le note del piano, calcolate su RunPod con Basic Pitch"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L21 10l-7.2 1.8L12 19l-1.8-7.2L3 10l7.2-1.8z"/></svg><span>Note precise con RunPod</span></button><button class="mini sic" id="bRhy" hidden title="Battiti e batteria più precisi, calcolati su RunPod"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L21 10l-7.2 1.8L12 19l-1.8-7.2L3 10l7.2-1.8z"/></svg><span>Più precisa con RunPod</span></button>
         </div>
         <div class="optrow" id="tabFootWritten" hidden>
         <button class="mini" id="bEditTab">Modifica</button><button class="mini" id="bSyncTab">Sincronizza</button>
@@ -1810,7 +1810,7 @@ themeApply();</script>
       <div class="sbox sbrano">
         <div class="panel kp salakp"><div class="kpanel" id="kpSala"></div></div>
         <div class="row" style="gap:8px">
-          <div class="seg" id="sInst"><button data-i="bass">Basso</button><button data-i="guitar">Chitarra</button></div>
+          <div class="seg" id="sInst"><button data-i="bass">Basso</button><button data-i="guitar">Chitarra</button><button data-i="piano">Piano</button></div>
           <div class="seg" id="sMode"><button data-m="notes">Note</button><button data-m="chords">Accordi</button></div>
           <span class="snote" id="sNote"></span><span class="grow"></span>
           <button class="stbtn main" id="sListen" aria-label="Ascolta e prova"><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg><svg class="pa" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z"/></svg><span class="srl">Ascolta e prova</span></button>
@@ -2458,7 +2458,7 @@ themeApply();</script>
 <div class="ov" id="ovLic" hidden><div class="sheet licsheet">
   <div class="row"><h3 class="grow">Programmi usati e licenze</h3><button class="mini" data-close>Chiudi</button></div>
   <p class="snote">rooMusic usa questi programmi open source. Tutti i diritti restano ai loro autori, che ringraziamo: nessuno di loro è collegato a rooMusic né lo approva. Il nome e il logo rooMusic sono di Dino Addis.</p>
-  <ul class="liclist"><li class="licg">Nell'app (sul tuo dispositivo)</li><li><b>Demucs (HTDemucs)</b> <span class="licl">MIT</span><br><small>separare le tracce sul dispositivo · Alexandre Défossez, Simon Rouard e collaboratori (Meta AI) · <a href="https://github.com/facebookresearch/demucs" target="_blank" rel="noopener">sito</a></small></li><li><b>demucs-web e modello ONNX</b> <span class="licl">MIT (come Demucs)</span><br><small>far girare Demucs nel browser · timcsy · <a href="https://github.com/timcsy/demucs-web" target="_blank" rel="noopener">sito</a></small></li><li><b>ONNX Runtime Web</b> <span class="licl">MIT</span><br><small>motore che esegue i modelli nel browser · Microsoft · <a href="https://github.com/microsoft/onnxruntime" target="_blank" rel="noopener">sito</a></small></li><li><b>NeuralAmpModelerCore</b> <span class="licl">MIT</span><br><small>suono degli amplificatori NAM · Steven Atkinson · <a href="https://github.com/sdatkinson/NeuralAmpModelerCore" target="_blank" rel="noopener">sito</a></small></li><li><b>@hpcc-js/wasm-nam-core</b> <span class="licl">Apache 2.0</span><br><small>versione per browser del motore NAM · HPCC Systems · <a href="https://github.com/hpcc-systems/hpcc-js-wasm" target="_blank" rel="noopener">sito</a></small></li><li><b>LAME / lamejs</b> <span class="licl">LGPL 3.0</span><br><small>salvare le tracce in MP3 · LAME project (lame.sourceforge.net); porting JavaScript di Alex Zhukov · <a href="https://github.com/zhuker/lamejs" target="_blank" rel="noopener">sito</a></small></li><li><b>MediaPipe Tasks Vision e modelli Face Landmarker e Selfie Segmenter</b> <span class="licl">Apache 2.0</span><br><small>primo piano e sfondo sfocato nella foto del video · Google · <a href="https://github.com/google-ai-edge/mediapipe" target="_blank" rel="noopener">sito</a></small></li><li><b>Inter</b> <span class="licl">SIL Open Font License 1.1</span><br><small>carattere dei testi · Rasmus Andersson · <a href="https://github.com/rsms/inter" target="_blank" rel="noopener">sito</a></small></li><li class="licg">Su RunPod (solo se lo colleghi)</li><li><b>Demucs 4</b> <span class="licl">MIT</span><br><small>separare le tracce · Meta AI · <a href="https://github.com/facebookresearch/demucs" target="_blank" rel="noopener">sito</a></small></li><li><b>BS-RoFormer (architettura) e bs-roformer-infer</b> <span class="licl">MIT</span><br><small>separare voce e strumenti con più precisione · Phil Wang (lucidrains); OpenMIRLab · <a href="https://github.com/openmirlab/bs-roformer-infer" target="_blank" rel="noopener">sito</a></small></li><li><b>Modello BS-RoFormer SW</b> <span class="licl">CC BY-NC-SA 4.0 (solo uso non commerciale)</span><br><small>pesi del modello di separazione · jarredou · <a href="https://huggingface.co/enerjazzer/BS-ROFO-SW-Fixed" target="_blank" rel="noopener">sito</a></small></li><li><b>Qwen3-ASR e Qwen3-ForcedAligner</b> <span class="licl">Apache 2.0</span><br><small>scrivere il testo dalla voce e metterlo a tempo · Qwen Team, Alibaba Cloud · <a href="https://huggingface.co/Qwen/Qwen3-ASR-1.7B" target="_blank" rel="noopener">sito</a></small></li><li><b>Whisper</b> <span class="licl">MIT</span><br><small>scrivere il testo dalla voce · OpenAI · <a href="https://github.com/openai/whisper" target="_blank" rel="noopener">sito</a></small></li><li><b>SpeechBrain e modello ECAPA</b> <span class="licl">Apache 2.0</span><br><small>riconoscere quando cambia chi canta · SpeechBrain · <a href="https://github.com/speechbrain/speechbrain" target="_blank" rel="noopener">sito</a></small></li><li><b>MediaPipe e OpenCV</b> <span class="licl">Apache 2.0</span><br><small>controllo delle labbra e del viso nel video · Google; OpenCV · <a href="https://github.com/opencv/opencv" target="_blank" rel="noopener">sito</a></small></li><li><b>FFmpeg</b> <span class="licl">LGPL 2.1 / GPL 2 (secondo i componenti)</span><br><small>unire audio e video · FFmpeg · <a href="https://ffmpeg.org/legal.html" target="_blank" rel="noopener">sito</a></small></li><li><b>PyTorch e torchaudio</b> <span class="licl">BSD 3-Clause</span><br><small>motore dei modelli · Meta e collaboratori · <a href="https://github.com/pytorch/pytorch" target="_blank" rel="noopener">sito</a></small></li><li><b>NumPy, Pillow, runpod</b> <span class="licl">BSD 3-Clause; MIT-CMU; MIT</span><br><small>calcoli, immagini, collegamento a RunPod · comunità NumPy; Pillow; RunPod · <a href="https://github.com/runpod/runpod-python" target="_blank" rel="noopener">sito</a></small></li></ul>
+  <ul class="liclist"><li class="licg">Nell'app (sul tuo dispositivo)</li><li><b>Demucs (HTDemucs)</b> <span class="licl">MIT</span><br><small>separare le tracce sul dispositivo · Alexandre Défossez, Simon Rouard e collaboratori (Meta AI) · <a href="https://github.com/facebookresearch/demucs" target="_blank" rel="noopener">sito</a></small></li><li><b>demucs-web e modello ONNX</b> <span class="licl">MIT (come Demucs)</span><br><small>far girare Demucs nel browser · timcsy · <a href="https://github.com/timcsy/demucs-web" target="_blank" rel="noopener">sito</a></small></li><li><b>ONNX Runtime Web</b> <span class="licl">MIT</span><br><small>motore che esegue i modelli nel browser · Microsoft · <a href="https://github.com/microsoft/onnxruntime" target="_blank" rel="noopener">sito</a></small></li><li><b>NeuralAmpModelerCore</b> <span class="licl">MIT</span><br><small>suono degli amplificatori NAM · Steven Atkinson · <a href="https://github.com/sdatkinson/NeuralAmpModelerCore" target="_blank" rel="noopener">sito</a></small></li><li><b>@hpcc-js/wasm-nam-core</b> <span class="licl">Apache 2.0</span><br><small>versione per browser del motore NAM · HPCC Systems · <a href="https://github.com/hpcc-systems/hpcc-js-wasm" target="_blank" rel="noopener">sito</a></small></li><li><b>LAME / lamejs</b> <span class="licl">LGPL 3.0</span><br><small>salvare le tracce in MP3 · LAME project (lame.sourceforge.net); porting JavaScript di Alex Zhukov · <a href="https://github.com/zhuker/lamejs" target="_blank" rel="noopener">sito</a></small></li><li><b>MediaPipe Tasks Vision e modelli Face Landmarker e Selfie Segmenter</b> <span class="licl">Apache 2.0</span><br><small>primo piano e sfondo sfocato nella foto del video · Google · <a href="https://github.com/google-ai-edge/mediapipe" target="_blank" rel="noopener">sito</a></small></li><li><b>Inter</b> <span class="licl">SIL Open Font License 1.1</span><br><small>carattere dei testi · Rasmus Andersson · <a href="https://github.com/rsms/inter" target="_blank" rel="noopener">sito</a></small></li><li class="licg">Su RunPod (solo se lo colleghi)</li><li><b>Basic Pitch</b> <span class="licl">Apache-2.0</span><br><small>note del piano per la tablatura · Spotify</small></li><li><b>Demucs 4</b> <span class="licl">MIT</span><br><small>separare le tracce · Meta AI · <a href="https://github.com/facebookresearch/demucs" target="_blank" rel="noopener">sito</a></small></li><li><b>BS-RoFormer (architettura) e bs-roformer-infer</b> <span class="licl">MIT</span><br><small>separare voce e strumenti con più precisione · Phil Wang (lucidrains); OpenMIRLab · <a href="https://github.com/openmirlab/bs-roformer-infer" target="_blank" rel="noopener">sito</a></small></li><li><b>Modello BS-RoFormer SW</b> <span class="licl">CC BY-NC-SA 4.0 (solo uso non commerciale)</span><br><small>pesi del modello di separazione · jarredou · <a href="https://huggingface.co/enerjazzer/BS-ROFO-SW-Fixed" target="_blank" rel="noopener">sito</a></small></li><li><b>Qwen3-ASR e Qwen3-ForcedAligner</b> <span class="licl">Apache 2.0</span><br><small>scrivere il testo dalla voce e metterlo a tempo · Qwen Team, Alibaba Cloud · <a href="https://huggingface.co/Qwen/Qwen3-ASR-1.7B" target="_blank" rel="noopener">sito</a></small></li><li><b>Whisper</b> <span class="licl">MIT</span><br><small>scrivere il testo dalla voce · OpenAI · <a href="https://github.com/openai/whisper" target="_blank" rel="noopener">sito</a></small></li><li><b>SpeechBrain e modello ECAPA</b> <span class="licl">Apache 2.0</span><br><small>riconoscere quando cambia chi canta · SpeechBrain · <a href="https://github.com/speechbrain/speechbrain" target="_blank" rel="noopener">sito</a></small></li><li><b>MediaPipe e OpenCV</b> <span class="licl">Apache 2.0</span><br><small>controllo delle labbra e del viso nel video · Google; OpenCV · <a href="https://github.com/opencv/opencv" target="_blank" rel="noopener">sito</a></small></li><li><b>FFmpeg</b> <span class="licl">LGPL 2.1 / GPL 2 (secondo i componenti)</span><br><small>unire audio e video · FFmpeg · <a href="https://ffmpeg.org/legal.html" target="_blank" rel="noopener">sito</a></small></li><li><b>PyTorch e torchaudio</b> <span class="licl">BSD 3-Clause</span><br><small>motore dei modelli · Meta e collaboratori · <a href="https://github.com/pytorch/pytorch" target="_blank" rel="noopener">sito</a></small></li><li><b>NumPy, Pillow, runpod</b> <span class="licl">BSD 3-Clause; MIT-CMU; MIT</span><br><small>calcoli, immagini, collegamento a RunPod · comunità NumPy; Pillow; RunPod · <a href="https://github.com/runpod/runpod-python" target="_blank" rel="noopener">sito</a></small></li></ul>
   <p class="snote">LAME: l'app usa la libreria LAME senza modificarla (lame.sourceforge.net). Il modello BS-RoFormer SW si può usare solo senza scopo di lucro: rooMusic è gratuita. Gli amplificatori scaricati da TONE3000 hanno ciascuno la licenza scelta dal suo autore, indicata su tone3000.com. I testi completi delle licenze sono ai link «sito».</p>
 </div></div>
 <div class="ov" id="ovHelp" hidden><div class="sheet">
@@ -2488,6 +2488,7 @@ themeApply();</script>
     <details><summary>Nelle Lezioni non sento le note</summary><p>Alza il volume del telefono o del PC e controlla che non sia in silenzioso (su iPhone c'è il tasto sul lato). Se stavi ascoltando un brano, le Lezioni lo mettono in pausa da sole. Togli la spunta da «Suona anche le note» solo se vuoi sentire il metronomo e basta.</p></details>
     <details><summary>Quali canzoni mi conviene comprare?</summary><p>Nel <b>Menu</b> apri <b>«Cerca brani»</b> e premi <b>«Canzoni consigliate»</b>: trovi le canzoni italiane, quelle da suonare con la band, il rock al femminile e le più ascoltate del momento, con i link per comprarle.</p></details>
     <details><summary>Nel Palco voglio la base alle casse e il mio ascolto in cuffia</summary><p>Con una scheda audio a 4 uscite (es. Behringer UMC404HD) accendi il microfono nel Palco: la spunta <b>«Casse e cuffie separate»</b> manda alle casse base, voce e strumenti, e alle cuffie il tuo ascolto con il click. Se sono al contrario premi <b>«Scambia casse e cuffie»</b>. Togli la spunta per usare una sola uscita.</p></details>
+    <details><summary>La tablatura del piano</summary><p>Nella tablatura scegli <b>Piano</b>: le note scendono verso la tastiera e la accendono quando vanno suonate (verdi la mano sinistra, celesti la destra), con il nome dell'accordo. Serve il brano separato a <b>6 tracce</b>. L'app trova le note da sola; con <b>«Note precise con RunPod»</b> le trova tutte (pochi centesimi a brano).</p></details>
     <details><summary>Scorciatoie da tastiera</summary><p><code>Spazio</code> avvia o mette in pausa il brano; <code>Esc</code> chiude il Palco e il tutorial.</p></details>
   </div>
   <p class="snote">Brani, testi e impostazioni restano su questo dispositivo, nel browser.</p>
@@ -3043,7 +3044,7 @@ async function loadSong(s,bufs){
   // tablatura
   blocks=[];parseTab();renderTab();
   for(const k of ['bass','guitar']){TB[k].tok++;TB[k].busy=false}
-  CH.tok++;CH.busy=false;CH.base=s.chordsBase||null;BPM=s.bpm||null;TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;TB.drums.tok++;TB.drums.busy=false;TB.drums.base=s.drumBase||null;TB.drums.notes=TB.drums.base;TB.drums.sens=s.drumSens||1;
+  CH.tok++;CH.busy=false;CH.base=s.chordsBase||null;BPM=s.bpm||null;TB.bass.base=s.bassBase||null;TB.bass.sens=s.bassSens||.7;TB.guitar.base=s.gtrBase||null;TB.guitar.sens=s.gtrSens||.7;TB.drums.tok++;TB.drums.busy=false;TB.drums.base=s.drumBase||null;TB.drums.notes=TB.drums.base;TB.drums.sens=s.drumSens||1;TB.piano.tok++;TB.piano.busy=false;TB.piano.base=TB.piano.notes=s.pianoBase||null;TB.piano.sens=s.pianoSens||.7;TB.piano.rg=null;
   tabRemap();updTr();setInst(inst);
   guide=null;anaToken++;
   updPalSegs();prefSet('last',s.id);setTimeout(()=>{try{sbSongChanged()}catch(e){console.warn(e)}},0);setTimeout(songPickFill,0);
@@ -3454,14 +3455,15 @@ function drawPitch(t){const cv=$('#pitch');if(!cv.offsetParent)return;const r=cv
 /* ================= tablatura automatica del basso ================= */
 const BASS_STR4=[['G',43],['D',38],['A',33],['E',28]],BASS_STR5=[['G',43],['D',38],['A',33],['E',28],['B',23]];
 const GTR_STR=[['e',64],['B',59],['G',55],['D',50],['A',45],['E',40]];
-let five=prefGet('five')==='1',tabZoom=+(prefGet('tabZoom')||1),bassKey=null,inst=['guitar','drums'].includes(prefGet('inst'))?prefGet('inst'):'bass';
-const TB={bass:{base:null,notes:null,sens:.7,tok:0,busy:false},guitar:{base:null,notes:null,sens:.7,tok:0,busy:false},drums:{base:null,notes:null,sens:1,tok:0,busy:false}};
+let five=prefGet('five')==='1',tabZoom=+(prefGet('tabZoom')||1),bassKey=null,inst=['guitar','drums','piano'].includes(prefGet('inst'))?prefGet('inst'):'bass';
+const TB={bass:{base:null,notes:null,sens:.7,tok:0,busy:false},guitar:{base:null,notes:null,sens:.7,tok:0,busy:false},drums:{base:null,notes:null,sens:1,tok:0,busy:false},piano:{base:null,notes:null,sens:.7,tok:0,busy:false,rg:null}};
 const TCFG={bass:{name:'basso',stem:'bass',SRb:8000,hp:26,lp:320,sr2:4000,W:.128,hop:.032,fmin:28,fmax:300,lo:23,hi:67,fold:58,minF:3,maxFret:22,start:3,save:['bassBase','bassSens']},
   guitar:{name:'chitarra',stem:'guitar',SRb:16000,hp:70,lp:1400,sr2:8000,W:.064,hop:.016,fmin:75,fmax:1300,lo:40,hi:88,fold:null,minF:5,maxFret:20,start:5,save:['gtrBase','gtrSens']}};
 $('#five').checked=five;$('#tabZoom').value=String(tabZoom);
 const bassStrings=()=>inst==='drums'?DRUM_STR:inst==='guitar'?GTR_STR:(five?BASS_STR5:BASS_STR4);
 function tabRemap(){for(const k of ['bass','guitar'])TB[k].notes=TB[k].base?bassTab(TB[k].base,k):null;const kb=TB.bass.base||TB.guitar.base;bassKey=kb?bassKeyGuess(kb):null}
-function setInst(k){inst=k;prefSet('inst',k);{const pb=$('#pInst');if(pb)pb.textContent=instName(k)}$$('#instSeg button').forEach(b=>b.classList.toggle('on',b.dataset.i===k));$('#tabTitle').textContent=instName(k);$$('.nowLbl').forEach(e=>e.textContent=k==='drums'?'Colpo':tabMode==='chords'?'Accordo':'Nota');$('#fiveL').hidden=k!=='bass'||tabMode==='chords';$('#modeSeg').hidden=k==='drums';$('#pMode').hidden=k==='drums';{const ai=k==='drums'&&song&&song.drumAI&&song.drumAI.length;$('#sens option[value="ai"]').hidden=!ai;$('#sens').value=ai&&song.drumSrc==='ai'?'ai':String(TB[k].sens)}$$('#sens option').forEach(o=>{o.textContent=o.dataset[k==='drums'?'d':'n']||o.textContent});rhyBtn();
+function setInst(k){inst=k;prefSet('inst',k);{const pb=$('#pInst');if(pb)pb.textContent=instName(k)}$$('#instSeg button').forEach(b=>b.classList.toggle('on',b.dataset.i===k));$('#tabTitle').textContent=instName(k);$$('.nowLbl').forEach(e=>e.textContent=k==='drums'?'Colpo':tabMode==='chords'?'Accordo':'Nota');$('#fiveL').hidden=k!=='bass'||tabMode==='chords';$('#modeSeg').hidden=k==='drums'||k==='piano';$('#pMode').hidden=k==='drums'||k==='piano';{const ai=k==='drums'&&song&&song.drumAI&&song.drumAI.length;$('#sens option[value="ai"]').hidden=!ai;$('#sens').value=ai&&song.drumSrc==='ai'?'ai':String(TB[k].sens)}$$('#sens option').forEach(o=>{o.textContent=o.dataset[k==='drums'?'d':'n']||o.textContent});rhyBtn();
+  try{pnAiBtn()}catch(e){}if(k==='piano'){$$('[data-notes]').forEach(e=>e.hidden=e.id==='fiveL');if(TB.piano.busy)return;if(TB.piano.base){tabMsg(TB.piano.base.length?'':'Non ho trovato note di piano in questo brano');return}if(!song)return;if(!stems.piano){tabMsg('Serve la traccia del piano: separa il brano a 6 tracce (Impostazioni → Separazione → Modello a 6 tracce).');return}pianoAnalyze();return}
   if(k==='drums'){$$('[data-notes]').forEach(e=>e.hidden=e.id==='fiveL');if(TB.drums.busy)return;if(TB.drums.base){tabMsg(TB.drums.base.length?'':'Non ho trovato colpi di batteria in questo brano');return}drumAnalyze();return}
   $$('[data-notes]').forEach(e=>e.hidden=tabMode==='chords'||(e.id==='fiveL'&&k!=='bass'));
   if(tabMode==='chords'){chordEnsure();return}
@@ -3576,7 +3578,7 @@ async function drumAnalyze(){const T=TB.drums;const tok=++T.tok;const src=stems.
     if(inst==='drums')tabMsg(notes.length?'':'Non ho trovato colpi di batteria in questo brano');saveCur({drumBase:notes,drumSens:T.sens,drumSrc:'local'});if(song)song.drumSrc='local';if($('#sens').value==='ai')$('#sens').value=String(T.sens)}
   catch(e){console.error(e);if(inst==='drums')tabMsg('Non riesco ad analizzare la batteria di questo brano')}finally{if(live())T.busy=false}}
 const DRUM_STR=DR_LANES.map(l=>[l.k,l.gm]);
-const instName=k=>k==='guitar'?'Chitarra':k==='drums'?'Batteria':'Basso';
+const instName=k=>k==='guitar'?'Chitarra':k==='drums'?'Batteria':k==='piano'?'Piano':'Basso';
 /* ===== diteggiatura: corda e tasto per ogni nota (basso e chitarra, anche gli assoli) =====
    La mano sta in una «posizione»: l'indice su un tasto e le altre dita sui tasti accanto (basso 4 tasti, chitarra 5).
    Per tutta la sequenza scelgo insieme corde, tasti e posizioni con il minor movimento possibile (programmazione dinamica):
@@ -3690,7 +3692,7 @@ function drumIcon(g,l,x,y,s,col,ink){const w=s,h=s;g.save();g.translate(x,y);g.l
   else if(l===3){/* tom: tamburo alto */g.beginPath();g.rect(-w*.32,-h*.24,w*.64,h*.5);g.fill();g.stroke();ell(0,-h*.24,w*.32,h*.11,true)}
   else{/* cassa: tamburo grande visto di fronte, con il pedale */g.beginPath();g.arc(0,-h*.04,w*.4,0,Math.PI*2);g.fill();g.stroke();g.beginPath();g.arc(0,-h*.04,w*.14,0,Math.PI*2);g.fillStyle=ink;g.fill();g.beginPath();g.moveTo(-w*.1,h*.46);g.lineTo(w*.1,h*.46);g.moveTo(0,h*.36);g.lineTo(0,h*.46);g.stroke()}
   g.restore()}
-function tabDraw(cv,o,cur){const DR=inst==='drums';const dpr=window.devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return null;if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
+function tabDraw(cv,o,cur){if(inst==='piano')return pnRoll(cv,o,cur);const DR=inst==='drums';const dpr=window.devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return null;if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
   const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle=C.paper;g.fillRect(0,0,w,h);
   const strs=bassStrings(),n=strs.length,top=(o.big?18:28)+(DR?(o.big?14:8):0),gap=(h-top-(o.big?16:22)-(DR?(o.big?14:10):0))/(n-1),pxs=o.pxs,cx=Math.round(w*o.cx),t0=cur-cx/pxs,t1=t0+w/pxs,r=o.r;
   if(!o.big){g.font='11px rooText,system-ui';g.fillStyle=C.dim;for(let q=Math.ceil(t0);q<=t1;q++){const x=cx+(q-cur)*pxs;g.globalAlpha=.35;g.fillRect(x,top-12,1,h-top);g.globalAlpha=1;if(q%5===0&&q>=0)g.fillText(fmt(q),x+3,12)}}
@@ -3704,11 +3706,76 @@ function tabDraw(cv,o,cur){const DR=inst==='drums';const dpr=window.devicePixelR
   g.fillStyle=C.mute;g.fillRect(cx-1,top-16,2,h-top+10);
   if(DR){const L=Math.min(gap*.9,o.big?46:36);strs.forEach((_,i)=>{const y=top+i*gap;g.fillStyle=C.paper;g.fillRect(0,y-L/2-2,L+8,L+4);if(isLight())drTile(g,L/2+4,y,L*.92);drumIcon(g,i,L/2+4,y,isLight()?L*.8:L,drCol(i),isLight()?cssV('--fg'):'#fff')});return active}
   strs.forEach(([nm],i)=>{const y=top+i*gap;g.fillStyle=C.paper;g.fillRect(0,y-11,24,22);g.fillStyle=C.fg;g.font=`700 ${o.big?15:14}px rooText,system-ui`;g.fillText(nm,6,y+5)});return active}
+/* ================= TABLATURA DEL PIANO =================
+   Note che scendono verso una tastiera disegnata (come i video «Synthesia»), con il nome dell'accordo.
+   Le note si ricavano dalla traccia del piano: subito con un'analisi fatta qui (gratis), oppure precise con RunPod (Basic Pitch). */
+async function pianoAnalyze(){const T=TB.piano;const tok=++T.tok;const src=stems.piano;if(!src){tabMsg('Serve la traccia del piano: separa il brano a 6 tracce (Impostazioni → Separazione → Modello a 6 tracce).');return}
+  const live=()=>tok===T.tok;T.busy=true;const prog=v=>{if(live()&&inst==='piano')tabMsg('Cerco le note del piano… '+Math.round(v*100)+'%')};prog(0);
+  try{const SR=16000;const off=new OfflineAudioContext(1,Math.ceil(src.duration*SR),SR);const s=off.createBufferSource();s.buffer=src;s.connect(off.destination);s.start();const ren=await off.startRendering();if(!live())return;
+    const x=ren.getChannelData(0),N=4096,hop=512,df=SR/N,nF=Math.max(0,Math.floor((x.length-N)/hop));const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/(N-1));
+    const re=new Float32Array(N),im=new Float32Array(N),mag=new Float32Array(N/2),LO=33,HI=96,NM=HI-LO+1;const sal=new Float32Array(nF*NM),f1=new Float32Array(nF*NM),f2=new Float32Array(nF*NM),rms=new Float32Array(nF);
+    const binOf=f=>f/df;
+    for(let fi=0;fi<nF;fi++){const o=fi*hop;let e=0;for(let i=0;i<N;i++){const v=x[o+i];re[i]=v*win[i];im[i]=0;e+=v*v}rms[fi]=Math.sqrt(e/N);fftIt(re,im,false);
+      for(let i=0;i<N/2;i++)mag[i]=Math.log(1+60*Math.hypot(re[i],im[i]));
+      for(let k=0;k<NM;k++){const f=440*2**((LO+k-69)/12);let sv=0,w=1;for(let h=1;h<=6;h++){const b=binOf(f*h);if(b>=N/2-2)break;const bi=Math.round(b);const pk=Math.max(mag[bi-1]||0,mag[bi],mag[bi+1]||0);if(h===1)f1[fi*NM+k]=pk;if(h===2)f2[fi*NM+k]=pk;sv+=w*pk;w*=.75}sal[fi*NM+k]=sv}
+      if(fi%150===0){prog(fi/nF*.8);await new Promise(r=>setTimeout(r,0));if(!live())return}}
+    /* soglie: più sensibile = più note */
+    const sens=T.sens||.7,rel=.78-.28*(sens-.5),fmax=new Float32Array(nF);for(let fi=0;fi<nF;fi++){let m=0;for(let k=0;k<NM;k++)m=Math.max(m,sal[fi*NM+k]);fmax[fi]=m}
+    const sorted=Array.from(fmax).sort((a,b)=>a-b),floor=(sorted[Math.floor(sorted.length*.95)]||0)*.3,rmsS=Array.from(rms).sort((a,b)=>a-b),rmsFloor=(rmsS[Math.floor(rmsS.length*.95)]||0)*.06+1e-4;
+    const on=new Map(),notes=[],dt=hop/SR,t0=(N/2)/SR,prev=new Float32Array(NM);
+    for(let fi=0;fi<nF;fi++){const cand=[];if(rms[fi]>rmsFloor&&fmax[fi]>floor){for(let k=0;k<NM;k++){const v=sal[fi*NM+k];if(v>=rel*fmax[fi]&&v>=(sal[fi*NM+k-1]||0)&&v>=(sal[fi*NM+k+1]||0)&&f1[fi*NM+k]>=(LO+k<45?.4:.6)*f2[fi*NM+k])cand.push([k,v])}}
+      cand.sort((a,b)=>b[1]-a[1]);const acc=[];for(const[k,v]of cand){if(acc.length>=4)break;if(acc.some(([a,va])=>{const d=Math.abs(k-a);return d===1||(k>a&&[12,19,24,28].includes(k-a)&&v<.72*va&&f1[fi*NM+k]<1.15*f1[fi*NM+a])}))continue;acc.push([k,v])}
+      const now=new Set(acc.map(a=>a[0]));const t=t0+fi*dt;
+      for(const[k,v]of acc){const o=on.get(k);const jump=v>prev[k]*1.35&&prev[k]>0;if(!o)on.set(k,{a:t,miss:0,v});else{o.miss=0;if(jump&&t-o.a>.12){notes.push([o.a,t,LO+k,o.v]);on.set(k,{a:t,miss:0,v})}}}
+      for(const[k,o]of[...on]){if(!now.has(k)){o.miss++;if(o.miss>=2){if(t-o.a>.08)notes.push([o.a,t-dt,LO+k,o.v]);on.delete(k)}}}
+      for(let k=0;k<NM;k++)prev[k]=sal[fi*NM+k]}
+    for(const[k,o]of on)if(t0+nF*dt-o.a>.08)notes.push([o.a,t0+nF*dt,LO+k,o.v]);
+    notes.sort((a,b)=>a[0]-b[0]||a[2]-b[2]);const out=notes.map(n=>[+n[0].toFixed(3),+n[1].toFixed(3),n[2],1]);if(!live())return;
+    T.base=T.notes=out;T.rg=null;T.busy=false;if(inst==='piano')tabMsg(out.length?'':'Non ho trovato note di piano in questo brano');saveCur({pianoBase:out,pianoSens:T.sens,pianoSrc:'local'});if(song)song.pianoSrc='local'}
+  catch(e){console.error(e);T.busy=false;if(inst==='piano')tabMsg('Non riesco a leggere le note del piano: '+(e.message||e))}}
+/* note precise: RunPod con Basic Pitch (Spotify, open source) */
+function pnAiBtn(){const b=$('#bPnAI');if(b)b.hidden=!(inst==='piano'&&song&&song.stored&&rp.key&&rp.ep&&stems.piano)}
+async function pnAiRun(){if(!song||!song.stored||!stems.piano){toast('Serve un brano della Libreria con la traccia del piano');return}if(sepBusy||pnAiRun.on){toast('RunPod sta già lavorando: riprova tra poco');return}
+  pnAiRun.on=true;const b=$('#bPnAI');b.disabled=true;const say=m=>tabMsg('RunPod: '+String(m||'').replace(/…$/,'')+'…');tabMsg('Preparo il piano per RunPod…');
+  try{const id=song.id,f=await trvFiles(id,['piano'],stems),x=f.piano;if(!x)throw new Error('traccia del piano non trovata');
+    sepAbort=false;const out=await rpCall({mode:'piano',audio_b64:await abToB64(x.data),filename:x.name},say);if(!out)throw new Error('fermato');if(out.error)throw new Error(out.error);
+    if(!out.piano)throw new Error('il servizio RunPod va aggiornato: pubblica la nuova versione del worker (New Release)');
+    if(out.piano.error)throw new Error(/non installato|No module/.test(out.piano.error)?'il servizio RunPod va aggiornato: pubblica la nuova versione del worker (New Release)':out.piano.error);
+    if(!song||song.id!==id)return;const notes=(out.piano.notes||[]).filter(n=>n&&n.length>=3).map(n=>[+n[0],+n[1],n[2]|0,n[3]==null?1:+n[3]]).sort((a,b)=>a[0]-b[0]||a[2]-b[2]);
+    if(!notes.length)throw new Error('non ho ricevuto note');const T=TB.piano;T.tok++;T.busy=false;T.base=T.notes=notes;T.rg=null;await saveCur({pianoBase:notes,pianoSrc:'ai'});song.pianoSrc='ai';tabMsg('');
+    toast('Fatto con RunPod: '+notes.length+' note del piano. Con «Rifai» torni all\'analisi fatta qui.')}
+  catch(e){console.error(e);const m=String(e&&e.message||e);tabMsg('');toast('Non riesco a leggere il piano con RunPod: '+({NET:'controlla internet',AUTH:'chiave RunPod non valida',NOEP:'endpoint RunPod non trovato'}[m]||m))}
+  finally{pnAiRun.on=false;b.disabled=false}}
+/* nome dell'accordo dalle note che suonano insieme */
+function pnChordOf(ms){const pcs=[...new Set(ms.map(m=>((m+tr)%12+12)%12))];if(pcs.length<3)return '';const bass=((Math.min(...ms)+tr)%12+12)%12;let best=null;
+  for(const r of pcs)for(const q of['M','m','7','m7','maj7','dim','aug']){const iv=LZ_CH[q].iv.map(x=>(r+x)%12);if(iv.every(p=>pcs.includes(p))){const sc=iv.length*10-(pcs.length-iv.length)*3+(r===bass?2:0);if(!best||sc>best.sc)best={r,q,sc}}}
+  return best?lzChName(best.r,best.q):''}
+/* disegno: le note scendono verso la tastiera e la accendono quando vanno suonate */
+function pnRoll(cv,o,cur){const dpr=window.devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return null;if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
+  const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle=C.paper;g.fillRect(0,0,w,h);const T=TB.piano,ns=T.notes||[];
+  if(!T.rg){let lo=60,hi=71;if(ns.length){const ms=ns.map(n=>n[2]+tr).sort((a,b)=>a-b);lo=ms[Math.floor(ms.length*.01)];hi=ms[Math.floor(ms.length*.99)]}lo=Math.max(21,lo-((lo%12)+12)%12);hi=Math.min(108,hi+(11-((hi%12)+12)%12));while(hi-lo<23){lo=Math.max(21,lo-12);if(hi-lo<23)hi+=12}T.rg=[lo,hi]}
+  const[lo,hi]=T.rg,isB=m=>[1,3,6,8,10].includes(((m%12)+12)%12),whites=[];for(let m=lo;m<=hi;m++)if(!isB(m))whites.push(m);const kw=w/whites.length,kh=Math.min(h*.3,o.big?120:86),bw=kw*.62,bh=kh*.62,H=h-kh-2;
+  const X=new Map();whites.forEach((m,i)=>X.set(m,i*kw));const xOf=m=>isB(m)?[X.get(m-1)+kw-bw/2,bw]:[X.get(m),kw];
+  const L=3.2/(tabZoom||1),py=H/L,yOf=t=>H-(t-cur)*py;
+  if(loopA!=null&&loopB!=null){g.fillStyle=C.acc;g.globalAlpha=.1;g.fillRect(0,yOf(loopB),w,yOf(loopA)-yOf(loopB));g.globalAlpha=1}
+  g.strokeStyle=C.line||C.steel;g.globalAlpha=.25;g.lineWidth=1;for(const m of whites)if(m%12===0){const x=X.get(m);g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke()}g.globalAlpha=1;
+  const active=[],onSet=new Set();
+  for(const n of ns){const a=n[0],b=n[1],m=n[2]+tr;if(b<cur-.3||a>cur+L)continue;if(m<lo||m>hi)continue;const[x,ww]=xOf(m);const y1=yOf(a),y0=yOf(b);const on=a<=cur&&cur<b;if(on){active.push(n);onSet.add(m)}
+    const lh=m<60;g.fillStyle=on?C.acc:lh?'#5fbf6a':'#3b9fd6';g.globalAlpha=a<cur&&!on?.25:.92;const rx=x+1,rw=Math.max(3,ww-2),ry=Math.max(-4,y0),rh=Math.max(4,Math.min(H,y1)-ry);
+    g.beginPath();if(g.roundRect)g.roundRect(rx,ry,rw,rh,Math.min(5,rw/2));else g.rect(rx,ry,rw,rh);g.fill();g.globalAlpha=1}
+  g.fillStyle=C.mute;g.fillRect(0,H,w,2);
+  for(const m of whites){const x=X.get(m);g.fillStyle=onSet.has(m)?C.acc:'#f6f4ee';g.fillRect(x+.5,H+2,kw-1,kh-2);g.strokeStyle='#3a3f44';g.lineWidth=1;g.strokeRect(x+.5,H+2,kw-1,kh-2);
+    if(m%12===0&&kw>13){g.fillStyle='#6a737c';g.font=`700 ${Math.min(12,kw*.45)}px rooText,system-ui`;g.textAlign='center';g.fillText(NOTE_IT[0]+(Math.floor(m/12)-1),x+kw/2,h-6);g.textAlign='left'}}
+  for(let m=lo;m<=hi;m++)if(isB(m)&&X.has(m-1)){const[x]=xOf(m);g.fillStyle=onSet.has(m)?C.acc:'#1d2126';g.fillRect(x,H+2,bw,bh)}
+  const names=[...new Set(active.map(n=>n[2]+tr))].sort((a,b)=>a-b),ch=pnChordOf(names);
+  if(ch){g.font=`800 ${o.big?28:20}px rooText,system-ui`;g.fillStyle=C.fg;g.fillText(ch,10,o.big?34:24)}
+  if(!active.length)return null;const r=active[0].slice();r.ptxt=(ch?ch+' · ':'')+names.map(m=>nomeMidi(m)).join(' ');return r}
 $('#five').onchange=e=>{five=e.target.checked;prefSet('five',five?'1':'0');tabRemap()};
 $('#tabZoom').onchange=e=>{tabZoom=+e.target.value;prefSet('tabZoom',tabZoom)};
-$('#sens').onchange=e=>{if(e.target.value==='ai'){if(song&&song.drumAI){const T=TB.drums;T.tok++;T.busy=false;T.base=T.notes=song.drumAI;tabMsg('');saveCur({drumBase:song.drumAI,drumSrc:'ai'});song.drumSrc='ai'}return}TB[inst].sens=+e.target.value;inst==='drums'?drumAnalyze():bassAnalyze(inst)};
+$('#sens').onchange=e=>{if(e.target.value==='ai'){if(song&&song.drumAI){const T=TB.drums;T.tok++;T.busy=false;T.base=T.notes=song.drumAI;tabMsg('');saveCur({drumBase:song.drumAI,drumSrc:'ai'});song.drumSrc='ai'}return}TB[inst].sens=+e.target.value;inst==='drums'?drumAnalyze():inst==='piano'?pianoAnalyze():bassAnalyze(inst)};
 $('#bRhy').onclick=()=>rhyRun();
-$('#bRedo').onclick=()=>inst==='drums'?drumAnalyze():tabMode==='chords'?chordAnalyze():bassAnalyze(inst);
+$('#bPnAI').onclick=()=>pnAiRun();
+$('#bRedo').onclick=()=>inst==='piano'?pianoAnalyze():inst==='drums'?drumAnalyze():tabMode==='chords'?chordAnalyze():bassAnalyze(inst);
 let tabView=prefGet('tabView')||'auto';
 function setTabView(v){tabView=v;prefSet('tabView',v);$('#tvAuto').classList.toggle('on',v==='auto');$('#tvWritten').classList.toggle('on',v!=='auto');$('#tabAutoWrap').hidden=v!=='auto';$('#tabFootAuto').hidden=v!=='auto';$('#tabs').hidden=v==='auto';$('#tabFootWritten').hidden=v==='auto'}
 $('#tvAuto').onclick=()=>setTabView('auto');$('#tvWritten').onclick=()=>setTabView('written');setTabView(tabView);setTabMode(tabMode);
@@ -3949,7 +4016,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-lvpd][data
 let PEDB=null;
 $$('#lvRev button').forEach(b=>b.onclick=()=>{LV.rev=+b.dataset.v;if(LV.rg)LV.rg.gain.setTargetAtTime(LV.rev,ctx().currentTime,.03);lvSave();lvRender()});
 
-$('#pInst').onclick=()=>{setInst(inst==='bass'?'guitar':inst==='guitar'?'drums':'bass');$$('.kpanel').forEach(P=>delete P.dataset.ci)};
+$('#pInst').onclick=()=>{setInst(inst==='bass'?'guitar':inst==='guitar'?'drums':inst==='drums'?'piano':'bass');$$('.kpanel').forEach(P=>delete P.dataset.ci)};
 $('#pTab').onclick=()=>{palTabOn=!palTabOn;prefSet('palTab',palTabOn?'1':'0');$('#pTab').classList.toggle('on',palTabOn);$('#palTabWrap').hidden=!palTabOn;palLayout()};
 
 /* ================= ciclo di disegno ================= */
@@ -3975,10 +4042,10 @@ function frame(){const t=now(),tv=viewT();clickTick();if(performance.now()-LAT.t
   karaUpdate(tv);updTab(tv);sampleMic(tv);drawPitch(tv);
   if(performance.now()-lastColorT>1000){readColors();lastColorT=performance.now()}
   let active=null;
-  const TD=tabMode==='chords'&&inst!=='drums'?chordDraw:tabDraw;
+  const TD=tabMode==='chords'&&inst!=='drums'&&inst!=='piano'?chordDraw:tabDraw;
   if(!palOn&&tabView==='auto'&&!$('#tabAutoWrap').hidden)active=TD($('#tabCv'),{pxs:120*tabZoom,cx:.28,r:11},tv);
   if(palOn&&palTabOn)active=TD($('#palTab'),{pxs:150*tabZoom,cx:.14,r:15,big:1},tv);
-  let txt='–';if(active){if(inst==='drums')txt=DR_LANES[active[3]].nm;else if(tabMode==='chords'){const r=((active[2]+tr)%12+12)%12;txt=chName(active[2]>=0?r:0,active[3])+' ('+chNameEn(r,active[3])+')'}else txt=`${nomeMidi(active[2])} · corda ${bassStrings()[active[3]][0]}, tasto ${active[4]}`}
+  let txt='–';if(active){if(active.ptxt)txt=active.ptxt;else if(inst==='drums')txt=DR_LANES[active[3]].nm;else if(tabMode==='chords'){const r=((active[2]+tr)%12+12)%12;txt=chName(active[2]>=0?r:0,active[3])+' ('+chNameEn(r,active[3])+')'}else txt=`${nomeMidi(active[2])} · corda ${bassStrings()[active[3]][0]}, tasto ${active[4]}`}
   if($('#noteNow').textContent!==txt){$('#noteNow').textContent=txt;$('#noteNow2').textContent=txt}
   requestAnimationFrame(frame)}
 
@@ -4855,7 +4922,7 @@ function rhyApply(rec,r,force){if(!r||r.error)return '';const got=[];
   if(r.beats&&r.beats.length>=8&&r.bpm>30&&r.bpm<260){const b=Math.round(r.bpm);Object.assign(rec,{beats:r.beats,bpm:b,beatBpm:b,beatDown:r.down||0,meter:r.meter||4,beatSrc:'ai'});got.push('battiti')}
   if(r.drums&&r.drums.length){rec.drumAI=rhyNotes(r.drums);if(force||!rec.drumBase||rec.drumSrc==='ai'){rec.drumBase=rec.drumAI;rec.drumSrc='ai'}got.push('batteria')}
   return got.join(' e ')}
-function rhyBtn(){const b=$('#bRhy');if(b)b.hidden=!(RP_RITMO&&inst==='drums'&&song&&song.stored&&rp.key&&rp.ep&&stems.drums)}
+function rhyBtn(){try{pnAiBtn()}catch(e){}const b=$('#bRhy');if(b)b.hidden=!(RP_RITMO&&inst==='drums'&&song&&song.stored&&rp.key&&rp.ep&&stems.drums)}
 async function rhyRun(){if(!song||!song.stored||!stems.drums){toast('Serve un brano della Libreria con la traccia della batteria');return}if(sepBusy||rhyRun.on){toast('RunPod sta già lavorando: riprova tra poco');return}
   rhyRun.on=true;const b=$('#bRhy');b.disabled=true;const say=m=>tabMsg('RunPod: '+String(m||'').replace(/…$/,'')+'…');tabMsg('Preparo la batteria per RunPod…');
   try{const id=song.id,ks=['drums'].concat(stems.bass?['bass']:[]);const f=await trvFiles(id,ks,stems);let tot=0;const files=[];
@@ -8014,8 +8081,8 @@ $('#sPos').onchange=async e=>{const t=+e.target.value/1000*sDur();if(SP.on){sLis
 $$('#sInst button').forEach(b=>b.onclick=()=>{setInst(b.dataset.i);sTabUI()});$$('#sMode button').forEach(b=>b.onclick=()=>{setTabMode(b.dataset.m);sTabUI()});
 function sTabUI(){$$('#sInst button').forEach(b=>b.classList.toggle('on',b.dataset.i===inst));$$('#sMode button').forEach(b=>b.classList.toggle('on',b.dataset.m===tabMode))}
 /* testo del brano: riga attuale grande, la prossima piccola */
-let sFr=0;function sFrame(){if($('#salaOv').hidden)return;const t=sNow();if(SA.view==='rec'){karaUpdate(t,$('#kpSala'));const TD=tabMode==='chords'&&inst!=='drums'?chordDraw:tabDraw;const C0=C;if(!SA.C){const cs=getComputedStyle($('#salaOv')),g=k=>cs.getPropertyValue(k).trim();SA.C={paper:g('--surface'),fg:g('--fg'),dim:g('--dim'),steel:g('--steel'),acc:g('--accent'),accInk:g('--accent-ink'),line:g('--line'),mute:g('--mute'),surf:g('--raise')}}C=SA.C;let a;try{a=TD($('#sTab'),{pxs:120*tabZoom,cx:.25,r:11},t)}finally{C=C0}
-    $('#sNote').textContent=a?(inst==='drums'?'Colpo: '+DR_LANES[a[3]].nm:tabMode==='chords'?'Accordo: '+chName(((a[2]+tr)%12+12)%12,a[3]):'Nota: '+nomeMidi(a[2])+' · corda '+bassStrings()[a[3]][0]+', tasto '+a[4]):'';
+let sFr=0;function sFrame(){if($('#salaOv').hidden)return;const t=sNow();if(SA.view==='rec'){karaUpdate(t,$('#kpSala'));const TD=tabMode==='chords'&&inst!=='drums'&&inst!=='piano'?chordDraw:tabDraw;const C0=C;if(!SA.C){const cs=getComputedStyle($('#salaOv')),g=k=>cs.getPropertyValue(k).trim();SA.C={paper:g('--surface'),fg:g('--fg'),dim:g('--dim'),steel:g('--steel'),acc:g('--accent'),accInk:g('--accent-ink'),line:g('--line'),mute:g('--mute'),surf:g('--raise')}}C=SA.C;let a;try{a=TD($('#sTab'),{pxs:120*tabZoom,cx:.25,r:11},t)}finally{C=C0}
+    $('#sNote').textContent=a?(a.ptxt?'Note: '+a.ptxt:inst==='drums'?'Colpo: '+DR_LANES[a[3]].nm:tabMode==='chords'?'Accordo: '+chName(((a[2]+tr)%12+12)%12,a[3]):'Nota: '+nomeMidi(a[2])+' · corda '+bassStrings()[a[3]][0]+', tasto '+a[4]):'';
     const d=sDur();if(document.activeElement!==$('#sPos')){$('#sPos').value=Math.round(t/d*1000);$('#sPosT').textContent=fmt(t)}}
   sFr=requestAnimationFrame(sFrame)}
 /* ---------- registrazione ---------- */
@@ -9297,12 +9364,13 @@ const TUT_SECTIONS=[
    {s:'#latAuto',t:'Ritardo audio automatico',d:'L\'app misura da sola quanto tarda il suono ad arrivare, per esempio con le cuffie Bluetooth, e mette testo e tablatura a tempo. Toglilo solo se vuoi regolarlo tu.'},
    {s:'#latMan',t:'Ritardo a mano',d:'Se hai tolto l\'automatico, qui scrivi il ritardo in millesimi di secondo.'},
   ]},
- {id:'strumento',name:'Opzioni strumento',ico:'🎸',sub:'basso, chitarra o batteria, note o accordi',ex:0,
+ {id:'strumento',name:'Opzioni strumento',ico:'🎸',sub:'basso, chitarra, piano o batteria, note o accordi',ex:0,
   prep:()=>{tutCloseAll();tutOpt('optTab',true)},done:()=>tutOpt('optTab',false),
   steps:[
    {t:'Opzioni strumento',d:'Qui decidi che cosa vedere nella parte dello strumento: quale strumento, se le note una per una o gli accordi, e quanto ingrandire.'},
    {s:'#instSeg [data-i="bass"]',t:'Basso',d:'Mostra la tablatura del basso: le righe sono le corde e il numero è il tasto da premere.'},
    {s:'#instSeg [data-i="guitar"]',t:'Chitarra',d:'Mostra la tablatura della chitarra. Serve un brano separato a sei tracce, perché c\'è bisogno della traccia della chitarra.'},
+   {s:'#instSeg [data-i="piano"]',t:'Piano',d:'Per il piano le note scendono verso una tastiera disegnata e la accendono quando vanno suonate: verdi per la mano sinistra, celesti per la destra. In alto c\'è il nome dell\'accordo. Serve il brano separato a sei tracce. Con «Note precise con RunPod» ottieni tutte le note del piano.'},
    {s:'#instSeg [data-i="drums"]',t:'Batteria',d:'Mostra la batteria con i disegni degli strumenti: piatti, charleston, rullante, tom e cassa. Ogni colpo compare sulla sua riga, con il suo colore.'},
    {s:'#modeSeg [data-m="notes"]',t:'Note',d:'Vedi le note una alla volta, come in una tablatura.'},
    {s:'#modeSeg [data-m="chords"]',t:'Accordi',d:'Vedi gli accordi che scorrono. Per la chitarra c\'è anche il disegno della posizione delle dita.'},
@@ -9365,7 +9433,7 @@ const TUT_SECTIONS=[
    {s:'#pCast',t:'Trasmetti sul TV',d:'Manda il testo e la tablatura su un televisore, così tutta la band li vede in grande.'},
    {s:'#kpPal',play:[2.2,7],t:'Il testo',d:'Il testo del brano, grande, con le parole che si colorano a tempo.'},
    {s:'#palTab',t:'La tablatura',d:'La parte del tuo strumento che scorre. La linea rossa è il momento giusto da suonare.'},
-   {s:'#pInst',t:'Strumento',d:'Cambia lo strumento della tablatura: basso, chitarra o batteria.'},
+   {s:'#pInst',t:'Strumento',d:'Cambia lo strumento della tablatura: basso, chitarra, batteria o piano. Per il piano le note scendono verso la tastiera.'},
    {s:'#pMode',t:'Note o accordi',d:'Passa dalle note una per una agli accordi, e viceversa.'},
    {s:'#pSeek',t:'La linea del brano',d:'Trascinala per andare in un punto del brano.'},
    {s:'#pSPrev',t:'Brano precedente',d:'Con la scaletta accesa, va al brano prima.'},

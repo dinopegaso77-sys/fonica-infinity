@@ -1,0 +1,1702 @@
+[
+ {
+  "h": "7ae31553",
+  "t": "Benvenuto in rooMusic. Questa è la schermata principale. Da qui scegli il brano, lo ascolti e apri tutti gli strumenti per cantare e suonare. Ti mostro i comandi uno alla volta, dall'alto verso il basso. Premi Avanti quando vuoi, oppure lascia che vada avanti da solo."
+ },
+ {
+  "h": "6576413e",
+  "t": "Condividi su WhatsApp. Sta nel Menu. Manda rooMusic ai tuoi amici: si apre WhatsApp con il messaggio già pronto e il collegamento all'app."
+ },
+ {
+  "h": "782d4045",
+  "t": "Tutorial. Lo trovi in cima al Menu: è il pulsante che hai appena usato. Lo puoi riaprire quando vuoi e scegliere la schermata che ti interessa."
+ },
+ {
+  "h": "1382fa83",
+  "t": "Donazione con PayPal. Anche questa sta nel Menu. Se l'app ti piace puoi fare una piccola donazione. È facoltativa: rooMusic resta gratuita."
+ },
+ {
+  "h": "b78a468b",
+  "t": "Dimmi la tua. Sta nel Menu. Scrivi a chi ha creato rooMusic: le stelline, se ti piace, se qualcosa non va o se hai un'idea. Il messaggio arriva solo a lui e non viene pubblicato."
+ },
+ {
+  "h": "5abeed23",
+  "t": "Menu. Il Menu raccoglie Tutorial, Condividi, Dona e le funzioni che si usano meno spesso: Cerca brani, Aggiungi brano, Libreria, Impostazioni, Ricarica RunPod, Aiuto, Dimmi la tua, Schermo intero e Presentazione. In fondo c'è la versione dell'app con le novità."
+ },
+ {
+  "h": "2a5cdfbc",
+  "t": "Palco. Apre lo schermo intero per esibirti: il testo grande che si colora parola per parola e, accanto o sotto, la tablatura del tuo strumento."
+ },
+ {
+  "h": "46fbd2aa",
+  "t": "Video. Registra la tua esibizione con la fotocamera, con il testo che scorre e la base. Alla fine crei il video da salvare o da mandare agli amici."
+ },
+ {
+  "h": "46f0e691",
+  "t": "Sala prove. Solo sul computer. Registra la band con la scheda audio: ogni musicista su una traccia, con amplificatori e pedali dal vivo in cuffia. Su telefono e tablet non c'è, perché lì il suono torna in cuffia con troppo ritardo."
+ },
+ {
+  "h": "bff8b5e7",
+  "t": "Lezioni. Lezioni di chitarra, basso, batteria e pianoforte, dalle basi all'avanzato: note, scale, accordi, ritmi, spartiti ed esercizi per le mani, con il manico che suona, il metronomo e l'allenamento del giorno. Funzionano anche senza internet."
+ },
+ {
+  "h": "029ce118",
+  "t": "Il brano. Qui vedi il brano aperto. Toccalo per sceglierne un altro dalla tua libreria. Quando segui una scaletta, qui compare il nome della scaletta: toccandolo scegli la scaletta o uno dei suoi brani."
+ },
+ {
+  "h": "cbbb690d",
+  "t": "Singolo o Scaletta. Con Singolo scegli i brani uno alla volta. Toccalo e diventa Scaletta: l'app segue solo i brani della scaletta, uno dopo l'altro. Toccalo di nuovo per tornare a Singolo."
+ },
+ {
+  "h": "6111eb62",
+  "t": "La barra della scaletta. Compare solo con la scaletta accesa. Ti dice a che brano sei, per esempio 3 di 8. Toccando il titolo scegli un altro brano della scaletta. Per andare al brano prima o dopo usi i tasti del lettore, qui sotto."
+ },
+ {
+  "h": "e17089e2",
+  "t": "Brano precedente. Compare con la scaletta accesa: torna al brano prima della scaletta."
+ },
+ {
+  "h": "28837de0",
+  "t": "Indietro. Torna indietro di 5 secondi."
+ },
+ {
+  "h": "3afdff6f",
+  "t": "Play e pausa. Fa partire o ferma il brano. Sul computer puoi usare anche la barra spaziatrice. In auto con il Bluetooth, o con le cuffie, funzionano anche i loro tasti: play, pausa, brano dopo e brano prima. Sul display dell'auto vedi titolo, artista e copertina."
+ },
+ {
+  "h": "a83e5c17",
+  "t": "Avanti. Va avanti di 5 secondi."
+ },
+ {
+  "h": "9f9cd95b",
+  "t": "Brano successivo. Compare con la scaletta accesa: passa al brano dopo della scaletta."
+ },
+ {
+  "h": "42da1e1f",
+  "t": "La linea del brano. Trascina il pallino per andare in qualsiasi punto del brano. Accanto vedi il tempo passato e la durata totale."
+ },
+ {
+  "h": "dd596dfc",
+  "t": "Mixer. Il volume di ogni strumento del brano: voce, basso, batteria, chitarra e gli altri. Ci sono anche i mix già pronti, come il Karaoke senza voce."
+ },
+ {
+  "h": "c4d3ee34",
+  "t": "Velocità e click. Rallenta o accelera il brano senza cambiare l'intonazione, accende il metronomo e ripete un passaggio. Sotto vedi i battiti al minuto del brano."
+ },
+ {
+  "h": "4b61d9ba",
+  "t": "Tonalità. Alza o abbassa il brano di mezzo tono alla volta. Accordi e tablatura seguono la nuova tonalità."
+ },
+ {
+  "h": "1ffee8da",
+  "t": "Accordatore. Per accordare chitarra e basso, e anche per controllare l'intonazione della voce."
+ },
+ {
+  "h": "e329bbf4",
+  "t": "Altro. Apre gli strumenti che si usano meno spesso: Estensione vocale, Foglio A4, Tag MP3 e, sul computer, Latenza e Pedaliera. Te li mostro adesso uno alla volta."
+ },
+ {
+  "h": "08bbbf98",
+  "t": "Estensione vocale. Canti dalla nota più bassa alla più alta che riesci: l'app capisce la tua voce e ti consiglia la tonalità più comoda per il brano."
+ },
+ {
+  "h": "c17194d8",
+  "t": "Tag MP3. Correggi titolo, artista, album, anno e testo del brano, e scarica l'MP3 con queste informazioni dentro."
+ },
+ {
+  "h": "085533b2",
+  "t": "Foglio A4. Il testo con gli accordi su fogli da leggere sul leggio, stampare o salvare in PDF. Puoi anche segnarci le tue note da musicista."
+ },
+ {
+  "h": "a591ec72",
+  "t": "Latenza. Solo computer. Misura il ritardo tra quando suoni e quando ti senti in cuffia, e ti aiuta a ridurlo."
+ },
+ {
+  "h": "5b323972",
+  "t": "La mia pedaliera. Solo sul computer. Colleghi una pedaliera MIDI alla scheda audio: con i piedi cambi suono, cambi brano della scaletta e regoli il volume."
+ },
+ {
+  "h": "a7795df4",
+  "t": "Il testo. Qui scorre il testo del brano: la riga che si canta è illuminata e le parole si colorano a tempo. Nei duetti le righe hanno colori diversi per ogni cantante."
+ },
+ {
+  "h": "3dfc2313",
+  "t": "Opzioni testo. Apre i comandi del testo: cercarlo, trascriverlo dalla voce, modificarlo, metterlo a tempo e ingrandirlo. Li vediamo nella scheda Opzioni testo del tutorial."
+ },
+ {
+  "h": "14bf3ffb",
+  "t": "Lo strumento. Qui scorre la parte del tuo strumento: basso, chitarra o batteria. La linea rossa è il momento giusto: suoni quello che passa sotto la linea."
+ },
+ {
+  "h": "8f57c213",
+  "t": "Opzioni strumento. Apre i comandi dello strumento: scegli basso, chitarra o batteria, note o accordi, lo zoom e quante note mostrare."
+ },
+ {
+  "h": "b48767b1",
+  "t": "Opzioni testo. Qui sistemi il testo del brano. Di solito l'app lo trova da sola, ma se manca o non è preciso lo puoi cercare, trascrivere, correggere e mettere a tempo."
+ },
+ {
+  "h": "45587e77",
+  "t": "Testo da. Scegli come si fa il testo. Il consigliato prende le parole giuste da LRCLIB o, se lì non ci sono, le fa ascoltare a Qwen3; poi Whisper mette a tempo ogni parola. Le altre scelte usano solo LRCLIB, solo Qwen3 o solo Whisper. Vale anche per «Affina» e per i brani nuovi."
+ },
+ {
+  "h": "839089e7",
+  "t": "Trascrivi dalla voce. RunPod ascolta la voce del brano e scrive il testo con il programma scelto in «Testo da», mettendo ogni parola a tempo. Serve RunPod collegato."
+ },
+ {
+  "h": "5b7360ab",
+  "t": "Lingua. La lingua in cui si canta il brano. Di solito lasciala su Automatica: se l'artista ha già altri brani, l'app usa la loro lingua, altrimenti RunPod la riconosce da solo prima di scrivere il testo. Cambiala solo se il testo è venuto in una lingua sbagliata, poi premi Trascrivi dalla voce."
+ },
+ {
+  "h": "da5f38ba",
+  "t": "Modifica. Apre il testo per correggerlo a mano o per incollarne uno tuo."
+ },
+ {
+  "h": "6bd31214",
+  "t": "Allinea da solo. Rimette a tempo il testo ascoltando la voce del brano. Usalo dopo aver incollato o corretto un testo."
+ },
+ {
+  "h": "a9ba901d",
+  "t": "Sincronizza a mano. Fa partire il brano e tu tocchi un pulsante all'inizio di ogni riga: così metti a tempo il testo da solo."
+ },
+ {
+  "h": "33f81d59",
+  "t": "Riconosci le voci. Per i duetti: RunPod capisce quale cantante canta ogni riga e le colora: blu il primo, rosso il secondo, giallo quando cantano insieme."
+ },
+ {
+  "h": "a0b05f5f",
+  "t": "Correggi a mano. Se una riga del duetto ha il colore sbagliato, tocca qui e poi tocca la riga per cambiarle colore."
+ },
+ {
+  "h": "b37608a3",
+  "t": "Testo prima. Se il testo arriva in ritardo rispetto alla voce, toccalo: il testo si sposta prima di due decimi di secondo alla volta."
+ },
+ {
+  "h": "2ed68914",
+  "t": "Testo dopo. Se il testo arriva in anticipo, toccalo: il testo si sposta dopo."
+ },
+ {
+  "h": "a5f425ae",
+  "t": "Testo più piccolo. Rimpicciolisce le scritte del testo."
+ },
+ {
+  "h": "ab8df8bb",
+  "t": "Testo più grande. Ingrandisce le scritte del testo, comodo da lontano."
+ },
+ {
+  "h": "282e2679",
+  "t": "Ritardo audio automatico. L'app misura da sola quanto tarda il suono ad arrivare, per esempio con le cuffie Bluetooth, e mette testo e tablatura a tempo. Toglilo solo se vuoi regolarlo tu."
+ },
+ {
+  "h": "597d1cf8",
+  "t": "Ritardo a mano. Se hai tolto l'automatico, qui scrivi il ritardo in millesimi di secondo."
+ },
+ {
+  "h": "266ac8da",
+  "t": "Opzioni strumento. Qui decidi che cosa vedere nella parte dello strumento: quale strumento, se le note una per una o gli accordi, e quanto ingrandire."
+ },
+ {
+  "h": "6443e652",
+  "t": "Basso. Mostra la tablatura del basso: le righe sono le corde e il numero è il tasto da premere."
+ },
+ {
+  "h": "fc7dfa3e",
+  "t": "Chitarra. Mostra la tablatura della chitarra. Serve un brano separato a sei tracce, perché c'è bisogno della traccia della chitarra."
+ },
+ {
+  "h": "5c5a284c",
+  "t": "Piano. Per il piano le note scendono verso una tastiera disegnata e la accendono quando vanno suonate: verdi per la mano sinistra, celesti per la destra. In alto c'è il nome dell'accordo. Serve il brano separato a sei tracce. Con «Note precise con RunPod» ottieni tutte le note del piano."
+ },
+ {
+  "h": "ec8d4007",
+  "t": "Batteria. Mostra la batteria con i disegni degli strumenti: piatti, charleston, rullante, tom e cassa. Ogni colpo compare sulla sua riga, con il suo colore."
+ },
+ {
+  "h": "f6f9368d",
+  "t": "Note. Vedi le note una alla volta, come in una tablatura."
+ },
+ {
+  "h": "2e63791c",
+  "t": "Accordi. Vedi gli accordi che scorrono. Per la chitarra c'è anche il disegno della posizione delle dita."
+ },
+ {
+  "h": "33f050e0",
+  "t": "Automatica. La tablatura la scrive l'app ascoltando il brano."
+ },
+ {
+  "h": "ac4665be",
+  "t": "Scritta. Usi una tablatura tua, scritta o incollata a mano."
+ },
+ {
+  "h": "f7397fb2",
+  "t": "Zoom. Allarga o stringe la tablatura: con vicino le note sono più distanti e si leggono meglio."
+ },
+ {
+  "h": "f315c704",
+  "t": "5 corde. Solo per il basso: spuntalo se il tuo basso ha cinque corde."
+ },
+ {
+  "h": "5a3fda2d",
+  "t": "Quante note. Se la tablatura ha troppe note, scegli meno note; se ne mancano, scegli più note. Per la batteria vale lo stesso con i colpi. Se la batteria è stata scritta da RunPod, qui trovi anche «RunPod (precisa)»: puoi passare dall'una all'altra quando vuoi."
+ },
+ {
+  "h": "c4c526ed",
+  "t": "Rifai. Fa riascoltare il brano all'app e riscrive la tablatura da capo."
+ },
+ {
+  "h": "7235b524",
+  "t": "Più precisa con RunPod. Solo nella batteria. RunPod riascolta la batteria con programmi più precisi e trova anche i battiti e le battute, così il click va più a tempo. Costa pochi centesimi. Se preferisci il risultato di prima, nel menu dei colpi scegli di nuovo «colpi normali»."
+ },
+ {
+  "h": "ccc5252c",
+  "t": "Modifica. Con la tablatura scritta: apre il testo della tablatura per scriverla o incollarla."
+ },
+ {
+  "h": "8f3bddfd",
+  "t": "Sincronizza. Con la tablatura scritta: la metti a tempo toccando all'inizio di ogni pezzo mentre il brano suona."
+ },
+ {
+  "h": "c815da9f",
+  "t": "Il Mixer. Il brano è diviso in tracce: voce, basso, batteria, chitarra, piano e altro. Nel mixer decidi quanto si sente ognuna, per esempio togli la voce per cantare tu, o il basso per suonarlo tu."
+ },
+ {
+  "h": "88b23af8",
+  "t": "Tutto. Rimette tutte le tracce al volume normale, come il brano originale."
+ },
+ {
+  "h": "62b0a5b2",
+  "t": "Karaoke. Toglie la voce: resta solo la base e canti tu."
+ },
+ {
+  "h": "c96e3534",
+  "t": "Voce guida bassa. La voce originale resta, ma molto bassa: ti aiuta a non perderti mentre canti."
+ },
+ {
+  "h": "b852677b",
+  "t": "Suono io il basso. Toglie il basso dal brano: lo suoni tu sopra la base."
+ },
+ {
+  "h": "e8c4f5be",
+  "t": "Studio basso. Lascia solo il basso e la batteria, per ascoltare bene la parte da imparare."
+ },
+ {
+  "h": "3e66f35e",
+  "t": "Suono io la chitarra. Toglie la chitarra dal brano: la suoni tu."
+ },
+ {
+  "h": "da6429b3",
+  "t": "Studio chitarra. Lascia la chitarra in primo piano, per impararne la parte."
+ },
+ {
+  "h": "9b537927",
+  "t": "Il nome della traccia. Ogni riga è una traccia del brano. Il nome ti dice quale strumento è."
+ },
+ {
+  "h": "2c67e6dc",
+  "t": "M, muto. Spegne questa traccia. Toccalo di nuovo per riaccenderla."
+ },
+ {
+  "h": "20e4c079",
+  "t": "S, solo. Fa sentire solo questa traccia, tutte le altre si spengono. Toccalo di nuovo per tornare come prima."
+ },
+ {
+  "h": "6930cdb9",
+  "t": "Il volume. Trascina a destra per alzare, a sinistra per abbassare. Il cambio si sente subito."
+ },
+ {
+  "h": "d9b2af44",
+  "t": "Microfono. Accende il microfono e ti fa sentire la tua voce insieme al brano. Usa le cuffie per non avere fischi."
+ },
+ {
+  "h": "86aa13ac",
+  "t": "Velocità e click. Qui rallenti un brano difficile per impararlo, accendi il click del metronomo e ripeti in continuazione un passaggio."
+ },
+ {
+  "h": "bf1bedea",
+  "t": "Velocità. Scegli la velocità in battiti al minuto. Il brano rallenta o accelera senza cambiare l'intonazione: le note restano le stesse."
+ },
+ {
+  "h": "3d307f72",
+  "t": "bpm diviso due. Se il numero dei battiti sembra il doppio di quello vero, toccalo per dimezzarlo."
+ },
+ {
+  "h": "6b93af48",
+  "t": "bpm per due. Se il numero sembra la metà di quello vero, toccalo per raddoppiarlo."
+ },
+ {
+  "h": "7a9e06b8",
+  "t": "Click batteria. Accende il metronomo, che segue i battiti veri del brano anche se il tempo cambia un po'."
+ },
+ {
+  "h": "3b904f87",
+  "t": "Accento. Sceglie ogni quanti colpi c'è il colpo più forte: ogni 4 per la maggior parte dei brani, ogni 3 per i valzer."
+ },
+ {
+  "h": "5610c626",
+  "t": "Volume del click. Alza o abbassa il volume del metronomo."
+ },
+ {
+  "h": "73cc60bb",
+  "t": "A, inizio del passaggio. Mentre il brano suona, tocca A nel punto in cui inizia il pezzo che vuoi ripetere."
+ },
+ {
+  "h": "1bac877e",
+  "t": "B, fine del passaggio. Tocca B dove il pezzo finisce: da adesso il brano ripete da A a B, quante volte vuoi."
+ },
+ {
+  "h": "98c02f1a",
+  "t": "Togli. Cancella A e B: il brano torna a suonare normalmente."
+ },
+ {
+  "h": "f28eadf0",
+  "t": "Tonalità. Se il brano è troppo alto o troppo basso per la tua voce, qui lo sposti di mezzo tono alla volta. Accordi e tablatura cambiano insieme al brano."
+ },
+ {
+  "h": "b45ff9da",
+  "t": "Abbassa. Abbassa il brano di mezzo tono. Se quella tonalità non è ancora pronta, l'app la prepara con RunPod e te lo dice."
+ },
+ {
+  "h": "686e52ec",
+  "t": "Alza. Alza il brano di mezzo tono."
+ },
+ {
+  "h": "0ad2aa18",
+  "t": "Originale. Riporta il brano alla sua tonalità originale."
+ },
+ {
+  "h": "8f88bfb7",
+  "t": "Il Palco. Il Palco è lo schermo per esibirti: testo grande, tablatura e tutti i comandi a portata di mano. Quando premi play, i comandi spariscono dopo due secondi per lasciare lo schermo pulito: toccalo per farli tornare."
+ },
+ {
+  "h": "0cb97d7d",
+  "t": "Casa. Esce dal Palco e torna alla schermata principale."
+ },
+ {
+  "h": "be33a396",
+  "t": "Il brano. Mostra il brano aperto. Toccalo per cambiare brano, o per scegliere un brano della scaletta se è accesa."
+ },
+ {
+  "h": "0f8604b2",
+  "t": "A meno. Rimpicciolisce il testo."
+ },
+ {
+  "h": "ab1fc12e",
+  "t": "A più. Ingrandisce il testo, per leggerlo da lontano."
+ },
+ {
+  "h": "a1267ef9",
+  "t": "Trasmetti sul TV. Manda il testo e la tablatura su un televisore, così tutta la band li vede in grande."
+ },
+ {
+  "h": "1b515dd6",
+  "t": "Il testo. Il testo del brano, grande, con le parole che si colorano a tempo."
+ },
+ {
+  "h": "7ae72121",
+  "t": "La tablatura. La parte del tuo strumento che scorre. La linea rossa è il momento giusto da suonare."
+ },
+ {
+  "h": "3b07d545",
+  "t": "Strumento. Cambia lo strumento della tablatura: basso, chitarra, batteria o piano. Per il piano le note scendono verso la tastiera."
+ },
+ {
+  "h": "cb8ea4c1",
+  "t": "Note o accordi. Passa dalle note una per una agli accordi, e viceversa."
+ },
+ {
+  "h": "5fe1cde1",
+  "t": "La linea del brano. Trascinala per andare in un punto del brano."
+ },
+ {
+  "h": "1cc36e49",
+  "t": "Brano precedente. Con la scaletta accesa, va al brano prima."
+ },
+ {
+  "h": "438ebba7",
+  "t": "Play e pausa. Fa partire o ferma il brano."
+ },
+ {
+  "h": "05618936",
+  "t": "Brano successivo. Con la scaletta accesa, va al brano dopo."
+ },
+ {
+  "h": "bf0d1300",
+  "t": "Tracce. Apre un piccolo mixer: alzi, abbassi o togli voce, chitarra, basso e gli altri strumenti senza uscire dal Palco."
+ },
+ {
+  "h": "470427fb",
+  "t": "Tablatura. Mostra o nasconde la tablatura, per avere tutto lo schermo per il testo."
+ },
+ {
+  "h": "8151da21",
+  "t": "Microfono. Accende il microfono e, con una scheda audio, anche gli strumenti (voce, chitarra, basso, piano e tastiere). Per ognuno scegli se sentirlo in cuffia, il volume e l'eco sulla voce. Con una scheda a 4 uscite, come la Behringer UMC404HD, le casse e le cuffie sono separate: alle casse vanno base, voce e strumenti per il pubblico, alle cuffie il tuo ascolto. Lo scambi con «Scambia casse e cuffie»."
+ },
+ {
+  "h": "eb89926a",
+  "t": "Scaletta. Apre la scaletta della serata, per preparare o cambiare l'ordine dei brani."
+ },
+ {
+  "h": "853b7c1e",
+  "t": "Altro. Apre Duetto, Click, Video e Foglio. Se uno di questi è acceso, sul pulsante compare un puntino."
+ },
+ {
+  "h": "1587a1e1",
+  "t": "Duetto. Accende i colori del duetto: blu per il primo cantante, rosso per il secondo, giallo quando cantate insieme."
+ },
+ {
+  "h": "1c2f0b62",
+  "t": "Click. Accende o spegne il metronomo che segue il brano."
+ },
+ {
+  "h": "4f942517",
+  "t": "Video. Passa alla registrazione del video con questo brano."
+ },
+ {
+  "h": "04a16ae3",
+  "t": "Foglio. Apre l'ultimo foglio A4 del brano, con testo e accordi da leggere."
+ },
+ {
+  "h": "13c39fa5",
+  "t": "La Libreria. Qui ci sono tutti i tuoi brani, divisi per artista e per album. Per farti vedere com'è piena ho messo tre brani inventati: «Luci sul porto» e «Strada d'estate» dei Lampioni, e «Notte di vento» della Banda del Faro. Non sono brani veri: li ha creati l'app."
+ },
+ {
+  "h": "e097cfd0",
+  "t": "Scegli un MP3. Per un brano nuovo, tocca qui e scegli il file MP3 dal telefono o dal computer."
+ },
+ {
+  "h": "7bacb1bc",
+  "t": "Oppure un link. Se il brano è su internet, incolla qui il collegamento diretto al file audio."
+ },
+ {
+  "h": "3dd82a17",
+  "t": "Scarica da link. Scarica il file dal collegamento che hai incollato."
+ },
+ {
+  "h": "3c155bb0",
+  "t": "Separa tracce. Manda il brano a RunPod, che lo divide in voce, basso, batteria, chitarra e altro. Prima ti chiede la tonalità. Quando ha finito, il brano compare qui sotto."
+ },
+ {
+  "h": "d4bff10d",
+  "t": "L'artista. Ogni artista è una tendina, con quanti brani e quanti album hai: toccala per aprirla o chiuderla. Con «Storia», per un artista vero, l'app ti racconta la sua storia e i suoi album, con la fonte; lì puoi anche scrivere i nomi d'arte con cui è conosciuto. I Lampioni sono inventati, quindi lì non c'è niente da leggere."
+ },
+ {
+  "h": "6e68323b",
+  "t": "L'album. Dentro l'artista ci sono i suoi album, anche loro a tendina, con l'anno e il numero di brani. Per i brani veri l'app trova da sola anche la copertina."
+ },
+ {
+  "h": "79e3d0ec",
+  "t": "Il titolo. Tocca il titolo per aprire subito il brano, per esempio «Luci sul porto»."
+ },
+ {
+  "h": "5996c152",
+  "t": "Le tracce del brano. Qui vedi in quali tracce è diviso il brano, se ha già il testo e dove si trova: qui, nel cloud o in tutti e due."
+ },
+ {
+  "h": "44d8ce0d",
+  "t": "Dove si trova. «Qui» vuol dire sul dispositivo; «nel cloud» vuol dire nel tuo spazio su internet. Accanto ci sono i pulsanti per scaricarlo qui, toglierlo da qui lasciandolo nel cloud, o salvarlo nel cloud."
+ },
+ {
+  "h": "f96ec624",
+  "t": "Aggiungi alla coda. Mette il brano in fondo alla scaletta, la coda dei brani da suonare. Toccalo di nuovo per toglierlo."
+ },
+ {
+  "h": "b1a7b438",
+  "t": "Modifica tag MP3. Cambia titolo, artista, album, anno e testo del brano. C'è una scheda del tutorial solo per questo."
+ },
+ {
+  "h": "264f872f",
+  "t": "Salva tracce. Salva le tracce separate del brano sul dispositivo, per esempio per usarle in un altro programma."
+ },
+ {
+  "h": "7dac4851",
+  "t": "Elimina ovunque. Cancella il brano. Prima ti chiede conferma, perché lo toglie anche dal cloud e dagli altri dispositivi."
+ },
+ {
+  "h": "f554e319",
+  "t": "Spazio e filtri. Sopra l'elenco vedi quanto spazio usano i brani e quanti sono qui, nel cloud o in tutti e due. Con i filtri mostri solo quelli che ti interessano."
+ },
+ {
+  "h": "82377bfd",
+  "t": "Carica i brani già separati. Se hai una cartella con le tracce già separate, divise in Artista e Titolo, le carichi tutte da qui."
+ },
+ {
+  "h": "31ff8885",
+  "t": "Tracce già separate o un MP3. Scegli insieme le tracce di un brano, come vocals, bass, drums e other: l'app le riconosce dal nome. Con un solo MP3 il brano resta intero."
+ },
+ {
+  "h": "606c8846",
+  "t": "Titolo. Scrivi il titolo del brano che stai aggiungendo."
+ },
+ {
+  "h": "a321be25",
+  "t": "Artista. Scrivi chi lo canta."
+ },
+ {
+  "h": "37460cda",
+  "t": "Salva. Aggiunge il brano alla Libreria."
+ },
+ {
+  "h": "e3a3d461",
+  "t": "Aggiungi brani. Si apre dal Menu, con Aggiungi brano. Serve a caricare tanti brani in una volta da una cartella dove le tracce sono già separate, ognuna nella sua sottocartella Artista e Titolo, con il loro testo."
+ },
+ {
+  "h": "46040b77",
+  "t": "Dalla cartella delle tracce. Legge la cartella delle tracce che hai già scelto la volta prima."
+ },
+ {
+  "h": "63ca172d",
+  "t": "Scegli un'altra cartella. Scegli una cartella diversa. L'app cerca i brani in tutte le sottocartelle."
+ },
+ {
+  "h": "b62ae1f9",
+  "t": "Dal cloud R2. Se hai collegato il cloud, prendi i brani salvati lì."
+ },
+ {
+  "h": "e529e169",
+  "t": "Un nuovo MP3 da separare. Per un brano non ancora separato: scegli l'MP3 e l'app lo manda a RunPod per dividerlo in tracce."
+ },
+ {
+  "h": "bd555c51",
+  "t": "Seleziona tutti. Quando compare l'elenco dei brani trovati, spunta qui per sceglierli tutti in una volta."
+ },
+ {
+  "h": "55a3e28a",
+  "t": "Aggiungi. Aggiunge alla Libreria i brani che hai spuntato."
+ },
+ {
+  "h": "f4bdcd04",
+  "t": "Cerca brani. Si apre dal Menu. Cerchi un artista o una canzone, ascolti un pezzetto e scegli dove comprare l'MP3. Dopo l'acquisto aggiungi il file con Aggiungi brano oppure dalla Libreria."
+ },
+ {
+  "h": "f9762497",
+  "t": "Artista. Cerca per nome del cantante o del gruppo."
+ },
+ {
+  "h": "3a0783e7",
+  "t": "Canzone. Cerca per titolo della canzone."
+ },
+ {
+  "h": "dbfbafbe",
+  "t": "Cosa cercare. Scrivi qui quello che cerchi. Per esempio ho scritto Mina."
+ },
+ {
+  "h": "ec8931c5",
+  "t": "Cerca. Fa la ricerca e mostra i risultati con l'anteprima da ascoltare e il prezzo indicativo. Il prezzo vero lo vedi sulla piattaforma dove compri."
+ },
+ {
+  "h": "3e6a6533",
+  "t": "Canzoni consigliate. Apre le liste delle canzoni da avere: Italiane, Da suonare cult, Rock femminili, il meglio di Sanremo (tutte le vincitrici e le più famose) e, quando internet c'è, Più ascoltate ora (la classifica di Apple Music Italia). Accanto a ogni canzone: Anteprima fa sentire 30 secondi, YouTube la apre per ascoltarla tutta, e con Amazon, iTunes o Qobuz la cerchi e la compri."
+ },
+ {
+  "h": "e8e97d67",
+  "t": "Lezioni. Si aprono con il pulsante Lezioni in alto. Sono ordinate dalla più facile alla più difficile, in 6 livelli: parti dalla prima e vai avanti con calma."
+ },
+ {
+  "h": "60074098",
+  "t": "Chitarra, basso, batteria o piano. Scegli lo strumento: le lezioni, l'allenamento del giorno e i progressi sono separati per ognuno."
+ },
+ {
+  "h": "429fbaef",
+  "t": "Allenamento del giorno. Quattro parti: riscaldamento, scala, accordi e dita. Cambia ogni giorno da solo. Scegli quanto dura (8, 12 o 20 minuti) e premi Inizia. I pallini sono gli ultimi 14 giorni: quelli pieni sono i giorni in cui ti sei allenato."
+ },
+ {
+  "h": "91a4978c",
+  "t": "Una lezione. Tocca una lezione per aprirla. Quando l'hai imparata compare il segno di spunta; negli esercizi vedi anche il tuo record di velocità."
+ },
+ {
+  "h": "d9ff7337",
+  "t": "Il manico. Tocca un pallino per sentire la nota. Arancione è la nota principale. Sul telefono il manico è in verticale: scorri per vederlo tutto."
+ },
+ {
+  "h": "d98e7121",
+  "t": "Le scelte. Qui scegli la nota, la posizione, l'accordo o il dito di partenza. Con «Scritte» decidi cosa vedere nei pallini: le note, i gradi o le dita."
+ },
+ {
+  "h": "24048cc9",
+  "t": "Suona e metronomo. Premi Suona: l'app conta 4 battiti e poi suona, accendendo le note una alla volta. Con − e + cambi la velocità. Togli «Suona anche le note» per sentire solo il metronomo e suonare tu; togli «Metronomo» se non ti serve."
+ },
+ {
+  "h": "6aa8e301",
+  "t": "Il piano. Per il piano c'è la tastiera: tocca un tasto per sentirlo. I numeri nei pallini sono le dita (1 pollice, 5 mignolo), celesti per la mano destra e verdi per la sinistra. Sopra c'è lo spartito, che si accende nota per nota mentre suona."
+ },
+ {
+  "h": "8b521c34",
+  "t": "Aspettami e tastiera MIDI. Con «Aspettami» l'app va avanti solo quando suoni la nota giusta, sul disegno o sulla tua tastiera. Se colleghi una tastiera MIDI con il cavo USB, i tasti che premi si accendono e l'app controlla se sono giusti."
+ },
+ {
+  "h": "905f24ee",
+  "t": "La batteria. Per la batteria al posto del manico c'è una griglia: una riga per pezzo (charleston, rullante, cassa, tom, piatti) e un quadretto per ogni momento. Quadretto pieno = colpo. Durante Suona si accende la colonna di adesso. Tocca un quadretto per sentire il suono."
+ },
+ {
+  "h": "a400afdd",
+  "t": "Crea il tuo ritmo. Nell'ultima lezione della batteria inventi il tuo ritmo: tocca i quadretti per mettere e togliere i colpi. Hai 3 ritmi, che si salvano da soli; puoi anche partire da un ritmo delle lezioni."
+ },
+ {
+  "h": "9ab99020",
+  "t": "La Scaletta. La scaletta è l'elenco dei brani da suonare, in ordine. Per esempio ho preparato la «Serata di esempio» con i tre brani inventati. Quando la scaletta è accesa, l'app passa da un brano all'altro seguendo questo ordine. Alla fine del tutorial ti rimetto la tua scaletta com'era."
+ },
+ {
+  "h": "57ae586c",
+  "t": "I brani in ordine. Ecco i brani della scaletta, dal primo all'ultimo."
+ },
+ {
+  "h": "8c01ad74",
+  "t": "Suona questo brano. Il triangolo fa partire subito quel brano della scaletta."
+ },
+ {
+  "h": "358f2cee",
+  "t": "Sposta giù. Le frecce spostano il brano più su o più giù, per cambiare l'ordine della serata."
+ },
+ {
+  "h": "7faf2655",
+  "t": "Togli. La croce toglie il brano dalla scaletta. Il brano resta nella Libreria."
+ },
+ {
+  "h": "b9fdb481",
+  "t": "Scegli un artista. Per aggiungere brani: scegli un artista e sotto compaiono i suoi brani da toccare. Con «Tutti i suoi brani» li aggiungi tutti insieme."
+ },
+ {
+  "h": "440c4105",
+  "t": "Cerca un titolo. Scrivi una parte del titolo per trovare subito il brano da aggiungere."
+ },
+ {
+  "h": "ac813e3f",
+  "t": "Tutta la libreria. Mette nella scaletta tutti i brani della Libreria."
+ },
+ {
+  "h": "2acb14d7",
+  "t": "Passa da solo al prossimo. Se è spuntato, quando un brano finisce dopo 5 secondi parte il successivo."
+ },
+ {
+  "h": "891ecd0d",
+  "t": "Suona dal primo. Accende la scaletta e fa partire il primo brano."
+ },
+ {
+  "h": "b05ce5c1",
+  "t": "Spegni la scaletta. Spegne la scaletta e torni a scegliere i brani uno alla volta."
+ },
+ {
+  "h": "a1e338f1",
+  "t": "Nome della scaletta. Dai un nome alla scaletta, per esempio «Serata al pub»."
+ },
+ {
+  "h": "696d8b30",
+  "t": "Salva. Salva la scaletta con quel nome, per ritrovarla un'altra volta."
+ },
+ {
+  "h": "4a7c08f3",
+  "t": "Scalette salvate. Qui scegli una delle scalette che hai salvato."
+ },
+ {
+  "h": "f1eb76a6",
+  "t": "Carica. Apre la scaletta che hai scelto."
+ },
+ {
+  "h": "3971cc7a",
+  "t": "Elimina. Cancella la scaletta scelta. I brani restano nella Libreria."
+ },
+ {
+  "h": "2abd0363",
+  "t": "Nuova vuota. Comincia una scaletta nuova, senza brani."
+ },
+ {
+  "h": "4df9e3b3",
+  "t": "Salva in un file. Salva la scaletta in un file, per mandarla agli altri musicisti."
+ },
+ {
+  "h": "0b144b24",
+  "t": "Apri da file. Apre una scaletta che ti hanno mandato in un file."
+ },
+ {
+  "h": "40445e31",
+  "t": "Il Foglio A4. Il foglio A4 mette su carta il testo con gli accordi sopra le parole, da leggere, stampare o mandare alla band. Si apre con il pulsante Foglio nella schermata principale. Per esempio lo creo per «Luci sul porto»."
+ },
+ {
+  "h": "858cd733",
+  "t": "Per chi è il foglio. Scegli Chitarra per avere gli accordi, oppure Basso per avere le note del basso."
+ },
+ {
+  "h": "ccdf34be",
+  "t": "Tonalità originale. Ti dice in che tonalità è il brano."
+ },
+ {
+  "h": "97123bd2",
+  "t": "Scegli la tonalità. Puoi fare il foglio più alto o più basso, di mezzo tono alla volta. Ti segna anche quella che stai usando adesso e quelle che hai già salvato."
+ },
+ {
+  "h": "606d1fba",
+  "t": "Crea il foglio. Crea il foglio con le scelte che hai fatto. Adesso lo creo io per farti vedere com'è."
+ },
+ {
+  "h": "5409d458",
+  "t": "Il foglio. Ecco il foglio del brano di esempio: titolo, accordi e testo. Se è lungo ci sono più fogli, che giri con il dito o con le frecce."
+ },
+ {
+  "h": "cf6e3a6b",
+  "t": "Chitarra o Basso. Passa dagli accordi della chitarra alle note del basso."
+ },
+ {
+  "h": "df5de4c1",
+  "t": "Tonalità giù. Abbassa il foglio di mezzo tono."
+ },
+ {
+  "h": "4e4d4366",
+  "t": "Tonalità su. Alza il foglio di mezzo tono."
+ },
+ {
+  "h": "445c00fe",
+  "t": "Segna. Serve per evidenziare parole o righe e scrivere note per i musicisti. Toccalo, poi tocca una parola del testo."
+ },
+ {
+  "h": "287d375e",
+  "t": "La riga scelta. Per esempio ho toccato la prima parola. Qui vedi la riga, con la parola scelta evidenziata."
+ },
+ {
+  "h": "12fe6e24",
+  "t": "Parola o riga. Scegli se segnare solo la parola o tutta la riga."
+ },
+ {
+  "h": "d8849b65",
+  "t": "I segni. Ogni segno ha un colore e un nome: Stop, Cambio, Assolo, Coro e Attenzione. Si leggono bene anche se stampi in bianco e nero."
+ },
+ {
+  "h": "e273f2d2",
+  "t": "Nota accanto alla riga. Scrivi una nota breve, per esempio «entra la batteria». Compare accanto alla riga, sul foglio."
+ },
+ {
+  "h": "a0935737",
+  "t": "Togli i segni. Toglie tutti i segni di questa riga."
+ },
+ {
+  "h": "06c3a795",
+  "t": "Fatto. Salva il segno e chiude questa finestrella. Premi di nuovo Segna per finire di segnare."
+ },
+ {
+  "h": "a5cf85db",
+  "t": "Zoom. Ingrandisce o rimpicciolisce il foglio sullo schermo. Non cambia la stampa."
+ },
+ {
+  "h": "a989b7b8",
+  "t": "Salva PDF. Salva il foglio come PDF."
+ },
+ {
+  "h": "33a3bb4f",
+  "t": "Condividi. Manda il foglio, per esempio su WhatsApp."
+ },
+ {
+  "h": "e2028424",
+  "t": "Stampa. Stampa il foglio su carta A4."
+ },
+ {
+  "h": "e798bbcd",
+  "t": "Testo. Salva il foglio come testo semplice, con gli accordi sopra le parole."
+ },
+ {
+  "h": "c1e468cf",
+  "t": "Tutti i fogli. Mostra tutti i fogli che hai creato, di tutti i brani."
+ },
+ {
+  "h": "b13a3696",
+  "t": "Schermo intero. Lascia solo il foglio, senza pulsanti: comodo sul leggio con il tablet."
+ },
+ {
+  "h": "84f1afba",
+  "t": "Chiudi. Chiude il foglio e torna alla schermata principale."
+ },
+ {
+  "h": "e7f85d1f",
+  "t": "L'Accordatore. Si apre con il pulsante Accordatore nella schermata principale. Ascolta il tuo strumento con il microfono e ti dice se la corda è giusta, troppo alta o troppo bassa. In questa prova il microfono resta spento."
+ },
+ {
+  "h": "bd67f441",
+  "t": "Strumento. Scegli che cosa accordi: chitarra, basso a 4 o 5 corde, ukulele, oppure tutte le note per la voce e i fiati."
+ },
+ {
+  "h": "bbf10e7d",
+  "t": "La di riferimento. Di solito è 440. Cambialo solo se la band accorda su un La diverso."
+ },
+ {
+  "h": "6cf8cf69",
+  "t": "La nota. Qui compare la nota che stai suonando."
+ },
+ {
+  "h": "6cdb9853",
+  "t": "La lancetta. Se la lancetta sta a sinistra la corda è bassa: tirala un po'. Se sta a destra è alta: allentala. Al centro, nella zona verde, è giusta."
+ },
+ {
+  "h": "ea49a018",
+  "t": "Le corde. Le corde del tuo strumento, con il loro numero. Quando una corda è accordata, si colora."
+ },
+ {
+  "h": "038ba021",
+  "t": "Il consiglio. Qui l'app ti dice cosa fare. Suona una corda alla volta e lasciala vibrare."
+ },
+ {
+  "h": "f9cf2b7b",
+  "t": "Estensione vocale. Si apre con il pulsante Estensione vocale nella schermata principale. L'app misura la nota più bassa e la più alta che canti comoda, poi ti dice in che tonalità cantare ogni brano."
+ },
+ {
+  "h": "bd726953",
+  "t": "Chi canta. Ogni cantante ha la sua misura. Qui scegli chi canta adesso."
+ },
+ {
+  "h": "9bf48da5",
+  "t": "Nuova voce. Aggiunge un cantante nuovo, con il suo nome."
+ },
+ {
+  "h": "fa3d608f",
+  "t": "Elimina. Cancella la voce scelta."
+ },
+ {
+  "h": "23590f7d",
+  "t": "La tua estensione. Qui vedi le note che hai misurato, dalla più bassa alla più alta."
+ },
+ {
+  "h": "c4b83951",
+  "t": "Inizia. Fa partire la misura con il microfono. Ti chiede di cantare una nota sempre più bassa, poi sempre più alta, senza sforzare."
+ },
+ {
+  "h": "c128d96a",
+  "t": "La tastiera. Sulla tastiera vedi le note che riesci a cantare."
+ },
+ {
+  "h": "14a91efd",
+  "t": "Il brano aperto. Ti dice se il brano aperto va bene per la tua voce, e di quanto alzarlo o abbassarlo."
+ },
+ {
+  "h": "b8dfb023",
+  "t": "Adatta da solo. Se è spuntato, ogni brano che apri viene messo da solo nella tonalità giusta per chi canta."
+ },
+ {
+  "h": "02500e87",
+  "t": "Modifica tag MP3. Si apre dalla Libreria, con Modifica tag MP3 sotto il brano. Qui correggi le informazioni del brano. Per esempio ho aperto «Luci sul porto»."
+ },
+ {
+  "h": "b5db9445",
+  "t": "Titolo. Il titolo del brano."
+ },
+ {
+  "h": "d7ce64e3",
+  "t": "Artista. Chi lo canta. Se il brano è tuo, scrivi il tuo nome."
+ },
+ {
+  "h": "372bd6ea",
+  "t": "Album. L'album del brano. Nella Libreria i brani vengono raggruppati per album."
+ },
+ {
+  "h": "6ef24a40",
+  "t": "Anno. L'anno in cui è uscito."
+ },
+ {
+  "h": "1049c211",
+  "t": "Cerca il brano su internet. Parte dal titolo e guarda dove è pubblicato il brano: Apple Music, Deezer e MusicBrainz. Ti propone l'artista con la foto e tutti gli album dove c'è, dall'album originale alle raccolte e ai live, ognuno con la sua fonte. Tocchi quello giusto e premi Salva."
+ },
+ {
+  "h": "9d56bf6e",
+  "t": "Il testo. Il testo del brano. I tempi tra parentesi quadre all'inizio delle righe, come 00:02.40, tengono il testo a tempo con la musica."
+ },
+ {
+  "h": "6f487dcc",
+  "t": "Salva. Salva le modifiche nella Libreria."
+ },
+ {
+  "h": "84507c14",
+  "t": "Scarica l'MP3. Scarica il brano in MP3 con titolo, artista e testo dentro al file."
+ },
+ {
+  "h": "2f5f28d0",
+  "t": "Il Video. Qui ti registri mentre canti sul brano, con il testo che scorre, e poi crei un video bello da mandare agli amici. Si apre con il pulsante Video. Per esempio uso «Luci sul porto». In questa prova la fotocamera resta spenta."
+ },
+ {
+  "h": "a2df01a9",
+  "t": "Il brano. In alto vedi il brano che stai cantando."
+ },
+ {
+  "h": "ce85a122",
+  "t": "Fotocamera. Passa dalla fotocamera davanti a quella dietro."
+ },
+ {
+  "h": "c7234453",
+  "t": "Bozze. Le registrazioni che non hai ancora finito. Le riapri quando vuoi per cambiare effetti e sfondo."
+ },
+ {
+  "h": "1184c553",
+  "t": "Cloud. I video finiti che hai salvato nel cloud: li guardi, li mandi di nuovo o li cancelli."
+ },
+ {
+  "h": "e9258bb4",
+  "t": "Audio. Tocca qui per aprire le scelte sul suono. Ora te le faccio vedere una per una."
+ },
+ {
+  "h": "24e2fa2a",
+  "t": "Voce originale. No: senti solo la base. Guida: la voce del cantante bassa, per aiutarti. Sì: la voce del cantante piena."
+ },
+ {
+  "h": "4944f4b5",
+  "t": "Musica. Il volume della base nel video."
+ },
+ {
+  "h": "68e6cb04",
+  "t": "Tua voce. Il volume della tua voce nel video."
+ },
+ {
+  "h": "68b21628",
+  "t": "Sincronia voce. Mette a tempo la tua voce con la base. Con Sincronia automatica spuntata ci pensa l'app."
+ },
+ {
+  "h": "899c9842",
+  "t": "Duetto. Scegli Sì, due voci se cantate in due. Sotto scegli quale voce canti tu: Voce 1, Voce 2 oppure Tutto."
+ },
+ {
+  "h": "2dd40504",
+  "t": "Duetto con un amico. Carica il video di un amico che ha cantato l'altra parte: nel video finale sarete uno accanto all'altro."
+ },
+ {
+  "h": "2d80dd35",
+  "t": "Tonalità. Alza o abbassa il brano di mezzo tono, se ti è troppo alto o troppo basso."
+ },
+ {
+  "h": "091aa7cc",
+  "t": "Base nel video. Se è spuntato, nel video c'è anche la musica. Se no, solo la tua voce."
+ },
+ {
+  "h": "e2af1e8c",
+  "t": "Dall'inizio del brano. Se è spuntato, la registrazione parte dall'inizio. Se no, dal punto dove eri arrivato."
+ },
+ {
+  "h": "447cdcfa",
+  "t": "Filtro anti-eco. Usalo solo se canti senza cuffie e senti l'eco. Può rendere la voce un po' metallica."
+ },
+ {
+  "h": "ddd5642f",
+  "t": "Immagine. Qui scegli come appare il video."
+ },
+ {
+  "h": "f85d952d",
+  "t": "Cosa si vede. La fotocamera, il logo di rooMusic oppure una tua foto, se non vuoi farti vedere."
+ },
+ {
+  "h": "d40c38b2",
+  "t": "Qualità. Leggera occupa poco spazio, Alta si vede meglio ma il file è più grande."
+ },
+ {
+  "h": "844e2445",
+  "t": "Trucco. Rende la pelle più liscia e luminosa. Con Più bello anche un po' di colore su guance e labbra."
+ },
+ {
+  "h": "b49f50bd",
+  "t": "Sfondo. Cambia quello che c'è dietro di te: sfocato, studio, palco con le luci, tramonto sul mare, città di notte e altri."
+ },
+ {
+  "h": "37304745",
+  "t": "Testo nel video. Se è spuntato, il testo della canzone compare anche nel video."
+ },
+ {
+  "h": "38af455b",
+  "t": "Registra. Il pulsante rosso. Parte un conto alla rovescia, poi il brano e la registrazione. Premilo di nuovo per fermare. Con le cuffie il risultato è migliore."
+ },
+ {
+  "h": "1e072055",
+  "t": "Il video finale in 5 passi. Dopo la registrazione prepari il video finale in 5 passi: Voce, Effetti, Trucco, Sfondo e Labbra. Te li faccio vedere uno alla volta."
+ },
+ {
+  "h": "466f5b14",
+  "t": "Ascolta. Ascolta come è venuta, con tutte le modifiche che fai. Ferma interrompe l'ascolto."
+ },
+ {
+  "h": "f5badc0e",
+  "t": "Passo 1: sincronia. Se la tua voce arriva dopo la base, aumenta i millisecondi. Se arriva prima, diminuiscili. Di solito ci pensa l'app da sola."
+ },
+ {
+  "h": "b241306a",
+  "t": "Volume voce e base. Regola quanto si sentono la tua voce e la musica."
+ },
+ {
+  "h": "6767973f",
+  "t": "Pulizia. Toglie i rumori bassi e le «s» troppo forti."
+ },
+ {
+  "h": "e7f5817c",
+  "t": "Senza cuffie. Se hai cantato senza cuffie, spunta qui: RunPod toglie la musica rientrata nel microfono e i rumori di fondo."
+ },
+ {
+  "h": "4d9d57fa",
+  "t": "Passo 2: effetti. Con Scegli tu per me l'app sceglie gli effetti adatti alla tua voce e al brano."
+ },
+ {
+  "h": "66ffdf06",
+  "t": "Effetti pronti. Oppure scegli tu: Naturale, Studio, Pop, Ballata, Rock, Radio o Eco anni '80."
+ },
+ {
+  "h": "54e7bf4b",
+  "t": "Regolazioni. Riverbero, eco, presenza, compressione e raddoppio, se vuoi regolarli a mano."
+ },
+ {
+  "h": "76ba68ea",
+  "t": "Autotune. Corregge le note stonate: leggero, medio o forte. Robot fa l'effetto delle canzoni moderne."
+ },
+ {
+  "h": "71666972",
+  "t": "Passo 3: trucco. Lo stesso trucco di prima, anche dopo aver registrato. Va solo sul viso."
+ },
+ {
+  "h": "09cfba39",
+  "t": "Passo 4: sfondo. Cambi lo sfondo anche dopo aver registrato. Come registrato lo lascia com'era."
+ },
+ {
+  "h": "077981cd",
+  "t": "Passo 5: labbra. RunPod controlla secondo per secondo che la bocca si muova insieme alla voce."
+ },
+ {
+  "h": "2f7f48ea",
+  "t": "Spostamento a mano. Se nel video le labbra si muovono prima della voce, aumenta. Se si muovono dopo, diminuisci. Poi ricrea il video."
+ },
+ {
+  "h": "9077ebdb",
+  "t": "Apertura e chiusura. È l'ultima cosa prima di creare il video: una tua foto con artista, titolo e il tuo nome all'inizio, e il logo di rooMusic alla fine. Si aggiunge sia quando il video lo fa RunPod sia quando lo fa il telefono."
+ },
+ {
+  "h": "a509c647",
+  "t": "Accendi apertura e chiusura. Se è spuntato, il video comincia con la presentazione e finisce con il logo."
+ },
+ {
+  "h": "8979cbc5",
+  "t": "La tua foto. Con Scatta prendi la foto dal punto del tuo video che stai guardando; con Carica ne scegli una tua. L'app la sistema da sola: primo piano, luce giusta e sfondo sfocato. Puoi scegliere tra Migliorata e Originale."
+ },
+ {
+  "h": "8ebd7db4",
+  "t": "Nome di chi canta. Il nome che compare sotto il titolo, per esempio Dino Addis."
+ },
+ {
+  "h": "134b964e",
+  "t": "Sipario o Onda. Due modi di presentare il brano. Artista, titolo e nome stanno sempre su tre righe separate: un titolo lungo diventa più piccolo e non copre le altre scritte."
+ },
+ {
+  "h": "5f2a707d",
+  "t": "Anteprima. Guarda subito come vengono apertura e chiusura, prima di creare il video."
+ },
+ {
+  "h": "5eb510a0",
+  "t": "Crea il video finale. Mette insieme tutto quello che hai scelto e crea il video."
+ },
+ {
+  "h": "41612c99",
+  "t": "Salva sul telefono. Salva il video finito sul dispositivo. Mentre l'app prepara il video finale, questo e gli altri tasti per salvare e condividere restano spenti: si accendono quando il video è pronto."
+ },
+ {
+  "h": "6cf8a15d",
+  "t": "Condividi sui social. Manda il video su TikTok, Instagram, YouTube, Facebook o WhatsApp. Sul telefono si apre il menu per condividere; sul computer il video si scarica e si apre la pagina per caricarlo. La descrizione con gli hashtag è già copiata: ti basta incollarla."
+ },
+ {
+  "h": "6d37c7f0",
+  "t": "Salva nel cloud. Salva il video nel tuo cloud, per ritrovarlo su tutti i dispositivi."
+ },
+ {
+  "h": "dbb138b8",
+  "t": "Salva bozza. Tiene la registrazione nelle Bozze, per finirla un'altra volta."
+ },
+ {
+  "h": "3c888f0b",
+  "t": "Rifai. Ricomincia la registrazione da capo."
+ },
+ {
+  "h": "63eef8cb",
+  "t": "Home. Torna alla schermata principale."
+ },
+ {
+  "h": "697ca336",
+  "t": "La Sala prove. Nella Sala prove la band suona sul brano e registra: ognuno entra nella scheda audio e ha la sua traccia, con amplificatori e pedali finti che suonano come quelli veri. Si usa solo sul computer, con la scheda audio collegata via USB: su telefono e tablet il suono torna in cuffia con troppo ritardo."
+ },
+ {
+  "h": "0f4dbd7b",
+  "t": "Su telefono e tablet. Qui il pulsante Sala prove ti spiega solo cosa serve: per usare la Sala prove apri rooMusic sul computer, con la scheda audio collegata via USB."
+ },
+ {
+  "h": "0ff995a6",
+  "t": "I musicisti di esempio. Per farti vedere com'è ho messo tre musicisti inventati: Marco alla voce, Luca alla chitarra e Gianni al basso. In questa prova il microfono e la scheda audio restano spenti. Alla fine ti rimetto i tuoi musicisti."
+ },
+ {
+  "h": "cb766ea2",
+  "t": "Scegli un brano. Il brano su cui suonate. Toccalo per cambiarlo. Con la scaletta accesa scegli tra i brani della scaletta."
+ },
+ {
+  "h": "d07b2ef5",
+  "t": "Singolo o Scaletta. Come nella schermata principale: con Scaletta l'app segue i brani della serata, uno dopo l'altro."
+ },
+ {
+  "h": "dbd320c4",
+  "t": "Registra e Mix. Registra è dove suonate. Mix e sincronia è dove sistemate le registrazioni dopo."
+ },
+ {
+  "h": "4a3e673d",
+  "t": "Ritardo. Il ritardo tra quando suoni e quando ti senti in cuffia. Più è basso, meglio è."
+ },
+ {
+  "h": "05785ec3",
+  "t": "Altro. Apre una finestra con: Suona e riconosco (ognuno suona qualche nota e l'app capisce chi è collegato a quale ingresso), Banco 1 a tutti, Taratura ritardo, Uscite (volume delle cuffie e volume delle casse) e le scelte della registrazione: tonalità, click, conteggio 1-2-3-4 e partenza dall'inizio del brano."
+ },
+ {
+  "h": "61d9a485",
+  "t": "Consigli. Quale scheda audio sta usando l'app, dove suonano cuffie e casse, e un pulsante per accendere «Non disturbare», così nessuna notifica disturba mentre suonate."
+ },
+ {
+  "h": "1e6bd292",
+  "t": "Accordatore. Accordi gli strumenti direttamente dalla scheda audio."
+ },
+ {
+  "h": "d49bbce0",
+  "t": "Schermo intero. Usa tutto lo schermo del computer: tutto sta in una schermata, senza dover scorrere con il mouse mentre suoni."
+ },
+ {
+  "h": "000fd645",
+  "t": "Guida. Spiega come collegare la scheda audio e le cuffie."
+ },
+ {
+  "h": "5e09ed95",
+  "t": "Aggiungi musicista. Aggiunge un musicista. Ce ne stanno quattro nella stessa schermata."
+ },
+ {
+  "h": "486709a9",
+  "t": "Togli dalla base. Se è spuntato, dalla base spariscono gli strumenti che state suonando voi."
+ },
+ {
+  "h": "1e044d22",
+  "t": "Voce guida. La voce originale si sente solo in cuffia e non finisce nella registrazione."
+ },
+ {
+  "h": "8d752a25",
+  "t": "Volume base. Il volume di tutto il brano su cui suonate."
+ },
+ {
+  "h": "51b76c61",
+  "t": "Gli strumenti della base. Il volume di ogni strumento del brano, con il pulsante per spegnerlo."
+ },
+ {
+  "h": "574201b9",
+  "t": "TONE3000. Collega il tuo account TONE3000 per usare i suoi amplificatori. Toccalo per collegarlo; finito, torni da solo nella Sala prove."
+ },
+ {
+  "h": "ff2fb040",
+  "t": "Amplificatori NAM e casse IR. Se è spuntato, ogni chitarra e basso ha anche l'amplificatore e la cassa che suonano come quelli veri."
+ },
+ {
+  "h": "e455588f",
+  "t": "Pedaliera MIDI. Spuntalo se usi una pedaliera MIDI. Poi scegli quale musicista comanda: i pedali cambiano solo i suoi suoni. Con Pedali imposti cosa fa ogni pedale."
+ },
+ {
+  "h": "e58c0501",
+  "t": "Il musicista. Ogni musicista ha il suo riquadro. Per esempio questo è Luca, alla chitarra."
+ },
+ {
+  "h": "f4ee4fa1",
+  "t": "Nome e strumento. Scrivi il nome e scegli lo strumento: voce, chitarra, basso, piano e tastiere, o altro. Per il piano ci sono preset adatti: piano pulito, Rhodes con tremolo, organo, pad."
+ },
+ {
+  "h": "50358978",
+  "t": "Accordatore del musicista. Apre l'accordatore che ascolta solo il suo strumento."
+ },
+ {
+  "h": "6226403d",
+  "t": "Acceso o spento. Spegne l'ingresso: non si sente e non registra."
+ },
+ {
+  "h": "30af3b53",
+  "t": "MIDI. Compare accanto ad Acceso solo nel musicista comandato dalla pedaliera MIDI: i pedali cambiano i suoi banchi."
+ },
+ {
+  "h": "333f91a1",
+  "t": "REC. Se è acceso, questo musicista viene registrato sulla sua traccia."
+ },
+ {
+  "h": "9ff7ddaa",
+  "t": "Scheda e ingresso. In quale scheda audio e in quale ingresso è collegato."
+ },
+ {
+  "h": "d061bb2f",
+  "t": "Livello e cuffia. La barra mostra quanto forte arriva il suono: suona qualche nota per vederla. La cuffia dice se ti senti in cuffia con gli effetti."
+ },
+ {
+  "h": "ba11f9b2",
+  "t": "Volume cuffia e originale. Quanto ti senti in cuffia. L'altro pulsante accende o spegne la chitarra originale del brano."
+ },
+ {
+  "h": "c7f9be02",
+  "t": "Amplificatore e cassa. Compare se nelle Impostazioni hai acceso gli amplificatori NAM: scegli l'amplificatore e la cassa, modelli che suonano come quelli veri."
+ },
+ {
+  "h": "24498c38",
+  "t": "Le manopole. Trascina una manopola su o giù per regolarla. Tocca due volte per rimetterla com'era."
+ },
+ {
+  "h": "9ca07824",
+  "t": "I banchi. Cinque suoni pronti da cambiare con un tocco, o con la pedaliera, mentre suoni."
+ },
+ {
+  "h": "bbd0aa38",
+  "t": "Gestisci pedaliera. Apre la finestra del suono, con pedali, amplificatore e banchi. Te la faccio vedere tra poco."
+ },
+ {
+  "h": "7e9578b9",
+  "t": "Palco o Musicisti. Passa dalla vista Musicisti, con pedaliere e volumi, alla vista Palco, con testo e tablatura grandi da leggere mentre suonate. Nel Palco scegli anche basso o chitarra e note o accordi. Lo stesso pulsante ti riporta ai Musicisti."
+ },
+ {
+  "h": "2e9e42c8",
+  "t": "Brano precedente. Con la scaletta accesa torna al brano prima."
+ },
+ {
+  "h": "8b54c052",
+  "t": "Play e pausa. Fa partire il brano senza registrare, per provare i suoni. Premilo di nuovo per fermarlo."
+ },
+ {
+  "h": "218a8b7d",
+  "t": "Brano successivo. Con la scaletta accesa passa al brano dopo."
+ },
+ {
+  "h": "c6dd318c",
+  "t": "La linea del brano. Trascina il pallino per andare in un punto del brano: il brano continua da lì."
+ },
+ {
+  "h": "1b2b8148",
+  "t": "Registra. Fa partire il brano e registra tutti i musicisti con REC acceso, ognuno sulla sua traccia. Premilo di nuovo per fermare."
+ },
+ {
+  "h": "73ddf1d1",
+  "t": "Le riprese. Ogni registrazione è una ripresa. Toccala per ascoltarla e sistemarla nel Mix."
+ },
+ {
+  "h": "3c440ff5",
+  "t": "Mix e sincronia. Qui sistemi una ripresa: metti a tempo le tracce e prepari il file finale."
+ },
+ {
+  "h": "e180d3a4",
+  "t": "Allinea sul colpo. Se all'inizio avete battuto le mani, l'app mette tutte le tracce a tempo su quel colpo."
+ },
+ {
+  "h": "767fb19b",
+  "t": "Allinea alla base. Mette le tracce a tempo con il brano."
+ },
+ {
+  "h": "d7ac043c",
+  "t": "Metti gli effetti alla registrazione. La registrazione è sempre pulita, il suono vero dello strumento. Qui le metti sopra pedali, amplificatore e cassa che hai scelto. Utile se durante la registrazione gli effetti erano spenti, o per provare suoni diversi sulla stessa registrazione."
+ },
+ {
+  "h": "2db36b77",
+  "t": "Ascolta. Ascolta la ripresa con tutte le tracce."
+ },
+ {
+  "h": "bd85e7b7",
+  "t": "Sposta di poco. Sposta la traccia scelta di pochi millisecondi, avanti o indietro."
+ },
+ {
+  "h": "8d8fa316",
+  "t": "Zoom. Ingrandisce il disegno delle tracce, per vedere meglio."
+ },
+ {
+  "h": "5c0945f6",
+  "t": "Mix finale. Salva tutto il brano suonato in un file WAV e MP3."
+ },
+ {
+  "h": "a0d82a8c",
+  "t": "Tracce separate. Salva ogni musicista in un file a parte, per lavorarci con un altro programma."
+ },
+ {
+  "h": "be6efe7c",
+  "t": "Il suono di Luca. Questa è la pedaliera di Luca: si apre con Gestisci pedaliera."
+ },
+ {
+  "h": "2a6036f3",
+  "t": "I cinque banchi. Per ogni banco, da 1 a 5, scegli il suono: a sinistra quello solo per questo brano, a destra quello generale, che vale per tutti i brani. «Come il generale» usa quello di destra. Con «Suono del brano» l'app riempie i banchi del brano ascoltando il disco e cercando suoni simili."
+ },
+ {
+  "h": "ca447eee",
+  "t": "Il tuo strumento. Scegli il tuo strumento salvato: l'app corregge il suono perché ogni chitarra suona diversa."
+ },
+ {
+  "h": "0e0757c3",
+  "t": "Salva come preset. Salva i pedali come sono adesso con un nome tuo, per ritrovarli in tutti i brani."
+ },
+ {
+  "h": "b807f224",
+  "t": "L'ordine dei pedali. Trascina un pedale tenendolo per il nome sopra un altro, oppure usa le frecce sotto ogni pedale. Ordine classico rimette l'ordine di partenza."
+ },
+ {
+  "h": "4a3ce3a3",
+  "t": "La catena. Tutti i pedali, in ordine. Tocca un blocco per regolarlo, toccalo due volte per accenderlo o spegnerlo."
+ },
+ {
+  "h": "f8fd2cc6",
+  "t": "I pedali accesi. Qui vedi solo i pedali accesi, nell'ordine in cui suonano, grandi e con le manopole. Il segno del plettro ricorda che sono effetti per lo strumento. Se sono più di otto vanno su due righe."
+ },
+ {
+  "h": "a69a0646",
+  "t": "Equalizzatore. Se l'equalizzatore è acceso, compare lungo e sottile: trascina i punti su o giù per alzare o abbassare ogni frequenza."
+ },
+ {
+  "h": "b33f36b9",
+  "t": "Amplificatore e cassa. Con gli amplificatori NAM accesi, amplificatore e cassa stanno su una riga sola, come l'equalizzatore."
+ },
+ {
+  "h": "c2962485",
+  "t": "Copia il suono del brano. Fa ascoltare a RunPod la chitarra del brano e prepara un suono simile. Ora te lo faccio vedere."
+ },
+ {
+  "h": "199d54cc",
+  "t": "Analizza il suono. RunPod ascolta la chitarra separata e capisce com'è il suono: distorsione, delay, riverbero. Ci vuole circa un minuto."
+ },
+ {
+  "h": "722ac821",
+  "t": "I suoni trovati. Qui compaiono i suoni diversi del brano, con i punti dove si sentono. Toccane uno per provarlo."
+ },
+ {
+  "h": "521127e4",
+  "t": "Adatta alla tua chitarra. Suona 20 secondi come al solito: l'app confronta il tuo suono con quello del disco e corregge le frequenze, perché ogni chitarra suona diversa."
+ },
+ {
+  "h": "ed665046",
+  "t": "La mia pedaliera. Funziona come una pedaliera Boss: con i pedali 1, 2, 3 e 4 cambi suono, con CTL 1 e CTL 2 passi al brano prima o dopo della scaletta, con il pedale del volume regoli il volume di tutta l'app. Si apre dalla Sala prove, in Impostazioni › Pedaliera MIDI › Pedali. Per l'esempio ho collegato una Boss GT-10B finta: alla fine rimetto tutto com'era."
+ },
+ {
+  "h": "72757145",
+  "t": "Su telefono e tablet. Qui la pedaliera non c'è: si usa solo sul computer, insieme alla Sala prove, con la pedaliera collegata alla scheda audio."
+ },
+ {
+  "h": "3f7cd04e",
+  "t": "Questo browser. Questo browser non legge il MIDI. Usa Chrome o Edge sul computer."
+ },
+ {
+  "h": "e1d75e12",
+  "t": "Collega la pedaliera. Collega il MIDI OUT della pedaliera al MIDI IN della scheda audio e premi qui. La prima volta il browser chiede il permesso."
+ },
+ {
+  "h": "8b0101da",
+  "t": "Imposta come Boss GT-10B. Con un tocco collega tutti i pedali come sulla GT-10B. Prima però la GT-10B va impostata: lo spiega la guida in fondo alla finestra."
+ },
+ {
+  "h": "f819f8dc",
+  "t": "La spia. Si accende quando arriva un messaggio dalla pedaliera: così vedi subito se il cavo funziona."
+ },
+ {
+  "h": "a7bcf0b5",
+  "t": "Il disegno della pedaliera. Sotto ci sono i pedali 1, 2, 3 e 4, sopra CTL 1, CTL 2 e il pedale del volume. Quando premi un pedale vero, qui si accende la sua lucina. Puoi anche toccarli sullo schermo per provarli."
+ },
+ {
+  "h": "c32ef29c",
+  "t": "I pedali 1, 2, 3 e 4. Richiamano i banchi 1, 2, 3 e 4, cioè quattro suoni pronti, per esempio pulito, crunch, distorto e assolo. Se il brano ha i suoi banchi, i suoni sono quelli del brano."
+ },
+ {
+  "h": "e24b355e",
+  "t": "CTL e volume. CTL 1 torna al brano prima e CTL 2 passa al brano dopo, nella scaletta. Il pedale del volume alza e abbassa il volume di tutta l'app."
+ },
+ {
+  "h": "d51a1919",
+  "t": "Strumento dei banchi. Quale musicista cambia suono con i pedali 1-4, per esempio Luca alla chitarra. I pedali comandano solo lui: se ci sono due chitarre, l'altra non cambia. Accanto al suo Acceso compare il segno MIDI."
+ },
+ {
+  "h": "5277b953",
+  "t": "Banchi del brano. Puoi preparare banchi diversi per ogni brano della scaletta: quando cambi brano con CTL, i pedali richiamano i suoni di quel brano."
+ },
+ {
+  "h": "b428af97",
+  "t": "Cosa fa ogni pedale. Ogni riga è un pedale: a sinistra a quale pedale vero è collegato, poi cosa fa. Puoi cambiarlo, per esempio fare del pedale 4 il pulsante per avviare e fermare il brano."
+ },
+ {
+  "h": "8d1db817",
+  "t": "Collega. Per collegare un pedale: tocca Collega e premi il pedale vero. Funziona con qualsiasi pedaliera MIDI, non solo Boss."
+ },
+ {
+  "h": "e0da610e",
+  "t": "Scollega. La croce scollega quel pedale."
+ },
+ {
+  "h": "49af033e",
+  "t": "Parte da solo. Se è spuntato, quando cambi brano con CTL il brano nuovo parte da solo. Se no, resta fermo e lo fai partire tu."
+ },
+ {
+  "h": "1418c3be",
+  "t": "Torna al banco 1. Se è spuntato, a ogni brano nuovo chitarra e basso ripartono dal banco 1 di quel brano."
+ },
+ {
+  "h": "cf1cbc3c",
+  "t": "Suonare senza internet. In un locale senza connessione l'app usa quello che è sul dispositivo. Prima di uscire, con internet, premi Controlla la scaletta: ti dice se a qualche brano manca qualcosa."
+ },
+ {
+  "h": "e0316710",
+  "t": "La guida per la GT-10B. Qui trovi cosa impostare sulla GT-10B: PC Out acceso, CTL1 Out sul controllo 80, CTL2 Out sull'81 ed EXP1 Out sul 7. E il cavo MIDI, perché su tablet il cavo USB della GT-10B non porta il MIDI."
+ },
+ {
+  "h": "6647a779",
+  "t": "La latenza. È il ritardo tra quando suoni o canti e quando ti senti in cuffia. Sotto i 20 millesimi di secondo non lo senti, sopra i 35 si nota. Si apre con il pulsante Latenza, sotto gli strumenti."
+ },
+ {
+  "h": "774edcac",
+  "t": "Su telefono e tablet. Qui questa finestra non c'è: serve per suonare dal vivo con gli effetti, e su telefono e tablet il ritardo è troppo alto. Per suonare dal vivo serve il computer."
+ },
+ {
+  "h": "c32165ed",
+  "t": "Uscita. Il ritardo della cuffia: da quando l'app manda il suono a quando arriva alle orecchie."
+ },
+ {
+  "h": "67517760",
+  "t": "Ingresso. Il ritardo della scheda audio: da quando suoni a quando il suono arriva all'app."
+ },
+ {
+  "h": "2c40ab87",
+  "t": "Totale. I due ritardi sommati: è quello che senti davvero. Sotto c'è un giudizio, verde se va bene."
+ },
+ {
+  "h": "cc38025e",
+  "t": "Modalità audio. Minima è la più veloce, Sicura la più tranquilla. Se il suono gracchia o fa dei salti, passa a Normale o a Sicura."
+ },
+ {
+  "h": "2659239e",
+  "t": "Applica. Compare quando cambi modalità: riavvia l'audio con la scelta nuova."
+ },
+ {
+  "h": "586f1478",
+  "t": "Testo e suono. Tiene il testo del karaoke a tempo con quello che senti. Utile con casse o cuffie Bluetooth, che arrivano in ritardo. Se lo togli, sposti il testo a mano con la barra."
+ },
+ {
+  "h": "d8ec0c8f",
+  "t": "Consigli. Cuffie con il filo nella presa Phones della scheda, niente Bluetooth, scheda a 48 kilohertz, tablet in carica e altre app chiuse. Qui li trovi tutti."
+ },
+ {
+  "h": "66d65f48",
+  "t": "Le impostazioni. Si aprono dal Menu, con Impostazioni. Qui colleghi i servizi, salvi le chiavi e le impostazioni in un file, scegli dove tenere i brani e quale scheda audio usare."
+ },
+ {
+  "h": "806f8c5b",
+  "t": "Colori dell'app. Scegli i colori che ti stancano meno gli occhi. Celeste è quello principale, con cui parte l'app."
+ },
+ {
+  "h": "9b5cef1c",
+  "t": "I collegamenti. I servizi che fanno funzionare l'app: Cloud R2 per l'archivio, RunPod per separare i brani, TONE3000 per gli amplificatori, MVSEP come riserva gratuita. Il pallino dice se sono collegati; con Collega li colleghi uno per uno."
+ },
+ {
+  "h": "adbed78e",
+  "t": "Configurazione guidata. Ti accompagna a collegare tutto, un passo alla volta e nell'ordine giusto. C'è una scheda del tutorial solo per questa."
+ },
+ {
+  "h": "3c88e9ac",
+  "t": "Salva le chiavi in un file. Salva in un file solo le chiavi dei servizi. Tienilo per te e non mandarlo a nessuno: serve se il browser le cancella o se usi l'app su un altro dispositivo."
+ },
+ {
+  "h": "4bf4925a",
+  "t": "Ricarica dal file. Rimette le chiavi dal file. Funziona anche con il file vecchio, quello con chiavi e impostazioni insieme."
+ },
+ {
+  "h": "f9d409f2",
+  "t": "Cancella le chiavi. Toglie le chiavi da questo dispositivo, per esempio se lo presti o lo vendi. Ti chiede conferma due volte; brani e bozze restano."
+ },
+ {
+  "h": "27e5b230",
+  "t": "Salva le impostazioni. Un altro file, senza chiavi: scalette, banchi e suoni di ogni brano, amplificatori, pedaliera, musicisti della Sala prove, voci e segni sui fogli. Fallo sempre prima di una serata."
+ },
+ {
+  "h": "115bcd55",
+  "t": "Ricarica le impostazioni. Rimette scalette e suoni dal file. Prima ti chiede conferma, perché sostituisce quelli del dispositivo."
+ },
+ {
+  "h": "d0d0ddd5",
+  "t": "Solo su questo dispositivo. I brani restano solo qui."
+ },
+ {
+  "h": "ba32b9a2",
+  "t": "Anche nel cloud R2. I brani si salvano anche nel tuo spazio cloud, così li ritrovi su telefono, tablet e computer."
+ },
+ {
+  "h": "a7186c6f",
+  "t": "Salva tutta la Libreria. Manda nel cloud tutti i brani che ancora non ci sono."
+ },
+ {
+  "h": "683dcb43",
+  "t": "Sincronizza adesso. Allinea subito questo dispositivo con il cloud. Di solito lo fa da solo."
+ },
+ {
+  "h": "ed1c4b54",
+  "t": "Ingresso. Da dove entra la tua voce o il tuo strumento: il microfono del dispositivo o la scheda audio."
+ },
+ {
+  "h": "69b3168e",
+  "t": "Canale. Quale ingresso della scheda usare: il primo, il secondo, o tutti e due in stereo."
+ },
+ {
+  "h": "8463ce73",
+  "t": "Uscita. Dove senti la musica: cuffie, altoparlanti o la scheda audio."
+ },
+ {
+  "h": "82828650",
+  "t": "Eco, rumore e volume automatico. Aiutano con il microfono del telefono. Con una scheda audio o uno strumento collegato toglili tutti e tre: il suono resta naturale."
+ },
+ {
+  "h": "8f8eba21",
+  "t": "Ascoltami in cuffia. Ti senti in cuffia mentre suoni e canti. Usalo solo con le cuffie, altrimenti fischia."
+ },
+ {
+  "h": "8e4cb4aa",
+  "t": "Prova l'ingresso. Suona o parla: la barra si muove se il suono arriva."
+ },
+ {
+  "h": "c9c5d083",
+  "t": "Altre impostazioni. Qui sotto ci sono le cose che servono di rado: la separazione dei brani, RunPod, TONE3000, la cartella delle tracce e l'archivio."
+ },
+ {
+  "h": "797257ef",
+  "t": "Dove separo i brani. Automatico usa RunPod se è collegato. Solo RunPod non usa mai altro. Sul PC usa la scheda video del computer, che può essere lenta."
+ },
+ {
+  "h": "2a34993e",
+  "t": "MVSEP. Il servizio gratuito di riserva: si usa solo se RunPod manca o non risponde. È più lento, perché si aspetta in coda."
+ },
+ {
+  "h": "7cb1fed9",
+  "t": "RunPod. La separazione veloce, con il tuo account e il tuo credito: di solito pochi centesimi a brano."
+ },
+ {
+  "h": "af8057e1",
+  "t": "Collega da solo. Incolli la chiave RunPod e premi qui: l'app cerca il servizio sul tuo account e, se non c'è, lo crea. Se non ci riesce, c'è la guida passo passo per farlo a mano."
+ },
+ {
+  "h": "a3334475",
+  "t": "Cambia chiave o ID. Se RunPod è già collegato, qui cambi la chiave o il servizio."
+ },
+ {
+  "h": "628becd4",
+  "t": "Cosa non va?. Se qualcosa non funziona, premilo: l'app controlla da sola internet, la chiave, il servizio, il credito e le schede video, e ti dice in parole semplici cosa fare. Non manda niente a nessuno."
+ },
+ {
+  "h": "9b78648a",
+  "t": "Modello. In Impostazioni avanzate scegli in quante tracce dividere i brani: 6 tracce con chitarra e piano, oppure 4."
+ },
+ {
+  "h": "74250416",
+  "t": "Lingua del testo. Vale per tutti i brani. Lasciala su «La riconosce da sola»: l'app usa la lingua già vista per quell'artista, altrimenti RunPod la riconosce prima di scrivere il testo. Per un brano solo c'è Lingua in Opzioni testo."
+ },
+ {
+  "h": "1dfbb3c8",
+  "t": "TONE3000. La chiave pubblica di TONE3000, per scegliere amplificatori e casse. Inizia con t3k_pub. Mai la chiave segreta."
+ },
+ {
+  "h": "a7316bd2",
+  "t": "Cartella delle tracce. Sul computer puoi scegliere una cartella dove salvare anche le tracce separate, divise per artista e titolo."
+ },
+ {
+  "h": "95cea262",
+  "t": "Prova il salvataggio. Controlla che il browser riesca a salvare i brani."
+ },
+ {
+  "h": "2c4850a1",
+  "t": "Ripara l'archivio. Se qualche brano non si apre più, prova a sistemare l'archivio. I brani non vengono cancellati."
+ },
+ {
+  "h": "6b4f641e",
+  "t": "La configurazione guidata. Si apre la prima volta che usi l'app, oppure da Impostazioni. Colleghi quattro servizi, uno alla volta e in quest'ordine. Si fa una volta sola."
+ },
+ {
+  "h": "c1030958",
+  "t": "I quattro passi. Cloud R2, RunPod, TONE3000 e MVSEP. Ogni passo fatto prende la spunta; puoi toccarli per andare avanti e indietro."
+ },
+ {
+  "h": "407cc65b",
+  "t": "Hai già il file delle chiavi?. Se le hai salvate su un altro dispositivo, caricale da qui e hai finito."
+ },
+ {
+  "h": "322ba3be",
+  "t": "Passo 1: Cloud R2. Il tuo archivio nel cloud, gratis fino a 10 gigabyte. Si apre una finestra con quattro campi e la guida schermata per schermata."
+ },
+ {
+  "h": "8ecffe71",
+  "t": "Passo 2: la chiave RunPod. Crea l'account, ricarica il credito, crea la chiave con il permesso Read/Write e incollala qui. Inizia con rpa."
+ },
+ {
+  "h": "cb7d28f6",
+  "t": "Collega da solo. Premi qui: l'app crea il servizio sul tuo account. La prima volta che separi un brano, RunPod lo installa: ci vogliono 10-20 minuti, solo quella volta."
+ },
+ {
+  "h": "aff50baf",
+  "t": "Se lo fai a mano. Solo se Collega da solo non ci riesce: crea il servizio con la guida passo passo e incolla qui la sua sigla, poi premi Salva e prova."
+ },
+ {
+  "h": "71d6c553",
+  "t": "Cosa non va?. Se qualcosa non funziona, premi qui: l'app controlla da sola internet, la chiave, il credito e il servizio, e ti dice cosa sistemare. La chiave non viene mai mostrata."
+ },
+ {
+  "h": "2ae1c870",
+  "t": "Passo 3: TONE3000. Gratis: crei l'account, registri l'indirizzo di ritorno con Copia l'indirizzo e incolli qui la chiave pubblica, quella che inizia con t3k_pub."
+ },
+ {
+  "h": "75c80289",
+  "t": "Passo 4: MVSEP. Facoltativo: un servizio gratuito di riserva, se RunPod non c'è. Se hai collegato RunPod puoi saltarlo."
+ },
+ {
+  "h": "db2164bd",
+  "t": "Salta per ora. Passa al passo dopo senza collegare questo. Lo ritrovi in Impostazioni."
+ },
+ {
+  "h": "46726979",
+  "t": "Avanti. Va al passo dopo. Alla fine compare Fine."
+ },
+ {
+  "h": "b723ffca",
+  "t": "Lo faccio dopo. Chiude la configurazione. Quello che hai saltato lo ritrovi in Impostazioni."
+ },
+ {
+  "h": "4c8358a3",
+  "t": "Il cloud R2. È il tuo spazio su Cloudflare: qui si salvano brani, testi, bozze e video, e li ritrovi su telefono, tablet e computer. Gratis fino a 10 gigabyte. Si apre da Impostazioni o dalla configurazione guidata."
+ },
+ {
+  "h": "b4529d38",
+  "t": "ID account. Il numero del tuo account Cloudflare. Lo trovi nella pagina di R2, nel riquadro Account Details."
+ },
+ {
+  "h": "d89c246d",
+  "t": "Nome del bucket. Il nome dello spazio che hai creato su R2, per esempio roomusic."
+ },
+ {
+  "h": "4d269e69",
+  "t": "Access Key ID. Il primo codice del token che crei su R2."
+ },
+ {
+  "h": "3b33ce3c",
+  "t": "Secret Access Key. Il secondo codice, quello segreto. Cloudflare lo mostra una volta sola: copialo subito."
+ },
+ {
+  "h": "195e78c5",
+  "t": "Salva e prova. Salva i dati e prova il collegamento. Se compare la spunta verde è tutto pronto."
+ },
+ {
+  "h": "9a75abf2",
+  "t": "Come si crea lo spazio. La guida passo passo, con le parole esatte delle pagine di Cloudflare. Circa 10 minuti, una volta sola."
+ },
+ {
+  "h": "1cc0ec51",
+  "t": "Copia la regola. Copia la regola che permette all'app di usare il tuo spazio. Va incollata nelle impostazioni del bucket, alla voce CORS Policy."
+ },
+ {
+  "h": "9063c350",
+  "t": "Scollega. Toglie il collegamento al cloud da questo dispositivo. I brani nel cloud restano."
+ },
+ {
+  "h": "8b034217",
+  "t": "Dove sono i brani. È tutto nella Libreria: sopra l'elenco c'è lo spazio, e ogni brano dice dove si trova."
+ },
+ {
+  "h": "b40905ef",
+  "t": "Lo spazio. La barra mostra quanto spazio del dispositivo usano i brani. Sotto c'è il numero esatto."
+ },
+ {
+  "h": "53ab91bb",
+  "t": "Converti in MP3. Compare se ci sono tracce pesanti: le trasforma in MP3 e occupano molto meno, senza differenze che si sentono."
+ },
+ {
+  "h": "f64f2497",
+  "t": "Quali brani vedere. In cima alla Libreria scegli cosa mostrare: tutti, quelli sia qui sia nel cloud, quelli solo nel cloud o quelli solo qui. L'elenco si filtra subito."
+ },
+ {
+  "h": "95e1b6f5",
+  "t": "Sistema da solo. Tiene sul dispositivo i brani che apri più spesso, finché c'è posto. Gli altri restano nel cloud e si scaricano quando li apri."
+ },
+ {
+  "h": "2c261fbc",
+  "t": "Su ogni brano. Ogni brano dice se è qui, nel cloud o in tutti e due, e quanto pesa. Accanto trovi Scarica qui, Togli da qui o Salva nel cloud."
+ }
+]
