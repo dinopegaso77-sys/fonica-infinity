@@ -1,0 +1,32 @@
+name: Voce del tutorial
+on:
+  push:
+    paths: ['voce/testi.json', 'voce/crea_voce.py']
+  workflow_dispatch:
+concurrency: voce
+permissions:
+  contents: write
+  pages: write
+jobs:
+  voce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Registra le frasi
+        run: python voce/crea_voce.py
+        env:
+          RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
+      - name: Salva i file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A voce
+          if git diff --cached --quiet; then echo "Niente di nuovo"; exit 0; fi
+          git commit -m "Voce del tutorial aggiornata"
+          git pull --rebase && git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
+        env:
+          GH_TOKEN: ${{ github.token }}
