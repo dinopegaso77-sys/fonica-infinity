@@ -1,11 +1,13 @@
 # Crea i file audio della voce del tutorial con la stessa voce AI di Ciaksigira (MiniMax Speech 02 HD su RunPod).
 # Lo esegue GitHub da solo quando cambia voce/testi.json: crea solo le frasi nuove e toglie quelle non più usate.
 # La chiave RunPod sta nei "Secrets" di GitHub (RUNPOD_API_KEY), mai nell'app.
-import json, os, time, urllib.request
+import json, os, subprocess, sys, time, urllib.error, urllib.request
 VOCE = 'Patient_Man'   # altre voci maschili: Deep_Voice_Man, Elegant_Man, Determined_Man, Casual_Guy
 VELOCITA = 1.0
 D = os.path.dirname(os.path.abspath(__file__))
-KEY = os.environ['RUNPOD_API_KEY'].strip()
+KEY = os.environ.get('RUNPOD_API_KEY', '').strip()
+if not KEY:
+    sys.exit('Manca il segreto RUNPOD_API_KEY: GitHub → Settings → Secrets and variables → Actions → New repository secret.')
 API = os.environ.get('VOCE_API', 'https://api.runpod.ai/v2/minimax-speech-02-hd')
 def rp(path, body=None):
     req = urllib.request.Request(API + path, data=json.dumps(body).encode() if body else None,
@@ -26,6 +28,15 @@ for f in os.listdir(D):
         os.remove(os.path.join(D, f))
 mancano = [(h, t) for h, t in voluti.items() if not os.path.exists(os.path.join(D, h + '.mp3'))]
 print('Da creare:', len(mancano), '- caratteri:', sum(len(t) for _, t in mancano))
+def salva(msg):
+    # salva su GitHub le frasi già pronte, così niente va perso se il lavoro si ferma
+    if not os.environ.get('GITHUB_ACTIONS'): return
+    subprocess.run(['git', 'add', '-A', D])
+    if subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode == 0: return
+    subprocess.run(['git', 'commit', '-q', '-m', msg])
+    subprocess.run(['git', 'pull', '-q', '--rebase'])
+    subprocess.run(['git', 'push', '-q'])
+fatte = 0
 for n, (h, t) in enumerate(mancano, 1):
     for prova in range(3):
         try:
@@ -43,7 +54,15 @@ for n, (h, t) in enumerate(mancano, 1):
             with urllib.request.urlopen(u, timeout=120) as a, open(os.path.join(D, h + '.mp3'), 'wb') as f:
                 f.write(a.read())
             print(n, '/', len(mancano), h)
+            fatte += 1
+            if fatte % 25 == 0: salva('Voce del tutorial: %d frasi' % fatte)
             break
+        except urllib.error.HTTPError as e:
+            if e.code in (401, 403):
+                salva('Voce del tutorial: %d frasi' % fatte)
+                sys.exit('La chiave RunPod è stata rifiutata (%d). Crea una chiave con Serverless endpoints Read e Write e mettila nel segreto RUNPOD_API_KEY.' % e.code)
+            print('Errore su', h, '(tentativo', prova + 1, '):', e)
+            time.sleep(5)
         except Exception as e:
             print('Errore su', h, '(tentativo', prova + 1, '):', e)
             time.sleep(5)
