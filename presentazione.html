@@ -3,14 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>rooMusic</title>
-<meta name="description" content="rooMusic: la tua sala prove. Separi qualsiasi brano in voce e strumenti, canti in karaoke, suoni dal vivo con la tua scheda audio e crei video e duetti.">
+<title>rooMusic – Separa le canzoni, canta in karaoke e suona | Gratis nel browser</title>
+<meta name="description" content="La tua sala prove in tasca: separa qualsiasi canzone in voce, chitarra, basso, batteria e piano, canta in karaoke col testo che scorre, suona con i tuoi effetti e impara con le lezioni. Gratis, dal telefono o dal PC.">
 <meta name="theme-color" content="#07080d">
 <script>/* colori: lo stesso tema scelto nell'app */try{var _t=localStorage.getItem('f8_theme');document.documentElement.dataset.theme=/^(carta|nebbia|giallo|celeste|notte)$/.test(_t)?_t:'notte'}catch(e){document.documentElement.dataset.theme='notte'}</script>
 
-<meta property="og:title" content="rooMusic — la tua sala prove">
-<meta property="og:description" content="Separa i brani, canta, suona dal vivo, crea duetti. Tutto nel browser.">
-<meta property="og:image" content="rm-og.png">
+<link rel="canonical" href="https://roomusic.it/presentazione.html">
+<meta name="robots" content="index,follow">
+<meta property="og:site_name" content="rooMusic"><meta property="og:locale" content="it_IT"><meta property="og:type" content="website">
+<meta property="og:title" content="rooMusic · La tua sala prove in tasca">
+<meta property="og:description" content="Hai una canzone in testa? Separala in voce e strumenti, cantala in karaoke e suonaci sopra con i tuoi effetti. Gratis, dal telefono o dal PC.">
+<meta property="og:url" content="https://roomusic.it/presentazione.html"><meta property="og:image" content="https://roomusic.it/rm-og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="rooMusic, la tua sala prove in tasca">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="rooMusic · La tua sala prove in tasca"><meta name="twitter:description" content="Separa i brani, canta in karaoke e suona con i tuoi effetti. Gratis, nel browser."><meta name="twitter:image" content="https://roomusic.it/rm-og.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "rooMusic", "url": "https://roomusic.it/", "inLanguage": "it", "applicationCategory": "MultimediaApplication", "operatingSystem": "Android, iOS, Windows, macOS, Linux (browser)", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "image": "https://roomusic.it/rm-og.png"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quanto costa?", "acceptedAnswer": {"@type": "Answer", "text": "L'app è gratuita. Per separare i brani in modo veloce si collega un proprio account RunPod, un servizio a consumo: si paga solo il tempo di calcolo, pochi centesimi a brano. C'è anche un servizio gratuito, più lento."}}, {"@type": "Question", "name": "Devo installare qualcosa?", "acceptedAnswer": {"@type": "Answer", "text": "No. Si apre dal browser. Sul telefono e sul PC puoi aggiungerla alla schermata principale e usarla come un'app."}}, {"@type": "Question", "name": "Posso usare la mia scheda audio?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, sul computer: rooMusic riconosce gli ingressi della scheda audio, per voce e strumenti, e puoi ascoltarti in cuffia mentre suona la base. Su telefono e tablet no, perché il suono torna in cuffia con troppo ritardo."}}, {"@type": "Question", "name": "Dove finiscono i miei brani?", "acceptedAnswer": {"@type": "Answer", "text": "Restano sul tuo dispositivo, nel browser, e se vuoi anche in una cartella del tuo PC. Se preferisci, nel tuo spazio cloud Cloudflare R2, per ritrovarli su tutti i dispositivi. Puoi salvare in un file le tue chiavi e impostazioni, per ritrovarle sempre."}}, {"@type": "Question", "name": "Posso vederlo sul televisore?", "acceptedAnswer": {"@type": "Answer", "text": "Sì. Dal Palco tocca l'icona di trasmissione: con un TV con Chromecast o Google TV il testo e la tablatura vanno sul televisore, mentre la musica resta sul telefono o sulle casse. In alternativa puoi trasmettere tutto lo schermo del telefono."}}, {"@type": "Question", "name": "Posso imparare a suonare?", "acceptedAnswer": {"@type": "Answer", "text": "Sì. Con le Lezioni impari chitarra, basso, batteria e pianoforte passo passo: note, scale, accordi, spartiti, rudimenti, ritmi, accompagnamenti ed esercizi per le mani, anche con una tastiera MIDI collegata, con il manico che suona, il metronomo e l'allenamento del giorno. Funzionano anche senza internet."}}, {"@type": "Question", "name": "Posso usare qualsiasi canzone?", "acceptedAnswer": {"@type": "Answer", "text": "rooMusic non contiene e non vende musica: lavora sui file che scegli tu. Usala con brani acquistati regolarmente, tuoi o liberi da diritti, per studio e uso personale."}}]}</script>
 <link rel="icon" href="icon-192.png">
 
 
@@ -144,6 +150,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 /* rooMusic: l'immagine di riserva compare solo se il video non parte */
 .hero .stage img{display:none}
 .hero .stage.novid img{display:block}
+
+.vtbox{margin:26px auto 0;max-width:960px}
+.vtbox video{display:block;width:100%;border-radius:18px;background:#000;border:1px solid var(--line);aspect-ratio:16/9}
+.vtbox video.vert{max-width:420px;margin:0 auto;aspect-ratio:9/16}
+.vtbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
+.vtbtn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer}
+.vtbtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vtbtn[aria-pressed=false] #vtWave{display:none}
 </style>
 <style>/* caratteri dentro l'app (Inter, licenza SIL OFL 1.1): niente richieste a Google */
 @font-face{font-family:"rooText";src:url("rm-text.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
@@ -268,6 +282,20 @@ body{font-variant-numeric:tabular-nums;font-optical-sizing:auto}</style>
 
   <hr class="divider">
 
+  <section id="video">
+    <div class="wrap">
+      <p class="kicker reveal">Video tutorial</p>
+      <h2 class="g reveal">Collega rooMusic in 20 minuti</h2>
+      <p class="intro-txt reveal">Il cloud R2 per i tuoi brani e RunPod per separare le tracce, spiegati passo passo con la voce. Si fa una volta sola.</p>
+      <div class="vtbox reveal">
+        <video id="vt" controls playsinline preload="metadata" aria-label="Video tutorial: collegare il cloud R2 e RunPod"></video>
+        <div class="vtbar"><button class="vtbtn" id="vtVoice" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path id="vtWave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><span>Voce attiva</span></button><a class="vtbtn" href="./?app">Apri rooMusic e segui il video</a></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <section id="pc">
     <div class="wrap">
       <p class="kicker reveal">Al computer</p>
@@ -298,6 +326,20 @@ body{font-variant-numeric:tabular-nums;font-optical-sizing:auto}</style>
 
   <hr class="divider">
 
+  <section id="privacy">
+    <div class="wrap">
+      <p class="kicker reveal">Privacy</p>
+      <h2 class="g reveal">La tua musica resta tua</h2>
+      <div class="who">
+        <div class="reveal"><b class="g">Sul tuo dispositivo</b><span>Brani, tracce, impostazioni e chiavi restano nel tuo browser. Chi ha creato rooMusic non li vede e non li riceve.</span></div>
+        <div class="reveal"><b class="g">Solo se lo scegli tu</b><span>I brani escono solo verso i servizi che colleghi con il tuo account, come il tuo cloud R2 o il tuo RunPod, e solo quando li usi.</span></div>
+        <div class="reveal"><b class="g">Niente pubblicità</b><span>Nessun cookie pubblicitario e nessun tracciamento. Per testi e copertine si invia solo il nome del brano o dell'artista.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <section>
     <div class="wrap">
       <p class="kicker reveal">Domande frequenti</p>
@@ -321,7 +363,7 @@ body{font-variant-numeric:tabular-nums;font-optical-sizing:auto}</style>
       <p class="intro-txt reveal" style="margin:0 auto">Apri rooMusic e prova con la tua canzone preferita.</p>
       <div class="cta reveal">
         <a class="btn pri" href="./?app">Apri l'app</a>
-        <a class="btn sec" href="https://www.paypal.me/fonicainfinity" target="_blank" rel="noopener">Sostieni il progetto</a>
+        <!-- PayPal nascosto per ora: <a class="btn sec" href="https://www.paypal.me/fonicainfinity" target="_blank" rel="noopener">Sostieni il progetto</a> -->
       </div>
       <label class="skip reveal"><input type="checkbox" id="skipPres"> La prossima volta apri direttamente l'app, senza questa presentazione</label>
       <p class="note">rooMusic è uno strumento per lo studio e l'uso personale della musica. Non contiene, non vende e non distribuisce brani: chi la usa si impegna a rispettare il diritto d'autore.</p>
@@ -348,5 +390,28 @@ body{font-variant-numeric:tabular-nums;font-optical-sizing:auto}</style>
 <script>/* temi chiari: logo chiaro al posto di quello scuro */
 (function(){var t=document.documentElement.dataset.theme;if(!/^(carta|nebbia|giallo|celeste)$/.test(t))return;var C={carta:'#f4f1ea',nebbia:'#edf1f5',giallo:'#f6f0df',celeste:'#f6f0df'};var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',C[t]);
   document.querySelectorAll('img').forEach(function(i){var a=i.getAttribute('src');if(a==='rm-logo.svg')i.src='rm-logo-chiaro.svg';else if(a==='rm-logo-verticale.svg')i.src='rm-logo-verticale-chiaro.svg'});var v=document.getElementById('heroV');if(v){v.src='intro-roomusic-chiaro.mp4';try{v.play()}catch(e){}}})();</script>
+<script>
+/* video tutorial: verticale sul telefono, orizzontale sul PC; la voce (stessa voce del tutorial dell'app) parte con ogni parte del video.
+   Se una frase dura più della sua parte, il video aspetta la fine della frase. */
+(function(){var v=document.getElementById('vt');if(!v)return;
+  var vert=matchMedia('(max-width:700px) and (orientation:portrait)').matches;
+  v.src='video/tutorial-collegamenti'+(vert?'-verticale':'')+'.mp4';v.poster='video/copertina'+(vert?'-verticale':'')+'.jpg';if(vert)v.classList.add('vert');
+  var P=null,cur=-1,au=null,waiting=false,on=true,raf=0;
+  fetch('video/tutorial.json').then(function(r){return r.json()}).then(function(j){P=j.parti}).catch(function(){});
+  function stopAu(){if(au){try{au.pause()}catch(e){}au=null}waiting=false}
+  function seg(t){if(!P)return -1;for(var i=0;i<P.length;i++)if(t>=P[i].s&&t<P[i].s+P[i].d)return i;return -1}
+  function tick(){raf=0;if(v.paused&&!waiting)return;var t=v.currentTime,i=seg(t);
+    if(i!==cur){stopAu();cur=i;if(on&&i>=0){var off=t-P[i].s;au=new Audio('voce/'+P[i].h+'.mp3');au.onerror=function(){au=null};
+        au.onended=function(){au=null;if(waiting){waiting=false;v.play()}};
+        try{au.currentTime=Math.max(0,off-.2)}catch(e){}au.play().catch(function(){au=null})}}
+    else if(i>=0&&au&&!au.ended&&t>=P[i].s+P[i].d-.12&&!v.paused){waiting=true;v.pause()}
+    raf=requestAnimationFrame(tick)}
+  v.addEventListener('play',function(){if(au&&!waiting&&au.paused)au.play().catch(function(){});if(!raf)raf=requestAnimationFrame(tick)});
+  v.addEventListener('pause',function(){if(!waiting&&au)au.pause()});
+  v.addEventListener('seeking',function(){stopAu();cur=-1});
+  v.addEventListener('ended',stopAu);
+  document.getElementById('vtVoice').onclick=function(){on=!on;this.setAttribute('aria-pressed',on);this.querySelector('span').textContent=on?'Voce attiva':'Voce spenta';if(!on){var w=waiting;stopAu();if(w)v.play()}else cur=-1};
+})();
+</script>
 </body>
 </html>

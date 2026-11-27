@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /voce/
+
+Sitemap: https://roomusic.it/sitemap.xml

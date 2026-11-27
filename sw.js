@@ -11,4 +11,6 @@ self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.me
   if(u.searchParams.has('vc')||u.searchParams.has('r'))return;
   /* la pagina dell'app si chiede sempre fresca (senza la copia vecchia del browser), così dopo un aggiornamento arriva subito la versione nuova */
   const page=e.request.mode==='navigate'||/(\/|\.html)$/.test(u.pathname);
-  e.respondWith((page?fetch(u.href,{cache:'no-cache',credentials:'same-origin'}):fetch(e.request)).then(r=>{if(!r.ok){if(page)throw new Error('http '+r.status);return r}const cp=r.clone();caches.open(C).then(c=>c.put(e.request,cp));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
+  /* se il sito si è spostato (es. su roomusic.it) il browser segue il rimando invece di restare sulla copia vecchia */
+  const nav=e.request.mode==='navigate';
+  e.respondWith((page?fetch(u.href,{cache:'no-cache',credentials:'same-origin',redirect:nav?'manual':'follow'}):fetch(e.request)).then(r=>{if(r.type==='opaqueredirect')return r;if(!r.ok){if(page)throw new Error('http '+r.status);return r}const cp=r.clone();caches.open(C).then(c=>c.put(e.request,cp));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});

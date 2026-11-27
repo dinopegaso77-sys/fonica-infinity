@@ -4,8 +4,8 @@
   "t": "Benvenuto in rooMusic. Questa è la schermata principale. Da qui scegli il brano, lo ascolti e apri tutti gli strumenti per cantare e suonare. Ti mostro i comandi uno alla volta, dall'alto verso il basso. Premi Avanti quando vuoi, oppure lascia che vada avanti da solo."
  },
  {
-  "h": "6576413e",
-  "t": "Condividi su WhatsApp. Sta nel Menu. Manda rooMusic ai tuoi amici: si apre WhatsApp con il messaggio già pronto e il collegamento all'app."
+  "h": "189965b4",
+  "t": "Condividi. Sta nel Menu. Manda rooMusic ai tuoi amici su WhatsApp, Facebook o Instagram: il messaggio è già pronto, con l'indirizzo roomusic.it."
  },
  {
   "h": "782d4045",
@@ -1698,5 +1698,61 @@
  {
   "h": "2c261fbc",
   "t": "Su ogni brano. Ogni brano dice se è qui, nel cloud o in tutti e due, e quanto pesa. Accanto trovi Scarica qui, Togli da qui o Salva nel cloud."
+ },
+ {
+  "h": "11e73c18",
+  "t": "Ti mostro come collegare rooMusic, passo dopo passo. Sono tre cose: il tuo spazio cloud R2, dove si salvano i brani; RunPod, che separa le tracce; e il file delle chiavi. Si fa una volta sola, in circa venti minuti."
+ },
+ {
+  "h": "0fa8262a",
+  "t": "Primo passo, il cloud. Apri il sito dash punto cloudflare punto com. Se non hai un account premi Sign up e crealo gratis; se ce l'hai, entra con Log in."
+ },
+ {
+  "h": "5f0a4ae4",
+  "t": "Nel menu a sinistra apri Storage and databases, poi R2 Object Storage. La prima volta ti chiede di attivarlo con una carta: fino a dieci gigabyte è gratis."
+ },
+ {
+  "h": "7c978a38",
+  "t": "Premi Create bucket. In Bucket name scrivi un nome, per esempio roomusic, lascia il resto com'è e premi di nuovo Create bucket. Scrivi lo stesso nome anche in rooMusic."
+ },
+ {
+  "h": "a9fa857f",
+  "t": "Dentro il bucket apri la scheda Settings e scendi fino a CORS Policy, poi premi Add. In rooMusic premi Copia la regola, torna qui, cancella quello che c'è scritto, incolla e premi Save."
+ },
+ {
+  "h": "ffdfd768",
+  "t": "Torna su R2 Object Storage. A destra, nel riquadro Account Details, copia il numero accanto ad Account ID e incollalo in rooMusic, nel campo ID account."
+ },
+ {
+  "h": "fb902b2b",
+  "t": "Nello stesso riquadro, accanto ad API Tokens, premi Manage, poi Create Account API token. Nome: roomusic. Permessi: Object Read and Write. Scegli Apply to specific buckets only e il tuo bucket. Poi in fondo premi Create Account API Token."
+ },
+ {
+  "h": "eafd91eb",
+  "t": "Copia Access Key ID e Secret Access Key e incollale in rooMusic. Attenzione: la Secret si vede una volta sola, copiala subito. Poi premi Salva e prova il collegamento. Quando compare la spunta verde, il cloud è pronto."
+ },
+ {
+  "h": "d2f42075",
+  "t": "Secondo passo, RunPod. In rooMusic, al passo RunPod, tocca Crea l'account RunPod. Nella pagina che si apre premi Sign up e scegli Accedi con Google. Fallo subito e nello stesso browser: così ricevi il bonus."
+ },
+ {
+  "h": "cae5c4eb",
+  "t": "In alto tocca il pulsante verde con il più, accanto al credito, e ricarica almeno dieci dollari. Separare un brano costa di solito pochi centesimi, e quando non lo usi non paghi niente."
+ },
+ {
+  "h": "556f1160",
+  "t": "Apri Settings, poi API Keys, e premi Create API Key. Nome: rooMusic. Permessi: Read and Write. Premi Create e copia subito la chiave: RunPod la mostra una volta sola."
+ },
+ {
+  "h": "c2388e59",
+  "t": "Torna in rooMusic, incolla la chiave e premi Collega da solo. L'app crea il servizio sul tuo account con le impostazioni giuste. La prima volta servono dieci, venti minuti: quando compare Fatto, RunPod è collegato."
+ },
+ {
+  "h": "131c7554",
+  "t": "Ultimo passo, importante: premi Salva le chiavi in un file e tienilo da parte. Se cambi telefono, o il browser cancella i dati, con Carica il file delle chiavi ritrovi tutto in un attimo."
+ },
+ {
+  "h": "9c49bbf8",
+  "t": "Fatto! Ora scegli un brano e premi Separa tracce. TONE3000 e MVSEP sono facoltativi: se ti servono, trovi la guida dentro l'app, in Impostazioni. Buona musica con rooMusic!"
  }
 ]
