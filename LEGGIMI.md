@@ -15,7 +15,7 @@ Compare l'icona di rooMusic come una vera app.
 | `index.html` | tutta l'app |
 | `sw.js` | fa funzionare l'app anche senza internet |
 | `manifest.webmanifest`, `icon-*.png`, `apple-touch-icon.png` | icona e installazione |
-| `rm-*.svg`, `rm-og.png`, `rm-text*.woff2` | logo, anteprima per i link condivisi, caratteri |
+| `rm-*.svg`, `rm-share.jpg`, `rm-text*.woff2` | logo, immagine quadrata per i link condivisi, caratteri |
 | `intro-roomusic-chiaro.mp4`, `intro-roomusic-scuro.mp4` | animazione di apertura |
 | `presentazione.html` | pagina che presenta l'app |
 | `CNAME` | lo crea GitHub quando imposti il dominio: dice di pubblicare il sito su roomusic.it |
@@ -37,10 +37,12 @@ Serve una sola cosa, già fatta una volta: il segreto **RUNPOD_API_KEY** in
 **Settings → Secrets and variables → Actions**. La chiave resta su GitHub e non entra mai nell'app.
 
 ## Privacy, in breve
-Brani, tracce, impostazioni e chiavi dei servizi restano nella memoria del browser di chi usa l'app: l'autore non li vede.
-Escono solo verso i servizi che l'utente sceglie e collega con il proprio account (il suo cloud R2, il suo RunPod,
-TONE3000) o verso il servizio di riserva MVSEP; per le ricerche di testi e copertine si invia solo il nome del brano o dell'artista.
-L'app non ha pubblicità e non traccia nessuno. Il testo completo è nell'app, alla voce «Note legali».
+La privacy è tutelata: **rooMusic non ha archivi propri** e nessun brano, registrazione, chiave o dato personale resta nei sistemi dell'autore.
+- Brani, tracce, impostazioni e chiavi restano nella memoria del browser di chi usa l'app.
+- Il cloud **R2** e **RunPod** sono account dell'utente, a suo nome: solo lui ha le chiavi, l'autore non vi accede. Su RunPod i file si cancellano a lavoro finito.
+- Ai siti esterni (testi, copertine, MVSEP, TONE3000) va solo ciò che serve, quando l'utente lo sceglie; rooMusic non ne tiene copie.
+- All'autore arrivano solo i messaggi scritti con «Dimmi la tua». Niente pubblicità, niente tracciamento.
+Il testo completo è nell'app, alla voce «Note legali».
 
 ## Dominio roomusic.it
 - Registrato su Aruba. Nella Gestione DNS: quattro record **A** (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`)
