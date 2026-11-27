@@ -41,7 +41,7 @@ La privacy è tutelata: **rooMusic non ha archivi propri** e nessun brano, regis
 - Brani, tracce, impostazioni e chiavi restano nella memoria del browser di chi usa l'app.
 - Il cloud **R2** e **RunPod** sono account dell'utente, a suo nome: solo lui ha le chiavi, l'autore non vi accede. Su RunPod i file si cancellano a lavoro finito.
 - Ai siti esterni (testi, copertine, MVSEP, TONE3000) va solo ciò che serve, quando l'utente lo sceglie; rooMusic non ne tiene copie.
-- All'autore arrivano solo i messaggi scritti con «Dimmi la tua». Niente pubblicità, niente tracciamento.
+- All'autore arrivano solo i messaggi scritti con «Dimmi la tua». Niente pubblicità, niente tracciamento personale: le visite si contano in forma anonima e senza cookie con Cloudflare Web Analytics.
 Il testo completo è nell'app, alla voce «Note legali». Contatti: info@roomusic.it
 
 ## Dominio roomusic.it
