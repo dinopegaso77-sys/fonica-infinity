@@ -42,7 +42,7 @@ La privacy è tutelata: **rooMusic non ha archivi propri** e nessun brano, regis
 - Il cloud **R2** e **RunPod** sono account dell'utente, a suo nome: solo lui ha le chiavi, l'autore non vi accede. Su RunPod i file si cancellano a lavoro finito.
 - Ai siti esterni (testi, copertine, MVSEP, TONE3000) va solo ciò che serve, quando l'utente lo sceglie; rooMusic non ne tiene copie.
 - All'autore arrivano solo i messaggi scritti con «Dimmi la tua». Niente pubblicità, niente tracciamento.
-Il testo completo è nell'app, alla voce «Note legali».
+Il testo completo è nell'app, alla voce «Note legali». Contatti: info@roomusic.it
 
 ## Dominio roomusic.it
 - Registrato su Aruba. Nella Gestione DNS: quattro record **A** (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`)
